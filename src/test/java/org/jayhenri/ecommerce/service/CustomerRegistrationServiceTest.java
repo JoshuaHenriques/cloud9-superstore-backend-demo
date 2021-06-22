@@ -57,7 +57,7 @@ class CustomerRegistrationServiceTest {
                 null,
                 null
                 );
-        cus = new Customer(
+        cus1 = new Customer(
                 uuid,
                 "Joshua",
                 "Anthony",

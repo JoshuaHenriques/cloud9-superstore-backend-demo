@@ -7,8 +7,8 @@ import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -17,8 +17,7 @@ import javax.persistence.Id;
 public class LoginInformation {
 
     @Id
-    @GeneratedValue
-    private Long id;
+    private UUID uuid;
 
     @NotNull
     @Column(nullable = false, unique = true)
@@ -35,4 +34,12 @@ public class LoginInformation {
     @NotNull
     @Column(nullable = false, unique = true)
     private String phoneNumber;
+
+    public LoginInformation(UUID uuid, String email, String password, String dateOfBirth, String phoneNumber) {
+        this.uuid = uuid;
+        this.email = email;
+        this.password = password;
+        this.dateOfBirth = dateOfBirth;
+        this.phoneNumber = phoneNumber;
+    }
 }

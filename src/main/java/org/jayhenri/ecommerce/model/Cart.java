@@ -7,6 +7,7 @@ import lombok.Setter;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.util.ArrayList;
+import java.util.UUID;
 
 // TODO: Implement HST+GST+PROMOCODE computation
 
@@ -16,8 +17,7 @@ import java.util.ArrayList;
 public class Cart {
 
     @Id
-    @GeneratedValue
-    private Long id;
+    private UUID uuid;
 
     private ArrayList<Item> items;
 
@@ -26,4 +26,9 @@ public class Cart {
     private Double total;
 
     private final Double HST = 0.13;
+
+    public Cart(UUID uuid, ArrayList<Item> items) {
+        this.uuid = uuid;
+        this.items = items;
+    }
 }

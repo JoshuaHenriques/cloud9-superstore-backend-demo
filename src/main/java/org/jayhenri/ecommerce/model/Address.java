@@ -8,6 +8,7 @@ import lombok.Setter;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -15,8 +16,7 @@ import javax.persistence.Id;
 public class Address {
 
     @Id
-    @GeneratedValue
-    private Long id;
+    private UUID uuid;
 
     @NotNull
     @Column(nullable = false)
@@ -27,7 +27,7 @@ public class Address {
     private Long streetNumber;
 
     @NotNull
-    @Column(nullable = true)
+    @Column(nullable = false)
     private Long unitNumber;
 
     @NotNull
@@ -41,4 +41,14 @@ public class Address {
     @NotNull
     @Column(nullable = false)
     private String province;
+
+    public Address(UUID uuid, String streetName, Long streetNumber, Long unitNumber, String city, String postalCode, String province) {
+        this.uuid = uuid;
+        this.streetName = streetName;
+        this.streetNumber = streetNumber;
+        this.unitNumber = unitNumber;
+        this.city = city;
+        this.postalCode = postalCode;
+        this.province = province;
+    }
 }

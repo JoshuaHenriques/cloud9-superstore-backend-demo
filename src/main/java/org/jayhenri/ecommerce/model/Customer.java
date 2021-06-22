@@ -5,10 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -16,6 +13,7 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @Entity
+@Table(name = "customers")
 public class Customer { // TODO: nullable: false for most fields
 
     @Id
@@ -34,27 +32,27 @@ public class Customer { // TODO: nullable: false for most fields
     private String lastName;
     
     @NotNull
-    @Column(nullable = true)
+    @Column(nullable = false)
     private String email;
     
     @NotNull
-    @Column(nullable = true)
+    @Column(nullable = false)
     private String phonenumber;
 
     @NotNull
-    @Column(nullable = true)
+    @Column(nullable = false)
     private Address address;
 
-    @Column(nullable = true)
+    @Column(nullable = false)
     private Orders orders;
 
-    @Column(nullable = true)
+    @Column(nullable = false)
     private ArrayList<CreditCard> creditCards;
 
-    @Column(nullable = true)
+    @Column(nullable = false)
     private Cart cart;
 
-    @Column(nullable = true)
+    @Column(nullable = false)
     private LoginInformation login;
 
     public Customer(UUID id, String firstName, String middleName, String lastName, String email, String phonenumber, Address address, Orders orders, ArrayList<CreditCard> creditCards, Cart cart, LoginInformation login) {
