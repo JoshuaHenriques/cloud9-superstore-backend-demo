@@ -32,6 +32,14 @@ public class Customer { // TODO: nullable: false for most fields
     @NotNull
     @Column(nullable = false)
     private String lastName;
+    
+    @NotNull
+    @Column(nullable = true)
+    private String email;
+    
+    @NotNull
+    @Column(nullable = true)
+    private String phonenumber;
 
     @NotNull
     @Column(nullable = true)
@@ -49,11 +57,13 @@ public class Customer { // TODO: nullable: false for most fields
     @Column(nullable = true)
     private LoginInformation login;
 
-    public Customer(UUID id, String firstName, String middleName, String lastName, Address address, Orders orders, ArrayList<CreditCard> creditCards, Cart cart, LoginInformation login) {
+    public Customer(UUID id, String firstName, String middleName, String lastName, String email, String phonenumber, Address address, Orders orders, ArrayList<CreditCard> creditCards, Cart cart, LoginInformation login) {
         this.id = id;
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
+        this.email = email;
+        this.phonenumber = phonenumber;
         this.address = address;
         this.orders = orders;
         this.creditCards = creditCards;

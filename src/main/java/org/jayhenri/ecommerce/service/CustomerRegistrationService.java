@@ -1,5 +1,6 @@
 package org.jayhenri.ecommerce.service;
 
+import org.hibernate.annotations.NotFound;
 import org.jayhenri.ecommerce.model.Customer;
 import org.jayhenri.ecommerce.repository.CustomerRegistrationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,17 @@ public class CustomerRegistrationService {
         return cusRegRepo.findById(uuid);
     }
 
-    public void save(Customer cus) {
+    public boolean existsById(UUID uuid) { return cusRegRepo.existsById(uuid); }
+
+    public boolean existsByPhoneNumber(String phonenumber) {
+
+    }
+
+    public void save(Customer cus) throws Exception {
+
+        if (existsById(cus.getId())){
+            throw new Exception("Customer already exists!");
+        }
         cusRegRepo.save(cus);
     }
 }

@@ -16,6 +16,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
 import static org.mockito.Mockito.verify;
 
@@ -32,7 +33,7 @@ class CustomerRegistrationServiceTest {
     private ArgumentCaptor<Customer> argumentCaptor;
 
     // Given
-    private Customer cus;
+    private Customer cus, cus1;
     private Address add;
     private Orders ord;
     private Cart cart;
@@ -48,12 +49,27 @@ class CustomerRegistrationServiceTest {
                 "Joshua",
                 "Anthony",
                 "Henriques",
+                "joshuahenriques95@gmail.com",
+                "6474444444",
                 null,
                 null,
                 null,
                 null,
                 null
                 );
+        cus = new Customer(
+                uuid,
+                "Joshua",
+                "Anthony",
+                "Henriques",
+                "joshuahenriques95@gmail.com",
+                "6474444444",
+                null,
+                null,
+                null,
+                null,
+                null
+        );
     }
 
     @AfterEach
@@ -61,27 +77,26 @@ class CustomerRegistrationServiceTest {
     }
 
     @Test
-    void itShouldFindAll() {
-        // When
-        testMe.findAll();
-        // Then
-        verify(cusRegRepo).findAll();
-    }
-
-    @Test
-    void itShouldRegisterCustomer() {
+    void itShouldRegisterCustomer() throws Exception{
+        // Given
+        given(cusRegRepo.existsById(uuid))
+                .willReturn(false);
         // When
         testMe.save(cus);
         // Then
-//        Optional<Customer> optCus = cusRegRepo.findById(cus.getId());
-//        assertThat(optCus)
-//                .isPresent()
-//                .hasValueSatisfying(c -> {
-//                    assertThat(c).isEqualTo(cus);
-//                });
         then(cusRegRepo).should().save(argumentCaptor.capture());
         Customer customerACV = argumentCaptor.getValue();
         assertThat(customerACV).isEqualTo(cus);
         verify(cusRegRepo).save(customerACV);
+    }
+
+    @Test
+    void itShouldThrowWhenCustomerExists() throws Exception {
+        // Given
+
+        // When
+        testMe.save(cus);
+        // Then
+
     }
 }
