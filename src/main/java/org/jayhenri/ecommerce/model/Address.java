@@ -5,14 +5,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.UUID;
 
 @Getter
 @Setter
 @NoArgsConstructor
+@Entity
+@Table(name = "addresses")
 public class Address {
 
     @Id
@@ -50,5 +50,7 @@ public class Address {
         this.city = city;
         this.postalCode = postalCode;
         this.province = province;
+
+        // TODO: VALIDATE: postalcode; format text before inserting into db?;
     }
 }
