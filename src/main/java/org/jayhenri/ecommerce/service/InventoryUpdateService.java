@@ -1,5 +1,6 @@
 package org.jayhenri.ecommerce.service;
 
+import org.jayhenri.ecommerce.exception.OutOfStockException;
 import org.jayhenri.ecommerce.model.Inventory;
 
 public class InventoryUpdateService {
@@ -21,19 +22,34 @@ public class InventoryUpdateService {
         }
     }
 
-    public void removeFromInventory(char prod, int amount) {
+    public void removeFromInventory(char prod, int amount) throws OutOfStockException {
 
         switch (prod) {
-            case 'a': inventory.subProdACount(amount);
-            case 'b': inventory.subProdBCount(amount);
-            case 'c': inventory.subProdCCount(amount);
-            case 'd': inventory.subProdDCount(amount);
-            case 'e': inventory.subProdECount(amount);
+            case 'a': {
+                if (checkInventory(prod, amount)) inventory.subProdACount(amount);
+                else throw new OutOfStockException();
+            }
+            case 'b': {
+                checkInventory(prod, amount);
+                inventory.subProdBCount(amount);
+            }
+            case 'c': {
+                checkInventory(prod, amount);
+                inventory.subProdCCount(amount);
+            }
+            case 'd': {
+                checkInventory(prod, amount);
+                inventory.subProdDCount(amount);
+            }
+            case 'e': {
+                checkInventory(prod, amount);
+                inventory.subProdECount(amount);
+            }
         }
     }
 
-    public void checkInventory(char prod, int amount) {
-
+    public boolean checkInventory(char prod, int amount) {
+        return false;
     }
 
     public int count() {
