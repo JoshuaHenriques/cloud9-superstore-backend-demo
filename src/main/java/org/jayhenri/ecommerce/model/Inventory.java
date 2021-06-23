@@ -12,7 +12,7 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @Entity
-public class Inventory {
+public class Inventory { // TODO: Refactor
 
     @Id
     private UUID uuid;

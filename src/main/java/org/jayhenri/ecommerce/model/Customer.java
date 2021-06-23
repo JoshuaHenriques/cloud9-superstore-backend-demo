@@ -77,4 +77,5 @@ public class Customer {// TODO: nullable: false for most fields
         EmailValidator validator = EmailValidator.getInstance();
         return validator.isValid(email);
     }
+
 }

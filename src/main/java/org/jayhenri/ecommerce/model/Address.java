@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.naming.InvalidNameException;
 import javax.persistence.*;
 import java.util.UUID;
 import java.util.regex.Matcher;
@@ -44,21 +45,23 @@ public class Address {
     @Column(nullable = false)
     private String province;
 
-    private static final String REGEX = "^(?!.*[DFIOQU])[A-VXY][0-9][A-Z] ?[0-9][A-Z][0-9]$";
-    private Pattern pattern = Pattern.compile(REGEX);
+    private static final String REGEX_POSTAL_CODE = "^(?!.*[DFIOQU])[A-VXY][0-9][A-Z] ?[0-9][A-Z][0-9]$";
 
-    public Address(UUID uuid, String streetName, Long streetNumber, Long unitNumber, String city, String postalCode, String province) {
+    public Address(UUID uuid, String streetName, Long streetNumber, Long unitNumber, String city, String postalCode, String province) throws InvalidNameException {
         this.uuid = uuid;
         this.streetName = streetName;
         this.streetNumber = streetNumber;
         this.unitNumber = unitNumber;
         this.city = city;
-        this.postalCode = postalCode;
         this.province = province;
+
+        if (isValidPostalCode(postalCode)) this.postalCode = postalCode;
+        else throw new InvalidNameException();
     }
 
-    public boolean isValidPostalCard(String postalCode){
-        Matcher matcher =
-
+    public boolean isValidPostalCode(String postalCode) {
+        Pattern pattern = Pattern.compile(REGEX_POSTAL_CODE);
+        Matcher matcher = pattern.matcher(postalCode);
+        return matcher.matches();
     }
 }

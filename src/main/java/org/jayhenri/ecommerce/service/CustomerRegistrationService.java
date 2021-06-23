@@ -36,7 +36,13 @@ public class CustomerRegistrationService {
 
     public boolean existsById(UUID uuid) { return cusRegRepo.existsById(uuid); }
 
-    public boolean existsByPhoneNumber(String phonenumber) {
+    // TODO: Implement
+    public boolean existsByPhoneNumber(String phoneNumber) {
+        return false;
+    }
+
+    // TODO: Implement
+    public boolean existsByEmail(String email) {
         return false;
     }
 
