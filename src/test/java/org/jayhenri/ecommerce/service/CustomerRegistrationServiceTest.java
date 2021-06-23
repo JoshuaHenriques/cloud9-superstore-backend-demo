@@ -12,6 +12,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import javax.naming.InvalidNameException;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -41,7 +42,7 @@ class CustomerRegistrationServiceTest {
     private UUID uuid;
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws InvalidNameException {
         uuid = UUID.randomUUID();
         testMe = new CustomerRegistrationService(cusRegRepo);
         cus = new Customer(

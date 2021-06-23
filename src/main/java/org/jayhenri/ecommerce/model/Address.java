@@ -7,6 +7,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Getter
 @Setter
@@ -42,6 +44,9 @@ public class Address {
     @Column(nullable = false)
     private String province;
 
+    private static final String REGEX = "^(?!.*[DFIOQU])[A-VXY][0-9][A-Z] ?[0-9][A-Z][0-9]$";
+    private Pattern pattern = Pattern.compile(REGEX);
+
     public Address(UUID uuid, String streetName, Long streetNumber, Long unitNumber, String city, String postalCode, String province) {
         this.uuid = uuid;
         this.streetName = streetName;
@@ -50,7 +55,10 @@ public class Address {
         this.city = city;
         this.postalCode = postalCode;
         this.province = province;
+    }
 
-        // TODO: VALIDATE: postalcode; format text before inserting into db?;
+    public boolean isValidPostalCard(String postalCode){
+        Matcher matcher =
+
     }
 }

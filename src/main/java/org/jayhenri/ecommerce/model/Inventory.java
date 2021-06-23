@@ -38,25 +38,25 @@ public class Inventory {
     public int countD() { return this.prodDCount; }
     public int countE() { return this.prodECount; }
 
-    public void addToInventory(char x, int y) {
+    public void addToInventory(char prod, int amount) {
 
-        switch (x) {
-            case 'a': prodACount += y;
-            case 'b': prodBCount += y;
-            case 'c': prodCCount += y;
-            case 'd': prodDCount += y;
-            case 'e': prodECount += y;
+        switch (prod) {
+            case 'a': prodACount += amount;
+            case 'b': prodBCount += amount;
+            case 'c': prodCCount += amount;
+            case 'd': prodDCount += amount;
+            case 'e': prodECount += amount;
         }
     }
 
-    public void removeFromInventory(char x, int y) {
+    public void removeFromInventory(char prod, int amount) {
 
-        switch (x) {
-            case 'a': prodACount -= y;
-            case 'b': prodBCount -= y;
-            case 'c': prodCCount -= y;
-            case 'd': prodDCount -= y;
-            case 'e': prodECount -= y;
+        switch (prod) {
+            case 'a': prodACount -= amount;
+            case 'b': prodBCount -= amount;
+            case 'c': prodCCount -= amount;
+            case 'd': prodDCount -= amount;
+            case 'e': prodECount -= amount;
         }
     }
 }

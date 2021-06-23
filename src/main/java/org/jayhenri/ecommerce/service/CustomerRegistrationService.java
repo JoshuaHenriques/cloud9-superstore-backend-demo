@@ -37,7 +37,7 @@ public class CustomerRegistrationService {
     public boolean existsById(UUID uuid) { return cusRegRepo.existsById(uuid); }
 
     public boolean existsByPhoneNumber(String phonenumber) {
-
+        return false;
     }
 
     public void save(Customer cus) throws Exception {
@@ -47,4 +47,6 @@ public class CustomerRegistrationService {
         }
         cusRegRepo.save(cus);
     }
+
+    // TODO:
 }

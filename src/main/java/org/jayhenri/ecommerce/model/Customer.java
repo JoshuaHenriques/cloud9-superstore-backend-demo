@@ -4,7 +4,9 @@ import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.apache.commons.validator.routines.EmailValidator;
 
+import javax.naming.InvalidNameException;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.UUID;
@@ -14,7 +16,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Entity
 @Table(name = "customers")
-public class Customer { // TODO: nullable: false for most fields
+public class Customer {// TODO: nullable: false for most fields
 
     @Id
     private UUID id;
@@ -37,7 +39,7 @@ public class Customer { // TODO: nullable: false for most fields
     
     @NotNull
     @Column(nullable = false)
-    private String phonenumber;
+    private String phoneNumber;
 
     @NotNull
     @Column(nullable = false)
@@ -55,17 +57,24 @@ public class Customer { // TODO: nullable: false for most fields
     @Column(nullable = false)
     private LoginInformation login;
 
-    public Customer(UUID id, String firstName, String middleName, String lastName, String email, String phonenumber, Address address, Orders orders, ArrayList<CreditCard> creditCards, Cart cart, LoginInformation login) {
+    public Customer(UUID id, String firstName, String middleName, String lastName, String email, String phoneNumber, Address address, Orders orders, ArrayList<CreditCard> creditCards, Cart cart, LoginInformation login) throws InvalidNameException{
         this.id = id;
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
-        this.email = email;
-        this.phonenumber = phonenumber;
+        this.phoneNumber = phoneNumber;
         this.address = address;
         this.orders = orders;
         this.creditCards = creditCards;
         this.cart = cart;
         this.login = login;
+
+        if (isValidEmail(email)) this.email = email;
+        else throw new InvalidNameException();
+    }
+
+    public boolean isValidEmail(String email) {
+        EmailValidator validator = EmailValidator.getInstance();
+        return validator.isValid(email);
     }
 }
