@@ -13,22 +13,26 @@ public class AddressService {
     
     private static final String REGEX_POSTAL_CODE = "^(?!.*[DFIOQU])[A-VXY][0-9][A-Z] ?[0-9][A-Z][0-9]$";
 
-    public AddressService(UUID uuid,
-                          String streetName,
-                          Long streetNumber,
-                          Long unitNumber,
-                          String city,
-                          String postalCode,
-                          String province) throws InvalidNameException {
+    public AddressService(
+            UUID uuid,
+            String streetName,
+            Long streetNumber,
+            Long unitNumber,
+            String city,
+            String postalCode,
+            String province) throws InvalidNameException {
 
-        if (isValidPostalCode(postalCode)) {this.address = new Address(uuid,
+        if (isValidPostalCode(postalCode)) {
+            this.address = new Address(
+                uuid,
                 streetName,
                 streetNumber,
                 unitNumber,
                 city,
                 postalCode,
-                province);}
-        else throw new InvalidNameException();
+                province
+        );
+        } else throw new InvalidNameException();
     }
 
     public boolean isValidPostalCode(String postalCode) {

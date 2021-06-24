@@ -1,5 +1,6 @@
 package org.jayhenri.ecommerce.service;
 
+import org.javatuples.Quartet;
 import org.javatuples.Triplet;
 import org.jayhenri.ecommerce.model.Item;
 import org.jayhenri.ecommerce.model.Cart;
@@ -22,14 +23,14 @@ public class CartUpdateService {
         cart = new Cart(uuid);
     }
 
-    public void addToCart(Item item, Integer quantity, Character size) {
-        cart.getItems().add(new Triplet<Item, Integer, Character>(item, quantity, size));
+    public void addToCart(UUID uuid, Item item, Integer quantity, Character size) {
+        cart.getItems().add(new Quartet<>(uuid, item, quantity, size));
         update();
     }
 
     public void removeFromCart(String itemName) {
         cart.getItems().forEach(item -> {
-            if (item.getValue0().getName().equals(itemName)) {
+            if (item.getValue1().getName().equals(itemName)) {
                 cart.getItems().remove(item);
             }
         });
@@ -38,7 +39,7 @@ public class CartUpdateService {
 
     public void update() {
         cart.getItems().forEach(item -> {
-            subTotal += item.getValue0().getPrice();
+            subTotal += item.getValue1().getPrice();
         });
         total = subTotal * HST + DELIVERY_FEE;
     }
