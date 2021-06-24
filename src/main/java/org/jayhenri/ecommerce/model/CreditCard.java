@@ -30,18 +30,10 @@ public class CreditCard {
     @Column
     private Long cvc;
 
-    public CreditCard(UUID uuid, String fullName, String ccn, String expDate, Long cvc) throws InvalidNameException {
+    public CreditCard(UUID uuid, String fullName, String ccn, String expDate, Long cvc) {
         this.uuid = uuid;
         this.fullName = fullName;
         this.expDate = expDate;
         this.cvc = cvc;
-
-        if (isValidCreditCard(ccn)) this.ccn = ccn;
-        else throw new InvalidNameException();
-    }
-
-    public boolean isValidCreditCard(String ccn) {
-        CreditCardValidator ccv = new CreditCardValidator(CreditCardValidator.VISA);
-        return ccv.isValid(ccn);
     }
 }

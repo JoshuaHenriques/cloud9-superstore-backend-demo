@@ -3,13 +3,13 @@ package org.jayhenri.ecommerce.exception;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OutOfStockException extends Exception {
+public class CreditCardException extends Exception {
 
     private List<String> errorMessages = new ArrayList<>();
 
-    public OutOfStockException() {}
+    public CreditCardException() {}
 
-    public OutOfStockException(String msg) {
+    public CreditCardException(String msg) {
         super(msg);
     }
 
