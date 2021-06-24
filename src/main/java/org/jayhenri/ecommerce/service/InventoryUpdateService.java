@@ -30,18 +30,15 @@ public class InventoryUpdateService {
 
     // TODO
     public boolean checkInventory(UUID uuid, int amount) {
-        if ((inventory.getItems()))
-        return false;
+        if ((inventory.getItems().get(inventory.getItems().indexOf(uuid)).getValue1() - amount) < 0) {
+            return false;
+        } else return true;
     }
 
     public void listInventory() {}
 
     public int count() {
 
-        return inventory.getProdACount() +
-                inventory.getProdBCount() +
-                inventory.getProdCCount() +
-                inventory.getProdECount() +
-                inventory.getProdDCount();
+        return 0;
     }
 }
