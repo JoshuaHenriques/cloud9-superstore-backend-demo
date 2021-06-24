@@ -14,7 +14,7 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @Entity
-public class LoginInformation {
+public class Login {
 
     @Id
     private UUID uuid;
@@ -35,7 +35,7 @@ public class LoginInformation {
     @Column(nullable = false, unique = true)
     private String phoneNumber;
 
-    public LoginInformation(UUID uuid, String email, String password, String dateOfBirth, String phoneNumber) {
+    public Login(UUID uuid, String email, String password, String dateOfBirth, String phoneNumber) {
         this.uuid = uuid;
         this.email = email;
         this.password = password;

@@ -2,12 +2,14 @@ package org.jayhenri.ecommerce.service;
 
 import org.jayhenri.ecommerce.model.Address;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.naming.InvalidNameException;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@Service
 public class AddressService {
 
     @Autowired

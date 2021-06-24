@@ -55,9 +55,9 @@ public class Customer {// TODO: nullable: false for most fields
     private Cart cart;
 
     @Column(nullable = false)
-    private LoginInformation login;
+    private Login login;
 
-    public Customer(UUID id, String firstName, String middleName, String lastName, String email, String phoneNumber, Address address, Orders orders, ArrayList<CreditCard> creditCards, Cart cart, LoginInformation login) throws InvalidNameException{
+    public Customer(UUID id, String firstName, String middleName, String lastName, String email, String phoneNumber, Address address, Orders orders, ArrayList<CreditCard> creditCards, Cart cart, Login login) throws InvalidNameException{
         this.id = id;
         this.firstName = firstName;
         this.middleName = middleName;

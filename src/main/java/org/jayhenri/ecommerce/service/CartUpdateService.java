@@ -5,9 +5,11 @@ import org.javatuples.Triplet;
 import org.jayhenri.ecommerce.model.Item;
 import org.jayhenri.ecommerce.model.Cart;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
+@Service
 public class CartUpdateService {
 
     private static final Double HST = 0.13;

@@ -4,10 +4,12 @@ import org.javatuples.Quartet;
 import org.jayhenri.ecommerce.exception.OutOfStockException;
 import org.jayhenri.ecommerce.model.Inventory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
 // TODO: Implement better
+@Service
 public class InventoryUpdateService {
 
     @Autowired

@@ -17,12 +17,11 @@ import org.slf4j.LoggerFactory;
 @Service
 public class CustomerRegistrationService {
 
-    private final CustomerRegistrationRepository cusRegRepo;
-
     @Autowired
-    public CustomerRegistrationService(CustomerRegistrationRepository cusRegRepo) {
-        this.cusRegRepo = cusRegRepo;
-    }
+    private CustomerRegistrationRepository cusRegRepo;
+
+
+    public CustomerRegistrationService() { }
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 

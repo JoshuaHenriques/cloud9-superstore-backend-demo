@@ -13,7 +13,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import javax.naming.InvalidNameException;
-import java.util.Optional;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -38,13 +37,13 @@ class CustomerRegistrationServiceTest {
     private Address add;
     private Orders ord;
     private Cart cart;
-    private LoginInformation login;
+    private Login login;
     private UUID uuid;
 
     @BeforeEach
     void setUp() throws InvalidNameException {
         uuid = UUID.randomUUID();
-        testMe = new CustomerRegistrationService(cusRegRepo);
+        testMe = new CustomerRegistrationService();
         cus = new Customer(
                 uuid,
                 "Joshua",

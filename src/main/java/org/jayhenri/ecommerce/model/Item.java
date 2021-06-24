@@ -32,14 +32,13 @@ public class Item {
     @Column
     private double price;
 
-    @NotNull
-    @Column
-    private char tag; // TODO: Implement later
+//    @NotNull
+//    @Column
+//    private char tag; // TODO: Implement later
 
-    public Item(String name, double price, char tag) {
+    public Item(UUID uuid, String name, double price) {
         this.uuid = UUID.randomUUID();
         this.name = name;
         this.price = price;
-        this.tag = tag;
     }
 }
