@@ -26,11 +26,4 @@ public class Cart {
         this.uuid = uuid;
         this.items = new ArrayList<>();
     }
-
-    public void setItems(ArrayList<Quartet<UUID, Item, Integer, Character>> items) {
-        this.items = items;
-    }
-
-
-
 }

@@ -28,14 +28,12 @@ public class InventoryUpdateService {
         inventory.getItems().remove(inventory.getItems().indexOf(uuid));
     }
 
-    // TODO
     public boolean checkInventory(UUID uuid, int amount) {
+
         if ((inventory.getItems().get(inventory.getItems().indexOf(uuid)).getValue1() - amount) < 0) {
             return false;
         } else return true;
     }
-
-    public void listInventory() {}
 
     public int count() {
 
