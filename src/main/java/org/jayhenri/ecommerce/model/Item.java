@@ -6,30 +6,27 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
+import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.util.ArrayList;
+import java.util.UUID;
 
 @Getter
 @Setter
 @NoArgsConstructor
+@Entity
 public class Item {
 
     @Id
-    @GeneratedValue
-    private Long id;
-
-    @NotNull
     @Column
-    private Long UUID;
+    private UUID uuid;
 
     @NotNull
     @Column
     private String name;
 
-    @NotNull
-    @Column
-    private Rating rating; // TODO: Implement later
+//    @NotNull
+//    @Column
+//    private Rating rating; // TODO: Implement later
 
     @NotNull
     @Column
@@ -37,5 +34,12 @@ public class Item {
 
     @NotNull
     @Column
-    private ArrayList<Tag> tags; // TODO: Implement later
+    private char tag; // TODO: Implement later
+
+    public Item(String name, double price, char tag) {
+        this.uuid = UUID.randomUUID();
+        this.name = name;
+        this.price = price;
+        this.tag = tag;
+    }
 }

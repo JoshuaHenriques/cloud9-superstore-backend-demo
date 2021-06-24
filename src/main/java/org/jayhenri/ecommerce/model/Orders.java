@@ -5,9 +5,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.util.ArrayList;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -15,15 +15,17 @@ import java.util.ArrayList;
 public class Orders {
 
     @Id
-    @GeneratedValue
-    private Long id;
-
-    @Column
-    private Long UUID;
+    private UUID uuid;
 
     @Column
     private OrderStatus orderStatus;
 
     @Column
     private ArrayList<Item> items;
+
+    public Orders(UUID uuid, OrderStatus orderStatus, ArrayList<Item> items) {
+        this.uuid = uuid;
+        this.orderStatus = orderStatus;
+        this.items = items;
+    }
 }

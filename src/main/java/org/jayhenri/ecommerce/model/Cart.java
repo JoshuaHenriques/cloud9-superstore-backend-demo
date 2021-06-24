@@ -1,12 +1,13 @@
 package org.jayhenri.ecommerce.model;
 
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import java.util.ArrayList;
+import java.util.UUID;
+import org.javatuples.Quartet;
 
 // TODO: Implement HST+GST+PROMOCODE computation
 
@@ -15,15 +16,14 @@ import java.util.ArrayList;
 @NoArgsConstructor
 public class Cart {
 
-    @Id
-    @GeneratedValue
-    private Long id;
 
-    private ArrayList<Item> items;
+    private UUID uuid;
 
-    private Double subTotal;
+    private ArrayList<Quartet<UUID, Item, Integer, Character>> items;
 
-    private Double total;
+    public Cart(UUID uuid) {
 
-    private final Double HST = 0.13;
+        this.uuid = uuid;
+        this.items = new ArrayList<>();
+    }
 }

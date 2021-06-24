@@ -5,18 +5,20 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.naming.InvalidNameException;
+import javax.persistence.*;
+import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Getter
 @Setter
-@NoArgsConstructor
+@Entity
+@Table(name = "addresses")
 public class Address {
 
     @Id
-    @GeneratedValue
-    private Long id;
+    private UUID uuid;
 
     @NotNull
     @Column(nullable = false)
@@ -27,7 +29,7 @@ public class Address {
     private Long streetNumber;
 
     @NotNull
-    @Column(nullable = true)
+    @Column(nullable = false)
     private Long unitNumber;
 
     @NotNull
@@ -41,4 +43,14 @@ public class Address {
     @NotNull
     @Column(nullable = false)
     private String province;
+
+    public Address(UUID uuid, String streetName, Long streetNumber, Long unitNumber, String city, String postalCode, String province) throws InvalidNameException {
+        this.uuid = uuid;
+        this.streetName = streetName;
+        this.streetNumber = streetNumber;
+        this.unitNumber = unitNumber;
+        this.city = city;
+        this.province = province;
+        this.postalCode = postalCode;        
+    }
 }
