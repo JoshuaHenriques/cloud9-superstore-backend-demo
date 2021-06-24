@@ -7,7 +7,7 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.UUID;
-import org.javatuples.Triplet;
+import org.javatuples.Quartet;
 
 // TODO: Implement HST+GST+PROMOCODE computation
 
@@ -19,7 +19,7 @@ public class Cart {
 
     private UUID uuid;
 
-    private ArrayList<Triplet<Item, Integer, Character>> items;
+    private ArrayList<Quartet<UUID, Item, Integer, Character>> items;
 
     public Cart(UUID uuid) {
 
@@ -27,8 +27,10 @@ public class Cart {
         this.items = new ArrayList<>();
     }
 
-    public void setItems(ArrayList<Triplet<Item, Integer, Character>> items) {
+    public void setItems(ArrayList<Quartet<UUID, Item, Integer, Character>> items) {
         this.items = items;
     }
+
+
 
 }

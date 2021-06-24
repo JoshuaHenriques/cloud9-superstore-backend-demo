@@ -36,8 +36,8 @@ public class Item {
     @Column
     private char tag; // TODO: Implement later
 
-    public Item(UUID uuid, String name, double price, char tag) {
-        this.uuid = uuid;
+    public Item(String name, double price, char tag) {
+        this.uuid = UUID.randomUUID();
         this.name = name;
         this.price = price;
         this.tag = tag;

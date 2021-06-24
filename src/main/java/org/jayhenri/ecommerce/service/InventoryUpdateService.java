@@ -1,56 +1,40 @@
 package org.jayhenri.ecommerce.service;
 
+import org.javatuples.Quartet;
 import org.jayhenri.ecommerce.exception.OutOfStockException;
 import org.jayhenri.ecommerce.model.Inventory;
+import org.jayhenri.ecommerce.model.Item;
+import org.jayhenri.ecommerce.model.OldInventory;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.UUID;
 
 public class InventoryUpdateService {
 
+    @Autowired
     private Inventory inventory;
 
     public InventoryUpdateService() {
         inventory = new Inventory();
     }
 
-    public void addToInventory(char prod, int amount) {
+    public void addToInventory(UUID uuid, int s, int m, int l) {
 
-        switch (prod) {
-            case 'a': inventory.addProdACount(amount);
-            case 'b': inventory.addProdBCount(amount);
-            case 'c': inventory.addProdCCount(amount);
-            case 'd': inventory.addProdDCount(amount);
-            case 'e': inventory.addProdECount(amount);
-        }
+        inventory.getItems().add(new Quartet<>(uuid, s, m, l));
     }
 
-    public void removeFromInventory(char prod, int amount) throws OutOfStockException {
+    public void removeFromInventory(UUID uuid) throws OutOfStockException {
 
-        switch (prod) {
-            case 'a': {
-                if (checkInventory(prod, amount)) inventory.subProdACount(amount);
-                else throw new OutOfStockException();
-            }
-            case 'b': {
-                checkInventory(prod, amount);
-                inventory.subProdBCount(amount);
-            }
-            case 'c': {
-                checkInventory(prod, amount);
-                inventory.subProdCCount(amount);
-            }
-            case 'd': {
-                checkInventory(prod, amount);
-                inventory.subProdDCount(amount);
-            }
-            case 'e': {
-                checkInventory(prod, amount);
-                inventory.subProdECount(amount);
-            }
-        }
+        inventory.getItems().remove(inventory.getItems().indexOf(uuid));
     }
 
-    public boolean checkInventory(char prod, int amount) {
+    // TODO
+    public boolean checkInventory(UUID uuid, int amount) {
+        if ((inventory.getItems()))
         return false;
     }
+
+    public void listInventory() {}
 
     public int count() {
 
