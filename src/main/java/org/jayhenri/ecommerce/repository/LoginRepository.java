@@ -14,4 +14,7 @@ public interface LoginRepository extends JpaRepository<Login, UUID> {
 
     @Query("select case when count(c)> 0 then true else false end from Login c where lower(c.email) like lower(:email)")
     boolean existsLoginEmailCustomQuery(@Param("email") String email);
+
+    @Query("SELECT l FROM Login l WHERE l.email = ?1")
+    public Login findByEmail(String email);
 }
