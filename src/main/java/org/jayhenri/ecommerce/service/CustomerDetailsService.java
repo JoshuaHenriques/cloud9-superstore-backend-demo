@@ -1,4 +1,4 @@
 package org.jayhenri.ecommerce.service;
 
-public class LoginService {
+public class CustomerDetailsService {
 }

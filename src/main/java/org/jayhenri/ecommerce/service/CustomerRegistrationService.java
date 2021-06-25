@@ -1,9 +1,11 @@
 package org.jayhenri.ecommerce.service;
 
-import org.hibernate.annotations.NotFound;
-import org.jayhenri.ecommerce.model.Customer;
-import org.jayhenri.ecommerce.repository.CustomerRegistrationRepository;
+import org.jayhenri.ecommerce.exception.CustomerAlreadyExistsException;
+import org.jayhenri.ecommerce.model.*;
+import org.jayhenri.ecommerce.repository.CustomerRepository;
+import org.jayhenri.ecommerce.repository.LoginRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,45 +15,45 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
 @Service
 public class CustomerRegistrationService {
 
     @Autowired
-    private CustomerRegistrationRepository cusRegRepo;
+    private CustomerRepository customerRepository;
+
+    @Autowired
+    private LoginRepository loginRepository;
+
+    private Address address;
+    private Cart cart;
+    private Orders orders;
 
 
     public CustomerRegistrationService() { }
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
-
-    public List<Customer> findAll() {
-        return cusRegRepo.findAll();
-    }
-
-    public Optional<Customer> findById(UUID uuid) {
-        return cusRegRepo.findById(uuid);
-    }
-
-    public boolean existsById(UUID uuid) { return cusRegRepo.existsById(uuid); }
-
-    // TODO: Implement
     public boolean existsByPhoneNumber(String phoneNumber) {
-        return false;
+        return customerRepository.existsCustomerPhoneNumberCustomQuery(phoneNumber);
     }
-
-    // TODO: Implement
     public boolean existsByEmail(String email) {
-        return false;
+        return loginRepository.existsLoginEmailCustomQuery(email);
     }
 
-    public void save(Customer cus) throws Exception {
+    public void saveCustomer(Customer customer, Login login, Address address) throws CustomerAlreadyExistsException {
 
-        if (existsById(cus.getId())){
-            throw new Exception("Customer already exists!");
+        if (existsByPhoneNumber(customer.getPhoneNumber()) || existsByEmail(login.getEmail())){
+            throw new CustomerAlreadyExistsException();
         }
-        cusRegRepo.save(cus);
+        customer.setAddress(address);
+        customerRepository.save(customer);
+        encryptPassword(login);
     }
 
-    // TODO:
+    public void encryptPassword(Login login) {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String encodedPassword = passwordEncoder.encode(login.getPassword());
+        login.setPassword(encodedPassword);
+
+        loginRepository.save(login);
+    }
+
 }

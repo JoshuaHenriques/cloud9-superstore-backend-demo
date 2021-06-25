@@ -3,13 +3,13 @@ package org.jayhenri.ecommerce.exception;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CreditCardException extends Exception {
+public class CustomerAlreadyExistsException extends Exception {
 
     private List<String> errorMessages = new ArrayList<>();
 
-    public CreditCardException() {}
+    public CustomerAlreadyExistsException() {}
 
-    public CreditCardException(String msg) {
+    public CustomerAlreadyExistsException(String msg) {
         super(msg);
     }
 

@@ -21,27 +21,19 @@ public class Login {
     @Id
     private UUID uuid;
 
-    @NotNull
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true, length = 45)
     private String email;
 
-    @NotNull
-    @Column(nullable = false)
+    @Column(nullable = false, length = 64)
     private String password;
 
-    @NotNull
-    @Column(nullable = false)
+    @Column(nullable = false, length = 6)
     private String dateOfBirth;
-
-    @NotNull
-    @Column(nullable = false, unique = true)
-    private String phoneNumber;
 
     public Login(UUID uuid, String email, String password, String dateOfBirth, String phoneNumber) {
         this.uuid = uuid;
         this.email = email;
         this.password = password;
         this.dateOfBirth = dateOfBirth;
-        this.phoneNumber = phoneNumber;
     }
 }
