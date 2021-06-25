@@ -4,14 +4,18 @@ import org.javatuples.Quartet;
 import org.javatuples.Triplet;
 import org.jayhenri.ecommerce.model.Item;
 import org.jayhenri.ecommerce.model.Cart;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
+@Service
 public class CartUpdateService {
 
     private static final Double HST = 0.13;
     private static final Double DELIVERY_FEE = 10.00;
 
+    @Autowired
     private Cart cart;
     private UUID uuid;
 

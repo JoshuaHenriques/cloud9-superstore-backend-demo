@@ -8,12 +8,14 @@ import lombok.Setter;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.UUID;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @Entity
+@Table(name = "items")
 public class Item {
 
     @Id
@@ -32,14 +34,13 @@ public class Item {
     @Column
     private double price;
 
-    @NotNull
-    @Column
-    private char tag; // TODO: Implement later
+//    @NotNull
+//    @Column
+//    private char tag; // TODO: Implement later
 
-    public Item(String name, double price, char tag) {
+    public Item(UUID uuid, String name, double price) {
         this.uuid = UUID.randomUUID();
         this.name = name;
         this.price = price;
-        this.tag = tag;
     }
 }

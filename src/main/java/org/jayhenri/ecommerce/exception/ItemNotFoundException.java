@@ -1,15 +1,15 @@
 package org.jayhenri.ecommerce.exception;
 
-import java.util.ArrayList;
-import java.util.List;
+        import java.util.ArrayList;
+        import java.util.List;
 
-public class OutOfStockException extends Exception {
+public class ItemNotFoundException extends Exception {
 
     private List<String> errorMessages = new ArrayList<>();
 
-    public OutOfStockException() {}
+    public ItemNotFoundException() {}
 
-    public OutOfStockException(String msg) {
+    public ItemNotFoundException(String msg) {
         super(msg);
     }
 

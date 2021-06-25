@@ -8,13 +8,15 @@ import lombok.Setter;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.UUID;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @Entity
-public class LoginInformation {
+@Table(name = "logins")
+public class Login {
 
     @Id
     private UUID uuid;
@@ -35,7 +37,7 @@ public class LoginInformation {
     @Column(nullable = false, unique = true)
     private String phoneNumber;
 
-    public LoginInformation(UUID uuid, String email, String password, String dateOfBirth, String phoneNumber) {
+    public Login(UUID uuid, String email, String password, String dateOfBirth, String phoneNumber) {
         this.uuid = uuid;
         this.email = email;
         this.password = password;

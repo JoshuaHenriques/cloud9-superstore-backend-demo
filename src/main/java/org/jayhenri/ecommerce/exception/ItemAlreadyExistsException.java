@@ -1,15 +1,15 @@
 package org.jayhenri.ecommerce.exception;
 
-import java.util.ArrayList;
-import java.util.List;
+        import java.util.ArrayList;
+        import java.util.List;
 
-public class OutOfStockException extends Exception {
+public class ItemAlreadyExistsException extends Exception {
 
     private List<String> errorMessages = new ArrayList<>();
 
-    public OutOfStockException() {}
+    public ItemAlreadyExistsException() {}
 
-    public OutOfStockException(String msg) {
+    public ItemAlreadyExistsException(String msg) {
         super(msg);
     }
 
