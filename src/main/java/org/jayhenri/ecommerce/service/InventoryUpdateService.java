@@ -16,7 +16,6 @@ public class InventoryUpdateService {
     private Inventory inventory;
 
     public InventoryUpdateService() {
-
         inventory = new Inventory();
     }
 

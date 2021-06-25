@@ -1,5 +1,6 @@
 package org.jayhenri.ecommerce.service;
 
+import org.jayhenri.ecommerce.exception.ItemNotFoundException;
 import org.jayhenri.ecommerce.model.Item;
 import org.jayhenri.ecommerce.repository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,16 +17,33 @@ public class ItemCreationService {
     @Autowired
     private ItemRepository itemRepository;
 
-    public ItemCreationService(UUID uuid, String name, Double price) {
-        item = new Item(UUID.randomUUID(), name, price);
+    public void addItem(UUID uuid, String name, Double price) {
+        itemRepository.save(new Item(uuid, name, price));
     }
-
-    public void editItem() {}
-
-    public void deleteItem() {}
-
-    public void checkItem() {}
 }
+//    public void editItem(UUID uuid, Item item) {
+//        if (!ObjectUtils.isEmpty(tutorial.getTitle())) {
+//            if (!existsById(tutorial.getId())) {
+//                throw new ItemNotFoundException("Cannot find Item with UUID: " + tutorial.getId());
+//            }
+//            tutorialRepository.save(tutorial);
+//        } else {
+//            BadResourceException exc = new BadResourceException("Failed to add Tutorial");
+//            exc.addErrorMessage("Tutorial is null or empty");
+//            throw exc;
+//        }
+//    }
+//
+//    public void deleteItem() {
+//        public void deleteById(Long id) throws ResourceNotFoundException {
+//            if (!existsById(id)) {
+//                throw new ResourceNotFoundException("Cannot find tutorial with id: " + id);
+//            } else {
+//                tutorialRepository.deleteById(id);
+//            }
+//        }
+//    }
+//}
 /*
 @Service
 public class TutorialService {
