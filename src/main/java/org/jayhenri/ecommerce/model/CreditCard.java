@@ -5,14 +5,15 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.naming.InvalidNameException;
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.UUID;
 
 import org.apache.commons.validator.routines.CreditCardValidator;
 
 // TODO: Implement later
+@Getter
+@Setter
+@NoArgsConstructor
 public class CreditCard {
 
     @Id

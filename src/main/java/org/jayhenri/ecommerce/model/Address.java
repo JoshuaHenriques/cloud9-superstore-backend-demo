@@ -13,34 +13,26 @@ import java.util.regex.Pattern;
 
 @Getter
 @Setter
-@Entity
-@Table(name = "addresses")
 public class Address {
 
     @Id
     private UUID uuid;
 
-    @NotNull
     @Column(nullable = false)
     private String streetName;
 
-    @NotNull
     @Column(nullable = false)
     private Long streetNumber;
 
-    @NotNull
     @Column(nullable = false)
     private Long unitNumber;
 
-    @NotNull
     @Column(nullable = false)
     private String city;
 
-    @NotNull
     @Column(nullable = false)
     private String postalCode;
 
-    @NotNull
     @Column(nullable = false)
     private String province;
 

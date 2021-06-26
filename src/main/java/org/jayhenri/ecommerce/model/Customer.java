@@ -21,27 +21,18 @@ public class Customer {// TODO: nullable: false for most fields
     @Id
     private UUID id;
 
-    @NotNull
-    @Column(nullable = false)
+    @Column(nullable = false, length = 20)
     private String firstName;
 
-    @NotNull
-    @Column(nullable = true)
+    @Column(nullable = true, length = 20)
     private String middleName;
 
-    @NotNull
-    @Column(nullable = false)
+    @Column(nullable = false, length = 20)
     private String lastName;
-    
-    @NotNull
-    @Column(nullable = false)
-    private String email;
-    
-    @NotNull
-    @Column(nullable = false)
+
+    @Column(nullable = false, unique = true, length = 10)
     private String phoneNumber;
 
-    @NotNull
     @Column(nullable = false)
     private Address address;
 
@@ -49,33 +40,27 @@ public class Customer {// TODO: nullable: false for most fields
     private Orders orders;
 
     @Column(nullable = false)
-    private ArrayList<CreditCard> creditCards;
+    private CreditCard creditCard;
 
     @Column(nullable = false)
     private Cart cart;
 
-    @Column(nullable = false)
-    private Login login;
+//    @Column(nullable = false)
+//    private Login login;
 
-    public Customer(UUID id, String firstName, String middleName, String lastName, String email, String phoneNumber, Address address, Orders orders, ArrayList<CreditCard> creditCards, Cart cart, Login login) throws InvalidNameException{
+    public Customer(UUID id, String firstName, String middleName, String lastName, String email, String phoneNumber, Address address, Orders orders, CreditCard creditCard, Cart cart, Login login) throws InvalidNameException{
         this.id = id;
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
-        this.phoneNumber = phoneNumber;
         this.address = address;
+        this.phoneNumber = phoneNumber;
         this.orders = orders;
-        this.creditCards = creditCards;
+        this.creditCard = creditCard;
         this.cart = cart;
-        this.login = login;
-
-        if (isValidEmail(email)) this.email = email;
-        else throw new InvalidNameException();
+        // this.login = login;
     }
 
-    public boolean isValidEmail(String email) {
-        EmailValidator validator = EmailValidator.getInstance();
-        return validator.isValid(email);
-    }
+
 
 }
