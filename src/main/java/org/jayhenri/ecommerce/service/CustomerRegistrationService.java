@@ -25,15 +25,16 @@ public class CustomerRegistrationService {
         return customerRepository.existsCustomerPhoneNumberCustomQuery(phoneNumber);
     }
 
-    public void saveCustomer(Customer customer, UUID uuid) throws CustomerAlreadyExistsException, InvalidPostalCodeException {
+    public void saveCustomer(Customer customer) throws CustomerAlreadyExistsException, InvalidPostalCodeException {
 
-        if (existsByPhoneNumber(customer.getPhoneNumber()))
+        if (existsByPhoneNumber(customer.getPhoneNumber()) || existsByEmail(customer.getLogin().getEmail()))
             throw new CustomerAlreadyExistsException();
 
         else if (!isValidPostalCode(customer.getAddress().getPostalCode()))
             throw new InvalidPostalCodeException();
 
-        customer.setUuid(uuid);
+        // else if (!isValidPassword()){}
+
         customerRepository.save(customer);
     }
 
@@ -42,4 +43,18 @@ public class CustomerRegistrationService {
         Matcher matcher = pattern.matcher(postalCode);
         return matcher.matches();
     }
+
+    private boolean existsByEmail(String email) {
+        return customerRepository.existsCustomerEmailCustomQuery(email);
+    }
+
+    /*
+    private void encryptPassword(Login login) {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String encodedPassword = passwordEncoder.encode(login.getPassword());
+        login.setPassword(encodedPassword);
+
+        loginRepository.save(login);
+    }
+     */
 }

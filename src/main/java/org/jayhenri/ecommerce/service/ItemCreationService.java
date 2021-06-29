@@ -17,7 +17,7 @@ public class ItemCreationService {
     private ItemRepository itemRepository;
 
     public void addItem(UUID uuid, String name, Double price) {
-        itemRepository.save(new Item(uuid, name, price));
+        itemRepository.save(new Item(name, price));
     }
 }
 //    public void editItem(UUID uuid, Item item) {

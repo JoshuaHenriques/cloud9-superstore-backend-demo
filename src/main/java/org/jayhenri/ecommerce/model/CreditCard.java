@@ -13,8 +13,7 @@ import org.apache.commons.validator.routines.CreditCardValidator;
 // TODO: Implement later
 @Getter
 @Setter
-@NoArgsConstructor
-@Entity(name = "creditcards")
+@Embeddable
 public class CreditCard {
 
     @Id

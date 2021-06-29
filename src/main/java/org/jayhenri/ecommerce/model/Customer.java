@@ -13,13 +13,8 @@ import java.util.UUID;
 @NoArgsConstructor
 @Entity
 @Table(name = "customers")
-public class Customer {// TODO: nullable: false for most fields
-    // @Embeddable
+public class Customer {// TODO: nullable: false for most field
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
-    @Column
     private UUID uuid;
 
     @Column(nullable = false, length = 20)
@@ -37,36 +32,28 @@ public class Customer {// TODO: nullable: false for most fields
     @Column
     private Address address;
 
-//    @Column(nullable = false)
-//    private String streetName;
-//
-//    @Column(nullable = false)
-//    private Long streetNumber;
-//
-//    @Column(nullable = false)
-//    private Long unitNumber;
-//
-//    @Column(nullable = false)
-//    private String city;
-//
-//    @Column(nullable = false)
-//    private String postalCode;
-//
-//    @Column(nullable = false)
-//    private String province;
+    @Column
+    private Cart cart;
 
-    public Customer(UUID uuid, String firstName, String middleName, String lastName, String phoneNumber, Address address) {//, String streetName, Long streetNumber, Long unitNumber, String city, String postalCode, String province) {
-        this.uuid = uuid;
+    @Column
+    private CreditCard creditCard;
+
+    @Column
+    private Login login;
+
+    @Column
+    private Orders orders;
+
+    public Customer(String firstName, String middleName, String lastName, String phoneNumber, Address address, Cart cart, CreditCard creditCard, Login login, Orders orders) {
+        this.uuid = UUID.randomUUID();
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.address = address;
-//        this.streetName = streetName;
-//        this.streetNumber = streetNumber;
-//        this.unitNumber = unitNumber;
-//        this.city = city;
-//        this.postalCode = postalCode;
-//        this.province = province;
+        this.cart = cart;
+        this.creditCard = creditCard;
+        this.login = login;
+        this.orders = orders;
     }
 }

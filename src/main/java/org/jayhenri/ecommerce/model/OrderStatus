@@ -1,10 +1,24 @@
 package org.jayhenri.ecommerce.model;
 
+import lombok.Getter;
+
+import javax.persistence.Embeddable;
+
+@Getter
+@Embeddable
 public enum OrderStatus {
-    PREPARING,
-    PROCESSING,
-    APPROVED,
-    SHIPPING,
-    SHIPPED,
-    DELIVERED;
+    PREPARING("PREPARING"),
+    PROCESSING("PROCESSING"),
+    APPROVED("APPROVED"),
+    SHIPPING("SHIPPING"),
+    SHIPPED("SHIPPED"),
+    DELIVERED("DELIVERED");
+
+    private String status;
+
+    OrderStatus(String status) {
+        this.status = status;
+    }
 }
+
+

@@ -1,7 +1,6 @@
 package org.jayhenri.ecommerce.model;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -10,16 +9,10 @@ import java.util.UUID;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@Entity
-@Table(name = "logins")
+@Embeddable
 public class Login {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
-    @Column
     private UUID uuid;
 
     @Column(nullable = false, unique = true, length = 45)
