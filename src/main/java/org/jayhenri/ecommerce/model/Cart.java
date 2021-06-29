@@ -16,7 +16,6 @@ import org.javatuples.Quartet;
 @NoArgsConstructor
 public class Cart {
 
-
     private UUID uuid;
 
     private ArrayList<Quartet<UUID, Item, Integer, Character>> items;

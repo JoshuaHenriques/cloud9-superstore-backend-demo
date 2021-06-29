@@ -1,14 +1,11 @@
 package org.jayhenri.ecommerce.model;
 
-import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+
 import java.util.UUID;
 
 @Getter
@@ -19,6 +16,10 @@ import java.util.UUID;
 public class Login {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    @Column
     private UUID uuid;
 
     @Column(nullable = false, unique = true, length = 45)

@@ -1,10 +1,8 @@
 package org.jayhenri.ecommerce.service;
 
 import org.javatuples.Quartet;
-import org.javatuples.Triplet;
 import org.jayhenri.ecommerce.model.Item;
 import org.jayhenri.ecommerce.model.Cart;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -15,16 +13,13 @@ public class CartUpdateService {
     private static final Double HST = 0.13;
     private static final Double DELIVERY_FEE = 10.00;
 
-    @Autowired
     private Cart cart;
-    private UUID uuid;
 
     private Double subTotal = 0.00;
     private Double total = 0.00;
 
-    public CartUpdateService(UUID uuid) {
-        this.uuid = uuid;
-        cart = new Cart(uuid);
+    public CartUpdateService() {
+        cart = new Cart(UUID.randomUUID());
     }
 
     public void addToCart(UUID uuid, Item item, Integer quantity, Character size) {

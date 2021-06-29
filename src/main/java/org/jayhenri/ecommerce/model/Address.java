@@ -13,10 +13,8 @@ import java.util.regex.Pattern;
 
 @Getter
 @Setter
+@Embeddable
 public class Address {
-
-    @Id
-    private UUID uuid;
 
     @Column(nullable = false)
     private String streetName;
@@ -36,8 +34,8 @@ public class Address {
     @Column(nullable = false)
     private String province;
 
-    public Address(UUID uuid, String streetName, Long streetNumber, Long unitNumber, String city, String postalCode, String province) throws InvalidNameException {
-        this.uuid = uuid;
+    public Address(String streetName, Long streetNumber, Long unitNumber, String city, String postalCode, String province) throws InvalidNameException {
+        //this.uuid = uuid;
         this.streetName = streetName;
         this.streetNumber = streetNumber;
         this.unitNumber = unitNumber;

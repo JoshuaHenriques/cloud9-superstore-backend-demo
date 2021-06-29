@@ -11,8 +11,7 @@ import java.util.UUID;
 @Service
 public class ItemCreationService {
 
-    @Autowired
-    Item item;
+    private Item item;
 
     @Autowired
     private ItemRepository itemRepository;

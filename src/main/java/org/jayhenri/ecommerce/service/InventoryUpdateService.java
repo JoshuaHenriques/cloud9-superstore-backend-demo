@@ -12,7 +12,6 @@ import java.util.UUID;
 @Service
 public class InventoryUpdateService {
 
-    @Autowired
     private Inventory inventory;
 
     public InventoryUpdateService() {
