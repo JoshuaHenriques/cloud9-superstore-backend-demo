@@ -1,14 +1,11 @@
 package org.jayhenri.ecommerce.model;
 
-import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.apache.commons.validator.routines.EmailValidator;
 
-import javax.naming.InvalidNameException;
 import javax.persistence.*;
-import java.util.ArrayList;
+
 import java.util.UUID;
 
 @Getter
@@ -16,10 +13,9 @@ import java.util.UUID;
 @NoArgsConstructor
 @Entity
 @Table(name = "customers")
-public class Customer {// TODO: nullable: false for most fields
-
+public class Customer {// TODO: nullable: false for most field
     @Id
-    private UUID id;
+    private UUID uuid;
 
     @Column(nullable = false, length = 20)
     private String firstName;
@@ -33,34 +29,31 @@ public class Customer {// TODO: nullable: false for most fields
     @Column(nullable = false, unique = true, length = 10)
     private String phoneNumber;
 
-    @Column(nullable = false)
+    @Column
     private Address address;
 
-    @Column(nullable = false)
-    private Orders orders;
-
-    @Column(nullable = false)
-    private CreditCard creditCard;
-
-    @Column(nullable = false)
+    @Column
     private Cart cart;
 
-//    @Column(nullable = false)
-//    private Login login;
+    @Column
+    private CreditCard creditCard;
 
-    public Customer(UUID id, String firstName, String middleName, String lastName, String email, String phoneNumber, Address address, Orders orders, CreditCard creditCard, Cart cart, Login login) throws InvalidNameException{
-        this.id = id;
+    @Column
+    private Login login;
+
+    @Column
+    private Orders orders;
+
+    public Customer(String firstName, String middleName, String lastName, String phoneNumber, Address address, Cart cart, CreditCard creditCard, Login login, Orders orders) {
+        this.uuid = UUID.randomUUID();
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
-        this.address = address;
         this.phoneNumber = phoneNumber;
-        this.orders = orders;
-        this.creditCard = creditCard;
+        this.address = address;
         this.cart = cart;
-        // this.login = login;
+        this.creditCard = creditCard;
+        this.login = login;
+        this.orders = orders;
     }
-
-
-
 }

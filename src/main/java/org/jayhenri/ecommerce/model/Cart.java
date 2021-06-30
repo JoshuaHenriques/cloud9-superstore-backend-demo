@@ -9,21 +9,18 @@ import java.util.ArrayList;
 import java.util.UUID;
 import org.javatuples.Quartet;
 
+import javax.persistence.Embeddable;
+
 // TODO: Implement HST+GST+PROMOCODE computation
 
 @Getter
 @Setter
-@NoArgsConstructor
+@Embeddable
 public class Cart {
-
-
-    private UUID uuid;
 
     private ArrayList<Quartet<UUID, Item, Integer, Character>> items;
 
-    public Cart(UUID uuid) {
-
-        this.uuid = uuid;
+    public Cart() {
         this.items = new ArrayList<>();
     }
 }

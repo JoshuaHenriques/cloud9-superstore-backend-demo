@@ -13,7 +13,7 @@ import org.apache.commons.validator.routines.CreditCardValidator;
 // TODO: Implement later
 @Getter
 @Setter
-@NoArgsConstructor
+@Embeddable
 public class CreditCard {
 
     @Id
@@ -29,9 +29,9 @@ public class CreditCard {
     private String expDate;
 
     @Column
-    private Long cvc;
+    private String cvc;
 
-    public CreditCard(UUID uuid, String fullName, String ccn, String expDate, Long cvc) {
+    public CreditCard(UUID uuid, String fullName, String ccn, String expDate, String cvc) {
         this.uuid = uuid;
         this.fullName = fullName;
         this.expDate = expDate;

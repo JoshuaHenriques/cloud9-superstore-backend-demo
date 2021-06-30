@@ -1,19 +1,15 @@
 package org.jayhenri.ecommerce.service;
 
 import org.jayhenri.ecommerce.exception.CustomerAlreadyExistsException;
+import org.jayhenri.ecommerce.exception.InvalidPostalCodeException;
 import org.jayhenri.ecommerce.model.*;
 import org.jayhenri.ecommerce.repository.CustomerRepository;
-import org.jayhenri.ecommerce.repository.LoginRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 public class CustomerRegistrationService {
@@ -21,39 +17,44 @@ public class CustomerRegistrationService {
     @Autowired
     private CustomerRepository customerRepository;
 
-    @Autowired
-    private LoginRepository loginRepository;
-
-    private Address address;
-    private Cart cart;
-    private Orders orders;
-
+    private static final String REGEX_POSTAL_CODE = "^(?!.*[DFIOQU])[A-VXY][0-9][A-Z] ?[0-9][A-Z][0-9]$";
 
     public CustomerRegistrationService() { }
 
-    public boolean existsByPhoneNumber(String phoneNumber) {
+    private boolean existsByPhoneNumber(String phoneNumber) {
         return customerRepository.existsCustomerPhoneNumberCustomQuery(phoneNumber);
     }
-    public boolean existsByEmail(String email) {
-        return loginRepository.existsLoginEmailCustomQuery(email);
-    }
 
-    public void saveCustomer(Customer customer, Login login, Address address) throws CustomerAlreadyExistsException {
+    public void saveCustomer(Customer customer) throws CustomerAlreadyExistsException, InvalidPostalCodeException {
 
-        if (existsByPhoneNumber(customer.getPhoneNumber()) || existsByEmail(login.getEmail())){
+        if (existsByPhoneNumber(customer.getPhoneNumber()) || existsByEmail(customer.getLogin().getEmail()))
             throw new CustomerAlreadyExistsException();
-        }
-        customer.setAddress(address);
+
+        else if (!isValidPostalCode(customer.getAddress().getPostalCode()))
+            throw new InvalidPostalCodeException();
+
+        // else if (!isValidPassword()){}
+
         customerRepository.save(customer);
-        encryptPassword(login);
     }
 
-    public void encryptPassword(Login login) {
+    private boolean isValidPostalCode(String postalCode) {
+        Pattern pattern = Pattern.compile(REGEX_POSTAL_CODE);
+        Matcher matcher = pattern.matcher(postalCode);
+        return matcher.matches();
+    }
+
+    private boolean existsByEmail(String email) {
+        return customerRepository.existsCustomerEmailCustomQuery(email);
+    }
+
+    /*
+    private void encryptPassword(Login login) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String encodedPassword = passwordEncoder.encode(login.getPassword());
         login.setPassword(encodedPassword);
 
         loginRepository.save(login);
     }
-
+     */
 }

@@ -19,10 +19,8 @@ import java.util.UUID;
 public class Item {
 
     @Id
-    @Column
     private UUID uuid;
 
-    @NotNull
     @Column
     private String name;
 
@@ -30,7 +28,7 @@ public class Item {
 //    @Column
 //    private Rating rating; // TODO: Implement later
 
-    @NotNull
+
     @Column
     private double price;
 
@@ -38,7 +36,7 @@ public class Item {
 //    @Column
 //    private char tag; // TODO: Implement later
 
-    public Item(UUID uuid, String name, double price) {
+    public Item(String name, double price) {
         this.uuid = UUID.randomUUID();
         this.name = name;
         this.price = price;
