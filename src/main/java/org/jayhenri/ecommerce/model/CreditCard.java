@@ -4,20 +4,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.naming.InvalidNameException;
-import javax.persistence.*;
-import java.util.UUID;
-
-import org.apache.commons.validator.routines.CreditCardValidator;
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
 
 // TODO: Implement later
 @Getter
 @Setter
+@NoArgsConstructor
 @Embeddable
 public class CreditCard {
-
-    @Id
-    private UUID uuid;
 
     @Column
     private String fullName;
@@ -31,8 +26,7 @@ public class CreditCard {
     @Column
     private String cvc;
 
-    public CreditCard(UUID uuid, String fullName, String ccn, String expDate, String cvc) {
-        this.uuid = uuid;
+    public CreditCard(String fullName, String ccn, String expDate, String cvc) {
         this.fullName = fullName;
         this.expDate = expDate;
         this.cvc = cvc;

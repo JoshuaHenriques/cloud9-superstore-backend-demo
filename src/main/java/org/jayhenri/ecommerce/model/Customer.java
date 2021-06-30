@@ -5,7 +5,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-
 import java.util.UUID;
 
 @Getter
@@ -14,6 +13,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "customers")
 public class Customer {// TODO: nullable: false for most field
+
     @Id
     private UUID uuid;
 
@@ -29,31 +29,39 @@ public class Customer {// TODO: nullable: false for most field
     @Column(nullable = false, unique = true, length = 10)
     private String phoneNumber;
 
-    @Column
+    @Column(nullable = false, unique = true, length = 45)
+    private String email;
+
+    @Column(nullable = false, length = 64)
+    private String password;
+
+    @Column(nullable = false, length = 6)
+    private String dateOfBirth;
+
+    @Column(nullable = true)
     private Address address;
 
-    @Column
+    @Column(nullable = false)
     private Cart cart;
 
-    @Column
+    @Column(nullable = true)
     private CreditCard creditCard;
 
-    @Column
-    private Login login;
-
-    @Column
+    @Column(nullable = true)
     private Orders orders;
 
-    public Customer(String firstName, String middleName, String lastName, String phoneNumber, Address address, Cart cart, CreditCard creditCard, Login login, Orders orders) {
-        this.uuid = UUID.randomUUID();
+    public Customer(UUID uuid, String firstName, String middleName, String lastName, String phoneNumber, String email, String password, String dateOfBirth, Address address) {
+        this.uuid = uuid;
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.password = password;
+        this.dateOfBirth = dateOfBirth;
         this.address = address;
-        this.cart = cart;
-        this.creditCard = creditCard;
-        this.login = login;
-        this.orders = orders;
+        this.cart = new Cart();
+        this.creditCard = new CreditCard();
+        this.orders = new Orders();
     }
 }

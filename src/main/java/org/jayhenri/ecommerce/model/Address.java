@@ -1,18 +1,15 @@
 package org.jayhenri.ecommerce.model;
 
-import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.naming.InvalidNameException;
-import javax.persistence.*;
-import java.util.UUID;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
 
 @Getter
 @Setter
+@NoArgsConstructor
 @Embeddable
 public class Address {
 
@@ -34,13 +31,12 @@ public class Address {
     @Column(nullable = false)
     private String province;
 
-    public Address(String streetName, Long streetNumber, Long unitNumber, String city, String postalCode, String province) throws InvalidNameException {
-        //this.uuid = uuid;
+    public Address(String streetName, Long streetNumber, Long unitNumber, String city, String postalCode, String province) {
         this.streetName = streetName;
         this.streetNumber = streetNumber;
         this.unitNumber = unitNumber;
         this.city = city;
+        this.postalCode = postalCode;
         this.province = province;
-        this.postalCode = postalCode;        
     }
 }

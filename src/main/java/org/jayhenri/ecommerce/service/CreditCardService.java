@@ -15,7 +15,7 @@ public class CreditCardService {
 
     public void addCreditCard(UUID uuid, CreditCard creditCard) throws InvaildCreditCardException {
         if (isValidCreditCard(creditCard.getCcn())) {
-            creditCard.setUuid(uuid);
+            // creditCard.setUuid(uuid);
             // creditCardRepository.save(creditCard);
         } else throw new InvaildCreditCardException();
     }

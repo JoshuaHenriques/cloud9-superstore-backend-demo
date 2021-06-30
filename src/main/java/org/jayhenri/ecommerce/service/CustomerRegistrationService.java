@@ -7,7 +7,7 @@ import org.jayhenri.ecommerce.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.UUID;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -22,12 +22,12 @@ public class CustomerRegistrationService {
     public CustomerRegistrationService() { }
 
     private boolean existsByPhoneNumber(String phoneNumber) {
-        return customerRepository.existsCustomerPhoneNumberCustomQuery(phoneNumber);
+        return customerRepository.existsPhoneNumber(phoneNumber);
     }
 
     public void saveCustomer(Customer customer) throws CustomerAlreadyExistsException, InvalidPostalCodeException {
 
-        if (existsByPhoneNumber(customer.getPhoneNumber()) || existsByEmail(customer.getLogin().getEmail()))
+        if (existsByPhoneNumber(customer.getPhoneNumber()) || existsByEmail(customer.getEmail()))
             throw new CustomerAlreadyExistsException();
 
         else if (!isValidPostalCode(customer.getAddress().getPostalCode()))
@@ -45,7 +45,7 @@ public class CustomerRegistrationService {
     }
 
     private boolean existsByEmail(String email) {
-        return customerRepository.existsCustomerEmailCustomQuery(email);
+        return customerRepository.existsEmail(email);
     }
 
     /*
@@ -56,5 +56,5 @@ public class CustomerRegistrationService {
 
         loginRepository.save(login);
     }
-     */
+    */
 }

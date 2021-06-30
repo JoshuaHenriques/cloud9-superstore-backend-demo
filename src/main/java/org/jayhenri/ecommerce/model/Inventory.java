@@ -2,12 +2,14 @@ package org.jayhenri.ecommerce.model;
 
 import lombok.Getter;
 import lombok.Setter;
+
 import org.javatuples.Quartet;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
 import java.util.ArrayList;
 import java.util.UUID;
 

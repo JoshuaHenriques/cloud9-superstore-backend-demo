@@ -12,8 +12,8 @@ import java.util.UUID;
 public interface CustomerRepository extends JpaRepository<Customer, UUID> {
 
     @Query("select case when count(c)> 0 then true else false end from Customer c where lower(c.phoneNumber) like lower(:phoneNumber)")
-    boolean existsCustomerPhoneNumberCustomQuery(@Param("phoneNumber") String phoneNumber);
+    boolean existsPhoneNumber(@Param("phoneNumber") String phoneNumber);
 
     @Query("select case when count(c)> 0 then true else false end from Customer c where lower(c.email) like lower(:email)")
-    boolean existsCustomerEmailCustomQuery(@Param("email") String email);
+    boolean existsEmail(@Param("email") String email);
 }

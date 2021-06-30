@@ -3,8 +3,9 @@ package org.jayhenri.ecommerce.model;
 import lombok.Getter;
 import lombok.Setter;
 
-
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import javax.persistence.Id;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -13,9 +14,6 @@ import java.util.UUID;
 @Setter
 @Embeddable
 public class Orders {
-
-    @Id
-    private UUID uuid;
 
     // TODO: Fix enum import
     @Column
