@@ -4,41 +4,27 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
-import java.util.UUID;
-
+// TODO: Implement Ratings
 @Getter
 @Setter
 @NoArgsConstructor
-@Entity
-@Table(name = "items")
+@Embeddable
 public class Item {
-
-    @Id
-    private UUID uuid;
 
     @Column
     private String name;
 
-//    @NotNull
-//    @Column
-//    private Rating rating; // TODO: Implement later
-
+    @Column
+    private String description;
 
     @Column
     private double price;
 
-//    @NotNull
-//    @Column
-//    private char tag; // TODO: Implement later
-
-    public Item(String name, double price) {
-        this.uuid = UUID.randomUUID();
+    public Item(String name, String description, double price) {
         this.name = name;
+        this.description = description;
         this.price = price;
     }
 }

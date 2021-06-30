@@ -3,13 +3,12 @@ package org.jayhenri.ecommerce.exception;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InvaildCreditCardException extends Exception {
-
+public class InvalidCustomerException extends Exception {
     private List<String> errorMessages = new ArrayList<>();
 
-    public InvaildCreditCardException() {}
+    public InvalidCustomerException() {}
 
-    public InvaildCreditCardException(String msg) {
+    public InvalidCustomerException(String msg) {
         super(msg);
     }
 

@@ -16,4 +16,7 @@ public interface CustomerRepository extends JpaRepository<Customer, UUID> {
 
     @Query("select case when count(c)> 0 then true else false end from Customer c where lower(c.email) like lower(:email)")
     boolean existsEmail(@Param("email") String email);
+
+    @Query(value = "SELECT * FROM customers WHERE customers.email=:email", nativeQuery = true)
+    Customer findByEmail(@Param("email") String email);
 }

@@ -3,7 +3,7 @@ package org.jayhenri.ecommerce.controller;
 import org.jayhenri.ecommerce.exception.CustomerAlreadyExistsException;
 import org.jayhenri.ecommerce.exception.InvalidPostalCodeException;
 import org.jayhenri.ecommerce.model.Customer;
-import org.jayhenri.ecommerce.service.CustomerRegistrationService;
+import org.jayhenri.ecommerce.service.CustomerService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -17,11 +17,11 @@ import javax.validation.Valid;
 public class CustomerRegistrationController {
 
     @Autowired
-    private CustomerRegistrationService customerRegistrationService;
+    private CustomerService customerService;
 
     @PostMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Customer> register(@Valid @RequestBody Customer customer) throws CustomerAlreadyExistsException, InvalidPostalCodeException {
-        customerRegistrationService.saveCustomer(customer);
+        customerService.add(customer);
         return ResponseEntity.ok().build();
     }
 }
