@@ -2,6 +2,7 @@ package org.jayhenri.ecommerce.controller;
 
 import org.jayhenri.ecommerce.exception.*;
 import org.jayhenri.ecommerce.model.ClothingInventory;
+import org.jayhenri.ecommerce.model.Customer;
 import org.jayhenri.ecommerce.service.ClothingInventoryService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.naming.InvalidNameException;
+import javax.validation.Path;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -19,9 +22,9 @@ public class ClothingInventoryController {
     @Autowired
     private ClothingInventoryService clothingInventoryService;
 
-    @PutMapping(value = "/updateItem", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ClothingInventory> addToStock(@Valid @RequestBody ClothingInventory clothingInventory) throws InvalidItemException, ItemNotFoundException {
-        clothingInventoryService.update(clothingInventory);
+    @PutMapping(value = "/updateItem/{productName}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ClothingInventory> updateItem(@Valid @RequestBody ClothingInventory clothingInventory, @PathVariable String productName) throws InvalidItemException, ItemNotFoundException, ProductNameNotSameException {
+        clothingInventoryService.update(clothingInventory, productName);
         return ResponseEntity.ok().build();
     }
 
@@ -31,9 +34,14 @@ public class ClothingInventoryController {
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping(value = "/removeFromStock", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ClothingInventory> removeFromStock(@Valid @RequestBody ClothingInventory clothingInventory) throws InvalidItemException, ItemNotFoundException {
-        clothingInventoryService.delete(clothingInventory);
+    @GetMapping(value = "/getByName/{productName}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ClothingInventory getByProductName(@Valid @PathVariable String productName) throws InvalidNameException, CustomerNotFoundException {
+        return clothingInventoryService.getByProductName(productName);
+    }
+
+    @PostMapping(value = "/removeFromStock/{productName}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ClothingInventory> removeItemToInventory(@Valid @RequestBody ClothingInventory clothingInventory, @PathVariable String productName) throws InvalidItemException, ItemNotFoundException {
+        clothingInventoryService.delete(clothingInventory, productName);
         return ResponseEntity.ok().build();
     }
 

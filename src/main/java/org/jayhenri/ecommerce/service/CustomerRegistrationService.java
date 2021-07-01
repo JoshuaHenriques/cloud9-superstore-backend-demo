@@ -40,7 +40,7 @@ public class CustomerRegistrationService {
     }
 
     private boolean existsByEmail(String email) {
-        return customerRepository.existsEmail(email);
+        return customerRepository.existsByEmail(email);
     }
 
     /*

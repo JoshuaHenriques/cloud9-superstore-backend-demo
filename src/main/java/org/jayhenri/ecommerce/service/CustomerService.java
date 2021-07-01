@@ -1,9 +1,6 @@
 package org.jayhenri.ecommerce.service;
 
-import org.jayhenri.ecommerce.exception.CustomerAlreadyExistsException;
-import org.jayhenri.ecommerce.exception.CustomerNotFoundException;
-import org.jayhenri.ecommerce.exception.InvalidCustomerException;
-import org.jayhenri.ecommerce.exception.InvalidPostalCodeException;
+import org.jayhenri.ecommerce.exception.*;
 import org.jayhenri.ecommerce.model.Customer;
 import org.jayhenri.ecommerce.repository.CustomerRepository;
 
@@ -11,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
+import javax.naming.InvalidNameException;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -42,26 +40,26 @@ public class CustomerService {
         customerRepository.save(customer);
     }
 
-    public void delete(Customer customer) throws CustomerNotFoundException, InvalidCustomerException {
-        if (!ObjectUtils.isEmpty(customer)) {
-            if (existsByEmail(customer.getEmail())) {
-                customerRepository.delete(customer);
+    public void delete(String email) throws CustomerNotFoundException, InvalidCustomerException {
+        Customer deleteMe;
+        if (!ObjectUtils.isEmpty(email))
+            if (existsByEmail(email)) {
+                deleteMe = new Customer();
+                deleteMe.setEmail(email);
+                customerRepository.delete(deleteMe);
             }
-            throw new CustomerNotFoundException();
-        } else {
-            throw new InvalidCustomerException();
-        }
+            else throw new CustomerNotFoundException();
+        else throw new InvalidCustomerException();
     }
 
-    public void update(Customer newCustomer, String email) throws CustomerNotFoundException, InvalidCustomerException {
-        if (!ObjectUtils.isEmpty(newCustomer)) {
-            if (!existsByEmail(customer.getEmail())) {
-                throw new CustomerNotFoundException("Cannot find Item: " + customer.getEmail());
-            }
-            customerRepository.save(customer);
-        } else {
-            throw new InvalidCustomerException();
-        }
+    public void update(Customer customer, String email) throws CustomerNotFoundException, InvalidCustomerException, EmailNotSameException {
+        if (!ObjectUtils.isEmpty(customer))
+            if (existsByEmail(email) && existsByEmail(customer.getEmail()))
+                if (email.equals(customer.getEmail()))
+                    customerRepository.save(customer);
+                 else throw new EmailNotSameException();
+             else throw new CustomerNotFoundException(customer.getEmail());
+         else throw new InvalidCustomerException();
     }
 
     public List<Customer> findAll() {
@@ -75,12 +73,15 @@ public class CustomerService {
     }
 
     private boolean existsByEmail(String email) {
-        return customerRepository.existsEmail(email);
+        return customerRepository.existsByEmail(email);
     }
 
-    public Customer getByEmail(String email) {
-        if()
-        return customerRepository.findByEmail(email);
+    public Customer getByEmail(String email) throws InvalidNameException, CustomerNotFoundException {
+        if(!ObjectUtils.isEmpty(email)) {
+            if (existsByEmail(email)) {
+                return customerRepository.getByEmail(email);
+            } else throw new CustomerNotFoundException();
+        } else throw new InvalidNameException();
     }
 
     /*

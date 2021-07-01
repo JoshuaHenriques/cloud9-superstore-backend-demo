@@ -1,10 +1,9 @@
 package org.jayhenri.ecommerce.service;
 
 import lombok.NoArgsConstructor;
-import org.jayhenri.ecommerce.exception.InvalidItemException;
-import org.jayhenri.ecommerce.exception.ItemAlreadyExistsException;
-import org.jayhenri.ecommerce.exception.ItemNotFoundException;
+import org.jayhenri.ecommerce.exception.*;
 import org.jayhenri.ecommerce.model.ClothingInventory;
+import org.jayhenri.ecommerce.model.Customer;
 import org.jayhenri.ecommerce.repository.ClothingInventoryRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,22 +22,19 @@ public class ClothingInventoryService {
     @Autowired
     private ClothingInventoryRepository clothingInventoryRepository;
 
-    public void update(ClothingInventory clothingInventory) throws ItemNotFoundException, InvalidItemException {
-            if (!ObjectUtils.isEmpty(clothingInventory)) {
-                if (!existsByProductName(clothingInventory)) {
-                    throw new ItemNotFoundException("Cannot find Item: " + clothingInventory.getProductName());
-                }
-                clothingInventoryRepository.save(clothingInventory);
-            } else {
-                InvalidItemException exc = new InvalidItemException("Failed to add item");
-                exc.addErrorMessage("Item given is null or empty");
-                throw exc;
-            }
+    public void update(ClothingInventory clothingInventory, String productName) throws ItemNotFoundException, InvalidItemException, ProductNameNotSameException {
+        if (!ObjectUtils.isEmpty(clothingInventory))
+            if (existsByProductName(productName) && existsByProductName(clothingInventory.getProductName()))
+                if (productName.equals(clothingInventory.getProductName()))
+                    clothingInventoryRepository.save(clothingInventory);
+                else throw new ProductNameNotSameException();
+            else throw new ItemNotFoundException();
+        else throw new InvalidItemException();
     }
 
     public void add(ClothingInventory clothingInventory) throws ItemAlreadyExistsException, InvalidItemException {
         if (!ObjectUtils.isEmpty(clothingInventory)) {
-            if (!existsByProductName(clothingInventory)) {
+            if (!existsByProductName(clothingInventory.getProductName())) {
                 clothingInventoryRepository.save(clothingInventory);
             }
             throw new ItemAlreadyExistsException();
@@ -47,22 +43,27 @@ public class ClothingInventoryService {
         }
     }
 
-    public void delete(ClothingInventory clothingInventory) throws ItemNotFoundException, InvalidItemException {
-        if (!ObjectUtils.isEmpty(clothingInventory)) {
-            if (existsByProductName(clothingInventory)) {
-                clothingInventoryRepository.delete(clothingInventory);
+    public void delete(ClothingInventory clothingInventory, String productName) throws ItemNotFoundException, InvalidItemException {
+        ClothingInventory deleteMe;
+        if (!ObjectUtils.isEmpty(productName))
+            if (existsByProductName(productName)) {
+                deleteMe = new ClothingInventory();
+                deleteMe.setProductName(productName);
+                clothingInventoryRepository.delete(deleteMe);
             }
-            throw new ItemNotFoundException();
-        } else {
-            throw new InvalidItemException();
-        }
+            else throw new ItemNotFoundException();
+        else throw new InvalidItemException();
     }
 
     public List<ClothingInventory> findAll() {
         return clothingInventoryRepository.findAll();
     }
 
-    public boolean existsByProductName(ClothingInventory clothingInventory) {
-        return clothingInventoryRepository.existsByProductName(clothingInventory.getProductName());
+    public boolean existsByProductName(String productName) {
+        return clothingInventoryRepository.existsByProductName(productName);
+    }
+
+    public ClothingInventory getByProductName(String productName) {
+        return clothingInventoryRepository.getByProductName(productName);
     }
 }
