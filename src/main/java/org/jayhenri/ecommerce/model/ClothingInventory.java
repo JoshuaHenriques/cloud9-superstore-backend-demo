@@ -33,12 +33,12 @@ public class ClothingInventory {
     private double price;
 
     @Column
-    private Long smallQuantity;
+    private int smallQuantity;
 
     @Column
-    private Long mediumQuantity;
+    private int mediumQuantity;
 
     @Column
-    private Long largeQuantity;
+    private int largeQuantity;
 
 }

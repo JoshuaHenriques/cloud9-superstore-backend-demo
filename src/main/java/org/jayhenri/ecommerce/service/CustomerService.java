@@ -34,9 +34,7 @@ public class CustomerService {
 
         else if (!isValidPostalCode(customer.getAddress().getPostalCode()))
             throw new InvalidPostalCodeException();
-
         // else if (!isValidPassword()){}
-
         customerRepository.save(customer);
     }
 

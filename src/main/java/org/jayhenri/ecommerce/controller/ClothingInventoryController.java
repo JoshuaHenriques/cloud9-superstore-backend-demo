@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.naming.InvalidNameException;
-import javax.validation.Path;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -35,13 +34,13 @@ public class ClothingInventoryController {
     }
 
     @GetMapping(value = "/getByName/{productName}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ClothingInventory getByProductName(@Valid @PathVariable String productName) throws InvalidNameException, CustomerNotFoundException {
+    public ClothingInventory getByProductName(@Valid @PathVariable String productName) {
         return clothingInventoryService.getByProductName(productName);
     }
 
     @PostMapping(value = "/removeFromStock/{productName}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ClothingInventory> removeItemToInventory(@Valid @RequestBody ClothingInventory clothingInventory, @PathVariable String productName) throws InvalidItemException, ItemNotFoundException {
-        clothingInventoryService.delete(clothingInventory, productName);
+        clothingInventoryService.delete(productName);
         return ResponseEntity.ok().build();
     }
 

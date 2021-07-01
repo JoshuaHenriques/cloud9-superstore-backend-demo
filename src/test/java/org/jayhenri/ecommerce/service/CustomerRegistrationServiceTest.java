@@ -36,7 +36,7 @@
 //    // Given
 //    private Customer cus, cus1;
 //    private Address add;
-//    private Orders ord;
+//    private Order ord;
 //    private Cart cart;
 //    private Login login;
 //    private UUID uuid;

@@ -48,7 +48,7 @@ public class Customer {// TODO: nullable: false for most field
     private CreditCard creditCard;
 
     @Column(nullable = true)
-    private Orders orders;
+    private Order orders;
 
     public Customer(UUID uuid, String firstName, String middleName, String lastName, String phoneNumber, String email, String password, String dateOfBirth, Address address) {
         this.uuid = uuid;
@@ -62,6 +62,6 @@ public class Customer {// TODO: nullable: false for most field
         this.address = address;
         this.cart = new Cart();
         this.creditCard = new CreditCard();
-        this.orders = new Orders();
+        this.orders = new Order();
     }
 }

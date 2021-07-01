@@ -36,14 +36,12 @@ public class ClothingInventoryService {
         if (!ObjectUtils.isEmpty(clothingInventory)) {
             if (!existsByProductName(clothingInventory.getProductName())) {
                 clothingInventoryRepository.save(clothingInventory);
-            }
-            throw new ItemAlreadyExistsException();
-        } else {
-            throw new InvalidItemException();
-        }
+            } else throw new ItemAlreadyExistsException();
+        } else throw new InvalidItemException();
+
     }
 
-    public void delete(ClothingInventory clothingInventory, String productName) throws ItemNotFoundException, InvalidItemException {
+    public void delete(String productName) throws ItemNotFoundException, InvalidItemException {
         ClothingInventory deleteMe;
         if (!ObjectUtils.isEmpty(productName))
             if (existsByProductName(productName)) {

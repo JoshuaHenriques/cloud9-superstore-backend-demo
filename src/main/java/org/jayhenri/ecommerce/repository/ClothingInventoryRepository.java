@@ -17,6 +17,6 @@ public interface ClothingInventoryRepository extends JpaRepository<ClothingInven
     @Query("select case when count(c)> 0 then true else false end from ClothingInventory c where lower(c.productName) like lower(:productName)")
     boolean existsByProductName(@Param("productName") String name);
 
-    @Query(value = "SELECT * FROM clothinginventory WHERE clothinginventory.productName=:productName", nativeQuery = true)
+    @Query(value = "SELECT * FROM inventory WHERE inventory.product_Name=:productName", nativeQuery = true)
     ClothingInventory getByProductName(@Param("productName") String productName);
 }
