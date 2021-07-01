@@ -1,45 +1,67 @@
 package org.jayhenri.ecommerce.model;
 
-import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import java.util.ArrayList;
+import javax.persistence.*;
+import java.util.UUID;
 
 @Getter
 @Setter
 @NoArgsConstructor
-public class Customer {
+@Entity
+@Table(name = "customers")
+public class Customer {// TODO: nullable: false for most field
 
     @Id
-    @GeneratedValue
-    private Long id;
+    private UUID uuid;
 
-    @NotNull
-    @Column(nullable = false)
+    @Column(nullable = false, length = 20)
     private String firstName;
 
-    @NotNull
-    @Column(nullable = false)
+    @Column(nullable = true, length = 20)
+    private String middleName;
+
+    @Column(nullable = false, length = 20)
     private String lastName;
 
-    @NotNull
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true, length = 10)
+    private String phoneNumber;
+
+    @Column(nullable = false, unique = true, length = 45)
+    private String email;
+
+    @Column(nullable = false, length = 64)
+    private String password;
+
+    @Column(nullable = false, length = 6)
+    private String dateOfBirth;
+
+    @Column(nullable = true)
     private Address address;
 
-    @Column(nullable = true)
-    private Orders orders;
-
     @Column(nullable = false)
-    private ArrayList<CreditCard> creditCards;
-
-    @Column(nullable = true)
     private Cart cart;
 
     @Column(nullable = true)
-    private LoginInformation login;
+    private CreditCard creditCard;
+
+    @Column(nullable = true)
+    private Order orders;
+
+    public Customer(UUID uuid, String firstName, String middleName, String lastName, String phoneNumber, String email, String password, String dateOfBirth, Address address) {
+        this.uuid = uuid;
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.password = password;
+        this.dateOfBirth = dateOfBirth;
+        this.address = address;
+        this.cart = new Cart();
+        this.creditCard = new CreditCard();
+        this.orders = new Order();
+    }
 }

@@ -1,44 +1,42 @@
 package org.jayhenri.ecommerce.model;
 
-import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.Embeddable;
 
 @Getter
 @Setter
 @NoArgsConstructor
+@Embeddable
 public class Address {
 
-    @Id
-    @GeneratedValue
-    private Long id;
-
-    @NotNull
     @Column(nullable = false)
     private String streetName;
 
-    @NotNull
     @Column(nullable = false)
     private Long streetNumber;
 
-    @NotNull
-    @Column(nullable = true)
+    @Column(nullable = false)
     private Long unitNumber;
 
-    @NotNull
     @Column(nullable = false)
     private String city;
 
-    @NotNull
     @Column(nullable = false)
     private String postalCode;
 
-    @NotNull
     @Column(nullable = false)
     private String province;
+
+    public Address(String streetName, Long streetNumber, Long unitNumber, String city, String postalCode, String province) {
+        this.streetName = streetName;
+        this.streetNumber = streetNumber;
+        this.unitNumber = unitNumber;
+        this.city = city;
+        this.postalCode = postalCode;
+        this.province = province;
+    }
 }

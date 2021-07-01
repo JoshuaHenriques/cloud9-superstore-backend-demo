@@ -1,41 +1,30 @@
 package org.jayhenri.ecommerce.model;
 
-import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import java.util.ArrayList;
+import javax.persistence.*;
 
+// TODO: Implement Ratings
 @Getter
 @Setter
 @NoArgsConstructor
+@Embeddable
 public class Item {
 
-    @Id
-    @GeneratedValue
-    private Long id;
-
-    @NotNull
-    @Column
-    private Long UUID;
-
-    @NotNull
     @Column
     private String name;
 
-    @NotNull
     @Column
-    private Rating rating; // TODO: Implement later
+    private String description;
 
-    @NotNull
     @Column
     private double price;
 
-    @NotNull
-    @Column
-    private ArrayList<Tag> tags; // TODO: Implement later
+    public Item(String name, String description, double price) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+    }
 }
