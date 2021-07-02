@@ -5,23 +5,28 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.UUID;
 
+// TODO: nullable: false for most field
 @Getter
 @Setter
 @NoArgsConstructor
 @Entity
 @Table(name = "customers")
-public class Customer {// TODO: nullable: false for most field
+public class Customer implements Serializable {
+
+    private static final long serialVersionUID = -2054386655979281969L;
+
+    public static final int ROLE_ADMIN = 1;
+    public static final int ROLE_NONADMIN = 0;
 
     @Id
-    private UUID uuid;
+    @Column(nullable = false, unique = true, length = 45)
+    private String email;
 
-    @Column(nullable = false, length = 20)
+    @Column(nullable = false)
     private String firstName;
-
-    @Column(nullable = true, length = 20)
-    private String middleName;
 
     @Column(nullable = false, length = 20)
     private String lastName;
@@ -29,10 +34,7 @@ public class Customer {// TODO: nullable: false for most field
     @Column(nullable = false, unique = true, length = 10)
     private String phoneNumber;
 
-    @Column(nullable = false, unique = true, length = 45)
-    private String email;
-
-    @Column(nullable = false, length = 64)
+    @Column(nullable = false, length = 128)
     private String password;
 
     @Column(nullable = false, length = 6)
@@ -41,19 +43,14 @@ public class Customer {// TODO: nullable: false for most field
     @Column(nullable = true)
     private Address address;
 
-    @Column(nullable = false)
     private Cart cart;
 
-    @Column(nullable = true)
     private CreditCard creditCard;
 
-    @Column(nullable = true)
     private Order orders;
 
-    public Customer(UUID uuid, String firstName, String middleName, String lastName, String phoneNumber, String email, String password, String dateOfBirth, Address address) {
-        this.uuid = uuid;
+    public Customer(String firstName, String lastName, String phoneNumber, String email, String password, String dateOfBirth, Address address) {
         this.firstName = firstName;
-        this.middleName = middleName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.email = email;

@@ -18,27 +18,14 @@ import java.util.UUID;
 @NoArgsConstructor
 @Entity
 @Table(name = "inventory")
-public class ClothingInventory {
+public class Inventory {
 
     @Id
-    private UUID uuid;
-
     @Column(unique = true)
     private String productName;
 
-    @Column
-    private String description;
+
 
     @Column
-    private double price;
-
-    @Column
-    private int smallQuantity;
-
-    @Column
-    private int mediumQuantity;
-
-    @Column
-    private int largeQuantity;
-
+    private int quantity;
 }

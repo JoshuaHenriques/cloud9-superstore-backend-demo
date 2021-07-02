@@ -1,16 +1,14 @@
 package org.jayhenri.ecommerce.controller;
 
 import org.jayhenri.ecommerce.exception.*;
-import org.jayhenri.ecommerce.model.ClothingInventory;
-import org.jayhenri.ecommerce.model.Customer;
-import org.jayhenri.ecommerce.service.ClothingInventoryService;
+import org.jayhenri.ecommerce.model.Inventory;
+import org.jayhenri.ecommerce.service.InventoryService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.naming.InvalidNameException;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -19,33 +17,33 @@ import java.util.List;
 public class ClothingInventoryController {
 
     @Autowired
-    private ClothingInventoryService clothingInventoryService;
+    private InventoryService inventoryService;
 
     @PutMapping(value = "/updateItem/{productName}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ClothingInventory> updateItem(@Valid @RequestBody ClothingInventory clothingInventory, @PathVariable String productName) throws InvalidItemException, ItemNotFoundException, ProductNameNotSameException {
-        clothingInventoryService.update(clothingInventory, productName);
+    public ResponseEntity<Inventory> updateItem(@Valid @RequestBody Inventory inventory, @PathVariable String productName) throws InvalidItemException, ItemNotFoundException, ProductNameNotSameException {
+        inventoryService.update(inventory, productName);
         return ResponseEntity.ok().build();
     }
 
     @PostMapping(value = "/addItem", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ClothingInventory> addItemToInventory(@Valid @RequestBody ClothingInventory clothingInventory) throws ItemAlreadyExistsException, InvalidItemException {
-        clothingInventoryService.add(clothingInventory);
+    public ResponseEntity<Inventory> addItemToInventory(@Valid @RequestBody Inventory inventory) throws ItemAlreadyExistsException, InvalidItemException {
+        inventoryService.add(inventory);
         return ResponseEntity.ok().build();
     }
 
     @GetMapping(value = "/getByName/{productName}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ClothingInventory getByProductName(@Valid @PathVariable String productName) {
-        return clothingInventoryService.getByProductName(productName);
+    public Inventory getByProductName(@Valid @PathVariable String productName) {
+        return inventoryService.getByProductName(productName);
     }
 
     @PostMapping(value = "/removeFromStock/{productName}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ClothingInventory> removeItemToInventory(@Valid @RequestBody ClothingInventory clothingInventory, @PathVariable String productName) throws InvalidItemException, ItemNotFoundException {
-        clothingInventoryService.delete(productName);
+    public ResponseEntity<Inventory> removeItemToInventory(@Valid @RequestBody Inventory inventory, @PathVariable String productName) throws InvalidItemException, ItemNotFoundException {
+        inventoryService.delete(productName);
         return ResponseEntity.ok().build();
     }
 
     @GetMapping(value = "/listItems")
-    public List<ClothingInventory> findAll() {
-        return clothingInventoryService.findAll();
+    public List<Inventory> findAll() {
+        return inventoryService.findAll();
     }
 }

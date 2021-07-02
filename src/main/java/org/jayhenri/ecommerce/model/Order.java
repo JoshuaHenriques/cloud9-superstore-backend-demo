@@ -20,6 +20,12 @@ public class Order {
     private String orderStatus;
 
     @Column
-    private ArrayList<ClothingInventory> order;
+    private ArrayList<Item> order;
+
+    @Column
+    private double subTotal;
+
+    @Column
+    private double totalPrice;
 
 }
