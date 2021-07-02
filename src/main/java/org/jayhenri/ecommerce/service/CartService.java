@@ -1,5 +1,6 @@
 package org.jayhenri.ecommerce.service;
 
+import org.jayhenri.ecommerce.model.Customer;
 import org.jayhenri.ecommerce.model.Item;
 import org.jayhenri.ecommerce.model.Cart;
 
@@ -32,6 +33,8 @@ public class CartService {
         cart.setTotal(total);
     }
 
-    public void saveToCustomer() {}
+    public void saveToCustomer(Customer customer) {
+        customer.setCart(this.cart);
+    }
 }
 

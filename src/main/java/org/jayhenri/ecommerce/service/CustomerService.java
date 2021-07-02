@@ -81,13 +81,6 @@ public class CustomerService {
             } else throw new CustomerNotFoundException();
         } else throw new InvalidNameException();
     }
-
-    public void updateCart() {}
-
-    public void updateOrder() {}
-
-    public void updateCreditCard() {}
-
     /*
     private void encryptPassword(Login login) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();

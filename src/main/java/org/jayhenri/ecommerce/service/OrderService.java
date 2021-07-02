@@ -1,6 +1,7 @@
 package org.jayhenri.ecommerce.service;
 
 import org.jayhenri.ecommerce.model.Cart;
+import org.jayhenri.ecommerce.model.Customer;
 import org.jayhenri.ecommerce.model.Order;
 import org.jayhenri.ecommerce.model.OrderDB;
 import org.jayhenri.ecommerce.repository.OrderDBRepository;
@@ -14,6 +15,8 @@ public class OrderService {
     private Order order;
     private OrderDB orderDB;
 
+    @Autowired
+    private CustomerService customerService;
 
     private static final Double HST = 0.13;
     private static final Double DELIVERY_FEE = 9.99;
@@ -35,5 +38,7 @@ public class OrderService {
         orderDBRepository.save(orderDB);
     }
 
-    public void saveToCustomer() {}
+    public void saveToCustomer(Customer customer) {
+        customer.getOrders().add(this.order);
+    }
 }
