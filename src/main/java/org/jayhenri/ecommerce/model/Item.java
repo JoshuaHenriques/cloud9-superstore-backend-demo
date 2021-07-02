@@ -5,6 +5,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Date;
 
 // TODO: Implement Ratings
 // TODO: There must be a better way to do this
@@ -12,11 +14,23 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @Embeddable
-public class Item {
+public class Item implements Serializable {
+
+    @Id
+    @Column(unique = true)
+    private String productName;
 
     @Column
     private String description;
 
     @Column
     private double price;
+
+    @Lob
+    @Column(name = "Image", length = Integer.MAX_VALUE, nullable = true)
+    private byte[] image;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "Create_Date", nullable = false)
+    private Date createDate;
 }

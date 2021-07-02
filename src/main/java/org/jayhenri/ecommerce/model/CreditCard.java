@@ -6,13 +6,14 @@ import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import java.io.Serializable;
 
 // TODO: Implement later
 @Getter
 @Setter
 @NoArgsConstructor
 @Embeddable
-public class CreditCard {
+public class CreditCard implements Serializable {
 
     @Column
     private String fullName;

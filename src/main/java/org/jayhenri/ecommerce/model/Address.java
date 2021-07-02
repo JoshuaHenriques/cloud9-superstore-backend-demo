@@ -6,12 +6,13 @@ import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import java.io.Serializable;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @Embeddable
-public class Address {
+public class Address implements Serializable {
 
     @Column(nullable = false)
     private String streetName;

@@ -4,9 +4,8 @@ package org.jayhenri.ecommerce.model;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.UUID;
-import org.javatuples.Quartet;
 
 import javax.persistence.Embeddable;
 
@@ -15,11 +14,12 @@ import javax.persistence.Embeddable;
 @Getter
 @Setter
 @Embeddable
-public class Cart {
+public class Cart implements Serializable {
 
-    private ArrayList<Quartet<UUID, Item, Integer, Character>> items;
+    private ArrayList<Item> items;
 
-    public Cart() {
-        this.items = new ArrayList<>();
-    }
+    private String customerEmail;
+
+    private Double total;
+
 }
