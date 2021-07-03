@@ -2,6 +2,7 @@ package org.jayhenri.ecommerce.service;
 
 import org.jayhenri.ecommerce.exception.*;
 import org.jayhenri.ecommerce.model.Customer;
+import org.jayhenri.ecommerce.model.Item;
 import org.jayhenri.ecommerce.repository.CustomerRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,8 @@ public class CustomerService {
 
     @Autowired
     private CustomerRepository customerRepository;
+
+
 
     private static final String REGEX_POSTAL_CODE = "^(?!.*[DFIOQU])[A-VXY][0-9][A-Z] ?[0-9][A-Z][0-9]$";
 
@@ -38,24 +41,21 @@ public class CustomerService {
         customerRepository.save(customer);
     }
 
-    public void delete(String email) throws CustomerNotFoundException, InvalidCustomerException {
-        Customer deleteMe;
-        if (!ObjectUtils.isEmpty(email))
-            if (existsByEmail(email)) {
-                deleteMe = new Customer();
-                deleteMe.setEmail(email);
+    public void delete(Customer customer) throws CustomerNotFoundException, InvalidCustomerException {
+        if (!ObjectUtils.isEmpty(customer.getEmail()))
+            if (existsByEmail(customer.getEmail())) {
+                Customer deleteMe = new Customer();
+                deleteMe.setEmail(customer.getEmail());
                 customerRepository.delete(deleteMe);
             }
             else throw new CustomerNotFoundException();
         else throw new InvalidCustomerException();
     }
 
-    public void update(Customer customer, String email) throws CustomerNotFoundException, InvalidCustomerException, EmailNotSameException {
+    public void update(Customer customer) throws CustomerNotFoundException, InvalidCustomerException, EmailNotSameException {
         if (!ObjectUtils.isEmpty(customer))
-            if (existsByEmail(email) && existsByEmail(customer.getEmail()))
-                if (email.equals(customer.getEmail()))
-                    customerRepository.save(customer);
-                 else throw new EmailNotSameException();
+            if (existsByEmail(customer.getEmail()))
+                customerRepository.save(customer);
              else throw new CustomerNotFoundException(customer.getEmail());
          else throw new InvalidCustomerException();
     }
@@ -80,6 +80,29 @@ public class CustomerService {
                 return customerRepository.getByEmail(email);
             } else throw new CustomerNotFoundException();
         } else throw new InvalidNameException();
+    }
+
+    public void addToCart(String productName) {
+        customer.setEmail(customerEmail);
+
+        this.cart.getItems().add(item);
+        updateCartTotal();
+        customer.setCart(this.cart);
+        customerService.update();
+    }
+
+    public void removeFromCart(String productName) {
+        this.cart.getItems().remove(item);
+        updateCartTotal();
+    }
+
+    public void updateCartTotal() {
+        double total = cart.getItems().stream().mapToDouble(Item::getPrice).sum();
+        cart.setTotal(total);
+    }
+
+    public void saveToCustomer() {
+        customer.setCart(this.cart);
     }
     /*
     private void encryptPassword(Login login) {

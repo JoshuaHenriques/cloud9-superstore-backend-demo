@@ -1,7 +1,8 @@
 package org.jayhenri.ecommerce.repository;
 
-import org.jayhenri.ecommerce.model.Inventory;
+import org.jayhenri.ecommerce.model.Customer;
 import org.jayhenri.ecommerce.model.OrderDB;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -14,9 +15,6 @@ import java.util.UUID;
 @Repository
 public interface OrderDBRepository extends JpaRepository<OrderDB, UUID> {
 
-    @Query("select case when count(c)> 0 then true else false end from Inventory c where lower(c.productName) like lower(:productName)")
-    boolean existsByProductName(@Param("productName") String name);
-
-    @Query(value = "SELECT * FROM inventory WHERE inventory.product_Name=:productName", nativeQuery = true)
-    Inventory getByProductName(@Param("productName") String productName);
+    @Query(value = "SELECT * FROM customers WHERE customers.email=:email", nativeQuery = true)
+    Customer getByEmail(@Param("email") String email);
 }

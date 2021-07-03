@@ -18,8 +18,6 @@ public class Cart implements Serializable {
 
     private ArrayList<Item> items;
 
-    private String customerEmail;
-
     private Double total;
 
 }
