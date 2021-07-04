@@ -3,6 +3,7 @@ package org.jayhenri.ecommerce.service;
 import lombok.NoArgsConstructor;
 import org.jayhenri.ecommerce.exception.*;
 import org.jayhenri.ecommerce.model.Inventory;
+import org.jayhenri.ecommerce.model.Item;
 import org.jayhenri.ecommerce.repository.InventoryRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,7 +61,7 @@ public class InventoryService {
         return inventoryRepository.existsByProductName(productName);
     }
 
-    public Inventory getByProductName(String productName) {
-        return inventoryRepository.getByProductName(productName);
+    public Item getByProductName(String productName) {
+        return inventoryRepository.getByProductName(productName).getItem();
     }
 }

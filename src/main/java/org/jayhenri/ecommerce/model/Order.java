@@ -4,14 +4,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.UUID;
 
 // TODO: Fix enum import
 @Getter
@@ -20,18 +17,20 @@ import java.util.Date;
 @Embeddable
 public class Order implements Serializable {
 
+    private static final long serialVersionUID = -3543368529566294417L;
+
+    @Id
+    @Column
+    private UUID uuid = UUID.randomUUID();
+
     @Column
     private String orderStatus;
 
-    @Column(unique = true, length = 128, nullable = false)
+    @Column
     private String CustomerEmail;
 
     @Column
     private ArrayList<Item> order;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "Create_Date", nullable = false)
-    private Date date;
 
     @Column
     private double subTotal;

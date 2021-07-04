@@ -16,6 +16,8 @@ import java.util.Date;
 @Embeddable
 public class Item implements Serializable {
 
+    private static final long serialVersionUID = -496088096515099704L;
+
     @Id
     @Column(unique = true)
     private String productName;

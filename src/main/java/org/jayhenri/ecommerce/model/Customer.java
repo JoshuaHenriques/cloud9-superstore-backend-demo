@@ -51,7 +51,7 @@ public class Customer implements Serializable {
 
     private Cart cart;
 
-    private ArrayList<CreditCard> creditCard;
+    private ArrayList<CreditCard> creditCards;
 
     private ArrayList<Order> orders;
 
@@ -64,7 +64,7 @@ public class Customer implements Serializable {
         this.dateOfBirth = dateOfBirth;
         this.address = address;
         this.cart = new Cart();
-        this.creditCard = new ArrayList<CreditCard>();
+        this.creditCards = new ArrayList<CreditCard>();
         this.orders = new ArrayList<Order>();
     }
 }

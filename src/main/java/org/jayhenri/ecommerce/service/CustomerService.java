@@ -1,8 +1,8 @@
 package org.jayhenri.ecommerce.service;
 
+import lombok.NoArgsConstructor;
 import org.jayhenri.ecommerce.exception.*;
-import org.jayhenri.ecommerce.model.Customer;
-import org.jayhenri.ecommerce.model.Item;
+import org.jayhenri.ecommerce.model.*;
 import org.jayhenri.ecommerce.repository.CustomerRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,20 +11,24 @@ import org.springframework.util.ObjectUtils;
 
 import javax.naming.InvalidNameException;
 import java.util.List;
+import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@NoArgsConstructor
 @Service
 public class CustomerService {
 
     @Autowired
     private CustomerRepository customerRepository;
 
+    @Autowired
+    private InventoryService inventoryService;
 
+    @Autowired
+    private OrderDBService orderDBService;
 
     private static final String REGEX_POSTAL_CODE = "^(?!.*[DFIOQU])[A-VXY][0-9][A-Z] ?[0-9][A-Z][0-9]$";
-
-    public CustomerService() { }
 
     private boolean existsByPhoneNumber(String phoneNumber) {
         return customerRepository.existsPhoneNumber(phoneNumber);
@@ -44,9 +48,7 @@ public class CustomerService {
     public void delete(Customer customer) throws CustomerNotFoundException, InvalidCustomerException {
         if (!ObjectUtils.isEmpty(customer.getEmail()))
             if (existsByEmail(customer.getEmail())) {
-                Customer deleteMe = new Customer();
-                deleteMe.setEmail(customer.getEmail());
-                customerRepository.delete(deleteMe);
+                customerRepository.delete(customer);
             }
             else throw new CustomerNotFoundException();
         else throw new InvalidCustomerException();
@@ -60,8 +62,12 @@ public class CustomerService {
          else throw new InvalidCustomerException();
     }
 
-    public List<Customer> findAll() {
+    public List<Customer> findAllCustomers() {
         return customerRepository.findAll();
+    }
+
+    public List<CreditCard> findAllCreditCards(String email) throws InvalidNameException, CustomerNotFoundException {
+        return getByEmail(email).getCreditCards();
     }
 
     private boolean isValidPostalCode(String postalCode) {
@@ -70,7 +76,7 @@ public class CustomerService {
         return matcher.matches();
     }
 
-    private boolean existsByEmail(String email) {
+    public boolean existsByEmail(String email) {
         return customerRepository.existsByEmail(email);
     }
 
@@ -82,28 +88,58 @@ public class CustomerService {
         } else throw new InvalidNameException();
     }
 
-    public void addToCart(String productName) {
-        customer.setEmail(customerEmail);
-
-        this.cart.getItems().add(item);
-        updateCartTotal();
-        customer.setCart(this.cart);
-        customerService.update();
+    public void addToCart(Customer customer, Item item) throws InvalidNameException, CustomerNotFoundException, InvalidCustomerException, EmailNotSameException {
+        customer.getCart().getItems().add(item);
+        update(customer);
     }
 
-    public void removeFromCart(String productName) {
-        this.cart.getItems().remove(item);
-        updateCartTotal();
+    public void removeFromCart(Customer customer, Item item) throws InvalidCustomerException, EmailNotSameException, CustomerNotFoundException {
+        customer.getCart().getItems().remove(item);
+        update(customer);
     }
 
-    public void updateCartTotal() {
-        double total = cart.getItems().stream().mapToDouble(Item::getPrice).sum();
-        cart.setTotal(total);
+    public void checkout(Cart cart) {
+        orderDBService.addOrderToDB(cart);
     }
 
-    public void saveToCustomer() {
-        customer.setCart(this.cart);
+    public void emptyCart(Customer customer) {
+        customer.setCart(new Cart());
     }
+
+    public void addCreditCard(Customer customer, CreditCard creditCard) throws InvalidCustomerException, EmailNotSameException, CustomerNotFoundException {
+        customer.getCreditCards().add(creditCard);
+        update(customer);
+    }
+
+    public void removeCreditCard(Customer customer, CreditCard creditCard) throws InvalidCustomerException, EmailNotSameException, CustomerNotFoundException {
+        customer.getCreditCards().remove(creditCard);
+        update(customer);
+    }
+
+    // TODO
+    public Order getOrder(Customer customer, UUID uuid) throws OrderNotFoundException {
+        return customer.getOrders().stream().filter(o -> o.getUuid().equals(uuid)).findFirst().orElseThrow(OrderNotFoundException::new);
+    }
+
+    public void addOrder(Customer customer, Order order) throws InvalidCustomerException, EmailNotSameException, CustomerNotFoundException {
+        customer.getOrders().add(order);
+        update(customer);
+    }
+
+    public void updateOrder(Customer customer, Order order, String orderStatus) {
+        customer.getOrders().remove(order);
+        order.setOrderStatus(orderStatus);
+        customer.getOrders().add(order);
+    }
+    public List<Order> findAllOrders(String email) throws InvalidNameException, CustomerNotFoundException {
+        return getByEmail(email).getOrders();
+    }
+
+
+    // TODO
+//    public CreditCard getCreditCard(Customer customer, UUID uuid) throws OrderNotFoundException {
+//        return customer.getCreditCards().stream().filter(o -> o.getUuid().equals(uuid)).findFirst().orElseThrow(OrderNotFoundException::new);
+//    }
     /*
     private void encryptPassword(Login login) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();

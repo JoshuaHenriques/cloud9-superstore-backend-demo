@@ -2,6 +2,7 @@ package org.jayhenri.ecommerce.controller;
 
 import org.jayhenri.ecommerce.exception.*;
 import org.jayhenri.ecommerce.model.Inventory;
+import org.jayhenri.ecommerce.model.Item;
 import org.jayhenri.ecommerce.service.InventoryService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,7 @@ public class InventoryController {
     }
 
     @GetMapping(value = "/get/{productName}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Inventory getByProductName(@Valid @PathVariable String productName) {
+    public Item getByProductName(@Valid @PathVariable String productName) {
         return inventoryService.getByProductName(productName);
     }
 

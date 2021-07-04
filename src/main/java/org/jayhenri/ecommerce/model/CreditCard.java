@@ -15,6 +15,7 @@ import java.io.Serializable;
 @Embeddable
 public class CreditCard implements Serializable {
 
+    private static final long serialVersionUID = -2537205539493070885L;
     @Column
     private String fullName;
 

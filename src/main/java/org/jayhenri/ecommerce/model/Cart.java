@@ -16,7 +16,11 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class Cart implements Serializable {
 
+    private static final long serialVersionUID = -198235381052492730L;
+
     private ArrayList<Item> items;
+
+    private String customerEmail;
 
     private Double total;
 
