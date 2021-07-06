@@ -7,8 +7,6 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.UUID;
 
 // TODO: nullable: false for most field
 @Getter
@@ -42,12 +40,12 @@ public class Customer implements Serializable {
     @Column(nullable = false, length = 6)
     private String dateOfBirth;
 
+//    @Temporal(TemporalType.TIMESTAMP)
+//    @Column(name = "Create_Date", nullable = false)
+//    private Date createDate;
+
     @Column(nullable = true)
     private Address address;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "Create_Date", nullable = false)
-    private Date createDate;
 
     private Cart cart;
 
@@ -55,7 +53,7 @@ public class Customer implements Serializable {
 
     private ArrayList<Order> orders;
 
-    public Customer(String firstName, String lastName, String phoneNumber, String email, String password, String dateOfBirth, Address address) {
+    public Customer(String firstName, String lastName, String phoneNumber, String email, String password, String dateOfBirth, Address address, Cart cart, ArrayList<CreditCard> creditCards, ArrayList<Order> orders) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
@@ -63,8 +61,8 @@ public class Customer implements Serializable {
         this.password = password;
         this.dateOfBirth = dateOfBirth;
         this.address = address;
-        this.cart = new Cart();
-        this.creditCards = new ArrayList<CreditCard>();
-        this.orders = new ArrayList<Order>();
+        this.cart = cart;
+        this.creditCards = creditCards;
+        this.orders = orders;
     }
 }

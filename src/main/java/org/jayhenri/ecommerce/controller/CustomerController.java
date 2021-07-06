@@ -97,8 +97,8 @@ public class CustomerController {
         return customerService.findAllOrders(email);
     }
 
-    @GetMapping(value = "/checkout")
-    public void checkout(@RequestBody Cart cart) {
-        customerService.checkout(cart);
-    }
+//    @GetMapping(value = "/checkout")
+//    public void checkout(@RequestBody Cart cart) {
+//        customerService.checkout(cart);
+//    }
 }

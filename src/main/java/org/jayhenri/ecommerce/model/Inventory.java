@@ -4,10 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 
 // TODO: Abstract for different type of items
@@ -23,11 +20,12 @@ public class Inventory implements Serializable {
     private static final long serialVersionUID = -1112477284611964207L;
 
     @Id
-    @Column(unique = true)
+    @Column
     private String productName;
 
     @Column
     private int quantity;
 
+    @Column
     private Item item;
 }

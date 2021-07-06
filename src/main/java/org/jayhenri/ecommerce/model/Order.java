@@ -27,15 +27,18 @@ public class Order implements Serializable {
     private String orderStatus;
 
     @Column
-    private String CustomerEmail;
+    private String customerEmail;
 
     @Column
     private ArrayList<Item> order;
 
     @Column
-    private double subTotal;
-
-    @Column
     private double totalPrice;
 
+    public Order(String orderStatus, String customerEmail, ArrayList<Item> order, double totalPrice) {
+        this.orderStatus = orderStatus;
+        this.customerEmail = customerEmail;
+        this.order = order;
+        this.totalPrice = totalPrice;
+    }
 }

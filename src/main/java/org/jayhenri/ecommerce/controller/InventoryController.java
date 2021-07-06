@@ -37,8 +37,8 @@ public class InventoryController {
         return inventoryService.getByProductName(productName);
     }
 
-    @PostMapping(value = "/remove/{productName}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Inventory> removeItemToInventory(@Valid @RequestBody Inventory inventory, @PathVariable String productName) throws InvalidItemException, ItemNotFoundException {
+    @DeleteMapping(value = "/remove/{productName}")
+    public ResponseEntity<Inventory> removeItemToInventory(@PathVariable String productName) throws InvalidItemException, ItemNotFoundException {
         inventoryService.delete(productName);
         return ResponseEntity.ok().build();
     }

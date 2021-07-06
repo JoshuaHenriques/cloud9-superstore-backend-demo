@@ -19,10 +19,10 @@ public class Address implements Serializable {
     private String streetName;
 
     @Column(nullable = false)
-    private Long streetNumber;
+    private String streetNumber;
 
     @Column(nullable = false)
-    private Long unitNumber;
+    private String unitNumber;
 
     @Column(nullable = false)
     private String city;
@@ -33,7 +33,7 @@ public class Address implements Serializable {
     @Column(nullable = false)
     private String province;
 
-    public Address(String streetName, Long streetNumber, Long unitNumber, String city, String postalCode, String province) {
+    public Address(String streetName, String streetNumber, String unitNumber, String city, String postalCode, String province) {
         this.streetName = streetName;
         this.streetNumber = streetNumber;
         this.unitNumber = unitNumber;

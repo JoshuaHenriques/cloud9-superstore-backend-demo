@@ -18,21 +18,22 @@ public class Item implements Serializable {
 
     private static final long serialVersionUID = -496088096515099704L;
 
-    @Id
-    @Column(unique = true)
-    private String productName;
+    private String itemName;
 
-    @Column
     private String description;
 
-    @Column
     private double price;
 
-    @Lob
-    @Column(name = "Image", length = Integer.MAX_VALUE, nullable = true)
     private byte[] image;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "Create_Date", nullable = false)
-    private Date createDate;
+//    @Temporal(TemporalType.TIMESTAMP)
+//    @Column(name = "Create_Date", nullable = false)
+//    private Date createDate;
+
+    public Item(String productName, String description, double price) {
+        this.itemName = productName;
+        this.description = description;
+        this.price = price;
+        this.image = null;
+    }
 }

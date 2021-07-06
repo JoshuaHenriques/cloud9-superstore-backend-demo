@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
 import javax.naming.InvalidNameException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.regex.Matcher;
@@ -27,6 +28,9 @@ public class CustomerService {
 
     @Autowired
     private OrderDBService orderDBService;
+
+    private static final Double HST = 0.13;
+    private static final Double DELIVERY_FEE = 9.99;
 
     private static final String REGEX_POSTAL_CODE = "^(?!.*[DFIOQU])[A-VXY][0-9][A-Z] ?[0-9][A-Z][0-9]$";
 
@@ -98,10 +102,6 @@ public class CustomerService {
         update(customer);
     }
 
-    public void checkout(Cart cart) {
-        orderDBService.addOrderToDB(cart);
-    }
-
     public void emptyCart(Customer customer) {
         customer.setCart(new Cart());
     }
@@ -116,7 +116,6 @@ public class CustomerService {
         update(customer);
     }
 
-    // TODO
     public Order getOrder(Customer customer, UUID uuid) throws OrderNotFoundException {
         return customer.getOrders().stream().filter(o -> o.getUuid().equals(uuid)).findFirst().orElseThrow(OrderNotFoundException::new);
     }
@@ -124,6 +123,15 @@ public class CustomerService {
     public void addOrder(Customer customer, Order order) throws InvalidCustomerException, EmailNotSameException, CustomerNotFoundException {
         customer.getOrders().add(order);
         update(customer);
+
+        OrderDB orderDB = new OrderDB(
+                "PROCESSING",
+                customer.getEmail(),
+                new ArrayList<Item>(order.getOrder()),
+                order.getTotalPrice(),
+                order.getTotalPrice()*HST+DELIVERY_FEE
+        );
+        orderDBService.addOrderToDB(orderDB);
     }
 
     public void updateOrder(Customer customer, Order order, String orderStatus) {

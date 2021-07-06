@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * G
+ */
 @Service
 public class CustomerRegistrationService {
 
@@ -29,17 +32,17 @@ public class CustomerRegistrationService {
         customerRepository.save(customer);
     }
 
-    private boolean existsByPhoneNumber(String phoneNumber) {
+    public boolean existsByPhoneNumber(String phoneNumber) {
         return customerRepository.existsPhoneNumber(phoneNumber);
     }
 
-    private boolean isValidPostalCode(String postalCode) {
+    public boolean isValidPostalCode(String postalCode) {
         Pattern pattern = Pattern.compile(REGEX_POSTAL_CODE);
         Matcher matcher = pattern.matcher(postalCode);
         return matcher.matches();
     }
 
-    private boolean existsByEmail(String email) {
+    public boolean existsByEmail(String email) {
         return customerRepository.existsByEmail(email);
     }
 
