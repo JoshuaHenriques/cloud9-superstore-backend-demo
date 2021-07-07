@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.naming.InvalidNameException;
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -52,27 +53,32 @@ public class CustomerController {
         return customerService.getByEmail(email);
     }
 
-    @PutMapping(value = "/{email}/cart/add/{productName}")
+    @PostMapping(value = "/{email}/cart/add/{productName}")
     public void addToCart(@PathVariable String productName, @PathVariable String email) throws InvalidNameException, InvalidCustomerException, EmailNotSameException, CustomerNotFoundException {
         customerService.addToCart(customerService.getByEmail(email), inventoryService.getByProductName(productName));
     }
 
-    @PutMapping(value = "/{email}/cart/remove/{productName}")
+    @DeleteMapping(value = "/{email}/cart/remove/{productName}")
     public void removeFromCart(@PathVariable String productName, @PathVariable String email) throws InvalidCustomerException, EmailNotSameException, CustomerNotFoundException, InvalidNameException {
-        customerService.removeFromCart(customerService.getByEmail(email), inventoryService.getByProductName(productName));
+        customerService.removeFromCart(customerService.getByEmail(email), productName);
     }
 
-    @PutMapping(value = "/{email}/cart/empty")
-    public void emptyCart(@PathVariable String email) throws InvalidNameException, CustomerNotFoundException {
+    @PatchMapping(value = "/{email}/cart/empty")
+    public void emptyCart(@PathVariable String email) throws InvalidNameException, CustomerNotFoundException, InvalidCustomerException, EmailNotSameException {
         customerService.emptyCart(customerService.getByEmail(email));
     }
 
+    @GetMapping(value = "/{email}/cart/get", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ArrayList<Item> getCart(@PathVariable String email) throws InvalidNameException, CustomerNotFoundException {
+        return customerService.getCart(customerService.getByEmail(email));
+    }
+    // TODO: Github readme: describe functionalities
     @PostMapping(value = "/{email}/creditCard/add/")
     public void addCreditCard(@PathVariable String email, @RequestBody CreditCard creditCard) throws InvalidNameException, InvalidCustomerException, EmailNotSameException, CustomerNotFoundException {
         customerService.addCreditCard(customerService.getByEmail(email), creditCard);
     }
 
-    @PutMapping(value = "/{email}/creditCard/update/{fourDigits}")
+    @DeleteMapping(value = "/{email}/creditCard/update/{fourDigits}")
     public void removeCreditCard(@PathVariable String email, @RequestBody CreditCard creditCard) throws InvalidNameException, CustomerNotFoundException, InvalidCustomerException, EmailNotSameException {
         customerService.removeCreditCard(customerService.getByEmail(email), creditCard);
     }

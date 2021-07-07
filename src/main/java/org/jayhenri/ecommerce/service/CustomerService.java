@@ -97,13 +97,27 @@ public class CustomerService {
         update(customer);
     }
 
-    public void removeFromCart(Customer customer, Item item) throws InvalidCustomerException, EmailNotSameException, CustomerNotFoundException {
-        customer.getCart().getItems().remove(item);
+    public void removeFromCart(Customer customer, String productName) throws InvalidCustomerException, EmailNotSameException, CustomerNotFoundException {
+
+        ArrayList<Item> removeMe = new ArrayList<Item>();
+// Create a list of values you wish to remove, adding to that list within the loop, then call originalList.removeAll(valuesToRemove) at the end
+        customer.getCart().getItems().forEach(item -> {
+            if(item.getItemName().equals(productName)) {
+                removeMe.add(item);
+            }
+        });
+        customer.getCart().getItems().removeAll(removeMe);
         update(customer);
     }
 
-    public void emptyCart(Customer customer) {
-        customer.setCart(new Cart());
+    public void emptyCart(Customer customer) throws InvalidCustomerException, EmailNotSameException, CustomerNotFoundException {
+        ArrayList<Item> removeMe = customer.getCart().getItems();
+        customer.getCart().getItems().removeAll(removeMe);
+        update(customer);
+    }
+
+    public ArrayList<Item> getCart(Customer customer) {
+        return customer.getCart().getItems();
     }
 
     public void addCreditCard(Customer customer, CreditCard creditCard) throws InvalidCustomerException, EmailNotSameException, CustomerNotFoundException {
