@@ -8,8 +8,10 @@ import org.springframework.data.repository.query.Param;
 
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
 import java.util.UUID;
 
+@Transactional
 @Repository
 public interface InventoryRepository extends JpaRepository<Inventory, UUID> {
 
