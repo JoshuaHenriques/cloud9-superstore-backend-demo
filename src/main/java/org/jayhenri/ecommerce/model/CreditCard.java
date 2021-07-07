@@ -23,14 +23,18 @@ public class CreditCard implements Serializable {
     private String ccn;
 
     @Column
+    private String fourDig;
+
+    @Column
     private String expDate;
 
     @Column
     private String cvc;
 
-    public CreditCard(String fullName, String ccn, String expDate, String cvc) {
+    public CreditCard(String fullName, String ccn, String expDate, String cvc, String fourDig) {
         this.fullName = fullName;
         this.expDate = expDate;
         this.cvc = cvc;
+        this.fourDig = fourDig;
     }
 }

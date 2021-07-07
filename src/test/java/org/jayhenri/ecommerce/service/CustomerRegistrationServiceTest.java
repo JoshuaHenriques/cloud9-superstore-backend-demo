@@ -70,8 +70,9 @@ class CustomerRegistrationServiceTest {
         creditCard = new CreditCard(
                 "Ubuntu User",
                 "4716902620158281",
+                "8281",
                 "05/25",
-                "584"
+                "8281"
         );
 
         orders.add(order);

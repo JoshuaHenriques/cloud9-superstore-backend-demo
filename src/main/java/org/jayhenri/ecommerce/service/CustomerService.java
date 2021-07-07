@@ -125,8 +125,15 @@ public class CustomerService {
         update(customer);
     }
 
-    public void removeCreditCard(Customer customer, CreditCard creditCard) throws InvalidCustomerException, EmailNotSameException, CustomerNotFoundException {
-        customer.getCreditCards().remove(creditCard);
+    public void removeCreditCard(Customer customer, String fourDig) throws InvalidCustomerException, EmailNotSameException, CustomerNotFoundException {
+        ArrayList<CreditCard> removeMe = new ArrayList<CreditCard>();
+// Create a list of values you wish to remove, adding to that list within the loop, then call originalList.removeAll(valuesToRemove) at the end
+        customer.getCreditCards().forEach(creditcard -> {
+            if(creditcard.getFourDig() != null && creditcard.getFourDig().equals(fourDig)) {
+                removeMe.add(creditcard);
+            }
+        });
+        customer.getCreditCards().removeAll(removeMe);
         update(customer);
     }
 

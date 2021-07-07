@@ -72,15 +72,16 @@ public class CustomerController {
     public ArrayList<Item> getCart(@PathVariable String email) throws InvalidNameException, CustomerNotFoundException {
         return customerService.getCart(customerService.getByEmail(email));
     }
+
     // TODO: Github readme: describe functionalities
-    @PostMapping(value = "/{email}/creditCard/add/")
+    @PostMapping(value = "/{email}/creditCard/add", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public void addCreditCard(@PathVariable String email, @RequestBody CreditCard creditCard) throws InvalidNameException, InvalidCustomerException, EmailNotSameException, CustomerNotFoundException {
         customerService.addCreditCard(customerService.getByEmail(email), creditCard);
     }
 
-    @DeleteMapping(value = "/{email}/creditCard/update/{fourDigits}")
-    public void removeCreditCard(@PathVariable String email, @RequestBody CreditCard creditCard) throws InvalidNameException, CustomerNotFoundException, InvalidCustomerException, EmailNotSameException {
-        customerService.removeCreditCard(customerService.getByEmail(email), creditCard);
+    @DeleteMapping(value = "/{email}/creditCard/remove/{fourDigits}")
+    public void removeCreditCard(@PathVariable String email, @PathVariable String fourDigits) throws InvalidNameException, CustomerNotFoundException, InvalidCustomerException, EmailNotSameException {
+        customerService.removeCreditCard(customerService.getByEmail(email), fourDigits);
     }
 
     @GetMapping(value = "/{email}/creditCards/list")
@@ -88,7 +89,7 @@ public class CustomerController {
         return customerService.findAllCreditCards(email);
     }
 
-    @PostMapping(value = "/{email}/orders/add/")
+    @PostMapping(value = "/{email}/orders/add")
     public void addOrder(@PathVariable String email, @RequestBody Order order) throws InvalidNameException, InvalidCustomerException, EmailNotSameException, CustomerNotFoundException {
         customerService.addOrder(customerService.getByEmail(email), order);
     }
