@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.jayhenri.ecommerce.service.CustomerRegistrationServiceTest" tests="6" skipped="6" failures="0" errors="0" timestamp="2021-07-07T13:09:14" hostname="kde-neon" time="0.008">
+  <properties/>
+  <testcase name="testAddThrowsInvalidPostalCodeException()" classname="org.jayhenri.ecommerce.service.CustomerRegistrationServiceTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="testAdd()" classname="org.jayhenri.ecommerce.service.CustomerRegistrationServiceTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="existsByEmail()" classname="org.jayhenri.ecommerce.service.CustomerRegistrationServiceTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="isValidPostalCode()" classname="org.jayhenri.ecommerce.service.CustomerRegistrationServiceTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="testAddThrowsCustomerAlreadyExistsException()" classname="org.jayhenri.ecommerce.service.CustomerRegistrationServiceTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="existsByPhoneNumber()" classname="org.jayhenri.ecommerce.service.CustomerRegistrationServiceTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
