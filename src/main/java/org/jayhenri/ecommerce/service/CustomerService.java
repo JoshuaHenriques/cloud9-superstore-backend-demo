@@ -155,10 +155,11 @@ public class CustomerService {
         orderDBService.addOrderToDB(orderDB);
     }
 
-    public void updateOrder(Customer customer, Order order, String orderStatus) {
-        customer.getOrders().remove(order);
-        order.setOrderStatus(orderStatus);
-        customer.getOrders().add(order);
+    public void updateOrder(Customer customer, UUID uuid, String orderStatus) throws InvalidCustomerException, EmailNotSameException, CustomerNotFoundException{
+        customer.getOrders().forEach(order -> {
+            if (order.getUuid().equals(uuid)) order.setOrderStatus(orderStatus);
+        });
+        update(customer);
     }
     public List<Order> findAllOrders(String email) throws InvalidNameException, CustomerNotFoundException {
         return getByEmail(email).getOrders();

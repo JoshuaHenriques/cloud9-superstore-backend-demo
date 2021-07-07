@@ -94,9 +94,9 @@ public class CustomerController {
         customerService.addOrder(customerService.getByEmail(email), order);
     }
 
-    @PutMapping(value = "/{email}/orders/updateStatus/{orderID}/{status}")
-    public void updateOrder(@PathVariable String email, @PathVariable UUID uuid, @PathVariable String orderStatus) throws InvalidNameException, CustomerNotFoundException, OrderNotFoundException {
-        customerService.updateOrder(customerService.getByEmail(email), customerService.getOrder(customerService.getByEmail(email), uuid), orderStatus);
+    @PutMapping(value = "/{email}/orders/updateStatus/{uuid}/{status}")
+    public void updateOrder(@PathVariable String email, @PathVariable UUID uuid, @PathVariable String status) throws InvalidCustomerException, EmailNotSameException, CustomerNotFoundException, InvalidNameException, CustomerNotFoundException, OrderNotFoundException {
+        customerService.updateOrder(customerService.getByEmail(email), uuid, status);
     }
 
     @GetMapping(value = "/{email}/orders/list")
