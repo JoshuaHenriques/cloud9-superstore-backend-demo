@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.naming.InvalidNameException;
 import java.util.ArrayList;
@@ -44,7 +44,7 @@ public class CustomerService {
 
         else if (!isValidPostalCode(customer.getAddress().getPostalCode()))
             throw new InvalidPostalCodeException();
-        customer.setPassword(encryptPassword(customer.getPassword()));
+        //customer.setPassword(encryptPassword(customer.getPassword()));
         customerRepository.save(customer);
     }
 
@@ -164,8 +164,8 @@ public class CustomerService {
         return getByEmail(email).getOrders();
     }
     
-    private String encryptPassword(String password) {
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        return passwordEncoder.encode(password);
-    }
+    // private String encryptPassword(String password) {
+    //     BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    //     return passwordEncoder.encode(password);
+    // }
 }
