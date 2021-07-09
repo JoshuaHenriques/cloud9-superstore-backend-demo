@@ -26,9 +26,6 @@ public class CustomerService {
     private CustomerRepository customerRepository;
 
     @Autowired
-    private InventoryService inventoryService;
-
-    @Autowired
     private OrderDBService orderDBService;
 
     private static final Double HST = 0.13;
