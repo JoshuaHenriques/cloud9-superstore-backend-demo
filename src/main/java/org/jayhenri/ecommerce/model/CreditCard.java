@@ -33,6 +33,7 @@ public class CreditCard implements Serializable {
 
     public CreditCard(String fullName, String ccn, String expDate, String cvc, String fourDig) {
         this.fullName = fullName;
+        this.ccn = ccn;
         this.expDate = expDate;
         this.cvc = cvc;
         this.fourDig = fourDig;

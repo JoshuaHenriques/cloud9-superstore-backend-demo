@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import javax.naming.InvalidNameException;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,9 +24,6 @@ public class CustomerService {
 
     @Autowired
     private CustomerRepository customerRepository;
-
-    @Autowired
-    private InventoryService inventoryService;
 
     @Autowired
     private OrderDBService orderDBService;
@@ -45,7 +44,7 @@ public class CustomerService {
 
         else if (!isValidPostalCode(customer.getAddress().getPostalCode()))
             throw new InvalidPostalCodeException();
-        // else if (!isValidPassword()){}
+        //customer.setPassword(encryptPassword(customer.getPassword()));
         customerRepository.save(customer);
     }
 
@@ -164,19 +163,9 @@ public class CustomerService {
     public List<Order> findAllOrders(String email) throws InvalidNameException, CustomerNotFoundException {
         return getByEmail(email).getOrders();
     }
-
-
-    // TODO
-//    public CreditCard getCreditCard(Customer customer, UUID uuid) throws OrderNotFoundException {
-//        return customer.getCreditCards().stream().filter(o -> o.getUuid().equals(uuid)).findFirst().orElseThrow(OrderNotFoundException::new);
-//    }
-    /*
-    private void encryptPassword(Login login) {
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String encodedPassword = passwordEncoder.encode(login.getPassword());
-        login.setPassword(encodedPassword);
-
-        loginRepository.save(login);
-    }
-    */
+    
+    // private String encryptPassword(String password) {
+    //     BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    //     return passwordEncoder.encode(password);
+    // }
 }
