@@ -33,17 +33,17 @@ public class CustomerController {
     private Order order;
     private CreditCard creditCard;
 
-    @PutMapping(value = "/update", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/update", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void updateCustomer(@Valid @RequestBody Customer customer) throws InvalidCustomerException, CustomerNotFoundException, EmailNotSameException {
         customerService.update(customer);
     }
 
-    @DeleteMapping(value = "/delete/{email}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = "/delete/{email}")
     public void deleteCustomer(@PathVariable String email) throws InvalidCustomerException, CustomerNotFoundException, InvalidNameException {
         customerService.delete(customerService.getByEmail(email));
     }
 
-    @GetMapping(value = "/list/customers")
+    @GetMapping(value = "/list/customers", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Customer> listCustomers() {
         return customerService.findAllCustomers();
     }
@@ -74,7 +74,7 @@ public class CustomerController {
     }
 
     // TODO: Github readme: describe functionalities
-    @PostMapping(value = "/{email}/creditCard/add", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/{email}/creditCard/add", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void addCreditCard(@PathVariable String email, @RequestBody CreditCard creditCard) throws InvalidNameException, InvalidCustomerException, EmailNotSameException, CustomerNotFoundException {
         customerService.addCreditCard(customerService.getByEmail(email), creditCard);
     }
@@ -84,12 +84,12 @@ public class CustomerController {
         customerService.removeCreditCard(customerService.getByEmail(email), fourDigits);
     }
 
-    @GetMapping(value = "/{email}/creditCards/list")
+    @GetMapping(value = "/{email}/creditCards/list", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<CreditCard> listCreditCards(@PathVariable String email) throws InvalidNameException, CustomerNotFoundException {
         return customerService.findAllCreditCards(email);
     }
 
-    @PostMapping(value = "/{email}/orders/add")
+    @PostMapping(value = "/{email}/orders/add", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void addOrder(@PathVariable String email, @RequestBody Order order) throws InvalidNameException, InvalidCustomerException, EmailNotSameException, CustomerNotFoundException {
         customerService.addOrder(customerService.getByEmail(email), order);
     }
@@ -99,7 +99,7 @@ public class CustomerController {
         customerService.updateOrder(customerService.getByEmail(email), uuid, status);
     }
 
-    @GetMapping(value = "/{email}/orders/list")
+    @GetMapping(value = "/{email}/orders/list", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Order> listOrders(@PathVariable String email) throws InvalidNameException, CustomerNotFoundException {
         return customerService.findAllOrders(email);
     }
