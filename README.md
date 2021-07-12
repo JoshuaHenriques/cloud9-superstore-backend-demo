@@ -1,6 +1,7 @@
 # Ecommerce-Demo API
 
 10,000+ Unique Customers
+
 20 Endpoints
 ```
 (api/register):
