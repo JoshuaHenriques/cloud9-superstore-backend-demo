@@ -1,8 +1,7 @@
 # Ecommerce-Demo API
 #### 172.105.3.51:8080
-10,000+ Unique Customers
-
-20 Endpoints
+#### 10,000+ Unique Customers
+#### 20 Endpoints
 ```
 (api/register):
 # Register Customer
