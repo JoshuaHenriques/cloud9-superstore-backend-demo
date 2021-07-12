@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="org.jayhenri.ecommerce.service.CustomerRegistrationServiceTest" tests="6" skipped="6" failures="0" errors="0" timestamp="2021-07-09T14:14:29" hostname="kde-neon" time="0.004">
+<testsuite name="org.jayhenri.ecommerce.service.CustomerRegistrationServiceTest" tests="6" skipped="6" failures="0" errors="0" timestamp="2021-07-12T19:27:05" hostname="kde-neon" time="0.004">
   <properties/>
-  <testcase name="testAddThrowsInvalidPostalCodeException()" classname="org.jayhenri.ecommerce.service.CustomerRegistrationServiceTest" time="0.0">
+  <testcase name="testAddThrowsInvalidPostalCodeException()" classname="org.jayhenri.ecommerce.service.CustomerRegistrationServiceTest" time="0.001">
     <skipped/>
   </testcase>
   <testcase name="testAdd()" classname="org.jayhenri.ecommerce.service.CustomerRegistrationServiceTest" time="0.0">
