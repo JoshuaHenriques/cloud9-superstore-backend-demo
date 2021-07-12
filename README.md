@@ -5,44 +5,38 @@
 ```
 (api/register):
 # Register Customer
-/customer
+/customer         POST
 
 (/api/customers):
-# Customer
-/update
-/delete/{email}
-/list/customers
-/{email}
+# Customer        
+/update           PUT
+/delete/{email}   DELETE
+/list/customers   GET
+/{email}          GET
 
 # Cart
-/{email}/cart/add/{productName}
-/{email}/cart/remove/{productName}
-/{email}/cart/empty
-/{email}/cart/get
+/{email}/cart/add/{productName}     POST
+/{email}/cart/remove/{productName}  DELETE
+/{email}/cart/empty                 PATCH
+/{email}/cart/get                   GET
 
 # Credit Card
-/{email}/creditCard/add
-/{email}/creditCard/remove/{fourDigits}
-/{email}/creditCards/list
-/{email}/orders/add
-/{email}/orders/updateStatus/{uuid}/{status}
-/{email}/orders/list
+/{email}/creditCard/add                   POST
+/{email}/creditCard/remove/{fourDigits}   DELETE
+/{email}/creditCards/list                 GET
+
+# Order
+/{email}/orders/add                           POST
+/{email}/orders/updateStatus/{uuid}/{status}  PUT
+/{email}/orders/list                          GET
 
 (api/inventory):
 # Update item
-/update/{productName}
-
-# Add item
-/add
-
-# Get item
-/get/{productName}
-
-# Remove item
-/remove/{productName}
-
-# List item
-/items/list
+/update/{productName}   PUT
+/add                    POST
+/get/{productName}      GET
+/remove/{productName}   DELETE
+/items/list             GET
 ```
 
 ## Installation
