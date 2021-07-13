@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.Entity;
 import java.io.Serializable;
 
 // TODO: Implement later
@@ -13,6 +14,7 @@ import java.io.Serializable;
 @Setter
 @NoArgsConstructor
 @Embeddable
+@Entity
 public class CreditCard implements Serializable {
 
     private static final long serialVersionUID = -2537205539493070885L;

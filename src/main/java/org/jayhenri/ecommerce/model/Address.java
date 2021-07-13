@@ -6,12 +6,14 @@ import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.Entity;
 import java.io.Serializable;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @Embeddable
+@Entity
 public class Address implements Serializable {
 
     private static final long serialVersionUID = -3706717403046249323L;

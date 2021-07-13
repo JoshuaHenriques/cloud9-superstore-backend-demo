@@ -6,7 +6,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
 
 // TODO: Implement Ratings
 // TODO: There must be a better way to do this
@@ -14,20 +13,21 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @Embeddable
+@Entity
 public class Item implements Serializable {
 
     private static final long serialVersionUID = -496088096515099704L;
 
-    @Column(nullable = true)
+    @Column
     private String itemName;
 
-    @Column(nullable = true)
+    @Column
     private String description;
 
-    @Column(nullable = true)
+    @Column
     private double price;
 
-    @Column(nullable = true)
+    @Column
     private byte[] image;
 
 //    @Temporal(TemporalType.TIMESTAMP)

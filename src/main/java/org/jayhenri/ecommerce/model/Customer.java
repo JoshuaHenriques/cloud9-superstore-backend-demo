@@ -1,5 +1,6 @@
 package org.jayhenri.ecommerce.model;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -44,16 +45,18 @@ public class Customer implements Serializable {
 //    @Column(name = "Create_Date", nullable = false)
 //    private Date createDate;
 
-    @Column(nullable = true)
+    @Embedded
     private Address address;
 
-    @Column(nullable = true)
+    @Embedded
     private Cart cart;
 
-    @Column(nullable = true)
+    @Column
+    @OneToMany
     private ArrayList<CreditCard> creditCards;
 
-    @Column(nullable = true)
+    @Column
+    @OneToMany
     private ArrayList<Order> orders;
 
     public Customer(String firstName, String lastName, String phoneNumber, String email, String password, String dateOfBirth, Address address, Cart cart, ArrayList<CreditCard> creditCards, ArrayList<Order> orders) {

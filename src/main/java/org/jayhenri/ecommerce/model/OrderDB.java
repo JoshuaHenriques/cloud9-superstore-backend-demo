@@ -30,6 +30,7 @@ public class OrderDB implements Serializable {
     private String customerEmail;
 
     @NotNull
+    @OneToMany
     private ArrayList<Item> items;
 
 //    @Temporal(TemporalType.TIMESTAMP)

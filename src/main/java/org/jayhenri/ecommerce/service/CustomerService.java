@@ -9,11 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
-
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.naming.InvalidNameException;
 import java.util.ArrayList;
@@ -61,7 +58,7 @@ public class CustomerService {
         else throw new InvalidCustomerException();
     }
 
-    public void update(Customer customer) throws CustomerNotFoundException, InvalidCustomerException, EmailNotSameException {
+    public void update(Customer customer) throws CustomerNotFoundException, InvalidCustomerException {
         if (!ObjectUtils.isEmpty(customer))
             if (existsByEmail(customer.getEmail()))
                 customerRepository.save(customer);
@@ -69,8 +66,8 @@ public class CustomerService {
          else throw new InvalidCustomerException();
     }
 
-    public List<Customer> findAllCustomers(Integer pageNo, Integer pageSize, String sortBy) {
-        Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy).ascending());
+    public List<Customer> findAllCustomers(Integer pageNo, Integer pageSize) { // String sortBy
+        Pageable paging = PageRequest.of(pageNo, pageSize); // Sort.by(sortBy).ascending()
         Page<Customer> pagedResult = customerRepository.findAll(paging);
 
         if(pagedResult.hasContent()) return pagedResult.getContent();
@@ -99,14 +96,14 @@ public class CustomerService {
         } else throw new InvalidNameException();
     }
 
-    public void addToCart(Customer customer, Item item) throws InvalidNameException, CustomerNotFoundException, InvalidCustomerException, EmailNotSameException {
+    public void addToCart(Customer customer, Item item) throws CustomerNotFoundException, InvalidCustomerException {
         customer.getCart().getItems().add(item);
         update(customer);
     }
 
-    public void removeFromCart(Customer customer, String productName) throws InvalidCustomerException, EmailNotSameException, CustomerNotFoundException {
+    public void removeFromCart(Customer customer, String productName) throws InvalidCustomerException, CustomerNotFoundException {
 
-        ArrayList<Item> removeMe = new ArrayList<Item>();
+        ArrayList<Item> removeMe = new ArrayList<>();
 // Create a list of values you wish to remove, adding to that list within the loop, then call originalList.removeAll(valuesToRemove) at the end
         customer.getCart().getItems().forEach(item -> {
             if(item.getItemName().equals(productName)) {
@@ -117,7 +114,7 @@ public class CustomerService {
         update(customer);
     }
 
-    public void emptyCart(Customer customer) throws InvalidCustomerException, EmailNotSameException, CustomerNotFoundException {
+    public void emptyCart(Customer customer) throws InvalidCustomerException, CustomerNotFoundException {
         ArrayList<Item> removeMe = customer.getCart().getItems();
         customer.getCart().getItems().removeAll(removeMe);
         update(customer);
@@ -127,42 +124,43 @@ public class CustomerService {
         return customer.getCart().getItems();
     }
 
-    public void addCreditCard(Customer customer, CreditCard creditCard) throws InvalidCustomerException, EmailNotSameException, CustomerNotFoundException {
+    public void addCreditCard(Customer customer, CreditCard creditCard) throws InvalidCustomerException, CustomerNotFoundException {
         customer.getCreditCards().add(creditCard);
         update(customer);
     }
 
-    public void removeCreditCard(Customer customer, String fourDig) throws InvalidCustomerException, EmailNotSameException, CustomerNotFoundException {
-        ArrayList<CreditCard> removeMe = new ArrayList<CreditCard>();
+    public void removeCreditCard(Customer customer, String fourDig) throws InvalidCustomerException, CustomerNotFoundException {
+        ArrayList<CreditCard> removeMe = new ArrayList<>();
 // Create a list of values you wish to remove, adding to that list within the loop, then call originalList.removeAll(valuesToRemove) at the end
-        customer.getCreditCards().forEach(creditcard -> {
-            if(creditcard.getFourDig() != null && creditcard.getFourDig().equals(fourDig)) {
-                removeMe.add(creditcard);
+        customer.getCreditCards().forEach(creditCard -> {
+            if(creditCard.getFourDig() != null && creditCard.getFourDig().equals(fourDig)) {
+                removeMe.add(creditCard);
             }
         });
         customer.getCreditCards().removeAll(removeMe);
         update(customer);
     }
 
-    public Order getOrder(Customer customer, UUID uuid) throws OrderNotFoundException {
-        return customer.getOrders().stream().filter(o -> o.getUuid().equals(uuid)).findFirst().orElseThrow(OrderNotFoundException::new);
-    }
+    // Not Used
+//    public Order getOrder(Customer customer, UUID uuid) throws OrderNotFoundException {
+//        return customer.getOrders().stream().filter(o -> o.getUuid().equals(uuid)).findFirst().orElseThrow(OrderNotFoundException::new);
+//    }
 
-    public void addOrder(Customer customer, Order order) throws InvalidCustomerException, EmailNotSameException, CustomerNotFoundException {
+    public void addOrder(Customer customer, Order order) throws InvalidCustomerException, CustomerNotFoundException {
         customer.getOrders().add(order);
         update(customer);
 
         OrderDB orderDB = new OrderDB(
                 "PROCESSING",
                 customer.getEmail(),
-                new ArrayList<Item>(order.getOrder()),
+                new ArrayList<>(order.getOrder()),
                 order.getTotalPrice(),
                 order.getTotalPrice()*HST+DELIVERY_FEE
         );
         orderDBService.addOrderToDB(orderDB);
     }
 
-    public void updateOrder(Customer customer, UUID uuid, String orderStatus) throws InvalidCustomerException, EmailNotSameException, CustomerNotFoundException{
+    public void updateOrder(Customer customer, UUID uuid, String orderStatus) throws InvalidCustomerException, CustomerNotFoundException{
         customer.getOrders().forEach(order -> {
             if (order.getUuid().equals(uuid)) order.setOrderStatus(orderStatus);
         });

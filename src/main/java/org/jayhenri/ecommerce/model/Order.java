@@ -14,7 +14,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @NoArgsConstructor
-@Embeddable
+@Entity
 public class Order implements Serializable {
 
     private static final long serialVersionUID = -3543368529566294417L;
@@ -30,6 +30,7 @@ public class Order implements Serializable {
     private String customerEmail;
 
     @Column
+    @OneToMany
     private ArrayList<Item> order;
 
     @Column

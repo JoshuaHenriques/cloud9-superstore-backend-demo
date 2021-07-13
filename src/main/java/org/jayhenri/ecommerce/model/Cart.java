@@ -8,26 +8,27 @@ import lombok.Setter;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
+import javax.persistence.*;
 
 // TODO: Implement HST+GST+PROMOCODE computation
 
 @Getter
 @Setter
-@Embeddable
 @NoArgsConstructor
+@Embeddable
+@Entity
 public class Cart implements Serializable {
 
     private static final long serialVersionUID = -198235381052492730L;
 
-    @Column(nullable = true)
+    @Column
+    @OneToMany
     private ArrayList<Item> items;
 
-    @Column(nullable = true)
+    @Column
     private String customerEmail;
 
-    @Column(nullable = true)
+    @Column
     private Double total;
 
     public Cart(ArrayList<Item> items, String customerEmail, Double total) {
