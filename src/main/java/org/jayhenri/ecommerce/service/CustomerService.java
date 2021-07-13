@@ -70,7 +70,7 @@ public class CustomerService {
     }
 
     public List<Customer> findAllCustomers(Integer pageNo, Integer pageSize, String sortBy) {
-        Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
+        Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy).ascending());
         Page<Customer> pagedResult = customerRepository.findAll(paging);
 
         if(pagedResult.hasContent()) return pagedResult.getContent();

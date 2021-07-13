@@ -18,12 +18,16 @@ public class Item implements Serializable {
 
     private static final long serialVersionUID = -496088096515099704L;
 
+    @Column(nullable = true)
     private String itemName;
 
+    @Column(nullable = true)
     private String description;
 
+    @Column(nullable = true)
     private double price;
 
+    @Column(nullable = true)
     private byte[] image;
 
 //    @Temporal(TemporalType.TIMESTAMP)

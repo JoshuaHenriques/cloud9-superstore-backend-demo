@@ -47,10 +47,13 @@ public class Customer implements Serializable {
     @Column(nullable = true)
     private Address address;
 
+    @Column(nullable = true)
     private Cart cart;
 
+    @Column(nullable = true)
     private ArrayList<CreditCard> creditCards;
 
+    @Column(nullable = true)
     private ArrayList<Order> orders;
 
     public Customer(String firstName, String lastName, String phoneNumber, String email, String password, String dateOfBirth, Address address, Cart cart, ArrayList<CreditCard> creditCards, ArrayList<Order> orders) {
