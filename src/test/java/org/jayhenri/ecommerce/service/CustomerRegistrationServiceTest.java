@@ -105,28 +105,6 @@ class CustomerRegistrationServiceTest {
     }
 
     @Test
-    void testAddThrowsInvalidPostalCodeException() throws InvalidPostalCodeException, CustomerAlreadyExistsException {
-        CustomerRegistrationService mockMeToTest = mock(CustomerRegistrationService.class);
-
-        willThrow(InvalidPostalCodeException.class).given(mockMeToTest).add(this.customer);
-
-        assertThatThrownBy(() -> {
-            mockMeToTest.add(this.customer);
-        }).isInstanceOf(InvalidPostalCodeException.class);
-    }
-
-    @Test
-    void testAddThrowsCustomerAlreadyExistsException() throws InvalidPostalCodeException, CustomerAlreadyExistsException {
-        CustomerRegistrationService mockMeToTest = mock(CustomerRegistrationService.class);
-
-        willThrow(CustomerAlreadyExistsException.class).given(mockMeToTest).add(this.customer);
-
-        assertThatThrownBy(() -> {
-            mockMeToTest.add(this.customer);
-        }).isInstanceOf(InvalidPostalCodeException.class);
-    }
-
-    @Test
     void existsByPhoneNumber() {
         given(testMe.existsByPhoneNumber("1234567890"))
                 .willReturn(true);

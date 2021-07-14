@@ -28,4 +28,10 @@ public class Inventory implements Serializable {
 
     @Column
     private Item item;
+
+    public Inventory(String productName, int quantity, Item item) {
+        this.productName = productName;
+        this.quantity = quantity;
+        this.item = item;
+    }
 }

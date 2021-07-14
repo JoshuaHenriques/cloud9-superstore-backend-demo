@@ -37,7 +37,7 @@ public class CustomerService {
         this.orderDBService = orderDBService;
     }
 
-    private boolean existsByPhoneNumber(String phoneNumber) {
+    public boolean existsByPhoneNumber(String phoneNumber) {
         return customerRepository.existsByPhoneNumber(phoneNumber);
     }
 
@@ -80,7 +80,7 @@ public class CustomerService {
         return getByEmail(email).getCreditCards();
     }
 
-    private boolean isValidPostalCode(String postalCode) {
+    public boolean isValidPostalCode(String postalCode) {
         Pattern pattern = Pattern.compile(REGEX_POSTAL_CODE);
         Matcher matcher = pattern.matcher(postalCode);
         return matcher.matches();

@@ -22,35 +22,16 @@ public class InventoryService {
         this.inventoryRepository = inventoryRepository;
     }
 
-    public void add(Inventory inventory) throws ItemAlreadyExistsException, InvalidItemException {
-        if (!ObjectUtils.isEmpty(inventory)) {
-            if (!existsByProductName(inventory.getProductName())) {
-                inventoryRepository.save(inventory);
-            } else throw new ItemAlreadyExistsException();
-        } else throw new InvalidItemException();
-
+    public void add(Inventory inventory) {
+            inventoryRepository.save(inventory);
     }
 
-    public void update(Inventory inventory, String productName) throws ItemNotFoundException, InvalidItemException, ProductNameNotSameException {
-        if (!ObjectUtils.isEmpty(inventory))
-            if (existsByProductName(productName) && existsByProductName(inventory.getProductName()))
-                if (productName.equals(inventory.getProductName()))
-                    inventoryRepository.save(inventory);
-                else throw new ProductNameNotSameException();
-            else throw new ItemNotFoundException();
-        else throw new InvalidItemException();
+    public void update(Inventory inventory) {
+            inventoryRepository.save(inventory);
     }
 
-    public void delete(String productName) throws ItemNotFoundException, InvalidItemException {
-        Inventory deleteMe;
-        if (!ObjectUtils.isEmpty(productName))
-            if (existsByProductName(productName)) {
-                deleteMe = new Inventory();
-                deleteMe.setProductName(productName);
-                inventoryRepository.delete(deleteMe);
-            }
-            else throw new ItemNotFoundException();
-        else throw new InvalidItemException();
+    public void delete(Inventory inventory) {
+        inventoryRepository.delete(inventory);
     }
 
     public List<Inventory> findAll() {
@@ -61,7 +42,7 @@ public class InventoryService {
         return inventoryRepository.existsByProductName(productName);
     }
 
-    public Item getByProductName(String productName) {
-        return inventoryRepository.getByProductName(productName).getItem();
+    public Inventory getByProductName(String productName) {
+        return inventoryRepository.getByProductName(productName);
     }
 }

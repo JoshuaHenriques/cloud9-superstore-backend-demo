@@ -59,7 +59,7 @@ public class CustomerController {
 
     @PostMapping(value = "/{email}/cart/add/{productName}")
     public void addToCart(@PathVariable String productName, @PathVariable String email) throws InvalidNameException, InvalidCustomerException, CustomerNotFoundException {
-        customerService.addToCart(customerService.getByEmail(email), inventoryService.getByProductName(productName));
+        customerService.addToCart(customerService.getByEmail(email), inventoryService.getByProductName(productName).getItem());
     }
 
     @DeleteMapping(value = "/{email}/cart/remove/{productName}")

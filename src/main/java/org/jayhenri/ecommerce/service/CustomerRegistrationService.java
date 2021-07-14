@@ -23,13 +23,7 @@ public class CustomerRegistrationService {
         this.customerRepository = customerRepository;
     }
 
-    public void add(Customer customer) throws CustomerAlreadyExistsException, InvalidPostalCodeException {
-
-        if (existsByPhoneNumber(customer.getPhoneNumber()) || existsByEmail(customer.getEmail()))
-            throw new CustomerAlreadyExistsException();
-
-        else if (!isValidPostalCode(customer.getAddress().getPostalCode()))
-            throw new InvalidPostalCodeException();
+    public void add(Customer customer) {
         customerRepository.save(customer);
     }
 

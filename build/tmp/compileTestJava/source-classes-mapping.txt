@@ -4,3 +4,5 @@ org/jayhenri/ecommerce/service/OrderDBServiceTest.java
  org.jayhenri.ecommerce.service.OrderDBServiceTest
 org/jayhenri/ecommerce/service/CustomerRegistrationServiceTest.java
  org.jayhenri.ecommerce.service.CustomerRegistrationServiceTest
+org/jayhenri/ecommerce/service/InventoryServiceTest.java
+ org.jayhenri.ecommerce.service.InventoryServiceTest

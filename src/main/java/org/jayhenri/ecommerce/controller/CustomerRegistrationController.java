@@ -26,6 +26,11 @@ public class CustomerRegistrationController {
 
     @PostMapping(value = "/customer", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Customer> register(@Valid @RequestBody Customer customer) throws CustomerAlreadyExistsException, InvalidPostalCodeException {
+        if (customerService.existsByPhoneNumber(customer.getPhoneNumber()) || customerService.existsByEmail(customer.getEmail()))
+            throw new CustomerAlreadyExistsException();
+        else if (!customerService.isValidPostalCode(customer.getAddress().getPostalCode()))
+            throw new InvalidPostalCodeException();
+
         customerService.add(customer);
         return ResponseEntity.ok().build();
     }
