@@ -8,7 +8,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.UUID;
 
 @Getter
@@ -33,10 +32,6 @@ public class OrderDB implements Serializable {
     @OneToMany
     private ArrayList<Item> items;
 
-//    @Temporal(TemporalType.TIMESTAMP)
-//    @Column(name = "Create_Date", nullable = false)
-//    private Date date;
-
     @Column
     private double subTotal;
 
@@ -47,7 +42,6 @@ public class OrderDB implements Serializable {
         this.orderStatus = orderStatus;
         this.customerEmail = customerEmail;
         this.items = items;
-        // this.date = date;
         this.subTotal = subTotal;
         this.totalPrice = totalPrice;
     }

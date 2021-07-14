@@ -23,16 +23,15 @@ import java.util.UUID;
 @RequestMapping("api/customers")
 public class CustomerController {
 
-    @Autowired
-    private CustomerService customerService;
+
+    private final CustomerService customerService;
+    private final InventoryService inventoryService;
 
     @Autowired
-    private InventoryService inventoryService;
-
-    private Customer customer;
-    private Item item;
-    private Order order;
-    private CreditCard creditCard;
+    public CustomerController(CustomerService customerService, InventoryService inventoryService) {
+        this.customerService = customerService;
+        this.inventoryService = inventoryService;
+    }
 
     @PutMapping(value = "/update", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void updateCustomer(@Valid @RequestBody Customer customer) throws InvalidCustomerException, CustomerNotFoundException {
@@ -108,9 +107,4 @@ public class CustomerController {
     public List<Order> listOrders(@PathVariable String email) throws InvalidNameException, CustomerNotFoundException {
         return customerService.findAllOrders(email);
     }
-
-//    @GetMapping(value = "/checkout")
-//    public void checkout(@RequestBody Cart cart) {
-//        customerService.checkout(cart);
-//    }
 }

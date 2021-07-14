@@ -1,6 +1,5 @@
 package org.jayhenri.ecommerce.service;
 
-import lombok.NoArgsConstructor;
 import org.jayhenri.ecommerce.exception.*;
 import org.jayhenri.ecommerce.model.*;
 import org.jayhenri.ecommerce.repository.CustomerRepository;
@@ -19,23 +18,27 @@ import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-@NoArgsConstructor
+
 @Service
 public class CustomerService {
 
-    @Autowired
-    private CustomerRepository customerRepository;
+    private final CustomerRepository customerRepository;
 
-    @Autowired
-    private OrderDBService orderDBService;
+    private final OrderDBService orderDBService;
 
     private static final Double HST = 0.13;
     private static final Double DELIVERY_FEE = 9.99;
 
     private static final String REGEX_POSTAL_CODE = "^(?!.*[DFIOQU])[A-VXY][0-9][A-Z] ?[0-9][A-Z][0-9]$";
 
+    @Autowired
+    public CustomerService(CustomerRepository customerRepository, OrderDBService orderDBService) {
+        this.customerRepository = customerRepository;
+        this.orderDBService = orderDBService;
+    }
+
     private boolean existsByPhoneNumber(String phoneNumber) {
-        return customerRepository.existsPhoneNumber(phoneNumber);
+        return customerRepository.existsByPhoneNumber(phoneNumber);
     }
 
     public void add(Customer customer) throws CustomerAlreadyExistsException, InvalidPostalCodeException {
@@ -45,7 +48,6 @@ public class CustomerService {
 
         else if (!isValidPostalCode(customer.getAddress().getPostalCode()))
             throw new InvalidPostalCodeException();
-        //customer.setPassword(encryptPassword(customer.getPassword()));
         customerRepository.save(customer);
     }
 
@@ -141,11 +143,6 @@ public class CustomerService {
         update(customer);
     }
 
-    // Not Used
-//    public Order getOrder(Customer customer, UUID uuid) throws OrderNotFoundException {
-//        return customer.getOrders().stream().filter(o -> o.getUuid().equals(uuid)).findFirst().orElseThrow(OrderNotFoundException::new);
-//    }
-
     public void addOrder(Customer customer, Order order) throws InvalidCustomerException, CustomerNotFoundException {
         customer.getOrders().add(order);
         update(customer);
@@ -169,9 +166,4 @@ public class CustomerService {
     public List<Order> findAllOrders(String email) throws InvalidNameException, CustomerNotFoundException {
         return getByEmail(email).getOrders();
     }
-    
-    // private String encryptPassword(String password) {
-    //     BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-    //     return passwordEncoder.encode(password);
-    // }
 }

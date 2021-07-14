@@ -10,16 +10,18 @@ import org.springframework.stereotype.Service;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * G
- */
 @Service
 public class CustomerRegistrationService {
 
-    @Autowired
-    private CustomerRepository customerRepository;
+
+    private final CustomerRepository customerRepository;
 
     private static final String REGEX_POSTAL_CODE = "^(?!.*[DFIOQU])[A-VXY][0-9][A-Z] ?[0-9][A-Z][0-9]$";
+
+    @Autowired
+    public CustomerRegistrationService(CustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
+    }
 
     public void add(Customer customer) throws CustomerAlreadyExistsException, InvalidPostalCodeException {
 
@@ -28,12 +30,11 @@ public class CustomerRegistrationService {
 
         else if (!isValidPostalCode(customer.getAddress().getPostalCode()))
             throw new InvalidPostalCodeException();
-        // else if (!isValidPassword()){}
         customerRepository.save(customer);
     }
 
     public boolean existsByPhoneNumber(String phoneNumber) {
-        return customerRepository.existsPhoneNumber(phoneNumber);
+        return customerRepository.existsByPhoneNumber(phoneNumber);
     }
 
     public boolean isValidPostalCode(String postalCode) {
@@ -45,14 +46,4 @@ public class CustomerRegistrationService {
     public boolean existsByEmail(String email) {
         return customerRepository.existsByEmail(email);
     }
-
-    /*
-    private void encryptPassword(Login login) {
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String encodedPassword = passwordEncoder.encode(login.getPassword());
-        login.setPassword(encodedPassword);
-
-        loginRepository.save(login);
-    }
-    */
 }

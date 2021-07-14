@@ -17,8 +17,13 @@ import java.util.List;
 @RequestMapping("api/inventory")
 public class InventoryController {
 
+
+    private final InventoryService inventoryService;
+
     @Autowired
-    private InventoryService inventoryService;
+    public InventoryController(InventoryService inventoryService) {
+        this.inventoryService = inventoryService;
+    }
 
     @PutMapping(value = "/update/{productName}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Inventory> updateItem(@Valid @RequestBody Inventory inventory, @PathVariable String productName) throws InvalidItemException, ItemNotFoundException, ProductNameNotSameException {

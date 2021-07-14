@@ -16,8 +16,13 @@ import javax.validation.Valid;
 @RequestMapping("api/register")
 public class CustomerRegistrationController {
 
+
+    private final CustomerService customerService;
+
     @Autowired
-    private CustomerService customerService;
+    public CustomerRegistrationController(CustomerService customerService) {
+        this.customerService = customerService;
+    }
 
     @PostMapping(value = "/customer", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Customer> register(@Valid @RequestBody Customer customer) throws CustomerAlreadyExistsException, InvalidPostalCodeException {

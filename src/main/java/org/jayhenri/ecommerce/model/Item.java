@@ -30,10 +30,6 @@ public class Item implements Serializable {
     @Column
     private byte[] image;
 
-//    @Temporal(TemporalType.TIMESTAMP)
-//    @Column(name = "Create_Date", nullable = false)
-//    private Date createDate;
-
     public Item(String productName, String description, double price) {
         this.itemName = productName;
         this.description = description;

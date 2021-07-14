@@ -1,6 +1,5 @@
 package org.jayhenri.ecommerce.service;
 
-import lombok.NoArgsConstructor;
 import org.jayhenri.ecommerce.exception.*;
 import org.jayhenri.ecommerce.model.Inventory;
 import org.jayhenri.ecommerce.model.Item;
@@ -13,23 +12,14 @@ import org.springframework.util.ObjectUtils;
 import java.util.List;
 
 // TODO: Implement better
-@NoArgsConstructor
 @Service
 public class InventoryService {
 
-    private Inventory inventory;
+    private final InventoryRepository inventoryRepository;
 
     @Autowired
-    private InventoryRepository inventoryRepository;
-
-    public void update(Inventory inventory, String productName) throws ItemNotFoundException, InvalidItemException, ProductNameNotSameException {
-        if (!ObjectUtils.isEmpty(inventory))
-            if (existsByProductName(productName) && existsByProductName(inventory.getProductName()))
-                if (productName.equals(inventory.getProductName()))
-                    inventoryRepository.save(inventory);
-                else throw new ProductNameNotSameException();
-            else throw new ItemNotFoundException();
-        else throw new InvalidItemException();
+    public InventoryService(InventoryRepository inventoryRepository) {
+        this.inventoryRepository = inventoryRepository;
     }
 
     public void add(Inventory inventory) throws ItemAlreadyExistsException, InvalidItemException {
@@ -39,6 +29,16 @@ public class InventoryService {
             } else throw new ItemAlreadyExistsException();
         } else throw new InvalidItemException();
 
+    }
+
+    public void update(Inventory inventory, String productName) throws ItemNotFoundException, InvalidItemException, ProductNameNotSameException {
+        if (!ObjectUtils.isEmpty(inventory))
+            if (existsByProductName(productName) && existsByProductName(inventory.getProductName()))
+                if (productName.equals(inventory.getProductName()))
+                    inventoryRepository.save(inventory);
+                else throw new ProductNameNotSameException();
+            else throw new ItemNotFoundException();
+        else throw new InvalidItemException();
     }
 
     public void delete(String productName) throws ItemNotFoundException, InvalidItemException {

@@ -1,4 +1,6 @@
-org/jayhenri/ecommerce/service/CustomerRegistrationServiceTest.java
- org.jayhenri.ecommerce.service.CustomerRegistrationServiceTest
+org/jayhenri/ecommerce/EcommerceApplicationTest.java
+ org.jayhenri.ecommerce.EcommerceApplicationTest
 org/jayhenri/ecommerce/service/OrderDBServiceTest.java
  org.jayhenri.ecommerce.service.OrderDBServiceTest
+org/jayhenri/ecommerce/service/CustomerRegistrationServiceTest.java
+ org.jayhenri.ecommerce.service.CustomerRegistrationServiceTest

@@ -1,6 +1,5 @@
 package org.jayhenri.ecommerce.model;
 
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -40,10 +39,6 @@ public class Customer implements Serializable {
 
     @Column(nullable = false, length = 6)
     private String dateOfBirth;
-
-//    @Temporal(TemporalType.TIMESTAMP)
-//    @Column(name = "Create_Date", nullable = false)
-//    private Date createDate;
 
     @Embedded
     private Address address;
