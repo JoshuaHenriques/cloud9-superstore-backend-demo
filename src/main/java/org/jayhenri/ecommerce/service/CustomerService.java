@@ -22,17 +22,13 @@ public class CustomerService {
 
     private final CustomerRepository customerRepository;
 
-    private final OrderDBService orderDBService;
-
     private static final Double HST = 0.13;
     private static final Double DELIVERY_FEE = 9.99;
 
-    private static final String REGEX_POSTAL_CODE = "^(?!.*[DFIOQU])[A-VXY][0-9][A-Z] ?[0-9][A-Z][0-9]$";
-
     @Autowired
-    public CustomerService(CustomerRepository customerRepository, OrderDBService orderDBService) {
+    public CustomerService(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
-        this.orderDBService = orderDBService;
+        // this.orderDBService = orderDBService;
     }
 
     public boolean existsByPhoneNumber(String phoneNumber) {
@@ -40,12 +36,6 @@ public class CustomerService {
     }
 
     public void add(Customer customer) throws CustomerAlreadyExistsException, InvalidPostalCodeException {
-
-        if (existsByPhoneNumber(customer.getPhoneNumber()) || existsByEmail(customer.getEmail()))
-            throw new CustomerAlreadyExistsException();
-
-        else if (!isValidPostalCode(customer.getAddress().getPostalCode()))
-            throw new InvalidPostalCodeException();
         customerRepository.save(customer);
     }
 
@@ -67,12 +57,6 @@ public class CustomerService {
 
     public List<CreditCard> findAllCreditCards(String email) {
         return getByEmail(email).getCreditCards();
-    }
-
-    public boolean isValidPostalCode(String postalCode) {
-        Pattern pattern = Pattern.compile(REGEX_POSTAL_CODE);
-        Matcher matcher = pattern.matcher(postalCode);
-        return matcher.matches();
     }
 
     public boolean existsByEmail(String email) {
@@ -132,14 +116,14 @@ public class CustomerService {
         customer.getOrders().add(order);
         update(customer);
 
-        OrderDB orderDB = new OrderDB(
-                "PROCESSING",
-                customer.getEmail(),
-                new ArrayList<>(order.getOrder()),
-                order.getTotalPrice(),
-                order.getTotalPrice()*HST+DELIVERY_FEE
-        );
-        orderDBService.addOrderToDB(orderDB);
+//        OrderDB orderDB = new OrderDB(
+//                "PROCESSING",
+//                customer.getEmail(),
+//                new ArrayList<>(order.getOrder()),
+//                order.getTotalPrice(),
+//                order.getTotalPrice()*HST+DELIVERY_FEE
+//        );
+//        orderDBService.addOrderToDB(orderDB);
     }
 
     public void updateOrder(Customer customer, UUID uuid, String orderStatus) {

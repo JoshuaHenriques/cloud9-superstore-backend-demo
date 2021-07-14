@@ -147,7 +147,6 @@ public class CustomerController {
     @GetMapping(value = "/{email}/orders/list", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Order> listOrders(@PathVariable String email) throws CustomerNotFoundException {
         if (customerService.existsByEmail(email)) {
-
             return customerService.findAllOrders(email);
         } else throw new CustomerNotFoundException();
     }

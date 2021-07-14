@@ -54,6 +54,12 @@ org/jayhenri/ecommerce/repository/InventoryRepository.java
  org.jayhenri.ecommerce.repository.InventoryRepository
 org/jayhenri/ecommerce/service/InventoryService.java
  org.jayhenri.ecommerce.service.InventoryService
+org/jayhenri/ecommerce/service/AddressService.java
+ org.jayhenri.ecommerce.service.AddressService
+org/jayhenri/ecommerce/service/OrderService.java
+ org.jayhenri.ecommerce.service.OrderService
+org/jayhenri/ecommerce/service/CreditCardService.java
+ org.jayhenri.ecommerce.service.CreditCardService
 org/jayhenri/ecommerce/controller/CustomerRegistrationController.java
  org.jayhenri.ecommerce.controller.CustomerRegistrationController
 org/jayhenri/ecommerce/controller/CustomerController.java
