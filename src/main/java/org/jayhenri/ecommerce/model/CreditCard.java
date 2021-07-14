@@ -9,6 +9,9 @@ import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import java.io.Serializable;
 
+/**
+ * The type Credit card.
+ */
 // TODO: Implement later
 @Getter
 @Setter
@@ -33,6 +36,15 @@ public class CreditCard implements Serializable {
     @Column
     private String cvc;
 
+    /**
+     * Instantiates a new Credit card.
+     *
+     * @param fullName the full name
+     * @param ccn      the ccn
+     * @param expDate  the exp date
+     * @param cvc      the cvc
+     * @param fourDig  the four dig
+     */
     public CreditCard(String fullName, String ccn, String expDate, String cvc, String fourDig) {
         this.fullName = fullName;
         this.ccn = ccn;

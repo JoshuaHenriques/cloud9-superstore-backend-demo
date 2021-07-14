@@ -7,6 +7,9 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serializable;
 
+/**
+ * The type Item.
+ */
 // TODO: Implement Ratings
 // TODO: There must be a better way to do this
 @Getter
@@ -30,6 +33,13 @@ public class Item implements Serializable {
     @Column
     private byte[] image;
 
+    /**
+     * Instantiates a new Item.
+     *
+     * @param productName the product name
+     * @param description the description
+     * @param price       the price
+     */
     public Item(String productName, String description, double price) {
         this.itemName = productName;
         this.description = description;

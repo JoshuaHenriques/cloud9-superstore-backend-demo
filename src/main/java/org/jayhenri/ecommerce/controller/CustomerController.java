@@ -21,6 +21,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * The type Customer controller.
+ */
 @RestController // Indicates that the data returned by each method will be written straight into the response body instead of rendering a template
 @RequestMapping("api/customers")
 public class CustomerController {
@@ -29,12 +32,25 @@ public class CustomerController {
     private final CustomerService customerService;
     private final InventoryService inventoryService;
 
+    /**
+     * Instantiates a new Customer controller.
+     *
+     * @param customerService  the customer service
+     * @param inventoryService the inventory service
+     */
     @Autowired
     public CustomerController(CustomerService customerService, InventoryService inventoryService) {
         this.customerService = customerService;
         this.inventoryService = inventoryService;
     }
 
+    /**
+     * Update customer.
+     *
+     * @param customer the customer
+     * @throws InvalidCustomerException  the invalid customer exception
+     * @throws CustomerNotFoundException the customer not found exception
+     */
     @PutMapping(value = "/update", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void updateCustomer(@Valid @RequestBody Customer customer) throws InvalidCustomerException, CustomerNotFoundException {
         if (!ObjectUtils.isEmpty(customer))
@@ -44,6 +60,14 @@ public class CustomerController {
         else throw new InvalidCustomerException();
     }
 
+    /**
+     * Delete customer.
+     *
+     * @param email the email
+     * @throws InvalidCustomerException  the invalid customer exception
+     * @throws CustomerNotFoundException the customer not found exception
+     * @throws InvalidNameException      the invalid name exception
+     */
     @DeleteMapping(value = "/delete/{email}")
     public void deleteCustomer(@PathVariable String email) throws InvalidCustomerException, CustomerNotFoundException, InvalidNameException {
         if (!ObjectUtils.isEmpty(email)) {
@@ -53,6 +77,13 @@ public class CustomerController {
         } else throw new InvalidCustomerException();
     }
 
+    /**
+     * List customers response entity.
+     *
+     * @param pageNo   the page no
+     * @param pageSize the page size
+     * @return the response entity
+     */
     @GetMapping(value = "/list/customers", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Customer>> listCustomers(@RequestParam(defaultValue = "0") Integer pageNo,
                                                         @RequestParam(defaultValue = "50") Integer pageSize) {
@@ -62,6 +93,14 @@ public class CustomerController {
         return new ResponseEntity<>(list, new HttpHeaders(), HttpStatus.OK);
     }
 
+    /**
+     * Gets by email.
+     *
+     * @param email the email
+     * @return the by email
+     * @throws InvalidNameException      the invalid name exception
+     * @throws CustomerNotFoundException the customer not found exception
+     */
     @GetMapping(value = "/{email}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Customer getByEmail(@Valid @PathVariable String email) throws InvalidNameException, CustomerNotFoundException {
         if(!ObjectUtils.isEmpty(email)) {
@@ -71,6 +110,14 @@ public class CustomerController {
         } else throw new InvalidNameException();
     }
 
+    /**
+     * Add to cart.
+     *
+     * @param productName the product name
+     * @param email       the email
+     * @throws CustomerNotFoundException the customer not found exception
+     * @throws ItemNotFoundException     the item not found exception
+     */
     @PostMapping(value = "/{email}/cart/add/{productName}")
     public void addToCart(@PathVariable String productName, @PathVariable String email) throws CustomerNotFoundException, ItemNotFoundException {
         if (customerService.existsByEmail(email)) {
@@ -80,6 +127,15 @@ public class CustomerController {
         } else throw new CustomerNotFoundException();
     }
 
+    /**
+     * Remove from cart.
+     *
+     * @param productName the product name
+     * @param email       the email
+     * @throws InvalidCustomerException  the invalid customer exception
+     * @throws CustomerNotFoundException the customer not found exception
+     * @throws ItemNotFoundException     the item not found exception
+     */
     @DeleteMapping(value = "/{email}/cart/remove/{productName}")
     public void removeFromCart(@PathVariable String productName, @PathVariable String email) throws InvalidCustomerException, CustomerNotFoundException, ItemNotFoundException {
         customerService.removeFromCart(customerService.getByEmail(email), productName);
@@ -90,6 +146,12 @@ public class CustomerController {
         } else throw new CustomerNotFoundException();
     }
 
+    /**
+     * Empty cart.
+     *
+     * @param email the email
+     * @throws CustomerNotFoundException the customer not found exception
+     */
     @PatchMapping(value = "/{email}/cart/empty")
     public void emptyCart(@PathVariable String email) throws CustomerNotFoundException {
         if (customerService.existsByEmail(email)) {
@@ -97,6 +159,13 @@ public class CustomerController {
         } else throw new CustomerNotFoundException();
     }
 
+    /**
+     * Gets cart.
+     *
+     * @param email the email
+     * @return the cart
+     * @throws CustomerNotFoundException the customer not found exception
+     */
     @GetMapping(value = "/{email}/cart/get", produces = MediaType.APPLICATION_JSON_VALUE)
     public ArrayList<Item> getCart(@PathVariable String email) throws CustomerNotFoundException {
         if (customerService.existsByEmail(email)) {
@@ -104,7 +173,16 @@ public class CustomerController {
         } else throw new CustomerNotFoundException();
     }
 
-    // TODO: Github readme: describe functionalities
+    /**
+     * Add credit card.
+     *
+     * @param email      the email
+     * @param creditCard the credit card
+     * @throws InvalidNameException      the invalid name exception
+     * @throws InvalidCustomerException  the invalid customer exception
+     * @throws CustomerNotFoundException the customer not found exception
+     */
+// TODO: Github readme: describe functionalities
     @PostMapping(value = "/{email}/creditCard/add", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void addCreditCard(@PathVariable String email, @RequestBody CreditCard creditCard) throws InvalidNameException, InvalidCustomerException, CustomerNotFoundException {
         if (customerService.existsByEmail(email)) {
@@ -113,6 +191,13 @@ public class CustomerController {
         } else throw new CustomerNotFoundException();
     }
 
+    /**
+     * Remove credit card.
+     *
+     * @param email      the email
+     * @param fourDigits the four digits
+     * @throws CustomerNotFoundException the customer not found exception
+     */
     @DeleteMapping(value = "/{email}/creditCard/remove/{fourDigits}")
     public void removeCreditCard(@PathVariable String email, @PathVariable String fourDigits) throws CustomerNotFoundException {
         if (customerService.existsByEmail(email)) {
@@ -121,6 +206,13 @@ public class CustomerController {
         } else throw new CustomerNotFoundException();
     }
 
+    /**
+     * List credit cards list.
+     *
+     * @param email the email
+     * @return the list
+     * @throws CustomerNotFoundException the customer not found exception
+     */
     @GetMapping(value = "/{email}/creditCards/list", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<CreditCard> listCreditCards(@PathVariable String email) throws CustomerNotFoundException {
         if (customerService.existsByEmail(email)) {
@@ -128,6 +220,13 @@ public class CustomerController {
         } else throw new CustomerNotFoundException();
     }
 
+    /**
+     * Add order.
+     *
+     * @param email the email
+     * @param order the order
+     * @throws CustomerNotFoundException the customer not found exception
+     */
     @PostMapping(value = "/{email}/orders/add", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void addOrder(@PathVariable String email, @RequestBody Order order) throws CustomerNotFoundException {
         if (customerService.existsByEmail(email)) {
@@ -136,6 +235,14 @@ public class CustomerController {
         } else throw new CustomerNotFoundException();
     }
 
+    /**
+     * Update order.
+     *
+     * @param email  the email
+     * @param uuid   the uuid
+     * @param status the status
+     * @throws CustomerNotFoundException the customer not found exception
+     */
     @PutMapping(value = "/{email}/orders/updateStatus/{uuid}/{status}")
     public void updateOrder(@PathVariable String email, @PathVariable UUID uuid, @PathVariable String status) throws CustomerNotFoundException{
         if (customerService.existsByEmail(email)) {
@@ -144,6 +251,13 @@ public class CustomerController {
         } else throw new CustomerNotFoundException();
     }
 
+    /**
+     * List orders list.
+     *
+     * @param email the email
+     * @return the list
+     * @throws CustomerNotFoundException the customer not found exception
+     */
     @GetMapping(value = "/{email}/orders/list", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Order> listOrders(@PathVariable String email) throws CustomerNotFoundException {
         if (customerService.existsByEmail(email)) {

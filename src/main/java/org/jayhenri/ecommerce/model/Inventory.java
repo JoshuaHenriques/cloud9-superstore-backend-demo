@@ -7,6 +7,9 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serializable;
 
+/**
+ * The type Inventory.
+ */
 // TODO: Abstract for different type of items
 // TODO: Implement ratings
 // TODO: Implement comments
@@ -29,6 +32,13 @@ public class Inventory implements Serializable {
     @Column
     private Item item;
 
+    /**
+     * Instantiates a new Inventory.
+     *
+     * @param productName the product name
+     * @param quantity    the quantity
+     * @param item        the item
+     */
     public Inventory(String productName, int quantity, Item item) {
         this.productName = productName;
         this.quantity = quantity;

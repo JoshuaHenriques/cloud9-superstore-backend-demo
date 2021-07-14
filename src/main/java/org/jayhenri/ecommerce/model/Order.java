@@ -10,6 +10,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.UUID;
 
+/**
+ * The type Order.
+ */
 // TODO: Fix enum import
 @Getter
 @Setter
@@ -36,6 +39,14 @@ public class Order implements Serializable {
     @Column
     private double totalPrice;
 
+    /**
+     * Instantiates a new Order.
+     *
+     * @param orderStatus   the order status
+     * @param customerEmail the customer email
+     * @param order         the order
+     * @param totalPrice    the total price
+     */
     public Order(String orderStatus, String customerEmail, ArrayList<Item> order, double totalPrice) {
         this.orderStatus = orderStatus;
         this.customerEmail = customerEmail;

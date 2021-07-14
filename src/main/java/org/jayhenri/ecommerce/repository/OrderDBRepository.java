@@ -8,6 +8,9 @@ import org.springframework.stereotype.Repository;
 import javax.transaction.Transactional;
 import java.util.UUID;
 
+/**
+ * The interface Order db repository.
+ */
 @Transactional
 @Repository
 public interface OrderDBRepository extends JpaRepository<OrderDB, UUID> {

@@ -8,6 +8,9 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * The type Customer.
+ */
 // TODO: nullable: false for most field
 @Getter
 @Setter
@@ -16,7 +19,13 @@ import java.util.ArrayList;
 @Table(name = "customers")
 public class Customer implements Serializable {
 
+    /**
+     * The constant ROLE_ADMIN.
+     */
     public static final int ROLE_ADMIN = 1;
+    /**
+     * The constant ROLE_NONADMIN.
+     */
     public static final int ROLE_NONADMIN = 0;
 
     private static final long serialVersionUID = -1854209356482886781L;
@@ -54,6 +63,20 @@ public class Customer implements Serializable {
     @OneToMany
     private ArrayList<Order> orders;
 
+    /**
+     * Instantiates a new Customer.
+     *
+     * @param firstName   the first name
+     * @param lastName    the last name
+     * @param phoneNumber the phone number
+     * @param email       the email
+     * @param password    the password
+     * @param dateOfBirth the date of birth
+     * @param address     the address
+     * @param cart        the cart
+     * @param creditCards the credit cards
+     * @param orders      the orders
+     */
     public Customer(String firstName, String lastName, String phoneNumber, String email, String password, String dateOfBirth, Address address, Cart cart, ArrayList<CreditCard> creditCards, ArrayList<Order> orders) {
         this.firstName = firstName;
         this.lastName = lastName;

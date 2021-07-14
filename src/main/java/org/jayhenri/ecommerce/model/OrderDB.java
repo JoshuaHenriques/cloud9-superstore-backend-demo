@@ -10,6 +10,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.UUID;
 
+/**
+ * The type Order db.
+ */
 @Getter
 @Setter
 @Entity
@@ -38,6 +41,15 @@ public class OrderDB implements Serializable {
     @Column
     private double totalPrice;
 
+    /**
+     * Instantiates a new Order db.
+     *
+     * @param orderStatus   the order status
+     * @param customerEmail the customer email
+     * @param items         the items
+     * @param subTotal      the sub total
+     * @param totalPrice    the total price
+     */
     public OrderDB(String orderStatus, String customerEmail, ArrayList<Item> items, double subTotal, double totalPrice) {
         this.orderStatus = orderStatus;
         this.customerEmail = customerEmail;

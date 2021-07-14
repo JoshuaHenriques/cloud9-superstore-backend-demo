@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
+/**
+ * The type Inventory controller.
+ */
 @RestController // Indicates that the data returned by each method will be written straight into the response body instead of rendering a template
 @RequestMapping("api/inventory")
 public class InventoryController {
@@ -21,11 +24,26 @@ public class InventoryController {
 
     private final InventoryService inventoryService;
 
+    /**
+     * Instantiates a new Inventory controller.
+     *
+     * @param inventoryService the inventory service
+     */
     @Autowired
     public InventoryController(InventoryService inventoryService) {
         this.inventoryService = inventoryService;
     }
 
+    /**
+     * Update item response entity.
+     *
+     * @param inventory the inventory
+     * @return the response entity
+     * @throws InvalidItemException        the invalid item exception
+     * @throws ItemNotFoundException       the item not found exception
+     * @throws ProductNameNotSameException the product name not same exception
+     * @throws ItemAlreadyExistsException  the item already exists exception
+     */
     @PutMapping(value = "/update", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Inventory> updateItem(@Valid @RequestBody Inventory inventory) throws InvalidItemException, ItemNotFoundException, ProductNameNotSameException, ItemAlreadyExistsException {
         if (!ObjectUtils.isEmpty(inventory)) {
@@ -36,6 +54,14 @@ public class InventoryController {
         } else throw new InvalidItemException();
     }
 
+    /**
+     * Add item to inventory response entity.
+     *
+     * @param inventory the inventory
+     * @return the response entity
+     * @throws ItemAlreadyExistsException the item already exists exception
+     * @throws InvalidItemException       the invalid item exception
+     */
     @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Inventory> addItemToInventory(@Valid @RequestBody Inventory inventory) throws ItemAlreadyExistsException, InvalidItemException {
         if (!ObjectUtils.isEmpty(inventory)) {
@@ -48,6 +74,13 @@ public class InventoryController {
         return ResponseEntity.ok().build();
     }
 
+    /**
+     * Gets by product name.
+     *
+     * @param productName the product name
+     * @return the by product name
+     * @throws ItemNotFoundException the item not found exception
+     */
     @GetMapping(value = "/get/{productName}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Inventory getByProductName(@Valid @PathVariable String productName) throws ItemNotFoundException {
         if (inventoryService.existsByProductName(productName)) {
@@ -55,6 +88,14 @@ public class InventoryController {
         } else throw new ItemNotFoundException();
     }
 
+    /**
+     * Remove item to inventory response entity.
+     *
+     * @param productName the product name
+     * @return the response entity
+     * @throws InvalidItemException  the invalid item exception
+     * @throws ItemNotFoundException the item not found exception
+     */
     @DeleteMapping(value = "/remove/{productName}")
     public ResponseEntity<Inventory> removeItemToInventory(@PathVariable String productName) throws InvalidItemException, ItemNotFoundException {
         if (!ObjectUtils.isEmpty(productName)) {
@@ -66,6 +107,11 @@ public class InventoryController {
         return ResponseEntity.ok().build();
     }
 
+    /**
+     * Find all list.
+     *
+     * @return the list
+     */
     @GetMapping(value = "/items/list")
     public List<Inventory> findAll() {
         return inventoryService.findAll();

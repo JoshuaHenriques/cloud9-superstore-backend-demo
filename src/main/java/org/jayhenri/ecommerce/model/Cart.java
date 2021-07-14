@@ -12,6 +12,9 @@ import javax.persistence.*;
 
 // TODO: Implement HST+GST+PROMOCODE computation
 
+/**
+ * The type Cart.
+ */
 @Getter
 @Setter
 @NoArgsConstructor
@@ -31,6 +34,13 @@ public class Cart implements Serializable {
     @Column
     private Double total;
 
+    /**
+     * Instantiates a new Cart.
+     *
+     * @param items         the items
+     * @param customerEmail the customer email
+     * @param total         the total
+     */
     public Cart(ArrayList<Item> items, String customerEmail, Double total) {
         this.items = items;
         this.customerEmail = customerEmail;

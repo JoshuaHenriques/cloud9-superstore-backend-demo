@@ -17,6 +17,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
+/**
+ * The type Customer service.
+ */
 @Service
 public class CustomerService {
 
@@ -25,28 +28,63 @@ public class CustomerService {
     private static final Double HST = 0.13;
     private static final Double DELIVERY_FEE = 9.99;
 
+    /**
+     * Instantiates a new Customer service.
+     *
+     * @param customerRepository the customer repository
+     */
     @Autowired
     public CustomerService(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
         // this.orderDBService = orderDBService;
     }
 
+    /**
+     * Exists by phone number boolean.
+     *
+     * @param phoneNumber the phone number
+     * @return the boolean
+     */
     public boolean existsByPhoneNumber(String phoneNumber) {
         return customerRepository.existsByPhoneNumber(phoneNumber);
     }
 
+    /**
+     * Add.
+     *
+     * @param customer the customer
+     * @throws CustomerAlreadyExistsException the customer already exists exception
+     * @throws InvalidPostalCodeException     the invalid postal code exception
+     */
     public void add(Customer customer) throws CustomerAlreadyExistsException, InvalidPostalCodeException {
         customerRepository.save(customer);
     }
 
+    /**
+     * Delete.
+     *
+     * @param customer the customer
+     */
     public void delete(Customer customer){
                 customerRepository.delete(customer);
     }
 
+    /**
+     * Update.
+     *
+     * @param customer the customer
+     */
     public void update(Customer customer) {
                 customerRepository.save(customer);
     }
 
+    /**
+     * Find all customers list.
+     *
+     * @param pageNo   the page no
+     * @param pageSize the page size
+     * @return the list
+     */
     public List<Customer> findAllCustomers(Integer pageNo, Integer pageSize) { // String sortBy
         Pageable paging = PageRequest.of(pageNo, pageSize); // Sort.by(sortBy).ascending()
         Page<Customer> pagedResult = customerRepository.findAll(paging);
@@ -55,23 +93,53 @@ public class CustomerService {
         else return new ArrayList<>();
     }
 
+    /**
+     * Find all credit cards list.
+     *
+     * @param email the email
+     * @return the list
+     */
     public List<CreditCard> findAllCreditCards(String email) {
         return getByEmail(email).getCreditCards();
     }
 
+    /**
+     * Exists by email boolean.
+     *
+     * @param email the email
+     * @return the boolean
+     */
     public boolean existsByEmail(String email) {
         return customerRepository.existsByEmail(email);
     }
 
+    /**
+     * Gets by email.
+     *
+     * @param email the email
+     * @return the by email
+     */
     public Customer getByEmail(String email) {
         return customerRepository.getByEmail(email);
     }
 
+    /**
+     * Add to cart.
+     *
+     * @param customer the customer
+     * @param item     the item
+     */
     public void addToCart(Customer customer, Item item) {
         customer.getCart().getItems().add(item);
         update(customer);
     }
 
+    /**
+     * Remove from cart.
+     *
+     * @param customer    the customer
+     * @param productName the product name
+     */
     public void removeFromCart(Customer customer, String productName) {
 
         ArrayList<Item> removeMe = new ArrayList<>();
@@ -85,21 +153,44 @@ public class CustomerService {
         update(customer);
     }
 
+    /**
+     * Empty cart.
+     *
+     * @param customer the customer
+     */
     public void emptyCart(Customer customer) {
         ArrayList<Item> removeMe = customer.getCart().getItems();
         customer.getCart().getItems().removeAll(removeMe);
         update(customer);
     }
 
+    /**
+     * Gets cart.
+     *
+     * @param customer the customer
+     * @return the cart
+     */
     public ArrayList<Item> getCart(Customer customer) {
         return customer.getCart().getItems();
     }
 
+    /**
+     * Add credit card.
+     *
+     * @param customer   the customer
+     * @param creditCard the credit card
+     */
     public void addCreditCard(Customer customer, CreditCard creditCard) {
         customer.getCreditCards().add(creditCard);
         update(customer);
     }
 
+    /**
+     * Remove credit card.
+     *
+     * @param customer the customer
+     * @param fourDig  the four dig
+     */
     public void removeCreditCard(Customer customer, String fourDig)  {
         ArrayList<CreditCard> removeMe = new ArrayList<>();
 // Create a list of values you wish to remove, adding to that list within the loop, then call originalList.removeAll(valuesToRemove) at the end
@@ -112,6 +203,12 @@ public class CustomerService {
         update(customer);
     }
 
+    /**
+     * Add order.
+     *
+     * @param customer the customer
+     * @param order    the order
+     */
     public void addOrder(Customer customer, Order order) {
         customer.getOrders().add(order);
         update(customer);
@@ -126,12 +223,26 @@ public class CustomerService {
 //        orderDBService.addOrderToDB(orderDB);
     }
 
+    /**
+     * Update order.
+     *
+     * @param customer    the customer
+     * @param uuid        the uuid
+     * @param orderStatus the order status
+     */
     public void updateOrder(Customer customer, UUID uuid, String orderStatus) {
         customer.getOrders().forEach(order -> {
             if (order.getUuid().equals(uuid)) order.setOrderStatus(orderStatus);
         });
         update(customer);
     }
+
+    /**
+     * Find all orders list.
+     *
+     * @param email the email
+     * @return the list
+     */
     public List<Order> findAllOrders(String email)  {
         return getByEmail(email).getOrders();
     }
