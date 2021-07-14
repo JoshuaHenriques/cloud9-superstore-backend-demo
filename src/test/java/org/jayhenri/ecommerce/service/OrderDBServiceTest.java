@@ -10,15 +10,27 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.*;
 
+/**
+ * The type Order db service test.
+ */
 @ExtendWith(MockitoExtension.class)
 class OrderDBServiceTest {
 
+    /**
+     * The Order db repository.
+     */
     @Mock
     OrderDBRepository orderDBRepository;
 
+    /**
+     * The Argument captor.
+     */
     @Captor
     ArgumentCaptor<OrderDB> argumentCaptor;
 
+    /**
+     * Add order to db.
+     */
     @Test
     void addOrderToDB() {
         OrderDB orderDB = new OrderDB();

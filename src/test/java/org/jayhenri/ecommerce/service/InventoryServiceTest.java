@@ -14,23 +14,47 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.*;
 
+/**
+ * The type Inventory service test.
+ */
 @ExtendWith(MockitoExtension.class)
 class InventoryServiceTest {
 
+    /**
+     * The Test me.
+     */
     InventoryService testMe;
 
+    /**
+     * The Inventory repository.
+     */
     @Mock
     InventoryRepository inventoryRepository;
 
+    /**
+     * The Captor inventory.
+     */
     @Captor
     ArgumentCaptor<Inventory> captorInventory;
 
+    /**
+     * The Captor string.
+     */
     @Captor
     ArgumentCaptor<String> captorString;
 
+    /**
+     * The Inventory.
+     */
     Inventory inventory;
+    /**
+     * The Item.
+     */
     Item item;
 
+    /**
+     * Sets up.
+     */
     @BeforeEach
     void setUp() {
         testMe = new InventoryService(inventoryRepository);
@@ -48,6 +72,9 @@ class InventoryServiceTest {
         );
     }
 
+    /**
+     * Test add.
+     */
     @Test
     void testAdd() {
         testMe.add(this.inventory);
@@ -57,6 +84,9 @@ class InventoryServiceTest {
         assertThat(captorInventory.getValue()).isEqualTo(this.inventory);
     }
 
+    /**
+     * Test update.
+     */
     @Test
     void testUpdate() {
         testMe.update(this.inventory);
@@ -66,6 +96,9 @@ class InventoryServiceTest {
         assertThat(captorInventory.getValue()).isEqualTo(this.inventory);
     }
 
+    /**
+     * Delete.
+     */
     @Test
     void delete() {
         testMe.delete(this.inventory);
@@ -75,6 +108,9 @@ class InventoryServiceTest {
         assertThat(captorInventory.getValue()).isEqualTo(this.inventory);
     }
 
+    /**
+     * Find all.
+     */
     @Test
     void findAll() {
         testMe.findAll();
@@ -82,6 +118,9 @@ class InventoryServiceTest {
         then(inventoryRepository).should().findAll();
     }
 
+    /**
+     * Exists by product name.
+     */
     @Test
     void existsByProductName() {
         given(testMe.existsByProductName("Test Product"))
@@ -94,6 +133,9 @@ class InventoryServiceTest {
         assertThat(bool).isTrue();
     }
 
+    /**
+     * Does not exists by product name.
+     */
     @Test
     void doesNotExistsByProductName() {
         given(testMe.existsByProductName("Test Product"))
@@ -106,6 +148,9 @@ class InventoryServiceTest {
         assertThat(bool).isFalse();
     }
 
+    /**
+     * Gets by product name.
+     */
     @Test
     void getByProductName() {
         testMe.getByProductName("Test Product");

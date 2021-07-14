@@ -16,26 +16,59 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.BDDMockito.*;
 
+/**
+ * The type Customer registration service test.
+ */
 @ExtendWith(MockitoExtension.class)
 class CustomerRegistrationServiceTest {
 
+    /**
+     * The Test me.
+     */
     CustomerRegistrationService testMe;
 
+    /**
+     * The Customer repository.
+     */
     @Mock
     CustomerRepository customerRepository;
 
+    /**
+     * The Captor customer.
+     */
     @Captor
     ArgumentCaptor<Customer> captorCustomer;
 
+    /**
+     * The Captor string.
+     */
     @Captor
     ArgumentCaptor<String> captorString;
 
+    /**
+     * The Customer.
+     */
     Customer customer;
+    /**
+     * The Order.
+     */
     Order order;
+    /**
+     * The Cart.
+     */
     Cart cart;
+    /**
+     * The Credit card.
+     */
     CreditCard creditCard;
+    /**
+     * The Item.
+     */
     Item item;
 
+    /**
+     * Sets up.
+     */
     @BeforeEach
     void setUp() {
         testMe = new CustomerRegistrationService(customerRepository);
@@ -95,6 +128,12 @@ class CustomerRegistrationServiceTest {
 
     }
 
+    /**
+     * Test add.
+     *
+     * @throws InvalidPostalCodeException     the invalid postal code exception
+     * @throws CustomerAlreadyExistsException the customer already exists exception
+     */
     @Test
     void testAdd() throws InvalidPostalCodeException, CustomerAlreadyExistsException {
         testMe.add(this.customer);
@@ -104,6 +143,9 @@ class CustomerRegistrationServiceTest {
         assertThat(captorCustomer.getValue()).isEqualTo(this.customer);
     }
 
+    /**
+     * Exists by phone number.
+     */
     @Test
     void existsByPhoneNumber() {
         given(testMe.existsByPhoneNumber("1234567890"))
@@ -116,6 +158,9 @@ class CustomerRegistrationServiceTest {
         assertThat(bool).isTrue();
     }
 
+    /**
+     * Does not exists by phone number.
+     */
     @Test
     void doesNotExistsByPhoneNumber() {
         given(testMe.existsByPhoneNumber("1234567890"))
@@ -128,6 +173,9 @@ class CustomerRegistrationServiceTest {
         assertThat(bool).isFalse();
     }
 
+    /**
+     * Is valid postal code.
+     */
     @Test
     void isValidPostalCode() {
         Boolean bool = testMe.isValidPostalCode("M1C8N3");
@@ -135,6 +183,9 @@ class CustomerRegistrationServiceTest {
         assertThat(bool).isTrue();
     }
 
+    /**
+     * Is not valid postal code.
+     */
     @Test
     void isNotValidPostalCode() {
         Boolean bool = testMe.isValidPostalCode("M1CM8N3");
@@ -142,6 +193,9 @@ class CustomerRegistrationServiceTest {
         assertThat(bool).isFalse();
     }
 
+    /**
+     * Exists by email.
+     */
     @Test
     void existsByEmail() {
         given(testMe.existsByEmail("testMe@gmail.com"))
@@ -154,6 +208,9 @@ class CustomerRegistrationServiceTest {
         assertThat(bool).isTrue();
     }
 
+    /**
+     * Does not exists by email.
+     */
     @Test
     void doesNotExistsByEmail() {
         given(testMe.existsByEmail("testMe@gmail.com"))
