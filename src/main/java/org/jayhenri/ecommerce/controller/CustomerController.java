@@ -2,6 +2,7 @@ package org.jayhenri.ecommerce.controller;
 
 import org.jayhenri.ecommerce.exception.CustomerNotFoundException;
 import org.jayhenri.ecommerce.exception.InvalidCustomerException;
+import org.jayhenri.ecommerce.exception.ItemNotFoundException;
 import org.jayhenri.ecommerce.model.*;
 import org.jayhenri.ecommerce.service.CustomerService;
 
@@ -11,6 +12,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.naming.InvalidNameException;
@@ -35,12 +37,20 @@ public class CustomerController {
 
     @PutMapping(value = "/update", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void updateCustomer(@Valid @RequestBody Customer customer) throws InvalidCustomerException, CustomerNotFoundException {
-        customerService.update(customer);
+        if (!ObjectUtils.isEmpty(customer))
+            if (customerService.existsByEmail(customer.getEmail()))
+                customerService.update(customer);
+            else throw new CustomerNotFoundException(customer.getEmail());
+        else throw new InvalidCustomerException();
     }
 
     @DeleteMapping(value = "/delete/{email}")
     public void deleteCustomer(@PathVariable String email) throws InvalidCustomerException, CustomerNotFoundException, InvalidNameException {
-        customerService.delete(customerService.getByEmail(email));
+        if (!ObjectUtils.isEmpty(email)) {
+            if (customerService.existsByEmail(email)) {
+                customerService.delete(customerService.getByEmail(email));
+            } else throw new CustomerNotFoundException();
+        } else throw new InvalidCustomerException();
     }
 
     @GetMapping(value = "/list/customers", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -54,57 +64,91 @@ public class CustomerController {
 
     @GetMapping(value = "/{email}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Customer getByEmail(@Valid @PathVariable String email) throws InvalidNameException, CustomerNotFoundException {
-        return customerService.getByEmail(email);
+        if(!ObjectUtils.isEmpty(email)) {
+            if (customerService.existsByEmail(email)) {
+                return customerService.getByEmail(email);
+            } else throw new CustomerNotFoundException();
+        } else throw new InvalidNameException();
     }
 
     @PostMapping(value = "/{email}/cart/add/{productName}")
-    public void addToCart(@PathVariable String productName, @PathVariable String email) throws InvalidNameException, InvalidCustomerException, CustomerNotFoundException {
-        customerService.addToCart(customerService.getByEmail(email), inventoryService.getByProductName(productName).getItem());
+    public void addToCart(@PathVariable String productName, @PathVariable String email) throws CustomerNotFoundException, ItemNotFoundException {
+        if (customerService.existsByEmail(email)) {
+            if (inventoryService.existsByProductName(productName)) {
+                customerService.addToCart(customerService.getByEmail(email), inventoryService.getByProductName(productName).getItem());
+            } throw new ItemNotFoundException();
+        } else throw new CustomerNotFoundException();
     }
 
     @DeleteMapping(value = "/{email}/cart/remove/{productName}")
-    public void removeFromCart(@PathVariable String productName, @PathVariable String email) throws InvalidCustomerException, CustomerNotFoundException, InvalidNameException {
+    public void removeFromCart(@PathVariable String productName, @PathVariable String email) throws InvalidCustomerException, CustomerNotFoundException, ItemNotFoundException {
         customerService.removeFromCart(customerService.getByEmail(email), productName);
+        if (customerService.existsByEmail(email)) {
+            if (inventoryService.existsByProductName(productName)) {
+                customerService.removeFromCart(customerService.getByEmail(email), productName);
+            } throw new ItemNotFoundException();
+        } else throw new CustomerNotFoundException();
     }
 
     @PatchMapping(value = "/{email}/cart/empty")
-    public void emptyCart(@PathVariable String email) throws InvalidNameException, CustomerNotFoundException, InvalidCustomerException {
-        customerService.emptyCart(customerService.getByEmail(email));
+    public void emptyCart(@PathVariable String email) throws CustomerNotFoundException {
+        if (customerService.existsByEmail(email)) {
+            customerService.emptyCart(customerService.getByEmail(email));
+        } else throw new CustomerNotFoundException();
     }
 
     @GetMapping(value = "/{email}/cart/get", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ArrayList<Item> getCart(@PathVariable String email) throws InvalidNameException, CustomerNotFoundException {
-        return customerService.getCart(customerService.getByEmail(email));
+    public ArrayList<Item> getCart(@PathVariable String email) throws CustomerNotFoundException {
+        if (customerService.existsByEmail(email)) {
+            return customerService.getCart(customerService.getByEmail(email));
+        } else throw new CustomerNotFoundException();
     }
 
     // TODO: Github readme: describe functionalities
     @PostMapping(value = "/{email}/creditCard/add", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void addCreditCard(@PathVariable String email, @RequestBody CreditCard creditCard) throws InvalidNameException, InvalidCustomerException, CustomerNotFoundException {
-        customerService.addCreditCard(customerService.getByEmail(email), creditCard);
+        if (customerService.existsByEmail(email)) {
+            // Validate CreditCard
+            customerService.addCreditCard(customerService.getByEmail(email), creditCard);
+        } else throw new CustomerNotFoundException();
     }
 
     @DeleteMapping(value = "/{email}/creditCard/remove/{fourDigits}")
-    public void removeCreditCard(@PathVariable String email, @PathVariable String fourDigits) throws InvalidNameException, CustomerNotFoundException, InvalidCustomerException {
-        customerService.removeCreditCard(customerService.getByEmail(email), fourDigits);
+    public void removeCreditCard(@PathVariable String email, @PathVariable String fourDigits) throws CustomerNotFoundException {
+        if (customerService.existsByEmail(email)) {
+            // CreditCardService should validate
+            customerService.removeCreditCard(customerService.getByEmail(email), fourDigits);
+        } else throw new CustomerNotFoundException();
     }
 
     @GetMapping(value = "/{email}/creditCards/list", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<CreditCard> listCreditCards(@PathVariable String email) throws InvalidNameException, CustomerNotFoundException {
-        return customerService.findAllCreditCards(email);
+    public List<CreditCard> listCreditCards(@PathVariable String email) throws CustomerNotFoundException {
+        if (customerService.existsByEmail(email)) {
+            return customerService.findAllCreditCards(email);
+        } else throw new CustomerNotFoundException();
     }
 
     @PostMapping(value = "/{email}/orders/add", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void addOrder(@PathVariable String email, @RequestBody Order order) throws InvalidNameException, InvalidCustomerException, CustomerNotFoundException {
-        customerService.addOrder(customerService.getByEmail(email), order);
+    public void addOrder(@PathVariable String email, @RequestBody Order order) throws CustomerNotFoundException {
+        if (customerService.existsByEmail(email)) {
+            // OrderService for validation
+            customerService.addOrder(customerService.getByEmail(email), order);
+        } else throw new CustomerNotFoundException();
     }
 
     @PutMapping(value = "/{email}/orders/updateStatus/{uuid}/{status}")
-    public void updateOrder(@PathVariable String email, @PathVariable UUID uuid, @PathVariable String status) throws InvalidCustomerException, InvalidNameException, CustomerNotFoundException {
-        customerService.updateOrder(customerService.getByEmail(email), uuid, status);
+    public void updateOrder(@PathVariable String email, @PathVariable UUID uuid, @PathVariable String status) throws CustomerNotFoundException{
+        if (customerService.existsByEmail(email)) {
+            // Validate
+            customerService.updateOrder(customerService.getByEmail(email), uuid, status);
+        } else throw new CustomerNotFoundException();
     }
 
     @GetMapping(value = "/{email}/orders/list", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Order> listOrders(@PathVariable String email) throws InvalidNameException, CustomerNotFoundException {
-        return customerService.findAllOrders(email);
+    public List<Order> listOrders(@PathVariable String email) throws CustomerNotFoundException {
+        if (customerService.existsByEmail(email)) {
+
+            return customerService.findAllOrders(email);
+        } else throw new CustomerNotFoundException();
     }
 }

@@ -9,9 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ObjectUtils;
 
-import javax.naming.InvalidNameException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -51,21 +49,12 @@ public class CustomerService {
         customerRepository.save(customer);
     }
 
-    public void delete(Customer customer) throws CustomerNotFoundException, InvalidCustomerException {
-        if (!ObjectUtils.isEmpty(customer.getEmail()))
-            if (existsByEmail(customer.getEmail())) {
+    public void delete(Customer customer){
                 customerRepository.delete(customer);
-            }
-            else throw new CustomerNotFoundException();
-        else throw new InvalidCustomerException();
     }
 
-    public void update(Customer customer) throws CustomerNotFoundException, InvalidCustomerException {
-        if (!ObjectUtils.isEmpty(customer))
-            if (existsByEmail(customer.getEmail()))
+    public void update(Customer customer) {
                 customerRepository.save(customer);
-             else throw new CustomerNotFoundException(customer.getEmail());
-         else throw new InvalidCustomerException();
     }
 
     public List<Customer> findAllCustomers(Integer pageNo, Integer pageSize) { // String sortBy
@@ -76,7 +65,7 @@ public class CustomerService {
         else return new ArrayList<>();
     }
 
-    public List<CreditCard> findAllCreditCards(String email) throws InvalidNameException, CustomerNotFoundException {
+    public List<CreditCard> findAllCreditCards(String email) {
         return getByEmail(email).getCreditCards();
     }
 
@@ -90,20 +79,16 @@ public class CustomerService {
         return customerRepository.existsByEmail(email);
     }
 
-    public Customer getByEmail(String email) throws InvalidNameException, CustomerNotFoundException {
-        if(!ObjectUtils.isEmpty(email)) {
-            if (existsByEmail(email)) {
-                return customerRepository.getByEmail(email);
-            } else throw new CustomerNotFoundException();
-        } else throw new InvalidNameException();
+    public Customer getByEmail(String email) {
+        return customerRepository.getByEmail(email);
     }
 
-    public void addToCart(Customer customer, Item item) throws CustomerNotFoundException, InvalidCustomerException {
+    public void addToCart(Customer customer, Item item) {
         customer.getCart().getItems().add(item);
         update(customer);
     }
 
-    public void removeFromCart(Customer customer, String productName) throws InvalidCustomerException, CustomerNotFoundException {
+    public void removeFromCart(Customer customer, String productName) {
 
         ArrayList<Item> removeMe = new ArrayList<>();
 // Create a list of values you wish to remove, adding to that list within the loop, then call originalList.removeAll(valuesToRemove) at the end
@@ -116,7 +101,7 @@ public class CustomerService {
         update(customer);
     }
 
-    public void emptyCart(Customer customer) throws InvalidCustomerException, CustomerNotFoundException {
+    public void emptyCart(Customer customer) {
         ArrayList<Item> removeMe = customer.getCart().getItems();
         customer.getCart().getItems().removeAll(removeMe);
         update(customer);
@@ -126,12 +111,12 @@ public class CustomerService {
         return customer.getCart().getItems();
     }
 
-    public void addCreditCard(Customer customer, CreditCard creditCard) throws InvalidCustomerException, CustomerNotFoundException {
+    public void addCreditCard(Customer customer, CreditCard creditCard) {
         customer.getCreditCards().add(creditCard);
         update(customer);
     }
 
-    public void removeCreditCard(Customer customer, String fourDig) throws InvalidCustomerException, CustomerNotFoundException {
+    public void removeCreditCard(Customer customer, String fourDig)  {
         ArrayList<CreditCard> removeMe = new ArrayList<>();
 // Create a list of values you wish to remove, adding to that list within the loop, then call originalList.removeAll(valuesToRemove) at the end
         customer.getCreditCards().forEach(creditCard -> {
@@ -143,7 +128,7 @@ public class CustomerService {
         update(customer);
     }
 
-    public void addOrder(Customer customer, Order order) throws InvalidCustomerException, CustomerNotFoundException {
+    public void addOrder(Customer customer, Order order) {
         customer.getOrders().add(order);
         update(customer);
 
@@ -157,13 +142,13 @@ public class CustomerService {
         orderDBService.addOrderToDB(orderDB);
     }
 
-    public void updateOrder(Customer customer, UUID uuid, String orderStatus) throws InvalidCustomerException, CustomerNotFoundException{
+    public void updateOrder(Customer customer, UUID uuid, String orderStatus) {
         customer.getOrders().forEach(order -> {
             if (order.getUuid().equals(uuid)) order.setOrderStatus(orderStatus);
         });
         update(customer);
     }
-    public List<Order> findAllOrders(String email) throws InvalidNameException, CustomerNotFoundException {
+    public List<Order> findAllOrders(String email)  {
         return getByEmail(email).getOrders();
     }
 }
