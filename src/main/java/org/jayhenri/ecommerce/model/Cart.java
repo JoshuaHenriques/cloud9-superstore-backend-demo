@@ -7,6 +7,8 @@ import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.*;
 
@@ -18,15 +20,22 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
-@Embeddable
 @Entity
 public class Cart implements Serializable {
 
     private static final long serialVersionUID = -198235381052492730L;
 
-    @Column
+    @Id
+    @Column(nullable = false)
+    private UUID cartUUID = UUID.randomUUID();
+
+    @JoinColumn(name = "itemUUID", insertable=false, updatable=false)
     @OneToMany
-    private ArrayList<Item> items;
+    private List<Item> items;
+
+    @JoinColumn(name = "customerUUID", nullable = false, insertable=false, updatable=false)
+    @OneToOne
+    private Customer customer;
 
     @Column
     private String customerEmail;
@@ -41,7 +50,7 @@ public class Cart implements Serializable {
      * @param customerEmail the customer email
      * @param total         the total
      */
-    public Cart(ArrayList<Item> items, String customerEmail, Double total) {
+    public Cart(List<Item> items, String customerEmail, Double total) {
         this.items = items;
         this.customerEmail = customerEmail;
         this.total = total;

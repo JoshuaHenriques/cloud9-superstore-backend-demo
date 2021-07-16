@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.UUID;
 
 /**
  * The type Inventory.
@@ -18,18 +19,22 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Entity
 @Table(name = "inventory")
-public class Inventory implements Serializable {
+public class Inventory extends AuditModel implements Serializable {
 
     private static final long serialVersionUID = -1112477284611964207L;
 
     @Id
+    @Column(nullable = false)
+    private UUID inventoryUUID = UUID.randomUUID();
+
     @Column
     private String productName;
 
     @Column
     private int quantity;
 
-    @Column
+    @JoinColumn(name = "itemUUID", nullable = false, insertable=false, updatable=false)
+    @OneToOne
     private Item item;
 
     /**

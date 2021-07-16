@@ -4,10 +4,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.UUID;
 
 /**
  * The type Credit card.
@@ -16,11 +15,19 @@ import java.io.Serializable;
 @Getter
 @Setter
 @NoArgsConstructor
-@Embeddable
 @Entity
 public class CreditCard implements Serializable {
 
     private static final long serialVersionUID = -2537205539493070885L;
+
+    @Id
+    @Column(nullable = false)
+    private UUID creditCardUUID = UUID.randomUUID();
+
+    @JoinColumn(name = "customerUUID", nullable = false, insertable=false, updatable=false)
+    @ManyToOne
+    private Customer customer;
+
     @Column
     private String fullName;
 

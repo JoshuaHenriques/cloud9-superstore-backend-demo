@@ -4,10 +4,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.persistence.Entity;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.UUID;
 
 /**
  * The type Address.
@@ -16,26 +17,34 @@ import java.io.Serializable;
 @Setter
 @NoArgsConstructor
 @Embeddable
-@Entity
-public class Address implements Serializable {
+public class Address extends AuditModel implements Serializable {
 
     private static final long serialVersionUID = -3706717403046249323L;
+
+    @NotNull
+    @Size(max = 100)
     @Column(nullable = false)
     private String streetName;
 
-    @Column(nullable = false)
+    @NotNull
+    @Size(max = 100)
+    @Column
     private String streetNumber;
 
-    @Column(nullable = false)
+    @NotNull
+    @Column
     private String unitNumber;
 
-    @Column(nullable = false)
+    @NotNull
+    @Column
     private String city;
 
-    @Column(nullable = false)
+    @NotNull
+    @Column
     private String postalCode;
 
-    @Column(nullable = false)
+    @NotNull
+    @Column
     private String province;
 
     /**

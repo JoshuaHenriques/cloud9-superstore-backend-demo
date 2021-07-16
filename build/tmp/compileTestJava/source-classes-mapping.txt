@@ -1,7 +1,7 @@
-org/jayhenri/ecommerce/service/InventoryServiceTest.java
- org.jayhenri.ecommerce.service.InventoryServiceTest
 org/jayhenri/ecommerce/EcommerceApplicationTest.java
  org.jayhenri.ecommerce.EcommerceApplicationTest
+org/jayhenri/ecommerce/service/InventoryServiceTest.java
+ org.jayhenri.ecommerce.service.InventoryServiceTest
 org/jayhenri/ecommerce/service/CustomerRegistrationServiceTest.java
  org.jayhenri.ecommerce.service.CustomerRegistrationServiceTest
 org/jayhenri/ecommerce/service/OrderDBServiceTest.java

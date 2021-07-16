@@ -13,8 +13,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 
 /**
@@ -159,7 +157,7 @@ public class CustomerService {
      * @param customer the customer
      */
     public void emptyCart(Customer customer) {
-        ArrayList<Item> removeMe = customer.getCart().getItems();
+        List<Item> removeMe = customer.getCart().getItems();
         customer.getCart().getItems().removeAll(removeMe);
         update(customer);
     }
@@ -170,7 +168,7 @@ public class CustomerService {
      * @param customer the customer
      * @return the cart
      */
-    public ArrayList<Item> getCart(Customer customer) {
+    public List<Item> getCart(Customer customer) {
         return customer.getCart().getItems();
     }
 
@@ -210,7 +208,7 @@ public class CustomerService {
      * @param order    the order
      */
     public void addOrder(Customer customer, Order order) {
-        customer.getOrders().add(order);
+        customer.getOrderList().add(order);
         update(customer);
 
 //        OrderDB orderDB = new OrderDB(
@@ -231,8 +229,8 @@ public class CustomerService {
      * @param orderStatus the order status
      */
     public void updateOrder(Customer customer, UUID uuid, String orderStatus) {
-        customer.getOrders().forEach(order -> {
-            if (order.getUuid().equals(uuid)) order.setOrderStatus(orderStatus);
+        customer.getOrderList().forEach(order -> {
+            if (order.getOrderUUID().equals(uuid)) order.setOrderStatus(orderStatus);
         });
         update(customer);
     }
@@ -244,6 +242,6 @@ public class CustomerService {
      * @return the list
      */
     public List<Order> findAllOrders(String email)  {
-        return getByEmail(email).getOrders();
+        return getByEmail(email).getOrderList();
     }
 }

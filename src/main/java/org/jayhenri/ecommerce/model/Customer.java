@@ -7,6 +7,8 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * The type Customer.
@@ -17,7 +19,7 @@ import java.util.ArrayList;
 @NoArgsConstructor
 @Entity
 @Table(name = "customers")
-public class Customer implements Serializable {
+public class Customer extends AuditModel implements Serializable {
 
     /**
      * The constant ROLE_ADMIN.
@@ -31,6 +33,9 @@ public class Customer implements Serializable {
     private static final long serialVersionUID = -1854209356482886781L;
 
     @Id
+    @Column(nullable = false)
+    private UUID customerUUID = UUID.randomUUID();
+
     @Column(nullable = false, unique = true, length = 45)
     private String email;
 
@@ -49,19 +54,21 @@ public class Customer implements Serializable {
     @Column(nullable = false, length = 6)
     private String dateOfBirth;
 
+    @Column
     @Embedded
     private Address address;
 
-    @Embedded
+    @JoinColumn(name = "cartUUID", nullable = false, insertable=false, updatable=false)
+    @OneToOne
     private Cart cart;
 
-    @Column
+    @JoinColumn(name = "creditCardUUID", nullable = false, insertable=false, updatable=false)
     @OneToMany
-    private ArrayList<CreditCard> creditCards;
+    private List<CreditCard> creditCards;
 
-    @Column
+    @JoinColumn(name = "orderUUID", nullable = false, insertable=false, updatable=false)
     @OneToMany
-    private ArrayList<Order> orders;
+    private List<Order> orderList;
 
     /**
      * Instantiates a new Customer.
@@ -75,9 +82,9 @@ public class Customer implements Serializable {
      * @param address     the address
      * @param cart        the cart
      * @param creditCards the credit cards
-     * @param orders      the orders
+     * @param orderList      the orders
      */
-    public Customer(String firstName, String lastName, String phoneNumber, String email, String password, String dateOfBirth, Address address, Cart cart, ArrayList<CreditCard> creditCards, ArrayList<Order> orders) {
+    public Customer(String firstName, String lastName, String phoneNumber, String email, String password, String dateOfBirth, Address address, Cart cart, List<CreditCard> creditCards, List<Order> orderList) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
@@ -87,6 +94,6 @@ public class Customer implements Serializable {
         this.address = address;
         this.cart = cart;
         this.creditCards = creditCards;
-        this.orders = orders;
+        this.orderList = orderList;
     }
 }

@@ -5,6 +5,7 @@ import org.jayhenri.ecommerce.exception.InvalidPostalCodeException;
 import org.jayhenri.ecommerce.model.Customer;
 import org.jayhenri.ecommerce.repository.CustomerRepository;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
@@ -118,6 +119,7 @@ class CustomerServiceTest {
      */
 // Do later
     @Test
+    @Disabled
     void findAllCustomers() {
     }
 
@@ -125,6 +127,7 @@ class CustomerServiceTest {
      * Find all credit cards.
      */
     @Test
+    @Disabled
     void findAllCreditCards() {
     }
 
@@ -132,6 +135,7 @@ class CustomerServiceTest {
      * Exists by email.
      */
     @Test
+    @Disabled
     void existsByEmail() {
     }
 
@@ -139,6 +143,7 @@ class CustomerServiceTest {
      * Gets by email.
      */
     @Test
+    @Disabled
     void getByEmail() {
     }
 
@@ -146,6 +151,7 @@ class CustomerServiceTest {
      * Add to cart.
      */
     @Test
+    @Disabled
     void addToCart() {
     }
 
@@ -153,6 +159,7 @@ class CustomerServiceTest {
      * Remove from cart.
      */
     @Test
+    @Disabled
     void removeFromCart() {
     }
 
@@ -160,6 +167,7 @@ class CustomerServiceTest {
      * Empty cart.
      */
     @Test
+    @Disabled
     void emptyCart() {
     }
 
@@ -167,6 +175,7 @@ class CustomerServiceTest {
      * Gets cart.
      */
     @Test
+    @Disabled
     void getCart() {
     }
 
@@ -174,6 +183,7 @@ class CustomerServiceTest {
      * Add credit card.
      */
     @Test
+    @Disabled
     void addCreditCard() {
     }
 
@@ -181,6 +191,7 @@ class CustomerServiceTest {
      * Remove credit card.
      */
     @Test
+    @Disabled
     void removeCreditCard() {
     }
 
@@ -188,6 +199,7 @@ class CustomerServiceTest {
      * Add order.
      */
     @Test
+    @Disabled
     void addOrder() {
     }
 
@@ -195,6 +207,7 @@ class CustomerServiceTest {
      * Update order.
      */
     @Test
+    @Disabled
     void updateOrder() {
     }
 
@@ -202,6 +215,7 @@ class CustomerServiceTest {
      * Find all orders.
      */
     @Test
+    @Disabled
     void findAllOrders() {
     }
 }

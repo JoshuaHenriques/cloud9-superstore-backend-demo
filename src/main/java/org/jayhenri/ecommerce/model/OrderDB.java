@@ -8,22 +8,24 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 /**
  * The type Order db.
+ * todo: merge with order
  */
 @Getter
 @Setter
 @Entity
 @NoArgsConstructor
 @Table(name = "orders")
-public class OrderDB implements Serializable {
+public class OrderDB extends AuditModel implements Serializable {
     private static final long serialVersionUID = -5378203026264681312L;
 
     @Id
-    @Column
-    private UUID uuid = UUID.randomUUID();
+    @Column(nullable = false)
+    private UUID orderDBUUID = UUID.randomUUID();
 
     @Column
     private String orderStatus;
@@ -31,9 +33,9 @@ public class OrderDB implements Serializable {
     @Column(unique = true, length = 128, nullable = false)
     private String customerEmail;
 
-    @NotNull
+    @JoinColumn(name = "itemUUID", nullable = false, insertable=false, updatable=false)
     @OneToMany
-    private ArrayList<Item> items;
+    private List<Item> items;
 
     @Column
     private double subTotal;
@@ -50,7 +52,7 @@ public class OrderDB implements Serializable {
      * @param subTotal      the sub total
      * @param totalPrice    the total price
      */
-    public OrderDB(String orderStatus, String customerEmail, ArrayList<Item> items, double subTotal, double totalPrice) {
+    public OrderDB(String orderStatus, String customerEmail, List<Item> items, double subTotal, double totalPrice) {
         this.orderStatus = orderStatus;
         this.customerEmail = customerEmail;
         this.items = items;
