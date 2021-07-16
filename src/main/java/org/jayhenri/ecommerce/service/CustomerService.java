@@ -205,10 +205,10 @@ public class CustomerService {
      * Add order.
      *
      * @param customer the customer
-     * @param order    the order
+     * @param orderDetails    the order
      */
-    public void addOrder(Customer customer, Order order) {
-        customer.getOrderList().add(order);
+    public void addOrder(Customer customer, OrderDetails orderDetails) {
+        customer.getOrderDetailsList().add(orderDetails);
         update(customer);
 
 //        OrderDB orderDB = new OrderDB(
@@ -229,19 +229,19 @@ public class CustomerService {
      * @param orderStatus the order status
      */
     public void updateOrder(Customer customer, UUID uuid, String orderStatus) {
-        customer.getOrderList().forEach(order -> {
-            if (order.getOrderUUID().equals(uuid)) order.setOrderStatus(orderStatus);
+        customer.getOrderDetailsList().forEach(orderDetails -> {
+            if (orderDetails.getOrderUUID().equals(uuid)) orderDetails.setOrderStatus(orderStatus);
         });
         update(customer);
     }
 
     /**
-     * Find all orders list.
+     * Find all orderDetails list.
      *
      * @param email the email
      * @return the list
      */
-    public List<Order> findAllOrders(String email)  {
-        return getByEmail(email).getOrderList();
+    public List<OrderDetails> findAllOrders(String email)  {
+        return getByEmail(email).getOrderDetailsList();
     }
 }

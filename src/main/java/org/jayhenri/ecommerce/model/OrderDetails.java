@@ -18,7 +18,7 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @Entity
-public class Order implements Serializable {
+public class OrderDetails implements Serializable {
 
     private static final long serialVersionUID = -3543368529566294417L;
 
@@ -26,20 +26,20 @@ public class Order implements Serializable {
     @Column(nullable = false)
     private UUID orderUUID = UUID.randomUUID();
 
-    @Column
+    @Column(nullable = false)
     private String orderStatus;
 
-    @Column
+    @Column(nullable = false)
     private String customerEmail;
 
     @JoinColumn(name = "itemUUID", nullable = false, insertable=false, updatable=false)
     @OneToMany
     private List<Item> itemList;
 
-    @Column
+    @Column(nullable = false)
     private double totalPrice;
 
-    public Order(String orderStatus, String customerEmail, List<Item> itemList, double totalPrice) {
+    public OrderDetails(String orderStatus, String customerEmail, List<Item> itemList, double totalPrice) {
         this.orderStatus = orderStatus;
         this.customerEmail = customerEmail;
         this.itemList = itemList;

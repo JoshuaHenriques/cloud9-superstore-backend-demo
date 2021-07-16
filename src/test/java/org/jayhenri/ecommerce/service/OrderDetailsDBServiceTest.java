@@ -14,7 +14,7 @@ import static org.mockito.BDDMockito.*;
  * The type Order db service test.
  */
 @ExtendWith(MockitoExtension.class)
-class OrderDBServiceTest {
+class OrderDetailsDBServiceTest {
 
     /**
      * The Order db repository.

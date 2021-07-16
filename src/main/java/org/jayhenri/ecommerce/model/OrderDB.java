@@ -19,7 +19,7 @@ import java.util.UUID;
 @Setter
 @Entity
 @NoArgsConstructor
-@Table(name = "orders")
+@Table(name = "orderDetails")
 public class OrderDB extends AuditModel implements Serializable {
     private static final long serialVersionUID = -5378203026264681312L;
 
@@ -27,7 +27,7 @@ public class OrderDB extends AuditModel implements Serializable {
     @Column(nullable = false)
     private UUID orderDBUUID = UUID.randomUUID();
 
-    @Column
+    @Column(nullable = false)
     private String orderStatus;
 
     @Column(unique = true, length = 128, nullable = false)
@@ -37,10 +37,10 @@ public class OrderDB extends AuditModel implements Serializable {
     @OneToMany
     private List<Item> items;
 
-    @Column
+    @Column(nullable = false)
     private double subTotal;
 
-    @Column
+    @Column(nullable = false)
     private double totalPrice;
 
     /**

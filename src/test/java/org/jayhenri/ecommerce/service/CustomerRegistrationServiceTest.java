@@ -52,7 +52,7 @@ class CustomerRegistrationServiceTest {
     /**
      * The Order.
      */
-    Order order;
+    OrderDetails orderDetails;
     /**
      * The Cart.
      */
@@ -73,7 +73,7 @@ class CustomerRegistrationServiceTest {
     void setUp() {
         testMe = new CustomerRegistrationService(customerRepository);
         ArrayList<Item> items = new ArrayList<>();
-        ArrayList<Order> orders = new ArrayList<>();
+        ArrayList<OrderDetails> orderDetails = new ArrayList<>();
         ArrayList<CreditCard> creditCards = new ArrayList<>();
 
         item = new Item(
@@ -84,7 +84,7 @@ class CustomerRegistrationServiceTest {
 
         items.add(item);
 
-        order = new Order(
+        this.orderDetails = new OrderDetails(
               "PROCESSING",
               "testMe@gmail.com",
                 items,
@@ -103,7 +103,7 @@ class CustomerRegistrationServiceTest {
                 "8281"
         );
 
-        orders.add(order);
+        orderDetails.add(this.orderDetails);
         creditCards.add(creditCard);
 
         customer = new Customer(
@@ -123,7 +123,7 @@ class CustomerRegistrationServiceTest {
                 ),
                 cart,
                 creditCards,
-                orders
+                orderDetails
         );
 
     }

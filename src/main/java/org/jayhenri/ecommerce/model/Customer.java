@@ -6,7 +6,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -54,7 +53,7 @@ public class Customer extends AuditModel implements Serializable {
     @Column(nullable = false, length = 6)
     private String dateOfBirth;
 
-    @Column
+    @Column(nullable = false)
     @Embedded
     private Address address;
 
@@ -68,7 +67,7 @@ public class Customer extends AuditModel implements Serializable {
 
     @JoinColumn(name = "orderUUID", nullable = false, insertable=false, updatable=false)
     @OneToMany
-    private List<Order> orderList;
+    private List<OrderDetails> orderDetailsList;
 
     /**
      * Instantiates a new Customer.
@@ -82,9 +81,9 @@ public class Customer extends AuditModel implements Serializable {
      * @param address     the address
      * @param cart        the cart
      * @param creditCards the credit cards
-     * @param orderList      the orders
+     * @param orderDetailsList      the orderDetails
      */
-    public Customer(String firstName, String lastName, String phoneNumber, String email, String password, String dateOfBirth, Address address, Cart cart, List<CreditCard> creditCards, List<Order> orderList) {
+    public Customer(String firstName, String lastName, String phoneNumber, String email, String password, String dateOfBirth, Address address, Cart cart, List<CreditCard> creditCards, List<OrderDetails> orderDetailsList) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
@@ -94,6 +93,6 @@ public class Customer extends AuditModel implements Serializable {
         this.address = address;
         this.cart = cart;
         this.creditCards = creditCards;
-        this.orderList = orderList;
+        this.orderDetailsList = orderDetailsList;
     }
 }

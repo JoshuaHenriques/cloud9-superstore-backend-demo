@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.naming.InvalidNameException;
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -224,14 +223,14 @@ public class CustomerController {
      * Add order.
      *
      * @param email the email
-     * @param order the order
+     * @param orderDetails the order
      * @throws CustomerNotFoundException the customer not found exception
      */
-    @PostMapping(value = "/{email}/orders/add", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void addOrder(@PathVariable String email, @RequestBody Order order) throws CustomerNotFoundException {
+    @PostMapping(value = "/{email}/orderDetails/add", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void addOrder(@PathVariable String email, @RequestBody OrderDetails orderDetails) throws CustomerNotFoundException {
         if (customerService.existsByEmail(email)) {
             // OrderService for validation
-            customerService.addOrder(customerService.getByEmail(email), order);
+            customerService.addOrder(customerService.getByEmail(email), orderDetails);
         } else throw new CustomerNotFoundException();
     }
 
@@ -243,7 +242,7 @@ public class CustomerController {
      * @param status the status
      * @throws CustomerNotFoundException the customer not found exception
      */
-    @PutMapping(value = "/{email}/orders/updateStatus/{uuid}/{status}")
+    @PutMapping(value = "/{email}/orderDetails/updateStatus/{uuid}/{status}")
     public void updateOrder(@PathVariable String email, @PathVariable UUID uuid, @PathVariable String status) throws CustomerNotFoundException{
         if (customerService.existsByEmail(email)) {
             // Validate
@@ -252,14 +251,14 @@ public class CustomerController {
     }
 
     /**
-     * List orders list.
+     * List orderDetails list.
      *
      * @param email the email
      * @return the list
      * @throws CustomerNotFoundException the customer not found exception
      */
-    @GetMapping(value = "/{email}/orders/list", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Order> listOrders(@PathVariable String email) throws CustomerNotFoundException {
+    @GetMapping(value = "/{email}/orderDetails/list", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<OrderDetails> listOrders(@PathVariable String email) throws CustomerNotFoundException {
         if (customerService.existsByEmail(email)) {
             return customerService.findAllOrders(email);
         } else throw new CustomerNotFoundException();
