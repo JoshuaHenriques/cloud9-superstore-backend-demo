@@ -135,7 +135,7 @@ class CustomerRegistrationServiceTest {
      * @throws CustomerAlreadyExistsException the customer already exists exception
      */
     @Test
-    void testAdd() throws InvalidPostalCodeException, CustomerAlreadyExistsException {
+    void testAdd() {
         testMe.add(this.customer);
 
         then(customerRepository).should().save(captorCustomer.capture());

@@ -21,7 +21,7 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @Entity
-public class Cart implements Serializable {
+public class Cart extends AuditModel implements Serializable {
 
     private static final long serialVersionUID = -198235381052492730L;
 

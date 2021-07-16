@@ -215,7 +215,7 @@ public class CustomerController {
     @GetMapping(value = "/{email}/creditCards/list", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<CreditCard> listCreditCards(@PathVariable String email) throws CustomerNotFoundException {
         if (customerService.existsByEmail(email)) {
-            return customerService.findAllCreditCards(email);
+            return customerService.findAllCreditCards(customerService.getByEmail(email));
         } else throw new CustomerNotFoundException();
     }
 
@@ -260,7 +260,7 @@ public class CustomerController {
     @GetMapping(value = "/{email}/orderDetails/list", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<OrderDetails> listOrders(@PathVariable String email) throws CustomerNotFoundException {
         if (customerService.existsByEmail(email)) {
-            return customerService.findAllOrders(email);
+            return customerService.findAllOrders(customerService.getByEmail(email));
         } else throw new CustomerNotFoundException();
     }
 }

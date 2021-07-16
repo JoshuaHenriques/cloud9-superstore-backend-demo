@@ -76,7 +76,7 @@ class InventoryServiceTest {
      * Test add.
      */
     @Test
-    void testAdd() {
+    void add() {
         testMe.add(this.inventory);
 
         then(inventoryRepository).should().save(captorInventory.capture());
@@ -88,7 +88,7 @@ class InventoryServiceTest {
      * Test update.
      */
     @Test
-    void testUpdate() {
+    void update() {
         testMe.update(this.inventory);
 
         then(inventoryRepository).should().save(captorInventory.capture());

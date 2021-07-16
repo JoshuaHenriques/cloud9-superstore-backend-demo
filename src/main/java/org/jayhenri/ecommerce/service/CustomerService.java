@@ -94,11 +94,11 @@ public class CustomerService {
     /**
      * Find all credit cards list.
      *
-     * @param email the email
+     * @param customer the email
      * @return the list
      */
-    public List<CreditCard> findAllCreditCards(String email) {
-        return getByEmail(email).getCreditCards();
+    public List<CreditCard> findAllCreditCards(Customer customer) {
+        return customer.getCreditCards();
     }
 
     /**
@@ -218,7 +218,7 @@ public class CustomerService {
 //                order.getTotalPrice(),
 //                order.getTotalPrice()*HST+DELIVERY_FEE
 //        );
-//        orderDBService.addOrderToDB(orderDB);
+//        orderDBService.addOrderToDB(orderDB);f
     }
 
     /**
@@ -238,10 +238,10 @@ public class CustomerService {
     /**
      * Find all orderDetails list.
      *
-     * @param email the email
+     * @param customer the email
      * @return the list
      */
-    public List<OrderDetails> findAllOrders(String email)  {
-        return getByEmail(email).getOrderDetailsList();
+    public List<OrderDetails> findAllOrders(Customer customer)  {
+        return customer.getOrderDetailsList();
     }
 }

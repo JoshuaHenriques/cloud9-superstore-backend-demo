@@ -16,7 +16,7 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @Entity
-public class CreditCard implements Serializable {
+public class CreditCard extends AuditModel implements Serializable {
 
     private static final long serialVersionUID = -2537205539493070885L;
 
