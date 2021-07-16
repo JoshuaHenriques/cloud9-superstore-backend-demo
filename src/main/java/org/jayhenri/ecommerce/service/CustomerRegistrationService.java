@@ -11,48 +11,64 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * G
+ * The type Customer registration service.
  */
 @Service
 public class CustomerRegistrationService {
 
-    @Autowired
-    private CustomerRepository customerRepository;
+
+    private final CustomerRepository customerRepository;
 
     private static final String REGEX_POSTAL_CODE = "^(?!.*[DFIOQU])[A-VXY][0-9][A-Z] ?[0-9][A-Z][0-9]$";
 
-    public void add(Customer customer) throws CustomerAlreadyExistsException, InvalidPostalCodeException {
+    /**
+     * Instantiates a new Customer registration service.
+     *
+     * @param customerRepository the customer repository
+     */
+    @Autowired
+    public CustomerRegistrationService(CustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
+    }
 
-        if (existsByPhoneNumber(customer.getPhoneNumber()) || existsByEmail(customer.getEmail()))
-            throw new CustomerAlreadyExistsException();
-
-        else if (!isValidPostalCode(customer.getAddress().getPostalCode()))
-            throw new InvalidPostalCodeException();
-        // else if (!isValidPassword()){}
+    /**
+     * Add.
+     *
+     * @param customer the customer
+     */
+    public void add(Customer customer) {
         customerRepository.save(customer);
     }
 
+    /**
+     * Exists by phone number boolean.
+     *
+     * @param phoneNumber the phone number
+     * @return the boolean
+     */
     public boolean existsByPhoneNumber(String phoneNumber) {
-        return customerRepository.existsPhoneNumber(phoneNumber);
+        return customerRepository.existsByPhoneNumber(phoneNumber);
     }
 
+    /**
+     * Is valid postal code boolean.
+     *
+     * @param postalCode the postal code
+     * @return the boolean
+     */
     public boolean isValidPostalCode(String postalCode) {
         Pattern pattern = Pattern.compile(REGEX_POSTAL_CODE);
         Matcher matcher = pattern.matcher(postalCode);
         return matcher.matches();
     }
 
+    /**
+     * Exists by email boolean.
+     *
+     * @param email the email
+     * @return the boolean
+     */
     public boolean existsByEmail(String email) {
         return customerRepository.existsByEmail(email);
     }
-
-    /*
-    private void encryptPassword(Login login) {
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String encodedPassword = passwordEncoder.encode(login.getPassword());
-        login.setPassword(encodedPassword);
-
-        loginRepository.save(login);
-    }
-    */
 }

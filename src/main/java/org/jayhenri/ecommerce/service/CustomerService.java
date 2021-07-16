@@ -1,104 +1,146 @@
 package org.jayhenri.ecommerce.service;
 
-import lombok.NoArgsConstructor;
 import org.jayhenri.ecommerce.exception.*;
 import org.jayhenri.ecommerce.model.*;
 import org.jayhenri.ecommerce.repository.CustomerRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ObjectUtils;
 
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
-import javax.naming.InvalidNameException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-@NoArgsConstructor
+
+/**
+ * The type Customer service.
+ */
 @Service
 public class CustomerService {
 
-    @Autowired
-    private CustomerRepository customerRepository;
-
-    @Autowired
-    private OrderDBService orderDBService;
+    private final CustomerRepository customerRepository;
 
     private static final Double HST = 0.13;
     private static final Double DELIVERY_FEE = 9.99;
 
-    private static final String REGEX_POSTAL_CODE = "^(?!.*[DFIOQU])[A-VXY][0-9][A-Z] ?[0-9][A-Z][0-9]$";
-
-    private boolean existsByPhoneNumber(String phoneNumber) {
-        return customerRepository.existsPhoneNumber(phoneNumber);
+    /**
+     * Instantiates a new Customer service.
+     *
+     * @param customerRepository the customer repository
+     */
+    @Autowired
+    public CustomerService(CustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
+        // this.orderDBService = orderDBService;
     }
 
+    /**
+     * Exists by phone number boolean.
+     *
+     * @param phoneNumber the phone number
+     * @return the boolean
+     */
+    public boolean existsByPhoneNumber(String phoneNumber) {
+        return customerRepository.existsByPhoneNumber(phoneNumber);
+    }
+
+    /**
+     * Add.
+     *
+     * @param customer the customer
+     * @throws CustomerAlreadyExistsException the customer already exists exception
+     * @throws InvalidPostalCodeException     the invalid postal code exception
+     */
     public void add(Customer customer) throws CustomerAlreadyExistsException, InvalidPostalCodeException {
-
-        if (existsByPhoneNumber(customer.getPhoneNumber()) || existsByEmail(customer.getEmail()))
-            throw new CustomerAlreadyExistsException();
-
-        else if (!isValidPostalCode(customer.getAddress().getPostalCode()))
-            throw new InvalidPostalCodeException();
-        //customer.setPassword(encryptPassword(customer.getPassword()));
         customerRepository.save(customer);
     }
 
-    public void delete(Customer customer) throws CustomerNotFoundException, InvalidCustomerException {
-        if (!ObjectUtils.isEmpty(customer.getEmail()))
-            if (existsByEmail(customer.getEmail())) {
+    /**
+     * Delete.
+     *
+     * @param customer the customer
+     */
+    public void delete(Customer customer){
                 customerRepository.delete(customer);
-            }
-            else throw new CustomerNotFoundException();
-        else throw new InvalidCustomerException();
     }
 
-    public void update(Customer customer) throws CustomerNotFoundException, InvalidCustomerException, EmailNotSameException {
-        if (!ObjectUtils.isEmpty(customer))
-            if (existsByEmail(customer.getEmail()))
+    /**
+     * Update.
+     *
+     * @param customer the customer
+     */
+    public void update(Customer customer) {
                 customerRepository.save(customer);
-             else throw new CustomerNotFoundException(customer.getEmail());
-         else throw new InvalidCustomerException();
     }
 
-    public List<Customer> findAllCustomers() {
-        return customerRepository.findAll();
+    /**
+     * Find all customers list.
+     *
+     * @param pageNo   the page no
+     * @param pageSize the page size
+     * @return the list
+     */
+    public List<Customer> findAllCustomers(Integer pageNo, Integer pageSize) { // String sortBy
+        Pageable paging = PageRequest.of(pageNo, pageSize); // Sort.by(sortBy).ascending()
+        Page<Customer> pagedResult = customerRepository.findAll(paging);
+
+        if(pagedResult.hasContent()) return pagedResult.getContent();
+        else return new ArrayList<>();
     }
 
-    public List<CreditCard> findAllCreditCards(String email) throws InvalidNameException, CustomerNotFoundException {
+    /**
+     * Find all credit cards list.
+     *
+     * @param email the email
+     * @return the list
+     */
+    public List<CreditCard> findAllCreditCards(String email) {
         return getByEmail(email).getCreditCards();
     }
 
-    private boolean isValidPostalCode(String postalCode) {
-        Pattern pattern = Pattern.compile(REGEX_POSTAL_CODE);
-        Matcher matcher = pattern.matcher(postalCode);
-        return matcher.matches();
-    }
-
+    /**
+     * Exists by email boolean.
+     *
+     * @param email the email
+     * @return the boolean
+     */
     public boolean existsByEmail(String email) {
         return customerRepository.existsByEmail(email);
     }
 
-    public Customer getByEmail(String email) throws InvalidNameException, CustomerNotFoundException {
-        if(!ObjectUtils.isEmpty(email)) {
-            if (existsByEmail(email)) {
-                return customerRepository.getByEmail(email);
-            } else throw new CustomerNotFoundException();
-        } else throw new InvalidNameException();
+    /**
+     * Gets by email.
+     *
+     * @param email the email
+     * @return the by email
+     */
+    public Customer getByEmail(String email) {
+        return customerRepository.getByEmail(email);
     }
 
-    public void addToCart(Customer customer, Item item) throws InvalidNameException, CustomerNotFoundException, InvalidCustomerException, EmailNotSameException {
+    /**
+     * Add to cart.
+     *
+     * @param customer the customer
+     * @param item     the item
+     */
+    public void addToCart(Customer customer, Item item) {
         customer.getCart().getItems().add(item);
         update(customer);
     }
 
-    public void removeFromCart(Customer customer, String productName) throws InvalidCustomerException, EmailNotSameException, CustomerNotFoundException {
+    /**
+     * Remove from cart.
+     *
+     * @param customer    the customer
+     * @param productName the product name
+     */
+    public void removeFromCart(Customer customer, String productName) {
 
-        ArrayList<Item> removeMe = new ArrayList<Item>();
+        ArrayList<Item> removeMe = new ArrayList<>();
 // Create a list of values you wish to remove, adding to that list within the loop, then call originalList.removeAll(valuesToRemove) at the end
         customer.getCart().getItems().forEach(item -> {
             if(item.getItemName().equals(productName)) {
@@ -109,63 +151,97 @@ public class CustomerService {
         update(customer);
     }
 
-    public void emptyCart(Customer customer) throws InvalidCustomerException, EmailNotSameException, CustomerNotFoundException {
-        ArrayList<Item> removeMe = customer.getCart().getItems();
+    /**
+     * Empty cart.
+     *
+     * @param customer the customer
+     */
+    public void emptyCart(Customer customer) {
+        List<Item> removeMe = customer.getCart().getItems();
         customer.getCart().getItems().removeAll(removeMe);
         update(customer);
     }
 
-    public ArrayList<Item> getCart(Customer customer) {
+    /**
+     * Gets cart.
+     *
+     * @param customer the customer
+     * @return the cart
+     */
+    public List<Item> getCart(Customer customer) {
         return customer.getCart().getItems();
     }
 
-    public void addCreditCard(Customer customer, CreditCard creditCard) throws InvalidCustomerException, EmailNotSameException, CustomerNotFoundException {
+    /**
+     * Add credit card.
+     *
+     * @param customer   the customer
+     * @param creditCard the credit card
+     */
+    public void addCreditCard(Customer customer, CreditCard creditCard) {
         customer.getCreditCards().add(creditCard);
         update(customer);
     }
 
-    public void removeCreditCard(Customer customer, String fourDig) throws InvalidCustomerException, EmailNotSameException, CustomerNotFoundException {
-        ArrayList<CreditCard> removeMe = new ArrayList<CreditCard>();
+    /**
+     * Remove credit card.
+     *
+     * @param customer the customer
+     * @param fourDig  the four dig
+     */
+    public void removeCreditCard(Customer customer, String fourDig)  {
+        ArrayList<CreditCard> removeMe = new ArrayList<>();
 // Create a list of values you wish to remove, adding to that list within the loop, then call originalList.removeAll(valuesToRemove) at the end
-        customer.getCreditCards().forEach(creditcard -> {
-            if(creditcard.getFourDig() != null && creditcard.getFourDig().equals(fourDig)) {
-                removeMe.add(creditcard);
+        customer.getCreditCards().forEach(creditCard -> {
+            if(creditCard.getFourDig() != null && creditCard.getFourDig().equals(fourDig)) {
+                removeMe.add(creditCard);
             }
         });
         customer.getCreditCards().removeAll(removeMe);
         update(customer);
     }
 
-    public Order getOrder(Customer customer, UUID uuid) throws OrderNotFoundException {
-        return customer.getOrders().stream().filter(o -> o.getUuid().equals(uuid)).findFirst().orElseThrow(OrderNotFoundException::new);
-    }
-
-    public void addOrder(Customer customer, Order order) throws InvalidCustomerException, EmailNotSameException, CustomerNotFoundException {
-        customer.getOrders().add(order);
+    /**
+     * Add order.
+     *
+     * @param customer the customer
+     * @param orderDetails    the order
+     */
+    public void addOrder(Customer customer, OrderDetails orderDetails) {
+        customer.getOrderDetailsList().add(orderDetails);
         update(customer);
 
-        OrderDB orderDB = new OrderDB(
-                "PROCESSING",
-                customer.getEmail(),
-                new ArrayList<Item>(order.getOrder()),
-                order.getTotalPrice(),
-                order.getTotalPrice()*HST+DELIVERY_FEE
-        );
-        orderDBService.addOrderToDB(orderDB);
+//        OrderDB orderDB = new OrderDB(
+//                "PROCESSING",
+//                customer.getEmail(),
+//                new ArrayList<>(order.getOrder()),
+//                order.getTotalPrice(),
+//                order.getTotalPrice()*HST+DELIVERY_FEE
+//        );
+//        orderDBService.addOrderToDB(orderDB);
     }
 
-    public void updateOrder(Customer customer, UUID uuid, String orderStatus) throws InvalidCustomerException, EmailNotSameException, CustomerNotFoundException{
-        customer.getOrders().forEach(order -> {
-            if (order.getUuid().equals(uuid)) order.setOrderStatus(orderStatus);
+    /**
+     * Update order.
+     *
+     * @param customer    the customer
+     * @param uuid        the uuid
+     * @param orderStatus the order status
+     */
+    public void updateOrder(Customer customer, UUID uuid, String orderStatus) {
+        customer.getOrderDetailsList().forEach(orderDetails -> {
+            if (orderDetails.getOrderUUID().equals(uuid)) orderDetails.setOrderStatus(orderStatus);
         });
         update(customer);
     }
-    public List<Order> findAllOrders(String email) throws InvalidNameException, CustomerNotFoundException {
-        return getByEmail(email).getOrders();
+
+    /**
+     * Find all orderDetails list.
+     *
+     * @param email the email
+     * @return the list
+     */
+    public List<OrderDetails> findAllOrders(String email)  {
+        return getByEmail(email).getOrderDetailsList();
     }
-    
-    // private String encryptPassword(String password) {
-    //     BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-    //     return passwordEncoder.encode(password);
-    // }
 }

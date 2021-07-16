@@ -6,22 +6,35 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
+/**
+ * The type Customer.
+ */
 // TODO: nullable: false for most field
 @Getter
 @Setter
 @NoArgsConstructor
 @Entity
 @Table(name = "customers")
-public class Customer implements Serializable {
+public class Customer extends AuditModel implements Serializable {
 
+    /**
+     * The constant ROLE_ADMIN.
+     */
     public static final int ROLE_ADMIN = 1;
+    /**
+     * The constant ROLE_NONADMIN.
+     */
     public static final int ROLE_NONADMIN = 0;
 
     private static final long serialVersionUID = -1854209356482886781L;
 
     @Id
+    @Column(nullable = false)
+    private UUID customerUUID = UUID.randomUUID();
+
     @Column(nullable = false, unique = true, length = 45)
     private String email;
 
@@ -40,20 +53,37 @@ public class Customer implements Serializable {
     @Column(nullable = false, length = 6)
     private String dateOfBirth;
 
-//    @Temporal(TemporalType.TIMESTAMP)
-//    @Column(name = "Create_Date", nullable = false)
-//    private Date createDate;
-
-    @Column(nullable = true)
+    @Column(nullable = false)
+    @Embedded
     private Address address;
 
+    @JoinColumn(name = "cartUUID", nullable = false, insertable=false, updatable=false)
+    @OneToOne
     private Cart cart;
 
-    private ArrayList<CreditCard> creditCards;
+    @JoinColumn(name = "creditCardUUID", nullable = false, insertable=false, updatable=false)
+    @OneToMany
+    private List<CreditCard> creditCards;
 
-    private ArrayList<Order> orders;
+    @JoinColumn(name = "orderUUID", nullable = false, insertable=false, updatable=false)
+    @OneToMany
+    private List<OrderDetails> orderDetailsList;
 
-    public Customer(String firstName, String lastName, String phoneNumber, String email, String password, String dateOfBirth, Address address, Cart cart, ArrayList<CreditCard> creditCards, ArrayList<Order> orders) {
+    /**
+     * Instantiates a new Customer.
+     *
+     * @param firstName   the first name
+     * @param lastName    the last name
+     * @param phoneNumber the phone number
+     * @param email       the email
+     * @param password    the password
+     * @param dateOfBirth the date of birth
+     * @param address     the address
+     * @param cart        the cart
+     * @param creditCards the credit cards
+     * @param orderDetailsList      the orderDetails
+     */
+    public Customer(String firstName, String lastName, String phoneNumber, String email, String password, String dateOfBirth, Address address, Cart cart, List<CreditCard> creditCards, List<OrderDetails> orderDetailsList) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
@@ -63,6 +93,6 @@ public class Customer implements Serializable {
         this.address = address;
         this.cart = cart;
         this.creditCards = creditCards;
-        this.orders = orders;
+        this.orderDetailsList = orderDetailsList;
     }
 }

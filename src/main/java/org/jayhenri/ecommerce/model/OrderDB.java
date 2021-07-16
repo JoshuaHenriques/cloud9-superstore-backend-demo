@@ -8,45 +8,54 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
+/**
+ * The type Order db.
+ * todo: merge with order
+ */
 @Getter
 @Setter
 @Entity
 @NoArgsConstructor
-@Table(name = "orders")
-public class OrderDB implements Serializable {
+@Table(name = "orderDetails")
+public class OrderDB extends AuditModel implements Serializable {
     private static final long serialVersionUID = -5378203026264681312L;
 
     @Id
-    @Column
-    private UUID uuid = UUID.randomUUID();
+    @Column(nullable = false)
+    private UUID orderDBUUID = UUID.randomUUID();
 
-    @Column
+    @Column(nullable = false)
     private String orderStatus;
 
     @Column(unique = true, length = 128, nullable = false)
     private String customerEmail;
 
-    @NotNull
-    private ArrayList<Item> items;
+    @JoinColumn(name = "itemUUID", nullable = false, insertable=false, updatable=false)
+    @OneToMany
+    private List<Item> items;
 
-//    @Temporal(TemporalType.TIMESTAMP)
-//    @Column(name = "Create_Date", nullable = false)
-//    private Date date;
-
-    @Column
+    @Column(nullable = false)
     private double subTotal;
 
-    @Column
+    @Column(nullable = false)
     private double totalPrice;
 
-    public OrderDB(String orderStatus, String customerEmail, ArrayList<Item> items, double subTotal, double totalPrice) {
+    /**
+     * Instantiates a new Order db.
+     *
+     * @param orderStatus   the order status
+     * @param customerEmail the customer email
+     * @param items         the items
+     * @param subTotal      the sub total
+     * @param totalPrice    the total price
+     */
+    public OrderDB(String orderStatus, String customerEmail, List<Item> items, double subTotal, double totalPrice) {
         this.orderStatus = orderStatus;
         this.customerEmail = customerEmail;
         this.items = items;
-        // this.date = date;
         this.subTotal = subTotal;
         this.totalPrice = totalPrice;
     }

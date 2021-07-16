@@ -5,7 +5,6 @@ import org.jayhenri.ecommerce.exception.InvalidPostalCodeException;
 import org.jayhenri.ecommerce.model.*;
 import org.jayhenri.ecommerce.repository.CustomerRepository;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
@@ -14,38 +13,67 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.ArrayList;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.BDDMockito.then;
-import static org.mockito.Mockito.*;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.BDDMockito.*;
 
+/**
+ * The type Customer registration service test.
+ */
 @ExtendWith(MockitoExtension.class)
 class CustomerRegistrationServiceTest {
 
-    @InjectMocks
-    CustomerRegistrationService customerRegistrationService;
+    /**
+     * The Test me.
+     */
+    CustomerRegistrationService testMe;
 
+    /**
+     * The Customer repository.
+     */
     @Mock
     CustomerRepository customerRepository;
 
+    /**
+     * The Captor customer.
+     */
     @Captor
-    private ArgumentCaptor<Customer> captorCustomer;
+    ArgumentCaptor<Customer> captorCustomer;
 
+    /**
+     * The Captor string.
+     */
     @Captor
-    private ArgumentCaptor<String> captorString;
+    ArgumentCaptor<String> captorString;
 
-
-
-    // Given
+    /**
+     * The Customer.
+     */
     Customer customer;
-    Order order;
+    /**
+     * The Order.
+     */
+    OrderDetails orderDetails;
+    /**
+     * The Cart.
+     */
     Cart cart;
+    /**
+     * The Credit card.
+     */
     CreditCard creditCard;
+    /**
+     * The Item.
+     */
     Item item;
 
+    /**
+     * Sets up.
+     */
     @BeforeEach
-    void setUp() throws InvalidPostalCodeException, CustomerAlreadyExistsException {
+    void setUp() {
+        testMe = new CustomerRegistrationService(customerRepository);
         ArrayList<Item> items = new ArrayList<>();
-        ArrayList<Order> orders = new ArrayList<>();
+        ArrayList<OrderDetails> orderDetails = new ArrayList<>();
         ArrayList<CreditCard> creditCards = new ArrayList<>();
 
         item = new Item(
@@ -56,7 +84,7 @@ class CustomerRegistrationServiceTest {
 
         items.add(item);
 
-        order = new Order(
+        this.orderDetails = new OrderDetails(
               "PROCESSING",
               "testMe@gmail.com",
                 items,
@@ -75,7 +103,7 @@ class CustomerRegistrationServiceTest {
                 "8281"
         );
 
-        orders.add(order);
+        orderDetails.add(this.orderDetails);
         creditCards.add(creditCard);
 
         customer = new Customer(
@@ -95,63 +123,103 @@ class CustomerRegistrationServiceTest {
                 ),
                 cart,
                 creditCards,
-                orders
+                orderDetails
         );
 
     }
-    // ask reddit
+
+    /**
+     * Test add.
+     *
+     * @throws InvalidPostalCodeException     the invalid postal code exception
+     * @throws CustomerAlreadyExistsException the customer already exists exception
+     */
     @Test
-    @Disabled
     void testAdd() throws InvalidPostalCodeException, CustomerAlreadyExistsException {
-        // When
-        customerRegistrationService.add(this.customer);
-        // Then
-        then(customerRepository).should().save(captorCustomer.capture());
-        Customer _customer = captorCustomer.getValue();
-        assertThat(_customer).isEqualTo(this.customer);
-    }
-
-    @Test
-    @Disabled
-    void testAddThrowsInvalidPostalCodeException() throws InvalidPostalCodeException, CustomerAlreadyExistsException {
-        CustomerRegistrationService testMe = mock(CustomerRegistrationService.class);
-        given(customerRegistrationService.existsByEmail("testMe@gmail.com")).willReturn(true);
-        doThrow(new CustomerAlreadyExistsException())
-                .when(testMe)
-                .add(this.customer);
-
         testMe.add(this.customer);
-    }
 
-    @Test
-    @Disabled
-    void testAddThrowsCustomerAlreadyExistsException() throws InvalidPostalCodeException, CustomerAlreadyExistsException {
-        // When
-        customerRegistrationService.add(this.customer);
-        // Then
         then(customerRepository).should().save(captorCustomer.capture());
-        Customer _customer = captorCustomer.getValue();
-        assertThat(_customer).isEqualTo(this.customer);
+
+        assertThat(captorCustomer.getValue()).isEqualTo(this.customer);
     }
 
+    /**
+     * Exists by phone number.
+     */
     @Test
-    @Disabled
-    void existsByPhoneNumber() throws InvalidPostalCodeException, CustomerAlreadyExistsException {
-        // Given
-        // When
-        when(customerRegistrationService.existsByPhoneNumber("2934811932")).thenReturn(true);
-        boolean exists = customerRegistrationService.existsByPhoneNumber("2934811932");
-        // Then
-        verify(customerRepository).existsPhoneNumber("2934811932");
-        assertThat(exists).isTrue();
+    void existsByPhoneNumber() {
+        given(testMe.existsByPhoneNumber("1234567890"))
+                .willReturn(true);
+
+        Boolean bool = testMe.existsByPhoneNumber("1234567890");
+        then(customerRepository).should().existsByPhoneNumber(captorString.capture());
+
+        assertThat(captorString.getValue()).isEqualTo("1234567890");
+        assertThat(bool).isTrue();
     }
+
+    /**
+     * Does not exists by phone number.
+     */
     @Test
-    @Disabled
+    void doesNotExistsByPhoneNumber() {
+        given(testMe.existsByPhoneNumber("1234567890"))
+                .willReturn(false);
+
+        Boolean bool = testMe.existsByPhoneNumber("1234567890");
+        then(customerRepository).should().existsByPhoneNumber(captorString.capture());
+
+        assertThat(captorString.getValue()).isEqualTo("1234567890");
+        assertThat(bool).isFalse();
+    }
+
+    /**
+     * Is valid postal code.
+     */
+    @Test
     void isValidPostalCode() {
+        Boolean bool = testMe.isValidPostalCode("M1C8N3");
+
+        assertThat(bool).isTrue();
     }
 
+    /**
+     * Is not valid postal code.
+     */
     @Test
-    @Disabled
+    void isNotValidPostalCode() {
+        Boolean bool = testMe.isValidPostalCode("M1CM8N3");
+
+        assertThat(bool).isFalse();
+    }
+
+    /**
+     * Exists by email.
+     */
+    @Test
     void existsByEmail() {
+        given(testMe.existsByEmail("testMe@gmail.com"))
+                .willReturn(true);
+
+        Boolean bool = testMe.existsByEmail("testMe@gmail.com");
+        then(customerRepository).should().existsByEmail(captorString.capture());
+
+        assertThat(captorString.getValue()).isEqualTo("testMe@gmail.com");
+        assertThat(bool).isTrue();
+    }
+
+    /**
+     * Does not exists by email.
+     */
+    @Test
+    void doesNotExistsByEmail() {
+        given(testMe.existsByEmail("testMe@gmail.com"))
+                .willReturn(false);
+
+        Boolean bool = testMe.existsByEmail("testMe@gmail.com");
+        then(customerRepository).should().existsByEmail(captorString.capture());
+
+        assertThat(captorString.getValue()).isEqualTo("testMe@gmail.com");
+        assertThat(bool).isFalse();
     }
 }

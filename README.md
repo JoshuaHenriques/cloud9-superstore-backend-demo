@@ -26,9 +26,9 @@
 /{email}/creditCards/list                 GET
 
 # Order
-/{email}/orders/add                           POST
-/{email}/orders/updateStatus/{uuid}/{status}  PUT
-/{email}/orders/list                          GET
+/{email}/orderDetails/add                           POST
+/{email}/orderDetails/updateStatus/{uuid}/{status}  PUT
+/{email}/orderDetails/list                          GET
 
 (api/inventory):
 # Update item

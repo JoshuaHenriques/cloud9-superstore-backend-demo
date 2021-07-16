@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="org.jayhenri.ecommerce.service.OrderDBServiceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-07-09T14:14:29" hostname="kde-neon" time="0.453">
-  <properties/>
-  <testcase name="addOrderToDB()" classname="org.jayhenri.ecommerce.service.OrderDBServiceTest" time="0.453"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
