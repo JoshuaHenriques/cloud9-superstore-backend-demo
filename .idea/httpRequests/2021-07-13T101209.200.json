@@ -1,0 +1,108 @@
+[
+  {
+    "email": "ei346336",
+    "firstName": "first63Name1",
+    "lastName": "lastName",
+    "phoneNumber": "4285449298",
+    "password": "password",
+    "dateOfBirth": "040595",
+    "address": {
+      "streetName": "streetName",
+      "streetNumber": "streetNumber",
+      "unitNumber": "unitNumber",
+      "city": "city",
+      "postalCode": "T3K9G3",
+      "province": "province"
+    },
+    "cart": {
+      "items": [
+        {
+          "itemName": "productName",
+          "description": "description",
+          "price": 34.65,
+          "image": null
+        }
+      ],
+      "customerEmail": "customerEmail",
+      "total": 34.65
+    },
+    "creditCards": [
+      {
+        "fullName": "fullName",
+        "ccn": null,
+        "fourDig": null,
+        "expDate": "expDate",
+        "cvc": "cvc"
+      }
+    ],
+    "orders": [
+      {
+        "uuid": "de25333f-71c1-497b-b00a-73b4ba2ff647",
+        "orderStatus": "orderStatus",
+        "customerEmail": "customerEmail",
+        "order": [
+          {
+            "itemName": "productName",
+            "description": "description",
+            "price": 34.65,
+            "image": null
+          }
+        ],
+        "totalPrice": 34.65
+      }
+    ]
+  },
+  {
+    "email": "ei366336",
+    "firstName": "first63Name1",
+    "lastName": "lastName",
+    "phoneNumber": "428544898",
+    "password": "password",
+    "dateOfBirth": "040595",
+    "address": {
+      "streetName": "streetName",
+      "streetNumber": "streetNumber",
+      "unitNumber": "unitNumber",
+      "city": "city",
+      "postalCode": "T3K9G3",
+      "province": "province"
+    },
+    "cart": {
+      "items": [
+        {
+          "itemName": "productName",
+          "description": "description",
+          "price": 34.65,
+          "image": null
+        }
+      ],
+      "customerEmail": "customerEmail",
+      "total": 34.65
+    },
+    "creditCards": [
+      {
+        "fullName": "fullName",
+        "ccn": null,
+        "fourDig": null,
+        "expDate": "expDate",
+        "cvc": "cvc"
+      }
+    ],
+    "orders": [
+      {
+        "uuid": "edb89b27-ce6e-439e-8086-39b8d08a4dc3",
+        "orderStatus": "orderStatus",
+        "customerEmail": "customerEmail",
+        "order": [
+          {
+            "itemName": "productName",
+            "description": "description",
+            "price": 34.65,
+            "image": null
+          }
+        ],
+        "totalPrice": 34.65
+      }
+    ]
+  }
+]

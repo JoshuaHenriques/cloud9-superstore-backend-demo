@@ -1,0 +1,56 @@
+[
+  {
+    "email": "Cruz_Aisha40@gmail.com",
+    "firstName": "Aisha",
+    "lastName": "Cruz",
+    "phoneNumber": "5199879740",
+    "password": "aingei8Chai",
+    "dateOfBirth": "691304",
+    "address": {
+      "streetName": "Goyeau Ave",
+      "streetNumber": "3892",
+      "unitNumber": "0",
+      "city": "Windsor",
+      "postalCode": "N9A1H9",
+      "province": "Ontario"
+    },
+    "cart": null,
+    "creditCards": [
+      {
+        "fullName": "Aisha Cruz",
+        "ccn": "4532101763467599",
+        "fourDig": "7599",
+        "expDate": "0425",
+        "cvc": "056"
+      }
+    ],
+    "orders": []
+  },
+  {
+    "email": "Cruz_Aisha94@gmail.com",
+    "firstName": "Aisha",
+    "lastName": "Cruz",
+    "phoneNumber": "5199879794",
+    "password": "aingei8Chai",
+    "dateOfBirth": "691304",
+    "address": {
+      "streetName": "Goyeau Ave",
+      "streetNumber": "3874",
+      "unitNumber": "0",
+      "city": "Windsor",
+      "postalCode": "N9A1H9",
+      "province": "Ontario"
+    },
+    "cart": null,
+    "creditCards": [
+      {
+        "fullName": "Aisha Cruz",
+        "ccn": "4532101763467599",
+        "fourDig": "7599",
+        "expDate": "0425",
+        "cvc": "056"
+      }
+    ],
+    "orders": []
+  }
+]
