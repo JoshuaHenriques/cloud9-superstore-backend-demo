@@ -6,5 +6,7 @@ org/jayhenri/ecommerce/EcommerceApplicationTest.java
  org.jayhenri.ecommerce.EcommerceApplicationTest
 org/jayhenri/ecommerce/service/CustomerRegistrationServiceTest.java
  org.jayhenri.ecommerce.service.CustomerRegistrationServiceTest
+org/jayhenri/ecommerce/controller/CustomerRegistrationControllerTest.java
+ org.jayhenri.ecommerce.controller.CustomerRegistrationControllerTest
 org/jayhenri/ecommerce/service/CustomerServiceTest.java
  org.jayhenri.ecommerce.service.CustomerServiceTest
