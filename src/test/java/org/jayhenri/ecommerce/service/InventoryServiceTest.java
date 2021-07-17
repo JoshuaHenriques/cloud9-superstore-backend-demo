@@ -119,7 +119,7 @@ class InventoryServiceTest {
      */
     @Test
     void existsByProductName() {
-        given(testMe.existsByProductName("Test Product"))
+        given(inventoryRepository.existsByProductName("Test Product"))
                 .willReturn(true);
 
         Boolean bool = testMe.existsByProductName("Test Product");
@@ -134,7 +134,7 @@ class InventoryServiceTest {
      */
     @Test
     void doesNotExistsByProductName() {
-        given(testMe.existsByProductName("Test Product"))
+        given(inventoryRepository.existsByProductName("Test Product"))
                 .willReturn(false);
 
         Boolean bool = testMe.existsByProductName("Test Product");

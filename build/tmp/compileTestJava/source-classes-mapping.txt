@@ -1,10 +1,10 @@
-org/jayhenri/ecommerce/service/CustomerServiceTest.java
- org.jayhenri.ecommerce.service.CustomerServiceTest
 org/jayhenri/ecommerce/service/InventoryServiceTest.java
  org.jayhenri.ecommerce.service.InventoryServiceTest
-org/jayhenri/ecommerce/controller/CustomerRegistrationControllerTest.java
- org.jayhenri.ecommerce.controller.CustomerRegistrationControllerTest
-org/jayhenri/ecommerce/service/CustomerRegistrationServiceTest.java
- org.jayhenri.ecommerce.service.CustomerRegistrationServiceTest
 org/jayhenri/ecommerce/service/OrderDetailsDBServiceTest.java
  org.jayhenri.ecommerce.service.OrderDetailsDBServiceTest
+org/jayhenri/ecommerce/service/CustomerRegistrationServiceTest.java
+ org.jayhenri.ecommerce.service.CustomerRegistrationServiceTest
+org/jayhenri/ecommerce/controller/CustomerRegistrationControllerTest.java
+ org.jayhenri.ecommerce.controller.CustomerRegistrationControllerTest
+org/jayhenri/ecommerce/service/CustomerServiceTest.java
+ org.jayhenri.ecommerce.service.CustomerServiceTest

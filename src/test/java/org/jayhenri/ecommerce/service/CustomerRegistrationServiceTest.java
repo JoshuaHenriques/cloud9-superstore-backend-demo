@@ -132,7 +132,7 @@ class CustomerRegistrationServiceTest {
      */
     @Test
     void existsByPhoneNumber() {
-        given(testMe.existsByPhoneNumber("1234567890"))
+        given(customerRepository.existsByPhoneNumber("1234567890"))
                 .willReturn(true);
 
         Boolean bool = testMe.existsByPhoneNumber("1234567890");
@@ -147,7 +147,7 @@ class CustomerRegistrationServiceTest {
      */
     @Test
     void doesNotExistsByPhoneNumber() {
-        given(testMe.existsByPhoneNumber("1234567890"))
+        given(customerRepository.existsByPhoneNumber("1234567890"))
                 .willReturn(false);
 
         Boolean bool = testMe.existsByPhoneNumber("1234567890");
@@ -182,7 +182,7 @@ class CustomerRegistrationServiceTest {
      */
     @Test
     void existsByEmail() {
-        given(testMe.existsByEmail("testMe@gmail.com"))
+        given(customerRepository.existsByEmail("testMe@gmail.com"))
                 .willReturn(true);
 
         Boolean bool = testMe.existsByEmail("testMe@gmail.com");
@@ -197,7 +197,7 @@ class CustomerRegistrationServiceTest {
      */
     @Test
     void doesNotExistsByEmail() {
-        given(testMe.existsByEmail("testMe@gmail.com"))
+        given(customerRepository.existsByEmail("testMe@gmail.com"))
                 .willReturn(false);
 
         Boolean bool = testMe.existsByEmail("testMe@gmail.com");

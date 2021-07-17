@@ -32,8 +32,8 @@ org/jayhenri/ecommerce/exception/InvalidCreditCardException.java
  org.jayhenri.ecommerce.exception.InvalidCreditCardException
 org/jayhenri/ecommerce/exception/InvalidCustomerException.java
  org.jayhenri.ecommerce.exception.InvalidCustomerException
-org/jayhenri/ecommerce/service/CustomerService.java
- org.jayhenri.ecommerce.service.CustomerService
+org/jayhenri/ecommerce/model/Customer.java
+ org.jayhenri.ecommerce.model.Customer
 org/jayhenri/ecommerce/service/OrderService.java
  org.jayhenri.ecommerce.service.OrderService
 org/jayhenri/ecommerce/model/AuditModel.java
@@ -48,8 +48,8 @@ org/jayhenri/ecommerce/service/OrderDBService.java
  org.jayhenri.ecommerce.service.OrderDBService
 org/jayhenri/ecommerce/model/OrderDB.java
  org.jayhenri.ecommerce.model.OrderDB
-org/jayhenri/ecommerce/controller/CustomerRegistrationController.java
- org.jayhenri.ecommerce.controller.CustomerRegistrationController
+org/jayhenri/ecommerce/controller/InventoryController.java
+ org.jayhenri.ecommerce.controller.InventoryController
 org/jayhenri/ecommerce/exception/CustomerNotFoundException.java
  org.jayhenri.ecommerce.exception.CustomerNotFoundException
 org/jayhenri/ecommerce/repository/CustomerRepository.java
@@ -62,9 +62,9 @@ org/jayhenri/ecommerce/model/Address.java
  org.jayhenri.ecommerce.model.Address
 org/jayhenri/ecommerce/model/Item.java
  org.jayhenri.ecommerce.model.Item
-org/jayhenri/ecommerce/model/Customer.java
- org.jayhenri.ecommerce.model.Customer
+org/jayhenri/ecommerce/controller/CustomerRegistrationController.java
+ org.jayhenri.ecommerce.controller.CustomerRegistrationController
 org/jayhenri/ecommerce/controller/CustomerController.java
  org.jayhenri.ecommerce.controller.CustomerController
-org/jayhenri/ecommerce/controller/InventoryController.java
- org.jayhenri.ecommerce.controller.InventoryController
+org/jayhenri/ecommerce/service/CustomerService.java
+ org.jayhenri.ecommerce.service.CustomerService

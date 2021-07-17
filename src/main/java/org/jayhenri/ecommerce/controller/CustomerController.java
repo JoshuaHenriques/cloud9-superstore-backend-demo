@@ -166,7 +166,7 @@ public class CustomerController {
      * @throws CustomerNotFoundException the customer not found exception
      */
     @GetMapping(value = "/{email}/cart/get", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Item> getCart(@PathVariable String email) throws CustomerNotFoundException {
+    public Cart getCart(@PathVariable String email) throws CustomerNotFoundException {
         if (customerService.existsByEmail(email)) {
             return customerService.getCart(customerService.getByEmail(email));
         } else throw new CustomerNotFoundException();

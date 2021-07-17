@@ -33,6 +33,7 @@ public class CustomerService {
      */
     @Autowired
     public CustomerService(CustomerRepository customerRepository) {
+
         this.customerRepository = customerRepository;
         // this.orderDBService = orderDBService;
     }
@@ -44,6 +45,7 @@ public class CustomerService {
      * @return the boolean
      */
     public boolean existsByPhoneNumber(String phoneNumber) {
+
         return customerRepository.existsByPhoneNumber(phoneNumber);
     }
 
@@ -55,6 +57,7 @@ public class CustomerService {
      * @throws InvalidPostalCodeException     the invalid postal code exception
      */
     public void add(Customer customer) throws CustomerAlreadyExistsException, InvalidPostalCodeException {
+
         customerRepository.save(customer);
     }
 
@@ -64,7 +67,8 @@ public class CustomerService {
      * @param customer the customer
      */
     public void delete(Customer customer){
-                customerRepository.delete(customer);
+
+        customerRepository.delete(customer);
     }
 
     /**
@@ -73,7 +77,8 @@ public class CustomerService {
      * @param customer the customer
      */
     public void update(Customer customer) {
-                customerRepository.save(customer);
+
+        customerRepository.save(customer);
     }
 
     /**
@@ -83,22 +88,13 @@ public class CustomerService {
      * @param pageSize the page size
      * @return the list
      */
-    public List<Customer> findAllCustomers(Integer pageNo, Integer pageSize) { // String sortBy
+    public List<Customer> findAllCustomers(Integer pageNo, Integer pageSize) {
+        // String sortBy
         Pageable paging = PageRequest.of(pageNo, pageSize); // Sort.by(sortBy).ascending()
         Page<Customer> pagedResult = customerRepository.findAll(paging);
 
         if(pagedResult.hasContent()) return pagedResult.getContent();
         else return new ArrayList<>();
-    }
-
-    /**
-     * Find all credit cards list.
-     *
-     * @param customer the email
-     * @return the list
-     */
-    public List<CreditCard> findAllCreditCards(Customer customer) {
-        return customer.getCreditCards();
     }
 
     /**
@@ -108,6 +104,7 @@ public class CustomerService {
      * @return the boolean
      */
     public boolean existsByEmail(String email) {
+
         return customerRepository.existsByEmail(email);
     }
 
@@ -118,6 +115,7 @@ public class CustomerService {
      * @return the by email
      */
     public Customer getByEmail(String email) {
+
         return customerRepository.getByEmail(email);
     }
 
@@ -128,6 +126,7 @@ public class CustomerService {
      * @param item     the item
      */
     public void addToCart(Customer customer, Item item) {
+
         customer.getCart().getItems().add(item);
         update(customer);
     }
@@ -140,7 +139,7 @@ public class CustomerService {
      */
     public void removeFromCart(Customer customer, String productName) {
 
-        ArrayList<Item> removeMe = new ArrayList<>();
+        List<Item> removeMe = new ArrayList<>();
 // Create a list of values you wish to remove, adding to that list within the loop, then call originalList.removeAll(valuesToRemove) at the end
         customer.getCart().getItems().forEach(item -> {
             if(item.getItemName().equals(productName)) {
@@ -157,8 +156,9 @@ public class CustomerService {
      * @param customer the customer
      */
     public void emptyCart(Customer customer) {
-        List<Item> removeMe = customer.getCart().getItems();
-        customer.getCart().getItems().removeAll(removeMe);
+
+        customer.getCart().setItems(new ArrayList<>());
+        customer.getCart().setTotal(0.00);
         update(customer);
     }
 
@@ -168,8 +168,9 @@ public class CustomerService {
      * @param customer the customer
      * @return the cart
      */
-    public List<Item> getCart(Customer customer) {
-        return customer.getCart().getItems();
+    public Cart getCart(Customer customer) {
+
+        return customer.getCart();
     }
 
     /**
@@ -179,6 +180,7 @@ public class CustomerService {
      * @param creditCard the credit card
      */
     public void addCreditCard(Customer customer, CreditCard creditCard) {
+
         customer.getCreditCards().add(creditCard);
         update(customer);
     }
@@ -190,6 +192,7 @@ public class CustomerService {
      * @param fourDig  the four dig
      */
     public void removeCreditCard(Customer customer, String fourDig)  {
+
         ArrayList<CreditCard> removeMe = new ArrayList<>();
 // Create a list of values you wish to remove, adding to that list within the loop, then call originalList.removeAll(valuesToRemove) at the end
         customer.getCreditCards().forEach(creditCard -> {
@@ -202,12 +205,25 @@ public class CustomerService {
     }
 
     /**
+     * Find all credit cards list.
+     *
+     * @param customer the email
+     * @return the list
+     */
+    public List<CreditCard> findAllCreditCards(Customer customer) {
+
+        return customer.getCreditCards();
+    }
+
+
+    /**
      * Add order.
      *
      * @param customer     the customer
      * @param orderDetails the order
      */
     public void addOrder(Customer customer, OrderDetails orderDetails) {
+
         customer.getOrderDetailsList().add(orderDetails);
         update(customer);
 
@@ -229,6 +245,7 @@ public class CustomerService {
      * @param orderStatus the order status
      */
     public void updateOrder(Customer customer, UUID uuid, String orderStatus) {
+
         customer.getOrderDetailsList().forEach(orderDetails -> {
             if (orderDetails.getOrderUUID().equals(uuid)) orderDetails.setOrderStatus(orderStatus);
         });
@@ -242,6 +259,7 @@ public class CustomerService {
      * @return the list
      */
     public List<OrderDetails> findAllOrders(Customer customer)  {
+
         return customer.getOrderDetailsList();
     }
 }
