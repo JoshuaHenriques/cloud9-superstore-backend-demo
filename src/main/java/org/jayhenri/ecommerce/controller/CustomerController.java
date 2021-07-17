@@ -222,7 +222,7 @@ public class CustomerController {
     /**
      * Add order.
      *
-     * @param email the email
+     * @param email        the email
      * @param orderDetails the order
      * @throws CustomerNotFoundException the customer not found exception
      */

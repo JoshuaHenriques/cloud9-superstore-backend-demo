@@ -204,8 +204,8 @@ public class CustomerService {
     /**
      * Add order.
      *
-     * @param customer the customer
-     * @param orderDetails    the order
+     * @param customer     the customer
+     * @param orderDetails the order
      */
     public void addOrder(Customer customer, OrderDetails orderDetails) {
         customer.getOrderDetailsList().add(orderDetails);

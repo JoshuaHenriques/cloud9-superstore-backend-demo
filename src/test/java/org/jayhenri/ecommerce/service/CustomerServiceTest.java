@@ -32,86 +32,91 @@ class CustomerServiceTest {
     /**
      * The Test me.
      */
-    CustomerService testMe;
+    private CustomerService testMe;
 
     /**
      * The Customer repository.
      */
     @Mock
-    CustomerRepository customerRepository;
+    private CustomerRepository customerRepository;
 
     /**
      * The Customer service.
      */
     @Mock
-    CustomerService mockMe;
+    private CustomerService mockMe;
 
     /**
      * The Captor customer.
      */
     @Captor
-    ArgumentCaptor<Customer> captorCustomer;
+    private ArgumentCaptor<Customer> captorCustomer;
 
     /**
      * The Captor string.
      */
     @Captor
-    ArgumentCaptor<String> captorString;
+    private ArgumentCaptor<String> captorString;
 
     /**
      * The Captor string.
      */
     @Captor
-    ArgumentCaptor<Item> captorItem;
+    private ArgumentCaptor<Item> captorItem;
 
     /**
      * The Captor string.
      */
     @Captor
-    ArgumentCaptor<CreditCard> captorCreditCard;
+    private ArgumentCaptor<CreditCard> captorCreditCard;
 
     /**
      * The Captor string.
      */
     @Captor
-    ArgumentCaptor<OrderDetails> captorOrderDetails;
+    private ArgumentCaptor<OrderDetails> captorOrderDetails;
 
     /**
      * The Captor string.
      */
     @Captor
-    ArgumentCaptor<UUID> captorUUID;
+    private ArgumentCaptor<UUID> captorUUID;
 
     /**
      * The Customer.
      */
-    Customer customer;
+    private Customer customer;
 
     /**
      * The Customer.
      */
-    Item item;
+    private Item item;
 
     /**
      * The Customer.
      */
-    CreditCard creditCard;
+    private CreditCard creditCard;
 
     /**
      * The Customer.
      */
-    OrderDetails orderDetails;
+    private OrderDetails orderDetails;
 
     /**
      * The Customer.
      */
-    UUID uuid;
+    private UUID uuid;
+
+    CustomerServiceTest() {
+    }
 
     /**
      * Sets up.
      */
     @BeforeEach
     void setUp() {
+        customer = new Customer();
+        orderDetails = new OrderDetails();
         testMe = new CustomerService(customerRepository);
         item = new Item(
                 "Test Item",

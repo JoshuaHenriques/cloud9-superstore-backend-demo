@@ -20,13 +20,13 @@ class OrderDetailsDBServiceTest {
      * The Order db repository.
      */
     @Mock
-    OrderDBRepository orderDBRepository;
+    private OrderDBRepository orderDBRepository;
 
     /**
      * The Argument captor.
      */
     @Captor
-    ArgumentCaptor<OrderDB> argumentCaptor;
+    private ArgumentCaptor<OrderDB> argumentCaptor;
 
     /**
      * Add order to db.

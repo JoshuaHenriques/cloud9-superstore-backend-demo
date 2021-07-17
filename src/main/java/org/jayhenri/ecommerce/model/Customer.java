@@ -72,16 +72,16 @@ public class Customer extends AuditModel implements Serializable {
     /**
      * Instantiates a new Customer.
      *
-     * @param firstName   the first name
-     * @param lastName    the last name
-     * @param phoneNumber the phone number
-     * @param email       the email
-     * @param password    the password
-     * @param dateOfBirth the date of birth
-     * @param address     the address
-     * @param cart        the cart
-     * @param creditCards the credit cards
-     * @param orderDetailsList      the orderDetails
+     * @param firstName        the first name
+     * @param lastName         the last name
+     * @param phoneNumber      the phone number
+     * @param email            the email
+     * @param password         the password
+     * @param dateOfBirth      the date of birth
+     * @param address          the address
+     * @param cart             the cart
+     * @param creditCards      the credit cards
+     * @param orderDetailsList the orderDetails
      */
     public Customer(String firstName, String lastName, String phoneNumber, String email, String password, String dateOfBirth, Address address, Cart cart, List<CreditCard> creditCards, List<OrderDetails> orderDetailsList) {
         this.firstName = firstName;

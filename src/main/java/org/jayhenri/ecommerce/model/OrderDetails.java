@@ -39,6 +39,14 @@ public class OrderDetails extends AuditModel implements Serializable {
     @Column(nullable = false)
     private double totalPrice;
 
+    /**
+     * Instantiates a new Order details.
+     *
+     * @param orderStatus   the order status
+     * @param customerEmail the customer email
+     * @param itemList      the item list
+     * @param totalPrice    the total price
+     */
     public OrderDetails(String orderStatus, String customerEmail, List<Item> itemList, double totalPrice) {
         this.orderStatus = orderStatus;
         this.customerEmail = customerEmail;

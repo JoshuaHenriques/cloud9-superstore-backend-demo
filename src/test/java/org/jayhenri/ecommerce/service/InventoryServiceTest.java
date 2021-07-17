@@ -23,34 +23,30 @@ class InventoryServiceTest {
     /**
      * The Test me.
      */
-    InventoryService testMe;
+    private InventoryService testMe;
 
     /**
      * The Inventory repository.
      */
     @Mock
-    InventoryRepository inventoryRepository;
+    private InventoryRepository inventoryRepository;
 
     /**
      * The Captor inventory.
      */
     @Captor
-    ArgumentCaptor<Inventory> captorInventory;
+    private ArgumentCaptor<Inventory> captorInventory;
 
     /**
      * The Captor string.
      */
     @Captor
-    ArgumentCaptor<String> captorString;
+    private ArgumentCaptor<String> captorString;
 
     /**
      * The Inventory.
      */
-    Inventory inventory;
-    /**
-     * The Item.
-     */
-    Item item;
+    private Inventory inventory;
 
     /**
      * Sets up.
@@ -59,7 +55,7 @@ class InventoryServiceTest {
     void setUp() {
         testMe = new InventoryService(inventoryRepository);
 
-        item = new Item(
+        Item item = new Item(
                 "Test Product",
                 "Test Description",
                 9.99
