@@ -12,6 +12,9 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -244,6 +247,12 @@ class CustomerServiceTest {
     @Test
     @Disabled
     void findAllCustomers() {
+        Integer pageNo = 0;
+        Integer pageSize = 5;
+        List<Customer> list = testMe.findAllCustomers(pageNo,pageSize);
+        Pageable paging = PageRequest.of(pageNo,pageSize);
+
+        then(customerRepository).should().findAll(paging);
     }
 
     /**
@@ -307,12 +316,13 @@ class CustomerServiceTest {
      */
     @Test
     void addToCart() {
-        mockMe.addToCart(customer, item);
+        int size = customer.getCart().getItems().size();
+        testMe.addToCart(customer, item);
 
-        then(mockMe).should().addToCart(captorCustomer.capture(), captorItem.capture());
+        then(customerRepository).should().save(captorCustomer.capture());
 
         assertThat(captorCustomer.getValue()).isEqualTo(customer);
-        assertThat(captorItem.getValue()).isEqualTo(item);
+        assertThat(captorCustomer.getValue().getCart().getItems().size()).isEqualTo(size+1);
     }
 
     /**
