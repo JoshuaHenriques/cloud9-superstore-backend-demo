@@ -31,6 +31,7 @@ public class InventoryController {
      */
     @Autowired
     public InventoryController(InventoryService inventoryService) {
+
         this.inventoryService = inventoryService;
     }
 
@@ -114,6 +115,7 @@ public class InventoryController {
      */
     @GetMapping(value = "/items/list")
     public List<Inventory> findAll() {
+
         return inventoryService.findAll();
     }
 }

@@ -18,7 +18,7 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @Entity
-public class OrderDetails extends AuditModel implements Serializable {
+public class OrderDetails implements Serializable {
 
     private static final long serialVersionUID = -3543368529566294417L;
 

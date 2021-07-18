@@ -9,7 +9,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
  * The type Ecommerce application.
  */
 @SpringBootApplication
-@EnableJpaAuditing
 public class EcommerceApplication {
 
     /**

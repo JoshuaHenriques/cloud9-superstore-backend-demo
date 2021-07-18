@@ -27,6 +27,7 @@ public class InventoryService {
      */
     @Autowired
     public InventoryService(InventoryRepository inventoryRepository) {
+
         this.inventoryRepository = inventoryRepository;
     }
 
@@ -36,6 +37,7 @@ public class InventoryService {
      * @param inventory the inventory
      */
     public void add(Inventory inventory) {
+
             inventoryRepository.save(inventory);
     }
 
@@ -45,6 +47,7 @@ public class InventoryService {
      * @param inventory the inventory
      */
     public void update(Inventory inventory) {
+
             inventoryRepository.save(inventory);
     }
 
@@ -54,6 +57,7 @@ public class InventoryService {
      * @param inventory the inventory
      */
     public void delete(Inventory inventory) {
+
         inventoryRepository.delete(inventory);
     }
 
@@ -63,6 +67,7 @@ public class InventoryService {
      * @return the list
      */
     public List<Inventory> findAll() {
+
         return inventoryRepository.findAll();
     }
 
@@ -73,6 +78,7 @@ public class InventoryService {
      * @return the boolean
      */
     public boolean existsByProductName(String productName) {
+
         return inventoryRepository.existsByProductName(productName);
     }
 
@@ -83,6 +89,7 @@ public class InventoryService {
      * @return the by product name
      */
     public Inventory getByProductName(String productName) {
+
         return inventoryRepository.getByProductName(productName);
     }
 }

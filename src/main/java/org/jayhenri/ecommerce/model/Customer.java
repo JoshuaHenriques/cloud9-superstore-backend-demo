@@ -18,7 +18,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Entity
 @Table(name = "customers")
-public class Customer extends AuditModel implements Serializable {
+public class Customer implements Serializable {
 
     /**
      * The constant ROLE_ADMIN.
@@ -57,15 +57,15 @@ public class Customer extends AuditModel implements Serializable {
     @Embedded
     private Address address;
 
-    @JoinColumn(name = "cartUUID", nullable = false, insertable=false, updatable=false)
+    @JoinColumn(name = "cartUUID", nullable = true, insertable=false, updatable=false)
     @OneToOne
     private Cart cart;
 
-    @JoinColumn(name = "creditCardUUID", nullable = false, insertable=false, updatable=false)
+    @JoinColumn(name = "creditCardUUID", nullable = true, insertable=false, updatable=false)
     @OneToMany
     private List<CreditCard> creditCards;
 
-    @JoinColumn(name = "orderUUID", nullable = false, insertable=false, updatable=false)
+    @JoinColumn(name = "orderUUID", nullable = true, insertable=false, updatable=false)
     @OneToMany
     private List<OrderDetails> orderDetailsList;
 

@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -21,7 +20,7 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @Entity
-public class Cart extends AuditModel implements Serializable {
+public class Cart implements Serializable {
 
     private static final long serialVersionUID = -198235381052492730L;
 

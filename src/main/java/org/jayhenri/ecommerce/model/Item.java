@@ -3,8 +3,6 @@ package org.jayhenri.ecommerce.model;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -19,7 +17,7 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @Entity
-public class Item extends AuditModel implements Serializable {
+public class Item implements Serializable {
 
     private static final long serialVersionUID = -496088096515099704L;
 
