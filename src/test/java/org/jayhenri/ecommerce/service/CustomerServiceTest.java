@@ -44,12 +44,6 @@ class CustomerServiceTest {
     private CustomerRepository customerRepository;
 
     /**
-     * The Customer service.
-     */
-    @Mock
-    private CustomerService mockMe;
-
-    /**
      * The Captor customer.
      */
     @Captor
@@ -119,10 +113,6 @@ class CustomerServiceTest {
      * The Customer.
      */
     private List<Item> items;
-
-
-    CustomerServiceTest() {
-    }
 
     /**
      * Sets up.
