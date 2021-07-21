@@ -109,7 +109,6 @@ class CustomerRegistrationServiceTest {
                 creditCards,
                 orderDetails
         );
-
     }
 
     /**

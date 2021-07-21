@@ -2,10 +2,10 @@ org/jayhenri/ecommerce/model/Inventory.java
  org.jayhenri.ecommerce.model.Inventory
 org/jayhenri/ecommerce/repository/InventoryRepository.java
  org.jayhenri.ecommerce.repository.InventoryRepository
-org/jayhenri/ecommerce/exception/ItemAlreadyExistsException.java
- org.jayhenri.ecommerce.exception.ItemAlreadyExistsException
 org/jayhenri/ecommerce/exception/ProductNameNotSameException.java
  org.jayhenri.ecommerce.exception.ProductNameNotSameException
+org/jayhenri/ecommerce/exception/ItemAlreadyExistsException.java
+ org.jayhenri.ecommerce.exception.ItemAlreadyExistsException
 org/jayhenri/ecommerce/service/AddressService.java
  org.jayhenri.ecommerce.service.AddressService
 org/jayhenri/ecommerce/model/OrderDetails.java
