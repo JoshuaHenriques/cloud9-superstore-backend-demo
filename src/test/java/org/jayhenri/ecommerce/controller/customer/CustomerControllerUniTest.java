@@ -1,12 +1,12 @@
 package org.jayhenri.ecommerce.controller.customer;
 
-import org.jayhenri.ecommerce.controller.InventoryController;
-import org.jayhenri.ecommerce.exception.InvalidItemException;
-import org.jayhenri.ecommerce.exception.ItemAlreadyExistsException;
-import org.jayhenri.ecommerce.exception.ItemNotFoundException;
-import org.jayhenri.ecommerce.model.Inventory;
+import org.jayhenri.ecommerce.controller.CustomerController;
+import org.jayhenri.ecommerce.exception.*;
+import org.jayhenri.ecommerce.model.*;
+import org.jayhenri.ecommerce.service.CustomerService;
 import org.jayhenri.ecommerce.service.InventoryService;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
@@ -14,6 +14,10 @@ import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.ResponseEntity;
+import org.springframework.orm.hibernate5.HibernateTemplate;
+
+import javax.naming.InvalidNameException;
+import java.util.ArrayList;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -24,125 +28,241 @@ import static org.mockito.BDDMockito.then;
 class CustomerControllerUniTest {
 
     @Captor
-    private ArgumentCaptor<Inventory> captorInventory;
+    private ArgumentCaptor<Customer> captorCustomer;
 
     @Captor
     private ArgumentCaptor<String> captorString;
 
     @Mock
+    private CustomerService customerService;
+
+    @Mock
     private InventoryService inventoryService;
 
-    private InventoryController testMe;
+    private CustomerController testMe;
+
+    private Customer customer;
+
+    private Item item;
 
     private Inventory inventory;
 
     @BeforeEach
     void setUp() {
+        testMe = new CustomerController(customerService, inventoryService);
         inventory = new Inventory();
-        testMe = new InventoryController(inventoryService);
+
+        ArrayList<Item> items = new ArrayList<>();
+        ArrayList<OrderDetails> orderDetails = new ArrayList<>();
+        ArrayList<CreditCard> creditCards = new ArrayList<>();
+
+        item = new Item(
+                "Test Product",
+                "Test Description",
+                9.99
+        );
+
+        items.add(item);
+
+        inventory = new Inventory(
+                "Test Product",
+                329,
+                item
+        );
+
+        OrderDetails orderDetails1 = new OrderDetails(
+                "PROCESSING",
+                "testMe@gmail.com",
+                items,
+                9.00
+        );
+
+        Cart cart = new Cart(
+                items,
+                "testMe@gmail.com",
+                29.23
+        );
+
+        CreditCard creditCard = new CreditCard(
+                "Ubuntu User",
+                "4716902620158281",
+                "8281",
+                "05/25",
+                "8281"
+        );
+
+        orderDetails.add(orderDetails1);
+        creditCards.add(creditCard);
+
+        customer = new Customer(
+                "testMe",
+                "TestMe",
+                "2934811932",
+                "testMe@gmail.com",
+                "testMePassword",
+                "082395",
+                new Address(
+                        "Test Me",
+                        "29L",
+                        "0L",
+                        "New York",
+                        "T2K9R3",
+                        "Province"
+                ),
+                cart,
+                creditCards,
+                orderDetails
+        );
     }
 
     @Test
-    void updateItem() throws ItemAlreadyExistsException, InvalidItemException {
-        assertThat(ResponseEntity.ok().build()).isEqualTo(testMe.updateItem(inventory));
+    void updateCustomer() throws InvalidCustomerException, CustomerNotFoundException {
+        given(customerService.existsByEmail(customer.getEmail())).willReturn(true);
 
-        then(inventoryService).should().update(captorInventory.capture());
+        testMe.updateCustomer(customer);
 
-        assertThat(captorInventory.getValue()).isEqualTo(inventory);
+        then(customerService).should().update(captorCustomer.capture());
 
+        assertThat(captorCustomer.getValue()).isEqualTo(customer);
     }
 
     @Test
-    void updateItemThrowsInvalidItemException() {
-        assertThrows(InvalidItemException.class, () -> {
-            testMe.updateItem(null);
+    void updateCustomerThrowsInvalidCustomerException() {
+        assertThrows(InvalidCustomerException.class, () -> {
+            testMe.updateCustomer(null);
         });
     }
 
     @Test
-    void updateItemThrowsItemAlreadyExistsException() {
-        given(inventoryService.existsByProductName(inventory.getProductName())).willReturn(true);
+    void updateCustomerThrowsCustomerAlreadyExistsException() {
+        given(customerService.existsByEmail(customer.getEmail())).willReturn(false);
 
-        assertThrows(ItemAlreadyExistsException.class, () -> {
-            testMe.updateItem(inventory);
+        assertThrows(CustomerNotFoundException.class, () -> {
+            testMe.updateCustomer(customer);
         });
     }
 
     @Test
-    void addItem() throws ItemAlreadyExistsException, InvalidItemException {
-        assertThat(ResponseEntity.ok().build()).isEqualTo(testMe.addItem(inventory));
+    void deleteCustomer() throws InvalidCustomerException, CustomerNotFoundException {
+        given(customerService.existsByEmail("testMe@gmail.com")).willReturn(true);
+        given(customerService.getByEmail("testMe@gmail.com")).willReturn(customer);
 
-        then(inventoryService).should().add(captorInventory.capture());
+        testMe.deleteCustomer("testMe@gmail.com");
 
-        assertThat(captorInventory.getValue()).isEqualTo(inventory);
+        then(customerService).should().delete(captorCustomer.capture());
 
+        assertThat(captorCustomer.getValue()).isEqualTo(customer);
+        assertThat(captorCustomer.getValue().getEmail()).isEqualTo("testMe@gmail.com");
     }
 
     @Test
-    void addItemThrowsInvalidItemException() {
-        assertThrows(InvalidItemException.class, () -> {
-            testMe.addItem(null);
+    void deleteCustomerThrowsCustomerNotFoundException() {
+        assertThrows(CustomerNotFoundException.class, () -> {
+            testMe.deleteCustomer("testMe@gmail.com");
         });
     }
 
     @Test
-    void addItemThrowsItemAlreadyExistsException() {
-        given(inventoryService.existsByProductName(inventory.getProductName())).willReturn(true);
-
-        assertThrows(ItemAlreadyExistsException.class, () -> {
-            testMe.addItem(inventory);
+    void deleteCustomerThrowsInvalidCustomerException() {
+        assertThrows(InvalidCustomerException.class, () -> {
+            testMe.deleteCustomer(null);
         });
     }
 
     @Test
-    void getByProductName() throws ItemNotFoundException {
-        given(inventoryService.existsByProductName("Test")).willReturn(true);
-        given(inventoryService.getByProductName("Test")).willReturn(inventory);
+    @Disabled
+    void listCustomers() {
 
-        assertThat(inventory).isEqualTo(testMe.getByProductName("Test"));
-
-        then(inventoryService).should().getByProductName(captorString.capture());
-
-        assertThat(captorString.getValue()).isEqualTo("Test");
     }
 
     @Test
-    void getByProductNameThrowsItemNotFoundException() {
-        given(inventoryService.existsByProductName("Test")).willReturn(false);
+    void getByEmail() throws InvalidNameException, CustomerNotFoundException {
+        given(customerService.existsByEmail("testMe@gmail.com")).willReturn(true);
+
+        testMe.getByEmail("testMe@gmail.com");
+
+        then(customerService).should().getByEmail(captorString.capture());
+
+        assertThat("testMe@gmail.com").isEqualTo(captorString.getValue());
+    }
+
+    @Test
+    void getByEmailThrowsInvalidNameException() {
+        assertThrows(InvalidNameException.class, () -> {
+            testMe.getByEmail(null);
+        });
+    }
+
+    @Test
+    void getByEmailThrowsCustomerNotFoundException() {
+        given(customerService.existsByEmail("testMe@gmail.com")).willReturn(false);
+
+        assertThrows(CustomerNotFoundException.class, () -> {
+            testMe.getByEmail("testMe@gmail.com");
+        });
+    }
+
+    @Test
+    void addToCart() throws CustomerNotFoundException, ItemNotFoundException {
+        given(customerService.existsByEmail("testMe@gmail.com")).willReturn(true);
+        given(inventoryService.existsByProductName("Test Product")).willReturn(true);
+
+        given(customerService.getByEmail("testMe@gmail.com")).willReturn(customer);
+        given(inventoryService.getByProductName("Test Product")).willReturn(inventory);
+
+        testMe.addToCart("Test Product", "testMe@gmail.com");
+
+        then(customerService).should().addToCart(customer, inventory.getItem());
+    }
+
+    @Test
+    void addToCartThrowsCustomerNotFoundException() {
+        given(customerService.existsByEmail("testMe@gmail.com")).willReturn(false);
+
+        assertThrows(CustomerNotFoundException.class, () -> {
+            testMe.addToCart("Test Product", "testMe@gmail.com");
+        });
+    }
+
+    @Test
+    void addToCartThrowsItemNotFoundException() {
+        given(customerService.existsByEmail("testMe@gmail.com")).willReturn(true);
+        given(inventoryService.existsByProductName("Test Product")).willReturn(false);
 
         assertThrows(ItemNotFoundException.class, () -> {
-            testMe.getByProductName("Test");
+            testMe.addToCart("Test Product", "testMe@gmail.com");
         });
     }
 
     @Test
-    void removeItem() throws InvalidItemException, ItemNotFoundException {
-        given(inventoryService.existsByProductName("Test")).willReturn(true);
-        given(inventoryService.getByProductName("Test")).willReturn(inventory);
+    void removeFromCart() throws CustomerNotFoundException, ItemNotFoundException {
+        given(customerService.existsByEmail("testMe@gmail.com")).willReturn(true);
+        given(inventoryService.existsByProductName("Test Product")).willReturn(true);
 
-        assertThat(ResponseEntity.ok().build()).isEqualTo(testMe.removeItem("Test"));
+        given(customerService.getByEmail("testMe@gmail.com")).willReturn(customer);
+        given(inventoryService.getByProductName("Test Product")).willReturn(inventory);
 
-        then(inventoryService).should().delete(inventory);
+        testMe.removeFromCart("Test Product", "testMe@gmail.com");
+
+        then(customerService).should().removeFromCart(customer, inventory.getItem());
     }
 
     @Test
-    void removeItemThrowsInvalidItemException() {
-        assertThrows(InvalidItemException.class, () -> {
-            testMe.removeItem(null);
+    void removeFromCartThrowsCustomerNotFoundException() {
+        given(customerService.existsByEmail("testMe@gmail.com")).willReturn(false);
+
+        assertThrows(CustomerNotFoundException.class, () -> {
+            testMe.removeFromCart("Test Product", "testMe@gmail.com");
         });
     }
 
     @Test
-    void removeItemThrowsItemNotFoundException() {
-        given(inventoryService.existsByProductName("Test")).willReturn(false);
+    void removeFromCartThrowsItemNotFoundException() {
+        given(customerService.existsByEmail("testMe@gmail.com")).willReturn(true);
+        given(inventoryService.existsByProductName("Test Product")).willReturn(false);
 
         assertThrows(ItemNotFoundException.class, () -> {
-            testMe.removeItem("Test");
+            testMe.removeFromCart("Test Product", "testMe@gmail.com");
         });
-    }
-
-    @Test
-    void findAll() {
-        assertThat(testMe.findAll()).isEqualTo(inventoryService.findAll());
     }
 }

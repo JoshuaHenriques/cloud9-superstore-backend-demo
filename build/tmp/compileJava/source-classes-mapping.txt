@@ -62,7 +62,7 @@ org/jayhenri/ecommerce/model/Item.java
  org.jayhenri.ecommerce.model.Item
 org/jayhenri/ecommerce/model/Customer.java
  org.jayhenri.ecommerce.model.Customer
-org/jayhenri/ecommerce/controller/CustomerController.java
- org.jayhenri.ecommerce.controller.CustomerController
 org/jayhenri/ecommerce/controller/InventoryController.java
  org.jayhenri.ecommerce.controller.InventoryController
+org/jayhenri/ecommerce/controller/CustomerController.java
+ org.jayhenri.ecommerce.controller.CustomerController

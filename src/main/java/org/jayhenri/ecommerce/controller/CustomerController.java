@@ -65,13 +65,13 @@ public class CustomerController {
      * @param email the email
      * @throws InvalidCustomerException  the invalid customer exception
      * @throws CustomerNotFoundException the customer not found exception
-     * @throws InvalidNameException      the invalid name exception
      */
     @DeleteMapping(value = "/delete/{email}")
-    public void deleteCustomer(@PathVariable String email) throws InvalidCustomerException, CustomerNotFoundException, InvalidNameException {
+    public void deleteCustomer(@PathVariable String email) throws InvalidCustomerException, CustomerNotFoundException {
         if (!ObjectUtils.isEmpty(email)) {
             if (customerService.existsByEmail(email)) {
-                customerService.delete(customerService.getByEmail(email));
+                Customer _customer = customerService.getByEmail(email);
+                customerService.delete(_customer);
             } else throw new CustomerNotFoundException();
         } else throw new InvalidCustomerException();
     }
@@ -121,8 +121,11 @@ public class CustomerController {
     public void addToCart(@PathVariable String productName, @PathVariable String email) throws CustomerNotFoundException, ItemNotFoundException {
         if (customerService.existsByEmail(email)) {
             if (inventoryService.existsByProductName(productName)) {
-                customerService.addToCart(customerService.getByEmail(email), inventoryService.getByProductName(productName).getItem());
-            } throw new ItemNotFoundException();
+                Customer customer = customerService.getByEmail(email);
+                Inventory inventory = inventoryService.getByProductName(productName);
+                Item item = inventory.getItem();
+                customerService.addToCart(customer, item);
+            } else throw new ItemNotFoundException();
         } else throw new CustomerNotFoundException();
     }
 
@@ -131,13 +134,11 @@ public class CustomerController {
      *
      * @param productName the product name
      * @param email       the email
-     * @throws InvalidCustomerException  the invalid customer exception
      * @throws CustomerNotFoundException the customer not found exception
      * @throws ItemNotFoundException     the item not found exception
      */
     @DeleteMapping(value = "/{email}/cart/remove/{productName}")
-    public void removeFromCart(@PathVariable String productName, @PathVariable String email) throws InvalidCustomerException, CustomerNotFoundException, ItemNotFoundException {
-        customerService.removeFromCart(customerService.getByEmail(email), productName);
+    public void removeFromCart(@PathVariable String productName, @PathVariable String email) throws CustomerNotFoundException, ItemNotFoundException {
         if (customerService.existsByEmail(email)) {
             if (inventoryService.existsByProductName(productName)) {
                 customerService.removeFromCart(customerService.getByEmail(email), productName);
@@ -177,13 +178,11 @@ public class CustomerController {
      *
      * @param email      the email
      * @param creditCard the credit card
-     * @throws InvalidNameException      the invalid name exception
-     * @throws InvalidCustomerException  the invalid customer exception
      * @throws CustomerNotFoundException the customer not found exception
      */
 // TODO: Github readme: describe functionalities
     @PostMapping(value = "/{email}/creditCard/add", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void addCreditCard(@PathVariable String email, @RequestBody CreditCard creditCard) throws InvalidNameException, InvalidCustomerException, CustomerNotFoundException {
+    public void addCreditCard(@PathVariable String email, @RequestBody CreditCard creditCard) throws CustomerNotFoundException {
         if (customerService.existsByEmail(email)) {
             // Validate CreditCard
             customerService.addCreditCard(customerService.getByEmail(email), creditCard);

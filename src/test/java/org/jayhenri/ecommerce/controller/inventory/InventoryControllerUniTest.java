@@ -49,7 +49,6 @@ class InventoryControllerUniTest {
         then(inventoryService).should().update(captorInventory.capture());
 
         assertThat(captorInventory.getValue()).isEqualTo(inventory);
-
     }
 
     @Test
