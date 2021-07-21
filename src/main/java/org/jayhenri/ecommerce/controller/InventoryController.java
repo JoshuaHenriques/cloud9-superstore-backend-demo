@@ -31,6 +31,7 @@ public class InventoryController {
      */
     @Autowired
     public InventoryController(InventoryService inventoryService) {
+
         this.inventoryService = inventoryService;
     }
 
@@ -40,12 +41,10 @@ public class InventoryController {
      * @param inventory the inventory
      * @return the response entity
      * @throws InvalidItemException        the invalid item exception
-     * @throws ItemNotFoundException       the item not found exception
-     * @throws ProductNameNotSameException the product name not same exception
      * @throws ItemAlreadyExistsException  the item already exists exception
      */
     @PutMapping(value = "/update", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Inventory> updateItem(@Valid @RequestBody Inventory inventory) throws InvalidItemException, ItemNotFoundException, ProductNameNotSameException, ItemAlreadyExistsException {
+    public ResponseEntity<String> updateItem(@Valid @RequestBody Inventory inventory) throws InvalidItemException, ItemAlreadyExistsException {
         if (!ObjectUtils.isEmpty(inventory)) {
             if (!inventoryService.existsByProductName(inventory.getProductName())) {
                 inventoryService.update(inventory);
@@ -63,14 +62,12 @@ public class InventoryController {
      * @throws InvalidItemException       the invalid item exception
      */
     @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Inventory> addItemToInventory(@Valid @RequestBody Inventory inventory) throws ItemAlreadyExistsException, InvalidItemException {
+    public ResponseEntity<Inventory> addItem(@Valid @RequestBody Inventory inventory) throws ItemAlreadyExistsException, InvalidItemException {
         if (!ObjectUtils.isEmpty(inventory)) {
             if (!inventoryService.existsByProductName(inventory.getProductName())) {
                 inventoryService.add(inventory);
             } else throw new ItemAlreadyExistsException();
         } else throw new InvalidItemException();
-
-
         return ResponseEntity.ok().build();
     }
 
@@ -97,7 +94,7 @@ public class InventoryController {
      * @throws ItemNotFoundException the item not found exception
      */
     @DeleteMapping(value = "/remove/{productName}")
-    public ResponseEntity<Inventory> removeItemToInventory(@PathVariable String productName) throws InvalidItemException, ItemNotFoundException {
+    public ResponseEntity<Inventory> removeItem(@PathVariable String productName) throws InvalidItemException, ItemNotFoundException {
         if (!ObjectUtils.isEmpty(productName)) {
             if (inventoryService.existsByProductName(productName)) {
                 inventoryService.delete(inventoryService.getByProductName(productName));
@@ -114,6 +111,7 @@ public class InventoryController {
      */
     @GetMapping(value = "/items/list")
     public List<Inventory> findAll() {
+
         return inventoryService.findAll();
     }
 }

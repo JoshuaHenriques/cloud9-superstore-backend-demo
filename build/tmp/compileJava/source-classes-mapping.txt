@@ -2,10 +2,10 @@ org/jayhenri/ecommerce/model/Inventory.java
  org.jayhenri.ecommerce.model.Inventory
 org/jayhenri/ecommerce/repository/InventoryRepository.java
  org.jayhenri.ecommerce.repository.InventoryRepository
-org/jayhenri/ecommerce/exception/ItemAlreadyExistsException.java
- org.jayhenri.ecommerce.exception.ItemAlreadyExistsException
 org/jayhenri/ecommerce/exception/ProductNameNotSameException.java
  org.jayhenri.ecommerce.exception.ProductNameNotSameException
+org/jayhenri/ecommerce/exception/ItemAlreadyExistsException.java
+ org.jayhenri.ecommerce.exception.ItemAlreadyExistsException
 org/jayhenri/ecommerce/service/AddressService.java
  org.jayhenri.ecommerce.service.AddressService
 org/jayhenri/ecommerce/model/OrderDetails.java
@@ -36,8 +36,6 @@ org/jayhenri/ecommerce/service/CustomerService.java
  org.jayhenri.ecommerce.service.CustomerService
 org/jayhenri/ecommerce/service/OrderService.java
  org.jayhenri.ecommerce.service.OrderService
-org/jayhenri/ecommerce/model/AuditModel.java
- org.jayhenri.ecommerce.model.AuditModel
 org/jayhenri/ecommerce/exception/ItemNotFoundException.java
  org.jayhenri.ecommerce.exception.ItemNotFoundException
 org/jayhenri/ecommerce/repository/OrderDBRepository.java
@@ -64,7 +62,7 @@ org/jayhenri/ecommerce/model/Item.java
  org.jayhenri.ecommerce.model.Item
 org/jayhenri/ecommerce/model/Customer.java
  org.jayhenri.ecommerce.model.Customer
-org/jayhenri/ecommerce/controller/CustomerController.java
- org.jayhenri.ecommerce.controller.CustomerController
 org/jayhenri/ecommerce/controller/InventoryController.java
  org.jayhenri.ecommerce.controller.InventoryController
+org/jayhenri/ecommerce/controller/CustomerController.java
+ org.jayhenri.ecommerce.controller.CustomerController

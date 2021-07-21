@@ -1,0 +1,7 @@
+{
+  "timestamp": "2021-07-13T03:26:22.822+00:00",
+  "status": 401,
+  "error": "Unauthorized",
+  "message": "Unauthorized",
+  "path": "/api/customers/list/customers"
+}

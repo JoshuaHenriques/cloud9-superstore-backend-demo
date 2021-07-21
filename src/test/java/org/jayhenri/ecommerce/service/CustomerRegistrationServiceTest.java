@@ -25,46 +25,30 @@ class CustomerRegistrationServiceTest {
     /**
      * The Test me.
      */
-    CustomerRegistrationService testMe;
+    private CustomerRegistrationService testMe;
 
     /**
      * The Customer repository.
      */
     @Mock
-    CustomerRepository customerRepository;
+    private CustomerRepository customerRepository;
 
     /**
      * The Captor customer.
      */
     @Captor
-    ArgumentCaptor<Customer> captorCustomer;
+    private ArgumentCaptor<Customer> captorCustomer;
 
     /**
      * The Captor string.
      */
     @Captor
-    ArgumentCaptor<String> captorString;
+    private ArgumentCaptor<String> captorString;
 
     /**
      * The Customer.
      */
-    Customer customer;
-    /**
-     * The Order.
-     */
-    OrderDetails orderDetails;
-    /**
-     * The Cart.
-     */
-    Cart cart;
-    /**
-     * The Credit card.
-     */
-    CreditCard creditCard;
-    /**
-     * The Item.
-     */
-    Item item;
+    private Customer customer;
 
     /**
      * Sets up.
@@ -76,7 +60,7 @@ class CustomerRegistrationServiceTest {
         ArrayList<OrderDetails> orderDetails = new ArrayList<>();
         ArrayList<CreditCard> creditCards = new ArrayList<>();
 
-        item = new Item(
+        Item item = new Item(
                 "Test Product",
                 "Test Description",
                 9.99
@@ -84,18 +68,18 @@ class CustomerRegistrationServiceTest {
 
         items.add(item);
 
-        this.orderDetails = new OrderDetails(
-              "PROCESSING",
-              "testMe@gmail.com",
+        OrderDetails orderDetails1 = new OrderDetails(
+                "PROCESSING",
+                "testMe@gmail.com",
                 items,
                 9.00
         );
-        cart = new Cart(
+        Cart cart = new Cart(
                 items,
                 "testMe@gmail.com",
                 29.23
         );
-        creditCard = new CreditCard(
+        CreditCard creditCard = new CreditCard(
                 "Ubuntu User",
                 "4716902620158281",
                 "8281",
@@ -103,7 +87,7 @@ class CustomerRegistrationServiceTest {
                 "8281"
         );
 
-        orderDetails.add(this.orderDetails);
+        orderDetails.add(orderDetails1);
         creditCards.add(creditCard);
 
         customer = new Customer(
@@ -125,7 +109,6 @@ class CustomerRegistrationServiceTest {
                 creditCards,
                 orderDetails
         );
-
     }
 
     /**
@@ -135,7 +118,7 @@ class CustomerRegistrationServiceTest {
      * @throws CustomerAlreadyExistsException the customer already exists exception
      */
     @Test
-    void testAdd() throws InvalidPostalCodeException, CustomerAlreadyExistsException {
+    void testAdd() {
         testMe.add(this.customer);
 
         then(customerRepository).should().save(captorCustomer.capture());
@@ -148,7 +131,7 @@ class CustomerRegistrationServiceTest {
      */
     @Test
     void existsByPhoneNumber() {
-        given(testMe.existsByPhoneNumber("1234567890"))
+        given(customerRepository.existsByPhoneNumber("1234567890"))
                 .willReturn(true);
 
         Boolean bool = testMe.existsByPhoneNumber("1234567890");
@@ -163,7 +146,7 @@ class CustomerRegistrationServiceTest {
      */
     @Test
     void doesNotExistsByPhoneNumber() {
-        given(testMe.existsByPhoneNumber("1234567890"))
+        given(customerRepository.existsByPhoneNumber("1234567890"))
                 .willReturn(false);
 
         Boolean bool = testMe.existsByPhoneNumber("1234567890");
@@ -198,7 +181,7 @@ class CustomerRegistrationServiceTest {
      */
     @Test
     void existsByEmail() {
-        given(testMe.existsByEmail("testMe@gmail.com"))
+        given(customerRepository.existsByEmail("testMe@gmail.com"))
                 .willReturn(true);
 
         Boolean bool = testMe.existsByEmail("testMe@gmail.com");
@@ -213,7 +196,7 @@ class CustomerRegistrationServiceTest {
      */
     @Test
     void doesNotExistsByEmail() {
-        given(testMe.existsByEmail("testMe@gmail.com"))
+        given(customerRepository.existsByEmail("testMe@gmail.com"))
                 .willReturn(false);
 
         Boolean bool = testMe.existsByEmail("testMe@gmail.com");

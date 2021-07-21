@@ -1,0 +1,134 @@
+GET http://localhost:8080/api/customers/list/customers
+
+<> 2021-07-18T134747.200.json
+
+###
+
+GET http://localhost:8080/api/customers/list/customers?pageSize=2&pageNo=0&sortBy=firstName
+
+<> 2021-07-13T103631.200.json
+
+###
+
+GET http://localhost:8080/api/customers/list/customers?pageSize=2&pageNo=0&sortBy=first\_name
+
+<> 2021-07-13T103550.500.json
+
+###
+
+GET http://localhost:8080/api/customers/list/customers?pageSize=2&pageNo=0&sortBy=first_name
+
+<> 2021-07-13T103519.500.json
+
+###
+
+GET http://localhost:8080/api/customers/list/customers?pageSize=2&pageNo=0
+
+<> 2021-07-13T101209.200.json
+
+###
+
+GET http://localhost:8080/api/customers/list/customers?pageSize=2&pageNo=1
+
+<> 2021-07-13T101144.200.json
+
+###
+
+GET http://localhost:8080/api/customers/list/customers?pageSize=50&pageNo=1
+
+<> 2021-07-13T101127.200.json
+
+###
+
+GET http://localhost:8080/api/customers/list/customers
+
+<> 2021-07-13T100826.200.json
+
+###
+
+GET http://localhost:8080/api/customers/list/customers?pageSize=50&pageNo=1
+
+<> 2021-07-13T095128.500.json
+
+###
+
+GET http://localhost:8080/api/customers/list/customers?pageSize=50&pageNo=1
+
+<> 2021-07-13T095024.500.json
+
+###
+
+GET http://localhost:8080/api/customers/list/customers
+
+<> 2021-07-13T094932.500.json
+
+###
+
+GET http://localhost:8080/api/customers/list/customers
+
+<> 2021-07-13T094619.500.json
+
+###
+
+GET http://localhost:8080/api/customers/list/customers
+
+<> 2021-07-13T094524.500.json
+
+###
+
+GET http://localhost:8080/api/customers/list/customers
+
+<> 2021-07-13T094343.500.json
+
+###
+
+GET http://localhost:8080/api/customers/list/customers
+
+<> 2021-07-13T094241.500.json
+
+###
+
+GET http://localhost:8080/api/customers/list/customers
+
+<> 2021-07-13T093515.500.json
+
+###
+
+GET http://localhost:8080/api/customers/list/customers
+
+###
+
+GET http://localhost:8080/api/customers/list/customers
+
+<> 2021-07-13T070625.200.json
+
+###
+
+GET http://localhost:8080/api/customers/list/customers
+
+<> 2021-07-13T002802.200.json
+
+###
+
+GET http://localhost:8080/api/customers/list/customers
+
+<> 2021-07-12T232631.401.json
+
+###
+
+GET http://localhost:8080/api/customers/list/customers
+
+<> 2021-07-12T232622.401.json
+
+###
+
+GET http://localhost:8080/api/customers/list/customers
+
+<> 2021-07-12T195820.401.json
+
+###
+
+GET http://localhost:8080/api/customers/list/customers
+
+###
+

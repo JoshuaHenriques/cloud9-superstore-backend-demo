@@ -23,34 +23,30 @@ class InventoryServiceTest {
     /**
      * The Test me.
      */
-    InventoryService testMe;
+    private InventoryService testMe;
 
     /**
      * The Inventory repository.
      */
     @Mock
-    InventoryRepository inventoryRepository;
+    private InventoryRepository inventoryRepository;
 
     /**
      * The Captor inventory.
      */
     @Captor
-    ArgumentCaptor<Inventory> captorInventory;
+    private ArgumentCaptor<Inventory> captorInventory;
 
     /**
      * The Captor string.
      */
     @Captor
-    ArgumentCaptor<String> captorString;
+    private ArgumentCaptor<String> captorString;
 
     /**
      * The Inventory.
      */
-    Inventory inventory;
-    /**
-     * The Item.
-     */
-    Item item;
+    private Inventory inventory;
 
     /**
      * Sets up.
@@ -59,7 +55,7 @@ class InventoryServiceTest {
     void setUp() {
         testMe = new InventoryService(inventoryRepository);
 
-        item = new Item(
+        Item item = new Item(
                 "Test Product",
                 "Test Description",
                 9.99
@@ -76,7 +72,7 @@ class InventoryServiceTest {
      * Test add.
      */
     @Test
-    void testAdd() {
+    void add() {
         testMe.add(this.inventory);
 
         then(inventoryRepository).should().save(captorInventory.capture());
@@ -88,7 +84,7 @@ class InventoryServiceTest {
      * Test update.
      */
     @Test
-    void testUpdate() {
+    void update() {
         testMe.update(this.inventory);
 
         then(inventoryRepository).should().save(captorInventory.capture());
@@ -123,7 +119,7 @@ class InventoryServiceTest {
      */
     @Test
     void existsByProductName() {
-        given(testMe.existsByProductName("Test Product"))
+        given(inventoryRepository.existsByProductName("Test Product"))
                 .willReturn(true);
 
         Boolean bool = testMe.existsByProductName("Test Product");
@@ -138,7 +134,7 @@ class InventoryServiceTest {
      */
     @Test
     void doesNotExistsByProductName() {
-        given(testMe.existsByProductName("Test Product"))
+        given(inventoryRepository.existsByProductName("Test Product"))
                 .willReturn(false);
 
         Boolean bool = testMe.existsByProductName("Test Product");

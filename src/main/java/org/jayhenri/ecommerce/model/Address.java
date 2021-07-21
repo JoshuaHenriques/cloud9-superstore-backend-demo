@@ -8,7 +8,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.util.UUID;
 
 /**
  * The type Address.
@@ -17,7 +16,7 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @Embeddable
-public class Address extends AuditModel implements Serializable {
+public class Address implements Serializable {
 
     private static final long serialVersionUID = -3706717403046249323L;
 

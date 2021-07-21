@@ -1,0 +1,6 @@
+org.jayhenri.ecommerce
+org.jayhenri.ecommerce.controller
+org.jayhenri.ecommerce.exception
+org.jayhenri.ecommerce.model
+org.jayhenri.ecommerce.repository
+org.jayhenri.ecommerce.service

@@ -19,7 +19,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Entity
 @Table(name = "inventory")
-public class Inventory extends AuditModel implements Serializable {
+public class Inventory implements Serializable {
 
     private static final long serialVersionUID = -1112477284611964207L;
 
