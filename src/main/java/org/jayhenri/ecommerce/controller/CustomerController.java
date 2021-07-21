@@ -142,7 +142,7 @@ public class CustomerController {
         if (customerService.existsByEmail(email)) {
             if (inventoryService.existsByProductName(productName)) {
                 customerService.removeFromCart(customerService.getByEmail(email), productName);
-            } throw new ItemNotFoundException();
+            } else throw new ItemNotFoundException();
         } else throw new CustomerNotFoundException();
     }
 
