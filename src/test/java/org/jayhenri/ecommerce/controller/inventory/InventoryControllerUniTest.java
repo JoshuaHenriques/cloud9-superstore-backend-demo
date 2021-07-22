@@ -59,10 +59,10 @@ class InventoryControllerUniTest {
     }
 
     @Test
-    void updateItemThrowsItemAlreadyExistsException() {
-        given(inventoryService.existsByProductName(inventory.getProductName())).willReturn(true);
+    void updateItemThrowsItemNotFoundException() {
+        given(inventoryService.existsByProductName(inventory.getProductName())).willReturn(false);
 
-        assertThrows(ItemAlreadyExistsException.class, () -> {
+        assertThrows(ItemNotFoundException.class, () -> {
             testMe.updateItem(inventory);
         });
     }

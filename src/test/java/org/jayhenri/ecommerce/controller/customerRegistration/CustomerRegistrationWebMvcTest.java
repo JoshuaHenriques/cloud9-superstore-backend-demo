@@ -14,6 +14,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.junit.jupiter.MockitoExtension;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -25,12 +27,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
 @ExtendWith(MockitoExtension.class)
 @WebMvcTest(CustomerRegistrationController.class)
-public class CustomerRegistrationIntTest {
+public class CustomerRegistrationWebMvcTest {
     
     @Autowired
     private MockMvc mockMvc;
@@ -95,12 +96,11 @@ public class CustomerRegistrationIntTest {
     @Test
     void registerThrowsCustomerAlreadyExistsException() throws Exception {
         given(customerService.existsByPhoneNumber(customer.getPhoneNumber())).willReturn(true);
-        given(addressService.isValidPostalCode(customer.getAddress().getPostalCode())).willReturn(true);
 
         mockMvc.perform(post("/api/register/customer")
             .contentType(MediaType.APPLICATION_JSON)
             .content(asJsonString(customer)))
-            .andExpect(status().isOk());
+            .andExpect(status().isBadRequest());
     }
 
     @Test
@@ -117,13 +117,9 @@ public class CustomerRegistrationIntTest {
 
     @Test
     void registerThrowsInvalidCustomerException() throws Exception {
-        given(customerService.existsByPhoneNumber(customer.getPhoneNumber())).willReturn(false);
-        given(customerService.existsByEmail(customer.getPhoneNumber())).willReturn(false);
-        given(addressService.isValidPostalCode(customer.getAddress().getPostalCode())).willReturn(false);
 
         mockMvc.perform(post("/api/register/customer")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(asJsonString(customer)))
+            .contentType(MediaType.APPLICATION_JSON))
             .andExpect(status().isBadRequest());
     }
 }

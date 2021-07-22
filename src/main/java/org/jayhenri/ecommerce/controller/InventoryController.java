@@ -2,7 +2,6 @@ package org.jayhenri.ecommerce.controller;
 
 import org.jayhenri.ecommerce.exception.*;
 import org.jayhenri.ecommerce.model.Inventory;
-import org.jayhenri.ecommerce.model.Item;
 import org.jayhenri.ecommerce.service.InventoryService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,14 +41,15 @@ public class InventoryController {
      * @return the response entity
      * @throws InvalidItemException        the invalid item exception
      * @throws ItemAlreadyExistsException  the item already exists exception
+     * @throws ItemNotFoundException
      */
     @PutMapping(value = "/update", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> updateItem(@Valid @RequestBody Inventory inventory) throws InvalidItemException, ItemAlreadyExistsException {
+    public ResponseEntity<String> updateItem(@Valid @RequestBody Inventory inventory) throws InvalidItemException, ItemNotFoundException {
         if (!ObjectUtils.isEmpty(inventory)) {
-            if (!inventoryService.existsByProductName(inventory.getProductName())) {
+            if (inventoryService.existsByProductName(inventory.getProductName())) {
                 inventoryService.update(inventory);
                 return ResponseEntity.ok().build();
-            } else throw new ItemAlreadyExistsException();
+            } else throw new ItemNotFoundException();
         } else throw new InvalidItemException();
     }
 
