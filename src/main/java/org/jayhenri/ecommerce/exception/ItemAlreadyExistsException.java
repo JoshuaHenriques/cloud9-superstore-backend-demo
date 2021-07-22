@@ -6,6 +6,9 @@ package org.jayhenri.ecommerce.exception;
 /**
  * The type Item already exists exception.
  */
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.http.HttpStatus;
+@ResponseStatus(value = HttpStatus.BAD_REQUEST)
 public class ItemAlreadyExistsException extends Exception {
 
     private List<String> errorMessages = new ArrayList<>();

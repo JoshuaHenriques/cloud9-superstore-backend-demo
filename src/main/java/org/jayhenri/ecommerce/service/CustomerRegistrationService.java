@@ -1,8 +1,5 @@
 package org.jayhenri.ecommerce.service;
 
-import org.jayhenri.ecommerce.exception.CustomerAlreadyExistsException;
-import org.jayhenri.ecommerce.exception.InvalidPostalCodeException;
-import org.jayhenri.ecommerce.model.Customer;
 import org.jayhenri.ecommerce.repository.CustomerRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;

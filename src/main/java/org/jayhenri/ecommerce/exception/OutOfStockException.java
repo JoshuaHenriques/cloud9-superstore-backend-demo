@@ -6,6 +6,9 @@ import java.util.List;
 /**
  * The type Out of stock exception.
  */
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.http.HttpStatus;
+@ResponseStatus(value = HttpStatus.BAD_REQUEST)
 public class OutOfStockException extends Exception {
 
     private List<String> errorMessages = new ArrayList<>();

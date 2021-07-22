@@ -6,6 +6,9 @@ import java.util.List;
 /**
  * The type Invalid customer exception.
  */
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.http.HttpStatus;
+@ResponseStatus(value = HttpStatus.BAD_REQUEST)
 public class InvalidCustomerException extends Exception {
     private List<String> errorMessages = new ArrayList<>();
 

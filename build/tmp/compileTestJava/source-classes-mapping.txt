@@ -2,8 +2,8 @@ org/jayhenri/ecommerce/controller/customerRegistration/CustomerRegistrationUniTe
  org.jayhenri.ecommerce.controller.customerRegistration.CustomerRegistrationUniTest
 org/jayhenri/ecommerce/service/InventoryServiceTest.java
  org.jayhenri.ecommerce.service.InventoryServiceTest
-org/jayhenri/ecommerce/service/CustomerServiceTest.java
- org.jayhenri.ecommerce.service.CustomerServiceTest
+org/jayhenri/ecommerce/controller/customer/CustomerControllerUniTest.java
+ org.jayhenri.ecommerce.controller.customer.CustomerControllerUniTest
 org/jayhenri/ecommerce/controller/inventory/InventoryControllerIntTest.java
  org.jayhenri.ecommerce.controller.inventory.InventoryControllerIntTest
 org/jayhenri/ecommerce/service/CustomerRegistrationServiceTest.java
@@ -12,5 +12,5 @@ org/jayhenri/ecommerce/controller/inventory/InventoryControllerUniTest.java
  org.jayhenri.ecommerce.controller.inventory.InventoryControllerUniTest
 org/jayhenri/ecommerce/service/OrderDetailsDBServiceUT.java
  org.jayhenri.ecommerce.service.OrderDetailsDBServiceUT
-org/jayhenri/ecommerce/controller/customer/CustomerControllerUniTest.java
- org.jayhenri.ecommerce.controller.customer.CustomerControllerUniTest
+org/jayhenri/ecommerce/service/CustomerServiceTest.java
+ org.jayhenri.ecommerce.service.CustomerServiceTest

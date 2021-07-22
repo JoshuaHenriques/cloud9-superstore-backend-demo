@@ -2,7 +2,6 @@ package org.jayhenri.ecommerce.controller.customerRegistration;
 
 import org.jayhenri.ecommerce.controller.CustomerRegistrationController;
 import org.jayhenri.ecommerce.exception.CustomerAlreadyExistsException;
-import org.jayhenri.ecommerce.exception.InvalidItemException;
 import org.jayhenri.ecommerce.exception.InvalidPostalCodeException;
 import org.jayhenri.ecommerce.model.*;
 import org.jayhenri.ecommerce.service.AddressService;

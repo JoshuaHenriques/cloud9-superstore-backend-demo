@@ -56,7 +56,7 @@ public class CustomerService {
      * @throws CustomerAlreadyExistsException the customer already exists exception
      * @throws InvalidPostalCodeException     the invalid postal code exception
      */
-    public void add(Customer customer) throws CustomerAlreadyExistsException, InvalidPostalCodeException {
+    public void add(Customer customer) {
 
         customerRepository.save(customer);
     }

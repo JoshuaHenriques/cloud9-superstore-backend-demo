@@ -1,6 +1,7 @@
 package org.jayhenri.ecommerce.controller;
 
 import org.jayhenri.ecommerce.exception.CustomerAlreadyExistsException;
+import org.jayhenri.ecommerce.exception.InvalidCustomerException;
 import org.jayhenri.ecommerce.exception.InvalidPostalCodeException;
 import org.jayhenri.ecommerce.model.Customer;
 import org.jayhenri.ecommerce.service.AddressService;
@@ -9,6 +10,7 @@ import org.jayhenri.ecommerce.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -42,10 +44,12 @@ public class CustomerRegistrationController {
      * @return the response entity
      * @throws CustomerAlreadyExistsException the customer already exists exception
      * @throws InvalidPostalCodeException     the invalid postal code exception
+     * @throws InvalidCustomerException
      */
     @PostMapping(value = "/customer", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Customer> register(@Valid @RequestBody Customer customer) throws CustomerAlreadyExistsException, InvalidPostalCodeException {
-        if (customerService.existsByPhoneNumber(customer.getPhoneNumber()) || customerService.existsByEmail(customer.getEmail()))
+    public ResponseEntity<Customer> register(@Valid @RequestBody Customer customer) throws CustomerAlreadyExistsException, InvalidPostalCodeException, InvalidCustomerException {
+        if (ObjectUtils.isEmpty(customer)) throw new InvalidCustomerException();
+        else if (customerService.existsByPhoneNumber(customer.getPhoneNumber()) || customerService.existsByEmail(customer.getEmail()))
             throw new CustomerAlreadyExistsException();
         else if (!addressService.isValidPostalCode(customer.getAddress().getPostalCode()))
             throw new InvalidPostalCodeException();

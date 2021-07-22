@@ -3,9 +3,13 @@ package org.jayhenri.ecommerce.exception;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.http.HttpStatus;
+
 /**
  * The type Invalid postal code exception.
  */
+@ResponseStatus(value = HttpStatus.BAD_REQUEST)
 public class InvalidPostalCodeException extends Exception {
 
     private List<String> errorMessages = new ArrayList<>();

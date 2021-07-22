@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.jayhenri.ecommerce.controller.customerRegistration.CustomerRegistrationUniTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2021-07-21T20:25:44" hostname="kde-neon" time="0.118">
+  <properties/>
+  <testcase name="registerThrowsInvalidPostalCodeException()" classname="org.jayhenri.ecommerce.controller.customerRegistration.CustomerRegistrationUniTest" time="0.104"/>
+  <testcase name="register()" classname="org.jayhenri.ecommerce.controller.customerRegistration.CustomerRegistrationUniTest" time="0.009"/>
+  <testcase name="registerThrowsCustomerAlreadyExistsException()" classname="org.jayhenri.ecommerce.controller.customerRegistration.CustomerRegistrationUniTest" time="0.004"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
