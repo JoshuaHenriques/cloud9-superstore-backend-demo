@@ -1,19 +1,26 @@
 package org.jayhenri.ecommerce.controller;
 
-import org.jayhenri.ecommerce.exception.*;
+import java.util.List;
+
+import org.jayhenri.ecommerce.exception.InvalidItemException;
+import org.jayhenri.ecommerce.exception.ItemAlreadyExistsException;
+import org.jayhenri.ecommerce.exception.ItemNotFoundException;
 import org.jayhenri.ecommerce.model.Inventory;
 import org.jayhenri.ecommerce.service.InventoryService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
-import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
-import java.util.List;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * The type Inventory controller.
@@ -45,7 +52,7 @@ public class InventoryController {
      * @throws ItemNotFoundException the item not found exception
      */
     @PutMapping(value = "/update", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> updateItem(@Valid @RequestBody Inventory inventory) throws InvalidItemException, ItemNotFoundException {
+    public ResponseEntity<String> updateItem(@RequestBody Inventory inventory) throws InvalidItemException, ItemNotFoundException {
         if (!ObjectUtils.isEmpty(inventory)) {
             if (inventoryService.existsByProductName(inventory.getProductName())) {
                 inventoryService.update(inventory);
@@ -66,7 +73,7 @@ public class InventoryController {
      * @throws InvalidItemException       the invalid item exception
      */
     @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> addItem(@Valid @RequestBody Inventory inventory) throws ItemAlreadyExistsException, InvalidItemException {
+    public ResponseEntity<String> addItem(@RequestBody Inventory inventory) throws ItemAlreadyExistsException, InvalidItemException {
         if (!ObjectUtils.isEmpty(inventory)) {
             if (!inventoryService.existsByProductName(inventory.getProductName())) {
                 inventoryService.add(inventory);
@@ -86,7 +93,7 @@ public class InventoryController {
      * @throws ItemNotFoundException the item not found exception
      */
     @GetMapping(value = "/get/{productName}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Inventory> getByProductName(@Valid @PathVariable String productName) throws ItemNotFoundException {
+    public ResponseEntity<Inventory> getByProductName(@PathVariable String productName) throws ItemNotFoundException {
         if (inventoryService.existsByProductName(productName)) {
 
             HttpHeaders responseHeaders = new HttpHeaders();

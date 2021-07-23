@@ -1,11 +1,20 @@
 package org.jayhenri.ecommerce.controller;
 
+import java.util.List;
+import java.util.UUID;
+
+import javax.naming.InvalidNameException;
+
 import org.jayhenri.ecommerce.exception.CustomerNotFoundException;
 import org.jayhenri.ecommerce.exception.InvalidCustomerException;
 import org.jayhenri.ecommerce.exception.ItemNotFoundException;
-import org.jayhenri.ecommerce.model.*;
+import org.jayhenri.ecommerce.model.Cart;
+import org.jayhenri.ecommerce.model.CreditCard;
+import org.jayhenri.ecommerce.model.Customer;
+import org.jayhenri.ecommerce.model.Inventory;
+import org.jayhenri.ecommerce.model.Item;
+import org.jayhenri.ecommerce.model.OrderDetails;
 import org.jayhenri.ecommerce.service.CustomerService;
-
 import org.jayhenri.ecommerce.service.InventoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -13,12 +22,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
-import org.springframework.web.bind.annotation.*;
-
-import javax.naming.InvalidNameException;
-import javax.validation.Valid;
-import java.util.List;
-import java.util.UUID;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * The type Customer controller.
@@ -51,7 +64,7 @@ public class CustomerController {
      * @throws CustomerNotFoundException the customer not found exception
      */
     @PutMapping(value = "/update", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> updateCustomer(@Valid @RequestBody Customer customer) throws InvalidCustomerException, CustomerNotFoundException {
+    public ResponseEntity<String> updateCustomer(@RequestBody Customer customer) throws InvalidCustomerException, CustomerNotFoundException {
         if (!ObjectUtils.isEmpty(customer)) {
             if (customerService.existsByEmail(customer.getEmail())) {
                 customerService.update(customer);
@@ -111,7 +124,7 @@ public class CustomerController {
      * @throws CustomerNotFoundException the customer not found exception
      */
     @GetMapping(value = "/{email}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Customer> getByEmail(@Valid @PathVariable String email) throws InvalidNameException, CustomerNotFoundException {
+    public ResponseEntity<Customer> getByEmail(@PathVariable String email) throws InvalidNameException, CustomerNotFoundException {
         if(!ObjectUtils.isEmpty(email)) {
             if (customerService.existsByEmail(email)) {
                 Customer _customer = customerService.getByEmail(email);

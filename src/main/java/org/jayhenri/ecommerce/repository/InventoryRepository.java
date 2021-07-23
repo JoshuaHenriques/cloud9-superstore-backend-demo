@@ -34,5 +34,8 @@ public interface InventoryRepository extends JpaRepository<Inventory, UUID> {
      * @return the by product name
      */
     @Query(value = "SELECT * FROM inventory WHERE inventory.product_Name=:productName", nativeQuery = true)
-    Inventory getByProductName(@Param("productName") String productName);
+    Inventory getByProductName(@Param("productName") String productName) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }
