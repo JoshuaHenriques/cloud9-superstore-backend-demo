@@ -5,6 +5,8 @@ import org.jayhenri.ecommerce.model.Inventory;
 import org.jayhenri.ecommerce.service.InventoryService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
@@ -47,7 +49,10 @@ public class InventoryController {
         if (!ObjectUtils.isEmpty(inventory)) {
             if (inventoryService.existsByProductName(inventory.getProductName())) {
                 inventoryService.update(inventory);
-                return ResponseEntity.ok().build();
+
+                HttpHeaders responseHeaders = new HttpHeaders();
+                responseHeaders.set("InventoryController", "updateItem");
+                return new ResponseEntity<>("Successfully Updated Item", responseHeaders, HttpStatus.OK);
             } else throw new ItemNotFoundException();
         } else throw new InvalidItemException();
     }
@@ -61,13 +66,16 @@ public class InventoryController {
      * @throws InvalidItemException       the invalid item exception
      */
     @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Inventory> addItem(@Valid @RequestBody Inventory inventory) throws ItemAlreadyExistsException, InvalidItemException {
+    public ResponseEntity<String> addItem(@Valid @RequestBody Inventory inventory) throws ItemAlreadyExistsException, InvalidItemException {
         if (!ObjectUtils.isEmpty(inventory)) {
             if (!inventoryService.existsByProductName(inventory.getProductName())) {
                 inventoryService.add(inventory);
+
+                HttpHeaders responseHeaders = new HttpHeaders();
+                responseHeaders.set("InventoryController", "addItem");
+                return new ResponseEntity<>("Successfully Created Item", responseHeaders, HttpStatus.CREATED);
             } else throw new ItemAlreadyExistsException();
         } else throw new InvalidItemException();
-        return ResponseEntity.ok().build();
     }
 
     /**
@@ -78,9 +86,13 @@ public class InventoryController {
      * @throws ItemNotFoundException the item not found exception
      */
     @GetMapping(value = "/get/{productName}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Inventory getByProductName(@Valid @PathVariable String productName) throws ItemNotFoundException {
+    public ResponseEntity<Inventory> getByProductName(@Valid @PathVariable String productName) throws ItemNotFoundException {
         if (inventoryService.existsByProductName(productName)) {
-            return inventoryService.getByProductName(productName);
+
+            HttpHeaders responseHeaders = new HttpHeaders();
+            responseHeaders.set("InventoryController", "getByProductName");
+            Inventory inventory = inventoryService.getByProductName(productName);
+            return new ResponseEntity<>(inventory, responseHeaders, HttpStatus.OK);
         } else throw new ItemNotFoundException();
     }
 
@@ -93,14 +105,16 @@ public class InventoryController {
      * @throws ItemNotFoundException the item not found exception
      */
     @DeleteMapping(value = "/remove/{productName}")
-    public ResponseEntity<Inventory> removeItem(@PathVariable String productName) throws InvalidItemException, ItemNotFoundException {
+    public ResponseEntity<String> removeItem(@PathVariable String productName) throws InvalidItemException, ItemNotFoundException {
         if (!ObjectUtils.isEmpty(productName)) {
             if (inventoryService.existsByProductName(productName)) {
                 inventoryService.delete(inventoryService.getByProductName(productName));
+
+                HttpHeaders responseHeaders = new HttpHeaders();
+                responseHeaders.set("InventoryController", "removeItem");
+                return new ResponseEntity<>("Successfully Deleted Item", responseHeaders, HttpStatus.OK);
             } else throw new ItemNotFoundException();
         } else throw new InvalidItemException();
-
-        return ResponseEntity.ok().build();
     }
 
     /**
@@ -109,8 +123,12 @@ public class InventoryController {
      * @return the list
      */
     @GetMapping(value = "/items/list")
-    public List<Inventory> findAll() {
+    public ResponseEntity<List<Inventory>> findAll() {
 
-        return inventoryService.findAll();
+        List<Inventory> allInventories = inventoryService.findAll();
+
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.set("InventoryController", "findAll");
+        return new ResponseEntity<>(allInventories, responseHeaders, HttpStatus.OK);
     }
 }

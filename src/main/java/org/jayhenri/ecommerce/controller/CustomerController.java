@@ -51,12 +51,16 @@ public class CustomerController {
      * @throws CustomerNotFoundException the customer not found exception
      */
     @PutMapping(value = "/update", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void updateCustomer(@Valid @RequestBody Customer customer) throws InvalidCustomerException, CustomerNotFoundException {
-        if (!ObjectUtils.isEmpty(customer))
-            if (customerService.existsByEmail(customer.getEmail()))
+    public ResponseEntity<String> updateCustomer(@Valid @RequestBody Customer customer) throws InvalidCustomerException, CustomerNotFoundException {
+        if (!ObjectUtils.isEmpty(customer)) {
+            if (customerService.existsByEmail(customer.getEmail())) {
                 customerService.update(customer);
-            else throw new CustomerNotFoundException(customer.getEmail());
-        else throw new InvalidCustomerException();
+
+                HttpHeaders responseHeaders = new HttpHeaders();
+                responseHeaders.set("CustomerController", "updateCustomer");
+                return new ResponseEntity<>("Successfully Updated Customer", responseHeaders, HttpStatus.OK);
+            } else throw new CustomerNotFoundException();
+        } else throw new InvalidCustomerException();
     }
 
     /**
@@ -67,11 +71,15 @@ public class CustomerController {
      * @throws CustomerNotFoundException the customer not found exception
      */
     @DeleteMapping(value = "/delete/{email}")
-    public void deleteCustomer(@PathVariable String email) throws InvalidCustomerException, CustomerNotFoundException {
+    public ResponseEntity<String> deleteCustomer(@PathVariable String email) throws InvalidCustomerException, CustomerNotFoundException {
         if (!ObjectUtils.isEmpty(email)) {
             if (customerService.existsByEmail(email)) {
                 Customer _customer = customerService.getByEmail(email);
                 customerService.delete(_customer);
+
+                HttpHeaders responseHeaders = new HttpHeaders();
+                responseHeaders.set("CustomerController", "deleteCustomer");
+                return new ResponseEntity<>("Successfully Deleted Customer", responseHeaders, HttpStatus.OK);
             } else throw new CustomerNotFoundException();
         } else throw new InvalidCustomerException();
     }
@@ -89,7 +97,9 @@ public class CustomerController {
                                                         // @RequestParam(defaultValue = "email") String sortBy
         List<Customer> list = customerService.findAllCustomers(pageNo, pageSize); // sortBy
 
-        return new ResponseEntity<>(list, new HttpHeaders(), HttpStatus.OK);
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.set("CustomerController", "listCustomers");
+        return new ResponseEntity<>(list, responseHeaders, HttpStatus.OK);
     }
 
     /**
@@ -101,10 +111,14 @@ public class CustomerController {
      * @throws CustomerNotFoundException the customer not found exception
      */
     @GetMapping(value = "/{email}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Customer getByEmail(@Valid @PathVariable String email) throws InvalidNameException, CustomerNotFoundException {
+    public ResponseEntity<Customer> getByEmail(@Valid @PathVariable String email) throws InvalidNameException, CustomerNotFoundException {
         if(!ObjectUtils.isEmpty(email)) {
             if (customerService.existsByEmail(email)) {
-                return customerService.getByEmail(email);
+                Customer _customer = customerService.getByEmail(email);
+
+                HttpHeaders responseHeaders = new HttpHeaders();
+                responseHeaders.set("CustomerController", "getByEmail");
+                return new ResponseEntity<>(_customer, responseHeaders, HttpStatus.OK);
             } else throw new CustomerNotFoundException();
         } else throw new InvalidNameException();
     }
@@ -118,13 +132,18 @@ public class CustomerController {
      * @throws ItemNotFoundException     the item not found exception
      */
     @PostMapping(value = "/{email}/cart/add/{productName}")
-    public void addToCart(@PathVariable String productName, @PathVariable String email) throws CustomerNotFoundException, ItemNotFoundException {
+    public ResponseEntity<String> addToCart(@PathVariable String productName, @PathVariable String email) throws CustomerNotFoundException, ItemNotFoundException {
         if (customerService.existsByEmail(email)) {
             if (inventoryService.existsByProductName(productName)) {
                 Customer customer = customerService.getByEmail(email);
                 Inventory inventory = inventoryService.getByProductName(productName);
                 Item item = inventory.getItem();
+
                 customerService.addToCart(customer, item);
+
+                HttpHeaders responseHeaders = new HttpHeaders();
+                responseHeaders.set("CustomerController", "addToCart");
+                return new ResponseEntity<>("Successfully Added to Cart", responseHeaders, HttpStatus.CREATED);
             } else throw new ItemNotFoundException();
         } else throw new CustomerNotFoundException();
     }
@@ -138,10 +157,14 @@ public class CustomerController {
      * @throws ItemNotFoundException     the item not found exception
      */
     @DeleteMapping(value = "/{email}/cart/remove/{productName}")
-    public void removeFromCart(@PathVariable String productName, @PathVariable String email) throws CustomerNotFoundException, ItemNotFoundException {
+    public ResponseEntity<String> removeFromCart(@PathVariable String productName, @PathVariable String email) throws CustomerNotFoundException, ItemNotFoundException {
         if (customerService.existsByEmail(email)) {
             if (inventoryService.existsByProductName(productName)) {
                 customerService.removeFromCart(customerService.getByEmail(email), productName);
+
+                HttpHeaders responseHeaders = new HttpHeaders();
+                responseHeaders.set("CustomerController", "removeFromCart");
+                return new ResponseEntity<>("Successfully Removed from Cart", responseHeaders, HttpStatus.OK);
             } else throw new ItemNotFoundException();
         } else throw new CustomerNotFoundException();
     }
@@ -153,9 +176,13 @@ public class CustomerController {
      * @throws CustomerNotFoundException the customer not found exception
      */
     @PatchMapping(value = "/{email}/cart/empty")
-    public void emptyCart(@PathVariable String email) throws CustomerNotFoundException {
+    public ResponseEntity<String> emptyCart(@PathVariable String email) throws CustomerNotFoundException {
         if (customerService.existsByEmail(email)) {
             customerService.emptyCart(customerService.getByEmail(email));
+
+            HttpHeaders responseHeaders = new HttpHeaders();
+            responseHeaders.set("CustomerController", "emptyCart");
+            return new ResponseEntity<>("Successfully Emptied Cart", responseHeaders, HttpStatus.OK);
         } else throw new CustomerNotFoundException();
     }
 
@@ -167,9 +194,13 @@ public class CustomerController {
      * @throws CustomerNotFoundException the customer not found exception
      */
     @GetMapping(value = "/{email}/cart/get", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Cart getCart(@PathVariable String email) throws CustomerNotFoundException {
+    public ResponseEntity<Cart> getCart(@PathVariable String email) throws CustomerNotFoundException {
         if (customerService.existsByEmail(email)) {
-            return customerService.getCart(customerService.getByEmail(email));
+            Cart _cart = customerService.getCart(customerService.getByEmail(email));
+
+            HttpHeaders responseHeaders = new HttpHeaders();
+            responseHeaders.set("CustomerController", "getCart");
+            return new ResponseEntity<>(_cart, responseHeaders, HttpStatus.OK);
         } else throw new CustomerNotFoundException();
     }
 
@@ -180,12 +211,15 @@ public class CustomerController {
      * @param creditCard the credit card
      * @throws CustomerNotFoundException the customer not found exception
      */
-// TODO: Github readme: describe functionalities
     @PostMapping(value = "/{email}/creditCard/add", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void addCreditCard(@PathVariable String email, @RequestBody CreditCard creditCard) throws CustomerNotFoundException {
+    public ResponseEntity<String> addCreditCard(@PathVariable String email, @RequestBody CreditCard creditCard) throws CustomerNotFoundException {
         if (customerService.existsByEmail(email)) {
             // Validate CreditCard
             customerService.addCreditCard(customerService.getByEmail(email), creditCard);
+
+            HttpHeaders responseHeaders = new HttpHeaders();
+            responseHeaders.set("CustomerController", "addCreditCard");
+            return new ResponseEntity<>("Successfully Added Credit Card", responseHeaders, HttpStatus.CREATED);
         } else throw new CustomerNotFoundException();
     }
 
@@ -197,10 +231,14 @@ public class CustomerController {
      * @throws CustomerNotFoundException the customer not found exception
      */
     @DeleteMapping(value = "/{email}/creditCard/remove/{fourDigits}")
-    public void removeCreditCard(@PathVariable String email, @PathVariable String fourDigits) throws CustomerNotFoundException {
+    public ResponseEntity<String> removeCreditCard(@PathVariable String email, @PathVariable String fourDigits) throws CustomerNotFoundException {
         if (customerService.existsByEmail(email)) {
             // CreditCardService should validate
             customerService.removeCreditCard(customerService.getByEmail(email), fourDigits);
+
+            HttpHeaders responseHeaders = new HttpHeaders();
+            responseHeaders.set("CustomerController", "removeCreditCard");
+            return new ResponseEntity<>("Successfully Removed Credit Card", responseHeaders, HttpStatus.OK);
         } else throw new CustomerNotFoundException();
     }
 
@@ -212,9 +250,13 @@ public class CustomerController {
      * @throws CustomerNotFoundException the customer not found exception
      */
     @GetMapping(value = "/{email}/creditCards/list", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<CreditCard> listCreditCards(@PathVariable String email) throws CustomerNotFoundException {
+    public ResponseEntity<List<CreditCard>> listCreditCards(@PathVariable String email) throws CustomerNotFoundException {
         if (customerService.existsByEmail(email)) {
-            return customerService.findAllCreditCards(customerService.getByEmail(email));
+            List<CreditCard> list = customerService.findAllCreditCards(customerService.getByEmail(email));
+
+            HttpHeaders responseHeaders = new HttpHeaders();
+            responseHeaders.set("CustomerController", "listCreditCards");
+            return new ResponseEntity<>(list, responseHeaders, HttpStatus.OK);
         } else throw new CustomerNotFoundException();
     }
 
@@ -226,10 +268,14 @@ public class CustomerController {
      * @throws CustomerNotFoundException the customer not found exception
      */
     @PostMapping(value = "/{email}/orderDetails/add", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void addOrder(@PathVariable String email, @RequestBody OrderDetails orderDetails) throws CustomerNotFoundException {
+    public ResponseEntity<String> addOrder(@PathVariable String email, @RequestBody OrderDetails orderDetails) throws CustomerNotFoundException {
         if (customerService.existsByEmail(email)) {
             // OrderService for validation
             customerService.addOrder(customerService.getByEmail(email), orderDetails);
+
+            HttpHeaders responseHeaders = new HttpHeaders();
+            responseHeaders.set("CustomerController", "addOrder");
+            return new ResponseEntity<>("Successfully Added Order", responseHeaders, HttpStatus.CREATED);
         } else throw new CustomerNotFoundException();
     }
 
@@ -242,10 +288,14 @@ public class CustomerController {
      * @throws CustomerNotFoundException the customer not found exception
      */
     @PutMapping(value = "/{email}/orderDetails/updateStatus/{uuid}/{status}")
-    public void updateOrder(@PathVariable String email, @PathVariable UUID uuid, @PathVariable String status) throws CustomerNotFoundException{
+    public ResponseEntity<String> updateOrder(@PathVariable String email, @PathVariable UUID uuid, @PathVariable String status) throws CustomerNotFoundException{
         if (customerService.existsByEmail(email)) {
             // Validate
             customerService.updateOrder(customerService.getByEmail(email), uuid, status);
+
+            HttpHeaders responseHeaders = new HttpHeaders();
+            responseHeaders.set("CustomerController", "updateOrder");
+            return new ResponseEntity<>("Successfully Updated Order", responseHeaders, HttpStatus.OK);
         } else throw new CustomerNotFoundException();
     }
 
@@ -257,9 +307,13 @@ public class CustomerController {
      * @throws CustomerNotFoundException the customer not found exception
      */
     @GetMapping(value = "/{email}/orderDetails/list", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<OrderDetails> listOrders(@PathVariable String email) throws CustomerNotFoundException {
+    public ResponseEntity<List<OrderDetails>> listOrders(@PathVariable String email) throws CustomerNotFoundException {
         if (customerService.existsByEmail(email)) {
-            return customerService.findAllOrders(customerService.getByEmail(email));
+            List<OrderDetails> list = customerService.findAllOrders(customerService.getByEmail(email));
+
+            HttpHeaders responseHeaders = new HttpHeaders();
+            responseHeaders.set("CustomerController", "listOrders");
+            return new ResponseEntity<>(list, responseHeaders, HttpStatus.OK);
         } else throw new CustomerNotFoundException();
     }
 }

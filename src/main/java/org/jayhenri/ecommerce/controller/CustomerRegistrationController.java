@@ -64,6 +64,6 @@ public class CustomerRegistrationController {
 
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.set("CustomerRegistrationController", "register");
-        return new ResponseEntity<String>("Successful", responseHeaders, HttpStatus.CREATED);
+        return new ResponseEntity<>("Successfully Created Customer", responseHeaders, HttpStatus.CREATED);
     }
 }
