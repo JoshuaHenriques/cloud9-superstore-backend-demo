@@ -25,6 +25,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
 
+/**
+ * The type Customer controller uni test.
+ */
 @ExtendWith(MockitoExtension.class)
 class CustomerControllerUniTest {
 
@@ -66,6 +69,9 @@ class CustomerControllerUniTest {
 
     private OrderDetails orderDetails1;
 
+    /**
+     * Sets up.
+     */
     @BeforeEach
     void setUp() {
         uuid = UUID.randomUUID();
@@ -135,6 +141,12 @@ class CustomerControllerUniTest {
         );
     }
 
+    /**
+     * Update customer.
+     *
+     * @throws InvalidCustomerException  the invalid customer exception
+     * @throws CustomerNotFoundException the customer not found exception
+     */
     @Test
     void updateCustomer() throws InvalidCustomerException, CustomerNotFoundException {
         given(customerService.existsByEmail(customer.getEmail())).willReturn(true);
@@ -146,6 +158,9 @@ class CustomerControllerUniTest {
         assertThat(captorCustomer.getValue()).isEqualTo(customer);
     }
 
+    /**
+     * Update customer throws invalid customer exception.
+     */
     @Test
     void updateCustomerThrowsInvalidCustomerException() {
         assertThrows(InvalidCustomerException.class, () -> {
@@ -153,6 +168,9 @@ class CustomerControllerUniTest {
         });
     }
 
+    /**
+     * Update customer throws customer already exists exception.
+     */
     @Test
     void updateCustomerThrowsCustomerAlreadyExistsException() {
         given(customerService.existsByEmail(customer.getEmail())).willReturn(false);
@@ -162,6 +180,12 @@ class CustomerControllerUniTest {
         });
     }
 
+    /**
+     * Delete customer.
+     *
+     * @throws InvalidCustomerException  the invalid customer exception
+     * @throws CustomerNotFoundException the customer not found exception
+     */
     @Test
     void deleteCustomer() throws InvalidCustomerException, CustomerNotFoundException {
         given(customerService.existsByEmail("testMe@gmail.com")).willReturn(true);
@@ -175,6 +199,9 @@ class CustomerControllerUniTest {
         assertThat(captorCustomer.getValue().getEmail()).isEqualTo("testMe@gmail.com");
     }
 
+    /**
+     * Delete customer throws customer not found exception.
+     */
     @Test
     void deleteCustomerThrowsCustomerNotFoundException() {
         assertThrows(CustomerNotFoundException.class, () -> {
@@ -182,6 +209,9 @@ class CustomerControllerUniTest {
         });
     }
 
+    /**
+     * Delete customer throws invalid customer exception.
+     */
     @Test
     void deleteCustomerThrowsInvalidCustomerException() {
         assertThrows(InvalidCustomerException.class, () -> {
@@ -189,12 +219,21 @@ class CustomerControllerUniTest {
         });
     }
 
+    /**
+     * List customers.
+     */
     @Test
     @Disabled
     void listCustomers() {
 
     }
 
+    /**
+     * Gets by email.
+     *
+     * @throws InvalidNameException      the invalid name exception
+     * @throws CustomerNotFoundException the customer not found exception
+     */
     @Test
     void getByEmail() throws InvalidNameException, CustomerNotFoundException {
         given(customerService.existsByEmail("testMe@gmail.com")).willReturn(true);
@@ -206,6 +245,9 @@ class CustomerControllerUniTest {
         assertThat("testMe@gmail.com").isEqualTo(captorString.getValue());
     }
 
+    /**
+     * Gets by email throws invalid name exception.
+     */
     @Test
     void getByEmailThrowsInvalidNameException() {
         assertThrows(InvalidNameException.class, () -> {
@@ -213,6 +255,9 @@ class CustomerControllerUniTest {
         });
     }
 
+    /**
+     * Gets by email throws customer not found exception.
+     */
     @Test
     void getByEmailThrowsCustomerNotFoundException() {
         given(customerService.existsByEmail("testMe@gmail.com")).willReturn(false);
@@ -222,6 +267,12 @@ class CustomerControllerUniTest {
         });
     }
 
+    /**
+     * Add to cart.
+     *
+     * @throws CustomerNotFoundException the customer not found exception
+     * @throws ItemNotFoundException     the item not found exception
+     */
     @Test
     void addToCart() throws CustomerNotFoundException, ItemNotFoundException {
         given(customerService.existsByEmail("testMe@gmail.com")).willReturn(true);
@@ -238,6 +289,9 @@ class CustomerControllerUniTest {
         assertThat(captorItem.getValue()).isEqualTo(inventory.getItem());
     }
 
+    /**
+     * Add to cart throws customer not found exception.
+     */
     @Test
     void addToCartThrowsCustomerNotFoundException() {
         given(customerService.existsByEmail("testMe@gmail.com")).willReturn(false);
@@ -247,6 +301,9 @@ class CustomerControllerUniTest {
         });
     }
 
+    /**
+     * Add to cart throws item not found exception.
+     */
     @Test
     void addToCartThrowsItemNotFoundException() {
         given(customerService.existsByEmail("testMe@gmail.com")).willReturn(true);
@@ -257,6 +314,12 @@ class CustomerControllerUniTest {
         });
     }
 
+    /**
+     * Remove from cart.
+     *
+     * @throws CustomerNotFoundException the customer not found exception
+     * @throws ItemNotFoundException     the item not found exception
+     */
     @Test
     void removeFromCart() throws CustomerNotFoundException, ItemNotFoundException {
         given(customerService.existsByEmail("testMe@gmail.com")).willReturn(true);
@@ -272,6 +335,9 @@ class CustomerControllerUniTest {
         assertThat(captorString.getValue()).isEqualTo("Test Product");
     }
 
+    /**
+     * Remove from cart throws customer not found exception.
+     */
     @Test
     void removeFromCartThrowsCustomerNotFoundException() {
         given(customerService.existsByEmail("testMe@gmail.com")).willReturn(false);
@@ -281,6 +347,9 @@ class CustomerControllerUniTest {
         });
     }
 
+    /**
+     * Remove from cart throws item not found exception.
+     */
     @Test
     void removeFromCartThrowsItemNotFoundException() {
         given(customerService.existsByEmail("testMe@gmail.com")).willReturn(true);
@@ -291,6 +360,11 @@ class CustomerControllerUniTest {
         });
     }
 
+    /**
+     * Empty cart.
+     *
+     * @throws CustomerNotFoundException the customer not found exception
+     */
     @Test
     void emptyCart() throws CustomerNotFoundException {
         given(customerService.existsByEmail("testMe@gmail.com")).willReturn(true);
@@ -303,6 +377,9 @@ class CustomerControllerUniTest {
         assertThat(captorCustomer.getValue()).isEqualTo(customer);
     }
 
+    /**
+     * Empty cart throws customer not found exception.
+     */
     @Test
     void emptyCartThrowsCustomerNotFoundException() {
         given(customerService.existsByEmail("testMe@gmail.com")).willReturn(false);
@@ -312,6 +389,11 @@ class CustomerControllerUniTest {
         });
     }
 
+    /**
+     * Gets cart.
+     *
+     * @throws CustomerNotFoundException the customer not found exception
+     */
     @Test
     void getCart() throws CustomerNotFoundException {
         given(customerService.existsByEmail("testMe@gmail.com")).willReturn(true);
@@ -324,6 +406,9 @@ class CustomerControllerUniTest {
         assertThat(captorCustomer.getValue()).isEqualTo(customer);
     }
 
+    /**
+     * Gets cart throws customer not found exception.
+     */
     @Test
     void getCartThrowsCustomerNotFoundException() {
         given(customerService.existsByEmail("testMe@gmail.com")).willReturn(false);
@@ -333,6 +418,11 @@ class CustomerControllerUniTest {
         });
     }
 
+    /**
+     * Add credit card.
+     *
+     * @throws CustomerNotFoundException the customer not found exception
+     */
     @Test
     void addCreditCard() throws CustomerNotFoundException {
         given(customerService.existsByEmail("testMe@gmail.com")).willReturn(true);
@@ -346,6 +436,9 @@ class CustomerControllerUniTest {
         assertThat(captorCreditCard.getValue()).isEqualTo(creditCard);
     }
 
+    /**
+     * Add credit card throws customer not found exception.
+     */
     @Test
     void addCreditCardThrowsCustomerNotFoundException() {
         given(customerService.existsByEmail("testMe@gmail.com")).willReturn(false);
@@ -355,6 +448,11 @@ class CustomerControllerUniTest {
         });
     }
 
+    /**
+     * Remove credit card.
+     *
+     * @throws CustomerNotFoundException the customer not found exception
+     */
     @Test
     void removeCreditCard() throws CustomerNotFoundException {
         given(customerService.existsByEmail("testMe@gmail.com")).willReturn(true);
@@ -368,6 +466,9 @@ class CustomerControllerUniTest {
         assertThat(captorString.getValue()).isEqualTo("4352");
     }
 
+    /**
+     * Remove credit card throws customer not found exception.
+     */
     @Test
     void removeCreditCardThrowsCustomerNotFoundException() {
         given(customerService.existsByEmail("testMe@gmail.com")).willReturn(false);
@@ -377,6 +478,11 @@ class CustomerControllerUniTest {
         });
     }
 
+    /**
+     * List credit cards.
+     *
+     * @throws CustomerNotFoundException the customer not found exception
+     */
     @Test
     void listCreditCards() throws CustomerNotFoundException {
         given(customerService.existsByEmail("testMe@gmail.com")).willReturn(true);
@@ -389,6 +495,9 @@ class CustomerControllerUniTest {
         assertThat(captorCustomer.getValue()).isEqualTo(customer);
     }
 
+    /**
+     * List credit cards throws customer not found exception.
+     */
     @Test
     void listCreditCardsThrowsCustomerNotFoundException() {
         given(customerService.existsByEmail("testMe@gmail.com")).willReturn(false);
@@ -398,6 +507,11 @@ class CustomerControllerUniTest {
         });
     }
 
+    /**
+     * Add order.
+     *
+     * @throws CustomerNotFoundException the customer not found exception
+     */
     @Test
     void addOrder() throws CustomerNotFoundException {
         given(customerService.existsByEmail("testMe@gmail.com")).willReturn(true);
@@ -411,6 +525,9 @@ class CustomerControllerUniTest {
         assertThat(captorOrderDetails.getValue()).isEqualTo(orderDetails1);
     }
 
+    /**
+     * Add order throws customer not found exception.
+     */
     @Test
     void addOrderThrowsCustomerNotFoundException() {
         given(customerService.existsByEmail("testMe@gmail.com")).willReturn(false);
@@ -420,6 +537,11 @@ class CustomerControllerUniTest {
         });
     }
 
+    /**
+     * Update order.
+     *
+     * @throws CustomerNotFoundException the customer not found exception
+     */
     @Test
     void updateOrder() throws CustomerNotFoundException {
         given(customerService.existsByEmail("testMe@gmail.com")).willReturn(true);
@@ -434,6 +556,9 @@ class CustomerControllerUniTest {
         assertThat(captorString.getValue()).isEqualTo("TEST");
     }
 
+    /**
+     * Update order throws customer not found exception.
+     */
     @Test
     void updateOrderThrowsCustomerNotFoundException() {
         given(customerService.existsByEmail("testMe@gmail.com")).willReturn(false);
@@ -443,6 +568,11 @@ class CustomerControllerUniTest {
         });
     }
 
+    /**
+     * List orders.
+     *
+     * @throws CustomerNotFoundException the customer not found exception
+     */
     @Test
     void listOrders() throws CustomerNotFoundException {
         given(customerService.existsByEmail("testMe@gmail.com")).willReturn(true);
@@ -455,6 +585,9 @@ class CustomerControllerUniTest {
         assertThat(captorCustomer.getValue()).isEqualTo(customer);
     }
 
+    /**
+     * List orders throws customer not found exception.
+     */
     @Test
     void listOrdersThrowsCustomerNotFoundException() {
         given(customerService.existsByEmail("testMe@gmail.com")).willReturn(false);

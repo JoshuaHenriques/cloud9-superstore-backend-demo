@@ -20,6 +20,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
 
+/**
+ * The type Inventory controller uni test.
+ */
 @ExtendWith(MockitoExtension.class)
 class InventoryControllerUniTest {
 
@@ -36,12 +39,22 @@ class InventoryControllerUniTest {
 
     private Inventory inventory;
 
+    /**
+     * Sets up.
+     */
     @BeforeEach
     void setUp() {
         inventory = new Inventory();
         testMe = new InventoryController(inventoryService);
     }
 
+    /**
+     * Update item.
+     *
+     * @throws ItemAlreadyExistsException the item already exists exception
+     * @throws InvalidItemException       the invalid item exception
+     * @throws ItemNotFoundException      the item not found exception
+     */
     @Test
     void updateItem() throws ItemAlreadyExistsException, InvalidItemException, ItemNotFoundException {
         assertThat(ResponseEntity.ok().build()).isEqualTo(testMe.updateItem(inventory));
@@ -51,6 +64,9 @@ class InventoryControllerUniTest {
         assertThat(captorInventory.getValue()).isEqualTo(inventory);
     }
 
+    /**
+     * Update item throws invalid item exception.
+     */
     @Test
     void updateItemThrowsInvalidItemException() {
         assertThrows(InvalidItemException.class, () -> {
@@ -58,6 +74,9 @@ class InventoryControllerUniTest {
         });
     }
 
+    /**
+     * Update item throws item not found exception.
+     */
     @Test
     void updateItemThrowsItemNotFoundException() {
         given(inventoryService.existsByProductName(inventory.getProductName())).willReturn(false);
@@ -67,6 +86,12 @@ class InventoryControllerUniTest {
         });
     }
 
+    /**
+     * Add item.
+     *
+     * @throws ItemAlreadyExistsException the item already exists exception
+     * @throws InvalidItemException       the invalid item exception
+     */
     @Test
     void addItem() throws ItemAlreadyExistsException, InvalidItemException {
         assertThat(ResponseEntity.ok().build()).isEqualTo(testMe.addItem(inventory));
@@ -77,6 +102,9 @@ class InventoryControllerUniTest {
 
     }
 
+    /**
+     * Add item throws invalid item exception.
+     */
     @Test
     void addItemThrowsInvalidItemException() {
         assertThrows(InvalidItemException.class, () -> {
@@ -84,6 +112,9 @@ class InventoryControllerUniTest {
         });
     }
 
+    /**
+     * Add item throws item already exists exception.
+     */
     @Test
     void addItemThrowsItemAlreadyExistsException() {
         given(inventoryService.existsByProductName(inventory.getProductName())).willReturn(true);
@@ -93,6 +124,11 @@ class InventoryControllerUniTest {
         });
     }
 
+    /**
+     * Gets by product name.
+     *
+     * @throws ItemNotFoundException the item not found exception
+     */
     @Test
     void getByProductName() throws ItemNotFoundException {
         given(inventoryService.existsByProductName("Test")).willReturn(true);
@@ -105,6 +141,9 @@ class InventoryControllerUniTest {
         assertThat(captorString.getValue()).isEqualTo("Test");
     }
 
+    /**
+     * Gets by product name throws item not found exception.
+     */
     @Test
     void getByProductNameThrowsItemNotFoundException() {
         given(inventoryService.existsByProductName("Test")).willReturn(false);
@@ -114,6 +153,12 @@ class InventoryControllerUniTest {
         });
     }
 
+    /**
+     * Remove item.
+     *
+     * @throws InvalidItemException  the invalid item exception
+     * @throws ItemNotFoundException the item not found exception
+     */
     @Test
     void removeItem() throws InvalidItemException, ItemNotFoundException {
         given(inventoryService.existsByProductName("Test")).willReturn(true);
@@ -124,6 +169,9 @@ class InventoryControllerUniTest {
         then(inventoryService).should().delete(inventory);
     }
 
+    /**
+     * Remove item throws invalid item exception.
+     */
     @Test
     void removeItemThrowsInvalidItemException() {
         assertThrows(InvalidItemException.class, () -> {
@@ -131,6 +179,9 @@ class InventoryControllerUniTest {
         });
     }
 
+    /**
+     * Remove item throws item not found exception.
+     */
     @Test
     void removeItemThrowsItemNotFoundException() {
         given(inventoryService.existsByProductName("Test")).willReturn(false);
@@ -140,6 +191,9 @@ class InventoryControllerUniTest {
         });
     }
 
+    /**
+     * Find all.
+     */
     @Test
     void findAll() {
         assertThat(testMe.findAll()).isEqualTo(inventoryService.findAll());

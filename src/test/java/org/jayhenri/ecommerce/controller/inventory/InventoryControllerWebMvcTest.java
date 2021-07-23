@@ -18,6 +18,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.mockito.BDDMockito.given;
 
+/**
+ * The type Inventory controller web mvc test.
+ */
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(InventoryController.class)
 class InventoryControllerWebMvcTest {
@@ -30,6 +33,9 @@ class InventoryControllerWebMvcTest {
 
     private Inventory inventory;
 
+    /**
+     * Sets up.
+     */
     @BeforeEach
     void setUp() {
         inventory = new Inventory(
@@ -42,6 +48,12 @@ class InventoryControllerWebMvcTest {
                 ));
     }
 
+    /**
+     * As json string string.
+     *
+     * @param obj the obj
+     * @return the string
+     */
     public static String asJsonString(final Object obj) {
         try {
             final ObjectMapper mapper = new ObjectMapper();
@@ -50,8 +62,13 @@ class InventoryControllerWebMvcTest {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }  
+    }
 
+    /**
+     * Update item.
+     *
+     * @throws Exception the exception
+     */
     @Test
     void updateItem() throws Exception {
         given(inventoryService.existsByProductName(inventory.getProductName())).willReturn(true);
@@ -62,6 +79,11 @@ class InventoryControllerWebMvcTest {
             .andExpect(status().isOk());
     }
 
+    /**
+     * Update item throws item not found exception.
+     *
+     * @throws Exception the exception
+     */
     @Test
     void updateItemThrowsItemNotFoundException() throws Exception {
         given(inventoryService.existsByProductName(inventory.getProductName())).willReturn(false);
@@ -72,6 +94,11 @@ class InventoryControllerWebMvcTest {
             .andExpect(status().isBadRequest());
     }
 
+    /**
+     * Update item throws invalid item exception.
+     *
+     * @throws Exception the exception
+     */
     @Test
     void updateItemThrowsInvalidItemException() throws Exception {
 
@@ -81,6 +108,11 @@ class InventoryControllerWebMvcTest {
             .andExpect(status().isBadRequest());
     }
 
+    /**
+     * Add item to inventory.
+     *
+     * @throws Exception the exception
+     */
     @Test
     void addItemToInventory() throws Exception {
         given(inventoryService.existsByProductName(inventory.getProductName())).willReturn(false);
@@ -91,6 +123,11 @@ class InventoryControllerWebMvcTest {
             .andExpect(status().isOk());
     }
 
+    /**
+     * Add item to inventory throws item already exists exception.
+     *
+     * @throws Exception the exception
+     */
     @Test
     void addItemToInventoryThrowsItemAlreadyExistsException() throws Exception {
         given(inventoryService.existsByProductName(inventory.getProductName())).willReturn(true);
@@ -101,6 +138,11 @@ class InventoryControllerWebMvcTest {
             .andExpect(status().isBadRequest());
     }
 
+    /**
+     * Add item to inventory throws invalid item exception.
+     *
+     * @throws Exception the exception
+     */
     @Test
     void addItemToInventoryThrowsInvalidItemException() throws Exception {
 
@@ -110,6 +152,11 @@ class InventoryControllerWebMvcTest {
             .andExpect(status().isBadRequest());
     }
 
+    /**
+     * Gets by product name.
+     *
+     * @throws Exception the exception
+     */
     @Test
     void getByProductName() throws Exception {
         given(inventoryService.existsByProductName("Test Product")).willReturn(true);
@@ -118,6 +165,11 @@ class InventoryControllerWebMvcTest {
             .andExpect(status().isOk());
     }
 
+    /**
+     * Gets by product name throws item not found exception.
+     *
+     * @throws Exception the exception
+     */
     @Test
     void getByProductNameThrowsItemNotFoundException() throws Exception {
         given(inventoryService.existsByProductName("Test Product")).willReturn(false);
@@ -126,6 +178,11 @@ class InventoryControllerWebMvcTest {
             .andExpect(status().isBadRequest());
     }
 
+    /**
+     * Remove item to inventory.
+     *
+     * @throws Exception the exception
+     */
     @Test
     void removeItemToInventory() throws Exception {
         given(inventoryService.existsByProductName("Test Project")).willReturn(true);
@@ -134,6 +191,11 @@ class InventoryControllerWebMvcTest {
             .andExpect(status().isOk());
     }
 
+    /**
+     * Remove item to inventory throws item not found exception.
+     *
+     * @throws Exception the exception
+     */
     @Test
     void removeItemToInventoryThrowsItemNotFoundException() throws Exception {
         given(inventoryService.existsByProductName("Test Project")).willReturn(false);
@@ -142,6 +204,11 @@ class InventoryControllerWebMvcTest {
             .andExpect(status().isBadRequest());
     }
 
+    /**
+     * Remove item to inventory throws invalid item exception.
+     *
+     * @throws Exception the exception
+     */
     @Test
     void removeItemToInventoryThrowsInvalidItemException() throws Exception {
 
@@ -151,6 +218,11 @@ class InventoryControllerWebMvcTest {
             .andExpect(status().isNotFound());
     }
 
+    /**
+     * Find all.
+     *
+     * @throws Exception the exception
+     */
     @Test
     void findAll() throws Exception {
         mockMvc.perform(get("/api/inventory/items/list"))

@@ -39,9 +39,8 @@ public class InventoryController {
      *
      * @param inventory the inventory
      * @return the response entity
-     * @throws InvalidItemException        the invalid item exception
-     * @throws ItemAlreadyExistsException  the item already exists exception
-     * @throws ItemNotFoundException
+     * @throws InvalidItemException  the invalid item exception
+     * @throws ItemNotFoundException the item not found exception
      */
     @PutMapping(value = "/update", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> updateItem(@Valid @RequestBody Inventory inventory) throws InvalidItemException, ItemNotFoundException {

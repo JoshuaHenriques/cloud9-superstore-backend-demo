@@ -32,7 +32,7 @@ public class Customer implements Serializable {
      * The constant ROLE_ADMIN.
      */
     public static final int ROLE_ADMIN = 1;
-    
+
     /**
      * The constant ROLE_NONADMIN.
      */

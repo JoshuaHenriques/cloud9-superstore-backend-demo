@@ -8,6 +8,10 @@ import java.util.List;
  */
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.http.HttpStatus;
+
+/**
+ * The type Email not same exception.
+ */
 @ResponseStatus(value = HttpStatus.BAD_REQUEST)
 public class EmailNotSameException extends Exception {
     private List<String> errorMessages = new ArrayList<>();

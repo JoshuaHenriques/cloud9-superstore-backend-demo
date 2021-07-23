@@ -29,6 +29,9 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+/**
+ * The type Customer registration web mvc test.
+ */
 @ExtendWith(MockitoExtension.class)
 @WebMvcTest(CustomerRegistrationController.class)
 public class CustomerRegistrationWebMvcTest {
@@ -45,7 +48,10 @@ public class CustomerRegistrationWebMvcTest {
     private Customer customer;
 
     private CustomerRegistrationController testMe;
-    
+
+    /**
+     * Sets up.
+     */
     @BeforeEach
     void setUp() {
         customer = new Customer();
@@ -72,6 +78,12 @@ public class CustomerRegistrationWebMvcTest {
         );
     }
 
+    /**
+     * As json string string.
+     *
+     * @param obj the obj
+     * @return the string
+     */
     public static String asJsonString(final Object obj) {
         try {
             final ObjectMapper mapper = new ObjectMapper();
@@ -80,8 +92,13 @@ public class CustomerRegistrationWebMvcTest {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }  
+    }
 
+    /**
+     * Register.
+     *
+     * @throws Exception the exception
+     */
     @Test
     void register() throws Exception {
         given(customerService.existsByPhoneNumber(customer.getPhoneNumber())).willReturn(false);
@@ -93,6 +110,11 @@ public class CustomerRegistrationWebMvcTest {
             .andExpect(status().isOk());
     }
 
+    /**
+     * Register throws customer already exists exception.
+     *
+     * @throws Exception the exception
+     */
     @Test
     void registerThrowsCustomerAlreadyExistsException() throws Exception {
         given(customerService.existsByPhoneNumber(customer.getPhoneNumber())).willReturn(true);
@@ -103,6 +125,11 @@ public class CustomerRegistrationWebMvcTest {
             .andExpect(status().isBadRequest());
     }
 
+    /**
+     * Register throws invalid postal code exception.
+     *
+     * @throws Exception the exception
+     */
     @Test
     void registerThrowsInvalidPostalCodeException() throws Exception {
         given(customerService.existsByPhoneNumber(customer.getPhoneNumber())).willReturn(false);
@@ -115,6 +142,11 @@ public class CustomerRegistrationWebMvcTest {
             .andExpect(status().isBadRequest());
     }
 
+    /**
+     * Register throws invalid customer exception.
+     *
+     * @throws Exception the exception
+     */
     @Test
     void registerThrowsInvalidCustomerException() throws Exception {
 

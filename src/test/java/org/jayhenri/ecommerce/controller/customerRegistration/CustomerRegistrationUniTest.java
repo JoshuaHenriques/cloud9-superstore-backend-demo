@@ -23,6 +23,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
 
+/**
+ * The type Customer registration uni test.
+ */
 @ExtendWith(MockitoExtension.class)
 public class CustomerRegistrationUniTest {
 
@@ -39,6 +42,9 @@ public class CustomerRegistrationUniTest {
 
     private Customer customer;
 
+    /**
+     * Sets up.
+     */
     @BeforeEach
     void setUp() {
         customer = new Customer();
@@ -99,6 +105,13 @@ public class CustomerRegistrationUniTest {
         );
     }
 
+    /**
+     * Register.
+     *
+     * @throws InvalidPostalCodeException     the invalid postal code exception
+     * @throws CustomerAlreadyExistsException the customer already exists exception
+     * @throws InvalidCustomerException       the invalid customer exception
+     */
     @Test
     void register() throws InvalidPostalCodeException, CustomerAlreadyExistsException, InvalidCustomerException {
         given(customerService.existsByEmail(customer.getEmail())).willReturn(false);
@@ -113,6 +126,9 @@ public class CustomerRegistrationUniTest {
         assertThat(customer).isEqualTo(captorCustomer.getValue());
     }
 
+    /**
+     * Register throws invalid postal code exception.
+     */
     @Test
     void registerThrowsInvalidPostalCodeException() {
         given(addressService.isValidPostalCode(customer.getAddress().getPostalCode())).willReturn(false);
@@ -122,6 +138,9 @@ public class CustomerRegistrationUniTest {
         });
     }
 
+    /**
+     * Register throws customer already exists exception.
+     */
     @Test
     void registerThrowsCustomerAlreadyExistsException() {
         given(customerService.existsByEmail(customer.getEmail())).willReturn(true);

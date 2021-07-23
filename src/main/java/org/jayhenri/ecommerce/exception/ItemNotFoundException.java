@@ -8,6 +8,10 @@ package org.jayhenri.ecommerce.exception;
  */
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.http.HttpStatus;
+
+/**
+ * The type Item not found exception.
+ */
 @ResponseStatus(value = HttpStatus.BAD_REQUEST)
 public class ItemNotFoundException extends Exception {
 
