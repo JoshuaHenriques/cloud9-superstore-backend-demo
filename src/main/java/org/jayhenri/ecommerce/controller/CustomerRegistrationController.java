@@ -20,7 +20,7 @@ import javax.validation.Valid;
 /**
  * The type Customer registration controller.
  */
-@RestController // Indicates that the data returned by each method will be written straight into the response body instead of rendering a template
+@RestController
 @RequestMapping("api/register")
 public class CustomerRegistrationController {
 
@@ -50,9 +50,13 @@ public class CustomerRegistrationController {
      */
     @PostMapping(value = "/customer", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> register(@Valid @RequestBody Customer customer) throws CustomerAlreadyExistsException, InvalidPostalCodeException, InvalidCustomerException {
-        if (ObjectUtils.isEmpty(customer)) throw new InvalidCustomerException();
+        
+        if (ObjectUtils.isEmpty(customer)) 
+            throw new InvalidCustomerException();
+
         else if (customerService.existsByPhoneNumber(customer.getPhoneNumber()) || customerService.existsByEmail(customer.getEmail()))
             throw new CustomerAlreadyExistsException();
+
         else if (!addressService.isValidPostalCode(customer.getAddress().getPostalCode()))
             throw new InvalidPostalCodeException();
 

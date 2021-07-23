@@ -13,8 +13,6 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.http.ResponseEntity;
-import org.springframework.orm.hibernate5.HibernateTemplate;
 
 import javax.naming.InvalidNameException;
 import java.util.ArrayList;

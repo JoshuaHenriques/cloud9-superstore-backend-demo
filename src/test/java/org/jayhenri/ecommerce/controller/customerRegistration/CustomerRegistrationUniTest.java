@@ -118,7 +118,7 @@ public class CustomerRegistrationUniTest {
         given(customerService.existsByPhoneNumber(customer.getPhoneNumber())).willReturn(false);
         given(addressService.isValidPostalCode(customer.getAddress().getPostalCode())).willReturn(true);
 
-        ResponseEntity<Customer> response = testMe.register(customer);
+        ResponseEntity<String> response = testMe.register(customer);
 
         then(customerService).should().add(captorCustomer.capture());
 

@@ -23,9 +23,6 @@ public class CustomerService {
 
     private final CustomerRepository customerRepository;
 
-    private static final Double HST = 0.13;
-    private static final Double DELIVERY_FEE = 9.99;
-
     /**
      * Instantiates a new Customer service.
      *

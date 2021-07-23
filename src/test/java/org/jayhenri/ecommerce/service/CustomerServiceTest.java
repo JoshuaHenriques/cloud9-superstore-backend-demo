@@ -12,17 +12,12 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
 
@@ -232,17 +227,11 @@ class CustomerServiceTest {
 
     /**
      * Find all customers.
+     * Do later.
      */
-// Do later
     @Test
     @Disabled
     void findAllCustomers() {
-        Integer pageNo = 0;
-        Integer pageSize = 5;
-        List<Customer> list = testMe.findAllCustomers(pageNo,pageSize);
-        Pageable paging = PageRequest.of(pageNo,pageSize);
-
-        then(customerRepository).should().findAll(paging);
     }
 
     /**

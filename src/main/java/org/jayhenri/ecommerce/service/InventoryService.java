@@ -1,13 +1,10 @@
 package org.jayhenri.ecommerce.service;
 
-import org.jayhenri.ecommerce.exception.*;
 import org.jayhenri.ecommerce.model.Inventory;
-import org.jayhenri.ecommerce.model.Item;
 import org.jayhenri.ecommerce.repository.InventoryRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ObjectUtils;
 
 import java.util.List;
 

@@ -11,18 +11,11 @@ import org.jayhenri.ecommerce.model.Customer;
 import org.jayhenri.ecommerce.service.AddressService;
 import org.jayhenri.ecommerce.service.CustomerService;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Captor;
 import org.mockito.junit.jupiter.MockitoExtension;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.BDDMockito.then;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -47,15 +40,12 @@ public class CustomerRegistrationWebMvcTest {
 
     private Customer customer;
 
-    private CustomerRegistrationController testMe;
-
     /**
      * Sets up.
      */
     @BeforeEach
     void setUp() {
         customer = new Customer();
-        testMe = new CustomerRegistrationController(addressService, customerService);
 
         customer = new Customer(
                 "testMe",
