@@ -2,6 +2,7 @@ package org.jayhenri.ecommerce.controller.customerRegistration;
 
 import org.jayhenri.ecommerce.controller.CustomerRegistrationController;
 import org.jayhenri.ecommerce.exception.CustomerAlreadyExistsException;
+import org.jayhenri.ecommerce.exception.InvalidCustomerException;
 import org.jayhenri.ecommerce.exception.InvalidPostalCodeException;
 import org.jayhenri.ecommerce.model.*;
 import org.jayhenri.ecommerce.service.AddressService;
@@ -99,7 +100,7 @@ public class CustomerRegistrationUniTest {
     }
 
     @Test
-    void register() throws InvalidPostalCodeException, CustomerAlreadyExistsException {
+    void register() throws InvalidPostalCodeException, CustomerAlreadyExistsException, InvalidCustomerException {
         given(customerService.existsByEmail(customer.getEmail())).willReturn(false);
         given(customerService.existsByPhoneNumber(customer.getPhoneNumber())).willReturn(false);
         given(addressService.isValidPostalCode(customer.getAddress().getPostalCode())).willReturn(true);

@@ -14,7 +14,6 @@ import java.util.List;
 /**
  * The type Inventory service.
  */
-// TODO: Implement better
 @Service
 public class InventoryService {
 

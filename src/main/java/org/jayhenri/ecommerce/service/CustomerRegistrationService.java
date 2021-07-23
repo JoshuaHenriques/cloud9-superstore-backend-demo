@@ -1,5 +1,6 @@
 package org.jayhenri.ecommerce.service;
 
+import org.jayhenri.ecommerce.model.Customer;
 import org.jayhenri.ecommerce.repository.CustomerRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;

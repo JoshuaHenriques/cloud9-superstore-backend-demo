@@ -43,7 +43,7 @@ class InventoryControllerUniTest {
     }
 
     @Test
-    void updateItem() throws ItemAlreadyExistsException, InvalidItemException {
+    void updateItem() throws ItemAlreadyExistsException, InvalidItemException, ItemNotFoundException {
         assertThat(ResponseEntity.ok().build()).isEqualTo(testMe.updateItem(inventory));
 
         then(inventoryService).should().update(captorInventory.capture());

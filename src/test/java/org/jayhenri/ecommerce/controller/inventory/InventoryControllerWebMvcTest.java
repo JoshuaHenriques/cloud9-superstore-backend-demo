@@ -76,7 +76,8 @@ class InventoryControllerWebMvcTest {
     void updateItemThrowsInvalidItemException() throws Exception {
 
         mockMvc.perform(put("/api/inventory/update")
-            .contentType(MediaType.APPLICATION_JSON))
+            .contentType(MediaType.APPLICATION_JSON)
+            .content("{}"))
             .andExpect(status().isBadRequest());
     }
 
@@ -104,7 +105,8 @@ class InventoryControllerWebMvcTest {
     void addItemToInventoryThrowsInvalidItemException() throws Exception {
 
         mockMvc.perform(post("/api/inventory/add")
-            .contentType(MediaType.APPLICATION_JSON))
+            .contentType(MediaType.APPLICATION_JSON)
+            .content("{}"))
             .andExpect(status().isBadRequest());
     }
 
@@ -143,7 +145,9 @@ class InventoryControllerWebMvcTest {
     @Test
     void removeItemToInventoryThrowsInvalidItemException() throws Exception {
 
-        mockMvc.perform(delete("/api/inventory/remove/"))
+        mockMvc.perform(delete("/api/inventory/remove/")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content("{}"))
             .andExpect(status().isNotFound());
     }
 

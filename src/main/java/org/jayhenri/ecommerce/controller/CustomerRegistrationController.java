@@ -8,6 +8,8 @@ import org.jayhenri.ecommerce.service.AddressService;
 import org.jayhenri.ecommerce.service.CustomerService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
@@ -47,7 +49,7 @@ public class CustomerRegistrationController {
      * @throws InvalidCustomerException
      */
     @PostMapping(value = "/customer", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Customer> register(@Valid @RequestBody Customer customer) throws CustomerAlreadyExistsException, InvalidPostalCodeException, InvalidCustomerException {
+    public ResponseEntity<String> register(@Valid @RequestBody Customer customer) throws CustomerAlreadyExistsException, InvalidPostalCodeException, InvalidCustomerException {
         if (ObjectUtils.isEmpty(customer)) throw new InvalidCustomerException();
         else if (customerService.existsByPhoneNumber(customer.getPhoneNumber()) || customerService.existsByEmail(customer.getEmail()))
             throw new CustomerAlreadyExistsException();
@@ -55,6 +57,9 @@ public class CustomerRegistrationController {
             throw new InvalidPostalCodeException();
 
         customerService.add(customer);
-        return ResponseEntity.ok().build();
+
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.set("CustomerRegistrationController", "register");
+        return new ResponseEntity<String>("Successful", responseHeaders, HttpStatus.CREATED);
     }
 }
