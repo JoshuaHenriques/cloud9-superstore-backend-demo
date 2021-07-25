@@ -1,5 +1,6 @@
 # Ecommerce-Demo API
 #### 172.105.3.51:8080
+#### Test Cases: 112
 #### 20 Endpoints
 ```
 (api/register):
