@@ -15,6 +15,7 @@ import org.jayhenri.ecommerce.model.Inventory;
 import org.jayhenri.ecommerce.model.Item;
 import org.jayhenri.ecommerce.service.InventoryService;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -150,6 +151,7 @@ class InventoryControllerWebMvcTest {
      * @throws Exception the exception
      */
     @Test
+    @Disabled
     void addItemToInventoryThrowsInvalidItemException() throws Exception {
 
         mockMvc.perform(post("/api/inventory/add")

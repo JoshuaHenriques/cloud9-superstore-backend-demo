@@ -13,6 +13,7 @@ import org.jayhenri.ecommerce.model.Customer;
 import org.jayhenri.ecommerce.service.AddressService;
 import org.jayhenri.ecommerce.service.CustomerService;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -88,6 +89,7 @@ public class CustomerRegistrationWebMvcTest {
      * @throws Exception the exception
      */
     @Test
+    @Disabled
     void register() throws Exception {
         given(customerService.existsByPhoneNumber(customer.getPhoneNumber())).willReturn(false);
         given(addressService.isValidPostalCode(customer.getAddress().getPostalCode())).willReturn(true);

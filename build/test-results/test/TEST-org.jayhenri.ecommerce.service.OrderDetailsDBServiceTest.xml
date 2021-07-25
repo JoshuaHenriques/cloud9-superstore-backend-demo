@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="org.jayhenri.ecommerce.service.OrderDetailsDBServiceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-07-23T14:08:50" hostname="kde-neon" time="0.035">
+<testsuite name="org.jayhenri.ecommerce.service.OrderDetailsDBServiceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-07-25T05:23:40" hostname="kde-neon" time="0.02">
   <properties/>
-  <testcase name="addOrderToDB()" classname="org.jayhenri.ecommerce.service.OrderDetailsDBServiceTest" time="0.035"/>
+  <testcase name="addOrderToDB()" classname="org.jayhenri.ecommerce.service.OrderDetailsDBServiceTest" time="0.02"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

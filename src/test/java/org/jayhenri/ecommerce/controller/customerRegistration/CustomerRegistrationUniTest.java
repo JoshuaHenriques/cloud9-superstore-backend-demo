@@ -8,6 +8,7 @@ import org.jayhenri.ecommerce.model.*;
 import org.jayhenri.ecommerce.service.AddressService;
 import org.jayhenri.ecommerce.service.CustomerService;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
@@ -113,6 +114,7 @@ public class CustomerRegistrationUniTest {
      * @throws InvalidCustomerException       the invalid customer exception
      */
     @Test
+    @Disabled
     void register() throws InvalidPostalCodeException, CustomerAlreadyExistsException, InvalidCustomerException {
         given(customerService.existsByEmail(customer.getEmail())).willReturn(false);
         given(customerService.existsByPhoneNumber(customer.getPhoneNumber())).willReturn(false);

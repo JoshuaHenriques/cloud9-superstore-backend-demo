@@ -7,6 +7,7 @@ import org.jayhenri.ecommerce.exception.ItemNotFoundException;
 import org.jayhenri.ecommerce.model.Inventory;
 import org.jayhenri.ecommerce.service.InventoryService;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
@@ -24,6 +25,7 @@ import static org.mockito.BDDMockito.then;
  * The type Inventory controller uni test.
  */
 @ExtendWith(MockitoExtension.class)
+@Disabled
 class InventoryControllerUniTest {
 
     @Captor

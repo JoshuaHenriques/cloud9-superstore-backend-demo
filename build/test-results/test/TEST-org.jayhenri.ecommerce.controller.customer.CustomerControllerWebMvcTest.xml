@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.jayhenri.ecommerce.controller.customer.CustomerControllerWebMvcTest" tests="14" skipped="2" failures="0" errors="0" timestamp="2021-07-25T05:23:38" hostname="kde-neon" time="0.098">
+  <properties/>
+  <testcase name="deleteCustomer()" classname="org.jayhenri.ecommerce.controller.customer.CustomerControllerWebMvcTest" time="0.017"/>
+  <testcase name="emptyCart()" classname="org.jayhenri.ecommerce.controller.customer.CustomerControllerWebMvcTest" time="0.005"/>
+  <testcase name="addOrder()" classname="org.jayhenri.ecommerce.controller.customer.CustomerControllerWebMvcTest" time="0.014"/>
+  <testcase name="updateOrder()" classname="org.jayhenri.ecommerce.controller.customer.CustomerControllerWebMvcTest" time="0.001">
+    <skipped/>
+  </testcase>
+  <testcase name="addCreditCard()" classname="org.jayhenri.ecommerce.controller.customer.CustomerControllerWebMvcTest" time="0.008"/>
+  <testcase name="updateItem()" classname="org.jayhenri.ecommerce.controller.customer.CustomerControllerWebMvcTest" time="0.006"/>
+  <testcase name="getCart()" classname="org.jayhenri.ecommerce.controller.customer.CustomerControllerWebMvcTest" time="0.006"/>
+  <testcase name="addToCart()" classname="org.jayhenri.ecommerce.controller.customer.CustomerControllerWebMvcTest" time="0.005"/>
+  <testcase name="listOrders()" classname="org.jayhenri.ecommerce.controller.customer.CustomerControllerWebMvcTest" time="0.005"/>
+  <testcase name="removeCreditCard()" classname="org.jayhenri.ecommerce.controller.customer.CustomerControllerWebMvcTest" time="0.005"/>
+  <testcase name="listCustomers()" classname="org.jayhenri.ecommerce.controller.customer.CustomerControllerWebMvcTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="getByEmail()" classname="org.jayhenri.ecommerce.controller.customer.CustomerControllerWebMvcTest" time="0.005"/>
+  <testcase name="removeFromCart()" classname="org.jayhenri.ecommerce.controller.customer.CustomerControllerWebMvcTest" time="0.006"/>
+  <testcase name="listCreditCard()" classname="org.jayhenri.ecommerce.controller.customer.CustomerControllerWebMvcTest" time="0.005"/>
+  <system-out><![CDATA[2021-07-25 01:23:38.468  INFO 209773 --- [    Test worker] .b.t.a.w.s.WebMvcTestContextBootstrapper : Neither @ContextConfiguration nor @ContextHierarchy found for test class [org.jayhenri.ecommerce.controller.customer.CustomerControllerWebMvcTest], using SpringBootContextLoader
+2021-07-25 01:23:38.468  INFO 209773 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [org.jayhenri.ecommerce.controller.customer.CustomerControllerWebMvcTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+2021-07-25 01:23:38.469  INFO 209773 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [org.jayhenri.ecommerce.controller.customer.CustomerControllerWebMvcTest]: CustomerControllerWebMvcTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2021-07-25 01:23:38.476  INFO 209773 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration org.jayhenri.ecommerce.EcommerceApplication for test class org.jayhenri.ecommerce.controller.customer.CustomerControllerWebMvcTest
+2021-07-25 01:23:38.477  INFO 209773 --- [    Test worker] .b.t.a.w.s.WebMvcTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.security.test.context.support.WithSecurityContextTestExecutionListener, org.springframework.security.test.context.support.ReactorContextTestExecutionListener, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
+2021-07-25 01:23:38.478  INFO 209773 --- [    Test worker] .b.t.a.w.s.WebMvcTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@64de3fd3, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@1c636ce4, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@69f06ea0, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@141435ab, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@1a1a05d, org.springframework.test.context.support.DirtiesContextTestExecutionListener@622e8c1, org.springframework.test.context.transaction.TransactionalTestExecutionListener@6ccd13cb, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@5941da94, org.springframework.security.test.context.support.WithSecurityContextTestExecutionListener@55ee2aa9, org.springframework.test.context.event.EventPublishingTestExecutionListener@441bb435, org.springframework.security.test.context.support.ReactorContextTestExecutionListener@40cca436, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@178e53c1, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@339188fb, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@2ab238a0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@ffac4d4, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@6a8f9eb1, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@5566054b]
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v2.5.2)
+
+2021-07-25 01:23:38.496  INFO 209773 --- [    Test worker] o.j.e.c.c.CustomerControllerWebMvcTest   : Starting CustomerControllerWebMvcTest using Java 11.0.11 on kde-neon with PID 209773 (started by joshua in /home/joshua/Documents/ecommerce-backend)
+2021-07-25 01:23:38.496  INFO 209773 --- [    Test worker] o.j.e.c.c.CustomerControllerWebMvcTest   : No active profile set, falling back to default profiles: default
+2021-07-25 01:23:38.799  INFO 209773 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2021-07-25 01:23:38.799  INFO 209773 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2021-07-25 01:23:38.800  INFO 209773 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2021-07-25 01:23:38.808  INFO 209773 --- [    Test worker] o.j.e.c.c.CustomerControllerWebMvcTest   : Started CustomerControllerWebMvcTest in 0.327 seconds (JVM running for 4.367)
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

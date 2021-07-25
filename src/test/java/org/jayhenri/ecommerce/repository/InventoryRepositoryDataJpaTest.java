@@ -2,6 +2,9 @@ package org.jayhenri.ecommerce.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.List;
+
+import org.jayhenri.ecommerce.model.Inventory;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +22,12 @@ public class InventoryRepositoryDataJpaTest {
     @Autowired
     private InventoryRepository testMe;
 
-    @Test
-    void existsByProductName() {
-        boolean exists = testMe.existsByProductName("Test");
+    private Inventory inventory;
 
-        assertThat(exists).isTrue();
+    @Test
+    void databaseShouldBeEmpty() {
+        Iterable<Inventory> inventory = testMe.findAll();
+
+        assertThat(inventory).isEmpty();
     }
 }
