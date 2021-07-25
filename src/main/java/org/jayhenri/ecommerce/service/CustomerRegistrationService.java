@@ -15,9 +15,8 @@ import java.util.regex.Pattern;
 public class CustomerRegistrationService {
 
 
-    private final CustomerRepository customerRepository;
-
     private static final String REGEX_POSTAL_CODE = "^(?!.*[DFIOQU])[A-VXY][0-9][A-Z] ?[0-9][A-Z][0-9]$";
+    private final CustomerRepository customerRepository;
 
     /**
      * Instantiates a new Customer registration service.

@@ -14,6 +14,9 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+/**
+ * The type Inventory repository data jpa test.
+ */
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
 public class InventoryRepositoryDataJpaTest {
@@ -47,6 +50,9 @@ public class InventoryRepositoryDataJpaTest {
         orderDetails = new OrderDetails("TEST", "TestMe@gmail.com", new ArrayList<>(), 43.24);
     }
 
+    /**
+     * Database should be empty.
+     */
     @Test
     void databaseShouldBeEmpty() {
         List<Inventory> inventory = testMe.findAll();

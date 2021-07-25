@@ -45,6 +45,7 @@ public class CustomerController {
      * Update customer.
      *
      * @param customer the customer
+     * @return the response entity
      * @throws InvalidCustomerException  the invalid customer exception
      * @throws CustomerNotFoundException the customer not found exception
      */
@@ -68,6 +69,7 @@ public class CustomerController {
      * Delete customer.
      *
      * @param email the email
+     * @return the response entity
      * @throws InvalidCustomerException  the invalid customer exception
      * @throws CustomerNotFoundException the customer not found exception
      */
@@ -135,6 +137,7 @@ public class CustomerController {
      *
      * @param productName the product name
      * @param email       the email
+     * @return the response entity
      * @throws CustomerNotFoundException the customer not found exception
      * @throws ItemNotFoundException     the item not found exception
      */
@@ -163,6 +166,7 @@ public class CustomerController {
      *
      * @param productName the product name
      * @param email       the email
+     * @return the response entity
      * @throws CustomerNotFoundException the customer not found exception
      * @throws ItemNotFoundException     the item not found exception
      */
@@ -186,6 +190,7 @@ public class CustomerController {
      * Empty cart.
      *
      * @param email the email
+     * @return the response entity
      * @throws CustomerNotFoundException the customer not found exception
      */
     @PatchMapping(value = "/{email}/cart/empty")
@@ -224,6 +229,7 @@ public class CustomerController {
      *
      * @param email      the email
      * @param creditCard the credit card
+     * @return the response entity
      * @throws CustomerNotFoundException the customer not found exception
      */
     @PostMapping(value = "/{email}/creditCard/add", consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -245,6 +251,7 @@ public class CustomerController {
      *
      * @param email      the email
      * @param fourDigits the four digits
+     * @return the response entity
      * @throws CustomerNotFoundException the customer not found exception
      */
     @DeleteMapping(value = "/{email}/creditCard/remove/{fourDigits}")
@@ -287,6 +294,7 @@ public class CustomerController {
      *
      * @param email        the email
      * @param orderDetails the order
+     * @return the response entity
      * @throws CustomerNotFoundException the customer not found exception
      */
     @PostMapping(value = "/{email}/orderDetails/add", consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -309,6 +317,7 @@ public class CustomerController {
      * @param email  the email
      * @param uuid   the uuid
      * @param status the status
+     * @return the response entity
      * @throws CustomerNotFoundException the customer not found exception
      */
     @PutMapping(value = "/{email}/orderDetails/updateStatus/{uuid}/{status}")
