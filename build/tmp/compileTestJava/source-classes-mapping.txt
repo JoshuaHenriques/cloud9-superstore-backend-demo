@@ -2,15 +2,21 @@ org/jayhenri/ecommerce/controller/customerRegistration/CustomerRegistrationUniTe
  org.jayhenri.ecommerce.controller.customerRegistration.CustomerRegistrationUniTest
 org/jayhenri/ecommerce/service/InventoryServiceTest.java
  org.jayhenri.ecommerce.service.InventoryServiceTest
+org/jayhenri/ecommerce/controller/inventory/InventoryControllerWebMvcTest.java
+ org.jayhenri.ecommerce.controller.inventory.InventoryControllerWebMvcTest
+org/jayhenri/ecommerce/service/OrderDetailsDBServiceTest.java
+ org.jayhenri.ecommerce.service.OrderDetailsDBServiceTest
 org/jayhenri/ecommerce/controller/customer/CustomerControllerUniTest.java
  org.jayhenri.ecommerce.controller.customer.CustomerControllerUniTest
-org/jayhenri/ecommerce/controller/inventory/InventoryControllerIntTest.java
- org.jayhenri.ecommerce.controller.inventory.InventoryControllerIntTest
 org/jayhenri/ecommerce/service/CustomerRegistrationServiceTest.java
  org.jayhenri.ecommerce.service.CustomerRegistrationServiceTest
+org/jayhenri/ecommerce/controller/customerRegistration/CustomerRegistrationWebMvcTest.java
+ org.jayhenri.ecommerce.controller.customerRegistration.CustomerRegistrationWebMvcTest
 org/jayhenri/ecommerce/controller/inventory/InventoryControllerUniTest.java
  org.jayhenri.ecommerce.controller.inventory.InventoryControllerUniTest
-org/jayhenri/ecommerce/service/OrderDetailsDBServiceUT.java
- org.jayhenri.ecommerce.service.OrderDetailsDBServiceUT
+org/jayhenri/ecommerce/repository/InventoryRepositoryDataJpaTest.java
+ org.jayhenri.ecommerce.repository.InventoryRepositoryDataJpaTest
+org/jayhenri/ecommerce/controller/customer/CustomerControllerWebMvcTest.java
+ org.jayhenri.ecommerce.controller.customer.CustomerControllerWebMvcTest
 org/jayhenri/ecommerce/service/CustomerServiceTest.java
  org.jayhenri.ecommerce.service.CustomerServiceTest

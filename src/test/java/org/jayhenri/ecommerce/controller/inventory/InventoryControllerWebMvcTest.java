@@ -126,7 +126,7 @@ class InventoryControllerWebMvcTest {
         mockMvc.perform(post("/api/inventory/add")
             .contentType(MediaType.APPLICATION_JSON)
             .content(asJsonString(inventory)))
-            .andExpect(status().isOk());
+            .andExpect(status().isCreated());
     }
 
     /**

@@ -1,20 +1,16 @@
 package org.jayhenri.ecommerce.repository;
 
-import org.jayhenri.ecommerce.model.Inventory;
+import java.util.UUID;
 
+import org.jayhenri.ecommerce.model.Inventory;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-
 import org.springframework.stereotype.Repository;
-
-import javax.transaction.Transactional;
-import java.util.UUID;
 
 /**
  * The interface Inventory repository.
  */
-@Transactional
 @Repository
 public interface InventoryRepository extends JpaRepository<Inventory, UUID> {
 
@@ -34,8 +30,5 @@ public interface InventoryRepository extends JpaRepository<Inventory, UUID> {
      * @return the by product name
      */
     @Query(value = "SELECT * FROM inventory WHERE inventory.product_Name=:productName", nativeQuery = true)
-    Inventory getByProductName(@Param("productName") String productName) {
-        // TODO Auto-generated method stub
-        return null;
-    }
+    Inventory getByProductName(@Param("productName") String productName);
 }

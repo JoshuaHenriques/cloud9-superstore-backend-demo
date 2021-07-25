@@ -22,25 +22,25 @@
 <tr>
 <td>
 <div class="infoBox" id="tests">
-<div class="counter">17</div>
+<div class="counter">24</div>
 <p>tests</p>
 </div>
 </td>
 <td>
 <div class="infoBox" id="failures">
-<div class="counter">0</div>
+<div class="counter">7</div>
 <p>failures</p>
 </div>
 </td>
 <td>
 <div class="infoBox" id="ignored">
-<div class="counter">4</div>
+<div class="counter">0</div>
 <p>ignored</p>
 </div>
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.302s</div>
+<div class="counter">0.390s</div>
 <p>duration</p>
 </div>
 </td>
@@ -49,8 +49,8 @@
 </div>
 </td>
 <td>
-<div class="infoBox skipped" id="successRate">
-<div class="percent">100%</div>
+<div class="infoBox failures" id="successRate">
+<div class="percent">70%</div>
 <p>successful</p>
 </div>
 </td>
@@ -60,30 +60,42 @@
 <div id="tabs">
 <ul class="tabLinks">
 <li>
-<a href="#tab0">Ignored tests</a>
+<a href="#tab0">Failed tests</a>
 </li>
 <li>
 <a href="#tab1">Classes</a>
 </li>
 </ul>
 <div id="tab0" class="tab">
-<h2>Ignored tests</h2>
+<h2>Failed tests</h2>
 <ul class="linkList">
 <li>
-<a href="../classes/org.jayhenri.ecommerce.controller.inventory.InventoryControllerIntTest.html">InventoryControllerIntTest</a>.
-<a href="../classes/org.jayhenri.ecommerce.controller.inventory.InventoryControllerIntTest.html#addItemToInventory()">addItemToInventory()</a>
+<a href="../classes/org.jayhenri.ecommerce.controller.inventory.InventoryControllerUniTest.html">InventoryControllerUniTest</a>.
+<a href="../classes/org.jayhenri.ecommerce.controller.inventory.InventoryControllerUniTest.html#addItem()">addItem()</a>
 </li>
 <li>
-<a href="../classes/org.jayhenri.ecommerce.controller.inventory.InventoryControllerIntTest.html">InventoryControllerIntTest</a>.
-<a href="../classes/org.jayhenri.ecommerce.controller.inventory.InventoryControllerIntTest.html#getByProductName()">getByProductName()</a>
+<a href="../classes/org.jayhenri.ecommerce.controller.inventory.InventoryControllerUniTest.html">InventoryControllerUniTest</a>.
+<a href="../classes/org.jayhenri.ecommerce.controller.inventory.InventoryControllerUniTest.html#findAll()">findAll()</a>
 </li>
 <li>
-<a href="../classes/org.jayhenri.ecommerce.controller.inventory.InventoryControllerIntTest.html">InventoryControllerIntTest</a>.
-<a href="../classes/org.jayhenri.ecommerce.controller.inventory.InventoryControllerIntTest.html#removeItemToInventory()">removeItemToInventory()</a>
+<a href="../classes/org.jayhenri.ecommerce.controller.inventory.InventoryControllerUniTest.html">InventoryControllerUniTest</a>.
+<a href="../classes/org.jayhenri.ecommerce.controller.inventory.InventoryControllerUniTest.html#getByProductName()">getByProductName()</a>
 </li>
 <li>
-<a href="../classes/org.jayhenri.ecommerce.controller.inventory.InventoryControllerIntTest.html">InventoryControllerIntTest</a>.
-<a href="../classes/org.jayhenri.ecommerce.controller.inventory.InventoryControllerIntTest.html#updateItem()">updateItem()</a>
+<a href="../classes/org.jayhenri.ecommerce.controller.inventory.InventoryControllerUniTest.html">InventoryControllerUniTest</a>.
+<a href="../classes/org.jayhenri.ecommerce.controller.inventory.InventoryControllerUniTest.html#removeItem()">removeItem()</a>
+</li>
+<li>
+<a href="../classes/org.jayhenri.ecommerce.controller.inventory.InventoryControllerUniTest.html">InventoryControllerUniTest</a>.
+<a href="../classes/org.jayhenri.ecommerce.controller.inventory.InventoryControllerUniTest.html#updateItem()">updateItem()</a>
+</li>
+<li>
+<a href="../classes/org.jayhenri.ecommerce.controller.inventory.InventoryControllerWebMvcTest.html">InventoryControllerWebMvcTest</a>.
+<a href="../classes/org.jayhenri.ecommerce.controller.inventory.InventoryControllerWebMvcTest.html#addItemToInventory()">addItemToInventory()</a>
+</li>
+<li>
+<a href="../classes/org.jayhenri.ecommerce.controller.inventory.InventoryControllerWebMvcTest.html">InventoryControllerWebMvcTest</a>.
+<a href="../classes/org.jayhenri.ecommerce.controller.inventory.InventoryControllerWebMvcTest.html#addItemToInventoryThrowsInvalidItemException()">addItemToInventoryThrowsInvalidItemException()</a>
 </li>
 </ul>
 </div>
@@ -101,24 +113,24 @@
 </tr>
 </thread>
 <tr>
-<td class="skipped">
-<a href="../classes/org.jayhenri.ecommerce.controller.inventory.InventoryControllerIntTest.html">InventoryControllerIntTest</a>
-</td>
-<td>5</td>
-<td>0</td>
-<td>4</td>
-<td>0.158s</td>
-<td class="skipped">100%</td>
-</tr>
-<tr>
-<td class="success">
+<td class="failures">
 <a href="../classes/org.jayhenri.ecommerce.controller.inventory.InventoryControllerUniTest.html">InventoryControllerUniTest</a>
 </td>
 <td>12</td>
+<td>5</td>
 <td>0</td>
+<td>0.086s</td>
+<td class="failures">58%</td>
+</tr>
+<tr>
+<td class="failures">
+<a href="../classes/org.jayhenri.ecommerce.controller.inventory.InventoryControllerWebMvcTest.html">InventoryControllerWebMvcTest</a>
+</td>
+<td>12</td>
+<td>2</td>
 <td>0</td>
-<td>0.144s</td>
-<td class="success">100%</td>
+<td>0.304s</td>
+<td class="failures">83%</td>
 </tr>
 </table>
 </div>
@@ -130,7 +142,7 @@
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 7.0.2</a> at Jul 21, 2021, 4:25:45 PM</p>
+<a href="http://www.gradle.org">Gradle 7.0.2</a> at Jul 23, 2021, 10:08:50 AM</p>
 </div>
 </div>
 </body>

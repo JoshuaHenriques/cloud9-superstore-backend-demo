@@ -247,6 +247,7 @@ public class CustomerController {
     public ResponseEntity<String> removeCreditCard(@PathVariable String email, @PathVariable String fourDigits) throws CustomerNotFoundException {
         if (customerService.existsByEmail(email)) {
             // CreditCardService should validate
+            // todo: compare customer's creditcard's last four digits with fourdigits
             customerService.removeCreditCard(customerService.getByEmail(email), fourDigits);
 
             HttpHeaders responseHeaders = new HttpHeaders();
