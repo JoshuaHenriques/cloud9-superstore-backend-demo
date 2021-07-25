@@ -1,13 +1,10 @@
 package org.jayhenri.ecommerce.exception;
 
-        import java.util.ArrayList;
-        import java.util.List;
-
-/**
- * The type Item already exists exception.
- */
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The type Item already exists exception.
@@ -20,7 +17,8 @@ public class ItemAlreadyExistsException extends Exception {
     /**
      * Instantiates a new Item already exists exception.
      */
-    public ItemAlreadyExistsException() {}
+    public ItemAlreadyExistsException() {
+    }
 
     /**
      * Instantiates a new Item already exists exception.

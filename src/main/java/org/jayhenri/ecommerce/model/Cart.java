@@ -5,11 +5,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
-
-import javax.persistence.*;
 
 // TODO: Implement HST+GST+PROMOCODE computation
 
@@ -28,11 +27,11 @@ public class Cart implements Serializable {
     @Column(nullable = false)
     private UUID cartUUID = UUID.randomUUID();
 
-    @JoinColumn(name = "itemUUID", insertable=false, updatable=false)
+    @JoinColumn(name = "itemUUID", insertable = false, updatable = false)
     @OneToMany
     private List<Item> items;
 
-    @JoinColumn(name = "customerUUID", nullable = false, insertable=false, updatable=false)
+    @JoinColumn(name = "customerUUID", nullable = false, insertable = false, updatable = false)
     @OneToOne
     private Customer customer;
 

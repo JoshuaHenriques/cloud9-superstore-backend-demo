@@ -1,13 +1,10 @@
 package org.jayhenri.ecommerce.exception;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
 import java.util.ArrayList;
 import java.util.List;
-
-/**
- * The type Email not same exception.
- */
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.http.HttpStatus;
 
 /**
  * The type Email not same exception.

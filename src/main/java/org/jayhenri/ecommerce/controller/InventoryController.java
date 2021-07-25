@@ -1,7 +1,5 @@
 package org.jayhenri.ecommerce.controller;
 
-import java.util.List;
-
 import org.jayhenri.ecommerce.exception.InvalidItemException;
 import org.jayhenri.ecommerce.exception.ItemAlreadyExistsException;
 import org.jayhenri.ecommerce.exception.ItemNotFoundException;
@@ -13,20 +11,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * The type Inventory controller.
  */
 @RestController // Indicates that the data returned by each method will be written straight into
-                // the response body instead of rendering a template
+// the response body instead of rendering a template
 @RequestMapping("api/inventory")
 public class InventoryController {
 

@@ -32,11 +32,11 @@ public class Item implements Serializable {
     private String description;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "cartUUID", nullable = false, insertable=false, updatable=false)
+    @JoinColumn(name = "cartUUID", nullable = false, insertable = false, updatable = false)
     private Cart cart;
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "inventoryUUID", nullable = false, insertable=false, updatable=false)
+    @JoinColumn(name = "inventoryUUID", nullable = false, insertable = false, updatable = false)
     private Inventory inventory;
 
     @Column

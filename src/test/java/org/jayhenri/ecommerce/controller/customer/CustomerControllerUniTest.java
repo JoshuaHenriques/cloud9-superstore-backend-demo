@@ -1,7 +1,9 @@
 package org.jayhenri.ecommerce.controller.customer;
 
 import org.jayhenri.ecommerce.controller.CustomerController;
-import org.jayhenri.ecommerce.exception.*;
+import org.jayhenri.ecommerce.exception.CustomerNotFoundException;
+import org.jayhenri.ecommerce.exception.InvalidCustomerException;
+import org.jayhenri.ecommerce.exception.ItemNotFoundException;
 import org.jayhenri.ecommerce.model.*;
 import org.jayhenri.ecommerce.service.CustomerService;
 import org.jayhenri.ecommerce.service.InventoryService;
@@ -442,7 +444,7 @@ class CustomerControllerUniTest {
         given(customerService.existsByEmail("testMe@gmail.com")).willReturn(false);
 
         assertThrows(CustomerNotFoundException.class, () -> {
-           testMe.addCreditCard("testMe@gmail.com", creditCard);
+            testMe.addCreditCard("testMe@gmail.com", creditCard);
         });
     }
 
@@ -501,7 +503,7 @@ class CustomerControllerUniTest {
         given(customerService.existsByEmail("testMe@gmail.com")).willReturn(false);
 
         assertThrows(CustomerNotFoundException.class, () -> {
-           testMe.listCreditCards("testMe@gmail.com");
+            testMe.listCreditCards("testMe@gmail.com");
         });
     }
 
@@ -531,7 +533,7 @@ class CustomerControllerUniTest {
         given(customerService.existsByEmail("testMe@gmail.com")).willReturn(false);
 
         assertThrows(CustomerNotFoundException.class, () -> {
-           testMe.addOrder("testMe@gmail.com", orderDetails1);
+            testMe.addOrder("testMe@gmail.com", orderDetails1);
         });
     }
 

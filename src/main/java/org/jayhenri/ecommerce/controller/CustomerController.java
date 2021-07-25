@@ -1,19 +1,9 @@
 package org.jayhenri.ecommerce.controller;
 
-import java.util.List;
-import java.util.UUID;
-
-import javax.naming.InvalidNameException;
-
 import org.jayhenri.ecommerce.exception.CustomerNotFoundException;
 import org.jayhenri.ecommerce.exception.InvalidCustomerException;
 import org.jayhenri.ecommerce.exception.ItemNotFoundException;
-import org.jayhenri.ecommerce.model.Cart;
-import org.jayhenri.ecommerce.model.CreditCard;
-import org.jayhenri.ecommerce.model.Customer;
-import org.jayhenri.ecommerce.model.Inventory;
-import org.jayhenri.ecommerce.model.Item;
-import org.jayhenri.ecommerce.model.OrderDetails;
+import org.jayhenri.ecommerce.model.*;
 import org.jayhenri.ecommerce.service.CustomerService;
 import org.jayhenri.ecommerce.service.InventoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,22 +12,17 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.naming.InvalidNameException;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * The type Customer controller.
  */
 @RestController // Indicates that the data returned by each method will be written straight into
-                // the response body instead of rendering a template
+// the response body instead of rendering a template
 @RequestMapping("api/customers")
 public class CustomerController {
 
@@ -112,7 +97,7 @@ public class CustomerController {
      */
     @GetMapping(value = "/list/customers", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Customer>> listCustomers(@RequestParam(defaultValue = "0") Integer pageNo,
-            @RequestParam(defaultValue = "50") Integer pageSize) {
+                                                        @RequestParam(defaultValue = "50") Integer pageSize) {
         // @RequestParam(defaultValue = "email") String sortBy
         List<Customer> list = customerService.findAllCustomers(pageNo, pageSize); // sortBy
 
@@ -328,7 +313,7 @@ public class CustomerController {
      */
     @PutMapping(value = "/{email}/orderDetails/updateStatus/{uuid}/{status}")
     public ResponseEntity<String> updateOrder(@PathVariable String email, @PathVariable UUID uuid,
-            @PathVariable String status) throws CustomerNotFoundException {
+                                              @PathVariable String status) throws CustomerNotFoundException {
         if (customerService.existsByEmail(email)) {
             // Validate
             customerService.updateOrder(customerService.getByEmail(email), uuid, status);

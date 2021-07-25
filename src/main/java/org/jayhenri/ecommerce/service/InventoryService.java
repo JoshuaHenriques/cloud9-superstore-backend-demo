@@ -2,7 +2,6 @@ package org.jayhenri.ecommerce.service;
 
 import org.jayhenri.ecommerce.model.Inventory;
 import org.jayhenri.ecommerce.repository.InventoryRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,7 +33,7 @@ public class InventoryService {
      */
     public void add(Inventory inventory) {
 
-            inventoryRepository.save(inventory);
+        inventoryRepository.save(inventory);
     }
 
     /**
@@ -44,7 +43,7 @@ public class InventoryService {
      */
     public void update(Inventory inventory) {
 
-            inventoryRepository.save(inventory);
+        inventoryRepository.save(inventory);
     }
 
     /**

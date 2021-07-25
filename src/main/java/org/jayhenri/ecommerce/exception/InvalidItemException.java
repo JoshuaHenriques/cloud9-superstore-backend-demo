@@ -1,13 +1,10 @@
 package org.jayhenri.ecommerce.exception;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
 import java.util.ArrayList;
 import java.util.List;
-
-/**
- * The type Invalid item exception.
- */
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.http.HttpStatus;
 
 /**
  * The type Invalid item exception.
@@ -19,7 +16,8 @@ public class InvalidItemException extends Exception {
     /**
      * Instantiates a new Invalid item exception.
      */
-    public InvalidItemException() {}
+    public InvalidItemException() {
+    }
 
     /**
      * Instantiates a new Invalid item exception.

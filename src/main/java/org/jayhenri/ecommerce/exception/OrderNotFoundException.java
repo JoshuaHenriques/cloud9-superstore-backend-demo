@@ -1,13 +1,10 @@
 package org.jayhenri.ecommerce.exception;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
 import java.util.ArrayList;
 import java.util.List;
-
-/**
- * The type Order not found exception.
- */
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.http.HttpStatus;
 
 /**
  * The type Order not found exception.
@@ -19,7 +16,8 @@ public class OrderNotFoundException extends Exception {
     /**
      * Instantiates a new Order not found exception.
      */
-    public OrderNotFoundException() {}
+    public OrderNotFoundException() {
+    }
 
     /**
      * Instantiates a new Order not found exception.

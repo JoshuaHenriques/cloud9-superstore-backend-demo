@@ -1,12 +1,7 @@
 package org.jayhenri.ecommerce.controller.customerRegistration;
 
 
-import static org.mockito.BDDMockito.given;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import org.jayhenri.ecommerce.controller.CustomerRegistrationController;
 import org.jayhenri.ecommerce.model.Address;
 import org.jayhenri.ecommerce.model.Customer;
@@ -23,16 +18,20 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.mockito.BDDMockito.given;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 /**
  * The type Customer registration web mvc test.
  */
 @ExtendWith(MockitoExtension.class)
 @WebMvcTest(CustomerRegistrationController.class)
 public class CustomerRegistrationWebMvcTest {
-    
+
     @Autowired
     private MockMvc mockMvc;
-    
+
     @MockBean
     private AddressService addressService;
 
@@ -95,9 +94,9 @@ public class CustomerRegistrationWebMvcTest {
         given(addressService.isValidPostalCode(customer.getAddress().getPostalCode())).willReturn(true);
 
         mockMvc.perform(post("/api/register/customer")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(asJsonString(customer)))
-            .andExpect(status().isOk());
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(asJsonString(customer)))
+                .andExpect(status().isOk());
     }
 
     /**
@@ -110,9 +109,9 @@ public class CustomerRegistrationWebMvcTest {
         given(customerService.existsByPhoneNumber(customer.getPhoneNumber())).willReturn(true);
 
         mockMvc.perform(post("/api/register/customer")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(asJsonString(customer)))
-            .andExpect(status().isBadRequest());
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(asJsonString(customer)))
+                .andExpect(status().isBadRequest());
     }
 
     /**
@@ -127,9 +126,9 @@ public class CustomerRegistrationWebMvcTest {
         given(addressService.isValidPostalCode(customer.getAddress().getPostalCode())).willReturn(false);
 
         mockMvc.perform(post("/api/register/customer")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(asJsonString(customer)))
-            .andExpect(status().isBadRequest());
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(asJsonString(customer)))
+                .andExpect(status().isBadRequest());
     }
 
     /**
@@ -141,7 +140,7 @@ public class CustomerRegistrationWebMvcTest {
     void registerThrowsInvalidCustomerException() throws Exception {
 
         mockMvc.perform(post("/api/register/customer")
-            .contentType(MediaType.APPLICATION_JSON))
-            .andExpect(status().isBadRequest());
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
     }
 }

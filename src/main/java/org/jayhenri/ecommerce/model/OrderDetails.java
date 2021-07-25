@@ -5,7 +5,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-
 import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
@@ -32,7 +31,7 @@ public class OrderDetails implements Serializable {
     @Column(nullable = false)
     private String customerEmail;
 
-    @JoinColumn(name = "itemUUID", nullable = false, insertable=false, updatable=false)
+    @JoinColumn(name = "itemUUID", nullable = false, insertable = false, updatable = false)
     @OneToMany
     private List<Item> itemList;
 

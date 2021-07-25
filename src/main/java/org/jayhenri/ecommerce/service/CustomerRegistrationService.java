@@ -2,9 +2,9 @@ package org.jayhenri.ecommerce.service;
 
 import org.jayhenri.ecommerce.model.Customer;
 import org.jayhenri.ecommerce.repository.CustomerRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

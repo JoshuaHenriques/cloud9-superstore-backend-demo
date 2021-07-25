@@ -15,7 +15,7 @@ public class EcommerceApplication {
      * @param args the input arguments
      */
     public static void main(String[] args) {
-		SpringApplication.run(EcommerceApplication.class, args);
-	}
+        SpringApplication.run(EcommerceApplication.class, args);
+    }
 
 }

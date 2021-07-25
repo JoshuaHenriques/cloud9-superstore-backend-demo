@@ -1,13 +1,10 @@
 package org.jayhenri.ecommerce.exception;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
 import java.util.ArrayList;
 import java.util.List;
-
-/**
- * The type Product name not same exception.
- */
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.http.HttpStatus;
 
 /**
  * The type Product name not same exception.
@@ -19,7 +16,8 @@ public class ProductNameNotSameException extends Exception {
     /**
      * Instantiates a new Product name not same exception.
      */
-    public ProductNameNotSameException() {}
+    public ProductNameNotSameException() {
+    }
 
     /**
      * Instantiates a new Product name not same exception.

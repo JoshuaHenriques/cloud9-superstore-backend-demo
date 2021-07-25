@@ -24,7 +24,7 @@ public class CreditCard implements Serializable {
     @Column(nullable = false)
     private UUID creditCardUUID = UUID.randomUUID();
 
-    @JoinColumn(name = "customerUUID", nullable = false, insertable=false, updatable=false)
+    @JoinColumn(name = "customerUUID", nullable = false, insertable = false, updatable = false)
     @ManyToOne
     private Customer customer;
 

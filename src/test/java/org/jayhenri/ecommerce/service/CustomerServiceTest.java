@@ -139,7 +139,7 @@ class CustomerServiceTest {
         items.add(item);
 
         cart = new Cart(
-            items,
+                items,
                 "testme@gmail.com",
                 93.22
         );
@@ -301,7 +301,7 @@ class CustomerServiceTest {
         then(customerRepository).should().save(captorCustomer.capture());
 
         assertThat(captorCustomer.getValue()).isEqualTo(customer);
-        assertThat(captorCustomer.getValue().getCart().getItems().size()).isEqualTo(size+1);
+        assertThat(captorCustomer.getValue().getCart().getItems().size()).isEqualTo(size + 1);
     }
 
     /**
@@ -316,7 +316,7 @@ class CustomerServiceTest {
 
         then(customerRepository).should().save(captorCustomer.capture());
 
-        assertThat(captorCustomer.getValue().getCart().getItems().size()).isEqualTo(size-1);
+        assertThat(captorCustomer.getValue().getCart().getItems().size()).isEqualTo(size - 1);
     }
 
     /**
@@ -366,7 +366,7 @@ class CustomerServiceTest {
         then(customerRepository).should().save(captorCustomer.capture());
 
         // Can assert that credit card list length was subtracted by 1
-        assertThat(captorCustomer.getValue().getCreditCards().size()).isEqualTo(size+1);
+        assertThat(captorCustomer.getValue().getCreditCards().size()).isEqualTo(size + 1);
         assertThat(captorCustomer.getValue()).isEqualTo(customer);
     }
 
@@ -382,7 +382,7 @@ class CustomerServiceTest {
         then(customerRepository).should().save(captorCustomer.capture());
 
         // Can assert that credit card list length was subtracted by 1
-        assertThat(captorCustomer.getValue().getCreditCards().size()).isEqualTo(size-1);
+        assertThat(captorCustomer.getValue().getCreditCards().size()).isEqualTo(size - 1);
         assertThat(captorCustomer.getValue()).isEqualTo(customer);
     }
 

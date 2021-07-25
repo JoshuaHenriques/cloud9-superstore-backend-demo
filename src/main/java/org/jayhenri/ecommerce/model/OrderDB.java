@@ -31,7 +31,7 @@ public class OrderDB implements Serializable {
     @Column(unique = true, length = 128, nullable = false)
     private String customerEmail;
 
-    @JoinColumn(name = "itemUUID", nullable = false, insertable=false, updatable=false)
+    @JoinColumn(name = "itemUUID", nullable = false, insertable = false, updatable = false)
     @OneToMany
     private List<Item> items;
 

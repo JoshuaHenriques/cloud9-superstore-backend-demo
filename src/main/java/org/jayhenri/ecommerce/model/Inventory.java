@@ -33,7 +33,7 @@ public class Inventory implements Serializable {
     @Column
     private int quantity;
 
-    @JoinColumn(name = "itemUUID", nullable = false, insertable=false, updatable=false)
+    @JoinColumn(name = "itemUUID", nullable = false, insertable = false, updatable = false)
     @OneToOne
     private Item item;
 

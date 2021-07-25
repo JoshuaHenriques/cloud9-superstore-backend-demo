@@ -1,22 +1,18 @@
 package org.jayhenri.ecommerce.service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
 import org.jayhenri.ecommerce.exception.CustomerAlreadyExistsException;
 import org.jayhenri.ecommerce.exception.InvalidPostalCodeException;
-import org.jayhenri.ecommerce.model.Cart;
-import org.jayhenri.ecommerce.model.CreditCard;
-import org.jayhenri.ecommerce.model.Customer;
-import org.jayhenri.ecommerce.model.Item;
-import org.jayhenri.ecommerce.model.OrderDetails;
+import org.jayhenri.ecommerce.model.*;
 import org.jayhenri.ecommerce.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 
 /**
@@ -67,7 +63,7 @@ public class CustomerService {
      *
      * @param customer the customer
      */
-    public void delete(Customer customer){
+    public void delete(Customer customer) {
 
         customerRepository.delete(customer);
     }
@@ -94,7 +90,7 @@ public class CustomerService {
         Pageable paging = PageRequest.of(pageNo, pageSize); // Sort.by(sortBy).ascending()
         Page<Customer> pagedResult = customerRepository.findAll(paging);
 
-        if(pagedResult.hasContent()) return pagedResult.getContent();
+        if (pagedResult.hasContent()) return pagedResult.getContent();
         else return new ArrayList<>();
     }
 
@@ -143,7 +139,7 @@ public class CustomerService {
         List<Item> removeMe = new ArrayList<>();
 // Create a list of values you wish to remove, adding to that list within the loop, then call originalList.removeAll(valuesToRemove) at the end
         customer.getCart().getItems().forEach(item -> {
-            if(item.getItemName().equals(productName)) {
+            if (item.getItemName().equals(productName)) {
                 removeMe.add(item);
             }
         });
@@ -192,12 +188,12 @@ public class CustomerService {
      * @param customer the customer
      * @param fourDig  the four dig
      */
-    public void removeCreditCard(Customer customer, String fourDig)  {
+    public void removeCreditCard(Customer customer, String fourDig) {
 
         ArrayList<CreditCard> removeMe = new ArrayList<>();
 // Create a list of values you wish to remove, adding to that list within the loop, then call originalList.removeAll(valuesToRemove) at the end
         customer.getCreditCards().forEach(creditCard -> {
-            if(creditCard.getFourDig() != null && creditCard.getFourDig().equals(fourDig)) {
+            if (creditCard.getFourDig() != null && creditCard.getFourDig().equals(fourDig)) {
                 removeMe.add(creditCard);
             }
         });
@@ -259,7 +255,7 @@ public class CustomerService {
      * @param customer the email
      * @return the list
      */
-    public List<OrderDetails> findAllOrders(Customer customer)  {
+    public List<OrderDetails> findAllOrders(Customer customer) {
 
         return customer.getOrderDetailsList();
     }

@@ -1,13 +1,10 @@
 package org.jayhenri.ecommerce.exception;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
 import java.util.ArrayList;
 import java.util.List;
-
-/**
- * The type Invalid credit card exception.
- */
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.http.HttpStatus;
 
 /**
  * The type Invalid credit card exception.
@@ -20,7 +17,8 @@ public class InvalidCreditCardException extends Exception {
     /**
      * Instantiates a new Invalid credit card exception.
      */
-    public InvalidCreditCardException() {}
+    public InvalidCreditCardException() {
+    }
 
     /**
      * Instantiates a new Invalid credit card exception.
