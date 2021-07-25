@@ -19,7 +19,8 @@ public class EmailNotSameException extends Exception {
     /**
      * Instantiates a new Email not same exception.
      */
-    public EmailNotSameException() {}
+    public EmailNotSameException() {
+    }
 
     /**
      * Instantiates a new Email not same exception.

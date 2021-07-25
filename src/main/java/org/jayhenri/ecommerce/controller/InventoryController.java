@@ -25,10 +25,10 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * The type Inventory controller.
  */
-@RestController // Indicates that the data returned by each method will be written straight into the response body instead of rendering a template
+@RestController // Indicates that the data returned by each method will be written straight into
+                // the response body instead of rendering a template
 @RequestMapping("api/inventory")
 public class InventoryController {
-
 
     private final InventoryService inventoryService;
 
@@ -52,7 +52,8 @@ public class InventoryController {
      * @throws ItemNotFoundException the item not found exception
      */
     @PutMapping(value = "/update", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> updateItem(@RequestBody Inventory inventory) throws InvalidItemException, ItemNotFoundException {
+    public ResponseEntity<String> updateItem(@RequestBody Inventory inventory)
+            throws InvalidItemException, ItemNotFoundException {
         if (!ObjectUtils.isEmpty(inventory)) {
             if (inventoryService.existsByProductName(inventory.getProductName())) {
                 inventoryService.update(inventory);
@@ -60,8 +61,10 @@ public class InventoryController {
                 HttpHeaders responseHeaders = new HttpHeaders();
                 responseHeaders.set("InventoryController", "updateItem");
                 return new ResponseEntity<>("Successfully Updated Item", responseHeaders, HttpStatus.OK);
-            } else throw new ItemNotFoundException();
-        } else throw new InvalidItemException();
+            } else
+                throw new ItemNotFoundException();
+        } else
+            throw new InvalidItemException();
     }
 
     /**
@@ -73,7 +76,8 @@ public class InventoryController {
      * @throws InvalidItemException       the invalid item exception
      */
     @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> addItem(@RequestBody Inventory inventory) throws ItemAlreadyExistsException, InvalidItemException {
+    public ResponseEntity<String> addItem(@RequestBody Inventory inventory)
+            throws ItemAlreadyExistsException, InvalidItemException {
         if (!ObjectUtils.isEmpty(inventory)) {
             if (!inventoryService.existsByProductName(inventory.getProductName())) {
                 inventoryService.add(inventory);
@@ -81,8 +85,10 @@ public class InventoryController {
                 HttpHeaders responseHeaders = new HttpHeaders();
                 responseHeaders.set("InventoryController", "addItem");
                 return new ResponseEntity<>("Successfully Created Item", responseHeaders, HttpStatus.CREATED);
-            } else throw new ItemAlreadyExistsException();
-        } else throw new InvalidItemException();
+            } else
+                throw new ItemAlreadyExistsException();
+        } else
+            throw new InvalidItemException();
     }
 
     /**
@@ -100,7 +106,8 @@ public class InventoryController {
             responseHeaders.set("InventoryController", "getByProductName");
             Inventory inventory = inventoryService.getByProductName(productName);
             return new ResponseEntity<>(inventory, responseHeaders, HttpStatus.OK);
-        } else throw new ItemNotFoundException();
+        } else
+            throw new ItemNotFoundException();
     }
 
     /**
@@ -112,7 +119,8 @@ public class InventoryController {
      * @throws ItemNotFoundException the item not found exception
      */
     @DeleteMapping(value = "/remove/{productName}")
-    public ResponseEntity<String> removeItem(@PathVariable String productName) throws InvalidItemException, ItemNotFoundException {
+    public ResponseEntity<String> removeItem(@PathVariable String productName)
+            throws InvalidItemException, ItemNotFoundException {
         if (!ObjectUtils.isEmpty(productName)) {
             if (inventoryService.existsByProductName(productName)) {
                 inventoryService.delete(inventoryService.getByProductName(productName));
@@ -120,8 +128,10 @@ public class InventoryController {
                 HttpHeaders responseHeaders = new HttpHeaders();
                 responseHeaders.set("InventoryController", "removeItem");
                 return new ResponseEntity<>("Successfully Deleted Item", responseHeaders, HttpStatus.OK);
-            } else throw new ItemNotFoundException();
-        } else throw new InvalidItemException();
+            } else
+                throw new ItemNotFoundException();
+        } else
+            throw new InvalidItemException();
     }
 
     /**

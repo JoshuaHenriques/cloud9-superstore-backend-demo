@@ -19,7 +19,8 @@ public class CustomerNotFoundException extends Exception {
     /**
      * Instantiates a new Customer not found exception.
      */
-    public CustomerNotFoundException() {}
+    public CustomerNotFoundException() {
+    }
 
     /**
      * Instantiates a new Customer not found exception.

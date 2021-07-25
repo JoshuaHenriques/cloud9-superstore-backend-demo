@@ -16,7 +16,8 @@ public class CustomerAlreadyExistsException extends Exception {
     /**
      * Instantiates a new Customer already exists exception.
      */
-    public CustomerAlreadyExistsException() {}
+    public CustomerAlreadyExistsException() {
+    }
 
     /**
      * Instantiates a new Customer already exists exception.

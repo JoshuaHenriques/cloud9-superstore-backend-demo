@@ -11,7 +11,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.ArrayList;
 import java.util.UUID;
 
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.jayhenri.ecommerce.controller.CustomerController;
@@ -37,7 +36,7 @@ import org.springframework.test.web.servlet.MockMvc;
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(CustomerController.class)
 public class CustomerControllerWebMvcTest {
- 
+
     @Autowired
     private MockMvc mockMvc;
 
@@ -46,7 +45,7 @@ public class CustomerControllerWebMvcTest {
 
     @MockBean
     private InventoryService inventoryService;
-    
+
     private Customer customer;
 
     private Inventory inventory;
@@ -72,49 +71,12 @@ public class CustomerControllerWebMvcTest {
      */
     @BeforeEach
     void setUp() {
-        customer = new Customer(
-                "testMe",
-                "TestMe",
-                "2934811932",
-                "testMe@gmail.com",
-                "testMePassword",
-                "082395",
-                new Address(
-                        "Test Me", 
-                        "29L", 
-                        "0L", 
-                        "New York", 
-                        "T2K9R3", 
-                        "Province"),
-                null, 
-                null, 
-                null);
 
-        inventory = new Inventory(
-                "Test Product",
-                369,
-                new Item(
-                        "Test Product",
-                        "Item Description",
-                        32.54
-                ));
+        inventory = new Inventory("Test Product", 369, new Item("Test Product", "Item Description", 32.54));
 
-                creditCard = new CreditCard(
-                    "Test Name",
-                    "4656085451464353",
-                    "05/23",
-                    "231",
-                    "4353"
-            );
-
-        orderDetails = new OrderDetails(
-                "TEST",
-                "TestMe@gmail.com",
-                new ArrayList<>(),
-                43.24
-        );
+        orderDetails = new OrderDetails("TEST", "TestMe@gmail.com", new ArrayList<>(), 43.24);
     }
-    
+
     /**
      * Update item.
      *
@@ -124,31 +86,29 @@ public class CustomerControllerWebMvcTest {
     void updateItem() throws Exception {
         given(customerService.existsByEmail(customer.getEmail())).willReturn(true);
 
-        mockMvc.perform(put("/api/customers/update")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(asJsonString(customer)))
-            .andExpect(status().isOk());
+        mockMvc.perform(
+                put("/api/customers/update").contentType(MediaType.APPLICATION_JSON).content(asJsonString(customer)))
+                .andExpect(status().isOk());
     }
-    
+
     @Test
     void deleteCustomer() throws Exception {
         given(customerService.existsByEmail("testMe@gmail.com")).willReturn(true);
 
-        mockMvc.perform(delete("/api/customers/delete/testMe@gmail.com"))
-            .andExpect(status().isOk());
+        mockMvc.perform(delete("/api/customers/delete/testMe@gmail.com")).andExpect(status().isOk());
     }
 
     // todo: test listcustomers
     @Test
     @Disabled
-    void listCustomers() {}
+    void listCustomers() {
+    }
 
     @Test
     void getByEmail() throws Exception {
         given(customerService.existsByEmail("testMe@gmail.com")).willReturn(true);
 
-        mockMvc.perform(get("/api/customers/testMe@gmail.com"))
-            .andExpect(status().isOk());
+        mockMvc.perform(get("/api/customers/testMe@gmail.com")).andExpect(status().isOk());
     }
 
     @Test
@@ -158,8 +118,7 @@ public class CustomerControllerWebMvcTest {
         given(customerService.getByEmail("testMe@gmail.com")).willReturn(customer);
         given(inventoryService.getByProductName("Test Product")).willReturn(inventory);
 
-        mockMvc.perform(post("/api/customers/testMe@gmail.com/cart/add/Test Product"))
-            .andExpect(status().isCreated());
+        mockMvc.perform(post("/api/customers/testMe@gmail.com/cart/add/Test Product")).andExpect(status().isCreated());
     }
 
     @Test
@@ -169,34 +128,29 @@ public class CustomerControllerWebMvcTest {
         given(customerService.getByEmail("testMe@gmail.com")).willReturn(customer);
         given(inventoryService.getByProductName("Test Product")).willReturn(inventory);
 
-        mockMvc.perform(delete("/api/customers/testMe@gmail.com/cart/remove/Test Product"))
-            .andExpect(status().isOk());
+        mockMvc.perform(delete("/api/customers/testMe@gmail.com/cart/remove/Test Product")).andExpect(status().isOk());
     }
 
     @Test
     void emptyCart() throws Exception {
         given(customerService.existsByEmail("testMe@gmail.com")).willReturn(true);
 
-        mockMvc.perform(patch("/api/customers/testMe@gmail.com/cart/empty"))
-            .andExpect(status().isOk());
+        mockMvc.perform(patch("/api/customers/testMe@gmail.com/cart/empty")).andExpect(status().isOk());
     }
 
     @Test
     void getCart() throws Exception {
         given(customerService.existsByEmail("testMe@gmail.com")).willReturn(true);
 
-        mockMvc.perform(get("/api/customers/testMe@gmail.com/cart/get"))
-            .andExpect(status().isOk());
+        mockMvc.perform(get("/api/customers/testMe@gmail.com/cart/get")).andExpect(status().isOk());
     }
 
     @Test
     void addCreditCard() throws Exception {
         given(customerService.existsByEmail("testMe@gmail.com")).willReturn(true);
 
-        mockMvc.perform(post("/api/customers/testMe@gmail.com/creditCard/add")
-        .contentType(MediaType.APPLICATION_JSON)
-        .content(asJsonString(creditCard)))    
-        .andExpect(status().isCreated());
+        mockMvc.perform(post("/api/customers/testMe@gmail.com/creditCard/add").contentType(MediaType.APPLICATION_JSON)
+                .content(asJsonString(creditCard))).andExpect(status().isCreated());
     }
 
     @Test
@@ -204,26 +158,22 @@ public class CustomerControllerWebMvcTest {
         given(customerService.existsByEmail("testMe@gmail.com")).willReturn(true);
         given(customerService.getByEmail("testMe@gmail.com")).willReturn(customer);
 
-        mockMvc.perform(delete("/api/customers/testMe@gmail.com/creditCard/remove/4353"))
-            .andExpect(status().isOk());
+        mockMvc.perform(delete("/api/customers/testMe@gmail.com/creditCard/remove/4353")).andExpect(status().isOk());
     }
 
     @Test
     void listCreditCard() throws Exception {
         given(customerService.existsByEmail("testMe@gmail.com")).willReturn(true);
 
-        mockMvc.perform(get("/api/customers/testMe@gmail.com/creditCards/list"))
-            .andExpect(status().isOk());
+        mockMvc.perform(get("/api/customers/testMe@gmail.com/creditCards/list")).andExpect(status().isOk());
     }
 
     @Test
     void addOrder() throws Exception {
         given(customerService.existsByEmail("testMe@gmail.com")).willReturn(true);
 
-        mockMvc.perform(post("/api/customers/testMe@gmail.com/orderDetails/add")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(asJsonString(creditCard)))   
-            .andExpect(status().isCreated());
+        mockMvc.perform(post("/api/customers/testMe@gmail.com/orderDetails/add").contentType(MediaType.APPLICATION_JSON)
+                .content(asJsonString(creditCard))).andExpect(status().isCreated());
     }
 
     @Test
@@ -238,7 +188,6 @@ public class CustomerControllerWebMvcTest {
     void listOrders() throws Exception {
         given(customerService.existsByEmail("testMe@gmail.com")).willReturn(true);
 
-        mockMvc.perform(get("/api/customers/testMe@gmail.com/orderDetails/list"))
-            .andExpect(status().isOk());
+        mockMvc.perform(get("/api/customers/testMe@gmail.com/orderDetails/list")).andExpect(status().isOk());
     }
 }
