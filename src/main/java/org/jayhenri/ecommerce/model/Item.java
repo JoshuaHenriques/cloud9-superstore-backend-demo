@@ -30,7 +30,7 @@ public class Item implements Serializable {
 
     @Id
     @Column(nullable = false)
-    private UUID itemUUID;
+    private UUID itemUUID = UUID.randomUUID();
 
     @Column
     private String itemName;
@@ -39,11 +39,11 @@ public class Item implements Serializable {
     private String description;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "cartUUID", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "cartUUID", nullable = true, insertable = false, updatable = false)
     private Cart cart;
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "inventoryUUID", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "inventoryUUID", nullable = true, insertable = false, updatable = false)
     private Inventory inventory;
 
     @Column

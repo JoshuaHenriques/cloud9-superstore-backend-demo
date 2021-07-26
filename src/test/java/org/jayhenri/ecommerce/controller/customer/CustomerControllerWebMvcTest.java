@@ -14,6 +14,7 @@ import java.util.UUID;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.jayhenri.ecommerce.controller.CustomerController;
+import org.jayhenri.ecommerce.model.Address;
 import org.jayhenri.ecommerce.model.CreditCard;
 import org.jayhenri.ecommerce.model.Customer;
 import org.jayhenri.ecommerce.model.Inventory;
@@ -79,10 +80,14 @@ public class CustomerControllerWebMvcTest {
      */
     @BeforeEach
     void setUp() {
+        customer = new Customer("testMe", "TestMe", "2934811932", "testMe@gmail.com", "testMePassword", "082395",
+                new Address("Test Me", "29L", "0L", "New York", "T2K9R3", "Province"), null, null, null);
 
         inventory = new Inventory("Test Product", 369, new Item("Test Product", "Item Description", 32.54));
 
         orderDetails = new OrderDetails("TEST", "TestMe@gmail.com", new ArrayList<>(), 43.24);
+
+        creditCard = new CreditCard("Test Name", "4656085451464353", "05/23", "231", "4353");
     }
 
     /**
@@ -91,13 +96,38 @@ public class CustomerControllerWebMvcTest {
      * @throws Exception the exception
      */
     @Test
-    @Disabled
-    void updateItem() throws Exception {
+    void updateCustomer() throws Exception {
         given(customerService.existsByEmail(customer.getEmail())).willReturn(true);
 
         mockMvc.perform(
                 put("/api/customers/update").contentType(MediaType.APPLICATION_JSON).content(asJsonString(customer)))
                 .andExpect(status().isOk());
+    }
+
+    /**
+     * Update item throws item not found exception.
+     *
+     * @throws Exception the exception
+     */
+    @Test
+    void updateCustomerThrowsItemNotFoundException() throws Exception {
+        given(customerService.existsByEmail(customer.getEmail())).willReturn(false);
+
+        mockMvc.perform(
+                put("/api/customers/update").contentType(MediaType.APPLICATION_JSON).content(asJsonString(customer)))
+                .andExpect(status().isNotFound());
+    }
+
+    /**
+     * Update item throws invalid item exception.
+     *
+     * @throws Exception the exception
+     */
+    @Test
+    void updateCustomerThrowsInvalidCustomerException() throws Exception {
+
+        mockMvc.perform(put("/api/customers/update").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
     }
 
     /**
@@ -113,9 +143,21 @@ public class CustomerControllerWebMvcTest {
     }
 
     /**
+     * Remove item to inventory throws item not found exception.
+     *
+     * @throws Exception the exception
+     */
+    @Test
+    void deleteCustomerThrowsCustomerNotFoundException() throws Exception {
+        given(customerService.existsByEmail("Test Project")).willReturn(false);
+
+        mockMvc.perform(delete("/api/customers/delete/testMe@gmail.com")).andExpect(status().isNotFound());
+    }
+
+    /**
      * List customers.
      */
-// todo: test listcustomers
+    // todo: test listcustomers
     @Test
     @Disabled
     void listCustomers() {
@@ -134,6 +176,18 @@ public class CustomerControllerWebMvcTest {
     }
 
     /**
+     * Gets by product name throws item not found exception.
+     *
+     * @throws Exception the exception
+     */
+    @Test
+    void getByEmailThrowsCustomerNotFoundException() throws Exception {
+        given(customerService.existsByEmail("testMe@gmail.com")).willReturn(false);
+
+        mockMvc.perform((get("/api/customers/testMe@gmail.com"))).andExpect(status().isNotFound());
+    }
+
+    /**
      * Add to cart.
      *
      * @throws Exception the exception
@@ -146,6 +200,22 @@ public class CustomerControllerWebMvcTest {
         given(inventoryService.getByProductName("Test Product")).willReturn(inventory);
 
         mockMvc.perform(post("/api/customers/testMe@gmail.com/cart/add/Test Product")).andExpect(status().isCreated());
+    }
+
+    @Test
+    void addToCartThrowsCustomerNotFoundException() throws Exception {
+        given(customerService.existsByEmail("testMe@gmail.com")).willReturn(false);
+
+        mockMvc.perform((post("/api/customers/testMe@gmail.com/cart/add/Test Product")))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    void addToCartThrowsItemNotFoundException() throws Exception {
+        given(inventoryService.existsByProductName("Test Product")).willReturn(false);
+
+        mockMvc.perform((post("/api/customers/testMe@gmail.com/cart/add/Test Product")))
+                .andExpect(status().isNotFound());
     }
 
     /**
@@ -163,6 +233,22 @@ public class CustomerControllerWebMvcTest {
         mockMvc.perform(delete("/api/customers/testMe@gmail.com/cart/remove/Test Product")).andExpect(status().isOk());
     }
 
+    @Test
+    void removeFromCartThrowsCustomerNotFoundException() throws Exception {
+        given(customerService.existsByEmail("testMe@gmail.com")).willReturn(false);
+
+        mockMvc.perform((delete("/api/customers/testMe@gmail.com/cart/remove/Test Product")))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    void removeFromCartThrowsItemNotFoundException() throws Exception {
+        given(inventoryService.existsByProductName("Test Product")).willReturn(false);
+
+        mockMvc.perform((delete("/api/customers/testMe@gmail.com/cart/remove/Test Product")))
+                .andExpect(status().isNotFound());
+    }
+
     /**
      * Empty cart.
      *
@@ -173,6 +259,13 @@ public class CustomerControllerWebMvcTest {
         given(customerService.existsByEmail("testMe@gmail.com")).willReturn(true);
 
         mockMvc.perform(patch("/api/customers/testMe@gmail.com/cart/empty")).andExpect(status().isOk());
+    }
+
+    @Test
+    void emptyCartThrowsCustomerNotFoundException() throws Exception {
+        given(customerService.existsByEmail("testMe@gmail.com")).willReturn(false);
+
+        mockMvc.perform((patch("/api/customers/testMe@gmail.com/cart/empty"))).andExpect(status().isNotFound());
     }
 
     /**
@@ -187,18 +280,32 @@ public class CustomerControllerWebMvcTest {
         mockMvc.perform(get("/api/customers/testMe@gmail.com/cart/get")).andExpect(status().isOk());
     }
 
+    @Test
+    void getCartThrowsCustomerNotFoundException() throws Exception {
+        given(customerService.existsByEmail("testMe@gmail.com")).willReturn(false);
+
+        mockMvc.perform((get("/api/customers/testMe@gmail.com/cart/get"))).andExpect(status().isNotFound());
+    }
+
     /**
      * Add credit card.
      *
      * @throws Exception the exception
      */
     @Test
-    @Disabled
     void addCreditCard() throws Exception {
         given(customerService.existsByEmail("testMe@gmail.com")).willReturn(true);
 
         mockMvc.perform(post("/api/customers/testMe@gmail.com/creditCard/add").contentType(MediaType.APPLICATION_JSON)
                 .content(asJsonString(creditCard))).andExpect(status().isCreated());
+    }
+
+    @Test
+    void addCreditCardThrowsCustomerNotFoundException() throws Exception {
+        given(customerService.existsByEmail("testMe@gmail.com")).willReturn(false);
+
+        mockMvc.perform((post("/api/customers/testMe@gmail.com/creditCard/add").contentType(MediaType.APPLICATION_JSON)
+                .content(asJsonString(creditCard)))).andExpect(status().isNotFound());
     }
 
     /**
@@ -214,6 +321,14 @@ public class CustomerControllerWebMvcTest {
         mockMvc.perform(delete("/api/customers/testMe@gmail.com/creditCard/remove/4353")).andExpect(status().isOk());
     }
 
+    @Test
+    void removeCreditCardThrowsCustomerNotFoundException() throws Exception {
+        given(customerService.existsByEmail("testMe@gmail.com")).willReturn(false);
+
+        mockMvc.perform((delete("/api/customers/testMe@gmail.com/creditCard/remove/4353")))
+                .andExpect(status().isNotFound());
+    }
+
     /**
      * List credit card.
      *
@@ -226,18 +341,33 @@ public class CustomerControllerWebMvcTest {
         mockMvc.perform(get("/api/customers/testMe@gmail.com/creditCards/list")).andExpect(status().isOk());
     }
 
+    @Test
+    void listCreditCardThrowsCustomerNotFoundException() throws Exception {
+        given(customerService.existsByEmail("testMe@gmail.com")).willReturn(false);
+
+        mockMvc.perform((get("/api/customers/testMe@gmail.com/creditCard/list"))).andExpect(status().isNotFound());
+    }
+
     /**
      * Add order.
      *
      * @throws Exception the exception
      */
     @Test
-    @Disabled
     void addOrder() throws Exception {
         given(customerService.existsByEmail("testMe@gmail.com")).willReturn(true);
 
         mockMvc.perform(post("/api/customers/testMe@gmail.com/orderDetails/add").contentType(MediaType.APPLICATION_JSON)
-                .content(asJsonString(creditCard))).andExpect(status().isCreated());
+                .content(asJsonString(orderDetails))).andExpect(status().isCreated());
+    }
+
+    @Test
+    void addOrderThrowsCustomerNotFoundException() throws Exception {
+        given(customerService.existsByEmail("testMe@gmail.com")).willReturn(false);
+
+        mockMvc.perform((post("/api/customers/testMe@gmail.com/orderDetails/add")
+                .contentType(MediaType.APPLICATION_JSON).content(asJsonString(orderDetails))))
+                .andExpect(status().isNotFound());
     }
 
     /**
@@ -263,5 +393,12 @@ public class CustomerControllerWebMvcTest {
         given(customerService.existsByEmail("testMe@gmail.com")).willReturn(true);
 
         mockMvc.perform(get("/api/customers/testMe@gmail.com/orderDetails/list")).andExpect(status().isOk());
+    }
+
+    @Test
+    void listOrdersThrowsCustomerNotFoundException() throws Exception {
+        given(customerService.existsByEmail("testMe@gmail.com")).willReturn(false);
+
+        mockMvc.perform((get("/api/customers/testMe@gmail.com/orderDetails/list"))).andExpect(status().isNotFound());
     }
 }

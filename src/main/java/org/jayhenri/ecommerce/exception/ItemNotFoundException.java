@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * The type Item not found exception.
  */
-@ResponseStatus(value = HttpStatus.BAD_REQUEST)
+@ResponseStatus(value = HttpStatus.NOT_FOUND)
 public class ItemNotFoundException extends Exception {
 
     private List<String> errorMessages = new ArrayList<>();

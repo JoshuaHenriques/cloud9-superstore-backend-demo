@@ -34,7 +34,6 @@ public class InventoryRepositoryDataJpaTest {
      */
     @BeforeEach
     void setUp() {
-        inventory = new Inventory("Test Product", 369, new Item("Test Product", "f", 334.3));
     }
 
     /**
@@ -51,6 +50,9 @@ public class InventoryRepositoryDataJpaTest {
      */
     @Test
     void storeInventory() {
+        Item item = new Item("Test Product", "f", 334.3);
+        Inventory inventory = new Inventory("Test Product", 369, item);
+
         Inventory _inventory = testMe.save(inventory);
 
         assertThat(_inventory).hasFieldOrPropertyWithValue("productName", "Test Product");

@@ -3,6 +3,7 @@ package org.jayhenri.ecommerce.model;
 import java.io.Serializable;
 import java.util.UUID;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -41,7 +42,7 @@ public class Inventory implements Serializable {
 
     // todo: @NotFound, fix nested exception entitynotfound when doing jpatest
     @JoinColumn(name = "itemUUID", nullable = true, insertable = false, updatable = false)
-    @OneToOne()
+    @OneToOne(cascade = {CascadeType.ALL})
     private Item item;
 
     /**

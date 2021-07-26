@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * The type Customer not found exception.
  */
-@ResponseStatus(value = HttpStatus.BAD_REQUEST)
+@ResponseStatus(value = HttpStatus.NOT_FOUND)
 public class CustomerNotFoundException extends Exception {
     private List<String> errorMessages = new ArrayList<>();
 
