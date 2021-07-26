@@ -89,7 +89,7 @@ class InventoryControllerWebMvcTest {
 
         mockMvc.perform(
                 put("/api/inventory/update").contentType(MediaType.APPLICATION_JSON).content(asJsonString(inventory)))
-                .andExpect(status().isBadRequest());
+                .andExpect(status().isNotFound());
     }
 
     /**
@@ -100,7 +100,7 @@ class InventoryControllerWebMvcTest {
     @Test
     void updateItemThrowsInvalidItemException() throws Exception {
 
-        mockMvc.perform(put("/api/inventory/update").contentType(MediaType.APPLICATION_JSON).content("{}"))
+        mockMvc.perform(put("/api/inventory/update").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest());
     }
 
@@ -168,7 +168,7 @@ class InventoryControllerWebMvcTest {
     void getByProductNameThrowsItemNotFoundException() throws Exception {
         given(inventoryService.existsByProductName("Test Product")).willReturn(false);
 
-        mockMvc.perform((get("/api/inventory/get/Test Product"))).andExpect(status().isBadRequest());
+        mockMvc.perform((get("/api/inventory/get/Test Product"))).andExpect(status().isNotFound());
     }
 
     /**
@@ -192,7 +192,7 @@ class InventoryControllerWebMvcTest {
     void removeItemToInventoryThrowsItemNotFoundException() throws Exception {
         given(inventoryService.existsByProductName("Test Project")).willReturn(false);
 
-        mockMvc.perform(delete("/api/inventory/remove/Test Project")).andExpect(status().isBadRequest());
+        mockMvc.perform(delete("/api/inventory/remove/Test Project")).andExpect(status().isNotFound());
     }
 
     /**

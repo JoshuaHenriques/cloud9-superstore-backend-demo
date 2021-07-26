@@ -210,16 +210,6 @@ class CustomerControllerUniTest {
     }
 
     /**
-     * Delete customer throws invalid customer exception.
-     */
-    @Test
-    void deleteCustomerThrowsInvalidCustomerException() {
-        assertThrows(InvalidCustomerException.class, () -> {
-            testMe.deleteCustomer(null);
-        });
-    }
-
-    /**
      * List customers.
      */
     @Test

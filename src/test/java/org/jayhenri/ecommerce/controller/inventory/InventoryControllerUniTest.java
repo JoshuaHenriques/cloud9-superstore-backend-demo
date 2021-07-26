@@ -14,6 +14,7 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -25,7 +26,6 @@ import static org.mockito.BDDMockito.then;
  * The type Inventory controller uni test.
  */
 @ExtendWith(MockitoExtension.class)
-@Disabled
 class InventoryControllerUniTest {
 
     @Captor
@@ -59,7 +59,9 @@ class InventoryControllerUniTest {
      */
     @Test
     void updateItem() throws ItemAlreadyExistsException, InvalidItemException, ItemNotFoundException {
-        assertThat(ResponseEntity.ok().build()).isEqualTo(testMe.updateItem(inventory));
+        given(inventoryService.existsByProductName(inventory.getProductName())).willReturn(true);
+
+        assertThat(HttpStatus.OK).isEqualTo(testMe.updateItem(inventory).getStatusCode());
 
         then(inventoryService).should().update(captorInventory.capture());
 
@@ -96,7 +98,9 @@ class InventoryControllerUniTest {
      */
     @Test
     void addItem() throws ItemAlreadyExistsException, InvalidItemException {
-        assertThat(ResponseEntity.ok().build()).isEqualTo(testMe.addItem(inventory));
+        ResponseEntity<String> response = testMe.addItem(inventory);
+
+        assertThat(HttpStatus.CREATED).isEqualTo(response.getStatusCode());
 
         then(inventoryService).should().add(captorInventory.capture());
 
@@ -136,7 +140,9 @@ class InventoryControllerUniTest {
         given(inventoryService.existsByProductName("Test")).willReturn(true);
         given(inventoryService.getByProductName("Test")).willReturn(inventory);
 
-        assertThat(inventory).isEqualTo(testMe.getByProductName("Test"));
+        ResponseEntity<Inventory> _inventory = testMe.getByProductName("Test");
+
+        assertThat(inventory).isEqualTo(_inventory.getBody());
 
         then(inventoryService).should().getByProductName(captorString.capture());
 
@@ -166,7 +172,7 @@ class InventoryControllerUniTest {
         given(inventoryService.existsByProductName("Test")).willReturn(true);
         given(inventoryService.getByProductName("Test")).willReturn(inventory);
 
-        assertThat(ResponseEntity.ok().build()).isEqualTo(testMe.removeItem("Test"));
+        assertThat(HttpStatus.OK).isEqualTo(testMe.removeItem("Test").getStatusCode());
 
         then(inventoryService).should().delete(inventory);
     }
@@ -198,6 +204,6 @@ class InventoryControllerUniTest {
      */
     @Test
     void findAll() {
-        assertThat(testMe.findAll()).isEqualTo(inventoryService.findAll());
+        assertThat(testMe.findAll().getStatusCode()).isEqualTo(HttpStatus.OK);
     }
 }
