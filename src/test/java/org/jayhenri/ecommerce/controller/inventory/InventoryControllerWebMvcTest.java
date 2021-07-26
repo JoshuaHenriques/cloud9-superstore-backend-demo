@@ -1,15 +1,6 @@
 package org.jayhenri.ecommerce.controller.inventory;
 
-import static org.mockito.BDDMockito.given;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import org.jayhenri.ecommerce.controller.InventoryController;
 import org.jayhenri.ecommerce.model.Inventory;
 import org.jayhenri.ecommerce.model.Item;
@@ -24,6 +15,11 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
+
+import static org.mockito.BDDMockito.given;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
  * The type Inventory controller web mvc test.
@@ -41,14 +37,6 @@ class InventoryControllerWebMvcTest {
     private Inventory inventory;
 
     /**
-     * Sets up.
-     */
-    @BeforeEach
-    void setUp() {
-        inventory = new Inventory("Test Product", 369, new Item("Test Product", "Item Description", 32.54));
-    }
-
-    /**
      * As json string string.
      *
      * @param obj the obj
@@ -62,6 +50,14 @@ class InventoryControllerWebMvcTest {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    /**
+     * Sets up.
+     */
+    @BeforeEach
+    void setUp() {
+        inventory = new Inventory("Test Product", 369, new Item("Test Product", "Item Description", 32.54));
     }
 
     /**

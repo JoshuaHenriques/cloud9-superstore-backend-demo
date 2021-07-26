@@ -1,9 +1,5 @@
 package org.jayhenri.ecommerce.repository;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import java.util.List;
-
 import org.jayhenri.ecommerce.model.Inventory;
 import org.jayhenri.ecommerce.model.Item;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,6 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * The type Inventory repository data jpa test.
@@ -60,6 +60,9 @@ public class InventoryRepositoryDataJpaTest {
         assertThat(_inventory).hasFieldOrProperty("item");
     }
 
+    /**
+     * Find all inventory.
+     */
     @Test
     void findAllInventory() {
         Inventory inventory0 = new Inventory("inventory1", 369, null);
@@ -74,6 +77,9 @@ public class InventoryRepositoryDataJpaTest {
         assertThat(inventory).hasSize(3).contains(inventory0, inventory1, inventory2);
     }
 
+    /**
+     * Exists by product name.
+     */
     @Test
     void existsByProductName() {
         Inventory inventory0 = new Inventory("inventory0", 369, null);
@@ -86,6 +92,9 @@ public class InventoryRepositoryDataJpaTest {
         assertThat(exists).isTrue();
     }
 
+    /**
+     * Gets by product name.
+     */
     @Test
     void getByProductName() {
         Inventory inventory0 = new Inventory("inventory0", 369, null);

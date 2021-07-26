@@ -41,6 +41,22 @@ public class CustomerRegistrationWebMvcTest {
     private Customer customer;
 
     /**
+     * As json string string.
+     *
+     * @param obj the obj
+     * @return the string
+     */
+    public static String asJsonString(final Object obj) {
+        try {
+            final ObjectMapper mapper = new ObjectMapper();
+            final String jsonContent = mapper.writeValueAsString(obj);
+            return jsonContent;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
      * Sets up.
      */
     @BeforeEach
@@ -64,22 +80,6 @@ public class CustomerRegistrationWebMvcTest {
                 null,
                 null
         );
-    }
-
-    /**
-     * As json string string.
-     *
-     * @param obj the obj
-     * @return the string
-     */
-    public static String asJsonString(final Object obj) {
-        try {
-            final ObjectMapper mapper = new ObjectMapper();
-            final String jsonContent = mapper.writeValueAsString(obj);
-            return jsonContent;
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
     }
 
     /**

@@ -70,21 +70,20 @@ public class CustomerController {
      *
      * @param email the email
      * @return the response entity
-     * @throws InvalidCustomerException  the invalid customer exception
      * @throws CustomerNotFoundException the customer not found exception
      */
     @DeleteMapping(value = "/delete/{email}")
     public ResponseEntity<String> deleteCustomer(@PathVariable String email)
             throws CustomerNotFoundException {
-            if (customerService.existsByEmail(email)) {
-                Customer _customer = customerService.getByEmail(email);
-                customerService.delete(_customer);
+        if (customerService.existsByEmail(email)) {
+            Customer _customer = customerService.getByEmail(email);
+            customerService.delete(_customer);
 
-                HttpHeaders responseHeaders = new HttpHeaders();
-                responseHeaders.set("CustomerController", "deleteCustomer");
-                return new ResponseEntity<>("Successfully Deleted Customer", responseHeaders, HttpStatus.OK);
-            } else
-                throw new CustomerNotFoundException();
+            HttpHeaders responseHeaders = new HttpHeaders();
+            responseHeaders.set("CustomerController", "deleteCustomer");
+            return new ResponseEntity<>("Successfully Deleted Customer", responseHeaders, HttpStatus.OK);
+        } else
+            throw new CustomerNotFoundException();
     }
 
     /**
