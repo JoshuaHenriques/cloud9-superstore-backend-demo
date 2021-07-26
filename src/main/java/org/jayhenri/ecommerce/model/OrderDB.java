@@ -1,13 +1,22 @@
 package org.jayhenri.ecommerce.model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * The type Order db.
@@ -31,6 +40,7 @@ public class OrderDB implements Serializable {
     @Column(unique = true, length = 128, nullable = false)
     private String customerEmail;
 
+    @NotFound(action = NotFoundAction.IGNORE)
     @JoinColumn(name = "itemUUID", nullable = false, insertable = false, updatable = false)
     @OneToMany
     private List<Item> items;

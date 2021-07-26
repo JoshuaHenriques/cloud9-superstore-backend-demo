@@ -1,12 +1,19 @@
 package org.jayhenri.ecommerce.model;
 
+import java.io.Serializable;
+import java.util.UUID;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import javax.persistence.*;
-import java.io.Serializable;
-import java.util.UUID;
 
 /**
  * The type Item.
@@ -23,7 +30,7 @@ public class Item implements Serializable {
 
     @Id
     @Column(nullable = false)
-    private UUID itemUUID = UUID.randomUUID();
+    private UUID itemUUID;
 
     @Column
     private String itemName;
@@ -53,6 +60,7 @@ public class Item implements Serializable {
      * @param price       the price
      */
     public Item(String productName, String description, double price) {
+        this.itemUUID = UUID.randomUUID();
         this.itemName = productName;
         this.description = description;
         this.price = price;

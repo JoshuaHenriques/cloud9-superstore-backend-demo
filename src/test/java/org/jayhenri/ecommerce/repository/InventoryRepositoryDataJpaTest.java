@@ -1,6 +1,15 @@
 package org.jayhenri.ecommerce.repository;
 
-import org.jayhenri.ecommerce.model.*;
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.jayhenri.ecommerce.model.CreditCard;
+import org.jayhenri.ecommerce.model.Customer;
+import org.jayhenri.ecommerce.model.Inventory;
+import org.jayhenri.ecommerce.model.Item;
+import org.jayhenri.ecommerce.model.OrderDetails;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -8,11 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * The type Inventory repository data jpa test.
@@ -22,7 +26,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class InventoryRepositoryDataJpaTest {
 
     @Autowired
-    private TestEntityManager entityManger;
+    private TestEntityManager entityManager;
 
     @Autowired
     private InventoryRepository testMe;
@@ -35,15 +39,14 @@ public class InventoryRepositoryDataJpaTest {
 
     private OrderDetails orderDetails;
 
+    private Item item;
+
     /**
      * Sets up.
      */
     @BeforeEach
     void setUp() {
-        customer = new Customer("testMe", "TestMe", "2934811932", "testMe@gmail.com", "testMePassword", "082395",
-                new Address("Test Me", "29L", "0L", "New York", "T2K9R3", "Province"), null, null, null);
-
-        inventory = new Inventory("Test Product", 369, new Item("Test Product", "Item Description", 32.54));
+        inventory = new Inventory("Test Product", 369, new Item("Test Product", "f", 334.3));
 
         creditCard = new CreditCard("Test Name", "4656085451464353", "05/23", "231", "4353");
 
@@ -54,9 +57,58 @@ public class InventoryRepositoryDataJpaTest {
      * Database should be empty.
      */
     @Test
-    void databaseShouldBeEmpty() {
+    void emptyDatabse() {
+        List<Inventory> inventory = testMe.findAll();
+        assertThat(inventory).isEmpty();
+    }
+
+    /**
+     * Database should store inventory.
+     */
+    @Test
+    void storeCustomer() {
+        Inventory _inventory = testMe.save(inventory);
+
+        assertThat(_inventory).hasFieldOrPropertyWithValue("productName", "Test Product");
+        assertThat(_inventory).hasFieldOrPropertyWithValue("quantity", 369);
+        assertThat(_inventory).hasFieldOrProperty("item");
+    }
+
+    @Test
+    void findAllInventory() {
+        Inventory inventory0 = new Inventory("inventory1", 369, null);
+        entityManager.persist(inventory0);
+        Inventory inventory1 = new Inventory("inventory2", 369, null);
+        entityManager.persist(inventory1);
+        Inventory inventory2 = new Inventory("inventory3", 369, null);
+        entityManager.persist(inventory2);
+
         List<Inventory> inventory = testMe.findAll();
 
-        assertThat(inventory).isEmpty();
+        assertThat(inventory).hasSize(3).contains(inventory0, inventory1, inventory2);
+    }
+
+    @Test
+    void existsByProductName() {
+        Inventory inventory0 = new Inventory("inventory0", 369, null);
+        entityManager.persist(inventory0);
+        Inventory inventory1 = new Inventory("inventory1", 369, null);
+        entityManager.persist(inventory1);
+
+        boolean exists = testMe.existsByProductName("inventory1");
+        
+        assertThat(exists).isTrue();
+    }
+
+    @Test
+    void getByProductName() {
+        Inventory inventory0 = new Inventory("inventory0", 369, null);
+        entityManager.persist(inventory0);
+        Inventory inventory1 = new Inventory("inventory1", 369, null);
+        entityManager.persist(inventory1);
+
+        Inventory inventory = testMe.getByProductName("inventory1");
+
+        assertThat(inventory).isEqualTo(inventory1);
     }
 }

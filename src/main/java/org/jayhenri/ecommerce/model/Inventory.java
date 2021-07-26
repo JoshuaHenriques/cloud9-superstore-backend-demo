@@ -1,12 +1,18 @@
 package org.jayhenri.ecommerce.model;
 
+import java.io.Serializable;
+import java.util.UUID;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import javax.persistence.*;
-import java.io.Serializable;
-import java.util.UUID;
 
 /**
  * The type Inventory.
@@ -33,8 +39,9 @@ public class Inventory implements Serializable {
     @Column
     private int quantity;
 
-    @JoinColumn(name = "itemUUID", nullable = false, insertable = false, updatable = false)
-    @OneToOne
+    // todo: @NotFound, fix nested exception entitynotfound when doing jpatest
+    @JoinColumn(name = "itemUUID", nullable = true, insertable = false, updatable = false)
+    @OneToOne()
     private Item item;
 
     /**
