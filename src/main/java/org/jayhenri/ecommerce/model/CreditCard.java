@@ -11,7 +11,6 @@ import java.util.UUID;
 /**
  * The type Credit card.
  */
-// TODO: Implement later
 @Getter
 @Setter
 @NoArgsConstructor

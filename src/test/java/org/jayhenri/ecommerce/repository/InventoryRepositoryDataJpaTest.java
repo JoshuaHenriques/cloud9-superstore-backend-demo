@@ -27,8 +27,6 @@ public class InventoryRepositoryDataJpaTest {
     @Autowired
     private InventoryRepository testMe;
 
-    private Inventory inventory;
-
     /**
      * Sets up.
      */

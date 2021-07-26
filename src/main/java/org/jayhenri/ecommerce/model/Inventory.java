@@ -11,9 +11,6 @@ import java.util.UUID;
 /**
  * The type Inventory.
  */
-// TODO: Abstract for different type of items
-// TODO: Implement ratings
-// TODO: Implement comments
 @Getter
 @Setter
 @NoArgsConstructor

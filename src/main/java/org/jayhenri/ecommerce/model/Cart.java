@@ -10,8 +10,6 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
 
-// TODO: Implement HST+GST+PROMOCODE computation
-
 /**
  * The type Cart.
  */

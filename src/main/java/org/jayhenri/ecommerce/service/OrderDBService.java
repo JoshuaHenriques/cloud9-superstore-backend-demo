@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 /**
  * The type Order db service.
  */
-// TODO: Update Customer through CustomerService methods
 @Service
 public class OrderDBService {
 

@@ -11,8 +11,6 @@ import java.util.UUID;
 /**
  * The type Item.
  */
-// TODO: Implement Ratings
-// TODO: There must be a better way to do this
 @Getter
 @Setter
 @NoArgsConstructor

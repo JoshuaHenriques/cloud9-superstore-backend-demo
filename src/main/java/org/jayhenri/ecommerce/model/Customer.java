@@ -12,7 +12,6 @@ import java.util.UUID;
 /**
  * The type Customer.
  */
-// TODO: nullable: false for most field
 @Getter
 @Setter
 @NoArgsConstructor

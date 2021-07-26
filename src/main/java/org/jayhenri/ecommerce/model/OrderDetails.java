@@ -12,7 +12,6 @@ import java.util.UUID;
 /**
  * The type Order.
  */
-// TODO: Fix enum import
 @Getter
 @Setter
 @NoArgsConstructor
