@@ -10,9 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
-import org.hibernate.annotations.NotFound;
-import org.hibernate.annotations.NotFoundAction;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -31,7 +28,7 @@ public class OrderDetails implements Serializable {
 
     @Id
     @Column(nullable = false)
-    private UUID orderUUID = UUID.randomUUID();
+    private UUID orderUUID;
 
     @Column(nullable = false)
     private String orderStatus;
@@ -39,8 +36,7 @@ public class OrderDetails implements Serializable {
     @Column(nullable = false)
     private String customerEmail;
 
-    @NotFound(action = NotFoundAction.IGNORE)
-    @JoinColumn(name = "itemUUID", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "itemUUID", nullable = true, insertable = false, updatable = false)
     @OneToMany
     private List<Item> itemList;
 
@@ -56,6 +52,7 @@ public class OrderDetails implements Serializable {
      * @param totalPrice    the total price
      */
     public OrderDetails(String orderStatus, String customerEmail, List<Item> itemList, double totalPrice) {
+        this.orderUUID = UUID.randomUUID();
         this.orderStatus = orderStatus;
         this.customerEmail = customerEmail;
         this.itemList = itemList;

@@ -2,14 +2,10 @@ package org.jayhenri.ecommerce.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.jayhenri.ecommerce.model.CreditCard;
-import org.jayhenri.ecommerce.model.Customer;
 import org.jayhenri.ecommerce.model.Inventory;
 import org.jayhenri.ecommerce.model.Item;
-import org.jayhenri.ecommerce.model.OrderDetails;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -33,31 +29,19 @@ public class InventoryRepositoryDataJpaTest {
 
     private Inventory inventory;
 
-    private Customer customer;
-
-    private CreditCard creditCard;
-
-    private OrderDetails orderDetails;
-
-    private Item item;
-
     /**
      * Sets up.
      */
     @BeforeEach
     void setUp() {
         inventory = new Inventory("Test Product", 369, new Item("Test Product", "f", 334.3));
-
-        creditCard = new CreditCard("Test Name", "4656085451464353", "05/23", "231", "4353");
-
-        orderDetails = new OrderDetails("TEST", "TestMe@gmail.com", new ArrayList<>(), 43.24);
     }
 
     /**
      * Database should be empty.
      */
     @Test
-    void emptyDatabse() {
+    void emptyDatabase() {
         List<Inventory> inventory = testMe.findAll();
         assertThat(inventory).isEmpty();
     }
@@ -66,7 +50,7 @@ public class InventoryRepositoryDataJpaTest {
      * Database should store inventory.
      */
     @Test
-    void storeCustomer() {
+    void storeInventory() {
         Inventory _inventory = testMe.save(inventory);
 
         assertThat(_inventory).hasFieldOrPropertyWithValue("productName", "Test Product");
@@ -96,7 +80,7 @@ public class InventoryRepositoryDataJpaTest {
         entityManager.persist(inventory1);
 
         boolean exists = testMe.existsByProductName("inventory1");
-        
+
         assertThat(exists).isTrue();
     }
 

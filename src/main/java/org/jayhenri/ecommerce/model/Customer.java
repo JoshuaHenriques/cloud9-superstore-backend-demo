@@ -13,9 +13,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.NotFound;
-import org.hibernate.annotations.NotFoundAction;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -69,17 +66,14 @@ public class Customer implements Serializable {
     @Embedded
     private Address address;
 
-    @NotFound(action = NotFoundAction.IGNORE)
     @JoinColumn(name = "cartUUID", nullable = true, insertable = false, updatable = false)
     @OneToOne
     private Cart cart;
     
-    @NotFound(action = NotFoundAction.IGNORE)
     @JoinColumn(name = "creditCardUUID", nullable = true, insertable = false, updatable = false)
     @OneToMany
     private List<CreditCard> creditCards;
 
-    @NotFound(action = NotFoundAction.IGNORE)
     @JoinColumn(name = "orderUUID", nullable = true, insertable = false, updatable = false)
     @OneToMany
     private List<OrderDetails> orderDetailsList;
