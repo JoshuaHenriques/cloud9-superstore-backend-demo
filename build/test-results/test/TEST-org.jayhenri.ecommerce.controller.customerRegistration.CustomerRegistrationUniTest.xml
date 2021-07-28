@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="org.jayhenri.ecommerce.controller.customerRegistration.CustomerRegistrationUniTest" tests="3" skipped="1" failures="0" errors="0" timestamp="2021-07-25T05:23:37" hostname="kde-neon" time="0.084">
+<testsuite name="org.jayhenri.ecommerce.controller.customerRegistration.CustomerRegistrationUniTest" tests="3" skipped="1" failures="0" errors="0" timestamp="2021-07-28T01:40:26" hostname="kde-neon" time="0.06">
   <properties/>
-  <testcase name="registerThrowsInvalidPostalCodeException()" classname="org.jayhenri.ecommerce.controller.customerRegistration.CustomerRegistrationUniTest" time="0.081"/>
+  <testcase name="registerThrowsInvalidPostalCodeException()" classname="org.jayhenri.ecommerce.controller.customerRegistration.CustomerRegistrationUniTest" time="0.057"/>
   <testcase name="register()" classname="org.jayhenri.ecommerce.controller.customerRegistration.CustomerRegistrationUniTest" time="0.0">
     <skipped/>
   </testcase>

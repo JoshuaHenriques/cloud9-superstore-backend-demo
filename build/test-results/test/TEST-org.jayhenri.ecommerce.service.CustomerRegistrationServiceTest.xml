@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="org.jayhenri.ecommerce.service.CustomerRegistrationServiceTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2021-07-25T05:23:40" hostname="kde-neon" time="0.049">
+<testsuite name="org.jayhenri.ecommerce.service.CustomerRegistrationServiceTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2021-07-28T01:40:29" hostname="kde-neon" time="0.037">
   <properties/>
-  <testcase name="doesNotExistsByPhoneNumber()" classname="org.jayhenri.ecommerce.service.CustomerRegistrationServiceTest" time="0.042"/>
+  <testcase name="doesNotExistsByPhoneNumber()" classname="org.jayhenri.ecommerce.service.CustomerRegistrationServiceTest" time="0.029"/>
   <testcase name="testAdd()" classname="org.jayhenri.ecommerce.service.CustomerRegistrationServiceTest" time="0.001"/>
-  <testcase name="existsByEmail()" classname="org.jayhenri.ecommerce.service.CustomerRegistrationServiceTest" time="0.001"/>
-  <testcase name="isValidPostalCode()" classname="org.jayhenri.ecommerce.service.CustomerRegistrationServiceTest" time="0.0"/>
-  <testcase name="isNotValidPostalCode()" classname="org.jayhenri.ecommerce.service.CustomerRegistrationServiceTest" time="0.0"/>
-  <testcase name="existsByPhoneNumber()" classname="org.jayhenri.ecommerce.service.CustomerRegistrationServiceTest" time="0.001"/>
+  <testcase name="existsByEmail()" classname="org.jayhenri.ecommerce.service.CustomerRegistrationServiceTest" time="0.002"/>
+  <testcase name="isValidPostalCode()" classname="org.jayhenri.ecommerce.service.CustomerRegistrationServiceTest" time="0.001"/>
+  <testcase name="isNotValidPostalCode()" classname="org.jayhenri.ecommerce.service.CustomerRegistrationServiceTest" time="0.001"/>
+  <testcase name="existsByPhoneNumber()" classname="org.jayhenri.ecommerce.service.CustomerRegistrationServiceTest" time="0.002"/>
   <testcase name="doesNotExistsByEmail()" classname="org.jayhenri.ecommerce.service.CustomerRegistrationServiceTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
