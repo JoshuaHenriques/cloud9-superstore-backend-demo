@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS item (
 	item_name		VARCHAR(25)			NOT NULL,
 	description		VARCHAR(255)		NOT NULL,
 	price 			DOUBLE PRECISION	NOT NULL,
-	image			BYTEA				NOT NULL
+	image			BYTEA				
 );
 
 CREATE TABLE IF NOT EXISTS inventory (
