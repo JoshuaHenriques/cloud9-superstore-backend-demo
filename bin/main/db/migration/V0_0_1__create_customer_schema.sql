@@ -1,5 +1,5 @@
 create table if not exists address (
-	address_uid uuid primary key default uuid_generate_v4(),
+	address_id      uuid primary key default uuid_generate_v4(),
 	street_name     varchar(50)     not null,
 	street_number   smallint        not null,
 	unit_number     smallint        not null,
@@ -8,8 +8,8 @@ create table if not exists address (
 	province        varchar(50)     not null
 );
 
-create table if not exists creditcard (
-	creditcard_uid  uuid            primary key default uuid_generate_v4(),
+create table if not exists credit_card (
+	credit_card_id  uuid primary key default uuid_generate_v4(),
 	first_name      varchar(50)     not null,
 	last_name       varchar(50)		not	null,
 	ccn				varchar(20)		not null unique,
@@ -18,22 +18,21 @@ create table if not exists creditcard (
 );
 
 create table if not exists cart (
-	cart_uid    uuid                primary key default uuid_generate_v4(),
-	item_uid	uuid				not null foreign key references item(item_uid),
-	total       double precision    not null
+	cart_id         uuid primary key default uuid_generate_v4(),
+	item_id			uuid[]		        not null,
+	total           double precision    not null
 );
 
 create table if not exists customer (
-	customer_uid    uuid            primary key default uuid_generate_v4(),
-	address_uid     uuid            not null unique foreign key references address(address_id),
-	cart_uid        uuid            not null unique foreign key references cart(cart_id),
-	creditcard_uid  uuid[]          foreign key references creditcard(creditcard_id),
-	order_uid       uuid[]          foreign key references order(order_id),
-	email           varchar(50)     not null identity unique,
+	customer_id     uuid primary key default uuid_generate_v4(),
+	email           varchar(50)     not null unique,
+	address_id      uuid            not null unique references address(address_id),
+	cart_uid        uuid            not null unique references cart(cart_id),
+	credit_card_ids uuid[],
+	order_ids       uuid[],
 	first_name      varchar(50)     not null,
 	last_name       varchar(50)     not null,
 	phone_number    varchar(15)     not null,
 	password        varchar(100)    not null,
-	date_of_birth   date     		not null,
+	date_of_birth   date     		not null
 );
-

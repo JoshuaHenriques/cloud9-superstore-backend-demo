@@ -22,12 +22,7 @@ public class Customer implements Serializable {
     /**
      * The constant ROLE_ADMIN.
      */
-    public static final int ROLE_ADMIN = 1;
-
-    /**
-     * The constant ROLE_NONADMIN.
-     */
-    public static final int ROLE_NONADMIN = 0;
+    public static final int ROLE_ADMIN = 0;
 
     private static final long serialVersionUID = -1854209356482886781L;
 
