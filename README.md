@@ -1,9 +1,7 @@
 # Ecommerce-Demo API
+*In development*
 #### 172.105.3.51:8080
 #### Test Cases: 131 ** explain tests
-#### Explain models, controllers, services, repositories
-#### Tech/Features used
-#### Overall use
 #### 20 Endpoints
 ```
 (api/register):
