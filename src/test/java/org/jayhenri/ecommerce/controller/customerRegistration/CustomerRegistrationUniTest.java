@@ -15,8 +15,10 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.net.http.HttpHeaders;
 import java.util.ArrayList;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -114,7 +116,6 @@ public class CustomerRegistrationUniTest {
      * @throws InvalidCustomerException       the invalid customer exception
      */
     @Test
-    @Disabled
     void register() throws InvalidPostalCodeException, CustomerAlreadyExistsException, InvalidCustomerException {
         given(customerService.existsByEmail(customer.getEmail())).willReturn(false);
         given(customerService.existsByPhoneNumber(customer.getPhoneNumber())).willReturn(false);
@@ -124,7 +125,7 @@ public class CustomerRegistrationUniTest {
 
         then(customerService).should().add(captorCustomer.capture());
 
-        assertThat(response).isEqualTo(ResponseEntity.ok().build());
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
         assertThat(customer).isEqualTo(captorCustomer.getValue());
     }
 

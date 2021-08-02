@@ -15,9 +15,12 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import javax.naming.InvalidNameException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -151,11 +154,12 @@ class CustomerControllerUniTest {
     void updateCustomer() throws InvalidCustomerException, CustomerNotFoundException {
         given(customerService.existsByEmail(customer.getEmail())).willReturn(true);
 
-        testMe.updateCustomer(customer);
+        ResponseEntity<String> response = testMe.updateCustomer(customer);
 
         then(customerService).should().update(captorCustomer.capture());
 
         assertThat(captorCustomer.getValue()).isEqualTo(customer);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
     }
 
     /**
@@ -172,7 +176,7 @@ class CustomerControllerUniTest {
      * Update customer throws customer already exists exception.
      */
     @Test
-    void updateCustomerThrowsCustomerAlreadyExistsException() {
+    void updateCustomerThrowsCustomerNotFoundException() {
         given(customerService.existsByEmail(customer.getEmail())).willReturn(false);
 
         assertThrows(CustomerNotFoundException.class, () -> {
@@ -191,12 +195,13 @@ class CustomerControllerUniTest {
         given(customerService.existsByEmail("testMe@gmail.com")).willReturn(true);
         given(customerService.getByEmail("testMe@gmail.com")).willReturn(customer);
 
-        testMe.deleteCustomer("testMe@gmail.com");
+        ResponseEntity<String> response = testMe.deleteCustomer("testMe@gmail.com");
 
         then(customerService).should().delete(captorCustomer.capture());
 
         assertThat(captorCustomer.getValue()).isEqualTo(customer);
         assertThat(captorCustomer.getValue().getEmail()).isEqualTo("testMe@gmail.com");
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
     }
 
     /**
@@ -228,11 +233,12 @@ class CustomerControllerUniTest {
     void getByEmail() throws InvalidNameException, CustomerNotFoundException {
         given(customerService.existsByEmail("testMe@gmail.com")).willReturn(true);
 
-        testMe.getByEmail("testMe@gmail.com");
+        ResponseEntity<Customer> response = testMe.getByEmail("testMe@gmail.com");
 
         then(customerService).should().getByEmail(captorString.capture());
 
         assertThat("testMe@gmail.com").isEqualTo(captorString.getValue());
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
     }
 
     /**
@@ -271,12 +277,13 @@ class CustomerControllerUniTest {
         given(customerService.getByEmail("testMe@gmail.com")).willReturn(customer);
         given(inventoryService.getByProductName("Test Product")).willReturn(inventory);
 
-        testMe.addToCart("Test Product", "testMe@gmail.com");
+        ResponseEntity<String> response = testMe.addToCart("Test Product", "testMe@gmail.com");
 
         then(customerService).should().addToCart(captorCustomer.capture(), captorItem.capture());
 
         assertThat(captorCustomer.getValue()).isEqualTo(customer);
         assertThat(captorItem.getValue()).isEqualTo(inventory.getItem());
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
     }
 
     /**
@@ -317,7 +324,7 @@ class CustomerControllerUniTest {
 
         given(customerService.getByEmail("testMe@gmail.com")).willReturn(customer);
 
-        testMe.removeFromCart("Test Product", "testMe@gmail.com");
+        ResponseEntity<String> response = testMe.removeFromCart("Test Product", "testMe@gmail.com");
 
         then(customerService).should().removeFromCart(captorCustomer.capture(), captorString.capture());
 
@@ -360,7 +367,7 @@ class CustomerControllerUniTest {
         given(customerService.existsByEmail("testMe@gmail.com")).willReturn(true);
         given(customerService.getByEmail("testMe@gmail.com")).willReturn(customer);
 
-        testMe.emptyCart("testMe@gmail.com");
+        ResponseEntity<String> response = testMe.emptyCart("testMe@gmail.com");
 
         then(customerService).should().emptyCart(captorCustomer.capture());
 
@@ -389,7 +396,7 @@ class CustomerControllerUniTest {
         given(customerService.existsByEmail("testMe@gmail.com")).willReturn(true);
         given(customerService.getByEmail("testMe@gmail.com")).willReturn(customer);
 
-        testMe.getCart("testMe@gmail.com");
+        ResponseEntity<Cart> response = testMe.getCart("testMe@gmail.com");
 
         then(customerService).should().getCart(captorCustomer.capture());
 
@@ -418,7 +425,7 @@ class CustomerControllerUniTest {
         given(customerService.existsByEmail("testMe@gmail.com")).willReturn(true);
         given(customerService.getByEmail("testMe@gmail.com")).willReturn(customer);
 
-        testMe.addCreditCard("testMe@gmail.com", creditCard);
+        ResponseEntity<String> response = testMe.addCreditCard("testMe@gmail.com", creditCard);
 
         then(customerService).should().addCreditCard(captorCustomer.capture(), captorCreditCard.capture());
 
@@ -448,7 +455,7 @@ class CustomerControllerUniTest {
         given(customerService.existsByEmail("testMe@gmail.com")).willReturn(true);
         given(customerService.getByEmail("testMe@gmail.com")).willReturn(customer);
 
-        testMe.removeCreditCard("testMe@gmail.com", "4352");
+        ResponseEntity<String> response = testMe.removeCreditCard("testMe@gmail.com", "4352");
 
         then(customerService).should().removeCreditCard(captorCustomer.capture(), captorString.capture());
 
@@ -478,7 +485,7 @@ class CustomerControllerUniTest {
         given(customerService.existsByEmail("testMe@gmail.com")).willReturn(true);
         given(customerService.getByEmail("testMe@gmail.com")).willReturn(customer);
 
-        testMe.listCreditCards("testMe@gmail.com");
+        ResponseEntity<List<CreditCard>> response = testMe.listCreditCards("testMe@gmail.com");
 
         then(customerService).should().findAllCreditCards(captorCustomer.capture());
 
@@ -507,7 +514,7 @@ class CustomerControllerUniTest {
         given(customerService.existsByEmail("testMe@gmail.com")).willReturn(true);
         given(customerService.getByEmail("testMe@gmail.com")).willReturn(customer);
 
-        testMe.addOrder("testMe@gmail.com", orderDetails1);
+        ResponseEntity<String> response = testMe.addOrder("testMe@gmail.com", orderDetails1);
 
         then(customerService).should().addOrder(captorCustomer.capture(), captorOrderDetails.capture());
 
@@ -537,7 +544,7 @@ class CustomerControllerUniTest {
         given(customerService.existsByEmail("testMe@gmail.com")).willReturn(true);
         given(customerService.getByEmail("testMe@gmail.com")).willReturn(customer);
 
-        testMe.updateOrder("testMe@gmail.com", uuid, "TEST");
+        ResponseEntity<String> response = testMe.updateOrder("testMe@gmail.com", uuid, "TEST");
 
         then(customerService).should().updateOrder(captorCustomer.capture(), captorUUID.capture(), captorString.capture());
 
@@ -568,7 +575,7 @@ class CustomerControllerUniTest {
         given(customerService.existsByEmail("testMe@gmail.com")).willReturn(true);
         given(customerService.getByEmail("testMe@gmail.com")).willReturn(customer);
 
-        testMe.listOrders("testMe@gmail.com");
+        ResponseEntity<List<OrderDetails>> response = testMe.listOrders("testMe@gmail.com");
 
         then(customerService).should().findAllOrders(captorCustomer.capture());
 

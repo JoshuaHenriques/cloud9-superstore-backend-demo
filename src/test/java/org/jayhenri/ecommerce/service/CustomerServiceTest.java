@@ -188,12 +188,9 @@ class CustomerServiceTest {
 
     /**
      * Add.
-     *
-     * @throws InvalidPostalCodeException     the invalid postal code exception
-     * @throws CustomerAlreadyExistsException the customer already exists exception
      */
     @Test
-    void add() throws InvalidPostalCodeException, CustomerAlreadyExistsException {
+    void add() {
         testMe.add(this.customer);
 
         then(customerRepository).should().save(captorCustomer.capture());
@@ -283,11 +280,13 @@ class CustomerServiceTest {
     @Test
     void getByEmail() {
         String email = "testMe@gmail.com";
-        testMe.getByEmail(email);
+        given(customerRepository.getByEmail(email)).willReturn(customer);
+        Customer _customer = testMe.getByEmail(email);
 
         then(customerRepository).should().getByEmail(captorString.capture());
 
         assertThat(captorString.getValue()).isEqualTo(email);
+        assertThat(customer).isEqualTo(_customer);
     }
 
     /**
