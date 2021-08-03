@@ -1,5 +1,7 @@
 package org.jayhenri.ecommerce.repository;
 
+import org.jayhenri.ecommerce.model.Address;
+import org.jayhenri.ecommerce.model.Customer;
 import org.jayhenri.ecommerce.model.Inventory;
 import org.jayhenri.ecommerce.model.Item;
 import org.junit.jupiter.api.BeforeEach;
@@ -28,13 +30,6 @@ public class InventoryRepositoryDataJpaTest {
     private InventoryRepository testMe;
 
     /**
-     * Sets up.
-     */
-    @BeforeEach
-    void setUp() {
-    }
-
-    /**
      * Database should be empty.
      */
     @Test
@@ -56,6 +51,22 @@ public class InventoryRepositoryDataJpaTest {
         assertThat(_inventory).hasFieldOrPropertyWithValue("productName", "Test Product");
         assertThat(_inventory).hasFieldOrPropertyWithValue("quantity", 369);
         assertThat(_inventory).hasFieldOrProperty("item");
+    }
+
+    /**
+     * Database should store customer.
+     */
+    @Test
+    void deleteInventory() {
+        Item item = new Item("Test Product", "f", 334.3);
+        Inventory inventory0 = new Inventory("Test Product", 369, item);
+        Inventory _inventory = entityManager.persist(inventory0);
+
+        testMe.delete(_inventory);
+        // entityManager.flush();
+
+        Inventory __inventory = entityManager.find(Inventory.class, _inventory.getInventoryUUID());
+        assertThat(__inventory).isNull();
     }
 
     /**

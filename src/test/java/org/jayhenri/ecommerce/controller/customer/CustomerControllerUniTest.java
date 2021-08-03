@@ -191,7 +191,7 @@ class CustomerControllerUniTest {
      * @throws CustomerNotFoundException the customer not found exception
      */
     @Test
-    void deleteCustomer() throws InvalidCustomerException, CustomerNotFoundException {
+    void deleteCustomer() throws CustomerNotFoundException {
         given(customerService.existsByEmail("testMe@gmail.com")).willReturn(true);
         given(customerService.getByEmail("testMe@gmail.com")).willReturn(customer);
 
@@ -490,6 +490,7 @@ class CustomerControllerUniTest {
         then(customerService).should().findAllCreditCards(captorCustomer.capture());
 
         assertThat(captorCustomer.getValue()).isEqualTo(customer);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
     }
 
     /**

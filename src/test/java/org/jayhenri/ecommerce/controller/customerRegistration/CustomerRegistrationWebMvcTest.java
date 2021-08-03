@@ -88,7 +88,6 @@ public class CustomerRegistrationWebMvcTest {
      * @throws Exception the exception
      */
     @Test
-    @Disabled
     void register() throws Exception {
         given(customerService.existsByPhoneNumber(customer.getPhoneNumber())).willReturn(false);
         given(addressService.isValidPostalCode(customer.getAddress().getPostalCode())).willReturn(true);
@@ -96,7 +95,7 @@ public class CustomerRegistrationWebMvcTest {
         mockMvc.perform(post("/api/register/customer")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(asJsonString(customer)))
-                .andExpect(status().isOk());
+                .andExpect(status().isCreated());
     }
 
     /**

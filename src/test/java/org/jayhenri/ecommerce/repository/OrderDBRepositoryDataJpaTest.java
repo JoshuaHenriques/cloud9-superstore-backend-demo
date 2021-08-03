@@ -39,7 +39,7 @@ public class OrderDBRepositoryDataJpaTest {
      * Database should store customer.
      */
     @Test
-    void storeCustomer() {
+    void storeOrderDB() {
         OrderDB orderDB = new OrderDB(new OrderDetails("TESTSTATUS", "testMe0@gmail.com", null, 29.99));
 
         OrderDB _orderDB = testMe.save(orderDB);

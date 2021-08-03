@@ -60,6 +60,22 @@ public class CustomerRepositoryDataJpaTest {
     }
 
     /**
+     * Database should store customer.
+     */
+    @Test
+    void deleteCustomer() {
+        Customer customer0 = new Customer("testMe", "TestMe", "2934811932", "testMe0@gmail.com", "testMePassword",
+                "082395", new Address("Test Me", "29L", "0L", "New York", "T2K9R3", "Province"), null, null, null);
+        Customer _customer = entityManager.persist(customer0);
+
+        testMe.delete(_customer);
+        // entityManager.flush();
+
+        Customer __customer = entityManager.find(Customer.class, _customer.getCustomerUUID());
+        assertThat(__customer).isNull();
+    }
+
+    /**
      * Find all inventory.
      */
     @Test
