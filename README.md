@@ -45,7 +45,9 @@ Endpoints:
     /get/{productName}      GET
     /remove/{productName}   DELETE
     /items/list             GET
-```
+    
+    135/135 Passed Tests, 5 Tests Ignored
+
 ### Built With
 
 * [Springboot 2.5.3]
