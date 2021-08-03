@@ -134,10 +134,9 @@ class InventoryControllerWebMvcTest {
      * @throws Exception the exception
      */
     @Test
-    @Disabled
     void addItemToInventoryThrowsInvalidItemException() throws Exception {
 
-        mockMvc.perform(post("/api/inventory/add").contentType(MediaType.APPLICATION_JSON).content("{}"))
+        mockMvc.perform(post("/api/inventory/add").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest());
     }
 

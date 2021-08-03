@@ -35,13 +35,13 @@
 </td>
 <td>
 <div class="infoBox" id="ignored">
-<div class="counter">2</div>
+<div class="counter">1</div>
 <p>ignored</p>
 </div>
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.195s</div>
+<div class="counter">0.193s</div>
 <p>duration</p>
 </div>
 </td>
@@ -79,17 +79,17 @@
 </thead>
 <tr>
 <td class="success">addCreditCard()</td>
-<td class="success">0.008s</td>
+<td class="success">0.007s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">addCreditCardThrowsCustomerNotFoundException()</td>
-<td class="success">0.018s</td>
+<td class="success">0.013s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">addOrder()</td>
-<td class="success">0.007s</td>
+<td class="success">0.008s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -114,17 +114,17 @@
 </tr>
 <tr>
 <td class="success">deleteCustomer()</td>
-<td class="success">0.017s</td>
+<td class="success">0.026s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">deleteCustomerThrowsCustomerNotFoundException()</td>
-<td class="success">0.005s</td>
+<td class="success">0.004s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">emptyCart()</td>
-<td class="success">0.005s</td>
+<td class="success">0.006s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -134,12 +134,12 @@
 </tr>
 <tr>
 <td class="success">getByEmail()</td>
-<td class="success">0.008s</td>
+<td class="success">0.007s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">getByEmailThrowsCustomerNotFoundException()</td>
-<td class="success">0.004s</td>
+<td class="success">0.005s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -154,12 +154,12 @@
 </tr>
 <tr>
 <td class="success">listCreditCard()</td>
-<td class="success">0.008s</td>
+<td class="success">0.007s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">listCreditCardThrowsCustomerNotFoundException()</td>
-<td class="success">0.007s</td>
+<td class="success">0.005s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -174,7 +174,7 @@
 </tr>
 <tr>
 <td class="success">listOrdersThrowsCustomerNotFoundException()</td>
-<td class="success">0.005s</td>
+<td class="success">0.006s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -184,12 +184,12 @@
 </tr>
 <tr>
 <td class="success">removeCreditCardThrowsCustomerNotFoundException()</td>
-<td class="success">0.006s</td>
+<td class="success">0.005s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">removeFromCart()</td>
-<td class="success">0.010s</td>
+<td class="success">0.007s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -199,12 +199,12 @@
 </tr>
 <tr>
 <td class="success">removeFromCartThrowsItemNotFoundException()</td>
-<td class="success">0.006s</td>
+<td class="success">0.005s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">updateCustomer()</td>
-<td class="success">0.012s</td>
+<td class="success">0.008s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -214,25 +214,25 @@
 </tr>
 <tr>
 <td class="success">updateCustomerThrowsItemNotFoundException()</td>
-<td class="success">0.008s</td>
+<td class="success">0.006s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
-<td class="skipped">updateOrder()</td>
-<td class="skipped">-</td>
-<td class="skipped">ignored</td>
+<td class="success">updateOrder()</td>
+<td class="success">0.007s</td>
+<td class="success">passed</td>
 </tr>
 </table>
 </div>
 <div id="tab1" class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>2021-08-03 12:40:58.930  INFO 23010 --- [    Test worker] .b.t.a.w.s.WebMvcTestContextBootstrapper : Neither @ContextConfiguration nor @ContextHierarchy found for test class [org.jayhenri.ecommerce.controller.customer.CustomerControllerWebMvcTest], using SpringBootContextLoader
-2021-08-03 12:40:58.931  INFO 23010 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [org.jayhenri.ecommerce.controller.customer.CustomerControllerWebMvcTest]: no resource found for suffixes {-context.xml, Context.groovy}.
-2021-08-03 12:40:58.931  INFO 23010 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [org.jayhenri.ecommerce.controller.customer.CustomerControllerWebMvcTest]: CustomerControllerWebMvcTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2021-08-03 12:40:58.937  INFO 23010 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration org.jayhenri.ecommerce.EcommerceApplication for test class org.jayhenri.ecommerce.controller.customer.CustomerControllerWebMvcTest
-2021-08-03 12:40:58.937  INFO 23010 --- [    Test worker] .b.t.a.w.s.WebMvcTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.security.test.context.support.WithSecurityContextTestExecutionListener, org.springframework.security.test.context.support.ReactorContextTestExecutionListener, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
-2021-08-03 12:40:58.938  INFO 23010 --- [    Test worker] .b.t.a.w.s.WebMvcTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@190edfb5, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@cd31521, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@7d9e563f, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@4a967ed9, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@250af349, org.springframework.test.context.support.DirtiesContextTestExecutionListener@31e490d4, org.springframework.test.context.transaction.TransactionalTestExecutionListener@3e440779, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@47ddd6de, org.springframework.security.test.context.support.WithSecurityContextTestExecutionListener@353fe5d7, org.springframework.test.context.event.EventPublishingTestExecutionListener@20c8a194, org.springframework.security.test.context.support.ReactorContextTestExecutionListener@3ea9153b, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@17eb5f16, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@5db01161, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@3811df42, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@4e6715b6, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@339e083, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@5edfc29c]
+<pre>2021-08-03 12:55:53.778  INFO 23813 --- [    Test worker] .b.t.a.w.s.WebMvcTestContextBootstrapper : Neither @ContextConfiguration nor @ContextHierarchy found for test class [org.jayhenri.ecommerce.controller.customer.CustomerControllerWebMvcTest], using SpringBootContextLoader
+2021-08-03 12:55:53.779  INFO 23813 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [org.jayhenri.ecommerce.controller.customer.CustomerControllerWebMvcTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+2021-08-03 12:55:53.779  INFO 23813 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [org.jayhenri.ecommerce.controller.customer.CustomerControllerWebMvcTest]: CustomerControllerWebMvcTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2021-08-03 12:55:53.784  INFO 23813 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration org.jayhenri.ecommerce.EcommerceApplication for test class org.jayhenri.ecommerce.controller.customer.CustomerControllerWebMvcTest
+2021-08-03 12:55:53.785  INFO 23813 --- [    Test worker] .b.t.a.w.s.WebMvcTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.security.test.context.support.WithSecurityContextTestExecutionListener, org.springframework.security.test.context.support.ReactorContextTestExecutionListener, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
+2021-08-03 12:55:53.786  INFO 23813 --- [    Test worker] .b.t.a.w.s.WebMvcTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@5cbd704d, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@190edfb5, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@cd31521, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@7d9e563f, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@4a967ed9, org.springframework.test.context.support.DirtiesContextTestExecutionListener@250af349, org.springframework.test.context.transaction.TransactionalTestExecutionListener@31e490d4, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@3e440779, org.springframework.security.test.context.support.WithSecurityContextTestExecutionListener@47ddd6de, org.springframework.test.context.event.EventPublishingTestExecutionListener@353fe5d7, org.springframework.security.test.context.support.ReactorContextTestExecutionListener@20c8a194, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@3ea9153b, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@17eb5f16, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@5db01161, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@3811df42, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@4e6715b6, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@339e083]
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -242,13 +242,13 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v2.5.2)
 
-2021-08-03 12:40:58.954  INFO 23010 --- [    Test worker] o.j.e.c.c.CustomerControllerWebMvcTest   : Starting CustomerControllerWebMvcTest using Java 16.0.1 on kde-neon with PID 23010 (started by joshua in /home/joshua/Documents/ecommerce-backend)
-2021-08-03 12:40:58.954  INFO 23010 --- [    Test worker] o.j.e.c.c.CustomerControllerWebMvcTest   : No active profile set, falling back to default profiles: default
-2021-08-03 12:40:59.302  INFO 23010 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2021-08-03 12:40:59.302  INFO 23010 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2021-08-03 12:40:59.302  INFO 23010 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
-2021-08-03 12:40:59.312  INFO 23010 --- [    Test worker] o.j.e.c.c.CustomerControllerWebMvcTest   : Started CustomerControllerWebMvcTest in 0.372 seconds (JVM running for 4.124)
-2021-08-03 12:40:59.528  WARN 23010 --- [    Test worker] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.http.converter.HttpMessageNotReadableException: Required request body is missing: public org.springframework.http.ResponseEntity&lt;java.lang.String&gt; org.jayhenri.ecommerce.controller.CustomerController.updateCustomer(org.jayhenri.ecommerce.model.Customer) throws org.jayhenri.ecommerce.exception.InvalidCustomerException,org.jayhenri.ecommerce.exception.CustomerNotFoundException]
+2021-08-03 12:55:53.802  INFO 23813 --- [    Test worker] o.j.e.c.c.CustomerControllerWebMvcTest   : Starting CustomerControllerWebMvcTest using Java 16.0.1 on kde-neon with PID 23813 (started by joshua in /home/joshua/Documents/ecommerce-backend)
+2021-08-03 12:55:53.802  INFO 23813 --- [    Test worker] o.j.e.c.c.CustomerControllerWebMvcTest   : No active profile set, falling back to default profiles: default
+2021-08-03 12:55:54.157  INFO 23813 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2021-08-03 12:55:54.157  INFO 23813 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2021-08-03 12:55:54.157  INFO 23813 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2021-08-03 12:55:54.166  INFO 23813 --- [    Test worker] o.j.e.c.c.CustomerControllerWebMvcTest   : Started CustomerControllerWebMvcTest in 0.378 seconds (JVM running for 4.058)
+2021-08-03 12:55:54.372  WARN 23813 --- [    Test worker] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.http.converter.HttpMessageNotReadableException: Required request body is missing: public org.springframework.http.ResponseEntity&lt;java.lang.String&gt; org.jayhenri.ecommerce.controller.CustomerController.updateCustomer(org.jayhenri.ecommerce.model.Customer) throws org.jayhenri.ecommerce.exception.InvalidCustomerException,org.jayhenri.ecommerce.exception.CustomerNotFoundException]
 </pre>
 </span>
 </div>
@@ -260,7 +260,7 @@
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 7.0.2</a> at Aug 3, 2021, 12:41:01 PM</p>
+<a href="http://www.gradle.org">Gradle 7.0.2</a> at Aug 3, 2021, 12:55:56 PM</p>
 </div>
 </div>
 </body>

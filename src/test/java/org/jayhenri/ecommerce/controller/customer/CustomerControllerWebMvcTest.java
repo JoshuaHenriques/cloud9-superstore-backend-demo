@@ -17,6 +17,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -45,6 +46,8 @@ public class CustomerControllerWebMvcTest {
     private CreditCard creditCard;
 
     private OrderDetails orderDetails;
+
+    private UUID uuid;
 
     /**
      * As json string string.
@@ -75,6 +78,8 @@ public class CustomerControllerWebMvcTest {
         orderDetails = new OrderDetails("TEST", "TestMe@gmail.com", new ArrayList<>(), 43.24);
 
         creditCard = new CreditCard("Test Name", "4656085451464353", "05/23", "231", "4353");
+
+        uuid = UUID.randomUUID();
     }
 
     /**
@@ -413,11 +418,10 @@ public class CustomerControllerWebMvcTest {
      * @throws Exception the exception
      */
     @Test
-    @Disabled
     void updateOrder() throws Exception {
         given(customerService.existsByEmail("testMe@gmail.com")).willReturn(true);
 
-        mockMvc.perform(put("/api/customers/testMe@gmail.com/orderDetails/updateStatus/"));
+        mockMvc.perform(put("/api/customers/testMe@gmail.com/orderDetails/updateStatus/88449ae4-9d4f-4a95-9325-d7bca97e6931/TestStatus")).andExpect(status().isOk());
     }
 
     /**
