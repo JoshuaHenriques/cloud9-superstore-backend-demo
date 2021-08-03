@@ -4,11 +4,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.UUID;
 
 /**
  * The type Address.
@@ -16,35 +16,32 @@ import java.io.Serializable;
 @Getter
 @Setter
 @NoArgsConstructor
-@Embeddable
+@Entity
+@Table(name = "address")
 public class Address implements Serializable {
 
     private static final long serialVersionUID = -3706717403046249323L;
 
-    @NotNull
-    @Size(max = 100)
-    @Column(nullable = false)
+    @Id
+    @Column(name = "address_id", unique = true, nullable = false)
+    private UUID addressUUID = UUID.randomUUID();
+
+    @Column(name = "street_name", nullable = false, length = 25)
     private String streetName;
 
-    @NotNull
-    @Size(max = 100)
-    @Column
+    @Column(name = "street_number", nullable = false)
     private String streetNumber;
 
-    @NotNull
-    @Column
+    @Column(name = "unit_number", nullable = false)
     private String unitNumber;
 
-    @NotNull
-    @Column
+    @Column(name = "city", nullable = false, length = 25)
     private String city;
 
-    @NotNull
-    @Column
+    @Column(name = "postal_code", nullable = false, length = 7)
     private String postalCode;
 
-    @NotNull
-    @Column
+    @Column(name = "province", nullable = false, length = 25)
     private String province;
 
     /**

@@ -15,32 +15,31 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @Entity
+@Table(name = "credit_card")
 public class CreditCard implements Serializable {
 
     private static final long serialVersionUID = -2537205539493070885L;
 
     @Id
-    @Column(nullable = false)
+    @Column(name = "credit_card_id", nullable = false)
     private UUID creditCardUUID = UUID.randomUUID();
 
-    @JoinColumn(name = "customerUUID", nullable = false, insertable = false, updatable = false)
-    @ManyToOne
-    private Customer customer;
-
-    @Column
+    @Column(name = "name", nullable = false, length = 100)
     private String fullName;
 
-    @Column
+    @Column(name = "ccn", unique = true, nullable = false, length = 16)
     private String ccn;
 
-    @Column
+    @Column(name = "four_dig", unique = true, nullable = false, length = 4)
     private String fourDig;
 
-    @Column
+    @Column(name = "cvc", nullable = false, length = 3)
+    private String cvc;
+
+    @Column(name = "exp_date", nullable = false, length = 10)
     private String expDate;
 
-    @Column
-    private String cvc;
+
 
     /**
      * Instantiates a new Credit card.

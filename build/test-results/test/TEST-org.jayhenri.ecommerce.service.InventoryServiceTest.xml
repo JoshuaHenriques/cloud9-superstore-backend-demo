@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="org.jayhenri.ecommerce.service.InventoryServiceTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2021-08-03T16:55:56" hostname="kde-neon" time="0.055">
+<testsuite name="org.jayhenri.ecommerce.service.InventoryServiceTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2021-08-03T17:06:32" hostname="kde-neon" time="0.052">
   <properties/>
-  <testcase name="doesNotExistsByProductName()" classname="org.jayhenri.ecommerce.service.InventoryServiceTest" time="0.045"/>
+  <testcase name="doesNotExistsByProductName()" classname="org.jayhenri.ecommerce.service.InventoryServiceTest" time="0.043"/>
   <testcase name="delete()" classname="org.jayhenri.ecommerce.service.InventoryServiceTest" time="0.001"/>
-  <testcase name="getByProductName()" classname="org.jayhenri.ecommerce.service.InventoryServiceTest" time="0.002"/>
+  <testcase name="getByProductName()" classname="org.jayhenri.ecommerce.service.InventoryServiceTest" time="0.001"/>
   <testcase name="findAll()" classname="org.jayhenri.ecommerce.service.InventoryServiceTest" time="0.001"/>
   <testcase name="update()" classname="org.jayhenri.ecommerce.service.InventoryServiceTest" time="0.001"/>
   <testcase name="add()" classname="org.jayhenri.ecommerce.service.InventoryServiceTest" time="0.001"/>

@@ -27,42 +27,42 @@ public class Customer implements Serializable {
     private static final long serialVersionUID = -1854209356482886781L;
 
     @Id
-    @Column(nullable = false)
+    @Column(name = "customer_id", nullable = false)
     private UUID customerUUID = UUID.randomUUID();
 
-    @Column(nullable = false, unique = true, length = 45)
+    @Column(name = "email", nullable = false, unique = true, length = 50)
     private String email;
 
-    @Column(nullable = false)
-    private String firstName;
-
-    @Column(nullable = false, length = 20)
-    private String lastName;
-
-    @Column(nullable = false, unique = true, length = 10)
-    private String phoneNumber;
-
-    @Column(nullable = false, length = 128)
-    private String password;
-
-    @Column(nullable = false, length = 6)
-    private String dateOfBirth;
-
-    @Column(nullable = false)
-    @Embedded
+    @Column(name = "address_id", nullable = false, unique = true)
+    @OneToOne
     private Address address;
 
-    @JoinColumn(name = "cartUUID", nullable = true, insertable = false, updatable = false)
+    @JoinColumn(name = "cart_id", nullable = true, insertable = false, updatable = false)
     @OneToOne
     private Cart cart;
 
-    @JoinColumn(name = "creditCardUUID", nullable = true, insertable = false, updatable = false)
+    @JoinColumn(name = "credit_card_ids", nullable = true, insertable = false, updatable = false)
     @OneToMany
-    private List<CreditCard> creditCards;
+    private List<UUID> creditCards;
 
-    @JoinColumn(name = "orderUUID", nullable = true, insertable = false, updatable = false)
+    @JoinColumn(name = "order_ids", nullable = true, insertable = false, updatable = false)
     @OneToMany
-    private List<OrderDetails> orderDetailsList;
+    private List<UUID> orderDetails;
+
+    @Column(name = "first_name", nullable = false, length = 25)
+    private String firstName;
+
+    @Column(name = "last_name", nullable = false, length = 25)
+    private String lastName;
+
+    @Column(name = "phone_number", nullable = false, unique = true, length = 10)
+    private String phoneNumber;
+
+    @Column(name = "password", nullable = false, length = 128)
+    private String password;
+
+    @Column(name = "date_of_birth", nullable = false, length = 10)
+    private String dateOfBirth;
 
     /**
      * Instantiates a new Customer.
@@ -76,9 +76,9 @@ public class Customer implements Serializable {
      * @param address          the address
      * @param cart             the cart
      * @param creditCards      the credit cards
-     * @param orderDetailsList the orderDetails
+     * @param orderDetails the orderDetails
      */
-    public Customer(String firstName, String lastName, String phoneNumber, String email, String password, String dateOfBirth, Address address, Cart cart, List<CreditCard> creditCards, List<OrderDetails> orderDetailsList) {
+    public Customer(String firstName, String lastName, String phoneNumber, String email, String password, String dateOfBirth, Address address, Cart cart, List<UUID> creditCards, List<UUID> orderDetails) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
@@ -88,6 +88,6 @@ public class Customer implements Serializable {
         this.address = address;
         this.cart = cart;
         this.creditCards = creditCards;
-        this.orderDetailsList = orderDetailsList;
+        this.orderDetails = orderDetails;
     }
 }

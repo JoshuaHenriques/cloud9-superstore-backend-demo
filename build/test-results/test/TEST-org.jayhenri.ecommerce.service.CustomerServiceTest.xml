@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="org.jayhenri.ecommerce.service.CustomerServiceTest" tests="19" skipped="1" failures="0" errors="0" timestamp="2021-08-03T16:55:56" hostname="kde-neon" time="0.027">
+<testsuite name="org.jayhenri.ecommerce.service.CustomerServiceTest" tests="19" skipped="1" failures="0" errors="0" timestamp="2021-08-03T17:06:32" hostname="kde-neon" time="0.023">
   <properties/>
-  <testcase name="doesNotExistsByPhoneNumber()" classname="org.jayhenri.ecommerce.service.CustomerServiceTest" time="0.002"/>
+  <testcase name="doesNotExistsByPhoneNumber()" classname="org.jayhenri.ecommerce.service.CustomerServiceTest" time="0.001"/>
   <testcase name="findAllCustomers()" classname="org.jayhenri.ecommerce.service.CustomerServiceTest" time="0.0">
     <skipped/>
   </testcase>
   <testcase name="emptyCart()" classname="org.jayhenri.ecommerce.service.CustomerServiceTest" time="0.002"/>
   <testcase name="delete()" classname="org.jayhenri.ecommerce.service.CustomerServiceTest" time="0.001"/>
-  <testcase name="addOrder()" classname="org.jayhenri.ecommerce.service.CustomerServiceTest" time="0.001"/>
-  <testcase name="update()" classname="org.jayhenri.ecommerce.service.CustomerServiceTest" time="0.001"/>
-  <testcase name="existsByEmail()" classname="org.jayhenri.ecommerce.service.CustomerServiceTest" time="0.002"/>
+  <testcase name="addOrder()" classname="org.jayhenri.ecommerce.service.CustomerServiceTest" time="0.0"/>
+  <testcase name="update()" classname="org.jayhenri.ecommerce.service.CustomerServiceTest" time="0.0"/>
+  <testcase name="existsByEmail()" classname="org.jayhenri.ecommerce.service.CustomerServiceTest" time="0.001"/>
   <testcase name="updateOrder()" classname="org.jayhenri.ecommerce.service.CustomerServiceTest" time="0.001"/>
   <testcase name="addCreditCard()" classname="org.jayhenri.ecommerce.service.CustomerServiceTest" time="0.002"/>
   <testcase name="findAllOrders()" classname="org.jayhenri.ecommerce.service.CustomerServiceTest" time="0.001"/>
   <testcase name="findAllCreditCards()" classname="org.jayhenri.ecommerce.service.CustomerServiceTest" time="0.001"/>
-  <testcase name="getCart()" classname="org.jayhenri.ecommerce.service.CustomerServiceTest" time="0.001"/>
+  <testcase name="getCart()" classname="org.jayhenri.ecommerce.service.CustomerServiceTest" time="0.0"/>
   <testcase name="add()" classname="org.jayhenri.ecommerce.service.CustomerServiceTest" time="0.001"/>
   <testcase name="addToCart()" classname="org.jayhenri.ecommerce.service.CustomerServiceTest" time="0.001"/>
   <testcase name="removeCreditCard()" classname="org.jayhenri.ecommerce.service.CustomerServiceTest" time="0.001"/>
   <testcase name="existsByPhoneNumber()" classname="org.jayhenri.ecommerce.service.CustomerServiceTest" time="0.001"/>
-  <testcase name="getByEmail()" classname="org.jayhenri.ecommerce.service.CustomerServiceTest" time="0.002"/>
+  <testcase name="getByEmail()" classname="org.jayhenri.ecommerce.service.CustomerServiceTest" time="0.001"/>
   <testcase name="removeFromCart()" classname="org.jayhenri.ecommerce.service.CustomerServiceTest" time="0.001"/>
   <testcase name="doesNotExistsByEmail()" classname="org.jayhenri.ecommerce.service.CustomerServiceTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>

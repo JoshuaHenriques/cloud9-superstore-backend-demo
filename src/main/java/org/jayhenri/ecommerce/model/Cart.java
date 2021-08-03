@@ -17,38 +17,29 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @Entity
+@Table(name = "cart")
 public class Cart implements Serializable {
 
     private static final long serialVersionUID = -198235381052492730L;
 
     @Id
-    @Column(nullable = false)
+    @Column(name = "cart_id", nullable = false)
     private UUID cartUUID = UUID.randomUUID();
 
-    @JoinColumn(name = "itemUUID", insertable = false, updatable = false)
-    @OneToMany
+    @Column(name = "item_ids", nullable = true)
     private List<Item> items;
 
-    @JoinColumn(name = "customerUUID", nullable = false, insertable = false, updatable = false)
-    @OneToOne
-    private Customer customer;
-
-    @Column
-    private String customerEmail;
-
-    @Column
+    @Column(name = "total", nullable = true)
     private Double total;
 
     /**
      * Instantiates a new Cart.
      *
      * @param items         the items
-     * @param customerEmail the customer email
      * @param total         the total
      */
-    public Cart(List<Item> items, String customerEmail, Double total) {
+    public Cart(List<Item> items, Double total) {
         this.items = items;
-        this.customerEmail = customerEmail;
         this.total = total;
     }
 }

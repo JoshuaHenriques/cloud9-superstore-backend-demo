@@ -34,5 +34,5 @@ create table if not exists customer (
 	last_name       varchar(50)     not null,
 	phone_number    varchar(15)     not null,
 	password        varchar(100)    not null,
-	date_of_birth   date     		not null
+	date_of_birth   varchar(10)  	not null
 );
