@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.jayhenri.ecommerce.controller.inventory.InventoryControllerUniTest" tests="12" skipped="0" failures="0" errors="0" timestamp="2021-08-03T16:40:58" hostname="kde-neon" time="0.07">
+  <properties/>
+  <testcase name="addItemThrowsItemAlreadyExistsException()" classname="org.jayhenri.ecommerce.controller.inventory.InventoryControllerUniTest" time="0.017"/>
+  <testcase name="getByProductNameThrowsItemNotFoundException()" classname="org.jayhenri.ecommerce.controller.inventory.InventoryControllerUniTest" time="0.002"/>
+  <testcase name="getByProductName()" classname="org.jayhenri.ecommerce.controller.inventory.InventoryControllerUniTest" time="0.034"/>
+  <testcase name="addItem()" classname="org.jayhenri.ecommerce.controller.inventory.InventoryControllerUniTest" time="0.001"/>
+  <testcase name="removeItemThrowsItemNotFoundException()" classname="org.jayhenri.ecommerce.controller.inventory.InventoryControllerUniTest" time="0.002"/>
+  <testcase name="updateItemThrowsInvalidItemException()" classname="org.jayhenri.ecommerce.controller.inventory.InventoryControllerUniTest" time="0.001"/>
+  <testcase name="findAll()" classname="org.jayhenri.ecommerce.controller.inventory.InventoryControllerUniTest" time="0.001"/>
+  <testcase name="updateItem()" classname="org.jayhenri.ecommerce.controller.inventory.InventoryControllerUniTest" time="0.002"/>
+  <testcase name="updateItemThrowsItemNotFoundException()" classname="org.jayhenri.ecommerce.controller.inventory.InventoryControllerUniTest" time="0.002"/>
+  <testcase name="removeItemThrowsInvalidItemException()" classname="org.jayhenri.ecommerce.controller.inventory.InventoryControllerUniTest" time="0.001"/>
+  <testcase name="addItemThrowsInvalidItemException()" classname="org.jayhenri.ecommerce.controller.inventory.InventoryControllerUniTest" time="0.002"/>
+  <testcase name="removeItem()" classname="org.jayhenri.ecommerce.controller.inventory.InventoryControllerUniTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
