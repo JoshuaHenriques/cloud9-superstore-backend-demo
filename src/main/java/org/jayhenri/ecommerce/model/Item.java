@@ -15,32 +15,25 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @Entity
+@Table(name = "item")
 public class Item implements Serializable {
 
     private static final long serialVersionUID = -496088096515099704L;
 
     @Id
-    @Column(nullable = false)
+    @Column(name = "item_id", nullable = false)
     private UUID itemUUID = UUID.randomUUID();
 
-    @Column
+    @Column(name = "item_name", nullable = false, length = 25)
     private String itemName;
 
-    @Column
+    @Column(name = "description", nullable = false, length = 255)
     private String description;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "cartUUID", nullable = true, insertable = false, updatable = false)
-    private Cart cart;
-
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "inventoryUUID", nullable = true, insertable = false, updatable = false)
-    private Inventory inventory;
-
-    @Column
+    @Column(name = "price", nullable = false)
     private double price;
 
-    @Column
+    @Column(name = "image", nullable = true)
     private byte[] image;
 
     /**

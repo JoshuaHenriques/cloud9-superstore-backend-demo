@@ -16,25 +16,25 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @Entity
+@Table(name = "order_details")
 public class OrderDetails implements Serializable {
 
     private static final long serialVersionUID = -3543368529566294417L;
 
     @Id
-    @Column(nullable = false)
-    private UUID orderUUID;
+    @Column(name = "order_details_id", nullable = false)
+    private UUID orderDetailsUUID = UUID.randomUUID();
 
-    @Column(nullable = false)
-    private String orderStatus;
-
-    @Column(nullable = false)
+    @Column(name = "customer_email", nullable = false, length = 50)
     private String customerEmail;
 
-    @JoinColumn(name = "itemUUID", nullable = true, insertable = false, updatable = false)
-    @OneToMany
-    private List<Item> itemList;
+    @Column(name = "item_names", nullable = true, insertable = false, updatable = false)
+    private List<String> itemNames;
 
-    @Column(nullable = false)
+    @Column(name = "order_status", nullable = false, length = 10)
+    private String orderStatus;
+
+    @Column(name = "total_price", nullable = false)
     private double totalPrice;
 
     /**
@@ -42,14 +42,13 @@ public class OrderDetails implements Serializable {
      *
      * @param orderStatus   the order status
      * @param customerEmail the customer email
-     * @param itemList      the item list
+     * @param itemNames      the item list
      * @param totalPrice    the total price
      */
-    public OrderDetails(String orderStatus, String customerEmail, List<Item> itemList, double totalPrice) {
-        this.orderUUID = UUID.randomUUID();
-        this.orderStatus = orderStatus;
+    public OrderDetails(String orderStatus, String customerEmail, List<String> itemNames, double totalPrice) {
         this.customerEmail = customerEmail;
-        this.itemList = itemList;
+        this.itemNames = itemNames;
+        this.orderStatus = orderStatus;
         this.totalPrice = totalPrice;
     }
 }

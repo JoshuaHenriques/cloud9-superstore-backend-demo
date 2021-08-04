@@ -21,30 +21,26 @@ public class Inventory implements Serializable {
     private static final long serialVersionUID = -1112477284611964207L;
 
     @Id
-    @Column(nullable = false)
+    @Column(name = "inventory_id", nullable = false)
     private UUID inventoryUUID = UUID.randomUUID();
 
-    @Column
-    private String productName;
+    @JoinColumn(name = "item_id", nullable = false, unique = true)
+    @OneToOne
+    private Item item;
 
-    @Column
+    @Column(name = "quantity", nullable = false, unique = false)
     private int quantity;
 
-    // todo: @NotFound, fix nested exception entitynotfound when doing jpatest
-    @JoinColumn(name = "itemUUID", nullable = true, insertable = false, updatable = false)
-    @OneToOne(cascade = {CascadeType.ALL})
-    private Item item;
+    private double price;
 
     /**
      * Instantiates a new Inventory.
      *
-     * @param productName the product name
      * @param quantity    the quantity
      * @param item        the item
      */
-    public Inventory(String productName, int quantity, Item item) {
-        this.productName = productName;
-        this.quantity = quantity;
+    public Inventory(Item item, int quantity) {
         this.item = item;
+        this.quantity = quantity;
     }
 }
