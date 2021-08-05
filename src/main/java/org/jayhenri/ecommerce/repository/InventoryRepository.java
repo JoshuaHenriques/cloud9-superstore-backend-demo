@@ -14,21 +14,4 @@ import java.util.UUID;
 @Repository
 public interface InventoryRepository extends JpaRepository<Inventory, UUID> {
 
-    /**
-     * Exists by product name boolean.
-     *
-     * @param name the name
-     * @return the boolean
-     */
-    @Query("select case when count(c)> 0 then true else false end from Inventory c where lower(c.productName) like lower(:productName)")
-    boolean existsByProductName(@Param("productName") String name);
-
-    /**
-     * Gets by product name.
-     *
-     * @param productName the product name
-     * @return the by product name
-     */
-    @Query(value = "SELECT * FROM inventory WHERE inventory.product_Name=:productName", nativeQuery = true)
-    Inventory getByProductName(@Param("productName") String productName);
 }

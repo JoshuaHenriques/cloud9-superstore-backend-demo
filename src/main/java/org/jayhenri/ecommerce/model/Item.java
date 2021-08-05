@@ -22,16 +22,17 @@ public class Item implements Serializable {
 
     @Id
     @Column(name = "item_id", nullable = false)
-    private UUID itemUUID = UUID.randomUUID();
+    private UUID itemUUID;
+
+    @OneToOne(mappedBy = "item", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private Inventory inventory;
 
     @Column(name = "item_name", nullable = false, length = 25)
     private String itemName;
 
-    @Column(name = "description", nullable = false, length = 255)
+    @Column(name = "item_description", nullable = false, length = 255)
     private String description;
-
-    @Column(name = "price", nullable = false)
-    private double price;
 
     @Column(name = "image", nullable = true)
     private byte[] image;
@@ -41,13 +42,11 @@ public class Item implements Serializable {
      *
      * @param productName the product name
      * @param description the description
-     * @param price       the price
      */
-    public Item(String productName, String description, double price) {
+    public Item(String productName, String description) {
         this.itemUUID = UUID.randomUUID();
         this.itemName = productName;
         this.description = description;
-        this.price = price;
         this.image = null;
     }
 }

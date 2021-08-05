@@ -24,8 +24,11 @@ public class CreditCard implements Serializable {
     @Column(name = "credit_card_id", nullable = false)
     private UUID creditCardUUID = UUID.randomUUID();
 
-    @Column(name = "name", nullable = false, length = 100)
-    private String fullName;
+    @Column(name = "customer_id", unique = true, nullable = true)
+    private UUID customerUUID;
+
+    @Column(name = "cus_name", nullable = false, length = 100)
+    private String cusName;
 
     @Column(name = "ccn", unique = true, nullable = false, length = 16)
     private String ccn;
@@ -44,14 +47,12 @@ public class CreditCard implements Serializable {
     /**
      * Instantiates a new Credit card.
      *
-     * @param fullName the full name
      * @param ccn      the ccn
      * @param expDate  the exp date
      * @param cvc      the cvc
      * @param fourDig  the four dig
      */
-    public CreditCard(String fullName, String ccn, String expDate, String cvc, String fourDig) {
-        this.fullName = fullName;
+    public CreditCard(String ccn, String expDate, String cvc, String fourDig) {
         this.ccn = ccn;
         this.expDate = expDate;
         this.cvc = cvc;

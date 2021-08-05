@@ -17,7 +17,7 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "address")
+@Table(name = "cus_address")
 public class Address implements Serializable {
 
     private static final long serialVersionUID = -3706717403046249323L;
@@ -25,6 +25,9 @@ public class Address implements Serializable {
     @Id
     @Column(name = "address_id", unique = true, nullable = false)
     private UUID addressUUID = UUID.randomUUID();
+
+    @Column(name = "customer_id", unique = true, nullable = true)
+    private UUID customerUUID;
 
     @Column(name = "street_name", nullable = false, length = 25)
     private String streetName;

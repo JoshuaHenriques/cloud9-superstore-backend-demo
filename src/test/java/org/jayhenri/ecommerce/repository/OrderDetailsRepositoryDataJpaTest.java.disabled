@@ -1,0 +1,69 @@
+package org.jayhenri.ecommerce.repository;
+
+import org.jayhenri.ecommerce.model.OrderDetails;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+/**
+ * The type Customer repository data jpa test.
+ */
+@ExtendWith(SpringExtension.class)
+@DataJpaTest
+public class OrderDetailsRepositoryDataJpaTest {
+
+    @Autowired
+    private TestEntityManager entityManager;
+
+    @Autowired
+    private OrderDetailsRepository testMe;
+
+    /**
+     * Database should be empty.
+     */
+    @Test
+    void emptyDatabase() {
+        List<OrderDetails> list = testMe.findAll();
+        assertThat(list).isEmpty();
+    }
+
+    /**
+     * Database should store customer.
+     */
+    @Test
+    void storeOrderDB() {
+        OrderDetails orderDetails = new OrderDetails("TESTSTATUS", "testMe0@gmail.com", null, 29.99);
+
+        OrderDetails _orderDetails  = testMe.save(orderDetails );
+
+        assertThat(_orderDetails).hasFieldOrPropertyWithValue("orderStatus", "TESTSTATUS");
+        assertThat(_orderDetails).hasFieldOrPropertyWithValue("customerEmail", "testMe0@gmail.com");
+        assertThat(_orderDetails).hasFieldOrPropertyWithValue("totalPrice", 38.948012999999996);
+    }
+
+    /**
+     * Find all order db.
+     */
+    @Test
+    void findAllOrderDetails() {
+        OrderDetails orderDetails0 = new OrderDetails("TESTSTATUS", "testMe0@gmail.com", null, 29.99);
+        entityManager.persist(orderDetails0);
+
+        OrderDetails orderDetails1 = new OrderDetails("TESTSTATUS", "testMe1@gmail.com", null, 29.99);
+        entityManager.persist(orderDetails1);
+
+        OrderDetails orderDetails2 = new OrderDetails("TESTSTATUS", "testMe2@gmail.com", null, 29.99);
+        entityManager.persist(orderDetails2);
+
+        List<OrderDetails> list = testMe.findAll();
+
+        assertThat(list).hasSize(3).contains(orderDetails0, orderDetails1, orderDetails2);
+    }
+}

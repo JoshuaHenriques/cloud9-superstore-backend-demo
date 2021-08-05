@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -33,21 +34,17 @@ public class Customer implements Serializable {
     @Column(name = "email", nullable = false, unique = true, length = 50)
     private String email;
 
-    @Column(name = "address_id", nullable = false, unique = true)
-    @OneToOne
-    private Address address;
+    @Column(name = "address_id", nullable = true, unique = true)
+    private UUID addressUUID;
 
-    @JoinColumn(name = "cart_id", nullable = true, insertable = false, updatable = false)
-    @OneToOne
-    private Cart cart;
+    @Column(name = "cart_id", nullable = true, insertable = false, updatable = false)
+    private UUID cartUUID;
 
-    @JoinColumn(name = "credit_card_ids", nullable = true, insertable = false, updatable = false)
-    @OneToMany
-    private List<UUID> creditCards;
+    @Column(name = "credit_card_ids", nullable = true, insertable = false, updatable = false)
+    private UUID[] creditCardUUIDs;
 
-    @JoinColumn(name = "order_ids", nullable = true, insertable = false, updatable = false)
-    @OneToMany
-    private List<UUID> orderDetails;
+    @Column(name = "order_ids", nullable = true, insertable = false, updatable = false)
+    private UUID[] orderDetailUUIDs;
 
     @Column(name = "first_name", nullable = false, length = 25)
     private String firstName;
@@ -78,16 +75,16 @@ public class Customer implements Serializable {
      * @param creditCards      the credit cards
      * @param orderDetails the orderDetails
      */
-    public Customer(String firstName, String lastName, String phoneNumber, String email, String password, String dateOfBirth, Address address, Cart cart, List<UUID> creditCards, List<UUID> orderDetails) {
+    public Customer(String firstName, String lastName, String phoneNumber, String email, String password, String dateOfBirth, UUID address, UUID cart, UUID[] creditCards, UUID[] orderDetails) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.password = password;
         this.dateOfBirth = dateOfBirth;
-        this.address = address;
-        this.cart = cart;
-        this.creditCards = creditCards;
-        this.orderDetails = orderDetails;
+        this.addressUUID = address;
+        this.cartUUID = cart;
+        this.creditCardUUIDs = creditCards;
+        this.orderDetailUUIDs = orderDetails;
     }
 }

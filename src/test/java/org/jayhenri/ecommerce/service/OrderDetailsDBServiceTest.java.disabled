@@ -1,0 +1,47 @@
+package org.jayhenri.ecommerce.service;
+
+import org.jayhenri.ecommerce.model.OrderDetails;
+import org.jayhenri.ecommerce.repository.OrderDetailsRepository;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.then;
+
+/**
+ * The type Order db service test.
+ */
+@ExtendWith(MockitoExtension.class)
+
+class OrderDetailsDBServiceTest {
+
+    /**
+     * The Order db repository.
+     */
+    @Mock
+    private OrderDetailsRepository orderDetailsRepository;
+
+    /**
+     * The Argument captor.
+     */
+    @Captor
+    private ArgumentCaptor<OrderDetails> argumentCaptor;
+
+    /**
+     * Add order to db.
+     */
+    @Test
+    void addOrderToDB() {
+        OrderDetails orderDetails = new OrderDetails();
+        OrderDetailsService testMe = new OrderDetailsService(orderDetailsRepository);
+
+        testMe.addOrderToDB(orderDetails);
+
+        then(orderDetailsRepository).should().save(argumentCaptor.capture());
+        assertThat(argumentCaptor.getValue()).isEqualTo(orderDetails);
+    }
+}

@@ -26,7 +26,7 @@ dependencies {
 	implementation 'commons-validator:commons-validator:1.7'
 	implementation 'org.springframework.boot:spring-boot-starter-validation:2.4.0'
     implementation 'org.jetbrains:annotations:20.1.0'
-
+	implementation 'com.vladmihalcea:hibernate-types-55:2.12.0'
 	runtimeOnly 'com.h2database:h2'
 	runtimeOnly 'org.postgresql:postgresql'
 
@@ -43,7 +43,7 @@ dependencies {
 }
 
 flyway {
-    url = 'jdbc:postgresql://192.168.1.12:5432/ecommerce'
+    url = 'jdbc:postgresql://localhost:5432/ecommerce'
     user = 'postgres'
     password = 'brock2021'
     locations = ['classpath:db/migration']
