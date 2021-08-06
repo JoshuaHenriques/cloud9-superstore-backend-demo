@@ -1,13 +1,13 @@
 <p align="center">
-  <h3 align="center">Ecommerce API Demo</h3>
+  <h3 align="center">Cloud9 Superstore Demo</h3>
   <p align="center">
-    Ecommerce backend API demo made with Springboot 
+    RESTful API Application
   </p>
 </p>
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-Springboot RESTful API bootstrap for a more complete project from spring initializer.
+Inspired by the Netflix show Cloud9 Superstore.
 
 [Entity-Relationship Diagram](https://github.com/JoshuaHenriques/cloud9-superstore-demo/blob/master/Cloud9-ERD.png)
 
@@ -92,4 +92,4 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 Personal Website - [https://joshuahenriques.com](https://joshuahenriques.com)
 
-Project Link: [https://github.com/joshuahenriques/ecommerce-backend](https://github.com/joshuahenriques/ecommerce-backend)
+Project Link: [https://github.com/joshuahenriques/cloud9-backend-demo](https://github.com/joshuahenriques/cloud9-backend-demo)
