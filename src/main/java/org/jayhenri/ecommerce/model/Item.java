@@ -31,10 +31,10 @@ public class Item implements Serializable {
     @Column(name = "item_name", nullable = false, length = 25)
     private String itemName;
 
-    @Column(name = "item_description", nullable = false, length = 255)
+    @Column(name = "item_description", nullable = false)
     private String description;
 
-    @Column(name = "image", nullable = true)
+    @Column(name = "image")
     private byte[] image;
 
     /**

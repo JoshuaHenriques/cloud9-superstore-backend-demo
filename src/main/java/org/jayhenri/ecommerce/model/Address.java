@@ -5,8 +5,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.UUID;
 
@@ -26,7 +24,7 @@ public class Address implements Serializable {
     @Column(name = "address_id", unique = true, nullable = false)
     private UUID addressUUID = UUID.randomUUID();
 
-    @Column(name = "customer_id", unique = true, nullable = true)
+    @Column(name = "customer_id", unique = true)
     private UUID customerUUID;
 
     @Column(name = "street_name", nullable = false, length = 25)
