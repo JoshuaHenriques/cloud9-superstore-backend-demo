@@ -9,6 +9,8 @@
 ## About The Project
 Springboot RESTful API bootstrap for a more complete project from spring initializer.
 
+[Entity-Relationship Diagram](https://github.com/joshuahenriques/cloud9-superstore-demo/Cloud9-ERD.png)
+
 Endpoints:
 
     (api/register):
@@ -58,7 +60,7 @@ Endpoints:
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/joshuahenriques/ecommerce-backend.git
+   git clone https://github.com/joshuahenriques/cloud9-superstore-demo.git
    ```
 3. In root directory build the app
    ```sh
