@@ -9,7 +9,7 @@
 ## About The Project
 Springboot RESTful API bootstrap for a more complete project from spring initializer.
 
-[Entity-Relationship Diagram](https://github.com/joshuahenriques/cloud9-superstore-demo/Cloud9-ERD.png)
+[Entity-Relationship Diagram](https://github.com/JoshuaHenriques/cloud9-superstore-demo/blob/master/Cloud9-ERD.png)
 
 Endpoints:
 
