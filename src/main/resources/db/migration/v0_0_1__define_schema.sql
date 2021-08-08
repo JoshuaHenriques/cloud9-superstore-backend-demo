@@ -1,9 +1,88 @@
 create extension if not exists "uuid-ossp";
-create table if not exists cus_address (
-	created_at      timestamp           default current_timestamp,
-    updated_at      timestamp           default current_timestamp,
-	cus_address_id  uuid primary key default uuid_generate_v4(),
-	customer_id 	uuid,
+create extension if not exists "pgcrypto";
+
+create table if not exists login (
+    created_at      timestamp       default current_timestamp,
+    updated_at      timestamp       default current_timestamp,
+    login_id        uuid			default uuid_generate_v4(),
+    active          boolean			not null default true,
+    moderator		boolean 		not null default false,
+    admin			boolean			not null default false,
+    email           varchar(255)    not null,
+    phone_number    varchar(10)     not null,
+    password        text    		not null
+);
+
+create table if not exists review (
+        created_at              timestamp       default current_timestamp,
+        updated_at              timestamp       default current_timestamp,
+        review_id               uuid            not null primary key default uuid_generate_v4(),
+        customer_id             uuid,
+        text                    text            not null,
+        rating                  int             not null check ((rating >= 0) and (rating <= 5)),
+        image                   bytea
+);
+
+create table if not exists item_reviews (
+        created_at              timestamp       default current_timestamp,
+        updated_at              timestamp       default current_timestamp,
+        item_reviews_id			uuid			not null primary key default uuid_generate_v4(),
+        item_id                 uuid            not null,
+        review_id               uuid            not null references review(review_id)
+);
+
+create table if not exists item (
+        created_at              timestamp       default current_timestamp,
+        updated_at              timestamp       default current_timestamp,
+        item_id                 uuid            not null primary key default uuid_generate_v4(),
+        item_reviews_id			uuid			unique references item_reviews(item_reviews_id),
+        item_name               varchar(25)     not null unique,
+        item_description text                   not null unique,
+        image                   bytea
+);
+
+alter table item_reviews add foreign key (item_id) references item(item_id);
+
+create table if not exists order_items (
+	        created_at              timestamp       default current_timestamp,
+            updated_at              timestamp       default current_timestamp,
+            order_items_id			uuid			not null primary key default uuid_generate_v4(),
+            order_id				uuid			not null,
+            item_id                 uuid            not null references item(item_id)
+);
+
+create table if not exists orders (
+	customer_id     uuid			not null unique primary key references customer(customer_id),
+	customer_email	varchar(100)	not null unique references customer(customer_name),
+	order_items_id	uuid			not null unique references order_items(order_items_id),
+	order_status	varchar(10)		not null,
+	total			double precision not null
+);
+
+alter table order_items add foreign key (order_id) references orders(order_is);
+
+create table if not exists inventory (
+	created_at      timestamp       default current_timestamp,
+	updated_at      timestamp       default current_timestamp,
+	item_id			uuid            not null primary key unique references item(item_id),
+	item_name       varchar(25)     not null unique references item(item_name),
+	quantity		int		        not null,
+	price 			double precision not null
+);
+
+create table if not exists online_inventory (
+	created_at      timestamp       default current_timestamp,
+	updated_at      timestamp       default current_timestamp,
+	item_id			uuid            not null primary key unique references item(item_id),
+	item_name       varchar(25)     not null unique references item(item_name),
+	quantity		int		        not null,
+	price 			double precision not null
+);
+
+create table if not exists address (
+	created_at      timestamp       default current_timestamp,
+    updated_at      timestamp       default current_timestamp,
+	address_id      uuid            primary key default uuid_generate_v4(),
 	street_name     varchar(25)     not null,
 	street_number   varchar(10)     not null,
 	unit_number     varchar(10)     not null,
@@ -12,156 +91,85 @@ create table if not exists cus_address (
 	province        varchar(25)     not null
 );
 
-create table if not exists customer (
+create table if not exists store (
+    created_at          timestamp   default current_timestamp,
+    updated_at          timestamp   default current_timestamp,
+    store_id            uuid        primary key default uuid_generate_v4(),
+    store_name          varchar(25) not null,
+    address_id          uuid        unique references address(address_id)
+    inventory_id        uuid        unique references inventory(inventory_id),
+    online_inventory_id uuid        references online_inventory(online_inventory_id)
+);
+
+create table if not exists employee (
 	created_at      timestamp       default current_timestamp,
 	updated_at      timestamp       default current_timestamp,
-	customer_id     uuid primary key default uuid_generate_v4(),
+	employee_id     uuid            primary key default uuid_generate_v4(),
 	email           varchar(50)     not null unique,
-	wallet_id       uuid not null unique references wallet(wallet_id),
-	past_orders_id  uuid not null unique references past_orders(past_orders_id),
+	login_id		uuid			unique references login(login_id),
+	store_id		uuid			references store(store_id),
 	first_name      varchar(25)     not null,
 	last_name       varchar(25)     not null,
 	phone_number    varchar(10)     not null,
-	password        varchar(128)    not null,
 	date_of_birth   varchar(10)  	not null
+);
 
 create table if not exists credit_card (
-    created_at      timestamp           default current_timestamp,
-    updated_at      timestamp           default current_timestamp,
-	customer_id  uuid primary key references customer(customer_id),
-	cus_name        varchar(25)     not null,
+    created_at      timestamp       default current_timestamp,
+    updated_at      timestamp       default current_timestamp,
+	credit_card_id     uuid         primary key references customer(customer_id),
+	full_name       varchar(25)     not null,
 	ccn				varchar(16)		not null unique,
 	four_dig        varchar(4)      not null unique,
 	cvc				varchar(3)		not null,
 	exp_date		varchar(10)		not null
 );
 
+create table if not exists wallet (
+    created_at      timestamp       default current_timestamp,
+    updated_at      timestamp       default current_timestamp,
+    wallet_id		uuid			primary key default uuid_generate_v4(),
+    customer_id		uuid,
+    credit_card_id	uuid			unique references credit_card(credit_card_id)
+);
+
+create table if not exists cart_items (
+	created_at      timestamp       default current_timestamp,
+    updated_at      timestamp       default current_timestamp,
+    cart_items_id	uuid			primary	key default uuid_generate_v4(),
+    cart_id			uuid,
+    item_id			uuid			references item(item_id)
+);
+
 create table if not exists cart (
 	created_at      timestamp           default current_timestamp,
     updated_at      timestamp           default current_timestamp,
-	customer_id 	uuid,
-	item_names		text[],
-	total           double precision
-);
-CREATE TYPE public.order_status AS ENUM (
-    'G',
-    'PG',
-    'PG-13',
-    'R',
-    'NC-17'
+	customer_id 	uuid				not null unique references customer(customer_id),
+	cart_items		uuid				unique references cart_items(cart_items),
+	total           double precision	not null
 );
 
+alter table cart_items add foreign key (cart_id) references cart(cart_id);
 
-insert into order_details (customer_email, item_names, order_status, total)
-values ('tom.jerry@gmail.com', '{"iPad"}', 'PREPARING', 992.51);
-
-do $$
-declare
-	ret_cart_id uuid;
-	ret_credit_card_id uuid;
-	ret_address_id uuid;
-	ret_customer_id uuid;
-begin
-	insert into customer (email, credit_card_ids, order_detail_ids, first_name, last_name, phone_number, password, date_of_birth)
-	values ('glory.scott@gmail.com', '{}', '{}', 'Scott', 'Glory', '4375923041', 'password123', '05/29/1990')
-	returning customer_id into ret_customer_id;
-
-	insert into address (street_name, street_number, unit_number, city, postal_code, province)
-	values ('137th Avenue', '3648', '0', 'Calgary', 'T5B 3V4', 'Alberta')
-	returning address_id into ret_address_id;
-
-	update customer set cus_address_id = ret_cus_address_id where customer_id = ret_customer_id;
-
-	update address set customer_id = ret_customer_id where address_id = ret_address_id;
-
-	insert into cart (item_names, total)
-	values ('{}', 0.00)
-	returning cart_id into ret_cart_id;
-
-	update customer set cart_id = ret_cart_id where customer_id = ret_customer_id;
-
-	update cart set customer_id = ret_customer_id where cart_id = ret_cart_id;
-
-	insert into credit_card (cus_name, ccn, four_dig, cvc, exp_date)
-	values ('Scott Glory', '5412625377173302', '3302', '372', '01/01/2025')
-	returning credit_card_id into ret_credit_card_id;
-
-	update customer set credit_card_ids = array_append(credit_card_ids, ret_credit_card_id) where customer_id = ret_customer_id;
-
-	update credit_card set customer_id = ret_customer_id where credit_card_id = ret_credit_card_id;
-end $$;
-
-create table if not exists orders (
-	orders_id uuid primary key default uuid_generate_v4(),
-	customer_id     uuid,
-	customer_email	varchar(100)		not null unique,
-	item_names		text[],
-	order_status	varchar(10)			not null,
-	total			double precision	not null
-);
-
-create table if not exists login (
-    created_at      timestamp       default current_timestamp,
-    updated_at      timestamp       default current_timestamp,
-    foreign_id      uuid,
-    status          boolean,
-    email           varchar(255)    not null,
-    phone_number    varchar(10)     not null,
-    password        varchar(128)    not null,
-    first_name      varchar(25)     not null,
-    last_name       varchar(25)     not null
-);
-
-create extension if not exists "uuid-ossp";
-
-create table if not exists discount_codes; make function
-
-create table if not exists item_review;
-
-create table if not exists item (
-    created_at      timestamp           default current_timestamp,
-    updated_at      timestamp           default current_timestamp,
-	item_id		    uuid primary key default uuid_generate_v4(),
-	item_name		varchar(25)			not null unique,
-	item_description varchar(255)		not null unique,
-	image			bytea
-);
-
-create table if not exists inventory (
+create table if not exists customer (
 	created_at      timestamp       default current_timestamp,
 	updated_at      timestamp       default current_timestamp,
-	item_id			uuid primary key unique references item(item_id),
-	item_name       varchar(25) not null unique references item(item_name),
-	quantity		int		not null,
-	price 			double precision	not null
+	id              uuid            primary key default uuid_generate_v4(),
+	email           varchar(50)     not null unique,
+	login_id		uuid			unique references login(login_id),
+	cart_id			uuid			unique references cart(cart_id),
+	address_id		uuid			unique references address(address_id),
+	wallet		    uuid          	unique references wallet(wallet_id),
+	orders          uuid	        unique references orders(orders_id),
+	first_name      varchar(25)     not null,
+	last_name       varchar(25)     not null,
+	phone_number    varchar(10)     not null,
+	password        varchar(128)    not null,
+	date_of_birth   varchar(10)  	not null
 );
 
-create table if not exists online_inventory ();
+alter table wallet add foreign key (customer_id) references customer(customer_id);
+alter table review add foreign key (customer_id) references customer(customer_id);
 
-do $$
-declare
-    ret_item_id uuid;
-	ret_item_name varchar(25);
-begin
-    insert into item (item_name, item_description)
-    values ('iPad', '2023 Model')
-    returning item_id, item_name into ret_item_id, ret_item_name;
 
-    insert into inventory (item_id, item_name, quantity, price)
-    values (ret_item_id, ret_item_name, 39, 399.99);
-end $$;
 
-create enum if not exists order_status;
-
-create table if not exists emp;
-
-create table if not exists store (
-    created_at timestamp default current_timestamp,
-    updated_at timestamp default current_timestamp,
-    store_id uuid primary key default uuid_generate_v4(),
-    manager_id uuid references manager(manager_id),
-    store_name varchar(25) primary key not null,
-    address_id uuid unique references address(address_id)
-    inventory_id uuid unique references inventory(inventory_id),
-    online_inventory_id uuid references online_inventory(online_inventory_id)
-);
