@@ -4,12 +4,12 @@ create extension if not exists "pgcrypto";
 create table if not exists login (
     created_at      timestamp       default current_timestamp,
     updated_at      timestamp       default current_timestamp,
-    login_id        uuid			default uuid_generate_v4(),
+    login_id        uuid			not null primary key default uuid_generate_v4(),
     active          boolean			not null default true,
     moderator		boolean 		not null default false,
     admin			boolean			not null default false,
-    email           varchar(255)    not null,
-    phone_number    varchar(10)     not null,
+    email           varchar(255)    not null unique,
+    phone_number    varchar(10)     not null unique,
     password        text    		not null
 );
 
@@ -44,27 +44,37 @@ create table if not exists item (
 alter table item_reviews add foreign key (item_id) references item(item_id);
 
 create table if not exists order_items (
-	        created_at              timestamp       default current_timestamp,
-            updated_at              timestamp       default current_timestamp,
-            order_items_id			uuid			not null primary key default uuid_generate_v4(),
-            order_id				uuid			not null,
-            item_id                 uuid            not null references item(item_id)
+	   	created_at              timestamp       default current_timestamp,
+       	updated_at              timestamp       default current_timestamp,
+       	order_items_id			uuid			primary key default uuid_generate_v4(),
+        orders_id				uuid,
+        item_id                 uuid            not null references item(item_id)
 );
 
 create table if not exists orders (
-	customer_id     uuid			not null unique primary key references customer(customer_id),
-	customer_email	varchar(100)	not null unique references customer(customer_name),
-	order_items_id	uuid			not null unique references order_items(order_items_id),
+    created_at      timestamp       default current_timestamp,
+    updated_at      timestamp       default current_timestamp,
+	orders_id     	uuid			primary key default uuid_generate_v4(),
+	order_items_id	uuid			not null references order_items(order_items_id),
 	order_status	varchar(10)		not null,
 	total			double precision not null
 );
 
-alter table order_items add foreign key (order_id) references orders(order_is);
+alter table order_items add foreign key (orders_id) references orders(orders_id);
+
+create table if not exists customer_orders (
+    created_at      timestamp       default current_timestamp,
+    updated_at      timestamp       default current_timestamp,
+    customer_orders_id	uuid		primary key default uuid_generate_v4(),
+    orders_id		uuid			references orders(orders_id),
+    customer_id		uuid
+);
 
 create table if not exists inventory (
 	created_at      timestamp       default current_timestamp,
 	updated_at      timestamp       default current_timestamp,
-	item_id			uuid            not null primary key unique references item(item_id),
+	inventory_id	uuid			primary key default uuid_generate_v4(),
+	item_id			uuid            not null unique references item(item_id),
 	item_name       varchar(25)     not null unique references item(item_name),
 	quantity		int		        not null,
 	price 			double precision not null
@@ -73,7 +83,8 @@ create table if not exists inventory (
 create table if not exists online_inventory (
 	created_at      timestamp       default current_timestamp,
 	updated_at      timestamp       default current_timestamp,
-	item_id			uuid            not null primary key unique references item(item_id),
+	online_inventory_id	uuid		primary key default uuid_generate_v4(),
+	item_id			uuid            not null unique references item(item_id),
 	item_name       varchar(25)     not null unique references item(item_name),
 	quantity		int		        not null,
 	price 			double precision not null
@@ -96,7 +107,7 @@ create table if not exists store (
     updated_at          timestamp   default current_timestamp,
     store_id            uuid        primary key default uuid_generate_v4(),
     store_name          varchar(25) not null,
-    address_id          uuid        unique references address(address_id)
+    address_id          uuid        unique references address(address_id),
     inventory_id        uuid        unique references inventory(inventory_id),
     online_inventory_id uuid        references online_inventory(online_inventory_id)
 );
@@ -117,7 +128,7 @@ create table if not exists employee (
 create table if not exists credit_card (
     created_at      timestamp       default current_timestamp,
     updated_at      timestamp       default current_timestamp,
-	credit_card_id     uuid         primary key references customer(customer_id),
+	credit_card_id  uuid         	primary key default uuid_generate_v4(),
 	full_name       varchar(25)     not null,
 	ccn				varchar(16)		not null unique,
 	four_dig        varchar(4)      not null unique,
@@ -144,8 +155,9 @@ create table if not exists cart_items (
 create table if not exists cart (
 	created_at      timestamp           default current_timestamp,
     updated_at      timestamp           default current_timestamp,
-	customer_id 	uuid				not null unique references customer(customer_id),
-	cart_items		uuid				unique references cart_items(cart_items),
+    cart_id			uuid				primary key default uuid_generate_v4(),
+	customer_id 	uuid,
+	cart_items_id	uuid				unique references cart_items(cart_items_id),
 	total           double precision	not null
 );
 
@@ -154,13 +166,13 @@ alter table cart_items add foreign key (cart_id) references cart(cart_id);
 create table if not exists customer (
 	created_at      timestamp       default current_timestamp,
 	updated_at      timestamp       default current_timestamp,
-	id              uuid            primary key default uuid_generate_v4(),
+	customer_id     uuid            primary key default uuid_generate_v4(),
 	email           varchar(50)     not null unique,
 	login_id		uuid			unique references login(login_id),
 	cart_id			uuid			unique references cart(cart_id),
 	address_id		uuid			unique references address(address_id),
 	wallet		    uuid          	unique references wallet(wallet_id),
-	orders          uuid	        unique references orders(orders_id),
+	customer_orders_id       uuid	        unique references customer_orders(customer_orders_id),
 	first_name      varchar(25)     not null,
 	last_name       varchar(25)     not null,
 	phone_number    varchar(10)     not null,
@@ -170,6 +182,5 @@ create table if not exists customer (
 
 alter table wallet add foreign key (customer_id) references customer(customer_id);
 alter table review add foreign key (customer_id) references customer(customer_id);
-
-
-
+alter table cart add foreign key (customer_id) references customer(customer_id);
+alter table customer_orders add foreign key (customer_id) references customer(customer_id);
