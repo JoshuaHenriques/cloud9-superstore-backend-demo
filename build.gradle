@@ -47,6 +47,7 @@ flyway {
     user = 'postgres'
     password = 'brock2021'
     locations = ['classpath:db/migration']
+	schemas = 'cloud9'
 }
 
 flywayMigrate.dependsOn classes
