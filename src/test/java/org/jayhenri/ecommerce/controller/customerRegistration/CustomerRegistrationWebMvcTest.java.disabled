@@ -3,8 +3,8 @@ package org.jayhenri.ecommerce.controller.customerRegistration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.jayhenri.ecommerce.controller.CustomerRegistrationController;
-import org.jayhenri.ecommerce.model.Address;
-import org.jayhenri.ecommerce.model.Customer;
+import org.jayhenri.ecommerce.model.customer.Address;
+import org.jayhenri.ecommerce.model.customer.Customer;
 import org.jayhenri.ecommerce.service.AddressService;
 import org.jayhenri.ecommerce.service.CustomerService;
 import org.junit.jupiter.api.BeforeEach;

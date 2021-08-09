@@ -1,7 +1,7 @@
 package org.jayhenri.ecommerce.repository;
 
-import org.jayhenri.ecommerce.model.Address;
-import org.jayhenri.ecommerce.model.Customer;
+import org.jayhenri.ecommerce.model.customer.Address;
+import org.jayhenri.ecommerce.model.customer.Customer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

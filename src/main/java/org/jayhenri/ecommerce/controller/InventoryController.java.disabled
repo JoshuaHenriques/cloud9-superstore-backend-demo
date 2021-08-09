@@ -3,7 +3,7 @@ package org.jayhenri.ecommerce.controller;
 import org.jayhenri.ecommerce.exception.InvalidItemException;
 import org.jayhenri.ecommerce.exception.ItemAlreadyExistsException;
 import org.jayhenri.ecommerce.exception.ItemNotFoundException;
-import org.jayhenri.ecommerce.model.Inventory;
+import org.jayhenri.ecommerce.model.inventory.Inventory;
 import org.jayhenri.ecommerce.service.InventoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;

@@ -2,8 +2,8 @@ package org.jayhenri.ecommerce.controller.inventory;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.jayhenri.ecommerce.controller.InventoryController;
-import org.jayhenri.ecommerce.model.Inventory;
-import org.jayhenri.ecommerce.model.Item;
+import org.jayhenri.ecommerce.model.inventory.Inventory;
+import org.jayhenri.ecommerce.model.store.Item;
 import org.jayhenri.ecommerce.service.InventoryService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;

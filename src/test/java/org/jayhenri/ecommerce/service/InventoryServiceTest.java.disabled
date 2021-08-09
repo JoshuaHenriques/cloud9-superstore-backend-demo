@@ -1,7 +1,7 @@
 package org.jayhenri.ecommerce.service;
 
-import org.jayhenri.ecommerce.model.Inventory;
-import org.jayhenri.ecommerce.model.Item;
+import org.jayhenri.ecommerce.model.inventory.Inventory;
+import org.jayhenri.ecommerce.model.store.Item;
 import org.jayhenri.ecommerce.repository.InventoryRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

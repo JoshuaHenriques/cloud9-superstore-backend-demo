@@ -3,7 +3,7 @@ package org.jayhenri.ecommerce.controller;
 import org.jayhenri.ecommerce.exception.CustomerAlreadyExistsException;
 import org.jayhenri.ecommerce.exception.InvalidCustomerException;
 import org.jayhenri.ecommerce.exception.InvalidPostalCodeException;
-import org.jayhenri.ecommerce.model.Customer;
+import org.jayhenri.ecommerce.model.customer.Customer;
 import org.jayhenri.ecommerce.service.AddressService;
 import org.jayhenri.ecommerce.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
