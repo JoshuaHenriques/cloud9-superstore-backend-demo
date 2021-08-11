@@ -1,4 +1,4 @@
-package org.jayhenri.cloud9.exception;
+package org.jayhenri.cloud9.exception.invalid;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -7,24 +7,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The type Email not same exception.
+ * The type Invalid item exception.
  */
 @ResponseStatus(value = HttpStatus.BAD_REQUEST)
-public class EmailNotSameException extends Exception {
+public class InvalidItemException extends Exception {
     private List<String> errorMessages = new ArrayList<>();
 
     /**
-     * Instantiates a new Email not same exception.
+     * Instantiates a new Invalid item exception.
      */
-    public EmailNotSameException() {
+    public InvalidItemException() {
     }
 
     /**
-     * Instantiates a new Email not same exception.
+     * Instantiates a new Invalid item exception.
      *
      * @param msg the msg
      */
-    public EmailNotSameException(String msg) {
+    public InvalidItemException(String msg) {
         super(msg);
     }
 

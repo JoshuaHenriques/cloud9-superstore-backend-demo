@@ -1,8 +1,5 @@
 package org.jayhenri.cloud9.service.customer;
 
-import org.jayhenri.cloud9.model.customer.Customer;
-import org.jayhenri.cloud9.repository.customer.CustomerRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.regex.Matcher;

@@ -20,9 +20,10 @@ public class OrdersService {
      * Instantiates a new Orders service.
      *
      * @param ordersRepository the orders repository
+     * @param customerService  the customer service
      */
     @Autowired
-    public OrdersService(OrdersRepository ordersRepository,CustomerService customerService) {
+    public OrdersService(OrdersRepository ordersRepository, CustomerService customerService) {
         this.ordersRepository = ordersRepository;
         this.customerService = customerService;
     }
@@ -42,8 +43,10 @@ public class OrdersService {
     /**
      * Update order.
      *
+     * @param orders the orders
      */
     public void updateOrders(Orders orders) {
+
         ordersRepository.save(orders);
     }
 

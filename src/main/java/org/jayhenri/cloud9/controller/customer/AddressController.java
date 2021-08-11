@@ -1,7 +1,8 @@
 package org.jayhenri.cloud9.controller.customer;
 
-import org.jayhenri.cloud9.exception.CustomerNotFoundException;
-import org.jayhenri.cloud9.exception.InvalidCustomerException;
+import org.jayhenri.cloud9.exception.invalid.InvalidAddressException;
+import org.jayhenri.cloud9.exception.invalid.InvalidCustomerException;
+import org.jayhenri.cloud9.exception.notfound.CustomerNotFoundException;
 import org.jayhenri.cloud9.model.customer.Address;
 import org.jayhenri.cloud9.model.customer.Customer;
 import org.jayhenri.cloud9.service.customer.CustomerService;
@@ -47,7 +48,7 @@ public class AddressController {
      */
     @PutMapping(value = "/update/{customerId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> updateAddress(@PathVariable("customerId") UUID uuid, @RequestBody Address address)
-            throws InvalidCustomerException, CustomerNotFoundException {
+            throws InvalidCustomerException, CustomerNotFoundException, InvalidAddressException {
         if (!ObjectUtils.isEmpty(address)) {
             if (customerService.existsById(uuid)) {
                 customer.setCustomerUUID(uuid);
@@ -60,6 +61,6 @@ public class AddressController {
             } else
                 throw new CustomerNotFoundException();
         } else
-            throw new InvalidCustomerException();
+            throw new InvalidAddressException();
     }
 }

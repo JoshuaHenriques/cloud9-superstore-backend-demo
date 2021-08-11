@@ -1,4 +1,4 @@
-package org.jayhenri.cloud9.exception;
+package org.jayhenri.cloud9.exception.invalid;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -7,24 +7,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The type Invalid customer exception.
+ * The type Invalid credit card exception.
  */
 @ResponseStatus(value = HttpStatus.BAD_REQUEST)
-public class InvalidCustomerException extends Exception {
+public class InvalidAddressException extends Exception {
+
     private List<String> errorMessages = new ArrayList<>();
 
     /**
-     * Instantiates a new Invalid customer exception.
+     * Instantiates a new Invalid credit card exception.
      */
-    public InvalidCustomerException() {
+    public InvalidAddressException() {
     }
 
     /**
-     * Instantiates a new Invalid customer exception.
+     * Instantiates a new Invalid credit card exception.
      *
      * @param msg the msg
      */
-    public InvalidCustomerException(String msg) {
+    public InvalidAddressException(String msg) {
         super(msg);
     }
 

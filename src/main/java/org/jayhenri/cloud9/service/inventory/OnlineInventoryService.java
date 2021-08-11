@@ -1,7 +1,7 @@
 package org.jayhenri.cloud9.service.inventory;
 
-import org.jayhenri.cloud9.model.customer.Customer;
 import org.jayhenri.cloud9.model.inventory.OnlineInventory;
+import org.jayhenri.cloud9.model.item.Item;
 import org.jayhenri.cloud9.repository.inventory.OnlineInventoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,10 +31,13 @@ public class OnlineInventoryService {
     /**
      * Add.
      *
-     * @param inventory the inventory
+     * @param item     the item
+     * @param quantity the quantity
+     * @param price    the price
      */
-    public void add(OnlineInventory inventory) {
+    public void add(Item item, int quantity, double price) {
 
+        OnlineInventory inventory = new OnlineInventory(item, item.getItemName(), quantity, price);
         inventoryRepository.save(inventory);
     }
 
@@ -71,23 +74,23 @@ public class OnlineInventoryService {
     /**
      * Exists by product name boolean.
      *
-     * @param productName the product name
+     * @param itemName the item name
      * @return the boolean
      */
-    public boolean existsByProductName(String productName) {
+    public boolean existsByItemName(String itemName) {
 
-        return inventoryRepository.existsByProductName(productName);
+        return inventoryRepository.existsByItemName(itemName);
     }
 
     /**
      * Gets by product name.
      *
-     * @param productName the product name
+     * @param itemName the item name
      * @return the by product name
      */
-    public OnlineInventory getByProductName(String productName) {
+    public OnlineInventory getByItemName(String itemName) {
 
-        return inventoryRepository.getByProductName(productName);
+        return inventoryRepository.getByItemName(itemName);
     }
 
     /**

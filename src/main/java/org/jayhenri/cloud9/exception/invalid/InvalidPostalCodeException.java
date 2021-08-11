@@ -1,4 +1,4 @@
-package org.jayhenri.cloud9.exception;
+package org.jayhenri.cloud9.exception.invalid;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -7,24 +7,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The type Order not found exception.
+ * The type Invalid postal code exception.
  */
 @ResponseStatus(value = HttpStatus.BAD_REQUEST)
-public class OrderNotFoundException extends Exception {
+public class InvalidPostalCodeException extends Exception {
+
     private List<String> errorMessages = new ArrayList<>();
 
     /**
-     * Instantiates a new Order not found exception.
+     * Instantiates a new Invalid postal code exception.
      */
-    public OrderNotFoundException() {
+    public InvalidPostalCodeException() {
     }
 
     /**
-     * Instantiates a new Order not found exception.
+     * Instantiates a new Invalid postal code exception.
      *
      * @param msg the msg
      */
-    public OrderNotFoundException(String msg) {
+    public InvalidPostalCodeException(String msg) {
         super(msg);
     }
 

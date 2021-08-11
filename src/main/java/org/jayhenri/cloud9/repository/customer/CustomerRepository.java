@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -41,4 +40,13 @@ public interface CustomerRepository extends JpaRepository<Customer, UUID> {
      */
     @Query(value = "SELECT * FROM customers WHERE customers.email = :email", nativeQuery = true)
     Customer getByEmail(@Param("email") String email);
+
+    /**
+     * Gets by email.
+     *
+     * @param email the email
+     * @return the by email
+     */
+    @Query(value = "SELECT * FROM credit_cards WHERE EXISTS (SELECT ccn FROM credit_cards WHERE credit_cards.ccn = :ccn", nativeQuery = true)
+    boolean existsByCreditCardCCN(@Param("ccn") String ccn);
 }

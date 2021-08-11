@@ -1,6 +1,9 @@
 package org.jayhenri.cloud9.controller.customer;
 
-import org.jayhenri.cloud9.exception.*;
+import org.jayhenri.cloud9.exception.alreadyexists.CustomerAlreadyExistsException;
+import org.jayhenri.cloud9.exception.invalid.InvalidCustomerException;
+import org.jayhenri.cloud9.exception.invalid.InvalidPostalCodeException;
+import org.jayhenri.cloud9.exception.notfound.CustomerNotFoundException;
 import org.jayhenri.cloud9.model.customer.Customer;
 import org.jayhenri.cloud9.service.customer.AddressService;
 import org.jayhenri.cloud9.service.customer.CustomerService;
@@ -45,8 +48,8 @@ public class CustomerController {
      * @param customer the customer
      * @return the response entity
      * @throws CustomerAlreadyExistsException the customer already exists exception
-     * @throws InvalidPostalCodeException     the invalid postal code exception
-     * @throws InvalidCustomerException       the invalid customer exception
+     * @throws InvalidPostalCodeException       the invalid postal code exception
+     * @throws InvalidCustomerException         the invalid customer exception
      */
     @PostMapping(value = "/customer", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> register(@RequestBody Customer customer)

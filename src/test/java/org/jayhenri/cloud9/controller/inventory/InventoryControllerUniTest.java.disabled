@@ -1,9 +1,9 @@
 package org.jayhenri.cloud9.controller.inventory;
 
 import org.jayhenri.cloud9.controller.InventoryController;
-import org.jayhenri.cloud9.exception.InvalidItemException;
-import org.jayhenri.cloud9.exception.ItemAlreadyExistsException;
-import org.jayhenri.cloud9.exception.ItemNotFoundException;
+import org.jayhenri.cloud9.exception.invalid.InvalidItemException;
+import org.jayhenri.cloud9.exception.alreadyexists.ItemAlreadyExistsException;
+import org.jayhenri.cloud9.exception.notfound.ItemNotFoundException;
 import org.jayhenri.cloud9.model.inventory.Inventory;
 import org.jayhenri.cloud9.service.InventoryService;
 import org.junit.jupiter.api.BeforeEach;

@@ -1,4 +1,4 @@
-package org.jayhenri.cloud9.exception;
+package org.jayhenri.cloud9.exception.notfound;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -7,25 +7,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The type Customer already exists exception.
+ * The type Order not found exception.
  */
 @ResponseStatus(value = HttpStatus.BAD_REQUEST)
-public class CustomerAlreadyExistsException extends Exception {
-
+public class OrdersNotFoundException extends Exception {
     private List<String> errorMessages = new ArrayList<>();
 
     /**
-     * Instantiates a new Customer already exists exception.
+     * Instantiates a new Order not found exception.
      */
-    public CustomerAlreadyExistsException() {
+    public OrdersNotFoundException() {
     }
 
     /**
-     * Instantiates a new Customer already exists exception.
+     * Instantiates a new Order not found exception.
      *
      * @param msg the msg
      */
-    public CustomerAlreadyExistsException(String msg) {
+    public OrdersNotFoundException(String msg) {
         super(msg);
     }
 

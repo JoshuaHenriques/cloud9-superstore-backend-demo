@@ -133,4 +133,15 @@ public class CustomerService {
 
         return customerRepository.getById(uuid);
     }
+
+    /**
+     * Exists by email boolean.
+     *
+     * @param ccn the credit card number
+     * @return the boolean
+     */
+    public boolean existsByCCN(String ccn) {
+
+        return customerRepository.existsByCreditCardCCN(ccn);
+    }
 }

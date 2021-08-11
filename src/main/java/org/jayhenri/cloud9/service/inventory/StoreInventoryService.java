@@ -1,14 +1,16 @@
 package org.jayhenri.cloud9.service.inventory;
 
 import org.jayhenri.cloud9.model.inventory.StoreInventory;
+import org.jayhenri.cloud9.model.item.Item;
 import org.jayhenri.cloud9.repository.inventory.StoreInventoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
- * The type StoreInventory service.
+ * The type Inventory service.
  */
 @Service
 public class StoreInventoryService {
@@ -29,10 +31,13 @@ public class StoreInventoryService {
     /**
      * Add.
      *
-     * @param inventory the inventory
+     * @param item     the item
+     * @param quantity the quantity
+     * @param price    the price
      */
-    public void add(StoreInventory inventory) {
+    public void add(Item item, int quantity, double price) {
 
+        StoreInventory inventory = new StoreInventory(item, item.getItemName(), quantity, price);
         inventoryRepository.save(inventory);
     }
 
@@ -69,22 +74,44 @@ public class StoreInventoryService {
     /**
      * Exists by product name boolean.
      *
-     * @param productName the product name
+     * @param itemName the item name
      * @return the boolean
      */
-    public boolean existsByProductName(String productName) {
+    public boolean existsByItemName(String itemName) {
 
-        return inventoryRepository.existsByProductName(productName);
+        return inventoryRepository.existsByItemName(itemName);
     }
 
     /**
      * Gets by product name.
      *
-     * @param productName the product name
+     * @param itemName the item name
      * @return the by product name
      */
-    public StoreInventory getByProductName(String productName) {
+    public StoreInventory getByItemName(String itemName) {
 
-        return inventoryRepository.getByProductName(productName);
+        return inventoryRepository.getByItemName(itemName);
+    }
+
+    /**
+     * Exists by email boolean.
+     *
+     * @param uuid the email
+     * @return the boolean
+     */
+    public boolean existsById(UUID uuid) {
+
+        return inventoryRepository.existsById(uuid);
+    }
+
+    /**
+     * Gets by email.
+     *
+     * @param uuid the email
+     * @return the by email
+     */
+    public StoreInventory getById(UUID uuid) {
+
+        return inventoryRepository.getById(uuid);
     }
 }

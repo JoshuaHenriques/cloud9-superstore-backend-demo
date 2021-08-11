@@ -1,8 +1,10 @@
 package org.jayhenri.cloud9.controller.customer;
 
-import org.jayhenri.cloud9.exception.CustomerNotFoundException;
+import org.jayhenri.cloud9.exception.alreadyexists.CreditCardAlreadyExistsException;
+import org.jayhenri.cloud9.exception.invalid.InvalidOrdersException;
+import org.jayhenri.cloud9.exception.notfound.CreditCardNotFoundException;
+import org.jayhenri.cloud9.exception.notfound.CustomerNotFoundException;
 import org.jayhenri.cloud9.model.customer.CreditCard;
-import org.jayhenri.cloud9.service.customer.AddressService;
 import org.jayhenri.cloud9.service.customer.CreditCardService;
 import org.jayhenri.cloud9.service.customer.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +12,9 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -43,19 +45,26 @@ public class CreditCardController {
      * @param creditCard the credit card
      * @return the response entity
      * @throws CustomerNotFoundException the customer not found exception
+     * @throws InvalidOrdersException    the invalid orders exception
      */
     @PostMapping(value = "/{customerId}/creditCard/add", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> addCreditCard(@PathVariable UUID customerId, @RequestBody CreditCard creditCard)
-            throws CustomerNotFoundException {
-        if (customerService.existsById(customerId)) {
-            // Validate CreditCard
-            creditCardService.addCreditCard(customerService.getById(customerId), creditCard);
+            throws CustomerNotFoundException, InvalidOrdersException, CreditCardAlreadyExistsException {
+        if (!ObjectUtils.isEmpty(creditCard)) {
 
-            HttpHeaders responseHeaders = new HttpHeaders();
-            responseHeaders.set("CustomerController", "addCreditCard");
-            return new ResponseEntity<>("Successfully Added Credit Card", responseHeaders, HttpStatus.CREATED);
+            if (customerService.existsById(customerId)) {
+                if (customerService.existsByCCN(creditCard.getCcn())) {
+                    creditCardService.addCreditCard(customerService.getById(customerId), creditCard);
+
+                    HttpHeaders responseHeaders = new HttpHeaders();
+                    responseHeaders.set("CustomerController", "addCreditCard");
+                    return new ResponseEntity<>("Successfully Added Credit Card", responseHeaders, HttpStatus.CREATED);
+                } else
+                    throw new CreditCardAlreadyExistsException();
+            } else
+                throw new CustomerNotFoundException();
         } else
-            throw new CustomerNotFoundException();
+            throw new InvalidOrdersException();
     }
 
     /**
@@ -64,17 +73,21 @@ public class CreditCardController {
      * @param customerId the customer id
      * @param cardId     the card id
      * @return the response entity
-     * @throws CustomerNotFoundException the customer not found exception
+     * @throws CustomerNotFoundException   the customer not found exception
+     * @throws CreditCardNotFoundException the credit card not found exception
      */
     @DeleteMapping(value = "/{customerId}/creditCard/remove/{cardId}")
     public ResponseEntity<String> removeCreditCard(@PathVariable UUID customerId, @PathVariable UUID cardId)
-            throws CustomerNotFoundException {
+            throws CustomerNotFoundException, CreditCardNotFoundException {
         if (customerService.existsById(customerId)) {
-            creditCardService.removeCreditCard(customerService.getById(customerId), cardId);
+            if (creditCardService.existsById(customerService.getById(customerId), cardId)) {
+                creditCardService.removeCreditCard(customerService.getById(customerId), cardId);
 
-            HttpHeaders responseHeaders = new HttpHeaders();
-            responseHeaders.set("CustomerController", "removeCreditCard");
-            return new ResponseEntity<>("Successfully Removed Credit Card", responseHeaders, HttpStatus.OK);
+                HttpHeaders responseHeaders = new HttpHeaders();
+                responseHeaders.set("CustomerController", "removeCreditCard");
+                return new ResponseEntity<>("Successfully Removed Credit Card", responseHeaders, HttpStatus.OK);
+            } else
+                throw new CreditCardNotFoundException();
         } else
             throw new CustomerNotFoundException();
     }

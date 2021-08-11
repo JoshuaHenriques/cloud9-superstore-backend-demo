@@ -1,4 +1,4 @@
-package org.jayhenri.cloud9.exception;
+package org.jayhenri.cloud9.exception.alreadyexists;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -7,24 +7,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The type Product name not same exception.
+ * The type Item already exists exception.
  */
 @ResponseStatus(value = HttpStatus.BAD_REQUEST)
-public class ProductNameNotSameException extends Exception {
+public class ItemAlreadyExistsException extends Exception {
+
     private List<String> errorMessages = new ArrayList<>();
 
     /**
-     * Instantiates a new Product name not same exception.
+     * Instantiates a new Item already exists exception.
      */
-    public ProductNameNotSameException() {
+    public ItemAlreadyExistsException() {
     }
 
     /**
-     * Instantiates a new Product name not same exception.
+     * Instantiates a new Item already exists exception.
      *
      * @param msg the msg
      */
-    public ProductNameNotSameException(String msg) {
+    public ItemAlreadyExistsException(String msg) {
         super(msg);
     }
 

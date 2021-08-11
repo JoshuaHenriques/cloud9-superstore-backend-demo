@@ -1,9 +1,9 @@
 package org.jayhenri.cloud9.controller.customerRegistration;
 
 import org.jayhenri.cloud9.controller.CustomerRegistrationController;
-import org.jayhenri.cloud9.exception.CustomerAlreadyExistsException;
-import org.jayhenri.cloud9.exception.InvalidCustomerException;
-import org.jayhenri.cloud9.exception.InvalidPostalCodeException;
+import org.jayhenri.cloud9.exception.alreadyexists.CustomerAlreadyExistsException;
+import org.jayhenri.cloud9.exception.invalid.InvalidCustomerException;
+import org.jayhenri.cloud9.exception.invalid.InvalidPostalCodeException;
 import org.jayhenri.cloud9.model.*;
 import org.jayhenri.cloud9.service.AddressService;
 import org.jayhenri.cloud9.service.customer.CustomerService;

@@ -1,8 +1,8 @@
 package org.jayhenri.cloud9.controller.store;
 
-import org.jayhenri.cloud9.exception.CustomerNotFoundException;
-import org.jayhenri.cloud9.exception.InvalidCustomerException;
-import org.jayhenri.cloud9.exception.ItemNotFoundException;
+import org.jayhenri.cloud9.exception.invalid.InvalidCustomerException;
+import org.jayhenri.cloud9.exception.notfound.CustomerNotFoundException;
+import org.jayhenri.cloud9.exception.notfound.ItemNotFoundException;
 import org.jayhenri.cloud9.model.customer.Customer;
 import org.jayhenri.cloud9.service.customer.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;

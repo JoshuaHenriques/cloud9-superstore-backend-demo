@@ -1,7 +1,7 @@
 package org.jayhenri.cloud9.controller.customer;
 
-import org.jayhenri.cloud9.exception.CustomerNotFoundException;
-import org.jayhenri.cloud9.exception.ItemNotFoundException;
+import org.jayhenri.cloud9.exception.notfound.CustomerNotFoundException;
+import org.jayhenri.cloud9.exception.notfound.ItemNotFoundException;
 import org.jayhenri.cloud9.model.customer.Cart;
 import org.jayhenri.cloud9.service.customer.CartService;
 import org.jayhenri.cloud9.service.customer.CustomerService;
@@ -11,7 +11,10 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 
 import java.util.UUID;
 
@@ -51,7 +54,7 @@ public class CartController {
     public ResponseEntity<String> addToCart(@PathVariable UUID customerId, @PathVariable UUID itemId)
             throws CustomerNotFoundException, ItemNotFoundException {
         if (customerService.existsById(customerId)) {
-            if (onlineInventoryService.existsById(customerId)) {
+            if (onlineInventoryService.existsById(itemId)) {
 
                 cartService.addToCart(customerService.getById(customerId), onlineInventoryService.getById(itemId).getItem());
 

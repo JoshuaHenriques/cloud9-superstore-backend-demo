@@ -1,4 +1,4 @@
-package org.jayhenri.cloud9.exception;
+package org.jayhenri.cloud9.exception.notfound;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -7,24 +7,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The type Invalid item exception.
+ * The type Customer not found exception.
  */
-@ResponseStatus(value = HttpStatus.BAD_REQUEST)
-public class InvalidItemException extends Exception {
+@ResponseStatus(value = HttpStatus.NOT_FOUND)
+public class CreditCardNotFoundException extends Exception {
     private List<String> errorMessages = new ArrayList<>();
 
     /**
-     * Instantiates a new Invalid item exception.
+     * Instantiates a new Customer not found exception.
      */
-    public InvalidItemException() {
+    public CreditCardNotFoundException() {
     }
 
     /**
-     * Instantiates a new Invalid item exception.
+     * Instantiates a new Customer not found exception.
      *
      * @param msg the msg
      */
-    public InvalidItemException(String msg) {
+    public CreditCardNotFoundException(String msg) {
         super(msg);
     }
 

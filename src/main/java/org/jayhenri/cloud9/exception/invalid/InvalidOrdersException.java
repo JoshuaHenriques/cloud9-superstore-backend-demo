@@ -1,4 +1,4 @@
-package org.jayhenri.cloud9.exception;
+package org.jayhenri.cloud9.exception.invalid;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -7,25 +7,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The type Invalid postal code exception.
+ * The type Invalid credit card exception.
  */
 @ResponseStatus(value = HttpStatus.BAD_REQUEST)
-public class InvalidPostalCodeException extends Exception {
+public class InvalidOrdersException extends Exception {
 
     private List<String> errorMessages = new ArrayList<>();
 
     /**
-     * Instantiates a new Invalid postal code exception.
+     * Instantiates a new Invalid credit card exception.
      */
-    public InvalidPostalCodeException() {
+    public InvalidOrdersException() {
     }
 
     /**
-     * Instantiates a new Invalid postal code exception.
+     * Instantiates a new Invalid credit card exception.
      *
      * @param msg the msg
      */
-    public InvalidPostalCodeException(String msg) {
+    public InvalidOrdersException(String msg) {
         super(msg);
     }
 

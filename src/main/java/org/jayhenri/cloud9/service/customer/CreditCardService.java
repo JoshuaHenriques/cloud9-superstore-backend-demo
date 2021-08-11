@@ -17,6 +17,11 @@ public class CreditCardService {
 
     private final CustomerService customerService;
 
+    /**
+     * Instantiates a new Credit card service.
+     *
+     * @param customerService the customer service
+     */
     @Autowired
     public CreditCardService(CustomerService customerService) {
         this.customerService = customerService;
@@ -95,5 +100,15 @@ public class CreditCardService {
             }
         });
         return creditCard.get();
+    }
+
+    /**
+     * Exists by email boolean.
+     *
+     * @param ccn the credit card number
+     * @return the boolean
+     */
+    public boolean existsByCCN(String ccn) {
+        return customerService.existsByCCN(ccn);
     }
 }

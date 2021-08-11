@@ -1,4 +1,4 @@
-package org.jayhenri.cloud9.exception;
+package org.jayhenri.cloud9.exception.alreadyexists;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -7,25 +7,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The type Item not found exception.
+ * The type Customer already exists exception.
  */
-@ResponseStatus(value = HttpStatus.NOT_FOUND)
-public class ItemNotFoundException extends Exception {
+@ResponseStatus(value = HttpStatus.BAD_REQUEST)
+public class CreditCardAlreadyExistsException extends Exception {
 
     private List<String> errorMessages = new ArrayList<>();
 
     /**
-     * Instantiates a new Item not found exception.
+     * Instantiates a new Customer already exists exception.
      */
-    public ItemNotFoundException() {
+    public CreditCardAlreadyExistsException() {
     }
 
     /**
-     * Instantiates a new Item not found exception.
+     * Instantiates a new Customer already exists exception.
      *
      * @param msg the msg
      */
-    public ItemNotFoundException(String msg) {
+    public CreditCardAlreadyExistsException(String msg) {
         super(msg);
     }
 

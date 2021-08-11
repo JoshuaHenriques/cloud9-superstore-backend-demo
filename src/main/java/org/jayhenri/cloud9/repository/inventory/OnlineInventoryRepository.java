@@ -14,14 +14,6 @@ import java.util.UUID;
 @Repository
 public interface OnlineInventoryRepository extends JpaRepository<OnlineInventory, UUID> {
 
-    /**
-     * Exists by phone number boolean.
-     *
-     * @param phoneNumber the phone number
-     * @return the boolean
-     */
-    @Query("select case when count(c)> 0 then true else false end from Customer c where lower(c.phoneNumber) like lower(:phoneNumber)")
-    boolean existsByPhoneNumber(@Param("phoneNumber") String phoneNumber);
 
     /**
      * Exists by product name boolean.
@@ -29,25 +21,9 @@ public interface OnlineInventoryRepository extends JpaRepository<OnlineInventory
      * @param phoneNumber the phone number
      * @return the boolean
      */
-    boolean existsByProductName(@Param("phoneNumber") String phoneNumber);
+    @Query(value = "SELECT * FROM online_inventory WHERE EXISTS (SELECT item_name FROM online_inventory WHERE online_inventory.item_name = :item_name)", nativeQuery = true)
+    boolean existsByItemName(@Param("item_name") String phoneNumber);
 
-    /**
-     * Exists by email boolean.
-     *
-     * @param email the email
-     * @return the boolean
-     */
-    @Query("select case when count(c)> 0 then true else false end from Customer c where lower(c.email) like lower(:email)")
-    boolean existsByEmail(@Param("email") String email);
-
-    /**
-     * Gets by email.
-     *
-     * @param email the email
-     * @return the by email
-     */
-    @Query(value = "SELECT * FROM customers WHERE customers.email=:email", nativeQuery = true)
-    OnlineInventory getByEmail(@Param("email") String email);
 
     /**
      * Gets by product name.
@@ -55,5 +31,6 @@ public interface OnlineInventoryRepository extends JpaRepository<OnlineInventory
      * @param email the email
      * @return the by product name
      */
-    OnlineInventory getByProductName(@Param("email") String email);
+    @Query(value = "SELECT * FROM online_inventory WHERE online_inventory.item_name = :item_name)", nativeQuery = true)
+    OnlineInventory getByItemName(@Param("item_name") String email);
 }

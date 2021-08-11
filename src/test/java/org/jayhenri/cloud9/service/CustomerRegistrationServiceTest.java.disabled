@@ -1,7 +1,7 @@
 package org.jayhenri.cloud9.service;
 
-import org.jayhenri.cloud9.exception.CustomerAlreadyExistsException;
-import org.jayhenri.cloud9.exception.InvalidPostalCodeException;
+import org.jayhenri.cloud9.exception.alreadyexists.CustomerAlreadyExistsException;
+import org.jayhenri.cloud9.exception.invalid.InvalidPostalCodeException;
 import org.jayhenri.cloud9.model.*;
 import org.jayhenri.cloud9.repository.customer.CustomerRepository;
 import org.junit.jupiter.api.BeforeEach;
