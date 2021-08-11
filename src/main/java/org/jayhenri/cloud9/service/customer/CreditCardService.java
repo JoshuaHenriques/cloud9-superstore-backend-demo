@@ -2,43 +2,54 @@ package org.jayhenri.cloud9.service.customer;
 
 import org.jayhenri.cloud9.model.customer.CreditCard;
 import org.jayhenri.cloud9.model.customer.Customer;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * The type Credit card service.
  */
 public class CreditCardService {
 
+    private final CustomerService customerService;
+
+    @Autowired
+    public CreditCardService(CustomerService customerService) {
+        this.customerService = customerService;
+    }
+
     /**
      * Add credit card.
      *
      * @param customer   the customer
      * @param creditCard the credit card
+     * @return the customer
      */
-    public Customer addCreditCard(Customer customer, CreditCard creditCard) {
+    public void addCreditCard(Customer customer, CreditCard creditCard) {
 
         customer.getWallet().add(creditCard);
-        return customer;
+        customerService.update(customer);
     }
 
     /**
      * Remove credit card.
      *
      * @param customer the customer
-     * @param fourDig  the four dig
+     * @param cardId   the card id
+     * @return the customer
      */
-    public Customer removeCreditCard(Customer customer, String fourDig) {
+    public void removeCreditCard(Customer customer, UUID cardId) {
 
         Set<CreditCard> removeMe = new HashSet<>();
-        customer.getWallet().forEach(creditCard -> {
-            if (creditCard.getFourDig() != null && creditCard.getFourDig().equals(fourDig)) {
-                removeMe.add(creditCard);
-            }
-        });
+        CreditCard card = getById(customer, cardId);
+        removeMe.add(card);
         customer.getWallet().removeAll(removeMe);
-        return customer;
+
+        customerService.update(customer);
     }
 
     /**
@@ -50,5 +61,39 @@ public class CreditCardService {
     public Set<CreditCard> findAllCreditCards(Customer customer) {
 
         return customer.getWallet();
+    }
+
+    /**
+     * Exists by email boolean.
+     *
+     * @param customer the customer
+     * @param cardId   the card id
+     * @return the boolean
+     */
+    public boolean existsById(Customer customer, UUID cardId) {
+        AtomicBoolean exists = new AtomicBoolean(false);
+        customer.getWallet().forEach(card -> {
+            if (card.getCreditCardUUID().equals(cardId)) {
+                exists.set(true);
+            }
+        });
+        return exists.get();
+    }
+
+    /**
+     * Gets by email.
+     *
+     * @param customer the customer
+     * @param cardId   the card id
+     * @return the by email
+     */
+    public CreditCard getById(Customer customer, UUID cardId) {
+        AtomicReference<CreditCard> creditCard = new AtomicReference<>(new CreditCard());
+        customer.getWallet().forEach(card -> {
+            if (card.getCreditCardUUID().equals(cardId)) {
+                creditCard.set(card);
+            }
+        });
+        return creditCard.get();
     }
 }

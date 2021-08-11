@@ -3,7 +3,7 @@ package org.jayhenri.cloud9.model.inventory;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.jayhenri.cloud9.model.store.Item;
+import org.jayhenri.cloud9.model.item.Item;
 
 import javax.persistence.*;
 import java.io.Serializable;

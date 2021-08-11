@@ -1,4 +1,4 @@
-package org.jayhenri.cloud9.service.store;
+package org.jayhenri.cloud9.service.item;
 
 import org.jayhenri.cloud9.model.item.Review;
 import org.jayhenri.cloud9.repository.item.ReviewRepository;
@@ -16,7 +16,7 @@ import java.util.List;
  * The type Customer service.
  */
 @Service
-public class StoreService {
+public class ReviewService {
 
     private final ReviewRepository reviewRepository;
 
@@ -26,7 +26,7 @@ public class StoreService {
      * @param reviewRepository the customer repository
      */
     @Autowired
-    public StoreService(ReviewRepository reviewRepository) {
+    public ReviewService(ReviewRepository reviewRepository) {
 
         this.reviewRepository = reviewRepository;
         // this.orderDBService = orderDBService;

@@ -2,11 +2,12 @@ package org.jayhenri.cloud9.service.customer;
 
 import org.jayhenri.cloud9.model.customer.Cart;
 import org.jayhenri.cloud9.model.customer.Customer;
-import org.jayhenri.cloud9.model.store.Item;
+import org.jayhenri.cloud9.model.item.Item;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 /**
  * The type Cart service.
@@ -30,15 +31,15 @@ public class CartService {
     /**
      * Remove from cart.
      *
-     * @param customer    the customer
-     * @param productName the product name
-     * @return customer
+     * @param customer the customer
+     * @param itemUUID the item uuid
+     * @return customer customer
      */
-    public Customer removeFromCart(Customer customer, String productName) {
+    public Customer removeFromCart(Customer customer, UUID itemUUID) {
 
         Set<Item> removeMe = new HashSet<>();
         customer.getCart().getItems().forEach(item -> {
-            if (item.getItemName().equals(productName)) {
+            if (item.getItemUUID().equals(itemUUID)) {
                 removeMe.add(item);
             }
         });
@@ -50,11 +51,11 @@ public class CartService {
      * Empty cart.
      *
      * @param customer the customer
-     * @return customer
+     * @return customer customer
      */
     public Customer emptyCart(Customer customer) {
 
-        customer.getCart().setItems(new HashSet<>(customer.getCart().getItems()));
+        customer.getCart().setItems(new HashSet<>());
         customer.getCart().setTotal(0.00);
 
         return customer;
@@ -70,4 +71,6 @@ public class CartService {
 
         return customer.getCart();
     }
+
+
 }

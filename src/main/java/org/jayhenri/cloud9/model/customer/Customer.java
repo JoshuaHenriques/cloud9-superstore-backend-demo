@@ -3,7 +3,7 @@ package org.jayhenri.cloud9.model.customer;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.jayhenri.cloud9.model.Login;
+import org.jayhenri.cloud9.model.login.Login;
 
 import javax.persistence.*;
 import java.io.Serializable;

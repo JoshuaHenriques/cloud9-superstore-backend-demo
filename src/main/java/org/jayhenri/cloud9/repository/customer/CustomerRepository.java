@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -15,13 +16,13 @@ import java.util.UUID;
 public interface CustomerRepository extends JpaRepository<Customer, UUID> {
 
     /**
-     * Exists by phone number boolean.
+     * Exists by email boolean.
      *
-     * @param phoneNumber the phone number
+     * @param phoneNumber the email
      * @return the boolean
      */
-    @Query("select case when count(c)> 0 then true else false end from Customer c where lower(c.phoneNumber) like lower(:phoneNumber)")
-    boolean existsByPhoneNumber(@Param("phoneNumber") String phoneNumber);
+    @Query(value = "SELECT * FROM customers WHERE EXISTS (SELECT phone_number FROM customers WHERE customers.phone_number = :phone_number)", nativeQuery = true)
+    boolean existsByPhoneNumber(@Param("phone_number") String phoneNumber);
 
     /**
      * Exists by email boolean.
@@ -29,7 +30,7 @@ public interface CustomerRepository extends JpaRepository<Customer, UUID> {
      * @param email the email
      * @return the boolean
      */
-    @Query("select case when count(c)> 0 then true else false end from Customer c where lower(c.email) like lower(:email)")
+    @Query(value = "SELECT * FROM customers WHERE EXISTS (SELECT email FROM customers WHERE customers.email = :email)", nativeQuery = true)
     boolean existsByEmail(@Param("email") String email);
 
     /**
@@ -38,6 +39,6 @@ public interface CustomerRepository extends JpaRepository<Customer, UUID> {
      * @param email the email
      * @return the by email
      */
-    @Query(value = "SELECT * FROM customers WHERE customers.email=:email", nativeQuery = true)
+    @Query(value = "SELECT * FROM customers WHERE customers.email = :email", nativeQuery = true)
     Customer getByEmail(@Param("email") String email);
 }

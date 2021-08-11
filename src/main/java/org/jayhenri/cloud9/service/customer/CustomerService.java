@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 
 /**
@@ -109,5 +110,27 @@ public class CustomerService {
     public Customer getByEmail(String email) {
 
         return customerRepository.getByEmail(email);
+    }
+
+    /**
+     * Exists by email boolean.
+     *
+     * @param uuid the email
+     * @return the boolean
+     */
+    public boolean existsById(UUID uuid) {
+
+        return customerRepository.existsById(uuid);
+    }
+
+    /**
+     * Gets by email.
+     *
+     * @param uuid the email
+     * @return the by email
+     */
+    public Customer getById(UUID uuid) {
+
+        return customerRepository.getById(uuid);
     }
 }

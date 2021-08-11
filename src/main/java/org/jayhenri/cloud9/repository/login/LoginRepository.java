@@ -1,6 +1,6 @@
 package org.jayhenri.cloud9.repository.login;
 
-import org.jayhenri.cloud9.model.Login;
+import org.jayhenri.cloud9.model.login.Login;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

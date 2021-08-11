@@ -3,7 +3,7 @@ package org.jayhenri.cloud9.controller.inventory;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.jayhenri.cloud9.controller.InventoryController;
 import org.jayhenri.cloud9.model.inventory.Inventory;
-import org.jayhenri.cloud9.model.store.Item;
+import org.jayhenri.cloud9.model.item.Item;
 import org.jayhenri.cloud9.service.InventoryService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;

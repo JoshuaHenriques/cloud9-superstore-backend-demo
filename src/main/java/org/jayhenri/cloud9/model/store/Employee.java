@@ -3,7 +3,7 @@ package org.jayhenri.cloud9.model.store;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.jayhenri.cloud9.model.Login;
+import org.jayhenri.cloud9.model.login.Login;
 
 import javax.persistence.*;
 import java.util.UUID;

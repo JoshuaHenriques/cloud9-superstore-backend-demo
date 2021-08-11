@@ -2,6 +2,8 @@ package org.jayhenri.cloud9.service.customer;
 
 import org.jayhenri.cloud9.model.customer.Customer;
 import org.jayhenri.cloud9.model.customer.Orders;
+import org.jayhenri.cloud9.repository.customer.OrdersRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Set;
 import java.util.UUID;
@@ -11,31 +13,38 @@ import java.util.UUID;
  */
 public class OrdersService {
 
+    private final CustomerService customerService;
+    private final OrdersRepository ordersRepository;
+
+    /**
+     * Instantiates a new Orders service.
+     *
+     * @param ordersRepository the orders repository
+     */
+    @Autowired
+    public OrdersService(OrdersRepository ordersRepository,CustomerService customerService) {
+        this.ordersRepository = ordersRepository;
+        this.customerService = customerService;
+    }
+
     /**
      * Add order.
      *
-     * @param customer     the customer
-     * @param orders the order
+     * @param customer the customer
+     * @param orders   the order
      */
-    public Customer addOrder(Customer customer, Orders orders) {
+    public void addOrder(Customer customer, Orders orders) {
 
         customer.getOrders().add(orders);
-        return customer;
+        customerService.update(customer);
     }
 
     /**
      * Update order.
      *
-     * @param customer    the customer
-     * @param uuid        the uuid
-     * @param orderStatus the order status
      */
-    public Customer updateOrder(Customer customer, UUID uuid, String orderStatus) {
-
-        customer.getOrders().forEach(order -> {
-            if (order.getOrdersUUID().equals(uuid)) order.setOrderStatus(orderStatus);
-        });
-        return customer;
+    public void updateOrders(Orders orders) {
+        ordersRepository.save(orders);
     }
 
     /**
@@ -47,5 +56,27 @@ public class OrdersService {
     public Set<Orders> findAllOrders(Customer customer) {
 
         return customer.getOrders();
+    }
+
+    /**
+     * Exists by email boolean.
+     *
+     * @param cardId the card id
+     * @return the boolean
+     */
+    public boolean existsById(UUID cardId) {
+
+        return ordersRepository.existsById(cardId);
+    }
+
+    /**
+     * Gets by email.
+     *
+     * @param cardId the card id
+     * @return the by email
+     */
+    public Orders getById(UUID cardId) {
+
+        return ordersRepository.getById(cardId);
     }
 }

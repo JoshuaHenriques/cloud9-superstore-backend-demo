@@ -3,7 +3,7 @@ package org.jayhenri.cloud9.repository;
 import org.jayhenri.cloud9.model.customer.Address;
 import org.jayhenri.cloud9.model.customer.Customer;
 import org.jayhenri.cloud9.model.inventory.Inventory;
-import org.jayhenri.cloud9.model.store.Item;
+import org.jayhenri.cloud9.model.item.Item;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

@@ -1,6 +1,6 @@
-package org.jayhenri.cloud9.repository.inventory;
+package org.jayhenri.cloud9.repository.item;
 
-import org.jayhenri.cloud9.model.inventory.OnlineInventory;
+import org.jayhenri.cloud9.model.item.Item;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -12,7 +12,7 @@ import java.util.UUID;
  * The interface Inventory repository.
  */
 @Repository
-public interface OnlineInventoryRepository extends JpaRepository<OnlineInventory, UUID> {
+public interface ItemRepository extends JpaRepository<Item, UUID> {
 
     /**
      * Exists by phone number boolean.
@@ -22,14 +22,6 @@ public interface OnlineInventoryRepository extends JpaRepository<OnlineInventory
      */
     @Query("select case when count(c)> 0 then true else false end from Customer c where lower(c.phoneNumber) like lower(:phoneNumber)")
     boolean existsByPhoneNumber(@Param("phoneNumber") String phoneNumber);
-
-    /**
-     * Exists by product name boolean.
-     *
-     * @param phoneNumber the phone number
-     * @return the boolean
-     */
-    boolean existsByProductName(@Param("phoneNumber") String phoneNumber);
 
     /**
      * Exists by email boolean.
@@ -47,13 +39,5 @@ public interface OnlineInventoryRepository extends JpaRepository<OnlineInventory
      * @return the by email
      */
     @Query(value = "SELECT * FROM customers WHERE customers.email=:email", nativeQuery = true)
-    OnlineInventory getByEmail(@Param("email") String email);
-
-    /**
-     * Gets by product name.
-     *
-     * @param email the email
-     * @return the by product name
-     */
-    OnlineInventory getByProductName(@Param("email") String email);
+    Item getByEmail(@Param("email") String email);
 }

@@ -1,11 +1,13 @@
 package org.jayhenri.cloud9.service.inventory;
 
+import org.jayhenri.cloud9.model.customer.Customer;
 import org.jayhenri.cloud9.model.inventory.OnlineInventory;
 import org.jayhenri.cloud9.repository.inventory.OnlineInventoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * The type Inventory service.
@@ -86,5 +88,27 @@ public class OnlineInventoryService {
     public OnlineInventory getByProductName(String productName) {
 
         return inventoryRepository.getByProductName(productName);
+    }
+
+    /**
+     * Exists by email boolean.
+     *
+     * @param uuid the email
+     * @return the boolean
+     */
+    public boolean existsById(UUID uuid) {
+
+        return inventoryRepository.existsById(uuid);
+    }
+
+    /**
+     * Gets by email.
+     *
+     * @param uuid the email
+     * @return the by email
+     */
+    public OnlineInventory getById(UUID uuid) {
+
+        return inventoryRepository.getById(uuid);
     }
 }

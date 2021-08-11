@@ -1,7 +1,7 @@
-package org.jayhenri.cloud9.service.store;
+package org.jayhenri.cloud9.service.login;
 
-import org.jayhenri.cloud9.model.item.Review;
-import org.jayhenri.cloud9.repository.item.ReviewRepository;
+import org.jayhenri.cloud9.model.login.Login;
+import org.jayhenri.cloud9.repository.login.LoginRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,19 +16,19 @@ import java.util.List;
  * The type Customer service.
  */
 @Service
-public class StoreService {
+public class LoginService {
 
-    private final ReviewRepository reviewRepository;
+    private final LoginRepository loginRepository;
 
     /**
-     * Instantiates a new Review service.
+     * Instantiates a new Login service.
      *
-     * @param reviewRepository the customer repository
+     * @param loginRepository the customer repository
      */
     @Autowired
-    public StoreService(ReviewRepository reviewRepository) {
+    public LoginService(LoginRepository loginRepository) {
 
-        this.reviewRepository = reviewRepository;
+        this.loginRepository = loginRepository;
         // this.orderDBService = orderDBService;
     }
 
@@ -40,7 +40,7 @@ public class StoreService {
      */
     public boolean existsByPhoneNumber(String phoneNumber) {
 
-        return reviewRepository.existsByPhoneNumber(phoneNumber);
+        return loginRepository.existsByPhoneNumber(phoneNumber);
     }
 
     /**
@@ -48,9 +48,9 @@ public class StoreService {
      *
      * @param customer the customer
      */
-    public void add(Review customer) {
+    public void add(Login customer) {
 
-        reviewRepository.save(customer);
+        loginRepository.save(customer);
     }
 
     /**
@@ -58,9 +58,9 @@ public class StoreService {
      *
      * @param customer the customer
      */
-    public void delete(Review customer) {
+    public void delete(Login customer) {
 
-        reviewRepository.delete(customer);
+        loginRepository.delete(customer);
     }
 
     /**
@@ -68,9 +68,9 @@ public class StoreService {
      *
      * @param customer the customer
      */
-    public void update(Review customer) {
+    public void update(Login customer) {
 
-        reviewRepository.save(customer);
+        loginRepository.save(customer);
     }
 
     /**
@@ -80,10 +80,10 @@ public class StoreService {
      * @param pageSize the page size
      * @return the list
      */
-    public List<Review> findAllReviews(Integer pageNo, Integer pageSize) {
+    public List<Login> findAllLogins(Integer pageNo, Integer pageSize) {
         // String sortBy
         Pageable paging = PageRequest.of(pageNo, pageSize); // Sort.by(sortBy).ascending()
-        Page<Review> pagedResult = reviewRepository.findAll(paging);
+        Page<Login> pagedResult = loginRepository.findAll(paging);
 
         if (pagedResult.hasContent()) return pagedResult.getContent();
         else return new ArrayList<>();
@@ -97,7 +97,7 @@ public class StoreService {
      */
     public boolean existsByEmail(String email) {
 
-        return reviewRepository.existsByEmail(email);
+        return loginRepository.existsByEmail(email);
     }
 
     /**
@@ -106,8 +106,8 @@ public class StoreService {
      * @param email the email
      * @return the by email
      */
-    public Review getByEmail(String email) {
+    public Login getByEmail(String email) {
 
-        return reviewRepository.getByEmail(email);
+        return loginRepository.getByEmail(email);
     }
 }
