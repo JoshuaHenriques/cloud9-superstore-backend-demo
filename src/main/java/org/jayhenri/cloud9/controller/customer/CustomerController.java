@@ -48,8 +48,8 @@ public class CustomerController {
      * @param customer the customer
      * @return the response entity
      * @throws CustomerAlreadyExistsException the customer already exists exception
-     * @throws InvalidPostalCodeException       the invalid postal code exception
-     * @throws InvalidCustomerException         the invalid customer exception
+     * @throws InvalidPostalCodeException     the invalid postal code exception
+     * @throws InvalidCustomerException       the invalid customer exception
      */
     @PostMapping(value = "/customer", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> register(@RequestBody Customer customer)

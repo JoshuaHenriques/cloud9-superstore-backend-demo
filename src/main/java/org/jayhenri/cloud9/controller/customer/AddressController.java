@@ -45,6 +45,7 @@ public class AddressController {
      * @return the response entity
      * @throws InvalidCustomerException  the invalid customer exception
      * @throws CustomerNotFoundException the customer not found exception
+     * @throws InvalidAddressException   the invalid address exception
      */
     @PutMapping(value = "/update/{customerId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> updateAddress(@PathVariable("customerId") UUID uuid, @RequestBody Address address)

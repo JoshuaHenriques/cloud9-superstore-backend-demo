@@ -1,5 +1,6 @@
 package org.jayhenri.cloud9.service.item;
 
+import org.jayhenri.cloud9.model.inventory.OnlineInventory;
 import org.jayhenri.cloud9.model.item.Item;
 import org.jayhenri.cloud9.repository.item.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 
 /**
@@ -30,17 +32,6 @@ public class ItemService {
 
         this.itemRepository = itemRepository;
         // this.orderDBService = orderDBService;
-    }
-
-    /**
-     * Exists by phone number boolean.
-     *
-     * @param phoneNumber the phone number
-     * @return the boolean
-     */
-    public boolean existsByPhoneNumber(String phoneNumber) {
-
-        return itemRepository.existsByPhoneNumber(phoneNumber);
     }
 
     /**
@@ -80,7 +71,7 @@ public class ItemService {
      * @param pageSize the page size
      * @return the list
      */
-    public List<Item> findAllEmployees(Integer pageNo, Integer pageSize) {
+    public List<Item> findAllItems(Integer pageNo, Integer pageSize) {
         // String sortBy
         Pageable paging = PageRequest.of(pageNo, pageSize); // Sort.by(sortBy).ascending()
         Page<Item> pagedResult = itemRepository.findAll(paging);
@@ -92,22 +83,66 @@ public class ItemService {
     /**
      * Exists by email boolean.
      *
-     * @param email the email
+     * @param itemName the item name
      * @return the boolean
      */
-    public boolean existsByEmail(String email) {
+    public boolean existsByItemName(String itemName) {
 
-        return itemRepository.existsByEmail(email);
+        return itemRepository.existsByItemName(itemName);
     }
 
     /**
      * Gets by email.
      *
-     * @param email the email
+     * @param itemName the item name
      * @return the by email
      */
-    public Item getByEmail(String email) {
+    public Item getByItemName(String itemName) {
 
-        return itemRepository.getByEmail(email);
+        return itemRepository.getByItemName(itemName);
+    }
+
+    /**
+     * Exists by email boolean.
+     *
+     * @param uuid the email
+     * @return the boolean
+     */
+    public boolean existsById(UUID uuid) {
+
+        return itemRepository.existsById(uuid);
+    }
+
+    /**
+     * Gets by email.
+     *
+     * @param uuid the email
+     * @return the by email
+     */
+    public Item getById(UUID uuid) {
+
+        return itemRepository.getById(uuid);
+    }
+
+    /**
+     * Exists by email boolean.
+     *
+     * @param uuid the email
+     * @return the boolean
+     */
+    public boolean existsByReviewId(UUID uuid) {
+
+        return itemRepository.existsByReviewId(uuid);
+    }
+
+    /**
+     * Gets by email.
+     *
+     * @param uuid the email
+     * @return the by email
+     */
+    public Item getByReviewId(UUID uuid) {
+
+        return itemRepository.getByReviewId(uuid);
     }
 }

@@ -44,7 +44,7 @@ public interface CustomerRepository extends JpaRepository<Customer, UUID> {
     /**
      * Gets by email.
      *
-     * @param email the email
+     * @param ccn the ccn
      * @return the by email
      */
     @Query(value = "SELECT * FROM credit_cards WHERE EXISTS (SELECT ccn FROM credit_cards WHERE credit_cards.ccn = :ccn", nativeQuery = true)

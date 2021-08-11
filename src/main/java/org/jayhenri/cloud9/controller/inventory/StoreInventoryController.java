@@ -41,10 +41,13 @@ public class StoreInventoryController {
     /**
      * Add item to storeInventory response entity.
      *
-     * @param storeInventory the storeInventory
+     * @param item     the item
+     * @param itemId   the item id
+     * @param quantity the quantity
+     * @param price    the price
      * @return the response entity
      * @throws ItemAlreadyExistsException the item already exists exception
-     * @throws InvalidItemException         the invalid item exception
+     * @throws InvalidItemException       the invalid item exception
      */
     @PostMapping(value = "/add/{itemId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> addItem(@RequestBody Item item, @PathVariable UUID itemId, @RequestBody int quantity, @RequestBody double price)
@@ -90,7 +93,7 @@ public class StoreInventoryController {
     /**
      * Gets by product name.
      *
-     * @param productName the product name
+     * @param itemName the item name
      * @return the by product name
      * @throws ItemNotFoundException the item not found exception
      */
@@ -109,7 +112,7 @@ public class StoreInventoryController {
     /**
      * Remove item to storeInventory response entity.
      *
-     * @param productName the product name
+     * @param itemName the item name
      * @return the response entity
      * @throws InvalidItemException  the invalid item exception
      * @throws ItemNotFoundException the item not found exception

@@ -31,7 +31,7 @@ public class ReviewController {
     /**
      * Instantiates a new Review controller.
      *
-     * @param reviewService  the review service
+     * @param reviewService    the review service
      * @param inventoryService the inventory service
      */
     @Autowired
@@ -46,7 +46,7 @@ public class ReviewController {
      * @param review the review
      * @return the response entity
      * @throws ReviewAlreadyExistsException the review already exists exception
-     * @throws InvalidPostalCodeException     the invalid postal code exception
+     * @throws InvalidPostalCodeException   the invalid postal code exception
      * @throws InvalidReviewException       the invalid review exception
      */
     @PostMapping(value = "/review", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

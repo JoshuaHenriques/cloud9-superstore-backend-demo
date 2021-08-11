@@ -17,27 +17,38 @@ public interface ItemRepository extends JpaRepository<Item, UUID> {
     /**
      * Exists by phone number boolean.
      *
-     * @param phoneNumber the phone number
+     * @param itemName the item name
      * @return the boolean
      */
-    @Query("select case when count(c)> 0 then true else false end from Customer c where lower(c.phoneNumber) like lower(:phoneNumber)")
-    boolean existsByPhoneNumber(@Param("phoneNumber") String phoneNumber);
+    @Query(value = "SELECT * FROM item WHERE EXISTS (SELECT item_name from item WHERE item.item_name = :item_name", nativeQuery = true)
+    boolean existsByItemName(@Param("item_name") String itemName);
 
-    /**
-     * Exists by email boolean.
-     *
-     * @param email the email
-     * @return the boolean
-     */
-    @Query("select case when count(c)> 0 then true else false end from Customer c where lower(c.email) like lower(:email)")
-    boolean existsByEmail(@Param("email") String email);
 
     /**
      * Gets by email.
      *
-     * @param email the email
+     * @param itemName the item name
      * @return the by email
      */
-    @Query(value = "SELECT * FROM customers WHERE customers.email=:email", nativeQuery = true)
-    Item getByEmail(@Param("email") String email);
+    @Query(value = "SELECT * FROM item WHERE item.item_name = :item_name", nativeQuery = true)
+    Item getByItemName(@Param("item_name") String itemName);
+
+    /**
+     * Exists by phone number boolean.
+     *
+     * @param itemName the item name
+     * @return the boolean
+     */
+    @Query(value = "SELECT * FROM item WHERE EXISTS (SELECT item_name from item WHERE item.item_name = :item_name", nativeQuery = true)
+    boolean existsByReviewId(@Param("reviewId") String itemName);
+
+
+    /**
+     * Gets by email.
+     *
+     * @param itemName the item name
+     * @return the by email
+     */
+    @Query(value = "SELECT * FROM item WHERE item.item_name = :item_name", nativeQuery = true)
+    Item getByReviewId(@Param("reviewId") String itemName);
 }

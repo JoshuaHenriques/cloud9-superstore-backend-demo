@@ -44,8 +44,9 @@ public class CreditCardController {
      * @param customerId the customer id
      * @param creditCard the credit card
      * @return the response entity
-     * @throws CustomerNotFoundException the customer not found exception
-     * @throws InvalidOrdersException    the invalid orders exception
+     * @throws CustomerNotFoundException        the customer not found exception
+     * @throws InvalidOrdersException           the invalid orders exception
+     * @throws CreditCardAlreadyExistsException the credit card already exists exception
      */
     @PostMapping(value = "/{customerId}/creditCard/add", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> addCreditCard(@PathVariable UUID customerId, @RequestBody CreditCard creditCard)

@@ -1,15 +1,12 @@
 package org.jayhenri.cloud9.service.item;
 
+import org.jayhenri.cloud9.model.item.Item;
 import org.jayhenri.cloud9.model.item.Review;
-import org.jayhenri.cloud9.repository.item.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicReference;
 
 
 /**
@@ -18,96 +15,68 @@ import java.util.List;
 @Service
 public class ReviewService {
 
-    private final ReviewRepository reviewRepository;
+    private final ItemService itemService;
 
     /**
      * Instantiates a new Review service.
      *
-     * @param reviewRepository the customer repository
+     * @param itemService the item service
      */
     @Autowired
-    public ReviewService(ReviewRepository reviewRepository) {
-
-        this.reviewRepository = reviewRepository;
-        // this.orderDBService = orderDBService;
-    }
-
-    /**
-     * Exists by phone number boolean.
-     *
-     * @param phoneNumber the phone number
-     * @return the boolean
-     */
-    public boolean existsByPhoneNumber(String phoneNumber) {
-
-        return reviewRepository.existsByPhoneNumber(phoneNumber);
+    public ReviewService(ItemService itemService) {
+        this.itemService = itemService;
     }
 
     /**
      * Add.
      *
-     * @param customer the customer
+     * @param item   the item
+     * @param review the review
      */
-    public void add(Review customer) {
+    public void addReview(Item item, Review review) {
 
-        reviewRepository.save(customer);
-    }
-
-    /**
-     * Delete.
-     *
-     * @param customer the customer
-     */
-    public void delete(Review customer) {
-
-        reviewRepository.delete(customer);
+        item.getReviews().add(review);
+        itemService.update(item);
     }
 
     /**
      * Update.
      *
-     * @param customer the customer
+     * @param item   the item
+     * @param review the review
      */
-    public void update(Review customer) {
+    public void update(Item item, Review review) {
 
-        reviewRepository.save(customer);
+        item.getReviews().forEach(review1 -> {
+            if (review1.getReviewUUID().equals(review.getReviewUUID()))
+                review1.setText(review.getText());
+                review1.setRating(review.getRating());
+        });
+        itemService.update(item);
+    }
+
+    /**
+     * Delete.
+     *
+     * @param item   the item
+     * @param review the review
+     */
+    public void delete(Item item, Review review) {
+        item.getReviews().forEach(review1 -> {
+            if (review1.getReviewUUID().equals(review.getReviewUUID()))
+                item.getReviews().remove(review);
+        });
+        itemService.update(item);
     }
 
     /**
      * Find all customers list.
      *
-     * @param pageNo   the page no
-     * @param pageSize the page size
+     * @param item the item
      * @return the list
      */
-    public List<Review> findAllReviews(Integer pageNo, Integer pageSize) {
-        // String sortBy
-        Pageable paging = PageRequest.of(pageNo, pageSize); // Sort.by(sortBy).ascending()
-        Page<Review> pagedResult = reviewRepository.findAll(paging);
+    public Set<Review> findAllReviews(Item item) {
 
-        if (pagedResult.hasContent()) return pagedResult.getContent();
-        else return new ArrayList<>();
-    }
-
-    /**
-     * Exists by email boolean.
-     *
-     * @param email the email
-     * @return the boolean
-     */
-    public boolean existsByEmail(String email) {
-
-        return reviewRepository.existsByEmail(email);
-    }
-
-    /**
-     * Gets by email.
-     *
-     * @param email the email
-     * @return the by email
-     */
-    public Review getByEmail(String email) {
-
-        return reviewRepository.getByEmail(email);
+        return item.getReviews();
     }
 }

@@ -1,8 +1,6 @@
 package org.jayhenri.cloud9.service.store;
 
 import org.jayhenri.cloud9.model.item.Review;
-import org.jayhenri.cloud9.repository.item.ReviewRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -18,19 +16,6 @@ import java.util.List;
 @Service
 public class StoreService {
 
-    private final ReviewRepository reviewRepository;
-
-    /**
-     * Instantiates a new Review service.
-     *
-     * @param reviewRepository the customer repository
-     */
-    @Autowired
-    public StoreService(ReviewRepository reviewRepository) {
-
-        this.reviewRepository = reviewRepository;
-        // this.orderDBService = orderDBService;
-    }
 
     /**
      * Exists by phone number boolean.
