@@ -3,13 +3,10 @@ package org.jayhenri.cloud9.service.store;
 import org.jayhenri.cloud9.model.store.Employee;
 import org.jayhenri.cloud9.repository.store.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 
 /**
@@ -23,7 +20,7 @@ public class EmployeeService {
     /**
      * Instantiates a new Employee service.
      *
-     * @param employeeRepository the customer repository
+     * @param employeeRepository the employee repository
      */
     @Autowired
     public EmployeeService(EmployeeRepository employeeRepository) {
@@ -46,68 +43,62 @@ public class EmployeeService {
     /**
      * Add.
      *
-     * @param customer the customer
+     * @param employee the employee
      */
-    public void add(Employee customer) {
+    public void add(Employee employee) {
 
-        employeeRepository.save(customer);
+        employeeRepository.save(employee);
     }
 
     /**
      * Delete.
      *
-     * @param customer the customer
+     * @param employee the employee
      */
-    public void delete(Employee customer) {
+    public void delete(Employee employee) {
 
-        employeeRepository.delete(customer);
+        employeeRepository.delete(employee);
     }
 
     /**
      * Update.
      *
-     * @param customer the customer
+     * @param employee the employee
      */
-    public void update(Employee customer) {
+    public void update(Employee employee) {
 
-        employeeRepository.save(customer);
+        employeeRepository.save(employee);
     }
 
     /**
-     * Find all customers list.
+     * Find all employees list.
      *
-     * @param pageNo   the page no
-     * @param pageSize the page size
      * @return the list
      */
-    public List<Employee> findAllEmployees(Integer pageNo, Integer pageSize) {
-        // String sortBy
-        Pageable paging = PageRequest.of(pageNo, pageSize); // Sort.by(sortBy).ascending()
-        Page<Employee> pagedResult = employeeRepository.findAll(paging);
+    public List<Employee> findAllEmployees() {
 
-        if (pagedResult.hasContent()) return pagedResult.getContent();
-        else return new ArrayList<>();
+        return employeeRepository.findAll();
     }
 
     /**
      * Exists by email boolean.
      *
-     * @param email the email
+     * @param uuid the email
      * @return the boolean
      */
-    public boolean existsByEmail(String email) {
+    public boolean existsById(UUID uuid) {
 
-        return employeeRepository.existsByEmail(email);
+        return employeeRepository.existsById(uuid);
     }
 
     /**
      * Gets by email.
      *
-     * @param email the email
+     * @param uuid the email
      * @return the by email
      */
-    public Employee getByEmail(String email) {
+    public Employee getById(UUID uuid) {
 
-        return employeeRepository.getByEmail(email);
+        return employeeRepository.getById(uuid);
     }
 }

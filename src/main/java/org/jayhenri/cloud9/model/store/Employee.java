@@ -3,6 +3,7 @@ package org.jayhenri.cloud9.model.store;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.jayhenri.cloud9.model.customer.Address;
 import org.jayhenri.cloud9.model.login.Login;
 
 import javax.persistence.*;
@@ -20,7 +21,13 @@ public class Employee {
 
     @Id
     @Column(name = "employee_id", unique = true, nullable = false)
-    private UUID reviewUUID = UUID.randomUUID();
+    private UUID employeeUUID = UUID.randomUUID();
+
+    @Column(name = "email", unique = true, nullable = false)
+    private String email;
+
+    @Column(name = "address_id", unique = true, nullable = false)
+    private Address address;
 
     @OneToOne
     @JoinColumn(name = "login_id", nullable = false, unique = true)
@@ -36,7 +43,7 @@ public class Employee {
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @Column(name = "phone_number", nullable = false)
+    @Column(name = "phone_number", unique = true, nullable = false)
     private String phoneNumber;
 
     @Column(name = "date_of_birth", nullable = false)

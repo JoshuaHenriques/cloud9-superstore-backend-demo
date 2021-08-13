@@ -1,6 +1,5 @@
 package org.jayhenri.cloud9.repository.inventory;
 
-import org.jayhenri.cloud9.model.inventory.OnlineInventory;
 import org.jayhenri.cloud9.model.inventory.StoreInventory;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

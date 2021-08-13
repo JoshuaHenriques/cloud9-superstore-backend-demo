@@ -5,7 +5,9 @@ import org.jayhenri.cloud9.model.item.Review;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
 
@@ -45,12 +47,12 @@ public class ReviewService {
      * @param item   the item
      * @param review the review
      */
-    public void update(Item item, Review review) {
+    public void updateReview(Item item, Review review) {
 
         item.getReviews().forEach(review1 -> {
             if (review1.getReviewUUID().equals(review.getReviewUUID()))
                 review1.setText(review.getText());
-                review1.setRating(review.getRating());
+            review1.setRating(review.getRating());
         });
         itemService.update(item);
     }
@@ -58,13 +60,13 @@ public class ReviewService {
     /**
      * Delete.
      *
-     * @param item   the item
-     * @param review the review
+     * @param item     the item
+     * @param reviewId the review id
      */
-    public void delete(Item item, Review review) {
+    public void deleteReview(Item item, UUID reviewId) {
         item.getReviews().forEach(review1 -> {
-            if (review1.getReviewUUID().equals(review.getReviewUUID()))
-                item.getReviews().remove(review);
+            if (review1.getReviewUUID().equals(reviewId))
+                item.getReviews().remove(review1);
         });
         itemService.update(item);
     }
@@ -78,5 +80,43 @@ public class ReviewService {
     public Set<Review> findAllReviews(Item item) {
 
         return item.getReviews();
+    }
+
+    /**
+     * Exists by email boolean.
+     *
+     * @param item     the item
+     * @param reviewId the review id
+     * @return the boolean
+     */
+    public boolean existsById(Item item, UUID reviewId) {
+
+        AtomicBoolean exists = new AtomicBoolean(false);
+        item.getReviews().forEach(review -> {
+            if (review.getReviewUUID().equals(reviewId))
+                exists.set(true);
+            else
+                exists.set(false);
+        });
+
+        return exists.get();
+    }
+
+    /**
+     * Gets by id.
+     *
+     * @param item     the item
+     * @param reviewId the review id
+     * @return the by id
+     */
+    public Review getById(Item item, UUID reviewId) {
+
+        AtomicReference<Review> review = new AtomicReference<>(new Review());
+        item.getReviews().forEach(review1 -> {
+            if (review1.getReviewUUID().equals(reviewId))
+                review.set(review1);
+        });
+
+        return review.get();
     }
 }

@@ -1,6 +1,5 @@
 package org.jayhenri.cloud9.service.item;
 
-import org.jayhenri.cloud9.model.inventory.OnlineInventory;
 import org.jayhenri.cloud9.model.item.Item;
 import org.jayhenri.cloud9.repository.item.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -122,27 +121,5 @@ public class ItemService {
     public Item getById(UUID uuid) {
 
         return itemRepository.getById(uuid);
-    }
-
-    /**
-     * Exists by email boolean.
-     *
-     * @param uuid the email
-     * @return the boolean
-     */
-    public boolean existsByReviewId(UUID uuid) {
-
-        return itemRepository.existsByReviewId(uuid);
-    }
-
-    /**
-     * Gets by email.
-     *
-     * @param uuid the email
-     * @return the by email
-     */
-    public Item getByReviewId(UUID uuid) {
-
-        return itemRepository.getByReviewId(uuid);
     }
 }

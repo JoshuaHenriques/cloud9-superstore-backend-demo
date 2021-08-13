@@ -4,7 +4,6 @@ import org.jayhenri.cloud9.exception.alreadyexists.ItemAlreadyExistsException;
 import org.jayhenri.cloud9.exception.invalid.InvalidItemException;
 import org.jayhenri.cloud9.exception.notfound.ItemNotFoundException;
 import org.jayhenri.cloud9.model.item.Item;
-import org.jayhenri.cloud9.model.item.Review;
 import org.jayhenri.cloud9.service.item.ItemService;
 import org.jayhenri.cloud9.service.item.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -159,101 +158,5 @@ public class ItemController {
                 throw new ItemNotFoundException();
         } else
             throw new InvalidItemException();
-    }
-
-    /**
-     * Register response entity.
-     *
-     * @param item the item
-     * @return the response entity
-     * @throws ItemAlreadyExistsException the item already exists exception
-     * @throws InvalidItemException       the invalid item exception
-     */
-    @PostMapping(value = "/add/{itemId}/review", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> addReview(@RequestBody Review review, @PathVariable UUID itemId)
-            throws ItemAlreadyExistsException, InvalidItemException, ItemNotFoundException {
-
-
-
-        if (ObjectUtils.isEmpty(review)) {
-                if (itemService.existsById(itemId)) {
-                    Item item = itemService.getById(itemId);
-                    reviewService.addReview(item, review);
-
-                    HttpHeaders responseHeaders = new HttpHeaders();
-                    responseHeaders.set("ItemRegistrationController", "addItem");
-                    return new ResponseEntity<>("Successfully Created Item", responseHeaders, HttpStatus.CREATED);
-            } else
-                throw new ItemNotFoundException();
-        } else
-            throw new InvalidItemException();
-    }
-
-    /**
-     * Update item.
-     *
-     * @param item   the item
-     * @param itemId the item id
-     * @return the response entity
-     * @throws InvalidItemException       the invalid item exception
-     * @throws ItemNotFoundException      the item not found exception
-     * @throws ItemAlreadyExistsException the item already exists exception
-     */
-    @PutMapping(value = "/update/{itemId}/{reviewId}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> updateItemReview(@RequestBody Review review, @PathVariable UUID itemId, @PathVariable UUID reviewId)
-            throws InvalidItemException, ItemNotFoundException, ItemAlreadyExistsException {
-        if (!ObjectUtils.isEmpty(review)) {
-            if (itemService.existsBy(item.getItemName())) {
-                if (itemService.existsById(itemId)) {
-                    itemService.update(item);
-
-                    HttpHeaders responseHeaders = new HttpHeaders();
-                    responseHeaders.set("ItemController", "updateItem");
-                    return new ResponseEntity<>("Successfully Updated Item", responseHeaders, HttpStatus.OK);
-                } else
-                    throw new ItemAlreadyExistsException();
-            } else
-                throw new ItemNotFoundException();
-        } else
-            throw new InvalidItemException();
-    }
-
-    /**
-     * Delete item.
-     *
-     * @param itemId the item id
-     * @return the response entity
-     * @throws ItemNotFoundException the item not found exception
-     */
-    @DeleteMapping(value = "/delete/{itemId}")
-    public ResponseEntity<String> deleteItemReview(@PathVariable String itemId)
-            throws ItemNotFoundException {
-        if (itemService.existsByItemName(itemId)) {
-            Item _item = itemService.getByItemName(itemId);
-            itemService.delete(_item);
-
-            HttpHeaders responseHeaders = new HttpHeaders();
-            responseHeaders.set("ItemController", "deleteItem");
-            return new ResponseEntity<>("Successfully Deleted Item", responseHeaders, HttpStatus.OK);
-        } else
-            throw new ItemNotFoundException();
-    }
-
-    /**
-     * List items response entity.
-     *
-     * @param pageNo   the page no
-     * @param pageSize the page size
-     * @return the response entity
-     */
-    @GetMapping(value = "/list/items", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Item>> listItemReviews(@RequestParam(defaultValue = "0") Integer pageNo,
-                                                @RequestParam(defaultValue = "50") Integer pageSize) {
-        // @RequestParam(defaultValue = "email") String sortBy
-        List<Item> list = itemService.findAllItems(pageNo, pageSize); // sortBy
-
-        HttpHeaders responseHeaders = new HttpHeaders();
-        responseHeaders.set("ItemController", "listItems");
-        return new ResponseEntity<>(list, responseHeaders, HttpStatus.OK);
     }
 }

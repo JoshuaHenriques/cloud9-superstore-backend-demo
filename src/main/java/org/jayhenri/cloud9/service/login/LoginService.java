@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 
 /**
@@ -92,22 +93,20 @@ public class LoginService {
     /**
      * Exists by email boolean.
      *
-     * @param email the email
      * @return the boolean
      */
-    public boolean existsByEmail(String email) {
+    public boolean existsById(UUID uuid) {
 
-        return loginRepository.existsByEmail(email);
+        return loginRepository.existsById(uuid);
     }
 
     /**
-     * Gets by email.
+     * Gets by id.
      *
-     * @param email the email
-     * @return the by email
+     * @return the by id
      */
-    public Login getByEmail(String email) {
+    public Login getById(UUID uuid) {
 
-        return loginRepository.getByEmail(email);
+        return loginRepository.getById(uuid);
     }
 }

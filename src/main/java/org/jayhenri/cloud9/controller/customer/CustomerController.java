@@ -24,7 +24,7 @@ import java.util.UUID;
  */
 @RestController // Indicates that the data returned by each method will be written straight into
 // the response body instead of rendering a template
-@RequestMapping("api/customers")
+@RequestMapping("api/customer")
 public class CustomerController {
 
     private final CustomerService customerService;

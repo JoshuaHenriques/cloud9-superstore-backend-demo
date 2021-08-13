@@ -1,13 +1,11 @@
 package org.jayhenri.cloud9.service.store;
 
-import org.jayhenri.cloud9.model.item.Review;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+import org.jayhenri.cloud9.model.store.Store;
+import org.jayhenri.cloud9.repository.store.StoreRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 
 /**
@@ -16,83 +14,70 @@ import java.util.List;
 @Service
 public class StoreService {
 
-
-    /**
-     * Exists by phone number boolean.
-     *
-     * @param phoneNumber the phone number
-     * @return the boolean
-     */
-    public boolean existsByPhoneNumber(String phoneNumber) {
-
-        return reviewRepository.existsByPhoneNumber(phoneNumber);
+    private final StoreRepository storeRepository;
+    
+    public StoreService(StoreRepository storeRepository) {
+        this.storeRepository = storeRepository;
     }
-
+    
     /**
      * Add.
      *
-     * @param customer the customer
+     * @param store the store
      */
-    public void add(Review customer) {
+    public void add(Store store) {
 
-        reviewRepository.save(customer);
+        storeRepository.save(store);
     }
 
     /**
      * Delete.
      *
-     * @param customer the customer
+     * @param store the store
      */
-    public void delete(Review customer) {
+    public void delete(Store store) {
 
-        reviewRepository.delete(customer);
+        storeRepository.delete(store);
     }
 
     /**
      * Update.
      *
-     * @param customer the customer
+     * @param store the store
      */
-    public void update(Review customer) {
+    public void update(Store store) {
 
-        reviewRepository.save(customer);
+        storeRepository.save(store);
     }
 
     /**
-     * Find all customers list.
+     * Find all stores list.
      *
-     * @param pageNo   the page no
-     * @param pageSize the page size
      * @return the list
      */
-    public List<Review> findAllReviews(Integer pageNo, Integer pageSize) {
-        // String sortBy
-        Pageable paging = PageRequest.of(pageNo, pageSize); // Sort.by(sortBy).ascending()
-        Page<Review> pagedResult = reviewRepository.findAll(paging);
-
-        if (pagedResult.hasContent()) return pagedResult.getContent();
-        else return new ArrayList<>();
+    public List<Store> findAllStores() {
+        return storeRepository.findAll();
     }
 
     /**
      * Exists by email boolean.
      *
-     * @param email the email
+     * @param uuid the email
      * @return the boolean
      */
-    public boolean existsByEmail(String email) {
+    public boolean existsById(UUID uuid) {
 
-        return reviewRepository.existsByEmail(email);
+        return storeRepository.existsById(uuid);
     }
 
     /**
      * Gets by email.
      *
-     * @param email the email
+     * @param uuid the email
      * @return the by email
      */
-    public Review getByEmail(String email) {
+    public Store getById(UUID uuid) {
 
-        return reviewRepository.getByEmail(email);
+        return storeRepository.getById(uuid);
     }
 }

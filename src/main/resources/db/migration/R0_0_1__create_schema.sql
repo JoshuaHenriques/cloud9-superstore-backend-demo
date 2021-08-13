@@ -134,6 +134,7 @@ create table if not exists employee (
 	created_at      timestamp       default current_timestamp,
 	updated_at      timestamp       default current_timestamp,
 	employee_id     uuid            primary key default uuid_generate_v4(),
+	address_id		uuid			unique references address(address_id),
 	email           varchar(50)     not null unique,
 	login_id		uuid			unique references login(login_id),
 	store_id		uuid			references store(store_id),
