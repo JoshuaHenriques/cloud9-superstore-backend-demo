@@ -26,7 +26,8 @@ public class Employee {
     @Column(name = "email", unique = true, nullable = false)
     private String email;
 
-    @Column(name = "address_id", unique = true, nullable = false)
+    @OneToOne
+    @JoinColumn(name = "address_id", unique = true, nullable = false)
     private Address address;
 
     @OneToOne

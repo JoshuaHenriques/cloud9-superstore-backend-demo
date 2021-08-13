@@ -4,6 +4,7 @@ import org.jayhenri.cloud9.model.customer.Customer;
 import org.jayhenri.cloud9.model.customer.Orders;
 import org.jayhenri.cloud9.repository.customer.OrdersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
 import java.util.UUID;
@@ -11,6 +12,7 @@ import java.util.UUID;
 /**
  * The type Orders service.
  */
+@Service
 public class OrdersService {
 
     private final CustomerService customerService;

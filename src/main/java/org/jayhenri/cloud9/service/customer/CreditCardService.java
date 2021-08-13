@@ -3,6 +3,7 @@ package org.jayhenri.cloud9.service.customer;
 import org.jayhenri.cloud9.model.customer.CreditCard;
 import org.jayhenri.cloud9.model.customer.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -13,6 +14,7 @@ import java.util.concurrent.atomic.AtomicReference;
 /**
  * The type Credit card service.
  */
+@Service
 public class CreditCardService {
 
     private final CustomerService customerService;
