@@ -1,6 +1,10 @@
-org/jayhenri/cloud9/customer/AddressServiceTest.java
- org.jayhenri.cloud9.customer.AddressServiceTest
-org/jayhenri/cloud9/customer/OrdersServiceTest.java
- org.jayhenri.cloud9.customer.OrdersServiceTest
-org/jayhenri/cloud9/customer/CartServiceTest.java
- org.jayhenri.cloud9.customer.CartServiceTest
+org/jayhenri/cloud9/customer/service/CreditCardServiceTest.java
+ org.jayhenri.cloud9.customer.service.CreditCardServiceTest
+org/jayhenri/cloud9/customer/service/AddressServiceTest.java
+ org.jayhenri.cloud9.customer.service.AddressServiceTest
+org/jayhenri/cloud9/customer/service/CartServiceTest.java
+ org.jayhenri.cloud9.customer.service.CartServiceTest
+org/jayhenri/cloud9/customer/service/OrdersServiceTest.java
+ org.jayhenri.cloud9.customer.service.OrdersServiceTest
+org/jayhenri/cloud9/customer/service/CustomerServiceTest.java
+ org.jayhenri.cloud9.customer.service.CustomerServiceTest
