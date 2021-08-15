@@ -23,7 +23,7 @@ public class Item implements Serializable {
 
     @Id
     @Column(name = "item_id", nullable = false)
-    private UUID itemUUID;
+    private UUID itemUUID = UUID.randomUUID();
 
     @Column(name = "item_name", nullable = false, length = 25)
     private String itemName;

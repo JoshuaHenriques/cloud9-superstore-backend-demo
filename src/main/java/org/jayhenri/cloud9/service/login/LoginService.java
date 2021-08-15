@@ -93,6 +93,7 @@ public class LoginService {
     /**
      * Exists by email boolean.
      *
+     * @param uuid the uuid
      * @return the boolean
      */
     public boolean existsById(UUID uuid) {
@@ -103,6 +104,7 @@ public class LoginService {
     /**
      * Gets by id.
      *
+     * @param uuid the uuid
      * @return the by id
      */
     public Login getById(UUID uuid) {

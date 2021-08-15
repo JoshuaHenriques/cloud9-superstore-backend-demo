@@ -60,7 +60,7 @@ public class StoreController {
         else if (!addressService.isValidPostalCode(store.getAddress().getPostalCode()))
             throw new InvalidPostalCodeException();
 
-        storeService.add(store);
+        storeService.addStore(store);
 
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.set("StoreController", "addStore");
@@ -70,7 +70,8 @@ public class StoreController {
     /**
      * Update store.
      *
-     * @param store the store
+     * @param store   the store
+     * @param storeId the store id
      * @return the response entity
      * @throws InvalidStoreException  the invalid store exception
      * @throws StoreNotFoundException the store not found exception
@@ -80,7 +81,7 @@ public class StoreController {
             throws InvalidStoreException, StoreNotFoundException {
         if (!ObjectUtils.isEmpty(store)) {
             if (storeService.existsById(storeId)) {
-                storeService.update(storeService.getById(storeId));
+                storeService.updateStore(storeService.getById(storeId));
 
                 HttpHeaders responseHeaders = new HttpHeaders();
                 responseHeaders.set("StoreController", "updateStore");
@@ -102,7 +103,7 @@ public class StoreController {
     public ResponseEntity<String> deleteStore(@PathVariable UUID storeId)
             throws StoreNotFoundException {
         if (storeService.existsById(storeId)) {
-            storeService.delete(storeService.getById(storeId));
+            storeService.deleteStore(storeService.getById(storeId));
 
             HttpHeaders responseHeaders = new HttpHeaders();
             responseHeaders.set("StoreController", "deleteStore");

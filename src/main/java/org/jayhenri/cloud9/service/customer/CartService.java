@@ -3,6 +3,7 @@ package org.jayhenri.cloud9.service.customer;
 import org.jayhenri.cloud9.model.customer.Cart;
 import org.jayhenri.cloud9.model.customer.Customer;
 import org.jayhenri.cloud9.model.item.Item;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -15,6 +16,18 @@ import java.util.UUID;
 @Service
 public class CartService {
 
+    private CustomerService customerService;
+
+    /**
+     * Instantiates a new Cart service.
+     *
+     * @param customerService the customer service
+     */
+    @Autowired
+    public CartService(CustomerService customerService) {
+        this.customerService = customerService;
+    }
+
     /**
      * Add to cart.
      *
@@ -22,10 +35,10 @@ public class CartService {
      * @param item     the item
      * @return the customer
      */
-    public Customer addToCart(Customer customer, Item item) {
+    public void addToCart(Customer customer, Item item) {
 
         customer.getCart().getItems().add(item);
-        return customer;
+        customerService.update(customer);
     }
 
     /**
@@ -35,7 +48,7 @@ public class CartService {
      * @param itemUUID the item uuid
      * @return customer customer
      */
-    public Customer removeFromCart(Customer customer, UUID itemUUID) {
+    public void removeFromCart(Customer customer, UUID itemUUID) {
 
         Set<Item> removeMe = new HashSet<>();
         customer.getCart().getItems().forEach(item -> {
@@ -44,7 +57,7 @@ public class CartService {
             }
         });
         customer.getCart().getItems().removeAll(removeMe);
-        return customer;
+        customerService.update(customer);
     }
 
     /**
@@ -53,12 +66,12 @@ public class CartService {
      * @param customer the customer
      * @return customer customer
      */
-    public Customer emptyCart(Customer customer) {
+    public void emptyCart(Customer customer) {
 
-        customer.getCart().setItems(new HashSet<>());
+        customer.getCart().getItems().removeAll(customer.getCart().getItems());
         customer.getCart().setTotal(0.00);
 
-        return customer;
+        customerService.update(customer);
     }
 
     /**
@@ -71,6 +84,4 @@ public class CartService {
 
         return customer.getCart();
     }
-
-
 }

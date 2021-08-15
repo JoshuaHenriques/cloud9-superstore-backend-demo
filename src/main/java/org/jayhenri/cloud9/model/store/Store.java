@@ -25,7 +25,7 @@ public class Store {
     @Column(name = "store_id", nullable = false)
     private UUID storeUUID = UUID.randomUUID();
 
-    @Column(name = "store_name", nullable = false, unique = true)
+    @Column(name = "store_name", nullable = false)
     private String storeName;
 
     @OneToOne

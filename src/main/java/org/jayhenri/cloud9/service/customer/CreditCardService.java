@@ -78,6 +78,7 @@ public class CreditCardService {
      * @return the boolean
      */
     public boolean existsById(Customer customer, UUID cardId) {
+
         AtomicBoolean exists = new AtomicBoolean(false);
         customer.getWallet().forEach(card -> {
             if (card.getCreditCardUUID().equals(cardId)) {
@@ -95,6 +96,7 @@ public class CreditCardService {
      * @return the by email
      */
     public CreditCard getById(Customer customer, UUID cardId) {
+
         AtomicReference<CreditCard> creditCard = new AtomicReference<>(new CreditCard());
         customer.getWallet().forEach(card -> {
             if (card.getCreditCardUUID().equals(cardId)) {
@@ -111,6 +113,7 @@ public class CreditCardService {
      * @return the boolean
      */
     public boolean existsByCCN(String ccn) {
+
         return customerService.existsByCCN(ccn);
     }
 }

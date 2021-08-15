@@ -26,7 +26,7 @@ public class Orders implements Serializable {
     @Column(name = "orders_id", nullable = false)
     private UUID ordersUUID = UUID.randomUUID();
 
-    @Column(name = "order_status", nullable = false, length = 10)
+    @Column(name = "order_status", nullable = false, length = 50)
     private String orderStatus;
 
     @OneToMany(cascade = CascadeType.ALL)

@@ -55,7 +55,7 @@ create table if not exists orders (
     updated_at      timestamp       default current_timestamp,
 	orders_id     	uuid			primary key default uuid_generate_v4(),
 	order_items_id	uuid			not null references order_items(order_items_id),
-	order_status	varchar(10)		not null,
+	order_status	varchar(50)		not null,
 	total			double precision not null
 );
 

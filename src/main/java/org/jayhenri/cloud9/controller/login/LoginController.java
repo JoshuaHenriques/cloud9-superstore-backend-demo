@@ -3,8 +3,6 @@ package org.jayhenri.cloud9.controller.login;
 import org.jayhenri.cloud9.exception.alreadyexists.LoginAlreadyExistsException;
 import org.jayhenri.cloud9.exception.invalid.InvalidLoginException;
 import org.jayhenri.cloud9.exception.notfound.LoginNotFoundException;
-import org.jayhenri.cloud9.exception.notfound.ItemNotFoundException;
-import org.jayhenri.cloud9.model.login.Login;
 import org.jayhenri.cloud9.model.login.Login;
 import org.jayhenri.cloud9.service.login.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
-import javax.naming.InvalidNameException;
 import java.util.List;
 import java.util.UUID;
 
@@ -32,7 +29,7 @@ public class LoginController {
     /**
      * Instantiates a new Login controller.
      *
-     * @param loginService  the login service
+     * @param loginService the login service
      */
     @Autowired
     public LoginController(LoginService loginService) {
@@ -44,6 +41,7 @@ public class LoginController {
      *
      * @param login the login
      * @return the response entity
+     * @throws LoginAlreadyExistsException the login already exists exception
      * @throws InvalidLoginException       the invalid login exception
      */
     @PostMapping(value = "/login", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -66,7 +64,8 @@ public class LoginController {
     /**
      * Update login.
      *
-     * @param login the login
+     * @param login   the login
+     * @param loginId the login id
      * @return the response entity
      * @throws InvalidLoginException  the invalid login exception
      * @throws LoginNotFoundException the login not found exception
@@ -117,7 +116,7 @@ public class LoginController {
      */
     @GetMapping(value = "/list/logins", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Login>> listLogins(@RequestParam(defaultValue = "0") Integer pageNo,
-                                                        @RequestParam(defaultValue = "50") Integer pageSize) {
+                                                  @RequestParam(defaultValue = "50") Integer pageSize) {
         // @RequestParam(defaultValue = "email") String sortBy
         List<Login> list = loginService.findAllLogins(pageNo, pageSize); // sortBy
 

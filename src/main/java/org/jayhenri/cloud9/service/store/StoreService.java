@@ -15,17 +15,23 @@ import java.util.UUID;
 public class StoreService {
 
     private final StoreRepository storeRepository;
-    
+
+    /**
+     * Instantiates a new Store service.
+     *
+     * @param storeRepository the store repository
+     */
     public StoreService(StoreRepository storeRepository) {
+
         this.storeRepository = storeRepository;
     }
-    
+
     /**
      * Add.
      *
      * @param store the store
      */
-    public void add(Store store) {
+    public void addStore(Store store) {
 
         storeRepository.save(store);
     }
@@ -35,7 +41,7 @@ public class StoreService {
      *
      * @param store the store
      */
-    public void delete(Store store) {
+    public void deleteStore(Store store) {
 
         storeRepository.delete(store);
     }
@@ -45,7 +51,7 @@ public class StoreService {
      *
      * @param store the store
      */
-    public void update(Store store) {
+    public void updateStore(Store store) {
 
         storeRepository.save(store);
     }
@@ -56,6 +62,7 @@ public class StoreService {
      * @return the list
      */
     public List<Store> findAllStores() {
+
         return storeRepository.findAll();
     }
 
