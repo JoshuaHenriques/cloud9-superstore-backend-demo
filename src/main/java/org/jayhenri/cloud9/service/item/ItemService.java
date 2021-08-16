@@ -66,17 +66,11 @@ public class ItemService {
     /**
      * Find all customers list.
      *
-     * @param pageNo   the page no
-     * @param pageSize the page size
      * @return the list
      */
-    public List<Item> findAllItems(Integer pageNo, Integer pageSize) {
-        // String sortBy
-        Pageable paging = PageRequest.of(pageNo, pageSize); // Sort.by(sortBy).ascending()
-        Page<Item> pagedResult = itemRepository.findAll(paging);
+    public List<Item> findAllItems() {
 
-        if (pagedResult.hasContent()) return pagedResult.getContent();
-        else return new ArrayList<>();
+        return itemRepository.findAll();
     }
 
     /**

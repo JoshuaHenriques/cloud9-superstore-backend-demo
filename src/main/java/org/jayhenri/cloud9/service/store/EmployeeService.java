@@ -101,4 +101,26 @@ public class EmployeeService {
 
         return employeeRepository.getById(uuid);
     }
+
+    /**
+     * Exists by email boolean.
+     *
+     * @param email the email
+     * @return the boolean
+     */
+    public boolean existsByEmail(String email) {
+
+        return employeeRepository.existsByEmail(email);
+    }
+
+    /**
+     * Gets by email.
+     *
+     * @param email the email
+     * @return the by email
+     */
+    public Employee getByEmail(String email) {
+
+        return employeeRepository.getByEmail(email);
+    }
 }

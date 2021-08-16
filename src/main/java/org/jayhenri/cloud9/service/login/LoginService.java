@@ -24,13 +24,12 @@ public class LoginService {
     /**
      * Instantiates a new Login service.
      *
-     * @param loginRepository the customer repository
+     * @param loginRepository the login repository
      */
     @Autowired
     public LoginService(LoginRepository loginRepository) {
 
         this.loginRepository = loginRepository;
-        // this.orderDBService = orderDBService;
     }
 
     /**
@@ -47,47 +46,41 @@ public class LoginService {
     /**
      * Add.
      *
-     * @param customer the customer
+     * @param login the login
      */
-    public void add(Login customer) {
+    public void add(Login login) {
 
-        loginRepository.save(customer);
+        loginRepository.save(login);
     }
 
     /**
      * Delete.
      *
-     * @param customer the customer
+     * @param login the login
      */
-    public void delete(Login customer) {
+    public void delete(Login login) {
 
-        loginRepository.delete(customer);
+        loginRepository.delete(login);
     }
 
     /**
      * Update.
      *
-     * @param customer the customer
+     * @param login the login
      */
-    public void update(Login customer) {
+    public void update(Login login) {
 
-        loginRepository.save(customer);
+        loginRepository.save(login);
     }
 
     /**
-     * Find all customers list.
+     * Find all logins list.
      *
-     * @param pageNo   the page no
-     * @param pageSize the page size
      * @return the list
      */
-    public List<Login> findAllLogins(Integer pageNo, Integer pageSize) {
-        // String sortBy
-        Pageable paging = PageRequest.of(pageNo, pageSize); // Sort.by(sortBy).ascending()
-        Page<Login> pagedResult = loginRepository.findAll(paging);
+    public List<Login> findAllLogins() {
 
-        if (pagedResult.hasContent()) return pagedResult.getContent();
-        else return new ArrayList<>();
+        return loginRepository.findAll();
     }
 
     /**

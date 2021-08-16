@@ -29,13 +29,13 @@ public class Login implements Serializable {
     private UUID loginUUID = UUID.randomUUID();
 
     @Column(name = "active", nullable = false)
-    private boolean active = true;
+    private boolean active;
 
     @Column(name = "moderator", nullable = false)
-    private boolean moderator = false;
+    private boolean moderator;
 
     @Column(name = "admin", nullable = false)
-    private boolean admin = false;
+    private boolean admin;
 
     @Column(name = "email", nullable = false)
     private String email;

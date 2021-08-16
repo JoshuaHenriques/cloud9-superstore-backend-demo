@@ -128,7 +128,7 @@ public class ItemController {
     public ResponseEntity<List<Item>> listItems(@RequestParam(defaultValue = "0") Integer pageNo,
                                                 @RequestParam(defaultValue = "50") Integer pageSize) {
         // @RequestParam(defaultValue = "email") String sortBy
-        List<Item> list = itemService.findAllItems(pageNo, pageSize); // sortBy
+        List<Item> list = itemService.findAllItems(); // sortBy
 
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.set("ItemController", "listItems");

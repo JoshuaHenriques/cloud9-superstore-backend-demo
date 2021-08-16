@@ -110,15 +110,12 @@ public class LoginController {
     /**
      * List logins response entity.
      *
-     * @param pageNo   the page no
-     * @param pageSize the page size
      * @return the response entity
      */
     @GetMapping(value = "/list/logins", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Login>> listLogins(@RequestParam(defaultValue = "0") Integer pageNo,
-                                                  @RequestParam(defaultValue = "50") Integer pageSize) {
+    public ResponseEntity<List<Login>> listLogins() {
         // @RequestParam(defaultValue = "email") String sortBy
-        List<Login> list = loginService.findAllLogins(pageNo, pageSize); // sortBy
+        List<Login> list = loginService.findAllLogins(); // sortBy
 
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.set("LoginController", "listLogins");

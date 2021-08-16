@@ -20,7 +20,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, UUID> {
      * @param phoneNumber the phone number
      * @return the boolean
      */
-    @Query("select case when count(c)> 0 then true else false end from Customer c where lower(c.phoneNumber) like lower(:phoneNumber)")
+    @Query("select case when count(c)> 0 then true else false end from Employee c where lower(c.phoneNumber) like lower(:phoneNumber)")
     boolean existsByPhoneNumber(@Param("phoneNumber") String phoneNumber);
 
     /**
@@ -29,7 +29,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, UUID> {
      * @param email the email
      * @return the boolean
      */
-    @Query("select case when count(c)> 0 then true else false end from Customer c where lower(c.email) like lower(:email)")
+    @Query("select case when count(c)> 0 then true else false end from Employee c where lower(c.email) like lower(:email)")
     boolean existsByEmail(@Param("email") String email);
 
     /**
@@ -38,6 +38,6 @@ public interface EmployeeRepository extends JpaRepository<Employee, UUID> {
      * @param email the email
      * @return the by email
      */
-    @Query(value = "SELECT * FROM customers WHERE customers.email=:email", nativeQuery = true)
+    @Query(value = "SELECT * FROM employee WHERE employee.email=:email", nativeQuery = true)
     Employee getByEmail(@Param("email") String email);
 }

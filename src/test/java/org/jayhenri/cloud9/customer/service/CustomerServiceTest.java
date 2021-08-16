@@ -91,11 +91,11 @@ class CustomerServiceTest {
      */
     @Test
     void testAdd() {
-        customerService.add(this.customer);
+        customerService.add(customer);
 
         then(customerRepository).should().save(captorCustomer.capture());
 
-        assertThat(captorCustomer.getValue()).isEqualTo(this.customer);
+        assertThat(captorCustomer.getValue()).isEqualTo(customer);
     }
 
     /**
@@ -133,11 +133,11 @@ class CustomerServiceTest {
      */
     @Test
     void add() {
-        customerService.add(this.customer);
+        customerService.add(customer);
 
         then(customerRepository).should().save(captorCustomer.capture());
 
-        assertThat(captorCustomer.getValue()).isEqualTo(this.customer);
+        assertThat(captorCustomer.getValue()).isEqualTo(customer);
     }
 
     /**
@@ -145,11 +145,11 @@ class CustomerServiceTest {
      */
     @Test
     void delete() {
-        customerService.delete(this.customer);
+        customerService.delete(customer);
 
         then(customerRepository).should().delete(captorCustomer.capture());
 
-        assertThat(captorCustomer.getValue()).isEqualTo(this.customer);
+        assertThat(captorCustomer.getValue()).isEqualTo(customer);
     }
 
     /**
@@ -157,11 +157,11 @@ class CustomerServiceTest {
      */
     @Test
     void update() {
-        customerService.update(this.customer);
+        customerService.update(customer);
 
         then(customerRepository).should().save(captorCustomer.capture());
 
-        assertThat(captorCustomer.getValue()).isEqualTo(this.customer);
+        assertThat(captorCustomer.getValue()).isEqualTo(customer);
     }
 
     /**
@@ -218,5 +218,44 @@ class CustomerServiceTest {
 
         assertThat(captorString.getValue()).isEqualTo(email);
         assertThat(customer).isEqualTo(_customer);
+    }
+
+    @Test
+    void existsById() {
+
+        given(customerRepository.existsById(uuid)).willReturn(true);
+
+        boolean exists = customerService.existsById(uuid);
+
+        then(customerRepository).should().existsById(captorUUID.capture());
+
+        assertThat(exists).isTrue();
+        assertThat(captorUUID.getValue()).isEqualTo(uuid);
+    }
+
+    @Test
+    void doesNotExistsById() {
+
+        given(customerRepository.existsById(uuid)).willReturn(false);
+
+        boolean exists = customerService.existsById(uuid);
+
+        then(customerRepository).should().existsById(captorUUID.capture());
+
+        assertThat(exists).isFalse();
+        assertThat(captorUUID.getValue()).isEqualTo(uuid);
+    }
+
+    @Test
+    void getById() {
+
+        given(customerRepository.getById(uuid)).willReturn(customer);
+
+        Customer _customer = customerService.getById(uuid);
+
+        then(customerRepository).should().getById(captorUUID.capture());
+
+        assertThat(_customer).isEqualTo(customer);
+        assertThat(captorUUID.getValue()).isEqualTo(uuid);
     }
 }
