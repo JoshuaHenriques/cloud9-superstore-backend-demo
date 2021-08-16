@@ -104,8 +104,8 @@ org/jayhenri/cloud9/service/customer/CreditCardService.java
  org.jayhenri.cloud9.service.customer.CreditCardService
 org/jayhenri/cloud9/service/customer/OrdersService.java
  org.jayhenri.cloud9.service.customer.OrdersService
-org/jayhenri/cloud9/controller/customer/CustomerController.java
- org.jayhenri.cloud9.controller.customer.CustomerController
+org/jayhenri/cloud9/controller/store/EmployeeController.java
+ org.jayhenri.cloud9.controller.store.EmployeeController
 org/jayhenri/cloud9/repository/customer/CustomerRepository.java
  org.jayhenri.cloud9.repository.customer.CustomerRepository
 org/jayhenri/cloud9/service/customer/CartService.java
@@ -134,5 +134,5 @@ org/jayhenri/cloud9/repository/store/EmployeeRepository.java
  org.jayhenri.cloud9.repository.store.EmployeeRepository
 org/jayhenri/cloud9/service/store/EmployeeService.java
  org.jayhenri.cloud9.service.store.EmployeeService
-org/jayhenri/cloud9/controller/store/EmployeeController.java
- org.jayhenri.cloud9.controller.store.EmployeeController
+org/jayhenri/cloud9/controller/customer/CustomerController.java
+ org.jayhenri.cloud9.controller.customer.CustomerController

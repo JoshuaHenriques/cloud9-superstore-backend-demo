@@ -52,14 +52,15 @@ public class CustomerController {
      * @throws InvalidCustomerException       the invalid customer exception
      */
     @PostMapping(value = "/customer", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> register(@RequestBody Customer customer)
+    public ResponseEntity<String> addCustomer(@RequestBody Customer customer)
             throws CustomerAlreadyExistsException, InvalidPostalCodeException, InvalidCustomerException {
 
         if (ObjectUtils.isEmpty(customer))
             throw new InvalidCustomerException();
 
         else if (customerService.existsByPhoneNumber(customer.getPhoneNumber())
-                || customerService.existsByEmail(customer.getEmail()))
+                || customerService.existsByEmail(customer.getEmail())
+                || customerService.existsById(customer.getCustomerUUID()))
             throw new CustomerAlreadyExistsException();
 
         else if (!addressService.isValidPostalCode(customer.getAddress().getPostalCode()))
