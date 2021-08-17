@@ -80,6 +80,7 @@ public interface InventoryServiceI<T> {
      *
      * @param t        the t
      * @param quantity the quantity
+     * @return the boolean
      */
     boolean canPurchase(T t, int quantity);
 
@@ -88,6 +89,7 @@ public interface InventoryServiceI<T> {
      *
      * @param t        the t
      * @param quantity the quantity
+     * @throws OutOfStockException the out of stock exception
      */
     void purchase(T t, int quantity) throws OutOfStockException;
 }

@@ -56,7 +56,7 @@ public class CartController {
      * @throws ItemNotFoundException     the item not found exception
      */
     @PutMapping(value = "/{customerId}/cart/add/{itemId}")
-    public ResponseEntity<String> addToCart(@PathVariable UUID customerId, @PathVariable UUID itemId)
+    public ResponseEntity<String> add(@PathVariable UUID customerId, @PathVariable UUID itemId)
             throws CustomerNotFoundException, ItemNotFoundException {
         if (customerService.existsById(customerId)) {
             if (onlineInventoryService.existsById(itemId)) {
@@ -64,7 +64,7 @@ public class CartController {
                 cartService.add(customerService.getById(customerId), onlineInventoryService.getById(itemId).getItem());
 
                 HttpHeaders responseHeaders = new HttpHeaders();
-                responseHeaders.set("CustomerController", "addToCart");
+                responseHeaders.set("CustomerController", "add");
                 return new ResponseEntity<>("Successfully Added to Cart", responseHeaders, HttpStatus.CREATED);
             } else
                 throw new ItemNotFoundException();
@@ -82,14 +82,14 @@ public class CartController {
      * @throws ItemNotFoundException     the item not found exception
      */
     @DeleteMapping(value = "/{customerId}/cart/remove/{itemID}")
-    public ResponseEntity<String> removeFromCart(@PathVariable UUID itemId, @PathVariable UUID customerId)
+    public ResponseEntity<String> remove(@PathVariable UUID itemId, @PathVariable UUID customerId)
             throws CustomerNotFoundException, ItemNotFoundException {
         if (customerService.existsById(customerId)) {
             if (onlineInventoryService.existsById(itemId)) {
                 cartService.remove(customerService.getById(customerId), itemId);
 
                 HttpHeaders responseHeaders = new HttpHeaders();
-                responseHeaders.set("CustomerController", "removeFromCart");
+                responseHeaders.set("CustomerController", "remove");
                 return new ResponseEntity<>("Successfully Removed from Cart", responseHeaders, HttpStatus.OK);
             } else
                 throw new ItemNotFoundException();
@@ -105,12 +105,12 @@ public class CartController {
      * @throws CustomerNotFoundException the customer not found exception
      */
     @PutMapping(value = "/{customerId}/cart/empty")
-    public ResponseEntity<String> emptyCart(@PathVariable UUID customerId) throws CustomerNotFoundException {
+    public ResponseEntity<String> empty(@PathVariable UUID customerId) throws CustomerNotFoundException {
         if (customerService.existsById(customerId)) {
             cartService.empty(customerService.getById(customerId));
 
             HttpHeaders responseHeaders = new HttpHeaders();
-            responseHeaders.set("CustomerController", "emptyCart");
+            responseHeaders.set("CustomerController", "empty");
             return new ResponseEntity<>("Successfully Emptied Cart", responseHeaders, HttpStatus.OK);
         } else
             throw new CustomerNotFoundException();
@@ -124,12 +124,12 @@ public class CartController {
      * @throws CustomerNotFoundException the customer not found exception
      */
     @GetMapping(value = "/{customerId}/cart/get", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Cart> getCart(@PathVariable UUID customerId) throws CustomerNotFoundException {
+    public ResponseEntity<Cart> get(@PathVariable UUID customerId) throws CustomerNotFoundException {
         if (customerService.existsById(customerId)) {
             Cart _cart = cartService.get(customerService.getById(customerId));
 
             HttpHeaders responseHeaders = new HttpHeaders();
-            responseHeaders.set("CustomerController", "getCart");
+            responseHeaders.set("CustomerController", "get");
             return new ResponseEntity<>(_cart, responseHeaders, HttpStatus.OK);
         } else
             throw new CustomerNotFoundException();

@@ -5,6 +5,7 @@ import org.jayhenri.cloud9.exception.alreadyexists.CustomerAlreadyExistsExceptio
 import org.jayhenri.cloud9.exception.invalid.InvalidCustomerException;
 import org.jayhenri.cloud9.exception.invalid.InvalidPostalCodeException;
 import org.jayhenri.cloud9.exception.notfound.CustomerNotFoundException;
+import org.jayhenri.cloud9.interfaces.service.customer.AddressServiceI;
 import org.jayhenri.cloud9.model.customer.*;
 import org.jayhenri.cloud9.model.login.Login;
 import org.jayhenri.cloud9.service.customer.AddressService;
@@ -54,7 +55,7 @@ class CustomerControllerUniTest {
     private UUID uuid;
 
     @Mock
-    private AddressService addressService;
+    private AddressServiceI addressService;
 
     /**
      * Sets up.
