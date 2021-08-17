@@ -60,7 +60,7 @@ public class ReviewController {
         if (ObjectUtils.isEmpty(review)) {
             if (itemService.existsById(itemId)) {
                 Item item = itemService.getById(itemId);
-                reviewService.addReview(item, review);
+                reviewService.add(item, review);
 
                 HttpHeaders responseHeaders = new HttpHeaders();
                 responseHeaders.set("ReviewController", "addReview");
@@ -90,7 +90,7 @@ public class ReviewController {
                 if (reviewService.existsById(itemService.getById(itemId), reviewId)) {
 
                     review.setReviewUUID(reviewId);
-                    reviewService.updateReview(itemService.getById(itemId), review);
+                    reviewService.update(itemService.getById(itemId), review);
 
                     HttpHeaders responseHeaders = new HttpHeaders();
                     responseHeaders.set("ReviewController", "updateReview");
@@ -119,7 +119,7 @@ public class ReviewController {
         if (itemService.existsById(itemId)) {
             if (reviewService.existsById(itemService.getById(itemId), reviewId)) {
 
-                reviewService.deleteReview(itemService.getById(itemId), reviewId);
+                reviewService.remove(itemService.getById(itemId), reviewId);
 
                 HttpHeaders responseHeaders = new HttpHeaders();
                 responseHeaders.set("ReviewController", "deleteItemReview");
@@ -138,7 +138,7 @@ public class ReviewController {
      */
     @GetMapping(value = "/list/items/{itemId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Set<Review>> listReviews(@PathVariable UUID itemId) {
-        Set<Review> list = reviewService.findAllReviews(itemService.getById(itemId));
+        Set<Review> list = reviewService.findAll(itemService.getById(itemId));
 
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.set("ReviewController", "listItemReview");

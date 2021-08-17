@@ -1,5 +1,7 @@
 package org.jayhenri.cloud9.service.customer;
 
+import org.jayhenri.cloud9.interfaces.customer.CustomerServiceI;
+import org.jayhenri.cloud9.interfaces.customer.OrderServiceI;
 import org.jayhenri.cloud9.model.customer.Customer;
 import org.jayhenri.cloud9.model.customer.Orders;
 import org.jayhenri.cloud9.repository.customer.OrdersRepository;
@@ -13,9 +15,9 @@ import java.util.UUID;
  * The type Orders service.
  */
 @Service
-public class OrdersService {
+public class OrdersService implements OrderServiceI<Customer, Orders, UUID> {
 
-    private final CustomerService customerService;
+    private final CustomerServiceI<Customer, UUID> customerService;
     private final OrdersRepository ordersRepository;
 
     /**
@@ -25,7 +27,7 @@ public class OrdersService {
      * @param customerService  the customer service
      */
     @Autowired
-    public OrdersService(OrdersRepository ordersRepository, CustomerService customerService) {
+    public OrdersService(OrdersRepository ordersRepository, CustomerServiceI<Customer, UUID> customerService) {
         this.ordersRepository = ordersRepository;
         this.customerService = customerService;
     }
@@ -36,7 +38,7 @@ public class OrdersService {
      * @param customer the customer
      * @param orders   the order
      */
-    public void addOrder(Customer customer, Orders orders) {
+    public void add(Customer customer, Orders orders) {
 
         customer.getOrders().add(orders);
         customerService.update(customer);
@@ -47,7 +49,7 @@ public class OrdersService {
      *
      * @param orders the orders
      */
-    public void updateOrders(Orders orders) {
+    public void update(Orders orders) {
 
         ordersRepository.save(orders);
     }
@@ -58,7 +60,7 @@ public class OrdersService {
      * @param customer the email
      * @return the list
      */
-    public Set<Orders> findAllOrders(Customer customer) {
+    public Set<Orders> findAll(Customer customer) {
 
         return customer.getOrders();
     }

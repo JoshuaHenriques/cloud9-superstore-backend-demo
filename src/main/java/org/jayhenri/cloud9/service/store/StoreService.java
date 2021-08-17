@@ -1,5 +1,6 @@
 package org.jayhenri.cloud9.service.store;
 
+import org.jayhenri.cloud9.interfaces.ServiceI;
 import org.jayhenri.cloud9.model.store.Store;
 import org.jayhenri.cloud9.repository.store.StoreRepository;
 import org.springframework.stereotype.Service;
@@ -12,7 +13,7 @@ import java.util.UUID;
  * The type Customer service.
  */
 @Service
-public class StoreService {
+public class StoreService implements ServiceI<Store, UUID> {
 
     private final StoreRepository storeRepository;
 
@@ -31,7 +32,7 @@ public class StoreService {
      *
      * @param store the store
      */
-    public void addStore(Store store) {
+    public void add(Store store) {
 
         storeRepository.save(store);
     }
@@ -41,7 +42,7 @@ public class StoreService {
      *
      * @param store the store
      */
-    public void deleteStore(Store store) {
+    public void remove(Store store) {
 
         storeRepository.delete(store);
     }
@@ -51,7 +52,7 @@ public class StoreService {
      *
      * @param store the store
      */
-    public void updateStore(Store store) {
+    public void update(Store store) {
 
         storeRepository.save(store);
     }
@@ -61,7 +62,7 @@ public class StoreService {
      *
      * @return the list
      */
-    public List<Store> findAllStores() {
+    public List<Store> findAll() {
 
         return storeRepository.findAll();
     }

@@ -2,15 +2,13 @@ package org.jayhenri.cloud9.customer.controller;
 
 import org.jayhenri.cloud9.controller.customer.CustomerController;
 import org.jayhenri.cloud9.exception.alreadyexists.CustomerAlreadyExistsException;
+import org.jayhenri.cloud9.exception.invalid.InvalidCustomerException;
 import org.jayhenri.cloud9.exception.invalid.InvalidPostalCodeException;
 import org.jayhenri.cloud9.exception.notfound.CustomerNotFoundException;
-import org.jayhenri.cloud9.exception.invalid.InvalidCustomerException;
 import org.jayhenri.cloud9.model.customer.*;
-import org.jayhenri.cloud9.model.item.Item;
 import org.jayhenri.cloud9.model.login.Login;
 import org.jayhenri.cloud9.service.customer.AddressService;
 import org.jayhenri.cloud9.service.customer.CustomerService;
-import org.jayhenri.cloud9.service.inventory.StoreInventoryService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -23,7 +21,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import javax.naming.InvalidNameException;
-import java.util.*;
+import java.util.HashSet;
+import java.util.UUID;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -62,9 +61,9 @@ class CustomerControllerUniTest {
      */
     @BeforeEach
     void setUp() {
-        
+
         uuid = UUID.randomUUID();
-        
+
         customerController = new CustomerController(customerService, addressService);
 
         customer = new Customer(
@@ -88,51 +87,51 @@ class CustomerControllerUniTest {
         );
     }
 
-        /**
-         * Register.
-         *
-         * @throws InvalidPostalCodeException     the invalid postal code exception
-         * @throws CustomerAlreadyExistsException the customer already exists exception
-         * @throws InvalidCustomerException       the invalid customer exception
-         */
-        @Test
-        void addCustomer() throws InvalidPostalCodeException, CustomerAlreadyExistsException, InvalidCustomerException {
-            given(customerService.existsByEmail(customer.getEmail())).willReturn(false);
-            given(customerService.existsById(customer.getCustomerUUID())).willReturn(false);
-            given(customerService.existsByPhoneNumber(customer.getPhoneNumber())).willReturn(false);
-            given(addressService.isValidPostalCode(customer.getAddress().getPostalCode())).willReturn(true);
+    /**
+     * Register.
+     *
+     * @throws InvalidPostalCodeException     the invalid postal code exception
+     * @throws CustomerAlreadyExistsException the customer already exists exception
+     * @throws InvalidCustomerException       the invalid customer exception
+     */
+    @Test
+    void addCustomer() throws InvalidPostalCodeException, CustomerAlreadyExistsException, InvalidCustomerException {
+        given(customerService.existsByEmail(customer.getEmail())).willReturn(false);
+        given(customerService.existsById(customer.getCustomerUUID())).willReturn(false);
+        given(customerService.existsByPhoneNumber(customer.getPhoneNumber())).willReturn(false);
+        given(addressService.isValidPostalCode(customer.getAddress().getPostalCode())).willReturn(true);
 
-            ResponseEntity<String> response = customerController.addCustomer(customer);
+        ResponseEntity<String> response = customerController.addCustomer(customer);
 
-            then(customerService).should().add(captorCustomer.capture());
+        then(customerService).should().add(captorCustomer.capture());
 
-            assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
-            assertThat(customer).isEqualTo(captorCustomer.getValue());
-        }
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
+        assertThat(customer).isEqualTo(captorCustomer.getValue());
+    }
 
-        /**
-         * Register throws invalid postal code exception.
-         */
-        @Test
-        void addCustomerThrowsInvalidPostalCodeException() {
-            given(addressService.isValidPostalCode(customer.getAddress().getPostalCode())).willReturn(false);
+    /**
+     * Register throws invalid postal code exception.
+     */
+    @Test
+    void addCustomerThrowsInvalidPostalCodeException() {
+        given(addressService.isValidPostalCode(customer.getAddress().getPostalCode())).willReturn(false);
 
-            assertThrows(InvalidPostalCodeException.class, () -> {
-                customerController.addCustomer(customer);
-            });
-        }
+        assertThrows(InvalidPostalCodeException.class, () -> {
+            customerController.addCustomer(customer);
+        });
+    }
 
-        /**
-         * Register throws customer already exists exception.
-         */
-        @Test
-        void addCustomerThrowsCustomerAlreadyExistsException() {
-            given(customerService.existsByEmail(customer.getEmail())).willReturn(true);
+    /**
+     * Register throws customer already exists exception.
+     */
+    @Test
+    void addCustomerThrowsCustomerAlreadyExistsException() {
+        given(customerService.existsByEmail(customer.getEmail())).willReturn(true);
 
-            assertThrows(CustomerAlreadyExistsException.class, () -> {
-                customerController.addCustomer(customer);
-            });
-        }
+        assertThrows(CustomerAlreadyExistsException.class, () -> {
+            customerController.addCustomer(customer);
+        });
+    }
 
     /**
      * Update customer.
@@ -185,9 +184,9 @@ class CustomerControllerUniTest {
 
         ResponseEntity<String> response = customerController.deleteCustomer(uuid);
 
-        then(customerService).should().delete(captorCustomer.capture());
+        then(customerService).should().remove(captorCustomer.capture());
 
-d        assertThat(captorCustomer.getValue()).isEqualTo(customer);
+        assertThat(captorCustomer.getValue()).isEqualTo(customer);
         assertThat(captorCustomer.getValue().getEmail()).isEqualTo("customerController@gmail.com");
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
     }

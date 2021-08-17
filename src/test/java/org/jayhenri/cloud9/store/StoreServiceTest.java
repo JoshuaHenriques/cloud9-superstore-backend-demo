@@ -21,6 +21,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
 
+/**
+ * The type Store service test.
+ */
 @ExtendWith(MockitoExtension.class)
 public class StoreServiceTest {
 
@@ -42,6 +45,9 @@ public class StoreServiceTest {
 
     private UUID uuid;
 
+    /**
+     * Sets up.
+     */
     @BeforeEach
     void setUp() {
 
@@ -54,13 +60,14 @@ public class StoreServiceTest {
                 new HashSet<OnlineInventory>()
         );
     }
+
     /**
      * Test add.
      */
     @Test
     void add() {
 
-        storeService.addStore(store);
+        storeService.add(store);
 
         then(storeRepository).should().save(captorStore.capture());
 
@@ -72,7 +79,7 @@ public class StoreServiceTest {
      */
     @Test
     void update() {
-        storeService.updateStore(store);
+        storeService.update(store);
 
         then(storeRepository).should().save(captorStore.capture());
 
@@ -84,7 +91,7 @@ public class StoreServiceTest {
      */
     @Test
     void delete() {
-        storeService.deleteStore(store);
+        storeService.remove(store);
 
         then(storeRepository).should().delete(captorStore.capture());
 
@@ -96,48 +103,57 @@ public class StoreServiceTest {
      */
     @Test
     void findAllStores() {
-        storeService.findAllStores();
+        storeService.findAll();
 
         then(storeRepository).should().findAll();
     }
 
-@Test
+    /**
+     * Exists by id.
+     */
+    @Test
     void existsById() {
 
-            given(storeRepository.existsById(uuid)).willReturn(true);
+        given(storeRepository.existsById(uuid)).willReturn(true);
 
-            boolean exists = storeService.existsById(uuid);
+        boolean exists = storeService.existsById(uuid);
 
-            then(storeRepository).should().existsById(captorUUID.capture());
+        then(storeRepository).should().existsById(captorUUID.capture());
 
-            assertThat(exists).isTrue();
-            assertThat(captorUUID.getValue()).isEqualTo(uuid);
-            }
+        assertThat(exists).isTrue();
+        assertThat(captorUUID.getValue()).isEqualTo(uuid);
+    }
 
-@Test
+    /**
+     * Does not exists by id.
+     */
+    @Test
     void doesNotExistsById() {
 
-            given(storeRepository.existsById(uuid)).willReturn(false);
+        given(storeRepository.existsById(uuid)).willReturn(false);
 
-            boolean exists = storeService.existsById(uuid);
+        boolean exists = storeService.existsById(uuid);
 
-            then(storeRepository).should().existsById(captorUUID.capture());
+        then(storeRepository).should().existsById(captorUUID.capture());
 
-            assertThat(exists).isFalse();
-            assertThat(captorUUID.getValue()).isEqualTo(uuid);
-            }
+        assertThat(exists).isFalse();
+        assertThat(captorUUID.getValue()).isEqualTo(uuid);
+    }
 
-@Test
+    /**
+     * Gets by id.
+     */
+    @Test
     void getById() {
 
-            given(storeRepository.getById(uuid)).willReturn(store);
+        given(storeRepository.getById(uuid)).willReturn(store);
 
-            Store _store = storeService.getById(uuid);
+        Store _store = storeService.getById(uuid);
 
-            then(storeRepository).should().getById(captorUUID.capture());
+        then(storeRepository).should().getById(captorUUID.capture());
 
-            assertThat(_store).isEqualTo(store);
-            assertThat(captorUUID.getValue()).isEqualTo(uuid);
-            }
+        assertThat(_store).isEqualTo(store);
+        assertThat(captorUUID.getValue()).isEqualTo(uuid);
+    }
 
 }

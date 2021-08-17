@@ -15,9 +15,11 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.HashSet;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
 
+/**
+ * The type Review service test.
+ */
 @ExtendWith(MockitoExtension.class)
 public class ReviewServiceTest {
 
@@ -33,6 +35,9 @@ public class ReviewServiceTest {
     @Captor
     private ArgumentCaptor<Item> captorItem;
 
+    /**
+     * Sets up.
+     */
     @BeforeEach
     void setUp() {
 
@@ -50,13 +55,14 @@ public class ReviewServiceTest {
                 4
         );
     }
+
     /**
      * Test add.
      */
     @Test
     void add() {
 
-        reviewService.addReview(item, review);
+        reviewService.add(item, review);
 
         then(itemService).should().update(captorItem.capture());
 
@@ -74,7 +80,7 @@ public class ReviewServiceTest {
 
         review.setText("Updated description");
 
-        reviewService.updateReview(item, review);
+        reviewService.update(item, review);
 
         then(itemService).should().update(captorItem.capture());
 
@@ -89,7 +95,7 @@ public class ReviewServiceTest {
 
         item.getReviews().add(review);
 
-        reviewService.deleteReview(item, review.getReviewUUID());
+        reviewService.remove(item, review.getReviewUUID());
 
         then(itemService).should().update(captorItem.capture());
 
@@ -105,7 +111,7 @@ public class ReviewServiceTest {
 
         item.getReviews().add(review);
 
-        assertThat(reviewService.findAllReviews(item).contains(review)).isTrue();
+        assertThat(reviewService.findAll(item).contains(review)).isTrue();
     }
 
     /**

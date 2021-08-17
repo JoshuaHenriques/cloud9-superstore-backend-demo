@@ -1,6 +1,5 @@
 package org.jayhenri.cloud9.item;
 
-import org.jayhenri.cloud9.model.inventory.StoreInventory;
 import org.jayhenri.cloud9.model.item.Item;
 import org.jayhenri.cloud9.repository.item.ItemRepository;
 import org.jayhenri.cloud9.service.item.ItemService;
@@ -19,6 +18,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
 
+/**
+ * The type Item service test.
+ */
 @ExtendWith(MockitoExtension.class)
 public class ItemServiceTest {
 
@@ -40,6 +42,9 @@ public class ItemServiceTest {
 
     private UUID uuid;
 
+    /**
+     * Sets up.
+     */
     @BeforeEach
     void setUp() {
 
@@ -54,6 +59,7 @@ public class ItemServiceTest {
                 null
         );
     }
+
     /**
      * Test add.
      */
@@ -84,7 +90,7 @@ public class ItemServiceTest {
      */
     @Test
     void delete() {
-        itemService.delete(item);
+        itemService.remove(item);
 
         then(itemRepository).should().delete(captorItem.capture());
 
@@ -96,11 +102,14 @@ public class ItemServiceTest {
      */
     @Test
     void findAllItems() {
-        itemService.findAllItems();
+        itemService.findAll();
 
         then(itemRepository).should().findAll();
     }
 
+    /**
+     * Exists by id.
+     */
     @Test
     void existsById() {
 
@@ -114,6 +123,9 @@ public class ItemServiceTest {
         assertThat(captorUUID.getValue()).isEqualTo(uuid);
     }
 
+    /**
+     * Does not exists by id.
+     */
     @Test
     void doesNotExistsById() {
 
@@ -127,6 +139,9 @@ public class ItemServiceTest {
         assertThat(captorUUID.getValue()).isEqualTo(uuid);
     }
 
+    /**
+     * Gets by id.
+     */
     @Test
     void getById() {
 

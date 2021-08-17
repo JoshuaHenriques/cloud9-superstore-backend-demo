@@ -60,7 +60,7 @@ public class StoreController {
         else if (!addressService.isValidPostalCode(store.getAddress().getPostalCode()))
             throw new InvalidPostalCodeException();
 
-        storeService.addStore(store);
+        storeService.add(store);
 
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.set("StoreController", "addStore");
@@ -81,7 +81,7 @@ public class StoreController {
             throws InvalidStoreException, StoreNotFoundException {
         if (!ObjectUtils.isEmpty(store)) {
             if (storeService.existsById(storeId)) {
-                storeService.updateStore(storeService.getById(storeId));
+                storeService.update(storeService.getById(storeId));
 
                 HttpHeaders responseHeaders = new HttpHeaders();
                 responseHeaders.set("StoreController", "updateStore");
@@ -103,7 +103,7 @@ public class StoreController {
     public ResponseEntity<String> deleteStore(@PathVariable UUID storeId)
             throws StoreNotFoundException {
         if (storeService.existsById(storeId)) {
-            storeService.deleteStore(storeService.getById(storeId));
+            storeService.remove(storeService.getById(storeId));
 
             HttpHeaders responseHeaders = new HttpHeaders();
             responseHeaders.set("StoreController", "deleteStore");
@@ -119,7 +119,7 @@ public class StoreController {
      */
     @GetMapping(value = "/list/customers", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Store>> listStores() {
-        List<Store> list = storeService.findAllStores();
+        List<Store> list = storeService.findAll();
 
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.set("StoreController", "listStores");

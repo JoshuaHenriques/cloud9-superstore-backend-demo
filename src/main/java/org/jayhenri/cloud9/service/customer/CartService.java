@@ -1,5 +1,7 @@
 package org.jayhenri.cloud9.service.customer;
 
+import org.jayhenri.cloud9.interfaces.customer.CartServiceI;
+import org.jayhenri.cloud9.interfaces.customer.CustomerServiceI;
 import org.jayhenri.cloud9.model.customer.Cart;
 import org.jayhenri.cloud9.model.customer.Customer;
 import org.jayhenri.cloud9.model.item.Item;
@@ -14,9 +16,9 @@ import java.util.UUID;
  * The type Cart service.
  */
 @Service
-public class CartService {
+public class CartService implements CartServiceI<Customer, Item, Cart, UUID> {
 
-    private CustomerService customerService;
+    private final CustomerServiceI<Customer, UUID> customerService;
 
     /**
      * Instantiates a new Cart service.
@@ -24,7 +26,8 @@ public class CartService {
      * @param customerService the customer service
      */
     @Autowired
-    public CartService(CustomerService customerService) {
+    public CartService(CustomerServiceI<Customer, UUID> customerService) {
+
         this.customerService = customerService;
     }
 
@@ -35,7 +38,7 @@ public class CartService {
      * @param item     the item
      * @return the customer
      */
-    public void addToCart(Customer customer, Item item) {
+    public void add(Customer customer, Item item) {
 
         customer.getCart().getItems().add(item);
         customerService.update(customer);
@@ -48,7 +51,7 @@ public class CartService {
      * @param itemUUID the item uuid
      * @return customer customer
      */
-    public void removeFromCart(Customer customer, UUID itemUUID) {
+    public void remove(Customer customer, UUID itemUUID) {
 
         Set<Item> removeMe = new HashSet<>();
         customer.getCart().getItems().forEach(item -> {
@@ -64,9 +67,8 @@ public class CartService {
      * Empty cart.
      *
      * @param customer the customer
-     * @return customer customer
      */
-    public void emptyCart(Customer customer) {
+    public void empty(Customer customer) {
 
         customer.getCart().getItems().removeAll(customer.getCart().getItems());
         customer.getCart().setTotal(0.00);
@@ -80,7 +82,7 @@ public class CartService {
      * @param customer the customer
      * @return the cart
      */
-    public Cart getCart(Customer customer) {
+    public Cart get(Customer customer) {
 
         return customer.getCart();
     }

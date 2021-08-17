@@ -111,7 +111,7 @@ public class CustomerController {
             throws CustomerNotFoundException {
         if (customerService.existsById(customerId)) {
             Customer _customer = customerService.getById(customerId);
-            customerService.delete(_customer);
+            customerService.remove(_customer);
 
             HttpHeaders responseHeaders = new HttpHeaders();
             responseHeaders.set("CustomerController", "deleteCustomer");
@@ -123,15 +123,12 @@ public class CustomerController {
     /**
      * List customers response entity.
      *
-     * @param pageNo   the page no
-     * @param pageSize the page size
      * @return the response entity
      */
     @GetMapping(value = "/list/customers", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Customer>> listCustomers(@RequestParam(defaultValue = "0") Integer pageNo,
-                                                        @RequestParam(defaultValue = "50") Integer pageSize) {
+    public ResponseEntity<List<Customer>> listCustomers() {
         // @RequestParam(defaultValue = "email") String sortBy
-        List<Customer> list = customerService.findAllCustomers(pageNo, pageSize); // sortBy
+        List<Customer> list = customerService.findAll(); // sortBy
 
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.set("CustomerController", "listCustomers");

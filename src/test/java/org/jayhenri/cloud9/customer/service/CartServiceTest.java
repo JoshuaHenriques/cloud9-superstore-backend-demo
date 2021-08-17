@@ -2,9 +2,7 @@ package org.jayhenri.cloud9.customer.service;
 
 import org.jayhenri.cloud9.model.customer.*;
 import org.jayhenri.cloud9.model.item.Item;
-import org.jayhenri.cloud9.model.item.Review;
 import org.jayhenri.cloud9.model.login.Login;
-import org.jayhenri.cloud9.service.customer.AddressService;
 import org.jayhenri.cloud9.service.customer.CartService;
 import org.jayhenri.cloud9.service.customer.CustomerService;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,6 +18,9 @@ import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+/**
+ * The type Cart service test.
+ */
 @ExtendWith(MockitoExtension.class)
 public class CartServiceTest {
 
@@ -32,18 +33,21 @@ public class CartServiceTest {
     private ArgumentCaptor<Cart> captorCart;
 
     private Cart cart;
-    
+
     private Item item1, item2;
-    
+
     private Set<Item> items;
-    
+
     private Customer customer;
-    
+
+    /**
+     * Sets up.
+     */
     @BeforeEach
     void setUp() {
 
         cartService = new CartService(customerService);
-    
+
         item1 = new Item(
                 "iPhone 13 Pro",
                 "2021 Model",
@@ -57,13 +61,13 @@ public class CartServiceTest {
                 new HashSet<>(),
                 null
         );
-        
+
         cart = new Cart(
                 new Customer(),
                 new HashSet<Item>(),
                 1129.99
         );
-        
+
         customer = new Customer(
                 "customer.mail@gmail.com",
                 new Login(),
@@ -77,13 +81,14 @@ public class CartServiceTest {
                 "08/23/1995"
         );
     }
+
     /**
      * Add to cart.
      */
     @Test
     void addToCart() {
 
-        cartService.addToCart(customer, item1);
+        cartService.add(customer, item1);
 
         assertThat(customer.getCart().getItems().contains(item1)).isTrue();
 
@@ -99,7 +104,7 @@ public class CartServiceTest {
         customer.getCart().getItems().add(item1);
         customer.getCart().getItems().add(item2);
 
-        cartService.removeFromCart(customer, item1.getItemUUID());
+        cartService.remove(customer, item1.getItemUUID());
 
         assertThat(customer.getCart().getItems().contains(item1)).isFalse();
 
@@ -114,7 +119,7 @@ public class CartServiceTest {
 
         customer.getCart().getItems().add(item1);
 
-        cartService.emptyCart(customer);
+        cartService.empty(customer);
 
         assertThat(customer.getCart().getItems().size()).isEqualTo(0);
     }
@@ -125,6 +130,6 @@ public class CartServiceTest {
     @Test
     void getCart() {
 
-        assertThat(cartService.getCart(customer)).isEqualTo(customer.getCart());
+        assertThat(cartService.get(customer)).isEqualTo(customer.getCart());
     }
 }

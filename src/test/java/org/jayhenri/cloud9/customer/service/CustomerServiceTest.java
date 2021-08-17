@@ -1,10 +1,7 @@
 package org.jayhenri.cloud9.customer.service;
 
 import org.jayhenri.cloud9.model.customer.Cart;
-import org.jayhenri.cloud9.model.customer.CreditCard;
 import org.jayhenri.cloud9.model.customer.Customer;
-import org.jayhenri.cloud9.model.customer.Orders;
-import org.jayhenri.cloud9.model.item.Item;
 import org.jayhenri.cloud9.repository.customer.CustomerRepository;
 import org.jayhenri.cloud9.service.customer.CustomerService;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,8 +13,6 @@ import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -145,7 +140,7 @@ class CustomerServiceTest {
      */
     @Test
     void delete() {
-        customerService.delete(customer);
+        customerService.remove(customer);
 
         then(customerRepository).should().delete(captorCustomer.capture());
 
@@ -220,6 +215,9 @@ class CustomerServiceTest {
         assertThat(customer).isEqualTo(_customer);
     }
 
+    /**
+     * Exists by id.
+     */
     @Test
     void existsById() {
 
@@ -233,6 +231,9 @@ class CustomerServiceTest {
         assertThat(captorUUID.getValue()).isEqualTo(uuid);
     }
 
+    /**
+     * Does not exists by id.
+     */
     @Test
     void doesNotExistsById() {
 
@@ -246,6 +247,9 @@ class CustomerServiceTest {
         assertThat(captorUUID.getValue()).isEqualTo(uuid);
     }
 
+    /**
+     * Gets by id.
+     */
     @Test
     void getById() {
 

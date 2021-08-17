@@ -56,7 +56,7 @@ public class CartController {
         if (customerService.existsById(customerId)) {
             if (onlineInventoryService.existsById(itemId)) {
 
-                cartService.addToCart(customerService.getById(customerId), onlineInventoryService.getById(itemId).getItem());
+                cartService.add(customerService.getById(customerId), onlineInventoryService.getById(itemId).getItem());
 
                 HttpHeaders responseHeaders = new HttpHeaders();
                 responseHeaders.set("CustomerController", "addToCart");
@@ -81,7 +81,7 @@ public class CartController {
             throws CustomerNotFoundException, ItemNotFoundException {
         if (customerService.existsById(customerId)) {
             if (onlineInventoryService.existsById(itemId)) {
-                cartService.removeFromCart(customerService.getById(customerId), itemId);
+                cartService.remove(customerService.getById(customerId), itemId);
 
                 HttpHeaders responseHeaders = new HttpHeaders();
                 responseHeaders.set("CustomerController", "removeFromCart");
@@ -102,7 +102,7 @@ public class CartController {
     @PutMapping(value = "/{customerId}/cart/empty")
     public ResponseEntity<String> emptyCart(@PathVariable UUID customerId) throws CustomerNotFoundException {
         if (customerService.existsById(customerId)) {
-            cartService.emptyCart(customerService.getById(customerId));
+            cartService.empty(customerService.getById(customerId));
 
             HttpHeaders responseHeaders = new HttpHeaders();
             responseHeaders.set("CustomerController", "emptyCart");
@@ -121,7 +121,7 @@ public class CartController {
     @GetMapping(value = "/{customerId}/cart/get", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Cart> getCart(@PathVariable UUID customerId) throws CustomerNotFoundException {
         if (customerService.existsById(customerId)) {
-            Cart _cart = cartService.getCart(customerService.getById(customerId));
+            Cart _cart = cartService.get(customerService.getById(customerId));
 
             HttpHeaders responseHeaders = new HttpHeaders();
             responseHeaders.set("CustomerController", "getCart");

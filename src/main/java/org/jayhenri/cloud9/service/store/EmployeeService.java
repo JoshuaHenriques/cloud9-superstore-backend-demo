@@ -1,5 +1,6 @@
 package org.jayhenri.cloud9.service.store;
 
+import org.jayhenri.cloud9.interfaces.EmployeeServiceI;
 import org.jayhenri.cloud9.model.store.Employee;
 import org.jayhenri.cloud9.repository.store.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,7 @@ import java.util.UUID;
  * The type Employee service.
  */
 @Service
-public class EmployeeService {
+public class EmployeeService implements EmployeeServiceI<Employee, UUID> {
 
     private final EmployeeRepository employeeRepository;
 
@@ -55,7 +56,7 @@ public class EmployeeService {
      *
      * @param employee the employee
      */
-    public void delete(Employee employee) {
+    public void remove(Employee employee) {
 
         employeeRepository.delete(employee);
     }
@@ -75,7 +76,7 @@ public class EmployeeService {
      *
      * @return the list
      */
-    public List<Employee> findAllEmployees() {
+    public List<Employee> findAll() {
 
         return employeeRepository.findAll();
     }

@@ -108,7 +108,7 @@ public class EmployeeController {
     public ResponseEntity<String> deleteEmployee(@PathVariable UUID employeeId)
             throws EmployeeNotFoundException {
         if (employeeService.existsById(employeeId)) {
-            employeeService.delete(employeeService.getById(employeeId));
+            employeeService.remove(employeeService.getById(employeeId));
 
             HttpHeaders responseHeaders = new HttpHeaders();
             responseHeaders.set("EmployeeController", "deleteEmployee");
@@ -124,7 +124,7 @@ public class EmployeeController {
      */
     @GetMapping(value = "/list/employees", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Employee>> listEmployees() {
-        List<Employee> list = employeeService.findAllEmployees();
+        List<Employee> list = employeeService.findAll();
 
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.set("EmployeeController", "listEmployees");

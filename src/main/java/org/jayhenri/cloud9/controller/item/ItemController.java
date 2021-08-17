@@ -108,7 +108,7 @@ public class ItemController {
             throws ItemNotFoundException {
         if (itemService.existsByItemName(itemId)) {
             Item _item = itemService.getByItemName(itemId);
-            itemService.delete(_item);
+            itemService.remove(_item);
 
             HttpHeaders responseHeaders = new HttpHeaders();
             responseHeaders.set("ItemController", "deleteItem");
@@ -128,7 +128,7 @@ public class ItemController {
     public ResponseEntity<List<Item>> listItems(@RequestParam(defaultValue = "0") Integer pageNo,
                                                 @RequestParam(defaultValue = "50") Integer pageSize) {
         // @RequestParam(defaultValue = "email") String sortBy
-        List<Item> list = itemService.findAllItems(); // sortBy
+        List<Item> list = itemService.findAll(); // sortBy
 
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.set("ItemController", "listItems");

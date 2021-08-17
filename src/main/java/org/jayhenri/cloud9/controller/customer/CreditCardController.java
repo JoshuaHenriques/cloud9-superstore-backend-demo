@@ -55,7 +55,7 @@ public class CreditCardController {
 
             if (customerService.existsById(customerId)) {
                 if (customerService.existsByCCN(creditCard.getCcn())) {
-                    creditCardService.addCreditCard(customerService.getById(customerId), creditCard);
+                    creditCardService.add(customerService.getById(customerId), creditCard);
 
                     HttpHeaders responseHeaders = new HttpHeaders();
                     responseHeaders.set("CustomerController", "addCreditCard");
@@ -82,7 +82,7 @@ public class CreditCardController {
             throws CustomerNotFoundException, CreditCardNotFoundException {
         if (customerService.existsById(customerId)) {
             if (creditCardService.existsById(customerService.getById(customerId), cardId)) {
-                creditCardService.removeCreditCard(customerService.getById(customerId), cardId);
+                creditCardService.remove(customerService.getById(customerId), cardId);
 
                 HttpHeaders responseHeaders = new HttpHeaders();
                 responseHeaders.set("CustomerController", "removeCreditCard");
@@ -104,7 +104,7 @@ public class CreditCardController {
     public ResponseEntity<Set<CreditCard>> listCreditCards(@PathVariable UUID customerId)
             throws CustomerNotFoundException {
         if (customerService.existsById(customerId)) {
-            Set<CreditCard> list = creditCardService.findAllCreditCards(customerService.getById(customerId));
+            Set<CreditCard> list = creditCardService.findAll(customerService.getById(customerId));
 
             HttpHeaders responseHeaders = new HttpHeaders();
             responseHeaders.set("CustomerController", "listCreditCards");

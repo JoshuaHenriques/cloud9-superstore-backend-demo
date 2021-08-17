@@ -134,7 +134,7 @@ class EmployeeServiceTest {
      */
     @Test
     void delete() {
-        employeeService.delete(this.employee);
+        employeeService.remove(this.employee);
 
         then(employeeRepository).should().delete(captorEmployee.capture());
 

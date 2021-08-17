@@ -1,14 +1,11 @@
 package org.jayhenri.cloud9.service.login;
 
+import org.jayhenri.cloud9.interfaces.LoginServiceI;
 import org.jayhenri.cloud9.model.login.Login;
 import org.jayhenri.cloud9.repository.login.LoginRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -17,7 +14,7 @@ import java.util.UUID;
  * The type Customer service.
  */
 @Service
-public class LoginService {
+public class LoginService implements LoginServiceI<Login, UUID> {
 
     private final LoginRepository loginRepository;
 
@@ -30,17 +27,6 @@ public class LoginService {
     public LoginService(LoginRepository loginRepository) {
 
         this.loginRepository = loginRepository;
-    }
-
-    /**
-     * Exists by phone number boolean.
-     *
-     * @param phoneNumber the phone number
-     * @return the boolean
-     */
-    public boolean existsByPhoneNumber(String phoneNumber) {
-
-        return loginRepository.existsByPhoneNumber(phoneNumber);
     }
 
     /**
@@ -58,7 +44,7 @@ public class LoginService {
      *
      * @param login the login
      */
-    public void delete(Login login) {
+    public void remove(Login login) {
 
         loginRepository.delete(login);
     }
@@ -78,7 +64,7 @@ public class LoginService {
      *
      * @return the list
      */
-    public List<Login> findAllLogins() {
+    public List<Login> findAll() {
 
         return loginRepository.findAll();
     }
@@ -103,5 +89,16 @@ public class LoginService {
     public Login getById(UUID uuid) {
 
         return loginRepository.getById(uuid);
+    }
+
+    /**
+     * Exists by phone number boolean.
+     *
+     * @param phoneNumber the phone number
+     * @return the boolean
+     */
+    public boolean existsByPhoneNumber(String phoneNumber) {
+
+        return loginRepository.existsByPhoneNumber(phoneNumber);
     }
 }

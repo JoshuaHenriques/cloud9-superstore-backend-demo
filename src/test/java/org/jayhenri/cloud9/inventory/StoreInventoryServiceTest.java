@@ -1,6 +1,5 @@
 package org.jayhenri.cloud9.inventory;
 
-import org.jayhenri.cloud9.model.inventory.OnlineInventory;
 import org.jayhenri.cloud9.model.inventory.StoreInventory;
 import org.jayhenri.cloud9.model.item.Item;
 import org.jayhenri.cloud9.repository.inventory.StoreInventoryRepository;
@@ -137,6 +136,9 @@ class StoreInventoryServiceTest {
         then(storeInventoryRepository).should().findAll();
     }
 
+    /**
+     * Exists by id.
+     */
     @Test
     void existsById() {
 
@@ -150,6 +152,9 @@ class StoreInventoryServiceTest {
         assertThat(captorUUID.getValue()).isEqualTo(uuid);
     }
 
+    /**
+     * Does not exists by id.
+     */
     @Test
     void doesNotExistsById() {
 
@@ -163,6 +168,9 @@ class StoreInventoryServiceTest {
         assertThat(captorUUID.getValue()).isEqualTo(uuid);
     }
 
+    /**
+     * Gets by id.
+     */
     @Test
     void getById() {
 

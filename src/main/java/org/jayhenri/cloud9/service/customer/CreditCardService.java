@@ -1,5 +1,7 @@
 package org.jayhenri.cloud9.service.customer;
 
+import org.jayhenri.cloud9.interfaces.customer.CreditCardServiceI;
+import org.jayhenri.cloud9.interfaces.customer.CustomerServiceI;
 import org.jayhenri.cloud9.model.customer.CreditCard;
 import org.jayhenri.cloud9.model.customer.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +17,9 @@ import java.util.concurrent.atomic.AtomicReference;
  * The type Credit card service.
  */
 @Service
-public class CreditCardService {
+public class CreditCardService implements CreditCardServiceI<Customer, CreditCard, UUID> {
 
-    private final CustomerService customerService;
+    private final CustomerServiceI<Customer, UUID> customerService;
 
     /**
      * Instantiates a new Credit card service.
@@ -25,7 +27,7 @@ public class CreditCardService {
      * @param customerService the customer service
      */
     @Autowired
-    public CreditCardService(CustomerService customerService) {
+    public CreditCardService(CustomerServiceI<Customer, UUID> customerService) {
 
         this.customerService = customerService;
     }
@@ -35,9 +37,8 @@ public class CreditCardService {
      *
      * @param customer   the customer
      * @param creditCard the credit card
-     * @return the customer
      */
-    public void addCreditCard(Customer customer, CreditCard creditCard) {
+    public void add(Customer customer, CreditCard creditCard) {
 
         customer.getWallet().add(creditCard);
         customerService.update(customer);
@@ -48,9 +49,8 @@ public class CreditCardService {
      *
      * @param customer the customer
      * @param cardId   the card id
-     * @return the customer
      */
-    public void removeCreditCard(Customer customer, UUID cardId) {
+    public void remove(Customer customer, UUID cardId) {
 
         Set<CreditCard> removeMe = new HashSet<>();
         CreditCard card = getById(customer, cardId);
@@ -66,7 +66,7 @@ public class CreditCardService {
      * @param customer the email
      * @return the list
      */
-    public Set<CreditCard> findAllCreditCards(Customer customer) {
+    public Set<CreditCard> findAll(Customer customer) {
 
         return customer.getWallet();
     }

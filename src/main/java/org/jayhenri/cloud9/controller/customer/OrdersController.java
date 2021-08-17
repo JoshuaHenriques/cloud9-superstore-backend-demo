@@ -51,7 +51,7 @@ public class OrdersController {
     @PostMapping(value = "/add/{customerId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> addOrder(@PathVariable UUID customerId, @RequestBody Orders orders) throws InvalidOrdersException {
         if (!ObjectUtils.isEmpty(orders)) {
-            ordersService.addOrder(customerService.getById(customerId), orders);
+            ordersService.add(customerService.getById(customerId), orders);
 
             HttpHeaders responseHeaders = new HttpHeaders();
             responseHeaders.set("OrdersController", "addOrder");
@@ -74,7 +74,7 @@ public class OrdersController {
         if (!ObjectUtils.isEmpty(orders)) {
             if (ordersService.existsById(ordersId)) {
                 orders.setOrdersUUID(ordersId);
-                ordersService.updateOrders(orders);
+                ordersService.update(orders);
 
                 HttpHeaders responseHeaders = new HttpHeaders();
                 responseHeaders.set("OrderController", "updateOrder");
@@ -96,7 +96,7 @@ public class OrdersController {
     public ResponseEntity<Set<Orders>> listOrders(@PathVariable UUID customerId) throws CustomerNotFoundException {
         // @RequestParam(defaultValue = "email") String sortBy
         if (customerService.existsById(customerId)) {
-            Set<Orders> list = ordersService.findAllOrders(customerService.getById(customerId)); // sortBy
+            Set<Orders> list = ordersService.findAll(customerService.getById(customerId)); // sortBy
 
             HttpHeaders responseHeaders = new HttpHeaders();
             responseHeaders.set("OrderController", "listCustomerOrders");

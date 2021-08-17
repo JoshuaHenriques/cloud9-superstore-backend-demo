@@ -50,9 +50,9 @@ class OrdersServiceTest {
      * The Order db repository.
      */
     private OrdersService ordersService;
-    
+
     private Customer customer;
-    
+
     private Orders orders;
 
     private UUID uuid;
@@ -63,6 +63,9 @@ class OrdersServiceTest {
     @Captor
     private ArgumentCaptor<Orders> captorOrders;
 
+    /**
+     * Sets up.
+     */
     @BeforeEach
     void setUp() {
         ordersService = new OrdersService(ordersRepository, customerService);
@@ -79,21 +82,21 @@ class OrdersServiceTest {
                 "6473829338",
                 "08/23/1995"
         );
-        
+
         orders = new Orders(
                 "PENDING",
                 new HashSet<Item>(),
                 293.68
         );
     }
-    
+
     /**
      * Add order.
      */
     @Test
     void addOrder() {
 
-        ordersService.addOrder(customer, orders);
+        ordersService.add(customer, orders);
 
         then(customerService).should().update(captorCustomer.capture());
 
@@ -107,7 +110,7 @@ class OrdersServiceTest {
     @Test
     void updateOrder() {
         orders.setOrderStatus("COMPLETED");
-        ordersService.updateOrders(orders);
+        ordersService.update(orders);
 
         then(ordersRepository).should().save(captorOrders.capture());
 
@@ -122,11 +125,14 @@ class OrdersServiceTest {
     void findAllOrders() {
 
         Set<Orders> orders = customer.getOrders();
-        Set<Orders> findAllOrders = ordersService.findAllOrders(customer);
+        Set<Orders> findAllOrders = ordersService.findAll(customer);
 
         assertThat(findAllOrders).isEqualTo(orders);
     }
 
+    /**
+     * Exists by id.
+     */
     @Test
     void existsById() {
 
@@ -140,6 +146,9 @@ class OrdersServiceTest {
         assertThat(captorUUID.getValue()).isEqualTo(uuid);
     }
 
+    /**
+     * Does not exists by id.
+     */
     @Test
     void doesNotExistsById() {
 
@@ -153,6 +162,9 @@ class OrdersServiceTest {
         assertThat(captorUUID.getValue()).isEqualTo(uuid);
     }
 
+    /**
+     * Gets by id.
+     */
     @Test
     void getById() {
 

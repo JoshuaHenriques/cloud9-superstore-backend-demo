@@ -98,7 +98,7 @@ public class LoginController {
     public ResponseEntity<String> deleteLogin(@PathVariable UUID loginId)
             throws LoginNotFoundException {
         if (loginService.existsById(loginId)) {
-            loginService.delete(loginService.getById(loginId));
+            loginService.remove(loginService.getById(loginId));
 
             HttpHeaders responseHeaders = new HttpHeaders();
             responseHeaders.set("LoginController", "deleteLogin");
@@ -115,7 +115,7 @@ public class LoginController {
     @GetMapping(value = "/list/logins", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Login>> listLogins() {
         // @RequestParam(defaultValue = "email") String sortBy
-        List<Login> list = loginService.findAllLogins(); // sortBy
+        List<Login> list = loginService.findAll(); // sortBy
 
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.set("LoginController", "listLogins");

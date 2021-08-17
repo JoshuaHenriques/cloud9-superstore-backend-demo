@@ -1,14 +1,11 @@
 package org.jayhenri.cloud9.service.item;
 
+import org.jayhenri.cloud9.interfaces.ServiceI;
 import org.jayhenri.cloud9.model.item.Item;
 import org.jayhenri.cloud9.repository.item.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -17,7 +14,7 @@ import java.util.UUID;
  * The type Customer service.
  */
 @Service
-public class ItemService {
+public class ItemService implements ServiceI<Item, UUID> {
 
     private final ItemRepository itemRepository;
 
@@ -48,7 +45,7 @@ public class ItemService {
      *
      * @param customer the customer
      */
-    public void delete(Item customer) {
+    public void remove(Item customer) {
 
         itemRepository.delete(customer);
     }
@@ -68,7 +65,7 @@ public class ItemService {
      *
      * @return the list
      */
-    public List<Item> findAllItems() {
+    public List<Item> findAll() {
 
         return itemRepository.findAll();
     }

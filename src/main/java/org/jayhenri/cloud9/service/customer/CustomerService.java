@@ -1,14 +1,11 @@
 package org.jayhenri.cloud9.service.customer;
 
+import org.jayhenri.cloud9.interfaces.customer.CustomerServiceI;
 import org.jayhenri.cloud9.model.customer.Customer;
 import org.jayhenri.cloud9.repository.customer.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -17,7 +14,7 @@ import java.util.UUID;
  * The type Customer service.
  */
 @Service
-public class CustomerService {
+public class CustomerService implements CustomerServiceI<Customer, UUID> {
 
     private final CustomerRepository customerRepository;
 
@@ -31,17 +28,6 @@ public class CustomerService {
 
         this.customerRepository = customerRepository;
         // this.orderDBService = orderDBService;
-    }
-
-    /**
-     * Exists by phone number boolean.
-     *
-     * @param phoneNumber the phone number
-     * @return the boolean
-     */
-    public boolean existsByPhoneNumber(String phoneNumber) {
-
-        return customerRepository.existsByPhoneNumber(phoneNumber);
     }
 
     /**
@@ -59,7 +45,7 @@ public class CustomerService {
      *
      * @param customer the customer
      */
-    public void delete(Customer customer) {
+    public void remove(Customer customer) {
 
         customerRepository.delete(customer);
     }
@@ -77,17 +63,11 @@ public class CustomerService {
     /**
      * Find all customers list.
      *
-     * @param pageNo   the page no
-     * @param pageSize the page size
      * @return the list
      */
-    public List<Customer> findAllCustomers(Integer pageNo, Integer pageSize) {
-        // String sortBy
-        Pageable paging = PageRequest.of(pageNo, pageSize); // Sort.by(sortBy).ascending()
-        Page<Customer> pagedResult = customerRepository.findAll(paging);
+    public List<Customer> findAll() {
 
-        if (pagedResult.hasContent()) return pagedResult.getContent();
-        else return new ArrayList<>();
+        return customerRepository.findAll();
     }
 
     /**
@@ -143,5 +123,16 @@ public class CustomerService {
     public boolean existsByCCN(String ccn) {
 
         return customerRepository.existsByCreditCardCCN(ccn);
+    }
+
+    /**
+     * Exists by phone number boolean.
+     *
+     * @param phoneNumber the phone number
+     * @return the boolean
+     */
+    public boolean existsByPhoneNumber(String phoneNumber) {
+
+        return customerRepository.existsByPhoneNumber(phoneNumber);
     }
 }

@@ -1,6 +1,5 @@
 package org.jayhenri.cloud9.login;
 
-import org.jayhenri.cloud9.model.inventory.StoreInventory;
 import org.jayhenri.cloud9.model.login.Login;
 import org.jayhenri.cloud9.repository.login.LoginRepository;
 import org.jayhenri.cloud9.service.login.LoginService;
@@ -12,13 +11,15 @@ import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.HashSet;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
 
+/**
+ * The type Login service test.
+ */
 @ExtendWith(MockitoExtension.class)
 public class LoginServiceTest {
 
@@ -40,6 +41,9 @@ public class LoginServiceTest {
 
     private UUID uuid;
 
+    /**
+     * Sets up.
+     */
     @BeforeEach
     void setUp() {
 
@@ -56,6 +60,7 @@ public class LoginServiceTest {
                 "somepassword"
         );
     }
+
     /**
      * Test add.
      */
@@ -88,7 +93,7 @@ public class LoginServiceTest {
     @Test
     void delete() {
 
-        loginService.delete(login);
+        loginService.remove(login);
 
         then(loginRepository).should().delete(captorLogin.capture());
 
@@ -101,11 +106,14 @@ public class LoginServiceTest {
     @Test
     void findAllLogins() {
 
-        loginService.findAllLogins();
+        loginService.findAll();
 
         then(loginRepository).should().findAll();
     }
 
+    /**
+     * Exists by id.
+     */
     @Test
     void existsById() {
 
@@ -119,6 +127,9 @@ public class LoginServiceTest {
         assertThat(captorUUID.getValue()).isEqualTo(uuid);
     }
 
+    /**
+     * Does not exists by id.
+     */
     @Test
     void doesNotExistsById() {
 
@@ -132,6 +143,9 @@ public class LoginServiceTest {
         assertThat(captorUUID.getValue()).isEqualTo(uuid);
     }
 
+    /**
+     * Gets by id.
+     */
     @Test
     void getById() {
 

@@ -11,6 +11,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+/**
+ * The type Address service test.
+ */
 @ExtendWith(MockitoExtension.class)
 public class AddressServiceTest {
 
@@ -21,6 +24,9 @@ public class AddressServiceTest {
 
     private Address address;
 
+    /**
+     * Sets up.
+     */
     @BeforeEach
     void setUp() {
 

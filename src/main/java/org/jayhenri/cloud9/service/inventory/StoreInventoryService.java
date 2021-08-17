@@ -1,5 +1,6 @@
 package org.jayhenri.cloud9.service.inventory;
 
+import org.jayhenri.cloud9.interfaces.InventoryServiceI;
 import org.jayhenri.cloud9.model.inventory.StoreInventory;
 import org.jayhenri.cloud9.model.item.Item;
 import org.jayhenri.cloud9.repository.inventory.StoreInventoryRepository;
@@ -13,7 +14,7 @@ import java.util.UUID;
  * The type Inventory service.
  */
 @Service
-public class StoreInventoryService {
+public class StoreInventoryService implements InventoryServiceI<StoreInventory, Item, UUID> {
 
     private final StoreInventoryRepository inventoryRepository;
 

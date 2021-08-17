@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.jayhenri.cloud9.store.EmployeeServiceTest" tests="10" skipped="1" failures="0" errors="0" timestamp="2021-08-17T03:54:40" hostname="kde-neon" time="0.094">
+  <properties/>
+  <testcase name="doesNotExistsByPhoneNumber()" classname="org.jayhenri.cloud9.store.EmployeeServiceTest" time="0.075"/>
+  <testcase name="testAdd()" classname="org.jayhenri.cloud9.store.EmployeeServiceTest" time="0.002"/>
+  <testcase name="delete()" classname="org.jayhenri.cloud9.store.EmployeeServiceTest" time="0.002"/>
+  <testcase name="update()" classname="org.jayhenri.cloud9.store.EmployeeServiceTest" time="0.002"/>
+  <testcase name="existsByEmail()" classname="org.jayhenri.cloud9.store.EmployeeServiceTest" time="0.001"/>
+  <testcase name="findAllEmployees()" classname="org.jayhenri.cloud9.store.EmployeeServiceTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="add()" classname="org.jayhenri.cloud9.store.EmployeeServiceTest" time="0.002"/>
+  <testcase name="existsByPhoneNumber()" classname="org.jayhenri.cloud9.store.EmployeeServiceTest" time="0.001"/>
+  <testcase name="getByEmail()" classname="org.jayhenri.cloud9.store.EmployeeServiceTest" time="0.001"/>
+  <testcase name="doesNotExistsByEmail()" classname="org.jayhenri.cloud9.store.EmployeeServiceTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
