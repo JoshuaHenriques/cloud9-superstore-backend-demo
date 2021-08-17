@@ -1,7 +1,7 @@
 package org.jayhenri.cloud9.service.customer;
 
-import org.jayhenri.cloud9.interfaces.customer.CartServiceI;
-import org.jayhenri.cloud9.interfaces.customer.CustomerServiceI;
+import org.jayhenri.cloud9.interfaces.service.customer.CartServiceI;
+import org.jayhenri.cloud9.interfaces.service.customer.CustomerServiceI;
 import org.jayhenri.cloud9.model.customer.Cart;
 import org.jayhenri.cloud9.model.customer.Customer;
 import org.jayhenri.cloud9.model.item.Item;
@@ -16,9 +16,9 @@ import java.util.UUID;
  * The type Cart service.
  */
 @Service
-public class CartService implements CartServiceI<Customer, Item, Cart, UUID> {
+public class CartService implements CartServiceI {
 
-    private final CustomerServiceI<Customer, UUID> customerService;
+    private final CustomerServiceI customerService;
 
     /**
      * Instantiates a new Cart service.
@@ -26,7 +26,7 @@ public class CartService implements CartServiceI<Customer, Item, Cart, UUID> {
      * @param customerService the customer service
      */
     @Autowired
-    public CartService(CustomerServiceI<Customer, UUID> customerService) {
+    public CartService(CustomerServiceI customerService) {
 
         this.customerService = customerService;
     }

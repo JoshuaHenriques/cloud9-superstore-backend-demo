@@ -1,6 +1,6 @@
 package org.jayhenri.cloud9.service.login;
 
-import org.jayhenri.cloud9.interfaces.LoginServiceI;
+import org.jayhenri.cloud9.interfaces.service.other.LoginServiceI;
 import org.jayhenri.cloud9.model.login.Login;
 import org.jayhenri.cloud9.repository.login.LoginRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import java.util.UUID;
  * The type Customer service.
  */
 @Service
-public class LoginService implements LoginServiceI<Login, UUID> {
+public class LoginService implements LoginServiceI {
 
     private final LoginRepository loginRepository;
 

@@ -1,6 +1,6 @@
 package org.jayhenri.cloud9.service.customer;
 
-import org.jayhenri.cloud9.interfaces.customer.CustomerServiceI;
+import org.jayhenri.cloud9.interfaces.service.customer.CustomerServiceI;
 import org.jayhenri.cloud9.model.customer.Customer;
 import org.jayhenri.cloud9.repository.customer.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import java.util.UUID;
  * The type Customer service.
  */
 @Service
-public class CustomerService implements CustomerServiceI<Customer, UUID> {
+public class CustomerService implements CustomerServiceI {
 
     private final CustomerRepository customerRepository;
 

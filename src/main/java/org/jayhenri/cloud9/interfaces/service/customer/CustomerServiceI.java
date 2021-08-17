@@ -1,14 +1,13 @@
-package org.jayhenri.cloud9.interfaces.customer;
+package org.jayhenri.cloud9.interfaces.service.customer;
 
-import org.jayhenri.cloud9.interfaces.ServiceI;
+import org.jayhenri.cloud9.interfaces.service.ServiceI;
+import org.jayhenri.cloud9.model.customer.Customer;
 
 /**
  * The interface Customer service i.
  *
- * @param <T> the type parameter
- * @param <U> the type parameter
  */
-public interface CustomerServiceI<T, U> extends ServiceI<T, U> {
+public interface CustomerServiceI extends ServiceI<Customer> {
 
     /**
      * Exists by email boolean.
@@ -32,7 +31,7 @@ public interface CustomerServiceI<T, U> extends ServiceI<T, U> {
      * @param email the email
      * @return the by email
      */
-    T getByEmail(String email);
+    Customer getByEmail(String email);
 
     /**
      * Exists by ccn boolean.

@@ -1,6 +1,6 @@
 package org.jayhenri.cloud9.service.store;
 
-import org.jayhenri.cloud9.interfaces.EmployeeServiceI;
+import org.jayhenri.cloud9.interfaces.service.other.EmployeeServiceI;
 import org.jayhenri.cloud9.model.store.Employee;
 import org.jayhenri.cloud9.repository.store.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import java.util.UUID;
  * The type Employee service.
  */
 @Service
-public class EmployeeService implements EmployeeServiceI<Employee, UUID> {
+public class EmployeeService implements EmployeeServiceI {
 
     private final EmployeeRepository employeeRepository;
 

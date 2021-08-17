@@ -1,14 +1,14 @@
-package org.jayhenri.cloud9.interfaces;
+package org.jayhenri.cloud9.interfaces.service;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * The interface Service i.
  *
  * @param <T> the type parameter
- * @param <U> the type parameter
  */
-public interface ServiceI<T, U> {
+public interface ServiceI<T> {
 
     /**
      * Add.
@@ -41,16 +41,16 @@ public interface ServiceI<T, U> {
     /**
      * Exists by id boolean.
      *
-     * @param u the u
+     * @param uuid the u
      * @return the boolean
      */
-    boolean existsById(U u);
+    boolean existsById(UUID uuid);
 
     /**
      * Gets by id.
      *
-     * @param u the u
+     * @param uuid the u
      * @return the by id
      */
-    T getById(U u);
+    T getById(UUID uuid);
 }

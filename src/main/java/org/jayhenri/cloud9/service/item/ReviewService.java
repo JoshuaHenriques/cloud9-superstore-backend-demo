@@ -1,7 +1,7 @@
 package org.jayhenri.cloud9.service.item;
 
-import org.jayhenri.cloud9.interfaces.ReviewServiceI;
-import org.jayhenri.cloud9.interfaces.ServiceI;
+import org.jayhenri.cloud9.interfaces.service.other.ReviewServiceI;
+import org.jayhenri.cloud9.interfaces.service.ServiceI;
 import org.jayhenri.cloud9.model.item.Item;
 import org.jayhenri.cloud9.model.item.Review;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ import java.util.concurrent.atomic.AtomicReference;
 @Service
 public class ReviewService implements ReviewServiceI<Item, Review, UUID> {
 
-    private final ServiceI<Item, UUID> itemService;
+    private final ServiceI<Item> itemService;
 
     /**
      * Instantiates a new Review service.
@@ -27,7 +27,7 @@ public class ReviewService implements ReviewServiceI<Item, Review, UUID> {
      * @param itemService the item service
      */
     @Autowired
-    public ReviewService(ServiceI<Item, UUID> itemService) {
+    public ReviewService(ServiceI<Item> itemService) {
 
 
         this.itemService = itemService;

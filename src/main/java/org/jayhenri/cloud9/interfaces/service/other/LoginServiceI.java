@@ -1,12 +1,13 @@
-package org.jayhenri.cloud9.interfaces;
+package org.jayhenri.cloud9.interfaces.service.other;
+
+import org.jayhenri.cloud9.interfaces.service.ServiceI;
+import org.jayhenri.cloud9.model.login.Login;
 
 /**
  * The interface Login service i.
  *
- * @param <T> the type parameter
- * @param <U> the type parameter
  */
-public interface LoginServiceI<T, U> extends ServiceI<T, U> {
+public interface LoginServiceI extends ServiceI<Login> {
 
     /**
      * Exists by phone number boolean.

@@ -1,4 +1,4 @@
-package org.jayhenri.cloud9.interfaces.customer;
+package org.jayhenri.cloud9.interfaces.service.customer;
 
 /**
  * The interface Address service i.

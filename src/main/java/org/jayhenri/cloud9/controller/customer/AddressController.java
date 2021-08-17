@@ -3,8 +3,16 @@ package org.jayhenri.cloud9.controller.customer;
 import org.jayhenri.cloud9.exception.invalid.InvalidAddressException;
 import org.jayhenri.cloud9.exception.invalid.InvalidCustomerException;
 import org.jayhenri.cloud9.exception.notfound.CustomerNotFoundException;
+import org.jayhenri.cloud9.exception.notfound.EmployeeNotFoundException;
+import org.jayhenri.cloud9.exception.notfound.StoreNotFoundException;
+import org.jayhenri.cloud9.interfaces.controller.AddressControllerI;
+import org.jayhenri.cloud9.interfaces.service.ServiceI;
+import org.jayhenri.cloud9.interfaces.service.customer.CustomerServiceI;
+import org.jayhenri.cloud9.interfaces.service.other.EmployeeServiceI;
 import org.jayhenri.cloud9.model.customer.Address;
 import org.jayhenri.cloud9.model.customer.Customer;
+import org.jayhenri.cloud9.model.store.Employee;
+import org.jayhenri.cloud9.model.store.Store;
 import org.jayhenri.cloud9.service.customer.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -20,12 +28,12 @@ import java.util.UUID;
  * The type Address controller.
  */
 @RestController
-@RequestMapping("api/customer/address")
-public class AddressController {
+@RequestMapping("api/address")
+public class AddressController implements AddressControllerI {
 
-    private final CustomerService customerService;
-
-    private Customer customer;
+    private final CustomerServiceI customerService;
+    private final ServiceI<Store> storeService;
+    private final EmployeeServiceI employeeService;
 
     /**
      * Instantiates a new Address controller.
@@ -33,8 +41,11 @@ public class AddressController {
      * @param customerService the customer service
      */
     @Autowired
-    public AddressController(CustomerService customerService) {
+    public AddressController(CustomerServiceI customerService, ServiceI<Store> storeService, EmployeeServiceI employeeService) {
+
         this.customerService = customerService;
+        this.storeService = storeService;
+        this.employeeService = employeeService;
     }
 
     /**
@@ -43,24 +54,61 @@ public class AddressController {
      * @param uuid    the uuid
      * @param address the customer
      * @return the response entity
-     * @throws InvalidCustomerException  the invalid customer exception
      * @throws CustomerNotFoundException the customer not found exception
      * @throws InvalidAddressException   the invalid address exception
      */
-    @PutMapping(value = "/update/{customerId}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> updateAddress(@PathVariable("customerId") UUID uuid, @RequestBody Address address)
-            throws InvalidCustomerException, CustomerNotFoundException, InvalidAddressException {
+    public ResponseEntity<String> update(@RequestBody Address address, @PathVariable("uuid") UUID uuid, String type)
+            throws CustomerNotFoundException, InvalidAddressException, StoreNotFoundException, EmployeeNotFoundException {
         if (!ObjectUtils.isEmpty(address)) {
-            if (customerService.existsById(uuid)) {
-                customer.setCustomerUUID(uuid);
-                customer.setAddress(address);
-                customerService.update(customer);
 
-                HttpHeaders responseHeaders = new HttpHeaders();
-                responseHeaders.set("AddressController", "updateAddress");
-                return new ResponseEntity<>("Successfully Updated Customer's Address", responseHeaders, HttpStatus.OK);
-            } else
-                throw new CustomerNotFoundException();
+            switch (type) {
+                case "customer":
+                    Customer customer = new Customer();
+
+                    if (customerService.existsById(uuid)) {
+                        customer.setCustomerUUID(uuid);
+                        customer.setAddress(address);
+                        customerService.update(customer);
+
+                        HttpHeaders responseHeaders = new HttpHeaders();
+                        responseHeaders.set("AddressController", "update");
+                        return new ResponseEntity<>("Successfully Updated Customer's Address", responseHeaders, HttpStatus.OK);
+                    } else
+                        throw new CustomerNotFoundException();
+
+                case "employee":
+                    Employee employee = new Employee();
+
+                    if (employeeService.existsById(uuid)) {
+                        employee.setEmployeeUUID(uuid);
+                        employee.setAddress(address);
+                        employeeService.update(employee);
+
+                        HttpHeaders responseHeaders = new HttpHeaders();
+                        responseHeaders.set("AddressController", "update");
+                        return new ResponseEntity<>("Successfully Updated Employee's Address", responseHeaders, HttpStatus.OK);
+                    } else
+                        throw new EmployeeNotFoundException();
+
+                case "store":
+                    Store store = new Store();
+
+                    if (storeService.existsById(uuid)) {
+                        store.setStoreUUID(uuid);
+                        store.setAddress(address);
+                        storeService.update(store);
+
+                        HttpHeaders responseHeaders = new HttpHeaders();
+                        responseHeaders.set("AddressController", "update");
+                        return new ResponseEntity<>("Successfully Updated Store's Address", responseHeaders, HttpStatus.OK);
+                    } else
+                        throw new StoreNotFoundException();
+
+                default:
+                    HttpHeaders responseHeaders = new HttpHeaders();
+                    responseHeaders.set("AddressController", "update");
+                    return new ResponseEntity<>("Wrong Type", responseHeaders, HttpStatus.OK);
+            }
         } else
             throw new InvalidAddressException();
     }

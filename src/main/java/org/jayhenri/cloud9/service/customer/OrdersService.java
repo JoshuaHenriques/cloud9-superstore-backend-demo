@@ -1,7 +1,7 @@
 package org.jayhenri.cloud9.service.customer;
 
-import org.jayhenri.cloud9.interfaces.customer.CustomerServiceI;
-import org.jayhenri.cloud9.interfaces.customer.OrderServiceI;
+import org.jayhenri.cloud9.interfaces.service.customer.CustomerServiceI;
+import org.jayhenri.cloud9.interfaces.service.customer.OrderServiceI;
 import org.jayhenri.cloud9.model.customer.Customer;
 import org.jayhenri.cloud9.model.customer.Orders;
 import org.jayhenri.cloud9.repository.customer.OrdersRepository;
@@ -15,9 +15,9 @@ import java.util.UUID;
  * The type Orders service.
  */
 @Service
-public class OrdersService implements OrderServiceI<Customer, Orders, UUID> {
+public class OrdersService implements OrderServiceI {
 
-    private final CustomerServiceI<Customer, UUID> customerService;
+    private final CustomerServiceI customerService;
     private final OrdersRepository ordersRepository;
 
     /**
@@ -27,7 +27,7 @@ public class OrdersService implements OrderServiceI<Customer, Orders, UUID> {
      * @param customerService  the customer service
      */
     @Autowired
-    public OrdersService(OrdersRepository ordersRepository, CustomerServiceI<Customer, UUID> customerService) {
+    public OrdersService(OrdersRepository ordersRepository, CustomerServiceI customerService) {
         this.ordersRepository = ordersRepository;
         this.customerService = customerService;
     }

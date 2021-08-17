@@ -1,15 +1,15 @@
-package org.jayhenri.cloud9.interfaces.customer;
+package org.jayhenri.cloud9.interfaces.service.other;
 
 import java.util.Set;
 
 /**
- * The interface Credit card service i.
+ * The interface Review service i.
  *
  * @param <T> the type parameter
  * @param <C> the type parameter
  * @param <U> the type parameter
  */
-public interface CreditCardServiceI<T, C, U> {
+public interface ReviewServiceI<T, C, U> {
 
     /**
      * Add.

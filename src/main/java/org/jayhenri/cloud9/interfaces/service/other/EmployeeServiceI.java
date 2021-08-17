@@ -1,12 +1,13 @@
-package org.jayhenri.cloud9.interfaces;
+package org.jayhenri.cloud9.interfaces.service.other;
+
+import org.jayhenri.cloud9.interfaces.service.ServiceI;
+import org.jayhenri.cloud9.model.store.Employee;
 
 /**
  * The interface Employee service i.
  *
- * @param <T> the type parameter
- * @param <U> the type parameter
  */
-public interface EmployeeServiceI<T, U> extends ServiceI<T, U> {
+public interface EmployeeServiceI extends ServiceI<Employee> {
 
     /**
      * Exists by email boolean.
@@ -30,5 +31,5 @@ public interface EmployeeServiceI<T, U> extends ServiceI<T, U> {
      * @param email the email
      * @return the by email
      */
-    T getByEmail(String email);
+    Employee getByEmail(String email);
 }

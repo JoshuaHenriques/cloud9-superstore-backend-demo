@@ -1,4 +1,4 @@
-package org.jayhenri.cloud9.interfaces;
+package org.jayhenri.cloud9.interfaces.service.other;
 
 import java.util.List;
 
