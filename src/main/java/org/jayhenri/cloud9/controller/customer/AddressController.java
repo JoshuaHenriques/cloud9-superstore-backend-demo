@@ -1,11 +1,10 @@
 package org.jayhenri.cloud9.controller.customer;
 
 import org.jayhenri.cloud9.exception.invalid.InvalidAddressException;
-import org.jayhenri.cloud9.exception.invalid.InvalidCustomerException;
 import org.jayhenri.cloud9.exception.notfound.CustomerNotFoundException;
 import org.jayhenri.cloud9.exception.notfound.EmployeeNotFoundException;
 import org.jayhenri.cloud9.exception.notfound.StoreNotFoundException;
-import org.jayhenri.cloud9.interfaces.controller.AddressControllerI;
+import org.jayhenri.cloud9.interfaces.controller.customer.AddressControllerI;
 import org.jayhenri.cloud9.interfaces.service.ServiceI;
 import org.jayhenri.cloud9.interfaces.service.customer.CustomerServiceI;
 import org.jayhenri.cloud9.interfaces.service.other.EmployeeServiceI;
@@ -13,11 +12,9 @@ import org.jayhenri.cloud9.model.customer.Address;
 import org.jayhenri.cloud9.model.customer.Customer;
 import org.jayhenri.cloud9.model.store.Employee;
 import org.jayhenri.cloud9.model.store.Store;
-import org.jayhenri.cloud9.service.customer.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
@@ -39,6 +36,8 @@ public class AddressController implements AddressControllerI {
      * Instantiates a new Address controller.
      *
      * @param customerService the customer service
+     * @param storeService    the store service
+     * @param employeeService the employee service
      */
     @Autowired
     public AddressController(CustomerServiceI customerService, ServiceI<Store> storeService, EmployeeServiceI employeeService) {

@@ -4,6 +4,8 @@ import org.jayhenri.cloud9.exception.alreadyexists.StoreAlreadyExistsException;
 import org.jayhenri.cloud9.exception.invalid.InvalidPostalCodeException;
 import org.jayhenri.cloud9.exception.invalid.InvalidStoreException;
 import org.jayhenri.cloud9.exception.notfound.StoreNotFoundException;
+import org.jayhenri.cloud9.interfaces.service.ServiceI;
+import org.jayhenri.cloud9.interfaces.service.customer.AddressServiceI;
 import org.jayhenri.cloud9.model.store.Store;
 import org.jayhenri.cloud9.service.customer.AddressService;
 import org.jayhenri.cloud9.service.store.StoreService;
@@ -26,8 +28,8 @@ import java.util.UUID;
 @RequestMapping("api/store")
 public class StoreController {
 
-    private final StoreService storeService;
-    private final AddressService addressService;
+    private final ServiceI<Store> storeService;
+    private final AddressServiceI addressService;
 
     /**
      * Instantiates a new Store controller.
@@ -36,7 +38,7 @@ public class StoreController {
      * @param addressService the inventory service
      */
     @Autowired
-    public StoreController(StoreService storeService, AddressService addressService) {
+    public StoreController(ServiceI<Store> storeService, AddressServiceI addressService) {
         this.storeService = storeService;
         this.addressService = addressService;
     }

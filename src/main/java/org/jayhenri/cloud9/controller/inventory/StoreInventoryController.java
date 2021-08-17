@@ -3,8 +3,10 @@ package org.jayhenri.cloud9.controller.inventory;
 import org.jayhenri.cloud9.exception.alreadyexists.ItemAlreadyExistsException;
 import org.jayhenri.cloud9.exception.invalid.InvalidItemException;
 import org.jayhenri.cloud9.exception.notfound.ItemNotFoundException;
+import org.jayhenri.cloud9.interfaces.service.other.InventoryServiceI;
 import org.jayhenri.cloud9.model.inventory.StoreInventory;
 import org.jayhenri.cloud9.model.item.Item;
+import org.jayhenri.cloud9.model.store.Store;
 import org.jayhenri.cloud9.service.inventory.StoreInventoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -25,7 +27,7 @@ import java.util.UUID;
 @RequestMapping("api/storeInventory")
 public class StoreInventoryController {
 
-    private final StoreInventoryService storeInventoryService;
+    private final InventoryServiceI<StoreInventory> storeInventoryService;
 
     /**
      * Instantiates a new StoreInventory controller.
@@ -33,7 +35,7 @@ public class StoreInventoryController {
      * @param storeInventoryService the storeInventory service
      */
     @Autowired
-    public StoreInventoryController(StoreInventoryService storeInventoryService) {
+    public StoreInventoryController(InventoryServiceI<StoreInventory> storeInventoryService) {
 
         this.storeInventoryService = storeInventoryService;
     }

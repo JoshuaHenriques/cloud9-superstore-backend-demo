@@ -3,6 +3,9 @@ package org.jayhenri.cloud9.controller.item;
 import org.jayhenri.cloud9.exception.alreadyexists.ItemAlreadyExistsException;
 import org.jayhenri.cloud9.exception.invalid.InvalidItemException;
 import org.jayhenri.cloud9.exception.notfound.ItemNotFoundException;
+import org.jayhenri.cloud9.interfaces.service.ServiceI;
+import org.jayhenri.cloud9.interfaces.service.other.ItemServiceI;
+import org.jayhenri.cloud9.interfaces.service.other.ReviewServiceI;
 import org.jayhenri.cloud9.model.item.Item;
 import org.jayhenri.cloud9.service.item.ItemService;
 import org.jayhenri.cloud9.service.item.ReviewService;
@@ -26,19 +29,16 @@ import java.util.UUID;
 @RequestMapping("api/item")
 public class ItemController {
 
-    private final ItemService itemService;
-    private final ReviewService reviewService;
+    private final ItemServiceI itemService;
 
     /**
      * Instantiates a new Item controller.
      *
-     * @param itemService   the item service
-     * @param reviewService the review service
+     * @param itemService the item service
      */
     @Autowired
-    public ItemController(ItemService itemService, ReviewService reviewService) {
+    public ItemController(ItemServiceI itemService) {
         this.itemService = itemService;
-        this.reviewService = reviewService;
     }
 
     /**

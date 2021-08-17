@@ -4,6 +4,8 @@ import org.jayhenri.cloud9.exception.alreadyexists.CreditCardAlreadyExistsExcept
 import org.jayhenri.cloud9.exception.invalid.InvalidOrdersException;
 import org.jayhenri.cloud9.exception.notfound.CreditCardNotFoundException;
 import org.jayhenri.cloud9.exception.notfound.CustomerNotFoundException;
+import org.jayhenri.cloud9.interfaces.service.customer.CreditCardServiceI;
+import org.jayhenri.cloud9.interfaces.service.customer.CustomerServiceI;
 import org.jayhenri.cloud9.model.customer.CreditCard;
 import org.jayhenri.cloud9.service.customer.CreditCardService;
 import org.jayhenri.cloud9.service.customer.CustomerService;
@@ -23,8 +25,8 @@ import java.util.UUID;
  */
 public class CreditCardController {
 
-    private final CustomerService customerService;
-    private final CreditCardService creditCardService;
+    private final CustomerServiceI customerService;
+    private final CreditCardServiceI creditCardService;
 
     /**
      * Instantiates a new Customer controller.
@@ -33,7 +35,7 @@ public class CreditCardController {
      * @param creditCardService the credit card service
      */
     @Autowired
-    public CreditCardController(CustomerService customerService, CreditCardService creditCardService) {
+    public CreditCardController(CustomerServiceI customerService, CreditCardServiceI creditCardService) {
         this.customerService = customerService;
         this.creditCardService = creditCardService;
     }

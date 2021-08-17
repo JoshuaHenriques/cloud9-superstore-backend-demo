@@ -3,9 +3,11 @@ package org.jayhenri.cloud9.controller.customer;
 import org.jayhenri.cloud9.exception.invalid.InvalidOrdersException;
 import org.jayhenri.cloud9.exception.notfound.CustomerNotFoundException;
 import org.jayhenri.cloud9.exception.notfound.OrdersNotFoundException;
+import org.jayhenri.cloud9.interfaces.service.ServiceI;
+import org.jayhenri.cloud9.interfaces.service.customer.CustomerServiceI;
 import org.jayhenri.cloud9.model.customer.Orders;
 import org.jayhenri.cloud9.service.customer.CustomerService;
-import org.jayhenri.cloud9.service.customer.OrdersService;
+import org.jayhenri.cloud9.interfaces.service.customer.OrdersServiceI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -25,8 +27,8 @@ import java.util.UUID;
 @RequestMapping("api/orders")
 public class OrdersController {
 
-    private final CustomerService customerService;
-    private final OrdersService ordersService;
+    private final CustomerServiceI customerService;
+    private final OrdersServiceI ordersService;
 
     /**
      * Instantiates a new Orders controller.
@@ -35,7 +37,7 @@ public class OrdersController {
      * @param customerService the customer service
      */
     @Autowired
-    public OrdersController(OrdersService ordersService, CustomerService customerService) {
+    public OrdersController(OrdersServiceI ordersService, CustomerServiceI customerService) {
         this.ordersService = ordersService;
         this.customerService = customerService;
     }

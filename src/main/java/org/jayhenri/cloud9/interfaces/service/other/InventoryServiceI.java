@@ -1,24 +1,26 @@
 package org.jayhenri.cloud9.interfaces.service.other;
 
+import org.jayhenri.cloud9.exception.OutOfStockException;
+import org.jayhenri.cloud9.model.item.Item;
+
 import java.util.List;
+import java.util.UUID;
 
 /**
  * The interface Inventory service i.
  *
  * @param <T> the type parameter
- * @param <C> the type parameter
- * @param <U> the type parameter
  */
-public interface InventoryServiceI<T, C, U> {
+public interface InventoryServiceI<T> {
 
     /**
      * Add.
      *
-     * @param c        the c
+     * @param item     the item
      * @param quantity the quantity
      * @param price    the price
      */
-    void add(C c, int quantity, double price);
+    void add(Item item, int quantity, double price);
 
     /**
      * Update.
@@ -60,16 +62,32 @@ public interface InventoryServiceI<T, C, U> {
     /**
      * Exists by id boolean.
      *
-     * @param u the u
+     * @param uuid the u
      * @return the boolean
      */
-    boolean existsById(U u);
+    boolean existsById(UUID uuid);
 
     /**
      * Gets by id.
      *
-     * @param u the u
+     * @param uuid the u
      * @return the by id
      */
-    T getById(U u);
+    T getById(UUID uuid);
+
+    /**
+     * Update.
+     *
+     * @param t        the t
+     * @param quantity the quantity
+     */
+    boolean canPurchase(T t, int quantity);
+
+    /**
+     * Update.
+     *
+     * @param t        the t
+     * @param quantity the quantity
+     */
+    void purchase(T t, int quantity) throws OutOfStockException;
 }

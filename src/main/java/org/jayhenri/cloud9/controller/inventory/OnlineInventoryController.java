@@ -3,6 +3,7 @@ package org.jayhenri.cloud9.controller.onlineInventory;
 import org.jayhenri.cloud9.exception.alreadyexists.ItemAlreadyExistsException;
 import org.jayhenri.cloud9.exception.invalid.InvalidItemException;
 import org.jayhenri.cloud9.exception.notfound.ItemNotFoundException;
+import org.jayhenri.cloud9.interfaces.service.other.InventoryServiceI;
 import org.jayhenri.cloud9.model.inventory.OnlineInventory;
 import org.jayhenri.cloud9.model.item.Item;
 import org.jayhenri.cloud9.service.inventory.OnlineInventoryService;
@@ -25,7 +26,7 @@ import java.util.UUID;
 @RequestMapping("api/onlineInventory")
 public class OnlineInventoryController {
 
-    private final OnlineInventoryService onlineInventoryService;
+    private final InventoryServiceI<OnlineInventory> onlineInventoryService;
 
     /**
      * Instantiates a new OnlineInventory controller.
@@ -33,7 +34,7 @@ public class OnlineInventoryController {
      * @param onlineInventoryService the onlineInventory service
      */
     @Autowired
-    public OnlineInventoryController(OnlineInventoryService onlineInventoryService) {
+    public OnlineInventoryController(InventoryServiceI<OnlineInventory> onlineInventoryService) {
 
         this.onlineInventoryService = onlineInventoryService;
     }

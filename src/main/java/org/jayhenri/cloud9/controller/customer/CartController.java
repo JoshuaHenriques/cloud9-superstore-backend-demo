@@ -2,7 +2,12 @@ package org.jayhenri.cloud9.controller.customer;
 
 import org.jayhenri.cloud9.exception.notfound.CustomerNotFoundException;
 import org.jayhenri.cloud9.exception.notfound.ItemNotFoundException;
+import org.jayhenri.cloud9.interfaces.service.customer.CartServiceI;
+import org.jayhenri.cloud9.interfaces.service.customer.CustomerServiceI;
+import org.jayhenri.cloud9.interfaces.service.other.InventoryServiceI;
 import org.jayhenri.cloud9.model.customer.Cart;
+import org.jayhenri.cloud9.model.inventory.OnlineInventory;
+import org.jayhenri.cloud9.model.item.Item;
 import org.jayhenri.cloud9.service.customer.CartService;
 import org.jayhenri.cloud9.service.customer.CustomerService;
 import org.jayhenri.cloud9.service.inventory.OnlineInventoryService;
@@ -23,9 +28,9 @@ import java.util.UUID;
  */
 public class CartController {
 
-    private final CustomerService customerService;
-    private final OnlineInventoryService onlineInventoryService;
-    private final CartService cartService;
+    private final CustomerServiceI customerService;
+    private final InventoryServiceI<OnlineInventory> onlineInventoryService;
+    private final CartServiceI cartService;
 
     /**
      * Instantiates a new Customer controller.

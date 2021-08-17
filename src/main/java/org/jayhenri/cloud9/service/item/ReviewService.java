@@ -1,5 +1,6 @@
 package org.jayhenri.cloud9.service.item;
 
+import org.jayhenri.cloud9.interfaces.service.other.ItemServiceI;
 import org.jayhenri.cloud9.interfaces.service.other.ReviewServiceI;
 import org.jayhenri.cloud9.interfaces.service.ServiceI;
 import org.jayhenri.cloud9.model.item.Item;
@@ -17,9 +18,9 @@ import java.util.concurrent.atomic.AtomicReference;
  * The type Customer service.
  */
 @Service
-public class ReviewService implements ReviewServiceI<Item, Review, UUID> {
+public class ReviewService implements ReviewServiceI {
 
-    private final ServiceI<Item> itemService;
+    private final ItemServiceI itemService;
 
     /**
      * Instantiates a new Review service.
@@ -27,7 +28,7 @@ public class ReviewService implements ReviewServiceI<Item, Review, UUID> {
      * @param itemService the item service
      */
     @Autowired
-    public ReviewService(ServiceI<Item> itemService) {
+    public ReviewService(ItemServiceI itemService) {
 
 
         this.itemService = itemService;

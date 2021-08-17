@@ -4,6 +4,8 @@ import org.jayhenri.cloud9.exception.alreadyexists.CustomerAlreadyExistsExceptio
 import org.jayhenri.cloud9.exception.invalid.InvalidCustomerException;
 import org.jayhenri.cloud9.exception.invalid.InvalidPostalCodeException;
 import org.jayhenri.cloud9.exception.notfound.CustomerNotFoundException;
+import org.jayhenri.cloud9.interfaces.service.customer.AddressServiceI;
+import org.jayhenri.cloud9.interfaces.service.customer.CustomerServiceI;
 import org.jayhenri.cloud9.model.customer.Customer;
 import org.jayhenri.cloud9.service.customer.AddressService;
 import org.jayhenri.cloud9.service.customer.CustomerService;
@@ -27,8 +29,8 @@ import java.util.UUID;
 @RequestMapping("api/customer")
 public class CustomerController {
 
-    private final CustomerService customerService;
-    private final AddressService addressService;
+    private final CustomerServiceI customerService;
+    private final AddressServiceI addressService;
 
     /**
      * Instantiates a new Customer controller.
@@ -37,7 +39,7 @@ public class CustomerController {
      * @param addressService  the inventory service
      */
     @Autowired
-    public CustomerController(CustomerService customerService, AddressService addressService) {
+    public CustomerController(CustomerServiceI customerService, AddressServiceI addressService) {
         this.customerService = customerService;
         this.addressService = addressService;
     }

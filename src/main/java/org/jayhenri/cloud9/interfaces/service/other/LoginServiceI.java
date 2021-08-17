@@ -5,7 +5,6 @@ import org.jayhenri.cloud9.model.login.Login;
 
 /**
  * The interface Login service i.
- *
  */
 public interface LoginServiceI extends ServiceI<Login> {
 

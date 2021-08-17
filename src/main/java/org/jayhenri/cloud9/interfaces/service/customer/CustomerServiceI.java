@@ -5,7 +5,6 @@ import org.jayhenri.cloud9.model.customer.Customer;
 
 /**
  * The interface Customer service i.
- *
  */
 public interface CustomerServiceI extends ServiceI<Customer> {
 

@@ -1,6 +1,10 @@
 package org.jayhenri.cloud9.interfaces.service.other;
 
+import org.jayhenri.cloud9.model.item.Item;
+import org.jayhenri.cloud9.model.item.Review;
+
 import java.util.Set;
+import java.util.UUID;
 
 /**
  * The interface Review service i.
@@ -9,47 +13,55 @@ import java.util.Set;
  * @param <C> the type parameter
  * @param <U> the type parameter
  */
-public interface ReviewServiceI<T, C, U> {
+public interface ReviewServiceI {
 
     /**
      * Add.
      *
-     * @param t the t
-     * @param C the c
+     * @param item   the item
+     * @param review the review
      */
-    void add(T t, C C);
+    void add(Item item, Review review);
+
+    /**
+     * Add.
+     *
+     * @param item   the item
+     * @param review the review
+     */
+    void update(Item item, Review review);
 
     /**
      * Remove.
      *
-     * @param t the t
-     * @param u the u
+     * @param item the item
+     * @param uuid the uuid
      */
-    void remove(T t, U u);
+    void remove(Item item, UUID uuid);
 
     /**
      * Find all set.
      *
-     * @param t the t
+     * @param item the item
      * @return the set
      */
-    Set<C> findAll(T t);
+    Set<Review> findAll(Item item);
 
     /**
      * Exists by id boolean.
      *
-     * @param t the t
-     * @param u the u
+     * @param item the item
+     * @param uuid the uuid
      * @return the boolean
      */
-    boolean existsById(T t, U u);
+    boolean existsById(Item item, UUID uuid);
 
     /**
      * Gets by id.
      *
-     * @param t the t
-     * @param u the u
+     * @param item the item
+     * @param uuid the uuid
      * @return the by id
      */
-    C getById(T t, U u);
+    Review getById(Item item, UUID uuid);
 }

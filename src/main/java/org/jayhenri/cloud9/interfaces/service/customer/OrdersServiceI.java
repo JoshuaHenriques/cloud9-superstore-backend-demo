@@ -8,12 +8,8 @@ import java.util.UUID;
 
 /**
  * The interface Order service i.
- *
- * @param <T> the type parameter
- * @param <C> the type parameter
- * @param <U> the type parameter
  */
-public interface OrderServiceI {
+public interface OrdersServiceI {
 
     /**
      * Add.

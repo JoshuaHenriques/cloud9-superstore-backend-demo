@@ -4,6 +4,8 @@ import org.jayhenri.cloud9.exception.alreadyexists.EmployeeAlreadyExistsExceptio
 import org.jayhenri.cloud9.exception.invalid.InvalidEmployeeException;
 import org.jayhenri.cloud9.exception.invalid.InvalidPostalCodeException;
 import org.jayhenri.cloud9.exception.notfound.EmployeeNotFoundException;
+import org.jayhenri.cloud9.interfaces.service.customer.AddressServiceI;
+import org.jayhenri.cloud9.interfaces.service.other.EmployeeServiceI;
 import org.jayhenri.cloud9.model.store.Employee;
 import org.jayhenri.cloud9.service.customer.AddressService;
 import org.jayhenri.cloud9.service.store.EmployeeService;
@@ -26,8 +28,8 @@ import java.util.UUID;
 @RequestMapping("api/employee")
 public class EmployeeController {
 
-    private final EmployeeService employeeService;
-    private final AddressService addressService;
+    private final EmployeeServiceI employeeService;
+    private final AddressServiceI addressService;
 
 
     /**
@@ -37,7 +39,7 @@ public class EmployeeController {
      * @param addressService  the address service
      */
     @Autowired
-    public EmployeeController(EmployeeService employeeService, AddressService addressService) {
+    public EmployeeController(EmployeeServiceI employeeService, AddressServiceI addressService) {
         this.employeeService = employeeService;
         this.addressService = addressService;
     }

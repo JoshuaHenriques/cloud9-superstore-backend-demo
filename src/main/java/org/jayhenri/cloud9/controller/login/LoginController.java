@@ -3,6 +3,7 @@ package org.jayhenri.cloud9.controller.login;
 import org.jayhenri.cloud9.exception.alreadyexists.LoginAlreadyExistsException;
 import org.jayhenri.cloud9.exception.invalid.InvalidLoginException;
 import org.jayhenri.cloud9.exception.notfound.LoginNotFoundException;
+import org.jayhenri.cloud9.interfaces.service.other.LoginServiceI;
 import org.jayhenri.cloud9.model.login.Login;
 import org.jayhenri.cloud9.service.login.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ import java.util.UUID;
 @RequestMapping("api/login")
 public class LoginController {
 
-    private final LoginService loginService;
+    private final LoginServiceI loginService;
 
     /**
      * Instantiates a new Login controller.
@@ -32,7 +33,8 @@ public class LoginController {
      * @param loginService the login service
      */
     @Autowired
-    public LoginController(LoginService loginService) {
+    public LoginController(LoginServiceI loginService) {
+
         this.loginService = loginService;
     }
 

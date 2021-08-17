@@ -8,6 +8,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * The interface Controller i.
+ *
+ * @param <T> the type parameter
+ */
 public interface ControllerI<T> {
 
     /**
@@ -29,7 +34,8 @@ public interface ControllerI<T> {
     /**
      * Update.
      *
-     * @param t the t
+     * @param t    the t
+     * @param uuid the uuid
      */
     @PutMapping("/update/{uuid}")
     void update(T t, UUID uuid);

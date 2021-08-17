@@ -5,7 +5,6 @@ import org.jayhenri.cloud9.model.store.Employee;
 
 /**
  * The interface Employee service i.
- *
  */
 public interface EmployeeServiceI extends ServiceI<Employee> {
 
