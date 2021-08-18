@@ -3,9 +3,9 @@ package org.jayhenri.cloud9.controller.login;
 import org.jayhenri.cloud9.exception.alreadyexists.LoginAlreadyExistsException;
 import org.jayhenri.cloud9.exception.invalid.InvalidLoginException;
 import org.jayhenri.cloud9.exception.notfound.LoginNotFoundException;
+import org.jayhenri.cloud9.interfaces.controller.ControllerI;
 import org.jayhenri.cloud9.interfaces.service.other.LoginServiceI;
 import org.jayhenri.cloud9.model.login.Login;
-import org.jayhenri.cloud9.service.login.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
+import javax.naming.InvalidNameException;
 import java.util.List;
 import java.util.UUID;
 
@@ -23,7 +24,7 @@ import java.util.UUID;
 @RestController // Indicates that the data returned by each method will be written straight into
 // the response body instead of rendering a template
 @RequestMapping("api/login")
-public class LoginController {
+public class LoginController implements ControllerI<Login> {
 
     private final LoginServiceI loginService;
 
@@ -46,8 +47,8 @@ public class LoginController {
      * @throws LoginAlreadyExistsException the login already exists exception
      * @throws InvalidLoginException       the invalid login exception
      */
-    @PostMapping(value = "/login", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> addLogin(@RequestBody Login login)
+    @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> add(@RequestBody Login login)
             throws LoginAlreadyExistsException, InvalidLoginException {
 
         if (ObjectUtils.isEmpty(login))
@@ -59,7 +60,7 @@ public class LoginController {
         loginService.add(login);
 
         HttpHeaders responseHeaders = new HttpHeaders();
-        responseHeaders.set("LoginRegistrationController", "register");
+        responseHeaders.set("LoginController", "add");
         return new ResponseEntity<>("Successfully Created Login", responseHeaders, HttpStatus.CREATED);
     }
 
@@ -73,7 +74,7 @@ public class LoginController {
      * @throws LoginNotFoundException the login not found exception
      */
     @PutMapping(value = "/update/{loginId}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> updateLogin(@RequestBody Login login, @PathVariable UUID loginId)
+    public ResponseEntity<String> update(@RequestBody Login login, @PathVariable UUID loginId)
             throws InvalidLoginException, LoginNotFoundException {
         if (!ObjectUtils.isEmpty(login)) {
             if (loginService.existsById(loginId)) {
@@ -81,7 +82,7 @@ public class LoginController {
                 loginService.update(login);
 
                 HttpHeaders responseHeaders = new HttpHeaders();
-                responseHeaders.set("LoginController", "updateLogin");
+                responseHeaders.set("LoginController", "update");
                 return new ResponseEntity<>("Successfully Updated Login", responseHeaders, HttpStatus.OK);
             } else
                 throw new LoginNotFoundException();
@@ -97,13 +98,13 @@ public class LoginController {
      * @throws LoginNotFoundException the login not found exception
      */
     @DeleteMapping(value = "/delete/{loginId}")
-    public ResponseEntity<String> deleteLogin(@PathVariable UUID loginId)
+    public ResponseEntity<String> delete(@PathVariable UUID loginId)
             throws LoginNotFoundException {
         if (loginService.existsById(loginId)) {
             loginService.remove(loginService.getById(loginId));
 
             HttpHeaders responseHeaders = new HttpHeaders();
-            responseHeaders.set("LoginController", "deleteLogin");
+            responseHeaders.set("LoginController", "delete");
             return new ResponseEntity<>("Successfully Deleted Login", responseHeaders, HttpStatus.OK);
         } else
             throw new LoginNotFoundException();
@@ -114,13 +115,34 @@ public class LoginController {
      *
      * @return the response entity
      */
-    @GetMapping(value = "/list/logins", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Login>> listLogins() {
-        // @RequestParam(defaultValue = "email") String sortBy
-        List<Login> list = loginService.findAll(); // sortBy
+    @GetMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Login>> list() {
+
+        List<Login> list = loginService.findAll();
 
         HttpHeaders responseHeaders = new HttpHeaders();
-        responseHeaders.set("LoginController", "listLogins");
+        responseHeaders.set("LoginController", "list");
         return new ResponseEntity<>(list, responseHeaders, HttpStatus.OK);
+    }
+
+    /**
+     * Gets by email.
+     *
+     * @param loginId the login name
+     */
+    @GetMapping(value = "/get/{loginId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Login> get(@PathVariable UUID loginId)
+            throws InvalidNameException, InvalidLoginException, LoginNotFoundException {
+        if (!ObjectUtils.isEmpty(loginId)) {
+            if (loginService.existsById(loginId)) {
+                Login _login = loginService.getById(loginId);
+
+                HttpHeaders responseHeaders = new HttpHeaders();
+                responseHeaders.set("LoginController", "get");
+                return new ResponseEntity<>(_login, responseHeaders, HttpStatus.OK);
+            } else
+                throw new LoginNotFoundException();
+        } else
+            throw new InvalidLoginException();
     }
 }

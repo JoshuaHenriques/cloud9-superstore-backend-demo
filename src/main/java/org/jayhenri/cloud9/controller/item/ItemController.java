@@ -3,12 +3,9 @@ package org.jayhenri.cloud9.controller.item;
 import org.jayhenri.cloud9.exception.alreadyexists.ItemAlreadyExistsException;
 import org.jayhenri.cloud9.exception.invalid.InvalidItemException;
 import org.jayhenri.cloud9.exception.notfound.ItemNotFoundException;
-import org.jayhenri.cloud9.interfaces.service.ServiceI;
+import org.jayhenri.cloud9.interfaces.controller.ControllerI;
 import org.jayhenri.cloud9.interfaces.service.other.ItemServiceI;
-import org.jayhenri.cloud9.interfaces.service.other.ReviewServiceI;
 import org.jayhenri.cloud9.model.item.Item;
-import org.jayhenri.cloud9.service.item.ItemService;
-import org.jayhenri.cloud9.service.item.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -24,10 +21,9 @@ import java.util.UUID;
 /**
  * The type Item controller.
  */
-@RestController // Indicates that the data returned by each method will be written straight into
-// the response body instead of rendering a template
+@RestController
 @RequestMapping("api/item")
-public class ItemController {
+public class ItemController implements ControllerI<Item> {
 
     private final ItemServiceI itemService;
 
@@ -49,8 +45,8 @@ public class ItemController {
      * @throws ItemAlreadyExistsException the item already exists exception
      * @throws InvalidItemException       the invalid item exception
      */
-    @PostMapping(value = "/add/item", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> addItem(@RequestBody Item item)
+    @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> add(@RequestBody Item item)
             throws ItemAlreadyExistsException, InvalidItemException {
 
         if (ObjectUtils.isEmpty(item))
@@ -63,7 +59,7 @@ public class ItemController {
         itemService.add(item);
 
         HttpHeaders responseHeaders = new HttpHeaders();
-        responseHeaders.set("ItemRegistrationController", "addItem");
+        responseHeaders.set("ItemRegistrationController", "add");
         return new ResponseEntity<>("Successfully Created Item", responseHeaders, HttpStatus.CREATED);
     }
 
@@ -78,7 +74,7 @@ public class ItemController {
      * @throws ItemAlreadyExistsException the item already exists exception
      */
     @PutMapping(value = "/update/{itemId}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> updateItem(@RequestBody Item item, @PathVariable UUID itemId)
+    public ResponseEntity<String> update(@RequestBody Item item, @PathVariable UUID itemId)
             throws InvalidItemException, ItemNotFoundException, ItemAlreadyExistsException {
         if (!ObjectUtils.isEmpty(item)) {
             if (itemService.existsByItemName(item.getItemName())) {
@@ -86,7 +82,7 @@ public class ItemController {
                     itemService.update(item);
 
                     HttpHeaders responseHeaders = new HttpHeaders();
-                    responseHeaders.set("ItemController", "updateItem");
+                    responseHeaders.set("ItemController", "update");
                     return new ResponseEntity<>("Successfully Updated Item", responseHeaders, HttpStatus.OK);
                 } else
                     throw new ItemAlreadyExistsException();
@@ -104,14 +100,14 @@ public class ItemController {
      * @throws ItemNotFoundException the item not found exception
      */
     @DeleteMapping(value = "/delete/{itemId}")
-    public ResponseEntity<String> deleteItem(@PathVariable String itemId)
+    public ResponseEntity<String> delete(@PathVariable UUID itemId)
             throws ItemNotFoundException {
-        if (itemService.existsByItemName(itemId)) {
-            Item _item = itemService.getByItemName(itemId);
+        if (itemService.existsById(itemId)) {
+            Item _item = itemService.getById(itemId);
             itemService.remove(_item);
 
             HttpHeaders responseHeaders = new HttpHeaders();
-            responseHeaders.set("ItemController", "deleteItem");
+            responseHeaders.set("ItemController", "delete");
             return new ResponseEntity<>("Successfully Deleted Item", responseHeaders, HttpStatus.OK);
         } else
             throw new ItemNotFoundException();
@@ -120,39 +116,35 @@ public class ItemController {
     /**
      * List items response entity.
      *
-     * @param pageNo   the page no
-     * @param pageSize the page size
      * @return the response entity
      */
-    @GetMapping(value = "/list/items", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Item>> listItems(@RequestParam(defaultValue = "0") Integer pageNo,
-                                                @RequestParam(defaultValue = "50") Integer pageSize) {
-        // @RequestParam(defaultValue = "email") String sortBy
-        List<Item> list = itemService.findAll(); // sortBy
+    @GetMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Item>> list() {
+
+        List<Item> list = itemService.findAll();
 
         HttpHeaders responseHeaders = new HttpHeaders();
-        responseHeaders.set("ItemController", "listItems");
+        responseHeaders.set("ItemController", "list");
         return new ResponseEntity<>(list, responseHeaders, HttpStatus.OK);
     }
 
     /**
      * Gets by email.
      *
-     * @param itemName the item name
      * @return the by email
      * @throws InvalidNameException  the invalid name exception
      * @throws ItemNotFoundException the item not found exception
      * @throws InvalidItemException  the invalid item exception
      */
-    @GetMapping(value = "/{itemName}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Item> getByItemName(@PathVariable String itemName)
+    @GetMapping(value = "/get/{itemId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Item> get(@PathVariable UUID itemId)
             throws InvalidNameException, ItemNotFoundException, InvalidItemException {
-        if (!ObjectUtils.isEmpty(itemName)) {
-            if (itemService.existsByItemName(itemName)) {
-                Item _item = itemService.getByItemName(itemName);
+        if (!ObjectUtils.isEmpty(itemId)) {
+            if (itemService.existsById(itemId)) {
+                Item _item = itemService.getById(itemId);
 
                 HttpHeaders responseHeaders = new HttpHeaders();
-                responseHeaders.set("ItemController", "getByItemName");
+                responseHeaders.set("ItemController", "get");
                 return new ResponseEntity<>(_item, responseHeaders, HttpStatus.OK);
             } else
                 throw new ItemNotFoundException();

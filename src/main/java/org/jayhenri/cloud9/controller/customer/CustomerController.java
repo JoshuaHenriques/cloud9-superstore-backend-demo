@@ -4,11 +4,10 @@ import org.jayhenri.cloud9.exception.alreadyexists.CustomerAlreadyExistsExceptio
 import org.jayhenri.cloud9.exception.invalid.InvalidCustomerException;
 import org.jayhenri.cloud9.exception.invalid.InvalidPostalCodeException;
 import org.jayhenri.cloud9.exception.notfound.CustomerNotFoundException;
+import org.jayhenri.cloud9.interfaces.controller.customer.CustomerControllerI;
 import org.jayhenri.cloud9.interfaces.service.customer.AddressServiceI;
 import org.jayhenri.cloud9.interfaces.service.customer.CustomerServiceI;
 import org.jayhenri.cloud9.model.customer.Customer;
-import org.jayhenri.cloud9.service.customer.AddressService;
-import org.jayhenri.cloud9.service.customer.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -27,7 +26,7 @@ import java.util.UUID;
 @RestController // Indicates that the data returned by each method will be written straight into
 // the response body instead of rendering a template
 @RequestMapping("api/customer")
-public class CustomerController {
+public class CustomerController implements CustomerControllerI<Customer> {
 
     private final CustomerServiceI customerService;
     private final AddressServiceI addressService;
@@ -53,8 +52,8 @@ public class CustomerController {
      * @throws InvalidPostalCodeException     the invalid postal code exception
      * @throws InvalidCustomerException       the invalid customer exception
      */
-    @PostMapping(value = "/customer", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> addCustomer(@RequestBody Customer customer)
+    @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> add(@RequestBody Customer customer)
             throws CustomerAlreadyExistsException, InvalidPostalCodeException, InvalidCustomerException {
 
         if (ObjectUtils.isEmpty(customer))
@@ -71,7 +70,7 @@ public class CustomerController {
         customerService.add(customer);
 
         HttpHeaders responseHeaders = new HttpHeaders();
-        responseHeaders.set("CustomerRegistrationController", "register");
+        responseHeaders.set("CustomerRegistrationController", "add");
         return new ResponseEntity<>("Successfully Created Customer", responseHeaders, HttpStatus.CREATED);
     }
 
@@ -84,8 +83,8 @@ public class CustomerController {
      * @throws InvalidCustomerException  the invalid customer exception
      * @throws CustomerNotFoundException the customer not found exception
      */
-    @PutMapping(value = "/update/{customerId}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> updateCustomer(@PathVariable("customerId") UUID uuid, @RequestBody Customer customer)
+    @PutMapping(value = "/update/{uuid}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> update(@RequestBody Customer customer, @PathVariable("uuid") UUID uuid)
             throws InvalidCustomerException, CustomerNotFoundException {
         if (!ObjectUtils.isEmpty(customer)) {
             if (customerService.existsById(customer.getCustomerUUID())) {
@@ -93,7 +92,7 @@ public class CustomerController {
                 customerService.update(customer);
 
                 HttpHeaders responseHeaders = new HttpHeaders();
-                responseHeaders.set("CustomerController", "updateCustomer");
+                responseHeaders.set("CustomerController", "update");
                 return new ResponseEntity<>("Successfully Updated Customer", responseHeaders, HttpStatus.OK);
             } else
                 throw new CustomerNotFoundException();
@@ -104,19 +103,19 @@ public class CustomerController {
     /**
      * Delete customer.
      *
-     * @param customerId the email
+     * @param uuid the email
      * @return the response entity
      * @throws CustomerNotFoundException the customer not found exception
      */
-    @DeleteMapping(value = "/delete/{customerId}")
-    public ResponseEntity<String> deleteCustomer(@PathVariable UUID customerId)
+    @DeleteMapping(value = "/delete/{uuid}")
+    public ResponseEntity<String> delete(@PathVariable UUID uuid)
             throws CustomerNotFoundException {
-        if (customerService.existsById(customerId)) {
-            Customer _customer = customerService.getById(customerId);
+        if (customerService.existsById(uuid)) {
+            Customer _customer = customerService.getById(uuid);
             customerService.remove(_customer);
 
             HttpHeaders responseHeaders = new HttpHeaders();
-            responseHeaders.set("CustomerController", "deleteCustomer");
+            responseHeaders.set("CustomerController", "delete");
             return new ResponseEntity<>("Successfully Deleted Customer", responseHeaders, HttpStatus.OK);
         } else
             throw new CustomerNotFoundException();
@@ -127,33 +126,33 @@ public class CustomerController {
      *
      * @return the response entity
      */
-    @GetMapping(value = "/list/customers", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Customer>> listCustomers() {
-        // @RequestParam(defaultValue = "email") String sortBy
-        List<Customer> list = customerService.findAll(); // sortBy
+    @GetMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Customer>> list() {
+        
+        List<Customer> list = customerService.findAll();
 
         HttpHeaders responseHeaders = new HttpHeaders();
-        responseHeaders.set("CustomerController", "listCustomers");
+        responseHeaders.set("CustomerController", "list");
         return new ResponseEntity<>(list, responseHeaders, HttpStatus.OK);
     }
 
     /**
      * Gets by email.
      *
-     * @param email the email
+     * @param uuid the email
      * @return the by email
      * @throws InvalidNameException      the invalid name exception
      * @throws CustomerNotFoundException the customer not found exception
      */
-    @GetMapping(value = "/{email}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Customer> getByEmail(@PathVariable String email)
+    @GetMapping(value = "/{uuid}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Customer> get(@PathVariable UUID uuid)
             throws InvalidNameException, CustomerNotFoundException {
-        if (!ObjectUtils.isEmpty(email)) {
-            if (customerService.existsByEmail(email)) {
-                Customer _customer = customerService.getByEmail(email);
+        if (!ObjectUtils.isEmpty(uuid)) {
+            if (customerService.existsById(uuid)) {
+                Customer _customer = customerService.getById(uuid);
 
                 HttpHeaders responseHeaders = new HttpHeaders();
-                responseHeaders.set("CustomerController", "getByEmail");
+                responseHeaders.set("CustomerController", "get");
                 return new ResponseEntity<>(_customer, responseHeaders, HttpStatus.OK);
             } else
                 throw new CustomerNotFoundException();
@@ -161,27 +160,27 @@ public class CustomerController {
             throw new InvalidNameException();
     }
 
-    /**
-     * Gets by email.
-     *
-     * @param customerId the email
-     * @return the by email
-     * @throws InvalidNameException      the invalid name exception
-     * @throws CustomerNotFoundException the customer not found exception
-     */
-    @GetMapping(value = "/{customerId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Customer> getById(@PathVariable UUID customerId)
-            throws InvalidNameException, CustomerNotFoundException {
-        if (!ObjectUtils.isEmpty(customerId)) {
-            if (customerService.existsById(customerId)) {
-                Customer _customer = customerService.getById(customerId);
-
-                HttpHeaders responseHeaders = new HttpHeaders();
-                responseHeaders.set("CustomerController", "getById");
-                return new ResponseEntity<>(_customer, responseHeaders, HttpStatus.OK);
-            } else
-                throw new CustomerNotFoundException();
-        } else
-            throw new InvalidNameException();
-    }
+//    /**
+//     * Gets by email.
+//     *
+//     * @param email the email
+//     * @return the by email
+//     * @throws InvalidNameException      the invalid name exception
+//     * @throws CustomerNotFoundException the customer not found exception
+//     */
+//    @GetMapping(value = "/{email}", produces = MediaType.APPLICATION_JSON_VALUE)
+//    public ResponseEntity<Customer> getByEmail(@PathVariable String email)
+//            throws InvalidNameException, CustomerNotFoundException {
+//        if (!ObjectUtils.isEmpty(email)) {
+//            if (customerService.existsByEmail(email)) {
+//                Customer _customer = customerService.getByEmail(email);
+//
+//                HttpHeaders responseHeaders = new HttpHeaders();
+//                responseHeaders.set("CustomerController", "getByEmail");
+//                return new ResponseEntity<>(_customer, responseHeaders, HttpStatus.OK);
+//            } else
+//                throw new CustomerNotFoundException();
+//        } else
+//            throw new InvalidNameException();
+//    }
 }

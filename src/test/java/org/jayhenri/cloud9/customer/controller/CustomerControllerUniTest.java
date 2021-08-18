@@ -8,7 +8,6 @@ import org.jayhenri.cloud9.exception.notfound.CustomerNotFoundException;
 import org.jayhenri.cloud9.interfaces.service.customer.AddressServiceI;
 import org.jayhenri.cloud9.model.customer.*;
 import org.jayhenri.cloud9.model.login.Login;
-import org.jayhenri.cloud9.service.customer.AddressService;
 import org.jayhenri.cloud9.service.customer.CustomerService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
@@ -41,9 +40,6 @@ class CustomerControllerUniTest {
 
     @Captor
     private ArgumentCaptor<String> captorString;
-
-    @Captor
-    private ArgumentCaptor<UUID> captorUUID;
 
     @Mock
     private CustomerService customerService;
@@ -102,7 +98,7 @@ class CustomerControllerUniTest {
         given(customerService.existsByPhoneNumber(customer.getPhoneNumber())).willReturn(false);
         given(addressService.isValidPostalCode(customer.getAddress().getPostalCode())).willReturn(true);
 
-        ResponseEntity<String> response = customerController.addCustomer(customer);
+        ResponseEntity<String> response = customerController.add(customer);
 
         then(customerService).should().add(captorCustomer.capture());
 
@@ -118,7 +114,7 @@ class CustomerControllerUniTest {
         given(addressService.isValidPostalCode(customer.getAddress().getPostalCode())).willReturn(false);
 
         assertThrows(InvalidPostalCodeException.class, () -> {
-            customerController.addCustomer(customer);
+            customerController.add(customer);
         });
     }
 
@@ -130,7 +126,7 @@ class CustomerControllerUniTest {
         given(customerService.existsByEmail(customer.getEmail())).willReturn(true);
 
         assertThrows(CustomerAlreadyExistsException.class, () -> {
-            customerController.addCustomer(customer);
+            customerController.add(customer);
         });
     }
 
@@ -144,7 +140,7 @@ class CustomerControllerUniTest {
     void updateCustomer() throws InvalidCustomerException, CustomerNotFoundException {
         given(customerService.existsById(customer.getCustomerUUID())).willReturn(true);
 
-        ResponseEntity<String> response = customerController.updateCustomer(customer.getCustomerUUID(), customer);
+        ResponseEntity<String> response = customerController.update(customer, customer.getCustomerUUID());
 
         then(customerService).should().update(captorCustomer.capture());
 
@@ -158,7 +154,7 @@ class CustomerControllerUniTest {
     @Test
     void updateCustomerThrowsInvalidCustomerException() {
         assertThrows(InvalidCustomerException.class, () -> {
-            customerController.updateCustomer(null, null);
+            customerController.update(null, null);
         });
     }
 
@@ -170,7 +166,7 @@ class CustomerControllerUniTest {
         given(customerService.existsById(uuid)).willReturn(false);
 
         assertThrows(CustomerNotFoundException.class, () -> {
-            customerController.updateCustomer(customer.getCustomerUUID(), customer);
+            customerController.update(customer, customer.getCustomerUUID());
         });
     }
 
@@ -183,7 +179,7 @@ class CustomerControllerUniTest {
     void deleteCustomer() throws CustomerNotFoundException {
         given(customerService.existsById(uuid)).willReturn(true);
 
-        ResponseEntity<String> response = customerController.deleteCustomer(uuid);
+        ResponseEntity<String> response = customerController.delete(uuid);
 
         then(customerService).should().remove(captorCustomer.capture());
 
@@ -198,7 +194,7 @@ class CustomerControllerUniTest {
     @Test
     void deleteCustomerThrowsCustomerNotFoundException() {
         assertThrows(CustomerNotFoundException.class, () -> {
-            customerController.deleteCustomer(UUID.randomUUID());
+            customerController.delete(UUID.randomUUID());
         });
     }
 
@@ -211,43 +207,43 @@ class CustomerControllerUniTest {
 
     }
 
-    /**
-     * Gets by email.
-     *
-     * @throws InvalidNameException      the invalid name exception
-     * @throws CustomerNotFoundException the customer not found exception
-     */
-    @Test
-    void getByEmail() throws InvalidNameException, CustomerNotFoundException {
-        given(customerService.existsByEmail("customer.email@gmail.com")).willReturn(true);
-
-        ResponseEntity<Customer> response = customerController.getByEmail("customer.email@gmail.com");
-
-        then(customerService).should().getByEmail(captorString.capture());
-
-        assertThat("customerController@gmail.com").isEqualTo(captorString.getValue());
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-    }
-
-    /**
-     * Gets by email throws invalid name exception.
-     */
-    @Test
-    void getByEmailThrowsInvalidNameException() {
-        assertThrows(InvalidNameException.class, () -> {
-            customerController.getByEmail(null);
-        });
-    }
-
-    /**
-     * Gets by email throws customer not found exception.
-     */
-    @Test
-    void getByEmailThrowsCustomerNotFoundException() {
-        given(customerService.existsByEmail("customerController@gmail.com")).willReturn(false);
-
-        assertThrows(CustomerNotFoundException.class, () -> {
-            customerController.getByEmail("customerController@gmail.com");
-        });
-    }
+//    /**
+//     * Gets by email.
+//     *
+//     * @throws InvalidNameException      the invalid name exception
+//     * @throws CustomerNotFoundException the customer not found exception
+//     */
+//    @Test
+//    void getByEmail() throws InvalidNameException, CustomerNotFoundException {
+//        given(customerService.existsByEmail("customer.email@gmail.com")).willReturn(true);
+//
+//        ResponseEntity<Customer> response = customerController.getByEmail("customer.email@gmail.com");
+//
+//        then(customerService).should().getByEmail(captorString.capture());
+//
+//        assertThat("customerController@gmail.com").isEqualTo(captorString.getValue());
+//        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+//    }
+//
+//    /**
+//     * Gets by email throws invalid name exception.
+//     */
+//    @Test
+//    void getByEmailThrowsInvalidNameException() {
+//        assertThrows(InvalidNameException.class, () -> {
+//            customerController.getByEmail(null);
+//        });
+//    }
+//
+//    /**
+//     * Gets by email throws customer not found exception.
+//     */
+//    @Test
+//    void getByEmailThrowsCustomerNotFoundException() {
+//        given(customerService.existsByEmail("customerController@gmail.com")).willReturn(false);
+//
+//        assertThrows(CustomerNotFoundException.class, () -> {
+//            customerController.getByEmail("customerController@gmail.com");
+//        });
+//    }
 }

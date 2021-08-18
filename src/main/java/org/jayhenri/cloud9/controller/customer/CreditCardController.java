@@ -4,6 +4,7 @@ import org.jayhenri.cloud9.exception.alreadyexists.CreditCardAlreadyExistsExcept
 import org.jayhenri.cloud9.exception.invalid.InvalidOrdersException;
 import org.jayhenri.cloud9.exception.notfound.CreditCardNotFoundException;
 import org.jayhenri.cloud9.exception.notfound.CustomerNotFoundException;
+import org.jayhenri.cloud9.interfaces.controller.customer.CreditCardControllerI;
 import org.jayhenri.cloud9.interfaces.service.customer.CreditCardServiceI;
 import org.jayhenri.cloud9.interfaces.service.customer.CustomerServiceI;
 import org.jayhenri.cloud9.model.customer.CreditCard;
@@ -23,7 +24,9 @@ import java.util.UUID;
 /**
  * The type Credit card controller.
  */
-public class CreditCardController {
+@RestController
+@RequestMapping("api/customer/creditCard")
+public class CreditCardController implements CreditCardControllerI {
 
     private final CustomerServiceI customerService;
     private final CreditCardServiceI creditCardService;
@@ -51,7 +54,7 @@ public class CreditCardController {
      * @throws CreditCardAlreadyExistsException the credit card already exists exception
      */
     @PostMapping(value = "/{customerId}/creditCard/add", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> addCreditCard(@PathVariable UUID customerId, @RequestBody CreditCard creditCard)
+    public ResponseEntity<String> add(@PathVariable UUID customerId, @RequestBody CreditCard creditCard)
             throws CustomerNotFoundException, InvalidOrdersException, CreditCardAlreadyExistsException {
         if (!ObjectUtils.isEmpty(creditCard)) {
 
@@ -60,7 +63,7 @@ public class CreditCardController {
                     creditCardService.add(customerService.getById(customerId), creditCard);
 
                     HttpHeaders responseHeaders = new HttpHeaders();
-                    responseHeaders.set("CustomerController", "addCreditCard");
+                    responseHeaders.set("CustomerController", "add");
                     return new ResponseEntity<>("Successfully Added Credit Card", responseHeaders, HttpStatus.CREATED);
                 } else
                     throw new CreditCardAlreadyExistsException();
@@ -80,14 +83,14 @@ public class CreditCardController {
      * @throws CreditCardNotFoundException the credit card not found exception
      */
     @DeleteMapping(value = "/{customerId}/creditCard/remove/{cardId}")
-    public ResponseEntity<String> removeCreditCard(@PathVariable UUID customerId, @PathVariable UUID cardId)
+    public ResponseEntity<String> remove(@PathVariable UUID customerId, @PathVariable UUID cardId)
             throws CustomerNotFoundException, CreditCardNotFoundException {
         if (customerService.existsById(customerId)) {
             if (creditCardService.existsById(customerService.getById(customerId), cardId)) {
                 creditCardService.remove(customerService.getById(customerId), cardId);
 
                 HttpHeaders responseHeaders = new HttpHeaders();
-                responseHeaders.set("CustomerController", "removeCreditCard");
+                responseHeaders.set("CustomerController", "remove");
                 return new ResponseEntity<>("Successfully Removed Credit Card", responseHeaders, HttpStatus.OK);
             } else
                 throw new CreditCardNotFoundException();
@@ -103,13 +106,13 @@ public class CreditCardController {
      * @throws CustomerNotFoundException the customer not found exception
      */
     @GetMapping(value = "/{customerId}/creditCards/list", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Set<CreditCard>> listCreditCards(@PathVariable UUID customerId)
+    public ResponseEntity<Set<CreditCard>> list(@PathVariable UUID customerId)
             throws CustomerNotFoundException {
         if (customerService.existsById(customerId)) {
             Set<CreditCard> list = creditCardService.findAll(customerService.getById(customerId));
 
             HttpHeaders responseHeaders = new HttpHeaders();
-            responseHeaders.set("CustomerController", "listCreditCards");
+            responseHeaders.set("CustomerController", "list");
             return new ResponseEntity<>(list, responseHeaders, HttpStatus.OK);
         } else
             throw new CustomerNotFoundException();

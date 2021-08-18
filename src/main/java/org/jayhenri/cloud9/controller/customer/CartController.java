@@ -2,6 +2,7 @@ package org.jayhenri.cloud9.controller.customer;
 
 import org.jayhenri.cloud9.exception.notfound.CustomerNotFoundException;
 import org.jayhenri.cloud9.exception.notfound.ItemNotFoundException;
+import org.jayhenri.cloud9.interfaces.controller.customer.CartControllerI;
 import org.jayhenri.cloud9.interfaces.service.customer.CartServiceI;
 import org.jayhenri.cloud9.interfaces.service.customer.CustomerServiceI;
 import org.jayhenri.cloud9.interfaces.service.other.InventoryServiceI;
@@ -16,17 +17,16 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
 /**
  * The type Cart controller.
  */
-public class CartController {
+@RestController
+@RequestMapping("/api/customer/cart")
+public class CartController implements CartControllerI {
 
     private final CustomerServiceI customerService;
     private final InventoryServiceI<OnlineInventory> onlineInventoryService;

@@ -3,6 +3,7 @@ package org.jayhenri.cloud9.controller.customer;
 import org.jayhenri.cloud9.exception.invalid.InvalidOrdersException;
 import org.jayhenri.cloud9.exception.notfound.CustomerNotFoundException;
 import org.jayhenri.cloud9.exception.notfound.OrdersNotFoundException;
+import org.jayhenri.cloud9.interfaces.controller.customer.OrdersControllerI;
 import org.jayhenri.cloud9.interfaces.service.ServiceI;
 import org.jayhenri.cloud9.interfaces.service.customer.CustomerServiceI;
 import org.jayhenri.cloud9.model.customer.Orders;
@@ -25,7 +26,7 @@ import java.util.UUID;
  */
 @RestController
 @RequestMapping("api/orders")
-public class OrdersController {
+public class OrdersController implements OrdersControllerI {
 
     private final CustomerServiceI customerService;
     private final OrdersServiceI ordersService;
@@ -51,12 +52,12 @@ public class OrdersController {
      * @throws InvalidOrdersException the invalid orders exception
      */
     @PostMapping(value = "/add/{customerId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> addOrder(@PathVariable UUID customerId, @RequestBody Orders orders) throws InvalidOrdersException {
+    public ResponseEntity<String> add(@RequestBody Orders orders, @PathVariable UUID customerId) throws InvalidOrdersException {
         if (!ObjectUtils.isEmpty(orders)) {
             ordersService.add(customerService.getById(customerId), orders);
 
             HttpHeaders responseHeaders = new HttpHeaders();
-            responseHeaders.set("OrdersController", "addOrder");
+            responseHeaders.set("OrdersController", "add");
             return new ResponseEntity<>("Successfully Created Customer's Order", responseHeaders, HttpStatus.CREATED);
         } else
             throw new InvalidOrdersException();
@@ -72,14 +73,14 @@ public class OrdersController {
      * @throws InvalidOrdersException  the invalid orders exception
      */
     @PutMapping(value = "/update/{ordersId}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> updateOrder(@PathVariable("ordersId") UUID ordersId, @RequestBody Orders orders) throws OrdersNotFoundException, InvalidOrdersException {
+    public ResponseEntity<String> update(@RequestBody Orders orders, @PathVariable("ordersId") UUID ordersId) throws OrdersNotFoundException, InvalidOrdersException {
         if (!ObjectUtils.isEmpty(orders)) {
             if (ordersService.existsById(ordersId)) {
                 orders.setOrdersUUID(ordersId);
                 ordersService.update(orders);
 
                 HttpHeaders responseHeaders = new HttpHeaders();
-                responseHeaders.set("OrderController", "updateOrder");
+                responseHeaders.set("OrderController", "update");
                 return new ResponseEntity<>("Successfully Updated Order", responseHeaders, HttpStatus.OK);
             } else
                 throw new OrdersNotFoundException();
@@ -95,8 +96,8 @@ public class OrdersController {
      * @throws CustomerNotFoundException the customer not found exception
      */
     @GetMapping(value = "/list/{customerId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Set<Orders>> listOrders(@PathVariable UUID customerId) throws CustomerNotFoundException {
-        // @RequestParam(defaultValue = "email") String sortBy
+    public ResponseEntity<Set<Orders>> list(@PathVariable UUID customerId) throws CustomerNotFoundException {
+
         if (customerService.existsById(customerId)) {
             Set<Orders> list = ordersService.findAll(customerService.getById(customerId)); // sortBy
 
@@ -118,14 +119,14 @@ public class OrdersController {
      * @throws InvalidOrdersException    the invalid orders exception
      */
     @GetMapping(value = "/{orderId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Orders> getById(@PathVariable UUID orderId)
+    public ResponseEntity<Orders> get(@PathVariable UUID orderId)
             throws InvalidNameException, CustomerNotFoundException, OrdersNotFoundException, InvalidOrdersException {
         if (!ObjectUtils.isEmpty(orderId)) {
             if (ordersService.existsById(orderId)) {
                 Orders _orders = ordersService.getById(orderId);
 
                 HttpHeaders responseHeaders = new HttpHeaders();
-                responseHeaders.set("OrdersController", "getById");
+                responseHeaders.set("OrdersController", "get");
                 return new ResponseEntity<>(_orders, responseHeaders, HttpStatus.OK);
             } else
                 throw new OrdersNotFoundException();

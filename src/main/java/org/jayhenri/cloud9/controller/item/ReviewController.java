@@ -2,15 +2,14 @@ package org.jayhenri.cloud9.controller.item;
 
 import org.jayhenri.cloud9.exception.alreadyexists.ItemAlreadyExistsException;
 import org.jayhenri.cloud9.exception.invalid.InvalidItemException;
+import org.jayhenri.cloud9.exception.invalid.InvalidReviewException;
 import org.jayhenri.cloud9.exception.notfound.ItemNotFoundException;
 import org.jayhenri.cloud9.exception.notfound.ReviewNotFoundException;
-import org.jayhenri.cloud9.interfaces.service.ServiceI;
+import org.jayhenri.cloud9.interfaces.controller.other.ReviewControllerI;
 import org.jayhenri.cloud9.interfaces.service.other.ItemServiceI;
 import org.jayhenri.cloud9.interfaces.service.other.ReviewServiceI;
 import org.jayhenri.cloud9.model.item.Item;
 import org.jayhenri.cloud9.model.item.Review;
-import org.jayhenri.cloud9.service.item.ItemService;
-import org.jayhenri.cloud9.service.item.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -19,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
+import javax.naming.InvalidNameException;
 import java.util.Set;
 import java.util.UUID;
 
@@ -27,8 +27,8 @@ import java.util.UUID;
  */
 @RestController // Indicates that the data returned by each method will be written straight into
 // the response body instead of rendering a template
-@RequestMapping("api/reviews")
-public class ReviewController {
+@RequestMapping("api/review")
+public class ReviewController implements ReviewControllerI {
 
     private final ReviewServiceI reviewService;
     private final ItemServiceI itemService;
@@ -56,8 +56,8 @@ public class ReviewController {
      * @throws InvalidItemException       the invalid item exception
      * @throws ItemNotFoundException      the item not found exception
      */
-    @PostMapping(value = "/add/{itemId}/review", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> addReview(@RequestBody Review review, @PathVariable UUID itemId)
+    @PostMapping(value = "/add/{itemId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> add(@RequestBody Review review, @PathVariable UUID itemId)
             throws ItemAlreadyExistsException, InvalidItemException, ItemNotFoundException {
 
         if (ObjectUtils.isEmpty(review)) {
@@ -66,7 +66,7 @@ public class ReviewController {
                 reviewService.add(item, review);
 
                 HttpHeaders responseHeaders = new HttpHeaders();
-                responseHeaders.set("ReviewController", "addReview");
+                responseHeaders.set("ReviewController", "add");
                 return new ResponseEntity<>("Successfully Created Item Review", responseHeaders, HttpStatus.CREATED);
             } else
                 throw new ItemNotFoundException();
@@ -86,7 +86,7 @@ public class ReviewController {
      * @throws ReviewNotFoundException the review not found exception
      */
     @PutMapping(value = "/update/{itemId}/{reviewId}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> updateReview(@RequestBody Review review, @PathVariable UUID itemId, @PathVariable UUID reviewId)
+    public ResponseEntity<String> update(@RequestBody Review review, @PathVariable UUID itemId, @PathVariable UUID reviewId)
             throws InvalidItemException, ItemNotFoundException, ReviewNotFoundException {
         if (!ObjectUtils.isEmpty(review)) {
             if (itemService.existsById(itemId)) {
@@ -96,7 +96,7 @@ public class ReviewController {
                     reviewService.update(itemService.getById(itemId), review);
 
                     HttpHeaders responseHeaders = new HttpHeaders();
-                    responseHeaders.set("ReviewController", "updateReview");
+                    responseHeaders.set("ReviewController", "update");
                     return new ResponseEntity<>("Successfully Updated Item Review", responseHeaders, HttpStatus.OK);
                 } else
                     throw new ReviewNotFoundException();
@@ -117,7 +117,7 @@ public class ReviewController {
      * @throws ReviewNotFoundException the review not found exception
      */
     @DeleteMapping(value = "/delete/{itemId}/{reviewId}")
-    public ResponseEntity<String> deleteReview(@PathVariable UUID itemId, @PathVariable UUID reviewId)
+    public ResponseEntity<String> delete(@PathVariable UUID itemId, @PathVariable UUID reviewId)
             throws ItemNotFoundException, ReviewNotFoundException {
         if (itemService.existsById(itemId)) {
             if (reviewService.existsById(itemService.getById(itemId), reviewId)) {
@@ -139,12 +139,34 @@ public class ReviewController {
      * @param itemId the item id
      * @return the response entity
      */
-    @GetMapping(value = "/list/items/{itemId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Set<Review>> listReviews(@PathVariable UUID itemId) {
+    @GetMapping(value = "/list/{itemId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Set<Review>> list(@PathVariable UUID itemId) {
         Set<Review> list = reviewService.findAll(itemService.getById(itemId));
 
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.set("ReviewController", "listItemReview");
         return new ResponseEntity<>(list, responseHeaders, HttpStatus.OK);
+    }
+
+    /**
+     * Gets by email.
+     *
+     * @return the by email
+     * @throws InvalidNameException  the invalid name exception
+     */
+    @GetMapping(value = "/get//{itemId}/{reviewId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Review> get(@PathVariable UUID itemId, @PathVariable UUID reviewId)
+            throws InvalidNameException, ReviewNotFoundException, InvalidReviewException {
+        if (!ObjectUtils.isEmpty(reviewId)) {
+            if (reviewService.existsById(itemService.getById(itemId), reviewId)) {
+                Review _review = reviewService.getById(itemService.getById(itemId), reviewId);
+
+                HttpHeaders responseHeaders = new HttpHeaders();
+                responseHeaders.set("ReviewController", "get");
+                return new ResponseEntity<>(_review, responseHeaders, HttpStatus.OK);
+            } else
+                throw new ReviewNotFoundException();
+        } else
+            throw new InvalidReviewException();
     }
 }

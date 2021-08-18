@@ -1,14 +1,13 @@
 package org.jayhenri.cloud9.controller.store;
 
 import org.jayhenri.cloud9.exception.alreadyexists.StoreAlreadyExistsException;
-import org.jayhenri.cloud9.exception.invalid.InvalidPostalCodeException;
 import org.jayhenri.cloud9.exception.invalid.InvalidStoreException;
+import org.jayhenri.cloud9.exception.invalid.InvalidPostalCodeException;
 import org.jayhenri.cloud9.exception.notfound.StoreNotFoundException;
+import org.jayhenri.cloud9.interfaces.controller.ControllerI;
 import org.jayhenri.cloud9.interfaces.service.ServiceI;
 import org.jayhenri.cloud9.interfaces.service.customer.AddressServiceI;
 import org.jayhenri.cloud9.model.store.Store;
-import org.jayhenri.cloud9.service.customer.AddressService;
-import org.jayhenri.cloud9.service.store.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -17,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
+import javax.naming.InvalidNameException;
 import java.util.List;
 import java.util.UUID;
 
@@ -26,7 +26,7 @@ import java.util.UUID;
 @RestController // Indicates that the data returned by each method will be written straight into
 // the response body instead of rendering a template
 @RequestMapping("api/store")
-public class StoreController {
+public class StoreController implements ControllerI<Store> {
 
     private final ServiceI<Store> storeService;
     private final AddressServiceI addressService;
@@ -52,8 +52,8 @@ public class StoreController {
      * @throws InvalidPostalCodeException  the invalid postal code exception
      * @throws InvalidStoreException       the invalid store exception
      */
-    @PostMapping(value = "/store", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> addStore(@RequestBody Store store)
+    @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> add(@RequestBody Store store)
             throws StoreAlreadyExistsException, InvalidPostalCodeException, InvalidStoreException {
 
         if (ObjectUtils.isEmpty(store))
@@ -65,7 +65,7 @@ public class StoreController {
         storeService.add(store);
 
         HttpHeaders responseHeaders = new HttpHeaders();
-        responseHeaders.set("StoreController", "addStore");
+        responseHeaders.set("StoreController", "add");
         return new ResponseEntity<>("Successfully Created Store", responseHeaders, HttpStatus.CREATED);
     }
 
@@ -78,15 +78,15 @@ public class StoreController {
      * @throws InvalidStoreException  the invalid store exception
      * @throws StoreNotFoundException the store not found exception
      */
-    @PutMapping(value = "/update", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> updateStore(@RequestBody Store store, @PathVariable UUID storeId)
+    @PutMapping(value = "/update/{storeId}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> update(@RequestBody Store store, @PathVariable UUID storeId)
             throws InvalidStoreException, StoreNotFoundException {
         if (!ObjectUtils.isEmpty(store)) {
             if (storeService.existsById(storeId)) {
                 storeService.update(storeService.getById(storeId));
 
                 HttpHeaders responseHeaders = new HttpHeaders();
-                responseHeaders.set("StoreController", "updateStore");
+                responseHeaders.set("StoreController", "update");
                 return new ResponseEntity<>("Successfully Updated Store", responseHeaders, HttpStatus.OK);
             } else
                 throw new StoreNotFoundException();
@@ -102,13 +102,13 @@ public class StoreController {
      * @throws StoreNotFoundException the store not found exception
      */
     @DeleteMapping(value = "/delete/{storeId}")
-    public ResponseEntity<String> deleteStore(@PathVariable UUID storeId)
+    public ResponseEntity<String> delete(@PathVariable UUID storeId)
             throws StoreNotFoundException {
         if (storeService.existsById(storeId)) {
             storeService.remove(storeService.getById(storeId));
 
             HttpHeaders responseHeaders = new HttpHeaders();
-            responseHeaders.set("StoreController", "deleteStore");
+            responseHeaders.set("StoreController", "delete");
             return new ResponseEntity<>("Successfully Deleted Store", responseHeaders, HttpStatus.OK);
         } else
             throw new StoreNotFoundException();
@@ -119,12 +119,37 @@ public class StoreController {
      *
      * @return the response entity
      */
-    @GetMapping(value = "/list/customers", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Store>> listStores() {
+    @GetMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Store>> list() {
         List<Store> list = storeService.findAll();
 
         HttpHeaders responseHeaders = new HttpHeaders();
-        responseHeaders.set("StoreController", "listStores");
+        responseHeaders.set("StoreController", "list");
         return new ResponseEntity<>(list, responseHeaders, HttpStatus.OK);
+    }
+
+    /**
+     * Gets by email.
+     *
+     * @param storeId the store name
+     * @return the by email
+     * @throws InvalidNameException  the invalid name exception
+     * @throws StoreNotFoundException the store not found exception
+     * @throws InvalidStoreException  the invalid store exception
+     */
+    @GetMapping(value = "/get/{storeId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Store> get(@PathVariable UUID storeId)
+            throws InvalidNameException, StoreNotFoundException, InvalidStoreException {
+        if (!ObjectUtils.isEmpty(storeId)) {
+            if (storeService.existsById(storeId)) {
+                Store _store = storeService.getById(storeId);
+
+                HttpHeaders responseHeaders = new HttpHeaders();
+                responseHeaders.set("StoreController", "get");
+                return new ResponseEntity<>(_store, responseHeaders, HttpStatus.OK);
+            } else
+                throw new StoreNotFoundException();
+        } else
+            throw new InvalidStoreException();
     }
 }
