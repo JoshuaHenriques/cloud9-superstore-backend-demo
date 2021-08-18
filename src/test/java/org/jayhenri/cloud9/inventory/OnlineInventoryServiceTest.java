@@ -1,5 +1,6 @@
 package org.jayhenri.cloud9.inventory;
 
+import org.jayhenri.cloud9.interfaces.service.other.InventoryServiceI;
 import org.jayhenri.cloud9.model.inventory.OnlineInventory;
 import org.jayhenri.cloud9.model.item.Item;
 import org.jayhenri.cloud9.repository.inventory.OnlineInventoryRepository;
@@ -28,7 +29,7 @@ class OnlineInventoryServiceTest {
     /**
      * The Test me.
      */
-    private OnlineInventoryService onlineInventoryService;
+    private InventoryServiceI<OnlineInventory> onlineInventoryService;
 
     /**
      * The OnlineInventory repository.

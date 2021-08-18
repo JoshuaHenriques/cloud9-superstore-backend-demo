@@ -98,8 +98,8 @@ org/jayhenri/cloud9/service/customer/CartService.java
  org.jayhenri.cloud9.service.customer.CartService
 org/jayhenri/cloud9/interfaces/service/customer/CartServiceI.java
  org.jayhenri.cloud9.interfaces.service.customer.CartServiceI
-org/jayhenri/cloud9/service/customer/CreditCardService.java
- org.jayhenri.cloud9.service.customer.CreditCardService
+org/jayhenri/cloud9/service/item/ReviewService.java
+ org.jayhenri.cloud9.service.item.ReviewService
 org/jayhenri/cloud9/service/store/EmployeeService.java
  org.jayhenri.cloud9.service.store.EmployeeService
 org/jayhenri/cloud9/service/customer/CustomerService.java
@@ -108,8 +108,8 @@ org/jayhenri/cloud9/interfaces/service/other/LoginServiceI.java
  org.jayhenri.cloud9.interfaces.service.other.LoginServiceI
 org/jayhenri/cloud9/service/login/LoginService.java
  org.jayhenri.cloud9.service.login.LoginService
-org/jayhenri/cloud9/interfaces/service/customer/CreditCardServiceI.java
- org.jayhenri.cloud9.interfaces.service.customer.CreditCardServiceI
+org/jayhenri/cloud9/interfaces/controller/other/ReviewControllerI.java
+ org.jayhenri.cloud9.interfaces.controller.other.ReviewControllerI
 org/jayhenri/cloud9/interfaces/service/customer/OrdersServiceI.java
  org.jayhenri.cloud9.interfaces.service.customer.OrdersServiceI
 org/jayhenri/cloud9/interfaces/service/other/ReviewServiceI.java
@@ -142,14 +142,14 @@ org/jayhenri/cloud9/controller/inventory/OnlineInventoryController.java
  org.jayhenri.cloud9.controller.inventory.OnlineInventoryController
 org/jayhenri/cloud9/interfaces/controller/other/EmployeeControllerI.java
  org.jayhenri.cloud9.interfaces.controller.other.EmployeeControllerI
-org/jayhenri/cloud9/interfaces/controller/customer/CustomerControllerI.java
- org.jayhenri.cloud9.interfaces.controller.customer.CustomerControllerI
+org/jayhenri/cloud9/service/customer/AddressService.java
+ org.jayhenri.cloud9.service.customer.AddressService
 org/jayhenri/cloud9/controller/customer/CartController.java
  org.jayhenri.cloud9.controller.customer.CartController
 org/jayhenri/cloud9/service/inventory/StoreInventoryService.java
  org.jayhenri.cloud9.service.inventory.StoreInventoryService
-org/jayhenri/cloud9/controller/customer/CreditCardController.java
- org.jayhenri.cloud9.controller.customer.CreditCardController
+org/jayhenri/cloud9/controller/item/ItemController.java
+ org.jayhenri.cloud9.controller.item.ItemController
 org/jayhenri/cloud9/interfaces/controller/other/InventoryControllerI.java
  org.jayhenri.cloud9.interfaces.controller.other.InventoryControllerI
 org/jayhenri/cloud9/controller/customer/OrdersController.java
@@ -160,21 +160,21 @@ org/jayhenri/cloud9/interfaces/controller/customer/OrdersControllerI.java
  org.jayhenri.cloud9.interfaces.controller.customer.OrdersControllerI
 org/jayhenri/cloud9/interfaces/service/other/ItemServiceI.java
  org.jayhenri.cloud9.interfaces.service.other.ItemServiceI
-org/jayhenri/cloud9/controller/customer/CustomerController.java
- org.jayhenri.cloud9.controller.customer.CustomerController
+org/jayhenri/cloud9/service/item/ItemService.java
+ org.jayhenri.cloud9.service.item.ItemService
 org/jayhenri/cloud9/controller/store/StoreController.java
  org.jayhenri.cloud9.controller.store.StoreController
 org/jayhenri/cloud9/controller/login/LoginController.java
  org.jayhenri.cloud9.controller.login.LoginController
 org/jayhenri/cloud9/interfaces/controller/ControllerI.java
  org.jayhenri.cloud9.interfaces.controller.ControllerI
-org/jayhenri/cloud9/service/item/ReviewService.java
- org.jayhenri.cloud9.service.item.ReviewService
-org/jayhenri/cloud9/interfaces/controller/other/ReviewControllerI.java
- org.jayhenri.cloud9.interfaces.controller.other.ReviewControllerI
-org/jayhenri/cloud9/controller/item/ItemController.java
- org.jayhenri.cloud9.controller.item.ItemController
-org/jayhenri/cloud9/service/item/ItemService.java
- org.jayhenri.cloud9.service.item.ItemService
-org/jayhenri/cloud9/service/customer/AddressService.java
- org.jayhenri.cloud9.service.customer.AddressService
+org/jayhenri/cloud9/service/customer/CreditCardService.java
+ org.jayhenri.cloud9.service.customer.CreditCardService
+org/jayhenri/cloud9/interfaces/controller/customer/CustomerControllerI.java
+ org.jayhenri.cloud9.interfaces.controller.customer.CustomerControllerI
+org/jayhenri/cloud9/controller/customer/CustomerController.java
+ org.jayhenri.cloud9.controller.customer.CustomerController
+org/jayhenri/cloud9/interfaces/service/customer/CreditCardServiceI.java
+ org.jayhenri.cloud9.interfaces.service.customer.CreditCardServiceI
+org/jayhenri/cloud9/controller/customer/CreditCardController.java
+ org.jayhenri.cloud9.controller.customer.CreditCardController

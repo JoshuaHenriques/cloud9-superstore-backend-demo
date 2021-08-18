@@ -1,5 +1,6 @@
 package org.jayhenri.cloud9.customer.service;
 
+import org.jayhenri.cloud9.interfaces.service.customer.CustomerServiceI;
 import org.jayhenri.cloud9.model.customer.Cart;
 import org.jayhenri.cloud9.model.customer.Customer;
 import org.jayhenri.cloud9.repository.customer.CustomerRepository;
@@ -28,7 +29,7 @@ class CustomerServiceTest {
     /**
      * The Test me.
      */
-    private CustomerService customerService;
+    private CustomerServiceI customerService;
 
     /**
      * The Customer repository.

@@ -1,5 +1,7 @@
 package org.jayhenri.cloud9.customer.service;
 
+import org.jayhenri.cloud9.interfaces.service.customer.CustomerServiceI;
+import org.jayhenri.cloud9.interfaces.service.customer.OrdersServiceI;
 import org.jayhenri.cloud9.model.customer.*;
 import org.jayhenri.cloud9.model.item.Item;
 import org.jayhenri.cloud9.model.login.Login;
@@ -38,7 +40,7 @@ class OrdersServiceTest {
      * The Order db repository.
      */
     @Mock
-    private CustomerService customerService;
+    private CustomerServiceI customerService;
 
     @Captor
     private ArgumentCaptor<Customer> captorCustomer;
@@ -49,7 +51,7 @@ class OrdersServiceTest {
     /**
      * The Order db repository.
      */
-    private OrdersService ordersService;
+    private OrdersServiceI ordersService;
 
     private Customer customer;
 

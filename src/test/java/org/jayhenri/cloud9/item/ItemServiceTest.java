@@ -1,5 +1,6 @@
 package org.jayhenri.cloud9.item;
 
+import org.jayhenri.cloud9.interfaces.service.other.ItemServiceI;
 import org.jayhenri.cloud9.model.item.Item;
 import org.jayhenri.cloud9.repository.item.ItemRepository;
 import org.jayhenri.cloud9.service.item.ItemService;
@@ -26,7 +27,7 @@ public class ItemServiceTest {
 
     private Item item;
 
-    private ItemService itemService;
+    private ItemServiceI itemService;
 
     @Mock
     private ItemRepository itemRepository;

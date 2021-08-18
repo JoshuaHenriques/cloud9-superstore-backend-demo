@@ -1,5 +1,6 @@
 package org.jayhenri.cloud9.store;
 
+import org.jayhenri.cloud9.interfaces.service.other.EmployeeServiceI;
 import org.jayhenri.cloud9.model.store.Employee;
 import org.jayhenri.cloud9.repository.store.EmployeeRepository;
 import org.jayhenri.cloud9.service.store.EmployeeService;
@@ -27,7 +28,7 @@ class EmployeeServiceTest {
     /**
      * The Test me.
      */
-    private EmployeeService employeeService;
+    private EmployeeServiceI employeeService;
 
     /**
      * The Employee repository.

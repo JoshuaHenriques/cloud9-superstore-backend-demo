@@ -1,5 +1,6 @@
 package org.jayhenri.cloud9.store;
 
+import org.jayhenri.cloud9.interfaces.service.ServiceI;
 import org.jayhenri.cloud9.model.customer.Address;
 import org.jayhenri.cloud9.model.inventory.OnlineInventory;
 import org.jayhenri.cloud9.model.inventory.StoreInventory;
@@ -29,7 +30,7 @@ public class StoreServiceTest {
 
     private Store store;
 
-    private StoreService storeService;
+    private ServiceI<Store> storeService;
 
     @Mock
     private StoreRepository storeRepository;

@@ -1,5 +1,7 @@
 package org.jayhenri.cloud9.customer.service;
 
+import org.jayhenri.cloud9.interfaces.service.customer.CreditCardServiceI;
+import org.jayhenri.cloud9.interfaces.service.customer.CustomerServiceI;
 import org.jayhenri.cloud9.model.customer.*;
 import org.jayhenri.cloud9.model.login.Login;
 import org.jayhenri.cloud9.service.customer.CreditCardService;
@@ -23,9 +25,9 @@ import static org.mockito.BDDMockito.given;
 class CreditCardServiceTest {
 
     @Mock
-    private CustomerService customerService;
+    private CustomerServiceI customerService;
 
-    private CreditCardService creditCardService;
+    private CreditCardServiceI creditCardService;
 
     private Customer customer;
 

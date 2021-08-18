@@ -1,5 +1,6 @@
 package org.jayhenri.cloud9.login;
 
+import org.jayhenri.cloud9.interfaces.service.other.LoginServiceI;
 import org.jayhenri.cloud9.model.login.Login;
 import org.jayhenri.cloud9.repository.login.LoginRepository;
 import org.jayhenri.cloud9.service.login.LoginService;
@@ -25,7 +26,7 @@ public class LoginServiceTest {
 
     private Login login;
 
-    private LoginService loginService;
+    private LoginServiceI loginService;
 
     @Mock
     private LoginRepository loginRepository;

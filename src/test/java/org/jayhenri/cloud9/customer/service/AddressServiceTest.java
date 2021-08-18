@@ -1,5 +1,6 @@
 package org.jayhenri.cloud9.customer.service;
 
+import org.jayhenri.cloud9.interfaces.service.customer.AddressServiceI;
 import org.jayhenri.cloud9.model.customer.Address;
 import org.jayhenri.cloud9.service.customer.AddressService;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ExtendWith(MockitoExtension.class)
 public class AddressServiceTest {
 
-    private AddressService addressService;
+    private AddressServiceI addressService;
 
     @Captor
     private ArgumentCaptor<Address> captorAddress;

@@ -1,5 +1,7 @@
 package org.jayhenri.cloud9.item;
 
+import org.jayhenri.cloud9.interfaces.service.other.ItemServiceI;
+import org.jayhenri.cloud9.interfaces.service.other.ReviewServiceI;
 import org.jayhenri.cloud9.model.item.Item;
 import org.jayhenri.cloud9.model.item.Review;
 import org.jayhenri.cloud9.service.item.ItemService;
@@ -27,10 +29,10 @@ public class ReviewServiceTest {
 
     private Item item;
 
-    private ReviewService reviewService;
+    private ReviewServiceI reviewService;
 
     @Mock
-    private ItemService itemService;
+    private ItemServiceI itemService;
 
     @Captor
     private ArgumentCaptor<Item> captorItem;

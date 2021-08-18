@@ -1,5 +1,7 @@
 package org.jayhenri.cloud9.customer.service;
 
+import org.jayhenri.cloud9.interfaces.service.customer.CartServiceI;
+import org.jayhenri.cloud9.interfaces.service.customer.CustomerServiceI;
 import org.jayhenri.cloud9.model.customer.*;
 import org.jayhenri.cloud9.model.item.Item;
 import org.jayhenri.cloud9.model.login.Login;
@@ -24,10 +26,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ExtendWith(MockitoExtension.class)
 public class CartServiceTest {
 
-    private CartService cartService;
+    private CartServiceI cartService;
 
     @Mock
-    private CustomerService customerService;
+    private CustomerServiceI customerService;
 
     @Captor
     private ArgumentCaptor<Cart> captorCart;

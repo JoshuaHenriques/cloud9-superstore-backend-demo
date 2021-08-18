@@ -1,10 +1,8 @@
-package org.jayhenri.cloud9.controller.customer;
+package org.jayhenri.cloud9.customer.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.jayhenri.cloud9.controller.customer.CustomerController;
-import org.jayhenri.cloud9.model.*;
 import org.jayhenri.cloud9.service.customer.CustomerService;
-import org.jayhenri.cloud9.service.InventoryService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;

@@ -1,5 +1,6 @@
 package org.jayhenri.cloud9.inventory;
 
+import org.jayhenri.cloud9.interfaces.service.other.InventoryServiceI;
 import org.jayhenri.cloud9.model.inventory.StoreInventory;
 import org.jayhenri.cloud9.model.item.Item;
 import org.jayhenri.cloud9.repository.inventory.StoreInventoryRepository;
@@ -28,7 +29,7 @@ class StoreInventoryServiceTest {
     /**
      * The Test me.
      */
-    private StoreInventoryService storeInventoryService;
+    private InventoryServiceI<StoreInventory> storeInventoryService;
 
     /**
      * The StoreInventory repository.
