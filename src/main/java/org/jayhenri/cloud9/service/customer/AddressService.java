@@ -1,5 +1,6 @@
 package org.jayhenri.cloud9.service.customer;
 
+import org.jayhenri.cloud9.interfaces.service.customer.AddressServiceI;
 import org.springframework.stereotype.Service;
 
 import java.util.regex.Matcher;
@@ -10,7 +11,7 @@ import java.util.regex.Pattern;
  */
 // todo: validate all fields
 @Service
-public class AddressService {
+public class AddressService implements AddressServiceI {
 
     private static final String REGEX_POSTAL_CODE = "^(?!.*[DFIOQU])[A-VXY][0-9][A-Z] ?[0-9][A-Z][0-9]$";
 
