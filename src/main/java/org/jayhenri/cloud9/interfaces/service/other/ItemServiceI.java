@@ -25,6 +25,8 @@ public interface ItemServiceI extends ServiceI<Item> {
      * @return the by item name
      */
     Item getByItemName(String itemName);
+
     boolean existsById(UUID uuid);
+
     Item getById(UUID uuid);
 }

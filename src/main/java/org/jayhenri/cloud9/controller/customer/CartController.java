@@ -8,7 +8,6 @@ import org.jayhenri.cloud9.interfaces.service.customer.CustomerServiceI;
 import org.jayhenri.cloud9.interfaces.service.other.InventoryServiceI;
 import org.jayhenri.cloud9.model.customer.Cart;
 import org.jayhenri.cloud9.model.inventory.OnlineInventory;
-import org.jayhenri.cloud9.model.item.Item;
 import org.jayhenri.cloud9.service.customer.CartService;
 import org.jayhenri.cloud9.service.customer.CustomerService;
 import org.jayhenri.cloud9.service.inventory.OnlineInventoryService;

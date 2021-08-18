@@ -1,8 +1,8 @@
 package org.jayhenri.cloud9.controller.store;
 
 import org.jayhenri.cloud9.exception.alreadyexists.StoreAlreadyExistsException;
-import org.jayhenri.cloud9.exception.invalid.InvalidStoreException;
 import org.jayhenri.cloud9.exception.invalid.InvalidPostalCodeException;
+import org.jayhenri.cloud9.exception.invalid.InvalidStoreException;
 import org.jayhenri.cloud9.exception.notfound.StoreNotFoundException;
 import org.jayhenri.cloud9.interfaces.controller.ControllerI;
 import org.jayhenri.cloud9.interfaces.service.ServiceI;
@@ -133,7 +133,7 @@ public class StoreController implements ControllerI<Store> {
      *
      * @param storeId the store name
      * @return the by email
-     * @throws InvalidNameException  the invalid name exception
+     * @throws InvalidNameException   the invalid name exception
      * @throws StoreNotFoundException the store not found exception
      * @throws InvalidStoreException  the invalid store exception
      */

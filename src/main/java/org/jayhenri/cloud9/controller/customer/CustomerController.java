@@ -128,7 +128,7 @@ public class CustomerController implements CustomerControllerI<Customer> {
      */
     @GetMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Customer>> list() {
-        
+
         List<Customer> list = customerService.findAll();
 
         HttpHeaders responseHeaders = new HttpHeaders();

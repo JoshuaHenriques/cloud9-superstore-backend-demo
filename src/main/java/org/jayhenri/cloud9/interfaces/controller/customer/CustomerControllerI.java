@@ -4,7 +4,6 @@ import org.jayhenri.cloud9.exception.alreadyexists.CustomerAlreadyExistsExceptio
 import org.jayhenri.cloud9.exception.invalid.InvalidCustomerException;
 import org.jayhenri.cloud9.exception.invalid.InvalidPostalCodeException;
 import org.jayhenri.cloud9.exception.notfound.CustomerNotFoundException;
-import org.jayhenri.cloud9.model.customer.Customer;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

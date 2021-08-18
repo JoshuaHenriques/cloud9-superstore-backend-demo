@@ -152,7 +152,7 @@ public class ReviewController implements ReviewControllerI {
      * Gets by email.
      *
      * @return the by email
-     * @throws InvalidNameException  the invalid name exception
+     * @throws InvalidNameException the invalid name exception
      */
     @GetMapping(value = "/get//{itemId}/{reviewId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Review> get(@PathVariable UUID itemId, @PathVariable UUID reviewId)

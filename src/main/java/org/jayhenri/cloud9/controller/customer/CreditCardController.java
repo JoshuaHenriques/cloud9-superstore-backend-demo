@@ -8,8 +8,6 @@ import org.jayhenri.cloud9.interfaces.controller.customer.CreditCardControllerI;
 import org.jayhenri.cloud9.interfaces.service.customer.CreditCardServiceI;
 import org.jayhenri.cloud9.interfaces.service.customer.CustomerServiceI;
 import org.jayhenri.cloud9.model.customer.CreditCard;
-import org.jayhenri.cloud9.service.customer.CreditCardService;
-import org.jayhenri.cloud9.service.customer.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

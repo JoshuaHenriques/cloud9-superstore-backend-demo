@@ -137,7 +137,7 @@ public class EmployeeController implements EmployeeControllerI {
      *
      * @param employeeId the item name
      * @return the by email
-     * @throws InvalidNameException  the invalid name exception
+     * @throws InvalidNameException      the invalid name exception
      * @throws EmployeeNotFoundException the item not found exception
      * @throws InvalidEmployeeException  the invalid item exception
      */
