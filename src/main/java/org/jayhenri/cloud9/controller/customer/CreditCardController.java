@@ -1,6 +1,7 @@
 package org.jayhenri.cloud9.controller.customer;
 
 import org.jayhenri.cloud9.exception.alreadyexists.CreditCardAlreadyExistsException;
+import org.jayhenri.cloud9.exception.invalid.InvalidCreditCardException;
 import org.jayhenri.cloud9.exception.invalid.InvalidOrdersException;
 import org.jayhenri.cloud9.exception.notfound.CreditCardNotFoundException;
 import org.jayhenri.cloud9.exception.notfound.CustomerNotFoundException;
@@ -48,14 +49,12 @@ public class CreditCardController implements CreditCardControllerI {
      * @param creditCard the credit card
      * @return the response entity
      * @throws CustomerNotFoundException        the customer not found exception
-     * @throws InvalidOrdersException           the invalid orders exception
      * @throws CreditCardAlreadyExistsException the credit card already exists exception
      */
     @PostMapping(value = "/{customerId}/creditCard/add", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> add(@PathVariable UUID customerId, @RequestBody CreditCard creditCard)
-            throws CustomerNotFoundException, InvalidOrdersException, CreditCardAlreadyExistsException {
+            throws CustomerNotFoundException, CreditCardAlreadyExistsException, InvalidCreditCardException {
         if (!ObjectUtils.isEmpty(creditCard)) {
-
             if (customerService.existsById(customerId)) {
                 if (customerService.existsByCCN(creditCard.getCcn())) {
                     creditCardService.add(customerService.getById(customerId), creditCard);
@@ -68,7 +67,7 @@ public class CreditCardController implements CreditCardControllerI {
             } else
                 throw new CustomerNotFoundException();
         } else
-            throw new InvalidOrdersException();
+            throw new InvalidCreditCardException();
     }
 
     /**

@@ -1,6 +1,7 @@
 package org.jayhenri.cloud9.interfaces.controller.customer;
 
 import org.jayhenri.cloud9.exception.alreadyexists.CreditCardAlreadyExistsException;
+import org.jayhenri.cloud9.exception.invalid.InvalidCreditCardException;
 import org.jayhenri.cloud9.exception.invalid.InvalidOrdersException;
 import org.jayhenri.cloud9.exception.notfound.CreditCardNotFoundException;
 import org.jayhenri.cloud9.exception.notfound.CustomerNotFoundException;
@@ -30,7 +31,7 @@ public interface CreditCardControllerI {
      */
     @PostMapping(value = "/{customerId}/creditCard/add", consumes = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<String> add(@PathVariable UUID customerId, @RequestBody CreditCard creditCard)
-            throws CustomerNotFoundException, InvalidOrdersException, CreditCardAlreadyExistsException;
+            throws CustomerNotFoundException, InvalidOrdersException, CreditCardAlreadyExistsException, InvalidCreditCardException;
 
     /**
      * Remove response entity.

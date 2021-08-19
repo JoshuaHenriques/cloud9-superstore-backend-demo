@@ -1,5 +1,6 @@
 package org.jayhenri.cloud9.controller.customer;
 
+import org.jayhenri.cloud9.exception.invalid.InvalidInventoryTypeException;
 import org.jayhenri.cloud9.exception.notfound.CustomerNotFoundException;
 import org.jayhenri.cloud9.exception.notfound.ItemNotFoundException;
 import org.jayhenri.cloud9.interfaces.controller.customer.CartControllerI;
@@ -8,9 +9,7 @@ import org.jayhenri.cloud9.interfaces.service.customer.CustomerServiceI;
 import org.jayhenri.cloud9.interfaces.service.other.InventoryServiceI;
 import org.jayhenri.cloud9.model.customer.Cart;
 import org.jayhenri.cloud9.model.inventory.OnlineInventory;
-import org.jayhenri.cloud9.service.customer.CartService;
-import org.jayhenri.cloud9.service.customer.CustomerService;
-import org.jayhenri.cloud9.service.inventory.OnlineInventoryService;
+import org.jayhenri.cloud9.model.inventory.StoreInventory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -29,6 +28,7 @@ public class CartController implements CartControllerI {
 
     private final CustomerServiceI customerService;
     private final InventoryServiceI<OnlineInventory> onlineInventoryService;
+    private final InventoryServiceI<StoreInventory> storeInventoryService;
     private final CartServiceI cartService;
 
     /**
@@ -39,10 +39,11 @@ public class CartController implements CartControllerI {
      * @param onlineInventoryService the inventory service
      */
     @Autowired
-    public CartController(CartService cartService, CustomerService customerService, OnlineInventoryService onlineInventoryService) {
+    public CartController(CartServiceI cartService, CustomerServiceI customerService, InventoryServiceI<OnlineInventory> onlineInventoryService, InventoryServiceI<StoreInventory> storeInventoryService) {
         this.customerService = customerService;
         this.cartService = cartService;
         this.onlineInventoryService = onlineInventoryService;
+        this.storeInventoryService = storeInventoryService;
     }
 
     /**
@@ -54,19 +55,36 @@ public class CartController implements CartControllerI {
      * @throws CustomerNotFoundException the customer not found exception
      * @throws ItemNotFoundException     the item not found exception
      */
-    @PutMapping(value = "/{customerId}/cart/add/{itemId}")
-    public ResponseEntity<String> add(@PathVariable UUID customerId, @PathVariable UUID itemId)
-            throws CustomerNotFoundException, ItemNotFoundException {
+    @PutMapping(value = "/{customerId}/cart/add/{type}/{itemId}")
+    public ResponseEntity<String> add(@PathVariable UUID customerId, @PathVariable UUID itemId, @PathVariable String type)
+            throws CustomerNotFoundException, ItemNotFoundException, InvalidInventoryTypeException {
         if (customerService.existsById(customerId)) {
-            if (onlineInventoryService.existsById(itemId)) {
+            switch (type) {
+                case "online":
+                    if (onlineInventoryService.existsById(itemId)) {
 
-                cartService.add(customerService.getById(customerId), onlineInventoryService.getById(itemId).getItem());
+                        cartService.add(customerService.getById(customerId), onlineInventoryService.getById(itemId).getItem());
 
-                HttpHeaders responseHeaders = new HttpHeaders();
-                responseHeaders.set("CustomerController", "add");
-                return new ResponseEntity<>("Successfully Added to Cart", responseHeaders, HttpStatus.CREATED);
-            } else
-                throw new ItemNotFoundException();
+                        HttpHeaders responseHeaders = new HttpHeaders();
+                        responseHeaders.set("CustomerController", "add");
+                        return new ResponseEntity<>("Successfully Added to Cart", responseHeaders, HttpStatus.CREATED);
+                    } else
+                        throw new ItemNotFoundException();
+
+                case "store":
+                    if (storeInventoryService.existsById(itemId)) {
+
+                        cartService.add(customerService.getById(customerId), storeInventoryService.getById(itemId).getItem());
+
+                        HttpHeaders responseHeaders = new HttpHeaders();
+                        responseHeaders.set("CustomerController", "add");
+                        return new ResponseEntity<>("Successfully Added to Cart", responseHeaders, HttpStatus.CREATED);
+                    } else
+                        throw new ItemNotFoundException();
+
+                default:
+                    throw new InvalidInventoryTypeException();
+            }
         } else
             throw new CustomerNotFoundException();
     }

@@ -23,8 +23,7 @@ import java.util.UUID;
 /**
  * The type Customer controller.
  */
-@RestController // Indicates that the data returned by each method will be written straight into
-// the response body instead of rendering a template
+@RestController
 @RequestMapping("api/customer")
 public class CustomerController implements CustomerControllerI {
 

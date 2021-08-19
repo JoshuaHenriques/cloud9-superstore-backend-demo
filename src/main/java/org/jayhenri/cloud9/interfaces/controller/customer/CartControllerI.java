@@ -1,5 +1,6 @@
 package org.jayhenri.cloud9.interfaces.controller.customer;
 
+import org.jayhenri.cloud9.exception.invalid.InvalidInventoryTypeException;
 import org.jayhenri.cloud9.exception.notfound.CustomerNotFoundException;
 import org.jayhenri.cloud9.exception.notfound.ItemNotFoundException;
 import org.jayhenri.cloud9.model.customer.Cart;
@@ -25,7 +26,7 @@ public interface CartControllerI {
      * @throws ItemNotFoundException     the item not found exception
      */
     @PutMapping(value = "/{customerId}/cart/add/{itemId}")
-    ResponseEntity<String> add(@PathVariable UUID customerId, @PathVariable UUID itemId) throws CustomerNotFoundException, ItemNotFoundException;
+    ResponseEntity<String> add(@PathVariable UUID customerId, @PathVariable UUID itemId, @PathVariable String type) throws CustomerNotFoundException, ItemNotFoundException, InvalidInventoryTypeException;
 
     /**
      * Remove response entity.

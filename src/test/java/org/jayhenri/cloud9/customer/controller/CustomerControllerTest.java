@@ -42,14 +42,14 @@ class CustomerControllerTest {
     @Mock
     private CustomerServiceI customerService;
 
+    @Mock
+    private AddressServiceI addressService;
+
     private CustomerControllerI customerController;
 
     private Customer customer;
 
     private UUID uuid;
-
-    @Mock
-    private AddressServiceI addressService;
 
     /**
      * Sets up.

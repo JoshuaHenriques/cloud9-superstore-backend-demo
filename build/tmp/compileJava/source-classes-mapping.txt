@@ -154,8 +154,8 @@ org/jayhenri/cloud9/interfaces/controller/other/InventoryControllerI.java
  org.jayhenri.cloud9.interfaces.controller.other.InventoryControllerI
 org/jayhenri/cloud9/controller/customer/OrdersController.java
  org.jayhenri.cloud9.controller.customer.OrdersController
-org/jayhenri/cloud9/interfaces/controller/customer/CreditCardControllerI.java
- org.jayhenri.cloud9.interfaces.controller.customer.CreditCardControllerI
+org/jayhenri/cloud9/controller/customer/CustomerController.java
+ org.jayhenri.cloud9.controller.customer.CustomerController
 org/jayhenri/cloud9/interfaces/controller/customer/OrdersControllerI.java
  org.jayhenri.cloud9.interfaces.controller.customer.OrdersControllerI
 org/jayhenri/cloud9/interfaces/service/other/ItemServiceI.java
@@ -168,13 +168,13 @@ org/jayhenri/cloud9/controller/login/LoginController.java
  org.jayhenri.cloud9.controller.login.LoginController
 org/jayhenri/cloud9/interfaces/controller/ControllerI.java
  org.jayhenri.cloud9.interfaces.controller.ControllerI
-org/jayhenri/cloud9/service/customer/CreditCardService.java
- org.jayhenri.cloud9.service.customer.CreditCardService
-org/jayhenri/cloud9/interfaces/controller/customer/CustomerControllerI.java
- org.jayhenri.cloud9.interfaces.controller.customer.CustomerControllerI
-org/jayhenri/cloud9/controller/customer/CustomerController.java
- org.jayhenri.cloud9.controller.customer.CustomerController
 org/jayhenri/cloud9/interfaces/service/customer/CreditCardServiceI.java
  org.jayhenri.cloud9.interfaces.service.customer.CreditCardServiceI
+org/jayhenri/cloud9/interfaces/controller/customer/CustomerControllerI.java
+ org.jayhenri.cloud9.interfaces.controller.customer.CustomerControllerI
+org/jayhenri/cloud9/service/customer/CreditCardService.java
+ org.jayhenri.cloud9.service.customer.CreditCardService
+org/jayhenri/cloud9/interfaces/controller/customer/CreditCardControllerI.java
+ org.jayhenri.cloud9.interfaces.controller.customer.CreditCardControllerI
 org/jayhenri/cloud9/controller/customer/CreditCardController.java
  org.jayhenri.cloud9.controller.customer.CreditCardController

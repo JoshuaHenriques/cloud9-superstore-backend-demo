@@ -56,4 +56,6 @@ public interface CreditCardServiceI {
      * @return the by id
      */
     CreditCard getById(Customer customer, UUID uuid);
+
+    public boolean existsByCCN(String ccn);
 }
