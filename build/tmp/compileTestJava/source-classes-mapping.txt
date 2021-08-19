@@ -1,26 +1,30 @@
-org/jayhenri/ecommerce/controller/customer/CustomerControllerUniTest.java
- org.jayhenri.ecommerce.controller.customer.CustomerControllerUniTest
-org/jayhenri/ecommerce/service/InventoryServiceTest.java
- org.jayhenri.ecommerce.service.InventoryServiceTest
-org/jayhenri/ecommerce/controller/inventory/InventoryControllerWebMvcTest.java
- org.jayhenri.ecommerce.controller.inventory.InventoryControllerWebMvcTest
-org/jayhenri/ecommerce/controller/customerRegistration/CustomerRegistrationWebMvcTest.java
- org.jayhenri.ecommerce.controller.customerRegistration.CustomerRegistrationWebMvcTest
-org/jayhenri/ecommerce/service/OrderDetailsDBServiceTest.java
- org.jayhenri.ecommerce.service.OrderDetailsDBServiceTest
-org/jayhenri/ecommerce/controller/customerRegistration/CustomerRegistrationUniTest.java
- org.jayhenri.ecommerce.controller.customerRegistration.CustomerRegistrationUniTest
-org/jayhenri/ecommerce/service/CustomerRegistrationServiceTest.java
- org.jayhenri.ecommerce.service.CustomerRegistrationServiceTest
-org/jayhenri/ecommerce/repository/OrderDBRepositoryDataJpaTest.java
- org.jayhenri.ecommerce.repository.OrderDBRepositoryDataJpaTest
-org/jayhenri/ecommerce/controller/inventory/InventoryControllerUniTest.java
- org.jayhenri.ecommerce.controller.inventory.InventoryControllerUniTest
-org/jayhenri/ecommerce/service/CustomerServiceTest.java
- org.jayhenri.ecommerce.service.CustomerServiceTest
-org/jayhenri/ecommerce/repository/CustomerRepositoryDataJpaTest.java
- org.jayhenri.ecommerce.repository.CustomerRepositoryDataJpaTest
-org/jayhenri/ecommerce/repository/InventoryRepositoryDataJpaTest.java
- org.jayhenri.ecommerce.repository.InventoryRepositoryDataJpaTest
-org/jayhenri/ecommerce/controller/customer/CustomerControllerWebMvcTest.java
- org.jayhenri.ecommerce.controller.customer.CustomerControllerWebMvcTest
+org/jayhenri/cloud9/customer/controller/OrdersControllerTest.java
+ org.jayhenri.cloud9.customer.controller.OrdersControllerTest
+org/jayhenri/cloud9/customer/service/CreditCardServiceTest.java
+ org.jayhenri.cloud9.customer.service.CreditCardServiceTest
+org/jayhenri/cloud9/item/ReviewServiceTest.java
+ org.jayhenri.cloud9.item.ReviewServiceTest
+org/jayhenri/cloud9/inventory/StoreInventoryServiceTest.java
+ org.jayhenri.cloud9.inventory.StoreInventoryServiceTest
+org/jayhenri/cloud9/customer/service/CustomerServiceTest.java
+ org.jayhenri.cloud9.customer.service.CustomerServiceTest
+org/jayhenri/cloud9/customer/controller/CustomerControllerTest.java
+ org.jayhenri.cloud9.customer.controller.CustomerControllerTest
+org/jayhenri/cloud9/store/StoreServiceTest.java
+ org.jayhenri.cloud9.store.StoreServiceTest
+org/jayhenri/cloud9/customer/service/OrdersServiceTest.java
+ org.jayhenri.cloud9.customer.service.OrdersServiceTest
+org/jayhenri/cloud9/item/ItemServiceTest.java
+ org.jayhenri.cloud9.item.ItemServiceTest
+org/jayhenri/cloud9/customer/service/AddressServiceTest.java
+ org.jayhenri.cloud9.customer.service.AddressServiceTest
+org/jayhenri/cloud9/login/LoginServiceTest.java
+ org.jayhenri.cloud9.login.LoginServiceTest
+org/jayhenri/cloud9/inventory/OnlineInventoryServiceTest.java
+ org.jayhenri.cloud9.inventory.OnlineInventoryServiceTest
+org/jayhenri/cloud9/customer/service/CartServiceTest.java
+ org.jayhenri.cloud9.customer.service.CartServiceTest
+org/jayhenri/cloud9/store/EmployeeServiceTest.java
+ org.jayhenri.cloud9.store.EmployeeServiceTest
+org/jayhenri/cloud9/customer/controller/CreditCardControllerTest.java
+ org.jayhenri.cloud9.customer.controller.CreditCardControllerTest
