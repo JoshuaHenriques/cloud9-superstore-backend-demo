@@ -7,6 +7,7 @@ import org.jayhenri.cloud9.interfaces.controller.customer.CartControllerI;
 import org.jayhenri.cloud9.interfaces.service.customer.CartServiceI;
 import org.jayhenri.cloud9.interfaces.service.customer.CustomerServiceI;
 import org.jayhenri.cloud9.interfaces.service.other.InventoryServiceI;
+import org.jayhenri.cloud9.interfaces.service.other.ItemServiceI;
 import org.jayhenri.cloud9.model.customer.Cart;
 import org.jayhenri.cloud9.model.inventory.OnlineInventory;
 import org.jayhenri.cloud9.model.inventory.StoreInventory;
@@ -30,6 +31,7 @@ public class CartController implements CartControllerI {
     private final InventoryServiceI<OnlineInventory> onlineInventoryService;
     private final InventoryServiceI<StoreInventory> storeInventoryService;
     private final CartServiceI cartService;
+    private final ItemServiceI itemService;
 
     /**
      * Instantiates a new Customer controller.
@@ -39,11 +41,12 @@ public class CartController implements CartControllerI {
      * @param onlineInventoryService the inventory service
      */
     @Autowired
-    public CartController(CartServiceI cartService, CustomerServiceI customerService, InventoryServiceI<OnlineInventory> onlineInventoryService, InventoryServiceI<StoreInventory> storeInventoryService) {
+    public CartController(CartServiceI cartService, CustomerServiceI customerService, InventoryServiceI<OnlineInventory> onlineInventoryService, InventoryServiceI<StoreInventory> storeInventoryService, ItemServiceI itemService) {
         this.customerService = customerService;
         this.cartService = cartService;
         this.onlineInventoryService = onlineInventoryService;
         this.storeInventoryService = storeInventoryService;
+        this.itemService = itemService;
     }
 
     /**
@@ -102,7 +105,7 @@ public class CartController implements CartControllerI {
     public ResponseEntity<String> remove(@PathVariable UUID itemId, @PathVariable UUID customerId)
             throws CustomerNotFoundException, ItemNotFoundException {
         if (customerService.existsById(customerId)) {
-            if (onlineInventoryService.existsById(itemId)) {
+            if (cartService.itemExists(customerService.getById(customerId).getCart(), itemService.getById(itemId))) {
                 cartService.remove(customerService.getById(customerId), itemId);
 
                 HttpHeaders responseHeaders = new HttpHeaders();

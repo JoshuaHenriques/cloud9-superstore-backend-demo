@@ -41,6 +41,7 @@ public class CartService implements CartServiceI {
     public void add(Customer customer, Item item) {
 
         customer.getCart().getItems().add(item);
+        calculate(customer.getCart());
         customerService.update(customer);
     }
 
@@ -60,6 +61,7 @@ public class CartService implements CartServiceI {
             }
         });
         customer.getCart().getItems().removeAll(removeMe);
+        calculate(customer.getCart());
         customerService.update(customer);
     }
 
@@ -85,5 +87,22 @@ public class CartService implements CartServiceI {
     public Cart get(Customer customer) {
 
         return customer.getCart();
+    }
+
+    public boolean itemExists(Cart cart, Item item){
+        return cart.getItems().contains(item);
+    }
+
+    // todo: test
+    public void calculate(Cart cart) {
+
+        cart.getItems().forEach(item -> {
+            cart.setTotal(cart.getTotal() + item.getPrice());
+        });
+
+        double DELIVERY = 9.99;
+        double HST = 1.13;
+
+        cart.setTotal(cart.getTotal()*HST*DELIVERY);
     }
 }

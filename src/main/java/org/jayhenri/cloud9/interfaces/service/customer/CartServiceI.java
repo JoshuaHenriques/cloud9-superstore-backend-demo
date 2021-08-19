@@ -46,4 +46,8 @@ public interface CartServiceI {
      * @return the s
      */
     Cart get(Customer customer);
+
+    boolean itemExists(Cart cart, Item item);
+
+    void calculate(Cart cart);
 }

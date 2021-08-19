@@ -36,7 +36,8 @@ create table if not exists item (
         item_id                 uuid            not null primary key default uuid_generate_v4(),
         item_reviews_id			uuid			unique references item_reviews(item_reviews_id),
         item_name               varchar(25)     not null unique,
-        item_description text                   not null unique,
+        item_description        text            not null unique,
+        price                   double precision not null unique,
         image                   bytea
 );
 
@@ -76,7 +77,7 @@ create table if not exists store_inventory (
 	item_id			uuid            not null unique references item(item_id),
 	item_name       varchar(25)     not null unique references item(item_name),
 	quantity		int		        not null,
-	price 			double precision not null
+	price 			double precision not null unique references item(price)
 );
 
 create table if not exists online_inventory (
@@ -86,7 +87,7 @@ create table if not exists online_inventory (
 	item_id			uuid            not null unique references item(item_id),
 	item_name       varchar(25)     not null unique references item(item_name),
 	quantity		int		        not null,
-	price 			double precision not null
+	price 			double precision not null unique references item(price)
 );
 
 create table if not exists address (

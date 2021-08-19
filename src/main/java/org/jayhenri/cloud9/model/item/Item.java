@@ -39,6 +39,9 @@ public class Item implements Serializable {
     )
     private Set<Review> reviews;
 
+    @Column(name = "price", nullable = false)
+    private double price;
+
     @Column(name = "image")
     private byte[] image;
 
