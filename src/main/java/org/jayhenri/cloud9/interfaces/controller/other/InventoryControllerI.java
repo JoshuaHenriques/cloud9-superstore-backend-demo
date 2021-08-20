@@ -53,7 +53,17 @@ public interface InventoryControllerI<T> {
      * @throws ItemNotFoundException the item not found exception
      */
     @GetMapping(value = "/get/{itemName}", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<T> get(@PathVariable String itemName) throws ItemNotFoundException;
+    ResponseEntity<T> getByItemName(@PathVariable String itemName) throws ItemNotFoundException;
+
+    /**
+     * Get response entity.
+     *
+     * @param itemId the item name
+     * @return the response entity
+     * @throws ItemNotFoundException the item not found exception
+     */
+    @GetMapping(value = "/get/{itemId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<T> getById(@PathVariable UUID itemId) throws ItemNotFoundException;
 
     /**
      * Remove response entity.

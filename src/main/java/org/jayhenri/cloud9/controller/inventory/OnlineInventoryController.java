@@ -100,12 +100,31 @@ public class OnlineInventoryController implements InventoryControllerI<OnlineInv
      */
 
     @GetMapping(value = "/get/{itemName}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<OnlineInventory> get(@PathVariable String itemName) throws ItemNotFoundException {
+    public ResponseEntity<OnlineInventory> getByItemName(@PathVariable String itemName) throws ItemNotFoundException {
         if (onlineInventoryService.existsByItemName(itemName)) {
 
             HttpHeaders responseHeaders = new HttpHeaders();
-            responseHeaders.set("OnlineInventoryController", "get");
+            responseHeaders.set("OnlineInventoryController", "getByItemName");
             OnlineInventory onlineInventory = onlineInventoryService.getByItemName(itemName);
+            return new ResponseEntity<>(onlineInventory, responseHeaders, HttpStatus.OK);
+        } else
+            throw new ItemNotFoundException();
+    }
+
+    /**
+     * Get response entity.
+     *
+     * @param itemId the item name
+     * @return the response entity
+     * @throws ItemNotFoundException the item not found exception
+     */
+    @GetMapping(value = "/get/{itemId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<OnlineInventory> getById(@PathVariable UUID itemId) throws ItemNotFoundException {
+        if (onlineInventoryService.existsById(itemId)) {
+
+            HttpHeaders responseHeaders = new HttpHeaders();
+            responseHeaders.set("OnlineInventoryController", "getByItemId");
+            OnlineInventory onlineInventory = onlineInventoryService.getById(itemId);
             return new ResponseEntity<>(onlineInventory, responseHeaders, HttpStatus.OK);
         } else
             throw new ItemNotFoundException();
