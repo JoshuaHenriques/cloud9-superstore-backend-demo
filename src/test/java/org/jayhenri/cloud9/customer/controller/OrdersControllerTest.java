@@ -33,6 +33,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
 
+/**
+ * The type Orders controller test.
+ */
 @ExtendWith(MockitoExtension.class)
 public class OrdersControllerTest {
 
@@ -59,6 +62,9 @@ public class OrdersControllerTest {
 
     private UUID uuid;
 
+    /**
+     * Sets up.
+     */
     @BeforeEach
     void setUp() {
 
@@ -71,8 +77,8 @@ public class OrdersControllerTest {
                 new Login(),
                 new Cart(),
                 new Address(),
-                new HashSet<CreditCard>(),
-                new HashSet<Orders>(),
+                new HashSet<>(),
+                new HashSet<>(),
                 "John",
                 "Doe",
                 "6473829338",
@@ -81,11 +87,16 @@ public class OrdersControllerTest {
 
         orders = new Orders(
                 "PENDING",
-                new HashSet<Item>(),
+                new HashSet<>(),
                 293.68
         );
     }
 
+    /**
+     * Add orders.
+     *
+     * @throws InvalidOrdersException the invalid orders exception
+     */
     @Test
     void addOrders() throws InvalidOrdersException {
 
@@ -100,14 +111,21 @@ public class OrdersControllerTest {
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
     }
 
+    /**
+     * Add orders throws invalid orders exception.
+     */
     @Test
     void addOrdersThrowsInvalidOrdersException() {
 
-        assertThrows(InvalidOrdersException.class, () -> {
-            ordersController.add(null, null);
-        });
+        assertThrows(InvalidOrdersException.class, () -> ordersController.add(null, null));
     }
 
+    /**
+     * Update orders.
+     *
+     * @throws InvalidOrdersException  the invalid orders exception
+     * @throws OrdersNotFoundException the orders not found exception
+     */
     @Test
     void updateOrders() throws InvalidOrdersException, OrdersNotFoundException {
 
@@ -121,24 +139,31 @@ public class OrdersControllerTest {
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
     }
 
+    /**
+     * Update orders throws orders not found exception.
+     */
     @Test
     void updateOrdersThrowsOrdersNotFoundException() {
 
         given(ordersService.existsById(uuid)).willReturn(false);
 
-        assertThrows(OrdersNotFoundException.class, () -> {
-           ordersController.update(orders, uuid);
-        });
+        assertThrows(OrdersNotFoundException.class, () -> ordersController.update(orders, uuid));
     }
 
+    /**
+     * Update orders throws invalid orders exception.
+     */
     @Test
     void updateOrdersThrowsInvalidOrdersException() {
 
-        assertThrows(InvalidOrdersException.class, () -> {
-           ordersController.update(null, null);
-        });
+        assertThrows(InvalidOrdersException.class, () -> ordersController.update(null, null));
     }
 
+    /**
+     * List orders.
+     *
+     * @throws CustomerNotFoundException the customer not found exception
+     */
     @Test
     void listOrders() throws CustomerNotFoundException {
 
@@ -155,16 +180,25 @@ public class OrdersControllerTest {
         assertThat(captorCustomer.getValue()).isEqualTo(customer);
     }
 
+    /**
+     * List orders throws customer not found exception.
+     */
     @Test
     void listOrdersThrowsCustomerNotFoundException() {
 
         given(customerService.existsById(uuid)).willReturn(false);
 
-        assertThrows(CustomerNotFoundException.class, () -> {
-            ordersController.list(uuid);
-        });
+        assertThrows(CustomerNotFoundException.class, () -> ordersController.list(uuid));
     }
 
+    /**
+     * Get.
+     *
+     * @throws InvalidNameException      the invalid name exception
+     * @throws InvalidOrdersException    the invalid orders exception
+     * @throws CustomerNotFoundException the customer not found exception
+     * @throws OrdersNotFoundException   the orders not found exception
+     */
     @Test
     void get() throws InvalidNameException, InvalidOrdersException, CustomerNotFoundException, OrdersNotFoundException {
 

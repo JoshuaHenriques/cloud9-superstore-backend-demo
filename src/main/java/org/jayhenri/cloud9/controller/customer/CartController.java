@@ -39,6 +39,8 @@ public class CartController implements CartControllerI {
      * @param cartService            the cart service
      * @param customerService        the customer service
      * @param onlineInventoryService the inventory service
+     * @param storeInventoryService  the store inventory service
+     * @param itemService            the item service
      */
     @Autowired
     public CartController(CartServiceI cartService, CustomerServiceI customerService, InventoryServiceI<OnlineInventory> onlineInventoryService, InventoryServiceI<StoreInventory> storeInventoryService, ItemServiceI itemService) {

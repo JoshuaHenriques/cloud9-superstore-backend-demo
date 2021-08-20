@@ -28,6 +28,7 @@ public interface CreditCardControllerI {
      * @throws CustomerNotFoundException        the customer not found exception
      * @throws InvalidOrdersException           the invalid orders exception
      * @throws CreditCardAlreadyExistsException the credit card already exists exception
+     * @throws InvalidCreditCardException       the invalid credit card exception
      */
     @PostMapping(value = "/{customerId}/creditCard/add", consumes = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<String> add(@PathVariable UUID customerId, @RequestBody CreditCard creditCard)

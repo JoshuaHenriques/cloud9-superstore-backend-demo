@@ -9,9 +9,6 @@ import java.util.UUID;
 /**
  * The interface Credit card service i.
  *
- * @param <T> the type parameter
- * @param <C> the type parameter
- * @param <U> the type parameter
  */
 public interface CreditCardServiceI {
 
@@ -57,5 +54,11 @@ public interface CreditCardServiceI {
      */
     CreditCard getById(Customer customer, UUID uuid);
 
-    public boolean existsByCCN(String ccn);
+    /**
+     * Exists by ccn boolean.
+     *
+     * @param ccn the ccn
+     * @return the boolean
+     */
+    boolean existsByCCN(String ccn);
 }

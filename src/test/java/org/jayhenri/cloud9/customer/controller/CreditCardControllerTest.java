@@ -30,6 +30,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
 
+/**
+ * The type Credit card controller test.
+ */
 @ExtendWith(MockitoExtension.class)
 public class CreditCardControllerTest {
 
@@ -58,6 +61,9 @@ public class CreditCardControllerTest {
 
     private CreditCard creditCard1;
 
+    /**
+     * Sets up.
+     */
     @BeforeEach
     void setUp() {
 
@@ -79,8 +85,8 @@ public class CreditCardControllerTest {
                 new Login(),
                 new Cart(),
                 new Address(),
-                new HashSet<CreditCard>(),
-                new HashSet<Orders>(),
+                new HashSet<>(),
+                new HashSet<>(),
                 "John",
                 "Doe",
                 "6473829338",
@@ -88,6 +94,14 @@ public class CreditCardControllerTest {
         );
     }
 
+    /**
+     * Add credit card.
+     *
+     * @throws CreditCardAlreadyExistsException the credit card already exists exception
+     * @throws InvalidOrdersException           the invalid orders exception
+     * @throws CustomerNotFoundException        the customer not found exception
+     * @throws InvalidCreditCardException       the invalid credit card exception
+     */
     @Test
     void addCreditCard() throws CreditCardAlreadyExistsException, InvalidOrdersException, CustomerNotFoundException, InvalidCreditCardException {
 
@@ -104,35 +118,44 @@ public class CreditCardControllerTest {
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
     }
 
+    /**
+     * Add credit card throws already exists exception.
+     */
     @Test
     void addCreditCardThrowsAlreadyExistsException() {
 
         given(customerService.existsById(uuid)).willReturn(true);
         given(customerService.existsByCCN("5215127929840370")).willReturn(false);
 
-        assertThrows(CreditCardAlreadyExistsException.class, () -> {
-            creditCardController.add(uuid, creditCard1);
-        });
+        assertThrows(CreditCardAlreadyExistsException.class, () -> creditCardController.add(uuid, creditCard1));
     }
 
+    /**
+     * Add credit card throws customer not found exception.
+     */
     @Test
     void addCreditCardThrowsCustomerNotFoundException() {
 
         given(customerService.existsById(uuid)).willReturn(false);
 
-        assertThrows(CustomerNotFoundException.class, () -> {
-            creditCardController.add(uuid, creditCard1);
-        });
+        assertThrows(CustomerNotFoundException.class, () -> creditCardController.add(uuid, creditCard1));
     }
 
+    /**
+     * Add credit card throws invalid credit card exception.
+     */
     @Test
     void addCreditCardThrowsInvalidCreditCardException() {
 
-        assertThrows(InvalidCreditCardException.class, () -> {
-            creditCardController.add(null, null);
-        });
+        assertThrows(InvalidCreditCardException.class, () -> creditCardController.add(null, null));
     }
 
+    /**
+     * Remove credit card.
+     *
+     * @throws CustomerNotFoundException   the customer not found exception
+     * @throws CreditCardNotFoundException the credit card not found exception
+     */
     @Test
     void removeCreditCard() throws CustomerNotFoundException, CreditCardNotFoundException {
 
@@ -149,6 +172,9 @@ public class CreditCardControllerTest {
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
     }
 
+    /**
+     * Remove credit card throws credit card not found exception.
+     */
     @Test
     void removeCreditCardThrowsCreditCardNotFoundException() {
 
@@ -156,21 +182,25 @@ public class CreditCardControllerTest {
         given(customerService.getById(uuid)).willReturn(customer);
         given(creditCardService.existsById(customer, uuid1)).willReturn(false);
 
-        assertThrows(CreditCardNotFoundException.class, () -> {
-            creditCardController.remove(uuid, uuid1);
-        });
+        assertThrows(CreditCardNotFoundException.class, () -> creditCardController.remove(uuid, uuid1));
     }
 
+    /**
+     * Remove credit card throws customer not found exception.
+     */
     @Test
     void removeCreditCardThrowsCustomerNotFoundException() {
 
         given(customerService.existsById(uuid)).willReturn(false);
 
-        assertThrows(CustomerNotFoundException.class, () -> {
-            creditCardController.remove(uuid, uuid1);
-        });
+        assertThrows(CustomerNotFoundException.class, () -> creditCardController.remove(uuid, uuid1));
     }
 
+    /**
+     * List credit cards.
+     *
+     * @throws CustomerNotFoundException the customer not found exception
+     */
     @Test
     void listCreditCards() throws CustomerNotFoundException {
 
@@ -185,13 +215,14 @@ public class CreditCardControllerTest {
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
     }
 
+    /**
+     * List credit cards throws customer not found exception.
+     */
     @Test
     void listCreditCardsThrowsCustomerNotFoundException() {
 
         given(customerService.existsById(uuid)).willReturn(false);
 
-        assertThrows(CustomerNotFoundException.class, () -> {
-            creditCardController.list(uuid);
-        });
+        assertThrows(CustomerNotFoundException.class, () -> creditCardController.list(uuid));
     }
 }
