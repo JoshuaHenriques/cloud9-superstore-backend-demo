@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.jayhenri.cloud9.customer.controller.CartControllerTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-08-19T23:56:58" hostname="kde-laptop" time="0.423">
+  <properties/>
+  <testcase name="get()" classname="org.jayhenri.cloud9.customer.controller.CartControllerTest" time="0.423"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
