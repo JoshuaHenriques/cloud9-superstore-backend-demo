@@ -34,23 +34,17 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
 
+/**
+ * The type Cart controller test.
+ */
 @ExtendWith(MockitoExtension.class)
 public class CartControllerTest {
-
-    @Captor
-    private ArgumentCaptor<Cart> captorCart;
 
     @Captor
     private ArgumentCaptor<Customer> captorCustomer;
 
     @Captor
     private ArgumentCaptor<UUID> captorUUID;
-
-    @Captor
-    private ArgumentCaptor<UUID> captorUUID2;
-
-    @Captor
-    private ArgumentCaptor<String> captorString;
 
     @Captor
     private ArgumentCaptor<Item> captorItem;
@@ -67,18 +61,14 @@ public class CartControllerTest {
     @Mock
     private CartServiceI cartService;
 
-    private CartControllerI cartController;
-
-    private Cart cart;
-
-    private UUID uuid, uuid2;
-
-    private Item item, item2;
-
-    private Set<Item> items;
-
     @Mock
     private ItemServiceI itemService;
+
+    private CartControllerI cartController;
+
+    private UUID customerId, itemId;
+
+    private Item item;
 
     private OnlineInventory onlineInventory;
 
@@ -92,9 +82,9 @@ public class CartControllerTest {
     @BeforeEach
     void setUp() {
 
-        uuid = UUID.randomUUID();
+        customerId = UUID.randomUUID();
 
-        uuid2 = UUID.randomUUID();
+        itemId = UUID.randomUUID();
 
         cartController = new CartController(cartService, customerService, onlineInventoryService, storeInventoryService, itemService);
 
@@ -102,13 +92,15 @@ public class CartControllerTest {
                 "iPhone 13 Pro",
                 "2021 Model",
                 new HashSet<>(),
+                1129.99,
                 null
         );
 
-        item2 = new Item(
+        Item item2 = new Item(
                 "Macbook Pro",
                 "2021 Model",
                 new HashSet<>(),
+                2129.99,
                 null
         );
 
@@ -120,29 +112,26 @@ public class CartControllerTest {
                 item,
                 item.getItemName(),
                 3849,
-                1129.99
+                item.getPrice()
         );
 
         storeInventory = new StoreInventory(
                 item2,
                 item2.getItemName(),
                 3901,
-                2129.99
-        );
-
-        cart = new Cart(
-                new Customer(),
-                items,
-                0.00
+                item.getPrice()
         );
 
         customer = new Customer(
                 "customer.mail@gmail.com",
                 new Login(),
-                cart,
+                new Cart(
+                        customer,
+                        items
+                ),
                 new Address(),
-                new HashSet<CreditCard>(),
-                new HashSet<Orders>(),
+                new HashSet<>(),
+                new HashSet<>(),
                 "John",
                 "Doe",
                 "6473829338",
@@ -150,16 +139,23 @@ public class CartControllerTest {
         );
     }
 
+    /**
+     * Add online item to cart.
+     *
+     * @throws InvalidInventoryTypeException the invalid inventory type exception
+     * @throws CustomerNotFoundException     the customer not found exception
+     * @throws ItemNotFoundException         the item not found exception
+     */
     @Test
     void addOnlineItemToCart() throws InvalidInventoryTypeException, CustomerNotFoundException, ItemNotFoundException {
 
-        given(customerService.existsById(uuid)).willReturn(true);
-        given(onlineInventoryService.existsById(uuid2)).willReturn(true);
+        given(customerService.existsById(customerId)).willReturn(true);
+        given(onlineInventoryService.existsById(itemId)).willReturn(true);
 
-        given(customerService.getById(uuid)).willReturn(customer);
-        given(onlineInventoryService.getById(uuid2)).willReturn(onlineInventory);
+        given(customerService.getById(customerId)).willReturn(customer);
+        given(onlineInventoryService.getById(itemId)).willReturn(onlineInventory);
 
-        ResponseEntity<String> response = cartController.add(uuid, uuid2, "online");
+        ResponseEntity<String> response = cartController.add(customerId, itemId, "online");
 
         then(cartService).should().add(captorCustomer.capture(), captorItem.capture());
 
@@ -168,28 +164,36 @@ public class CartControllerTest {
         assertThat(captorItem.getValue()).isEqualTo(onlineInventory.getItem());
     }
 
+    /**
+     * Add online item to cart throws item not found exception.
+     */
     @Test
     void addOnlineItemToCartThrowsItemNotFoundException() {
 
-        given(customerService.existsById(uuid)).willReturn(true);
-        given(onlineInventoryService.existsById(uuid2)).willReturn(false);
+        given(customerService.existsById(customerId)).willReturn(true);
+        given(onlineInventoryService.existsById(itemId)).willReturn(false);
 
-        assertThrows(ItemNotFoundException.class, () -> {
-            cartController.add(uuid, uuid2, "online");
-        });
+        assertThrows(ItemNotFoundException.class, () -> cartController.add(customerId, itemId, "online"));
 
     }
 
+    /**
+     * Add store item to cart.
+     *
+     * @throws InvalidInventoryTypeException the invalid inventory type exception
+     * @throws CustomerNotFoundException     the customer not found exception
+     * @throws ItemNotFoundException         the item not found exception
+     */
     @Test
     void addStoreItemToCart() throws InvalidInventoryTypeException, CustomerNotFoundException, ItemNotFoundException {
 
-        given(customerService.existsById(uuid)).willReturn(true);
-        given(storeInventoryService.existsById(uuid2)).willReturn(true);
+        given(customerService.existsById(customerId)).willReturn(true);
+        given(storeInventoryService.existsById(itemId)).willReturn(true);
 
-        given(customerService.getById(uuid)).willReturn(customer);
-        given(storeInventoryService.getById(uuid2)).willReturn(storeInventory);
+        given(customerService.getById(customerId)).willReturn(customer);
+        given(storeInventoryService.getById(itemId)).willReturn(storeInventory);
 
-        ResponseEntity<String> response = cartController.add(uuid, uuid2, "store");
+        ResponseEntity<String> response = cartController.add(customerId, itemId, "store");
 
         then(cartService).should().add(captorCustomer.capture(), captorItem.capture());
 
@@ -198,53 +202,145 @@ public class CartControllerTest {
         assertThat(captorItem.getValue()).isEqualTo(storeInventory.getItem());
     }
 
+    /**
+     * Add store item to cart throws item not found exception.
+     */
     @Test
     void addStoreItemToCartThrowsItemNotFoundException() {
 
-        given(customerService.existsById(uuid)).willReturn(true);
-        given(storeInventoryService.existsById(uuid2)).willReturn(false);
+        given(customerService.existsById(customerId)).willReturn(true);
+        given(storeInventoryService.existsById(itemId)).willReturn(false);
 
-        assertThrows(ItemNotFoundException.class, () -> {
-            cartController.add(uuid, uuid2, "store");
-        });
+        assertThrows(ItemNotFoundException.class, () -> cartController.add(customerId, itemId, "store"));
 
     }
 
+    /**
+     * Add throws invalid inventory type exception.
+     */
     @Test
     void addThrowsInvalidInventoryTypeException() {
 
-        given(customerService.existsById(uuid)).willReturn(true);
+        given(customerService.existsById(customerId)).willReturn(true);
 
-        assertThrows(InvalidInventoryTypeException.class, () -> {
-            cartController.add(uuid, uuid2, "");
-        });
+        assertThrows(InvalidInventoryTypeException.class, () -> cartController.add(customerId, itemId, ""));
 
     }
 
+    /**
+     * Add throws customer not found exception.
+     */
     @Test
     void addThrowsCustomerNotFoundException() {
 
-        given(customerService.existsById(uuid)).willReturn(false);
+        given(customerService.existsById(customerId)).willReturn(false);
 
-        assertThrows(CustomerNotFoundException.class, () -> {
-            cartController.add(uuid, uuid2, "");
-        });
+        assertThrows(CustomerNotFoundException.class, () -> cartController.add(customerId, itemId, ""));
     }
 
+    /**
+     * Remove.
+     *
+     * @throws CustomerNotFoundException the customer not found exception
+     * @throws ItemNotFoundException     the item not found exception
+     */
     @Test
     void remove() throws CustomerNotFoundException, ItemNotFoundException {
 
-        given(customerService.existsById(uuid)).willReturn(true);
-        given(customerService.getById(uuid).getCart()).willReturn(cart);
-        given(itemService.getById(uuid2)).willReturn(item);
-        given(cartService.itemExists(cart, item)).willReturn(true);
+        given(customerService.existsById(customerId)).willReturn(true);
+        given(customerService.getById(customerId)).willReturn(customer);
+        given(itemService.getById(itemId)).willReturn(item);
+        given(cartService.itemExists(customer.getCart(), item)).willReturn(true);
 
-        ResponseEntity<String> response =  cartController.remove(uuid2, uuid);
+        ResponseEntity<String> response =  cartController.remove(itemId, customerId);
 
         then(cartService).should().remove(captorCustomer.capture(), captorUUID.capture());
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(captorCustomer.getValue()).isEqualTo(customer);
-        assertThat(captorUUID.getValue()).isEqualTo(uuid2);
+        assertThat(captorUUID.getValue()).isEqualTo(itemId);
+    }
+
+    /**
+     * Remove throws item not found exception.
+     */
+    @Test
+    void removeThrowsItemNotFoundException() {
+
+        given(customerService.existsById(customerId)).willReturn(true);
+        given(customerService.getById(customerId)).willReturn(customer);
+        given(itemService.getById(itemId)).willReturn(item);
+        given(cartService.itemExists(customer.getCart(), item)).willReturn(false);
+        
+        assertThrows(ItemNotFoundException.class, () -> cartController.remove(itemId, customerId));
+    }
+
+    /**
+     * Remove throws customer not found exception.
+     */
+    @Test
+    void removeThrowsCustomerNotFoundException() {
+
+        given(customerService.existsById(customerId)).willReturn(false);
+
+        assertThrows(CustomerNotFoundException.class, () -> cartController.remove(itemId, customerId));
+    }
+
+    /**
+     * Empty.
+     *
+     * @throws CustomerNotFoundException the customer not found exception
+     */
+    @Test
+    void empty() throws CustomerNotFoundException {
+
+        given(customerService.existsById(customerId)).willReturn(true);
+        given(customerService.getById(customerId)).willReturn(customer);
+
+        ResponseEntity<String> response = cartController.empty(customerId);
+
+        then(cartService).should().empty(captorCustomer.capture());
+
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(captorCustomer.getValue()).isEqualTo(customer);
+    }
+
+    /**
+     * Empty throws customer not found exception.
+     */
+    @Test
+    void emptyThrowsCustomerNotFoundException() {
+
+        given(customerService.existsById(customerId)).willReturn(false);
+
+        assertThrows(CustomerNotFoundException.class, () -> cartController.empty(customerId));
+    }
+
+    /**
+     * Get.
+     *
+     * @throws CustomerNotFoundException the customer not found exception
+     */
+    @Test
+    void get() throws CustomerNotFoundException {
+
+        given(customerService.existsById(customerId)).willReturn(true);
+        given(customerService.getById(customerId)).willReturn(customer);
+        given(cartService.get(customer)).willReturn(customer.getCart());
+
+        ResponseEntity<Cart> response = cartController.get(customerId);
+
+        assertThat(response.getBody()).isEqualTo(customer.getCart());
+    }
+
+    /**
+     * Gets throws customer not found exception.
+     */
+    @Test
+    void getThrowsCustomerNotFoundException() {
+
+        given(customerService.existsById(customerId)).willReturn(false);
+
+        assertThrows(CustomerNotFoundException.class, () -> cartController.get(customerId));
     }
 }

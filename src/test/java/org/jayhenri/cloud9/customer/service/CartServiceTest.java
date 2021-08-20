@@ -31,14 +31,9 @@ public class CartServiceTest {
     @Mock
     private CustomerServiceI customerService;
 
-    @Captor
-    private ArgumentCaptor<Cart> captorCart;
-
     private Cart cart;
 
     private Item item1, item2;
-
-    private Set<Item> items;
 
     private Customer customer;
 
@@ -54,29 +49,32 @@ public class CartServiceTest {
                 "iPhone 13 Pro",
                 "2021 Model",
                 new HashSet<>(),
+                1129.99,
                 null
         );
 
         item2 = new Item(
-                "iPhone 13 Pro",
+                "Macbook Pro",
                 "2021 Model",
                 new HashSet<>(),
+                2129.99,
                 null
         );
 
-        cart = new Cart(
-                new Customer(),
-                new HashSet<Item>(),
-                1129.99
-        );
+        Set<Item> items = new HashSet<>();
+        items.add(item1);
+        items.add(item2);
 
         customer = new Customer(
                 "customer.mail@gmail.com",
                 new Login(),
-                cart,
+                new Cart(
+                        customer,
+                        items
+                ),
                 new Address(),
-                new HashSet<CreditCard>(),
-                new HashSet<Orders>(),
+                new HashSet<>(),
+                new HashSet<>(),
                 "John",
                 "Doe",
                 "6473829338",
@@ -133,5 +131,13 @@ public class CartServiceTest {
     void getCart() {
 
         assertThat(cartService.get(customer)).isEqualTo(customer.getCart());
+    }
+
+    /**
+     * Calculate.
+     */
+    @Test
+    void calculate() {
+        assertThat(customer.getCart().getTotal()).isEqualTo(3693.77);
     }
 }

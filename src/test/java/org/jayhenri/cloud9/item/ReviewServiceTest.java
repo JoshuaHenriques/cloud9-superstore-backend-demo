@@ -49,6 +49,7 @@ public class ReviewServiceTest {
                 "iPhone 13 Pro",
                 "2021 Model",
                 new HashSet<>(),
+                1129.99,
                 null
         );
 

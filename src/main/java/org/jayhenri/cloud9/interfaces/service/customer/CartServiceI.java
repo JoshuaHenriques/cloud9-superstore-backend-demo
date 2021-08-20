@@ -8,11 +8,6 @@ import java.util.UUID;
 
 /**
  * The interface Cart service i.
- *
- * @param <T> the type parameter
- * @param <C> the type parameter
- * @param <S> the type parameter
- * @param <U> the type parameter
  */
 public interface CartServiceI {
 
@@ -47,7 +42,12 @@ public interface CartServiceI {
      */
     Cart get(Customer customer);
 
+    /**
+     * Item exists boolean.
+     *
+     * @param cart the cart
+     * @param item the item
+     * @return the boolean
+     */
     boolean itemExists(Cart cart, Item item);
-
-    void calculate(Cart cart);
 }

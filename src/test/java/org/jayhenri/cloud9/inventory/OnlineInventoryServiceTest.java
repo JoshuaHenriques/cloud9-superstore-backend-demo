@@ -78,6 +78,7 @@ class OnlineInventoryServiceTest {
                 "iPhone 13 Pro",
                 "2021 Model",
                 new HashSet<>(),
+                1299.99,
                 null
         );
 

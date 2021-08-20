@@ -8,6 +8,7 @@ import org.jayhenri.cloud9.model.item.Item;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.util.Set;
 import java.util.UUID;
 
@@ -22,6 +23,8 @@ import java.util.UUID;
 public class Cart implements Serializable {
 
     private static final long serialVersionUID = -198235381052492730L;
+
+    private static DecimalFormat df = new DecimalFormat("0.00");
 
     @Id
     @Column(name = "cart_id", nullable = false)
@@ -39,7 +42,7 @@ public class Cart implements Serializable {
     )
     private Set<Item> items;
 
-    @Column(name = "total", nullable = true)
+    @Column(name = "total")
     private Double total;
 
     /**
@@ -47,11 +50,24 @@ public class Cart implements Serializable {
      *
      * @param customer the customer
      * @param items    the items
-     * @param total    the total
      */
-    public Cart(Customer customer, Set<Item> items, Double total) {
+    public Cart(Customer customer, Set<Item> items) {
         this.customer = customer;
         this.items = items;
-        this.total = total;
+        this.total = 0.00;
+        calculate();
+    }
+
+    /**
+     * Calculate.
+     */
+    public void calculate() {
+
+        items.forEach(item -> this.total += item.getPrice());
+
+        double DELIVERY = 9.99;
+        double HST = 1.13;
+
+        this.total = Math.round(((total*HST)+DELIVERY)*100.00) / 100.00;
     }
 }

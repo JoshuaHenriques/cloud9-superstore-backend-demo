@@ -36,12 +36,11 @@ public class CartService implements CartServiceI {
      *
      * @param customer the customer
      * @param item     the item
-     * @return the customer
      */
     public void add(Customer customer, Item item) {
 
         customer.getCart().getItems().add(item);
-        calculate(customer.getCart());
+        customer.getCart().calculate();
         customerService.update(customer);
     }
 
@@ -50,7 +49,6 @@ public class CartService implements CartServiceI {
      *
      * @param customer the customer
      * @param itemUUID the item uuid
-     * @return customer customer
      */
     public void remove(Customer customer, UUID itemUUID) {
 
@@ -61,7 +59,7 @@ public class CartService implements CartServiceI {
             }
         });
         customer.getCart().getItems().removeAll(removeMe);
-        calculate(customer.getCart());
+        customer.getCart().calculate();
         customerService.update(customer);
     }
 
@@ -90,19 +88,8 @@ public class CartService implements CartServiceI {
     }
 
     public boolean itemExists(Cart cart, Item item){
+
         return cart.getItems().contains(item);
     }
 
-    // todo: test
-    public void calculate(Cart cart) {
-
-        cart.getItems().forEach(item -> {
-            cart.setTotal(cart.getTotal() + item.getPrice());
-        });
-
-        double DELIVERY = 9.99;
-        double HST = 1.13;
-
-        cart.setTotal(cart.getTotal()*HST*DELIVERY);
-    }
 }

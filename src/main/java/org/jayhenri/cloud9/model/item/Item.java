@@ -51,12 +51,14 @@ public class Item implements Serializable {
      * @param itemName    the item name
      * @param description the description
      * @param reviews     the reviews
+     * @param price       the price
      * @param image       the image
      */
-    public Item(String itemName, String description, Set<Review> reviews, byte[] image) {
+    public Item(String itemName, String description, Set<Review> reviews, double price, byte[] image) {
         this.itemName = itemName;
         this.description = description;
         this.reviews = reviews;
+        this.price = price;
         this.image = image;
     }
 }
