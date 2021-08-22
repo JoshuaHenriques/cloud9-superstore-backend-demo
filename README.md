@@ -136,7 +136,7 @@ Integration Tests:
 ```
 
 #### Models
-<a href="#src/main/resources/db/migration/V0_0_1__create_cloud9_schema.sql">Schema</a> for a clearer model representation
+<a href="#https://github.com/JoshuaHenriques/cloud9-superstore-backend-demo/blob/master/src/main/resources/db/migration/V0_0_1__create_cloud9_schema.sql">Schema</a> for a clearer model representation
 ```
 Address
 
