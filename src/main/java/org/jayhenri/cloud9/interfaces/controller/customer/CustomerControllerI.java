@@ -27,8 +27,8 @@ public interface CustomerControllerI {
      * @throws InvalidPostalCodeException     the invalid postal code exception
      * @throws InvalidCustomerException       the invalid customer exception
      */
-    @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<String> add(@RequestBody Customer customer) throws CustomerAlreadyExistsException, InvalidPostalCodeException, InvalidCustomerException;
+    @PostMapping(value = "/add", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    ResponseEntity<String> add(@RequestBody @ModelAttribute Customer customer) throws CustomerAlreadyExistsException, InvalidPostalCodeException, InvalidCustomerException;
 
     /**
      * Remove.
@@ -39,8 +39,8 @@ public interface CustomerControllerI {
      * @throws InvalidCustomerException  the invalid customer exception
      * @throws CustomerNotFoundException the customer not found exception
      */
-    @PutMapping(value = "/update/{uuid}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<String> update(@RequestBody Customer customer, @PathVariable("uuid") UUID uuid) throws InvalidCustomerException, CustomerNotFoundException;
+    @PutMapping(value = "/update/{customerId}", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    ResponseEntity<String> update(@RequestBody @ModelAttribute Customer customer, @PathVariable UUID customerId) throws InvalidCustomerException, CustomerNotFoundException;
 
     /**
      * Update.
@@ -49,8 +49,8 @@ public interface CustomerControllerI {
      * @return the response entity
      * @throws CustomerNotFoundException the customer not found exception
      */
-    @DeleteMapping(value = "/delete/{uuid}")
-    ResponseEntity<String> delete(@PathVariable UUID uuid) throws CustomerNotFoundException;
+    @DeleteMapping(value = "/delete/{customerId}")
+    ResponseEntity<String> delete(@PathVariable UUID customerId) throws CustomerNotFoundException;
 
     /**
      * Find all list.
@@ -68,6 +68,6 @@ public interface CustomerControllerI {
      * @throws InvalidNameException      the invalid name exception
      * @throws CustomerNotFoundException the customer not found exception
      */
-    @GetMapping(value = "/{uuid}", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<Customer> get(@PathVariable UUID uuid) throws InvalidNameException, CustomerNotFoundException;
+    @GetMapping(value = "/get/{customerId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<Customer> get(@PathVariable UUID customerId) throws InvalidNameException, CustomerNotFoundException;
 }

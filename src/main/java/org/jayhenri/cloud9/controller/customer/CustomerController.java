@@ -51,8 +51,8 @@ public class CustomerController implements CustomerControllerI {
      * @throws InvalidPostalCodeException     the invalid postal code exception
      * @throws InvalidCustomerException       the invalid customer exception
      */
-    @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> add(@RequestBody Customer customer)
+    @PostMapping(value = "/add", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public ResponseEntity<String> add(@RequestBody @ModelAttribute Customer customer)
             throws CustomerAlreadyExistsException, InvalidPostalCodeException, InvalidCustomerException {
 
         if (ObjectUtils.isEmpty(customer))
@@ -76,18 +76,18 @@ public class CustomerController implements CustomerControllerI {
     /**
      * Update customer.
      *
-     * @param uuid     the uuid
+     * @param customerId     the customerId
      * @param customer the customer
      * @return the response entity
      * @throws InvalidCustomerException  the invalid customer exception
      * @throws CustomerNotFoundException the customer not found exception
      */
-    @PutMapping(value = "/update/{uuid}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> update(@RequestBody Customer customer, @PathVariable("uuid") UUID uuid)
+    @PutMapping(value = "/update/{customerId}", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public ResponseEntity<String> update(@RequestBody @ModelAttribute Customer customer, @PathVariable UUID customerId)
             throws InvalidCustomerException, CustomerNotFoundException {
         if (!ObjectUtils.isEmpty(customer)) {
             if (customerService.existsById(customer.getCustomerUUID())) {
-                customer.setCustomerUUID(uuid);
+                customer.setCustomerUUID(customerId);
                 customerService.update(customer);
 
                 HttpHeaders responseHeaders = new HttpHeaders();
@@ -102,15 +102,15 @@ public class CustomerController implements CustomerControllerI {
     /**
      * Delete customer.
      *
-     * @param uuid the email
+     * @param customerId the email
      * @return the response entity
      * @throws CustomerNotFoundException the customer not found exception
      */
-    @DeleteMapping(value = "/delete/{uuid}")
-    public ResponseEntity<String> delete(@PathVariable UUID uuid)
+    @DeleteMapping(value = "/delete/{customerId}")
+    public ResponseEntity<String> delete(@PathVariable UUID customerId)
             throws CustomerNotFoundException {
-        if (customerService.existsById(uuid)) {
-            Customer _customer = customerService.getById(uuid);
+        if (customerService.existsById(customerId)) {
+            Customer _customer = customerService.getById(customerId);
             customerService.remove(_customer);
 
             HttpHeaders responseHeaders = new HttpHeaders();
@@ -138,17 +138,17 @@ public class CustomerController implements CustomerControllerI {
     /**
      * Gets by email.
      *
-     * @param uuid the email
+     * @param customerId the email
      * @return the by email
      * @throws InvalidNameException      the invalid name exception
      * @throws CustomerNotFoundException the customer not found exception
      */
-    @GetMapping(value = "/get/{uuid}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Customer> get(@PathVariable UUID uuid)
+    @GetMapping(value = "/get/{customerId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Customer> get(@PathVariable UUID customerId)
             throws InvalidNameException, CustomerNotFoundException {
-        if (!ObjectUtils.isEmpty(uuid)) {
-            if (customerService.existsById(uuid)) {
-                Customer _customer = customerService.getById(uuid);
+        if (!ObjectUtils.isEmpty(customerId)) {
+            if (customerService.existsById(customerId)) {
+                Customer _customer = customerService.getById(customerId);
 
                 HttpHeaders responseHeaders = new HttpHeaders();
                 responseHeaders.set("CustomerController", "get");

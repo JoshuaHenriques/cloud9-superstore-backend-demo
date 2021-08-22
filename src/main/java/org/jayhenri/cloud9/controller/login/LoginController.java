@@ -134,7 +134,6 @@ public class LoginController implements ControllerI<Login> {
     public ResponseEntity<Login> get(@PathVariable UUID loginId)
             throws InvalidNameException, InvalidLoginException, LoginNotFoundException {
 
-        //UUID loginId = UUID.fromString(uuid);
         if (!ObjectUtils.isEmpty(loginId)) {
             if (loginService.existsById(loginId)) {
                 Login _login = loginService.getById(loginId);

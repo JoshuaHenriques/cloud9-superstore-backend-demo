@@ -27,7 +27,7 @@ public interface CartControllerI {
      * @throws ItemNotFoundException         the item not found exception
      * @throws InvalidInventoryTypeException the invalid inventory type exception
      */
-    @PutMapping(value = "/{customerId}/cart/add/{itemId}")
+    @PutMapping(value = "/{customerId}/cart/add/{itemId}", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     ResponseEntity<String> add(@PathVariable UUID customerId, @PathVariable UUID itemId, @PathVariable String type) throws CustomerNotFoundException, ItemNotFoundException, InvalidInventoryTypeException;
 
     /**

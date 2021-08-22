@@ -49,8 +49,8 @@ public class OrdersController implements OrdersControllerI {
      * @return the response entity
      * @throws InvalidOrdersException the invalid orders exception
      */
-    @PostMapping(value = "/add/{customerId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> add(@RequestBody Orders orders, @PathVariable UUID customerId) throws InvalidOrdersException {
+    @PostMapping(value = "/add/{customerId}", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public ResponseEntity<String> add(@RequestBody @ModelAttribute Orders orders, @PathVariable UUID customerId) throws InvalidOrdersException {
         if (!ObjectUtils.isEmpty(orders)) {
             ordersService.add(customerService.getById(customerId), orders);
 
@@ -70,8 +70,8 @@ public class OrdersController implements OrdersControllerI {
      * @throws OrdersNotFoundException the orders not found exception
      * @throws InvalidOrdersException  the invalid orders exception
      */
-    @PutMapping(value = "/update/{ordersId}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> update(@RequestBody Orders orders, @PathVariable("ordersId") UUID ordersId) throws OrdersNotFoundException, InvalidOrdersException {
+    @PutMapping(value = "/update/{ordersId}", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public ResponseEntity<String> update(@RequestBody @ModelAttribute Orders orders, @PathVariable UUID ordersId) throws OrdersNotFoundException, InvalidOrdersException {
         if (!ObjectUtils.isEmpty(orders)) {
             if (ordersService.existsById(ordersId)) {
                 orders.setOrdersUUID(ordersId);

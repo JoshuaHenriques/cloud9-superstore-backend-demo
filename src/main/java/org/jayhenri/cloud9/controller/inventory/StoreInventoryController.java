@@ -5,6 +5,7 @@ import org.jayhenri.cloud9.exception.invalid.InvalidItemException;
 import org.jayhenri.cloud9.exception.notfound.ItemNotFoundException;
 import org.jayhenri.cloud9.interfaces.controller.other.InventoryControllerI;
 import org.jayhenri.cloud9.interfaces.service.other.InventoryServiceI;
+import org.jayhenri.cloud9.model.inventory.OnlineInventory;
 import org.jayhenri.cloud9.model.inventory.StoreInventory;
 import org.jayhenri.cloud9.model.item.Item;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,13 +51,13 @@ public class StoreInventoryController implements InventoryControllerI<StoreInven
      * @throws ItemAlreadyExistsException the item already exists exception
      * @throws InvalidItemException       the invalid item exception
      */
-    @PostMapping(value = "/add/{itemId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> add(@RequestBody Item item, @PathVariable UUID itemId, @RequestBody int quantity, @RequestBody double price)
+    @PostMapping(value = "/add/{itemId}", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public ResponseEntity<String> add(@RequestBody @ModelAttribute StoreInventory storeInventory, @PathVariable UUID itemId)
             throws ItemAlreadyExistsException, InvalidItemException {
-        if (!ObjectUtils.isEmpty(item)) {
-            if (!storeInventoryService.existsByItemName(item.getItemName())) {
-                item.setItemUUID(itemId);
-                storeInventoryService.add(item, quantity, price);
+        if (!ObjectUtils.isEmpty(storeInventory)) {
+            if (!storeInventoryService.existsById(storeInventory.getInventoryUUID())) {
+                storeInventory.setInventoryUUID(itemId);
+                storeInventoryService.add(storeInventory);
 
                 HttpHeaders responseHeaders = new HttpHeaders();
                 responseHeaders.set("StoreInventoryController", "add");
@@ -75,11 +76,12 @@ public class StoreInventoryController implements InventoryControllerI<StoreInven
      * @throws InvalidItemException  the invalid item exception
      * @throws ItemNotFoundException the item not found exception
      */
-    @PutMapping(value = "/update/{inventoryId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> update(@RequestBody StoreInventory storeInventory)
+    @PutMapping(value = "/update/{inventoryId}", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public ResponseEntity<String> update(@RequestBody @ModelAttribute StoreInventory storeInventory, @PathVariable UUID inventoryId)
             throws InvalidItemException, ItemNotFoundException {
         if (!ObjectUtils.isEmpty(storeInventory)) {
-            if (storeInventoryService.existsByItemName(storeInventory.getItemName())) {
+            if (storeInventoryService.existsById(storeInventory.getInventoryUUID())) {
+                storeInventory.setInventoryUUID(inventoryId);
                 storeInventoryService.update(storeInventory);
 
                 HttpHeaders responseHeaders = new HttpHeaders();
@@ -138,15 +140,15 @@ public class StoreInventoryController implements InventoryControllerI<StoreInven
      * @throws InvalidItemException  the invalid item exception
      * @throws ItemNotFoundException the item not found exception
      */
-    @DeleteMapping(value = "/remove/{itemId}")
-    public ResponseEntity<String> remove(@PathVariable UUID itemId)
+    @DeleteMapping(value = "/delete/{itemId}")
+    public ResponseEntity<String> delete(@PathVariable UUID itemId)
             throws InvalidItemException, ItemNotFoundException {
         if (!ObjectUtils.isEmpty(itemId)) {
             if (storeInventoryService.existsById(itemId)) {
                 storeInventoryService.delete(storeInventoryService.getById(itemId));
 
                 HttpHeaders responseHeaders = new HttpHeaders();
-                responseHeaders.set("StoreInventoryController", "remove");
+                responseHeaders.set("StoreInventoryController", "delete");
                 return new ResponseEntity<>("Successfully Deleted Item", responseHeaders, HttpStatus.OK);
             } else
                 throw new ItemNotFoundException();

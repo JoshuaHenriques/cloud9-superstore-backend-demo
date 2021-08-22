@@ -27,8 +27,8 @@ public interface EmployeeControllerI {
      * @throws InvalidPostalCodeException     the invalid postal code exception
      * @throws InvalidEmployeeException       the invalid employee exception
      */
-    @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<String> add(@RequestBody Employee employee)
+    @PostMapping(value = "/add", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    ResponseEntity<String> add(@RequestBody @ModelAttribute Employee employee)
             throws EmployeeAlreadyExistsException, InvalidPostalCodeException, InvalidEmployeeException;
 
     /**
@@ -40,8 +40,8 @@ public interface EmployeeControllerI {
      * @throws InvalidEmployeeException  the invalid employee exception
      * @throws EmployeeNotFoundException the employee not found exception
      */
-    @PutMapping(value = "/update/{employeeId}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<String> update(@RequestBody Employee employee, @PathVariable UUID employeeId)
+    @PutMapping(value = "/update/{employeeId}", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    ResponseEntity<String> update(@RequestBody @ModelAttribute Employee employee, @PathVariable UUID employeeId)
             throws InvalidEmployeeException, EmployeeNotFoundException;
 
     /**

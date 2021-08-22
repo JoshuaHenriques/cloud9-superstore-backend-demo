@@ -46,8 +46,8 @@ public class ItemController implements ControllerI<Item> {
      * @throws ItemAlreadyExistsException the item already exists exception
      * @throws InvalidItemException       the invalid item exception
      */
-    @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> add(@RequestBody Item item)
+    @PostMapping(value = "/add", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public ResponseEntity<String> add(@RequestBody @ModelAttribute Item item)
             throws ItemAlreadyExistsException, InvalidItemException {
 
         if (ObjectUtils.isEmpty(item))
@@ -74,8 +74,8 @@ public class ItemController implements ControllerI<Item> {
      * @throws ItemNotFoundException      the item not found exception
      * @throws ItemAlreadyExistsException the item already exists exception
      */
-    @PutMapping(value = "/update/{itemId}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> update(@RequestBody Item item, @PathVariable UUID itemId)
+    @PutMapping(value = "/update/{itemId}", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public ResponseEntity<String> update(@RequestBody @ModelAttribute Item item, @PathVariable UUID itemId)
             throws InvalidItemException, ItemNotFoundException, ItemAlreadyExistsException {
         if (!ObjectUtils.isEmpty(item)) {
             if (itemService.existsByItemName(item.getItemName())) {

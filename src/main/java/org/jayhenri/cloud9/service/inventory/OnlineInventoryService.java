@@ -31,9 +31,8 @@ public class OnlineInventoryService implements InventoryServiceI<OnlineInventory
         this.inventoryRepository = inventoryRepository;
     }
 
-    public void add(Item item, int quantity, double price) {
+    public void add(OnlineInventory inventory) {
 
-        OnlineInventory inventory = new OnlineInventory(item, item.getItemName(), quantity, price);
         inventoryRepository.save(inventory);
     }
 

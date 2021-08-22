@@ -3,6 +3,7 @@ package org.jayhenri.cloud9.interfaces.controller.other;
 import org.jayhenri.cloud9.exception.alreadyexists.ItemAlreadyExistsException;
 import org.jayhenri.cloud9.exception.invalid.InvalidItemException;
 import org.jayhenri.cloud9.exception.notfound.ItemNotFoundException;
+import org.jayhenri.cloud9.interfaces.service.other.InventoryServiceI;
 import org.jayhenri.cloud9.model.item.Item;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -29,8 +30,8 @@ public interface InventoryControllerI<T> {
      * @throws ItemAlreadyExistsException the item already exists exception
      * @throws InvalidItemException       the invalid item exception
      */
-    @PostMapping(value = "/add/{itemId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<String> add(@RequestBody Item item, @PathVariable UUID itemId, @RequestBody int quantity, @RequestBody double price)
+    @PostMapping(value = "/add/{itemId}", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    ResponseEntity<String> add(@RequestBody @ModelAttribute T t, @PathVariable UUID itemId)
             throws ItemAlreadyExistsException, InvalidItemException;
 
     /**
@@ -41,8 +42,8 @@ public interface InventoryControllerI<T> {
      * @throws InvalidItemException  the invalid item exception
      * @throws ItemNotFoundException the item not found exception
      */
-    @PutMapping(value = "/update", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<String> update(@RequestBody T t)
+    @PutMapping(value = "/update/{inventoryId}", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    ResponseEntity<String> update(@RequestBody @ModelAttribute T t, @PathVariable UUID inventoryId)
             throws InvalidItemException, ItemNotFoundException;
 
     /**
@@ -62,7 +63,7 @@ public interface InventoryControllerI<T> {
      * @return the response entity
      * @throws ItemNotFoundException the item not found exception
      */
-    @GetMapping(value = "/get/{itemId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/get/{inventoryId}", produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<T> getById(@PathVariable UUID itemId) throws ItemNotFoundException;
 
     /**
@@ -73,8 +74,8 @@ public interface InventoryControllerI<T> {
      * @throws InvalidItemException  the invalid item exception
      * @throws ItemNotFoundException the item not found exception
      */
-    @DeleteMapping(value = "/remove/{itemId}")
-    ResponseEntity<String> remove(@PathVariable UUID itemId)
+    @DeleteMapping(value = "/delete/{itemId}")
+    ResponseEntity<String> delete(@PathVariable UUID itemId)
             throws InvalidItemException, ItemNotFoundException;
 
     /**

@@ -26,8 +26,8 @@ public interface OrdersControllerI {
      * @return the response entity
      * @throws InvalidOrdersException the invalid orders exception
      */
-    @PostMapping(value = "/add/{customerId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<String> add(@RequestBody Orders orders, @PathVariable UUID customerId) throws InvalidOrdersException;
+    @PostMapping(value = "/add/{customerId}", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    ResponseEntity<String> add(@RequestBody @ModelAttribute Orders orders, @PathVariable UUID customerId) throws InvalidOrdersException;
 
     /**
      * Update response entity.
@@ -38,8 +38,8 @@ public interface OrdersControllerI {
      * @throws OrdersNotFoundException the orders not found exception
      * @throws InvalidOrdersException  the invalid orders exception
      */
-    @PutMapping(value = "/update/{ordersId}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<String> update(@RequestBody Orders orders, @PathVariable("ordersId") UUID ordersId) throws OrdersNotFoundException, InvalidOrdersException;
+    @PutMapping(value = "/update/{ordersId}", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    ResponseEntity<String> update(@RequestBody @ModelAttribute Orders orders, @PathVariable UUID ordersId) throws OrdersNotFoundException, InvalidOrdersException;
 
     /**
      * List response entity.
@@ -49,7 +49,7 @@ public interface OrdersControllerI {
      * @throws CustomerNotFoundException the customer not found exception
      */
     @GetMapping(value = "/list/{customerId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Set<Orders>> list(@PathVariable UUID customerId) throws CustomerNotFoundException;
+    ResponseEntity<Set<Orders>> list(@PathVariable UUID customerId) throws CustomerNotFoundException;
 
     /**
      * Get response entity.
@@ -61,7 +61,7 @@ public interface OrdersControllerI {
      * @throws OrdersNotFoundException   the orders not found exception
      * @throws InvalidOrdersException    the invalid orders exception
      */
-    @GetMapping(value = "/{orderId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Orders> get(@PathVariable UUID orderId)
+    @GetMapping(value = "/get/{orderId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<Orders> get(@PathVariable UUID orderId)
             throws InvalidNameException, CustomerNotFoundException, OrdersNotFoundException, InvalidOrdersException;
 }

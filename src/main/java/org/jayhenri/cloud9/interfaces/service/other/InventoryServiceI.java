@@ -16,11 +16,8 @@ public interface InventoryServiceI<T> {
     /**
      * Add.
      *
-     * @param item     the item
-     * @param quantity the quantity
-     * @param price    the price
      */
-    void add(Item item, int quantity, double price);
+    void add(T t);
 
     /**
      * Update.

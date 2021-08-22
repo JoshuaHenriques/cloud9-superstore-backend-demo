@@ -243,7 +243,7 @@ class OnlineInventoryControllerUniTest {
         given(onlineInventoryService.existsById(uuid)).willReturn(true);
         given(onlineInventoryService.getById(uuid)).willReturn(inventory);
 
-        assertThat(HttpStatus.OK).isEqualTo(onlineInventoryController.remove(uuid).getStatusCode());
+        assertThat(HttpStatus.OK).isEqualTo(onlineInventoryController.delete(uuid).getStatusCode());
 
         then(onlineInventoryService).should().delete(inventory);
     }
@@ -254,7 +254,7 @@ class OnlineInventoryControllerUniTest {
     @Test
     void removeInventoryThrowsInvalidItemException() {
         assertThrows(InvalidItemException.class, () -> {
-            onlineInventoryController.remove(null);
+            onlineInventoryController.delete(null);
         });
     }
 
@@ -266,7 +266,7 @@ class OnlineInventoryControllerUniTest {
         given(onlineInventoryService.existsById(uuid)).willReturn(false);
 
         assertThrows(ItemNotFoundException.class, () -> {
-            onlineInventoryController.remove(uuid);
+            onlineInventoryController.delete(uuid);
         });
     }
 

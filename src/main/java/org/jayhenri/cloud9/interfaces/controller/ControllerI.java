@@ -38,7 +38,7 @@ public interface ControllerI<T> {
      * @throws ItemAlreadyExistsException  the item already exists exception
      * @throws InvalidItemException        the invalid item exception
      */
-    @PostMapping(value = "/add", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/add", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     ResponseEntity<String> add(@RequestBody @ModelAttribute T t) throws LoginAlreadyExistsException, InvalidLoginException, StoreAlreadyExistsException, InvalidPostalCodeException, InvalidStoreException, ItemAlreadyExistsException, InvalidItemException;
 
     /**
@@ -55,8 +55,8 @@ public interface ControllerI<T> {
      * @throws ItemNotFoundException      the item not found exception
      * @throws ItemAlreadyExistsException the item already exists exception
      */
-    @PutMapping(value = "/update/{uuid}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<String> update(@RequestBody T t, @PathVariable UUID uuid) throws InvalidLoginException, LoginNotFoundException, InvalidStoreException, StoreNotFoundException, InvalidItemException, ItemNotFoundException, ItemAlreadyExistsException;
+    @PutMapping(value = "/update/{uuid}", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    ResponseEntity<String> update(@RequestBody @ModelAttribute T t, @PathVariable UUID uuid) throws InvalidLoginException, LoginNotFoundException, InvalidStoreException, StoreNotFoundException, InvalidItemException, ItemNotFoundException, ItemAlreadyExistsException;
 
     /**
      * Delete response entity.

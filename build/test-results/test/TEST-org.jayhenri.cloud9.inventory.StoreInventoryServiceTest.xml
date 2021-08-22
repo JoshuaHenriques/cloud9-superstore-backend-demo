@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.jayhenri.cloud9.inventory.StoreInventoryServiceTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2021-08-21T20:01:25" hostname="kde-laptop" time="0.034">
+  <properties/>
+  <testcase name="existsByItemName()" classname="org.jayhenri.cloud9.inventory.StoreInventoryServiceTest" time="0.024"/>
+  <testcase name="delete()" classname="org.jayhenri.cloud9.inventory.StoreInventoryServiceTest" time="0.001"/>
+  <testcase name="update()" classname="org.jayhenri.cloud9.inventory.StoreInventoryServiceTest" time="0.001"/>
+  <testcase name="getByItemName()" classname="org.jayhenri.cloud9.inventory.StoreInventoryServiceTest" time="0.001"/>
+  <testcase name="findAllInventories()" classname="org.jayhenri.cloud9.inventory.StoreInventoryServiceTest" time="0.001"/>
+  <testcase name="getById()" classname="org.jayhenri.cloud9.inventory.StoreInventoryServiceTest" time="0.001"/>
+  <testcase name="add()" classname="org.jayhenri.cloud9.inventory.StoreInventoryServiceTest" time="0.001"/>
+  <testcase name="existsById()" classname="org.jayhenri.cloud9.inventory.StoreInventoryServiceTest" time="0.001"/>
+  <testcase name="doesNotExistsByItemName()" classname="org.jayhenri.cloud9.inventory.StoreInventoryServiceTest" time="0.001"/>
+  <testcase name="doesNotExistsById()" classname="org.jayhenri.cloud9.inventory.StoreInventoryServiceTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -38,9 +38,8 @@ public class StoreInventoryService implements InventoryServiceI<StoreInventory> 
      * @param quantity the quantity
      * @param price    the price
      */
-    public void add(Item item, int quantity, double price) {
+    public void add(StoreInventory inventory) {
 
-        StoreInventory inventory = new StoreInventory(item, item.getItemName(), quantity, price);
         inventoryRepository.save(inventory);
     }
 
