@@ -1,16 +1,44 @@
 <p align="center">
   <h3 align="center">Cloud9 Superstore Management System Demo</h3>
-  <p align="center">
+  
+<p align="center">
     RESTful API Application
-  </p>
-</p>
+
+<details open="open">
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#about-the-project">About</a></li>
+    <li><a href="#endpoints">Endpoints</a></li>
+    <li><a href="#layers-tested">Layers Tested</a></li>
+    <li><a href="#models">Models</a></li>
+    <li><a href="#dependencies">Dependencies</a></li>
+    <li><a href="#built-with">Built With</a></li>
+    <li><a href="#usage-for-cli">Usage for CLI</a></li>
+    <li><a href="#usage-for-docker">Usage for Docker</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ol>
+</details>
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-This app is a replica of a real world store.* The theme of the project was inspired by the Netflix show Cloud9 Superstore. 
+This app is a replica of a real world store.* The theme of the project was inspired by the Netflix show Cloud9 Superstore. Great to fork to expand for your use case
 
-
-#### ~55 Endpoints:
+#### Endpoints:
 ```
 Address:
 api/address
@@ -102,29 +130,62 @@ Store:
     /list
 ```
     
-#### Layers Tested (~200 Passing Tests)
+#### Layers Tested
 ```
+(~200 Passing Tests)
 Unit Tests:
   @Controller 
   @Service
 Integration Tests:
   @WebMvcTest
   @JpaDataTest
-  @SpringbootTest 
+  @SpringBootTest 
+```
+
+#### Models
+<a href="#src/main/resources/db/migration/V0_0_1__create_cloud9_schema.sql">Schema</a> for a clearer model representation
+```
+Address
+
+Customer
+   Orders
+   CreditCard
+   Cart
+   
+Inventory
+   OnlineInventory
+   StoreInventory
+   
+Item
+   Review
+   
+Login
+   Attempts
+   
+Store
+   Employee
 ```
 
 #### Dependencies
 ```
+Flyway Migration
+Spring Boot DevTools
+Lombok
+Spring Web
+Spring Data JPA
+Spring Security
+PostgreSQL Driver
+Commons Validator
+Hibernate
+Auth0 Java JWT
 ```
 
 #### Built With
-
 * [Springboot 2.5.3]
 * [Java 11]
 * [Gradle]
 
-#### Usage
-
+#### Usage for CLI
 1. Clone the repo
    ```sh
    git clone https://github.com/joshuahenriques/cloud9-superstore-demo.git
@@ -138,9 +199,21 @@ Integration Tests:
    ./gradlew bootRun
    ```
 
-<!-- CONTRIBUTING -->
-### Contributing
+#### Usage for Docker
+1. Clone the repo
+   ```sh
+   git clone https://github.com/joshuahenriques/cloud9-superstore-demo.git
+   ```
+3. In root directory build the app
+   ```sh
+   ./gradlew build
+   ```
+4. Then run it
+   ```sh
+   ./gradlew bootRun
+   ```
 
+### Contributing
 Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
 1. Fork the Project
@@ -149,14 +222,10 @@ Contributions are what make the open source community such an amazing place to b
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-<!-- LICENSE -->
 ### License
-
 Distributed under the MIT License. See `LICENSE` for more information.
 
-<!-- CONTACT -->
 ### Contact
-
 [https://joshuahenriques.com](https://joshuahenriques.com)
 
 [https://github.com/joshuahenriques/cloud9-backend-demo](https://github.com/joshuahenriques/cloud9-backend-demo)
