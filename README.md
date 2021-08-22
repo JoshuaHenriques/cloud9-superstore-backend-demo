@@ -10,9 +10,6 @@
     <li>
       <a href="#about-the-project">About The Project</a>
     </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-    </li>
     <li><a href="#about-the-project">About</a></li>
     <li><a href="#endpoints">Endpoints</a></li>
     <li><a href="#layers-tested">Layers Tested</a></li>
@@ -181,11 +178,15 @@ Auth0 Java JWT
 #### Usage for CLI
 1. Clone the repo
    ```sh
-   git clone https://github.com/joshuahenriques/cloud9-superstore-demo.git
+   git clone https://github.com/joshuahenriques/cloud9-superstore-backend-demo.git
    ```
-3. In root directory build the app
+2. In root directory build the app
    ```sh
    ./gradlew build
+   ```
+3. Migrate database with Flyway
+   ```sh
+   ./gradlew flywayMigrate
    ```
 4. Then run it
    ```sh
@@ -195,16 +196,11 @@ Auth0 Java JWT
 #### Usage for Docker
 1. Clone the repo
    ```sh
-   git clone https://github.com/joshuahenriques/cloud9-superstore-demo.git
+   git clone https://github.com/joshuahenriques/cloud9-superstore-backend-demo.git
    ```
-3. In root directory build the app
+2. In root directory build the app
    ```sh
-   ./gradlew build
-   ```
-4. Then run it
-   ```sh
-   ./gradlew bootRun
-   ```
+   docker-compose up
 
 ### Contributing
 Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
@@ -221,4 +217,4 @@ Distributed under the MIT License. See `LICENSE` for more information.
 ### Contact
 [https://joshuahenriques.com](https://joshuahenriques.com)
 
-[https://github.com/joshuahenriques/cloud9-backend-demo](https://github.com/joshuahenriques/cloud9-backend-demo)
+[https://github.com/joshuahenriques/cloud9-backend-demo](https://github.com/joshuahenriques/cloud9-superstore-backend-demo)
