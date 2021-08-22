@@ -1,6 +1,6 @@
 <p align="center">
   <h3 align="center">Cloud9 Superstore Management System Demo</h3>
-  
+
 <p align="center">
     RESTful API Application
 
@@ -122,7 +122,7 @@ Store:
     /get{storeId}
     /list
 ```
-    
+
 #### Layers Tested
 ```
 (~200 Passing Tests)
