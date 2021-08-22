@@ -7,40 +7,47 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-Inspired by the Netflix show Cloud9 Superstore.
+Inspired by the Netflix show Cloud9 Superstore. Replica of a real world superstore database
 
+*Remake*
 [Entity-Relationship Diagram](https://github.com/JoshuaHenriques/cloud9-superstore-demo/blob/master/Cloud9-ERD.png)
 
-~55 Endpoints:
-
-Address
+### ~55 Endpoints:
+```
+Address:
 api/address
   /update/{entity}/{uuid}
+
 Cart:
   /api/item
-    /add
-    /update/{itemId}
-    /delete/{itemId}
-    /get/{itemId}
+    /{customerId}/cart/add/{type}/{itemId}
+    /{customerId}/cart/empty
+    /{customerId}/cart/delete/{itemId}
+    {customerId}/cart/get
     /list
+
 CreditCard:
   /api/customer/creditCard
     /{customerId}/creditCard/add
     /{customerId}/creditCard/delete/{cardId}
     /{customerId}/creditCard/list
+
 Customer:
+
   /api/customer
     /add
     /update/{customerId}
     /delete/{customerId}
     /get/{customerId}
     /list
+
 Orders:
   /api/orders
     /add
     /update/{customerId}
     /get/{ordersId}
     /list/{customerId}
+
 OnlineInventory:
   /api/inventory/online
     /add/{itemId}
@@ -48,6 +55,7 @@ OnlineInventory:
     /delete/{inventoryId}
     /get/{inventoryId}
     /list
+
 StoreInventory:
   /api/inventory/store
     /add/{itemId}
@@ -55,6 +63,7 @@ StoreInventory:
     /delete/{inventoryId}
     /get/{inventoryId}
     /list
+
 Item:
   /api/item
     /add
@@ -62,6 +71,7 @@ Item:
     /delete/{itemId}
     /get/{itemId}
     /list
+
 Review:
   api/review
     /add/{itemId}/{reviewId}
@@ -69,6 +79,7 @@ Review:
     /delete/{itemId}/{reviewId}
     /get/{itemId}/{reviewId}
     /list
+
 Login:
   /api/login
     /add
@@ -76,6 +87,7 @@ Login:
     /delete/{loginId}
     /get/{loginId}
     /list
+
 Employee:
   /api/employee
     /add
@@ -83,6 +95,7 @@ Employee:
     /delete/{employeeId}
     /get/{employeeId}
     /list
+    
 Store:
   /api/store
     /add
@@ -90,9 +103,22 @@ Store:
     /delete/{storeId}
     /get{storeId}
     /list
+```
     
-135/~200 Passed Tests, 5 Tests Ignored
-  Tests Controller, service, webmvc, jpadatabase
+### Layers Tested (~200 Passing Tests)
+```
+Unit Tests:
+  @Controller 
+  @Service
+Integration Tests:
+  @WebMvcTest
+  @JpaDataTest
+  @SpringbootTest 
+```
+
+### Dependencies
+```
+```
 
 ### Built With
 
@@ -134,6 +160,6 @@ Distributed under the MIT License. See `LICENSE` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Personal Website - [https://joshuahenriques.com](https://joshuahenriques.com)
+[https://joshuahenriques.com](https://joshuahenriques.com)
 
-Project Link: [https://github.com/joshuahenriques/cloud9-backend-demo](https://github.com/joshuahenriques/cloud9-backend-demo)
+[https://github.com/joshuahenriques/cloud9-backend-demo](https://github.com/joshuahenriques/cloud9-backend-demo)
