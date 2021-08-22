@@ -1,10 +1,8 @@
 package org.jayhenri.cloud9.item;
 
 import org.jayhenri.cloud9.controller.item.ItemController;
-import org.jayhenri.cloud9.exception.alreadyexists.CustomerAlreadyExistsException;
 import org.jayhenri.cloud9.exception.alreadyexists.ItemAlreadyExistsException;
 import org.jayhenri.cloud9.exception.invalid.InvalidItemException;
-import org.jayhenri.cloud9.exception.invalid.InvalidPostalCodeException;
 import org.jayhenri.cloud9.interfaces.service.other.ItemServiceI;
 import org.jayhenri.cloud9.model.item.Item;
 import org.jayhenri.cloud9.repository.item.ItemRepository;
@@ -21,10 +19,12 @@ import java.util.HashSet;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
 
+/**
+ * The type Item controller test.
+ */
 @ExtendWith(MockitoExtension.class)
 public class ItemControllerTest {
 
@@ -68,6 +68,12 @@ public class ItemControllerTest {
         );
     }
 
+    /**
+     * Add item.
+     *
+     * @throws ItemAlreadyExistsException the item already exists exception
+     * @throws InvalidItemException       the invalid item exception
+     */
     @Test
     void addItem() throws ItemAlreadyExistsException, InvalidItemException {
 

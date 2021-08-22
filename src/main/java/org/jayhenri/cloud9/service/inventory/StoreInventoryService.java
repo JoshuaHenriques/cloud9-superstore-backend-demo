@@ -3,7 +3,6 @@ package org.jayhenri.cloud9.service.inventory;
 import org.jayhenri.cloud9.exception.OutOfStockException;
 import org.jayhenri.cloud9.interfaces.service.other.InventoryServiceI;
 import org.jayhenri.cloud9.model.inventory.StoreInventory;
-import org.jayhenri.cloud9.model.item.Item;
 import org.jayhenri.cloud9.repository.inventory.StoreInventoryRepository;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,9 +33,6 @@ public class StoreInventoryService implements InventoryServiceI<StoreInventory> 
     /**
      * Add.
      *
-     * @param item     the item
-     * @param quantity the quantity
-     * @param price    the price
      */
     public void add(StoreInventory inventory) {
 

@@ -16,6 +16,9 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+/**
+ * The type Login controller test.
+ */
 @ExtendWith(MockitoExtension.class)
 public class LoginControllerTest {
 
@@ -24,12 +27,18 @@ public class LoginControllerTest {
     @Mock
     private LoginServiceI loginService;
 
+    /**
+     * Set up.
+     */
     @BeforeEach
     void SetUp() {
 
         loginController = new LoginController(loginService);
     }
 
+    /**
+     * List.
+     */
     @Test
     void list() {
         ResponseEntity<List<Login>> response = loginController.list();

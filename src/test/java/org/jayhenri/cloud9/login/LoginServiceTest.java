@@ -1,6 +1,5 @@
 package org.jayhenri.cloud9.login;
 
-import javassist.bytecode.ByteArray;
 import org.jayhenri.cloud9.interfaces.service.other.LoginServiceI;
 import org.jayhenri.cloud9.model.login.Login;
 import org.jayhenri.cloud9.repository.login.LoginRepository;
@@ -14,7 +13,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -67,7 +65,9 @@ public class LoginServiceTest {
         login = new Login(
                 "test.blizzard@gmail.uk",
                 "2017740301",
-                "somepassword"
+                "somepassword",
+                new String[]{"dwe"},
+                true
         );
     }
 

@@ -70,6 +70,6 @@ public class Cart implements Serializable {
         double DELIVERY = 9.99;
         double HST = 1.13;
 
-        this.total = Math.round(((total*HST)+DELIVERY)*100.00) / 100.00;
+        this.total = Math.round(((total * HST) + DELIVERY) * 100.00) / 100.00;
     }
 }

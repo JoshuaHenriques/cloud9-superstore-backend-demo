@@ -6,7 +6,6 @@ import org.jayhenri.cloud9.exception.notfound.ItemNotFoundException;
 import org.jayhenri.cloud9.interfaces.controller.other.InventoryControllerI;
 import org.jayhenri.cloud9.interfaces.service.other.InventoryServiceI;
 import org.jayhenri.cloud9.model.inventory.OnlineInventory;
-import org.jayhenri.cloud9.model.item.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -42,10 +41,7 @@ public class OnlineInventoryController implements InventoryControllerI<OnlineInv
     /**
      * Add item to onlineInventory response entity.
      *
-     * @param item     the item
      * @param itemId   the item id
-     * @param quantity the quantity
-     * @param price    the price
      * @return the response entity
      * @throws ItemAlreadyExistsException the item already exists exception
      * @throws InvalidItemException       the invalid item exception
@@ -133,7 +129,6 @@ public class OnlineInventoryController implements InventoryControllerI<OnlineInv
     /**
      * Remove item to onlineInventory response entity.
      *
-     * @param itemName the item name
      * @return the response entity
      * @throws InvalidItemException  the invalid item exception
      * @throws ItemNotFoundException the item not found exception

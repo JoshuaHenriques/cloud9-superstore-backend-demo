@@ -87,7 +87,7 @@ public class CartService implements CartServiceI {
         return customer.getCart();
     }
 
-    public boolean itemExists(Cart cart, Item item){
+    public boolean itemExists(Cart cart, Item item) {
 
         return cart.getItems().contains(item);
     }

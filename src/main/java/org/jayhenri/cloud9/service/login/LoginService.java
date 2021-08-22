@@ -1,15 +1,13 @@
 package org.jayhenri.cloud9.service.login;
 
-import lombok.SneakyThrows;
-import org.jayhenri.cloud9.exception.notfound.LoginNotFoundException;
 import org.jayhenri.cloud9.interfaces.service.other.LoginServiceI;
 import org.jayhenri.cloud9.model.login.Login;
 import org.jayhenri.cloud9.repository.login.LoginRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import java.util.List;
+import java.util.UUID;
 
 
 /**

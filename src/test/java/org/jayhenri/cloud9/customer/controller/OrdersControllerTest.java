@@ -1,18 +1,16 @@
 package org.jayhenri.cloud9.customer.controller;
 
-import org.assertj.core.api.AssertionsForClassTypes;
 import org.jayhenri.cloud9.controller.customer.OrdersController;
-import org.jayhenri.cloud9.exception.invalid.InvalidCustomerException;
 import org.jayhenri.cloud9.exception.invalid.InvalidOrdersException;
 import org.jayhenri.cloud9.exception.notfound.CustomerNotFoundException;
 import org.jayhenri.cloud9.exception.notfound.OrdersNotFoundException;
-import org.jayhenri.cloud9.interfaces.service.customer.AddressServiceI;
 import org.jayhenri.cloud9.interfaces.service.customer.CustomerServiceI;
 import org.jayhenri.cloud9.interfaces.service.customer.OrdersServiceI;
-import org.jayhenri.cloud9.model.customer.*;
-import org.jayhenri.cloud9.model.item.Item;
+import org.jayhenri.cloud9.model.customer.Address;
+import org.jayhenri.cloud9.model.customer.Cart;
+import org.jayhenri.cloud9.model.customer.Customer;
+import org.jayhenri.cloud9.model.customer.Orders;
 import org.jayhenri.cloud9.model.login.Login;
-import org.jayhenri.cloud9.service.customer.CustomerService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

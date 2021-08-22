@@ -33,8 +33,8 @@ public interface CustomerControllerI {
     /**
      * Remove.
      *
-     * @param customer the customer
-     * @param uuid     the uuid
+     * @param customer   the customer
+     * @param customerId the customer id
      * @return the response entity
      * @throws InvalidCustomerException  the invalid customer exception
      * @throws CustomerNotFoundException the customer not found exception
@@ -45,7 +45,7 @@ public interface CustomerControllerI {
     /**
      * Update.
      *
-     * @param uuid the uuid
+     * @param customerId the customer id
      * @return the response entity
      * @throws CustomerNotFoundException the customer not found exception
      */
@@ -63,7 +63,7 @@ public interface CustomerControllerI {
     /**
      * Get response entity.
      *
-     * @param uuid the uuid
+     * @param customerId the customer id
      * @return the response entity
      * @throws InvalidNameException      the invalid name exception
      * @throws CustomerNotFoundException the customer not found exception

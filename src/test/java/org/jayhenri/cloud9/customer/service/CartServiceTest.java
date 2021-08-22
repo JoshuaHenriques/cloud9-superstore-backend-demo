@@ -2,16 +2,15 @@ package org.jayhenri.cloud9.customer.service;
 
 import org.jayhenri.cloud9.interfaces.service.customer.CartServiceI;
 import org.jayhenri.cloud9.interfaces.service.customer.CustomerServiceI;
-import org.jayhenri.cloud9.model.customer.*;
+import org.jayhenri.cloud9.model.customer.Address;
+import org.jayhenri.cloud9.model.customer.Cart;
+import org.jayhenri.cloud9.model.customer.Customer;
 import org.jayhenri.cloud9.model.item.Item;
 import org.jayhenri.cloud9.model.login.Login;
 import org.jayhenri.cloud9.service.customer.CartService;
-import org.jayhenri.cloud9.service.customer.CustomerService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 

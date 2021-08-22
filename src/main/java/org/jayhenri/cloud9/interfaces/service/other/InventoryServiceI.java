@@ -1,7 +1,6 @@
 package org.jayhenri.cloud9.interfaces.service.other;
 
 import org.jayhenri.cloud9.exception.OutOfStockException;
-import org.jayhenri.cloud9.model.item.Item;
 
 import java.util.List;
 import java.util.UUID;
@@ -16,6 +15,7 @@ public interface InventoryServiceI<T> {
     /**
      * Add.
      *
+     * @param t the t
      */
     void add(T t);
 

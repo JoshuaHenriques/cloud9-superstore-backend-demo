@@ -76,8 +76,8 @@ public class CustomerController implements CustomerControllerI {
     /**
      * Update customer.
      *
-     * @param customerId     the customerId
-     * @param customer the customer
+     * @param customerId the customerId
+     * @param customer   the customer
      * @return the response entity
      * @throws InvalidCustomerException  the invalid customer exception
      * @throws CustomerNotFoundException the customer not found exception

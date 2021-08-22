@@ -9,7 +9,9 @@ import org.jayhenri.cloud9.interfaces.service.customer.CartServiceI;
 import org.jayhenri.cloud9.interfaces.service.customer.CustomerServiceI;
 import org.jayhenri.cloud9.interfaces.service.other.InventoryServiceI;
 import org.jayhenri.cloud9.interfaces.service.other.ItemServiceI;
-import org.jayhenri.cloud9.model.customer.*;
+import org.jayhenri.cloud9.model.customer.Address;
+import org.jayhenri.cloud9.model.customer.Cart;
+import org.jayhenri.cloud9.model.customer.Customer;
 import org.jayhenri.cloud9.model.inventory.OnlineInventory;
 import org.jayhenri.cloud9.model.inventory.StoreInventory;
 import org.jayhenri.cloud9.model.item.Item;
@@ -251,7 +253,7 @@ public class CartControllerTest {
         given(itemService.getById(itemId)).willReturn(item);
         given(cartService.itemExists(customer.getCart(), item)).willReturn(true);
 
-        ResponseEntity<String> response =  cartController.delete(itemId, customerId);
+        ResponseEntity<String> response = cartController.delete(itemId, customerId);
 
         then(cartService).should().remove(captorCustomer.capture(), captorUUID.capture());
 
@@ -270,7 +272,7 @@ public class CartControllerTest {
         given(customerService.getById(customerId)).willReturn(customer);
         given(itemService.getById(itemId)).willReturn(item);
         given(cartService.itemExists(customer.getCart(), item)).willReturn(false);
-        
+
         assertThrows(ItemNotFoundException.class, () -> cartController.delete(itemId, customerId));
     }
 

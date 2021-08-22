@@ -10,7 +10,6 @@ import org.jayhenri.cloud9.interfaces.service.customer.AddressServiceI;
 import org.jayhenri.cloud9.interfaces.service.customer.CustomerServiceI;
 import org.jayhenri.cloud9.model.customer.*;
 import org.jayhenri.cloud9.model.login.Login;
-import org.jayhenri.cloud9.service.customer.CustomerService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -73,8 +72,8 @@ class CustomerControllerTest {
                         "P3E 5B2",
                         "Ontario"
                 ),
-                new HashSet<CreditCard>(),
-                new HashSet<Orders>(),
+                new HashSet<>(),
+                new HashSet<>(),
                 "Stew",
                 "Griffin",
                 "6478499939",
@@ -111,9 +110,7 @@ class CustomerControllerTest {
     void addCustomerThrowsInvalidPostalCodeException() {
         given(addressService.isValidPostalCode(customer.getAddress().getPostalCode())).willReturn(false);
 
-        assertThrows(InvalidPostalCodeException.class, () -> {
-            customerController.add(customer);
-        });
+        assertThrows(InvalidPostalCodeException.class, () -> customerController.add(customer));
     }
 
     /**
@@ -123,9 +120,7 @@ class CustomerControllerTest {
     void addCustomerThrowsCustomerAlreadyExistsException() {
         given(customerService.existsByEmail(customer.getEmail())).willReturn(true);
 
-        assertThrows(CustomerAlreadyExistsException.class, () -> {
-            customerController.add(customer);
-        });
+        assertThrows(CustomerAlreadyExistsException.class, () -> customerController.add(customer));
     }
 
     /**
@@ -151,9 +146,7 @@ class CustomerControllerTest {
      */
     @Test
     void updateCustomerThrowsInvalidCustomerException() {
-        assertThrows(InvalidCustomerException.class, () -> {
-            customerController.update(null, null);
-        });
+        assertThrows(InvalidCustomerException.class, () -> customerController.update(null, null));
     }
 
     /**
@@ -163,9 +156,7 @@ class CustomerControllerTest {
     void updateCustomerThrowsCustomerNotFoundException() {
         given(customerService.existsById(customer.getCustomerUUID())).willReturn(false);
 
-        assertThrows(CustomerNotFoundException.class, () -> {
-            customerController.update(customer, customer.getCustomerUUID());
-        });
+        assertThrows(CustomerNotFoundException.class, () -> customerController.update(customer, customer.getCustomerUUID()));
     }
 
     /**
@@ -191,9 +182,7 @@ class CustomerControllerTest {
      */
     @Test
     void deleteCustomerThrowsCustomerNotFoundException() {
-        assertThrows(CustomerNotFoundException.class, () -> {
-            customerController.delete(UUID.randomUUID());
-        });
+        assertThrows(CustomerNotFoundException.class, () -> customerController.delete(UUID.randomUUID()));
     }
 
     /**

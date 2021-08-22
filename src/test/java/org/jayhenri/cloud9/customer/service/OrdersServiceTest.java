@@ -6,7 +6,6 @@ import org.jayhenri.cloud9.model.customer.*;
 import org.jayhenri.cloud9.model.item.Item;
 import org.jayhenri.cloud9.model.login.Login;
 import org.jayhenri.cloud9.repository.customer.OrdersRepository;
-import org.jayhenri.cloud9.service.customer.CustomerService;
 import org.jayhenri.cloud9.service.customer.OrdersService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -77,8 +76,8 @@ class OrdersServiceTest {
                 new Login(),
                 new Cart(),
                 new Address(),
-                new HashSet<CreditCard>(),
-                new HashSet<Orders>(),
+                new HashSet<>(),
+                new HashSet<>(),
                 "John",
                 "Doe",
                 "6473829338",
@@ -87,7 +86,7 @@ class OrdersServiceTest {
 
         orders = new Orders(
                 "PENDING",
-                new HashSet<Item>(),
+                new HashSet<>(),
                 293.68
         );
     }

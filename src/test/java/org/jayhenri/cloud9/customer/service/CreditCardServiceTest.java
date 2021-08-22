@@ -5,7 +5,6 @@ import org.jayhenri.cloud9.interfaces.service.customer.CustomerServiceI;
 import org.jayhenri.cloud9.model.customer.*;
 import org.jayhenri.cloud9.model.login.Login;
 import org.jayhenri.cloud9.service.customer.CreditCardService;
-import org.jayhenri.cloud9.service.customer.CustomerService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -64,8 +63,8 @@ class CreditCardServiceTest {
                 new Login(),
                 new Cart(),
                 new Address(),
-                new HashSet<CreditCard>(),
-                new HashSet<Orders>(),
+                new HashSet<>(),
+                new HashSet<>(),
                 "John",
                 "Doe",
                 "6473829338",

@@ -5,9 +5,7 @@ import org.jayhenri.cloud9.exception.invalid.InvalidItemException;
 import org.jayhenri.cloud9.exception.notfound.ItemNotFoundException;
 import org.jayhenri.cloud9.interfaces.controller.other.InventoryControllerI;
 import org.jayhenri.cloud9.interfaces.service.other.InventoryServiceI;
-import org.jayhenri.cloud9.model.inventory.OnlineInventory;
 import org.jayhenri.cloud9.model.inventory.StoreInventory;
-import org.jayhenri.cloud9.model.item.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -43,10 +41,7 @@ public class StoreInventoryController implements InventoryControllerI<StoreInven
     /**
      * Add item to storeInventory response entity.
      *
-     * @param item     the item
      * @param itemId   the item id
-     * @param quantity the quantity
-     * @param price    the price
      * @return the response entity
      * @throws ItemAlreadyExistsException the item already exists exception
      * @throws InvalidItemException       the invalid item exception

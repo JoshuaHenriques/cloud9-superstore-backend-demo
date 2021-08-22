@@ -3,8 +3,6 @@ package org.jayhenri.cloud9.interfaces.controller.other;
 import org.jayhenri.cloud9.exception.alreadyexists.ItemAlreadyExistsException;
 import org.jayhenri.cloud9.exception.invalid.InvalidItemException;
 import org.jayhenri.cloud9.exception.notfound.ItemNotFoundException;
-import org.jayhenri.cloud9.interfaces.service.other.InventoryServiceI;
-import org.jayhenri.cloud9.model.item.Item;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,10 +20,8 @@ public interface InventoryControllerI<T> {
     /**
      * Add response entity.
      *
-     * @param item     the item
-     * @param itemId   the item id
-     * @param quantity the quantity
-     * @param price    the price
+     * @param t      the t
+     * @param itemId the item id
      * @return the response entity
      * @throws ItemAlreadyExistsException the item already exists exception
      * @throws InvalidItemException       the invalid item exception
@@ -37,7 +33,8 @@ public interface InventoryControllerI<T> {
     /**
      * Update response entity.
      *
-     * @param t the t
+     * @param t           the t
+     * @param inventoryId the inventory id
      * @return the response entity
      * @throws InvalidItemException  the invalid item exception
      * @throws ItemNotFoundException the item not found exception

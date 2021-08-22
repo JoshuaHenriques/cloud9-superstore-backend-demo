@@ -4,7 +4,6 @@ import org.jayhenri.cloud9.interfaces.service.other.ItemServiceI;
 import org.jayhenri.cloud9.interfaces.service.other.ReviewServiceI;
 import org.jayhenri.cloud9.model.item.Item;
 import org.jayhenri.cloud9.model.item.Review;
-import org.jayhenri.cloud9.service.item.ItemService;
 import org.jayhenri.cloud9.service.item.ReviewService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
