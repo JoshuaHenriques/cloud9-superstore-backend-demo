@@ -33,7 +33,6 @@ CreditCard:
     /{customerId}/creditCard/list
 
 Customer:
-
   /api/customer
     /add
     /update/{customerId}
