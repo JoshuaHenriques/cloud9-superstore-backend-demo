@@ -11,44 +11,88 @@ Inspired by the Netflix show Cloud9 Superstore.
 
 [Entity-Relationship Diagram](https://github.com/JoshuaHenriques/cloud9-superstore-demo/blob/master/Cloud9-ERD.png)
 
-Endpoints:
+~55 Endpoints:
 
-    (api/register):
-    # Register Customer
-    /customer         POST
-
-    (/api/customers):
-    # Customer        
-    /update           PUT
-    /delete/{email}   DELETE
-    /list/customers   GET
-    /{email}          GET
-
-    # Cart
-    /{email}/cart/add/{productName}     POST
-    /{email}/cart/remove/{productName}  DELETE
-    /{email}/cart/empty                 PATCH
-    /{email}/cart/get                   GET
-
-    # Credit Card
-    /{email}/creditCard/add                   POST
-    /{email}/creditCard/remove/{fourDigits}   DELETE
-    /{email}/creditCards/list                 GET
-
-    # Order
-    /{email}/orderDetails/add                           POST
-    /{email}/orderDetails/updateStatus/{uuid}/{status}  PUT
-    /{email}/orderDetails/list                          GET
-
-    (api/inventory):
-    # Update item
-    /update/{productName}   PUT
-    /add                    POST
-    /get/{productName}      GET
-    /remove/{productName}   DELETE
-    /items/list             GET
+Address
+api/address
+  /update/{entity}/{uuid}
+Cart:
+  /api/item
+    /add
+    /update/{itemId}
+    /delete/{itemId}
+    /get/{itemId}
+    /list
+CreditCard:
+  /api/customer/creditCard
+    /{customerId}/creditCard/add
+    /{customerId}/creditCard/delete/{cardId}
+    /{customerId}/creditCard/list
+Customer:
+  /api/customer
+    /add
+    /update/{customerId}
+    /delete/{customerId}
+    /get/{customerId}
+    /list
+Orders:
+  /api/orders
+    /add
+    /update/{customerId}
+    /get/{ordersId}
+    /list/{customerId}
+OnlineInventory:
+  /api/inventory/online
+    /add/{itemId}
+    /update/{inventoryId}
+    /delete/{inventoryId}
+    /get/{inventoryId}
+    /list
+StoreInventory:
+  /api/inventory/store
+    /add/{itemId}
+    /update/{inventoryId}
+    /delete/{inventoryId}
+    /get/{inventoryId}
+    /list
+Item:
+  /api/item
+    /add
+    /update/{itemId}
+    /delete/{itemId}
+    /get/{itemId}
+    /list
+Review:
+  api/review
+    /add/{itemId}/{reviewId}
+    /update/{itemId}/{reviewId}
+    /delete/{itemId}/{reviewId}
+    /get/{itemId}/{reviewId}
+    /list
+Login:
+  /api/login
+    /add
+    /update/{loginId}
+    /delete/{loginId}
+    /get/{loginId}
+    /list
+Employee:
+  /api/employee
+    /add
+    /update/{employeeId}
+    /delete/{employeeId}
+    /get/{employeeId}
+    /list
+Store:
+  /api/store
+    /add
+    /update/{storeId}
+    /delete/{storeId}
+    /get{storeId}
+    /list
     
-    135/135 Passed Tests, 5 Tests Ignored
+135/~200 Passed Tests, 5 Tests Ignored
+  Tests Controller, service, webmvc, jpadatabase
 
 ### Built With
 
