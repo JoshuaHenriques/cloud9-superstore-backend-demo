@@ -40,7 +40,7 @@ public interface CartControllerI {
      * @throws ItemNotFoundException     the item not found exception
      */
     @DeleteMapping(value = "/{customerId}/cart/remove/{itemID}")
-    ResponseEntity<String> remove(@PathVariable UUID itemId, @PathVariable UUID customerId) throws CustomerNotFoundException, ItemNotFoundException;
+    ResponseEntity<String> delete(@PathVariable UUID itemId, @PathVariable UUID customerId) throws CustomerNotFoundException, ItemNotFoundException;
 
     /**
      * Empty response entity.

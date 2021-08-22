@@ -104,7 +104,7 @@ public class CartController implements CartControllerI {
      * @throws ItemNotFoundException     the item not found exception
      */
     @DeleteMapping(value = "/{customerId}/cart/remove/{itemID}")
-    public ResponseEntity<String> remove(@PathVariable UUID itemId, @PathVariable UUID customerId)
+    public ResponseEntity<String> delete(@PathVariable UUID itemId, @PathVariable UUID customerId)
             throws CustomerNotFoundException, ItemNotFoundException {
         if (customerService.existsById(customerId)) {
             if (cartService.itemExists(customerService.getById(customerId).getCart(), itemService.getById(itemId))) {

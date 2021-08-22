@@ -59,6 +59,7 @@ public class AddressController implements AddressControllerI {
      * @throws CustomerNotFoundException the customer not found exception
      * @throws InvalidAddressException   the invalid address exception
      */
+
     public ResponseEntity<String> update(@RequestBody Address address, @PathVariable("uuid") UUID uuid, String type)
             throws CustomerNotFoundException, InvalidAddressException, StoreNotFoundException, EmployeeNotFoundException {
         if (!ObjectUtils.isEmpty(address)) {

@@ -143,7 +143,7 @@ public class CustomerController implements CustomerControllerI {
      * @throws InvalidNameException      the invalid name exception
      * @throws CustomerNotFoundException the customer not found exception
      */
-    @GetMapping(value = "/{uuid}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/get/{uuid}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Customer> get(@PathVariable UUID uuid)
             throws InvalidNameException, CustomerNotFoundException {
         if (!ObjectUtils.isEmpty(uuid)) {

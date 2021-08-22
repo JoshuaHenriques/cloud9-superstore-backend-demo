@@ -15,7 +15,6 @@ import org.jayhenri.cloud9.model.inventory.StoreInventory;
 import org.jayhenri.cloud9.model.item.Item;
 import org.jayhenri.cloud9.model.login.Login;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
@@ -252,7 +251,7 @@ public class CartControllerTest {
         given(itemService.getById(itemId)).willReturn(item);
         given(cartService.itemExists(customer.getCart(), item)).willReturn(true);
 
-        ResponseEntity<String> response =  cartController.remove(itemId, customerId);
+        ResponseEntity<String> response =  cartController.delete(itemId, customerId);
 
         then(cartService).should().remove(captorCustomer.capture(), captorUUID.capture());
 
@@ -272,7 +271,7 @@ public class CartControllerTest {
         given(itemService.getById(itemId)).willReturn(item);
         given(cartService.itemExists(customer.getCart(), item)).willReturn(false);
         
-        assertThrows(ItemNotFoundException.class, () -> cartController.remove(itemId, customerId));
+        assertThrows(ItemNotFoundException.class, () -> cartController.delete(itemId, customerId));
     }
 
     /**
@@ -283,7 +282,7 @@ public class CartControllerTest {
 
         given(customerService.existsById(customerId)).willReturn(false);
 
-        assertThrows(CustomerNotFoundException.class, () -> cartController.remove(itemId, customerId));
+        assertThrows(CustomerNotFoundException.class, () -> cartController.delete(itemId, customerId));
     }
 
     /**

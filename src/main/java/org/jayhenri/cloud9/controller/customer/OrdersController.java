@@ -116,7 +116,7 @@ public class OrdersController implements OrdersControllerI {
      * @throws OrdersNotFoundException   the orders not found exception
      * @throws InvalidOrdersException    the invalid orders exception
      */
-    @GetMapping(value = "/{orderId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/get/{orderId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Orders> get(@PathVariable UUID orderId)
             throws InvalidNameException, CustomerNotFoundException, OrdersNotFoundException, InvalidOrdersException {
         if (!ObjectUtils.isEmpty(orderId)) {

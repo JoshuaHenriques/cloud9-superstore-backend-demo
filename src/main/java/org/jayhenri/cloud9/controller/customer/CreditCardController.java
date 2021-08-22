@@ -79,8 +79,8 @@ public class CreditCardController implements CreditCardControllerI {
      * @throws CustomerNotFoundException   the customer not found exception
      * @throws CreditCardNotFoundException the credit card not found exception
      */
-    @DeleteMapping(value = "/{customerId}/creditCard/remove/{cardId}")
-    public ResponseEntity<String> remove(@PathVariable UUID customerId, @PathVariable UUID cardId)
+    @DeleteMapping(value = "/{customerId}/creditCard/delete/{cardId}")
+    public ResponseEntity<String> delete(@PathVariable UUID customerId, @PathVariable UUID cardId)
             throws CustomerNotFoundException, CreditCardNotFoundException {
         if (customerService.existsById(customerId)) {
             if (creditCardService.existsById(customerService.getById(customerId), cardId)) {
@@ -102,7 +102,7 @@ public class CreditCardController implements CreditCardControllerI {
      * @return the list
      * @throws CustomerNotFoundException the customer not found exception
      */
-    @GetMapping(value = "/{customerId}/creditCards/list", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/{customerId}/creditCard/list", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Set<CreditCard>> list(@PathVariable UUID customerId)
             throws CustomerNotFoundException {
         if (customerService.existsById(customerId)) {

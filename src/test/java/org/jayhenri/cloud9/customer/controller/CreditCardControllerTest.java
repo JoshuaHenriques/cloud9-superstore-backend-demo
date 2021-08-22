@@ -163,7 +163,7 @@ public class CreditCardControllerTest {
         given(customerService.getById(uuid)).willReturn(customer);
         given(creditCardService.existsById(customer, uuid1)).willReturn(true);
 
-        ResponseEntity<String> response = creditCardController.remove(uuid, uuid1);
+        ResponseEntity<String> response = creditCardController.delete(uuid, uuid1);
 
         then(creditCardService).should().remove(captorCustomer.capture(), captorUUID.capture());
 
@@ -182,7 +182,7 @@ public class CreditCardControllerTest {
         given(customerService.getById(uuid)).willReturn(customer);
         given(creditCardService.existsById(customer, uuid1)).willReturn(false);
 
-        assertThrows(CreditCardNotFoundException.class, () -> creditCardController.remove(uuid, uuid1));
+        assertThrows(CreditCardNotFoundException.class, () -> creditCardController.delete(uuid, uuid1));
     }
 
     /**
@@ -193,7 +193,7 @@ public class CreditCardControllerTest {
 
         given(customerService.existsById(uuid)).willReturn(false);
 
-        assertThrows(CustomerNotFoundException.class, () -> creditCardController.remove(uuid, uuid1));
+        assertThrows(CustomerNotFoundException.class, () -> creditCardController.delete(uuid, uuid1));
     }
 
     /**

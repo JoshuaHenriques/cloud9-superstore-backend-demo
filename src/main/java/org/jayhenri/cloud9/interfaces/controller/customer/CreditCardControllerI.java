@@ -44,7 +44,7 @@ public interface CreditCardControllerI {
      * @throws CreditCardNotFoundException the credit card not found exception
      */
     @DeleteMapping(value = "/{customerId}/creditCard/remove/{cardId}")
-    ResponseEntity<String> remove(@PathVariable UUID customerId, @PathVariable UUID cardId)
+    ResponseEntity<String> delete(@PathVariable UUID customerId, @PathVariable UUID cardId)
             throws CustomerNotFoundException, CreditCardNotFoundException;
 
     /**

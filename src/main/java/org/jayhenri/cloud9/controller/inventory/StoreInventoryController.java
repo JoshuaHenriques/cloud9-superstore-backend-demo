@@ -75,7 +75,7 @@ public class StoreInventoryController implements InventoryControllerI<StoreInven
      * @throws InvalidItemException  the invalid item exception
      * @throws ItemNotFoundException the item not found exception
      */
-    @PutMapping(value = "/update", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/update/{inventoryId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> update(@RequestBody StoreInventory storeInventory)
             throws InvalidItemException, ItemNotFoundException {
         if (!ObjectUtils.isEmpty(storeInventory)) {
