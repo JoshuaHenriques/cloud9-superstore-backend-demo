@@ -1,21 +1,16 @@
 <p align="center">
-  <h3 align="center">Cloud9 Superstore</h3>
+  <h3 align="center">Cloud9 Superstore Management System Demo</h3>
   <p align="center">
     RESTful API Application
-  </p>
-  <p>
-    In-Store and Online Management System
   </p>
 </p>
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-Inspired by the Netflix show Cloud9 Superstore. Replica of a real world superstore database
+This app is a replica of a real world store.* The theme of the project was inspired by the Netflix show Cloud9 Superstore. 
 
-*Remake*
-[Entity-Relationship Diagram](https://github.com/JoshuaHenriques/cloud9-superstore-demo/blob/master/Cloud9-ERD.png)
 
-### ~55 Endpoints:
+#### ~55 Endpoints:
 ```
 Address:
 api/address
@@ -107,7 +102,7 @@ Store:
     /list
 ```
     
-### Layers Tested (~200 Passing Tests)
+#### Layers Tested (~200 Passing Tests)
 ```
 Unit Tests:
   @Controller 
@@ -118,17 +113,17 @@ Integration Tests:
   @SpringbootTest 
 ```
 
-### Dependencies
+#### Dependencies
 ```
 ```
 
-### Built With
+#### Built With
 
 * [Springboot 2.5.3]
 * [Java 11]
 * [Gradle]
 
-### Usage
+#### Usage
 
 1. Clone the repo
    ```sh
@@ -144,7 +139,7 @@ Integration Tests:
    ```
 
 <!-- CONTRIBUTING -->
-## Contributing
+### Contributing
 
 Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
@@ -155,12 +150,12 @@ Contributions are what make the open source community such an amazing place to b
 5. Open a Pull Request
 
 <!-- LICENSE -->
-## License
+### License
 
 Distributed under the MIT License. See `LICENSE` for more information.
 
 <!-- CONTACT -->
-## Contact
+### Contact
 
 [https://joshuahenriques.com](https://joshuahenriques.com)
 
