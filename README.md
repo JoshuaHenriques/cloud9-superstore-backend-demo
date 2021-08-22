@@ -1,5 +1,5 @@
 <p align="center">
-  <h3 align="center">Cloud9 Superstore Demo</h3>
+  <h3 align="center">Cloud9 Superstore Management System Demo</h3>
   <p align="center">
     RESTful API Application
   </p>
@@ -7,56 +7,123 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-Inspired by the Netflix show Cloud9 Superstore.
+This app is a replica of a real world store.* The theme of the project was inspired by the Netflix show Cloud9 Superstore. 
 
-[Entity-Relationship Diagram](https://github.com/JoshuaHenriques/cloud9-superstore-demo/blob/master/Cloud9-ERD.png)
 
-Endpoints:
+#### ~55 Endpoints:
+```
+Address:
+api/address
+  /update/{entity}/{uuid}
 
-    (api/register):
-    # Register Customer
-    /customer         POST
+Cart:
+  /api/item
+    /{customerId}/cart/add/{type}/{itemId}
+    /{customerId}/cart/empty
+    /{customerId}/cart/delete/{itemId}
+    {customerId}/cart/get
+    /list
 
-    (/api/customers):
-    # Customer        
-    /update           PUT
-    /delete/{email}   DELETE
-    /list/customers   GET
-    /{email}          GET
+CreditCard:
+  /api/customer/creditCard
+    /{customerId}/creditCard/add
+    /{customerId}/creditCard/delete/{cardId}
+    /{customerId}/creditCard/list
 
-    # Cart
-    /{email}/cart/add/{productName}     POST
-    /{email}/cart/remove/{productName}  DELETE
-    /{email}/cart/empty                 PATCH
-    /{email}/cart/get                   GET
+Customer:
+  /api/customer
+    /add
+    /update/{customerId}
+    /delete/{customerId}
+    /get/{customerId}
+    /list
 
-    # Credit Card
-    /{email}/creditCard/add                   POST
-    /{email}/creditCard/remove/{fourDigits}   DELETE
-    /{email}/creditCards/list                 GET
+Orders:
+  /api/orders
+    /add
+    /update/{customerId}
+    /get/{ordersId}
+    /list/{customerId}
 
-    # Order
-    /{email}/orderDetails/add                           POST
-    /{email}/orderDetails/updateStatus/{uuid}/{status}  PUT
-    /{email}/orderDetails/list                          GET
+OnlineInventory:
+  /api/inventory/online
+    /add/{itemId}
+    /update/{inventoryId}
+    /delete/{inventoryId}
+    /get/{inventoryId}
+    /list
 
-    (api/inventory):
-    # Update item
-    /update/{productName}   PUT
-    /add                    POST
-    /get/{productName}      GET
-    /remove/{productName}   DELETE
-    /items/list             GET
+StoreInventory:
+  /api/inventory/store
+    /add/{itemId}
+    /update/{inventoryId}
+    /delete/{inventoryId}
+    /get/{inventoryId}
+    /list
+
+Item:
+  /api/item
+    /add
+    /update/{itemId}
+    /delete/{itemId}
+    /get/{itemId}
+    /list
+
+Review:
+  api/review
+    /add/{itemId}/{reviewId}
+    /update/{itemId}/{reviewId}
+    /delete/{itemId}/{reviewId}
+    /get/{itemId}/{reviewId}
+    /list
+
+Login:
+  /api/login
+    /add
+    /update/{loginId}
+    /delete/{loginId}
+    /get/{loginId}
+    /list
+
+Employee:
+  /api/employee
+    /add
+    /update/{employeeId}
+    /delete/{employeeId}
+    /get/{employeeId}
+    /list
     
-    135/135 Passed Tests, 5 Tests Ignored
+Store:
+  /api/store
+    /add
+    /update/{storeId}
+    /delete/{storeId}
+    /get{storeId}
+    /list
+```
+    
+#### Layers Tested (~200 Passing Tests)
+```
+Unit Tests:
+  @Controller 
+  @Service
+Integration Tests:
+  @WebMvcTest
+  @JpaDataTest
+  @SpringbootTest 
+```
 
-### Built With
+#### Dependencies
+```
+```
+
+#### Built With
 
 * [Springboot 2.5.3]
 * [Java 11]
 * [Gradle]
 
-### Usage
+#### Usage
 
 1. Clone the repo
    ```sh
@@ -72,7 +139,7 @@ Endpoints:
    ```
 
 <!-- CONTRIBUTING -->
-## Contributing
+### Contributing
 
 Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
@@ -83,13 +150,13 @@ Contributions are what make the open source community such an amazing place to b
 5. Open a Pull Request
 
 <!-- LICENSE -->
-## License
+### License
 
 Distributed under the MIT License. See `LICENSE` for more information.
 
 <!-- CONTACT -->
-## Contact
+### Contact
 
-Personal Website - [https://joshuahenriques.com](https://joshuahenriques.com)
+[https://joshuahenriques.com](https://joshuahenriques.com)
 
-Project Link: [https://github.com/joshuahenriques/cloud9-backend-demo](https://github.com/joshuahenriques/cloud9-backend-demo)
+[https://github.com/joshuahenriques/cloud9-backend-demo](https://github.com/joshuahenriques/cloud9-backend-demo)
