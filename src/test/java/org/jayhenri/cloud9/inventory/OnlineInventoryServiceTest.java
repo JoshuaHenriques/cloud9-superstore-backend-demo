@@ -93,16 +93,16 @@ class OnlineInventoryServiceTest {
     /**
      * Test add.
      */
-    @Test
-    void add() {
-        onlineInventoryService.add(item, 3950, 1129.99);
-
-        then(onlineInventoryRepository).should().save(captorOnlineInventory.capture());
-
-        assertThat(captorOnlineInventory.getValue().getItem()).isEqualTo(item);
-        assertThat(captorOnlineInventory.getValue().getQuantity()).isEqualTo(3950);
-        assertThat(captorOnlineInventory.getValue().getPrice()).isEqualTo(1129.99);
-    }
+//    @Test
+//    void add() {
+//        onlineInventoryService.add(item, 3950, 1129.99);
+//
+//        then(onlineInventoryRepository).should().save(captorOnlineInventory.capture());
+//
+//        assertThat(captorOnlineInventory.getValue().getItem()).isEqualTo(item);
+//        assertThat(captorOnlineInventory.getValue().getQuantity()).isEqualTo(3950);
+//        assertThat(captorOnlineInventory.getValue().getPrice()).isEqualTo(1129.99);
+//    }
 
     /**
      * Test update.

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="org.jayhenri.cloud9.customer.controller.OrdersControllerTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2021-08-21T20:01:25" hostname="kde-laptop" time="0.019">
+<testsuite name="org.jayhenri.cloud9.customer.controller.OrdersControllerTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2021-08-22T15:16:30" hostname="kde-laptop" time="0.022">
   <properties/>
   <testcase name="updateOrdersThrowsInvalidOrdersException()" classname="org.jayhenri.cloud9.customer.controller.OrdersControllerTest" time="0.009"/>
-  <testcase name="updateOrders()" classname="org.jayhenri.cloud9.customer.controller.OrdersControllerTest" time="0.002"/>
-  <testcase name="addOrders()" classname="org.jayhenri.cloud9.customer.controller.OrdersControllerTest" time="0.001"/>
+  <testcase name="updateOrders()" classname="org.jayhenri.cloud9.customer.controller.OrdersControllerTest" time="0.001"/>
+  <testcase name="addOrders()" classname="org.jayhenri.cloud9.customer.controller.OrdersControllerTest" time="0.002"/>
   <testcase name="get()" classname="org.jayhenri.cloud9.customer.controller.OrdersControllerTest" time="0.001"/>
-  <testcase name="listOrdersThrowsCustomerNotFoundException()" classname="org.jayhenri.cloud9.customer.controller.OrdersControllerTest" time="0.001"/>
-  <testcase name="listOrders()" classname="org.jayhenri.cloud9.customer.controller.OrdersControllerTest" time="0.002"/>
+  <testcase name="listOrdersThrowsCustomerNotFoundException()" classname="org.jayhenri.cloud9.customer.controller.OrdersControllerTest" time="0.002"/>
+  <testcase name="listOrders()" classname="org.jayhenri.cloud9.customer.controller.OrdersControllerTest" time="0.003"/>
   <testcase name="addOrdersThrowsInvalidOrdersException()" classname="org.jayhenri.cloud9.customer.controller.OrdersControllerTest" time="0.001"/>
-  <testcase name="updateOrdersThrowsOrdersNotFoundException()" classname="org.jayhenri.cloud9.customer.controller.OrdersControllerTest" time="0.001"/>
+  <testcase name="updateOrdersThrowsOrdersNotFoundException()" classname="org.jayhenri.cloud9.customer.controller.OrdersControllerTest" time="0.002"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

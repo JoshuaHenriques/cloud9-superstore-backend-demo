@@ -7,7 +7,7 @@ plugins {
 }
 
 group = 'com.jayhenri'
-version = '0.5'
+version = '0.9'
 sourceCompatibility = '11'
 
 configurations {
@@ -46,9 +46,9 @@ dependencies {
 }
 
 flyway {
-    url = 'jdbc:postgresql://localhost:5432/cloud9'
-    user = 'postgres'
-    password = 'postgres'
+    url = 'jdbc:postgresql://192.168.0.158:5434/cloud9'
+    user = 'cloud9'
+    password = 'cloud9'
     locations = ['classpath:db/migration']
 }
 

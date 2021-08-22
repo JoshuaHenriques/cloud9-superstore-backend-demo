@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="org.jayhenri.cloud9.customer.service.CustomerServiceTest" tests="13" skipped="1" failures="0" errors="0" timestamp="2021-08-21T20:01:25" hostname="kde-laptop" time="0.042">
+<testsuite name="org.jayhenri.cloud9.customer.service.CustomerServiceTest" tests="13" skipped="1" failures="0" errors="0" timestamp="2021-08-22T15:16:30" hostname="kde-laptop" time="0.036">
   <properties/>
-  <testcase name="doesNotExistsByPhoneNumber()" classname="org.jayhenri.cloud9.customer.service.CustomerServiceTest" time="0.025"/>
+  <testcase name="doesNotExistsByPhoneNumber()" classname="org.jayhenri.cloud9.customer.service.CustomerServiceTest" time="0.022"/>
   <testcase name="findAllCustomers()" classname="org.jayhenri.cloud9.customer.service.CustomerServiceTest" time="0.0">
     <skipped/>
   </testcase>
@@ -12,7 +12,7 @@
   <testcase name="getById()" classname="org.jayhenri.cloud9.customer.service.CustomerServiceTest" time="0.001"/>
   <testcase name="add()" classname="org.jayhenri.cloud9.customer.service.CustomerServiceTest" time="0.001"/>
   <testcase name="existsById()" classname="org.jayhenri.cloud9.customer.service.CustomerServiceTest" time="0.002"/>
-  <testcase name="existsByPhoneNumber()" classname="org.jayhenri.cloud9.customer.service.CustomerServiceTest" time="0.002"/>
+  <testcase name="existsByPhoneNumber()" classname="org.jayhenri.cloud9.customer.service.CustomerServiceTest" time="0.001"/>
   <testcase name="doesNotExistsById()" classname="org.jayhenri.cloud9.customer.service.CustomerServiceTest" time="0.001"/>
   <testcase name="getByEmail()" classname="org.jayhenri.cloud9.customer.service.CustomerServiceTest" time="0.001"/>
   <testcase name="doesNotExistsByEmail()" classname="org.jayhenri.cloud9.customer.service.CustomerServiceTest" time="0.001"/>

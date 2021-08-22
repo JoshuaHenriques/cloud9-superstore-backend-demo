@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="org.jayhenri.cloud9.store.StoreServiceTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2021-08-21T20:01:25" hostname="kde-laptop" time="0.026">
+<testsuite name="org.jayhenri.cloud9.store.StoreServiceTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2021-08-22T15:16:30" hostname="kde-laptop" time="0.033">
   <properties/>
-  <testcase name="delete()" classname="org.jayhenri.cloud9.store.StoreServiceTest" time="0.02"/>
+  <testcase name="delete()" classname="org.jayhenri.cloud9.store.StoreServiceTest" time="0.026"/>
   <testcase name="update()" classname="org.jayhenri.cloud9.store.StoreServiceTest" time="0.001"/>
   <testcase name="findAllStores()" classname="org.jayhenri.cloud9.store.StoreServiceTest" time="0.001"/>
   <testcase name="getById()" classname="org.jayhenri.cloud9.store.StoreServiceTest" time="0.001"/>
