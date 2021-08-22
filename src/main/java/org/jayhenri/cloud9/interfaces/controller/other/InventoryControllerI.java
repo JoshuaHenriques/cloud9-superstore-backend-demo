@@ -68,13 +68,13 @@ public interface InventoryControllerI<T> {
     /**
      * Remove response entity.
      *
-     * @param itemName the item name
+     * @param itemId the item name
      * @return the response entity
      * @throws InvalidItemException  the invalid item exception
      * @throws ItemNotFoundException the item not found exception
      */
-    @DeleteMapping(value = "/remove/{itemName}")
-    ResponseEntity<String> remove(@PathVariable String itemName)
+    @DeleteMapping(value = "/remove/{itemId}")
+    ResponseEntity<String> remove(@PathVariable UUID itemId)
             throws InvalidItemException, ItemNotFoundException;
 
     /**

@@ -1,5 +1,6 @@
 package org.jayhenri.cloud9.login;
 
+import javassist.bytecode.ByteArray;
 import org.jayhenri.cloud9.interfaces.service.other.LoginServiceI;
 import org.jayhenri.cloud9.model.login.Login;
 import org.jayhenri.cloud9.repository.login.LoginRepository;
@@ -11,7 +12,11 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -30,6 +35,9 @@ public class LoginServiceTest {
 
     @Mock
     private LoginRepository loginRepository;
+
+    @Mock
+    private PasswordEncoder passwordEncoder;
 
     @Captor
     private ArgumentCaptor<Login> captorLogin;
@@ -52,10 +60,11 @@ public class LoginServiceTest {
 
         loginService = new LoginService(loginRepository);
 
+        Set<String> roles = new HashSet<>();
+        roles.add("moderator");
+        roles.add("admin");
+
         login = new Login(
-                true,
-                true,
-                true,
                 "test.blizzard@gmail.uk",
                 "2017740301",
                 "somepassword"

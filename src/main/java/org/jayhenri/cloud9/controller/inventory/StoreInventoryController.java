@@ -133,17 +133,17 @@ public class StoreInventoryController implements InventoryControllerI<StoreInven
     /**
      * Remove item to storeInventory response entity.
      *
-     * @param itemName the item name
+     * @param itemId the item name
      * @return the response entity
      * @throws InvalidItemException  the invalid item exception
      * @throws ItemNotFoundException the item not found exception
      */
-    @DeleteMapping(value = "/remove/{itemName}")
-    public ResponseEntity<String> remove(@PathVariable String itemName)
+    @DeleteMapping(value = "/remove/{itemId}")
+    public ResponseEntity<String> remove(@PathVariable UUID itemId)
             throws InvalidItemException, ItemNotFoundException {
-        if (!ObjectUtils.isEmpty(itemName)) {
-            if (storeInventoryService.existsByItemName(itemName)) {
-                storeInventoryService.delete(storeInventoryService.getByItemName(itemName));
+        if (!ObjectUtils.isEmpty(itemId)) {
+            if (storeInventoryService.existsById(itemId)) {
+                storeInventoryService.delete(storeInventoryService.getById(itemId));
 
                 HttpHeaders responseHeaders = new HttpHeaders();
                 responseHeaders.set("StoreInventoryController", "remove");

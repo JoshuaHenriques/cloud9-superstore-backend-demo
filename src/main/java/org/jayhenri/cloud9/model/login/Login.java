@@ -1,15 +1,18 @@
 package org.jayhenri.cloud9.model.login;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.vladmihalcea.hibernate.type.array.StringArrayType;
+import javassist.bytecode.ByteArray;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+import org.hibernate.annotations.TypeDefs;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * The type Login.
@@ -17,6 +20,8 @@ import java.util.UUID;
 @Getter
 @Setter
 @NoArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer"})
+@TypeDefs(@TypeDef(name = "string-array", typeClass = StringArrayType.class))
 @Entity
 @Table(name = "login")
 public class Login implements Serializable {
@@ -28,14 +33,9 @@ public class Login implements Serializable {
     @Column(name = "login_id", unique = true, nullable = false)
     private UUID loginUUID = UUID.randomUUID();
 
-    @Column(name = "active", nullable = false)
-    private boolean active;
-
-    @Column(name = "moderator", nullable = false)
-    private boolean moderator;
-
-    @Column(name = "admin", nullable = false)
-    private boolean admin;
+    @Column(name = "roles", nullable = false)
+    @Type(type = "string-array")
+    private String[] roles;
 
     @Column(name = "email", nullable = false)
     private String email;
@@ -46,20 +46,19 @@ public class Login implements Serializable {
     @Column(name = "password", nullable = false)
     private String password;
 
+    @Column(name = "enabled", nullable = false)
+    private boolean enabled;
+
     /**
      * Instantiates a new Login.
      *
-     * @param active      the active
-     * @param moderator   the moderator
-     * @param admin       the admin
      * @param email       the email
      * @param phoneNumber the phone number
      * @param password    the password
      */
-    public Login(boolean active, boolean moderator, boolean admin, String email, String phoneNumber, String password) {
-        this.active = active;
-        this.moderator = moderator;
-        this.admin = admin;
+    public Login(String email, String phoneNumber, String password, String[] roles, boolean accountNonLocked) {
+        this.roles = roles;
+        this.enabled = accountNonLocked;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.password = password;

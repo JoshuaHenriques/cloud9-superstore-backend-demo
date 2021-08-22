@@ -16,13 +16,13 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.naming.InvalidNameException;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 /**
  * The type Login controller.
  */
-@RestController // Indicates that the data returned by each method will be written straight into
-// the response body instead of rendering a template
+@RestController
 @RequestMapping("api/login")
 public class LoginController implements ControllerI<Login> {
 
@@ -47,8 +47,8 @@ public class LoginController implements ControllerI<Login> {
      * @throws LoginAlreadyExistsException the login already exists exception
      * @throws InvalidLoginException       the invalid login exception
      */
-    @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> add(@RequestBody Login login)
+    @PostMapping(value = "/add", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public ResponseEntity<String> add(@RequestBody @ModelAttribute Login login)
             throws LoginAlreadyExistsException, InvalidLoginException {
 
         if (ObjectUtils.isEmpty(login))
@@ -73,8 +73,8 @@ public class LoginController implements ControllerI<Login> {
      * @throws InvalidLoginException  the invalid login exception
      * @throws LoginNotFoundException the login not found exception
      */
-    @PutMapping(value = "/update/{loginId}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> update(@RequestBody Login login, @PathVariable UUID loginId)
+    @PutMapping(value = "/update/{loginId}", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public ResponseEntity<String> update(@RequestBody @ModelAttribute Login login, @PathVariable UUID loginId)
             throws InvalidLoginException, LoginNotFoundException {
         if (!ObjectUtils.isEmpty(login)) {
             if (loginService.existsById(loginId)) {
@@ -133,6 +133,8 @@ public class LoginController implements ControllerI<Login> {
     @GetMapping(value = "/get/{loginId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Login> get(@PathVariable UUID loginId)
             throws InvalidNameException, InvalidLoginException, LoginNotFoundException {
+
+        //UUID loginId = UUID.fromString(uuid);
         if (!ObjectUtils.isEmpty(loginId)) {
             if (loginService.existsById(loginId)) {
                 Login _login = loginService.getById(loginId);

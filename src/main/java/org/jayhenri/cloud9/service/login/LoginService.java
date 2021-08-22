@@ -1,13 +1,15 @@
 package org.jayhenri.cloud9.service.login;
 
+import lombok.SneakyThrows;
+import org.jayhenri.cloud9.exception.notfound.LoginNotFoundException;
 import org.jayhenri.cloud9.interfaces.service.other.LoginServiceI;
 import org.jayhenri.cloud9.model.login.Login;
 import org.jayhenri.cloud9.repository.login.LoginRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 
 /**
@@ -18,6 +20,8 @@ public class LoginService implements LoginServiceI {
 
     private final LoginRepository loginRepository;
 
+    // private final PasswordEncoder passwordEncoder;
+
     /**
      * Instantiates a new Login service.
      *
@@ -27,7 +31,22 @@ public class LoginService implements LoginServiceI {
     public LoginService(LoginRepository loginRepository) {
 
         this.loginRepository = loginRepository;
+        // this.passwordEncoder = passwordEncoder;
     }
+
+//    @Override
+//    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+//
+//        if (!loginRepository.existsByEmail(email))
+//            throw new UsernameNotFoundException("Email not found");
+//
+//        Login login = loginRepository.getByEmail(email);
+//
+//        Set<SimpleGrantedAuthority> authorities = new HashSet<>();
+//        login.getRoles().forEach(role -> authorities.add(new SimpleGrantedAuthority(role)));
+//
+//        return new org.springframework.security.core.userdetails.User(login.getEmail(), login.getPassword(), authorities);
+//    }
 
     /**
      * Add.
@@ -36,6 +55,7 @@ public class LoginService implements LoginServiceI {
      */
     public void add(Login login) {
 
+        // login.setPassword(passwordEncoder.encode(login.getPassword()));
         loginRepository.save(login);
     }
 

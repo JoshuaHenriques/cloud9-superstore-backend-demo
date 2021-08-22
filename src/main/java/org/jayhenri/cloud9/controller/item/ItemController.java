@@ -34,6 +34,7 @@ public class ItemController implements ControllerI<Item> {
      */
     @Autowired
     public ItemController(ItemServiceI itemService) {
+
         this.itemService = itemService;
     }
 

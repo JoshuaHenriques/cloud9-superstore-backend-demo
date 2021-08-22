@@ -112,6 +112,8 @@ org/jayhenri/cloud9/exception/invalid/InvalidEmployeeException.java
  org.jayhenri.cloud9.exception.invalid.InvalidEmployeeException
 org/jayhenri/cloud9/interfaces/service/ServiceI.java
  org.jayhenri.cloud9.interfaces.service.ServiceI
+org/jayhenri/cloud9/repository/login/AttemptsRepository.java
+ org.jayhenri.cloud9.repository.login.AttemptsRepository
 org/jayhenri/cloud9/interfaces/controller/other/EmployeeControllerI.java
  org.jayhenri.cloud9.interfaces.controller.other.EmployeeControllerI
 org/jayhenri/cloud9/repository/store/EmployeeRepository.java
@@ -180,3 +182,5 @@ org/jayhenri/cloud9/interfaces/service/customer/CartServiceI.java
  org.jayhenri.cloud9.interfaces.service.customer.CartServiceI
 org/jayhenri/cloud9/service/customer/CartService.java
  org.jayhenri.cloud9.service.customer.CartService
+org/jayhenri/cloud9/model/login/Attempts.java
+ org.jayhenri.cloud9.model.login.Attempts

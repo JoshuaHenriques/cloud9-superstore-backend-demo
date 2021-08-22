@@ -33,7 +33,7 @@ public class CartServiceTest {
 
     private Cart cart;
 
-    private Item item1, item2;
+    private Item item1, item2, item3;
 
     private Customer customer;
 
@@ -58,6 +58,14 @@ public class CartServiceTest {
                 "2021 Model",
                 new HashSet<>(),
                 2129.99,
+                null
+        );
+
+        item3 = new Item(
+                "iPad Pro",
+                "2021 Model",
+                new HashSet<>(),
+                1929.99,
                 null
         );
 
@@ -88,11 +96,11 @@ public class CartServiceTest {
     @Test
     void addToCart() {
 
-        cartService.add(customer, item1);
+        cartService.add(customer, item3);
 
-        assertThat(customer.getCart().getItems().contains(item1)).isTrue();
+        assertThat(customer.getCart().getItems().contains(item3)).isTrue();
 
-        assertThat(customer.getCart().getItems().size()).isEqualTo(1);
+        assertThat(customer.getCart().getItems().size()).isEqualTo(3);
     }
 
     /**

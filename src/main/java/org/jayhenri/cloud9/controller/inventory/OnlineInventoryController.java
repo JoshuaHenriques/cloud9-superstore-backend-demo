@@ -138,12 +138,12 @@ public class OnlineInventoryController implements InventoryControllerI<OnlineInv
      * @throws InvalidItemException  the invalid item exception
      * @throws ItemNotFoundException the item not found exception
      */
-    @DeleteMapping(value = "/remove/{itemName}")
-    public ResponseEntity<String> remove(@PathVariable String itemName)
+    @DeleteMapping(value = "/remove/{itemId}")
+    public ResponseEntity<String> remove(@PathVariable UUID itemId)
             throws InvalidItemException, ItemNotFoundException {
-        if (!ObjectUtils.isEmpty(itemName)) {
-            if (onlineInventoryService.existsByItemName(itemName)) {
-                onlineInventoryService.delete(onlineInventoryService.getByItemName(itemName));
+        if (!ObjectUtils.isEmpty(itemId)) {
+            if (onlineInventoryService.existsById(itemId)) {
+                onlineInventoryService.delete(onlineInventoryService.getById(itemId));
 
                 HttpHeaders responseHeaders = new HttpHeaders();
                 responseHeaders.set("OnlineInventoryController", "remove");
