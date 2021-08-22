@@ -9,7 +9,7 @@ services:
       - flyway
   flyway:
     image: flyway/flyway:latest-alpine
-    command: -url=jdbc:postgresql://192.168.0.158:5434/cloud9 -user=cloud9 -password=cloud9 -connectRetries=6 info migrate info
+    command: -url=jdbc:postgresql://192.168.0.158:5434/cloud9 -user=postgres -password=postgres -connectRetries=6 info migrate info
     volumes:
       - ./src/main/resources/db/migration:/flyway/sql
     depends_on:
@@ -22,6 +22,6 @@ services:
     ports:
       - "5434:5432"
     environment:
-      POSTGRES_USER: cloud9
-      POSTGRES_PASSWORD: cloud9
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
       POSTGRES_DB: cloud9
