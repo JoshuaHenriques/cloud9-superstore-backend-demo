@@ -1,7 +1,10 @@
 <p align="center">
-  <h3 align="center">Cloud9 Superstore Demo</h3>
+  <h3 align="center">Cloud9 Superstore</h3>
   <p align="center">
     RESTful API Application
+  </p>
+  <p>
+    In-Store and Online Management System
   </p>
 </p>
 
