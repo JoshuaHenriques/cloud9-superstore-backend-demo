@@ -217,4 +217,4 @@ Distributed under the MIT License. See `LICENSE` for more information.
 ### Contact
 [https://joshuahenriques.com](https://joshuahenriques.com)
 
-[https://github.com/joshuahenriques/cloud9-backend-demo](https://github.com/joshuahenriques/cloud9-superstore-backend-demo)
+[https://github.com/joshuahenriques/cloud9-superstore-backend-demo](https://github.com/joshuahenriques/cloud9-superstore-backend-demo)
