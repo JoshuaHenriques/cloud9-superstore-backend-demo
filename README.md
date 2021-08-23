@@ -180,6 +180,13 @@ Auth0 Java JWT
    ```sh
    git clone https://github.com/joshuahenriques/cloud9-superstore-backend-demo.git
    ```
+2. Install postgresql and create database
+   ```sh
+   sudo apt install postgresql -y
+   su postgres
+   psql
+    *Within psql* "CREATE DATABASE cloud9;"
+   ```
 2. In root directory build the app
    ```sh
    ./gradlew build
