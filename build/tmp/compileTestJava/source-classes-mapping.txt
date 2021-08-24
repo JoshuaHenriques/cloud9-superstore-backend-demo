@@ -20,8 +20,8 @@ org/jayhenri/cloud9/customer/controller/CustomerControllerTest.java
  org.jayhenri.cloud9.customer.controller.CustomerControllerTest
 org/jayhenri/cloud9/customer/service/OrdersServiceTest.java
  org.jayhenri.cloud9.customer.service.OrdersServiceTest
-org/jayhenri/cloud9/item/ItemControllerTest.java
- org.jayhenri.cloud9.item.ItemControllerTest
+org/jayhenri/cloud9/inventory/OnlineInventoryServiceTest.java
+ org.jayhenri.cloud9.inventory.OnlineInventoryServiceTest
 org/jayhenri/cloud9/item/ItemServiceTest.java
  org.jayhenri.cloud9.item.ItemServiceTest
 org/jayhenri/cloud9/customer/service/AddressServiceTest.java
@@ -36,5 +36,5 @@ org/jayhenri/cloud9/customer/service/CartServiceTest.java
  org.jayhenri.cloud9.customer.service.CartServiceTest
 org/jayhenri/cloud9/login/LoginControllerTest.java
  org.jayhenri.cloud9.login.LoginControllerTest
-org/jayhenri/cloud9/inventory/OnlineInventoryServiceTest.java
- org.jayhenri.cloud9.inventory.OnlineInventoryServiceTest
+org/jayhenri/cloud9/item/ItemControllerTest.java
+ org.jayhenri.cloud9.item.ItemControllerTest
