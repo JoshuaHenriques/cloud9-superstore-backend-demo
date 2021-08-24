@@ -78,15 +78,14 @@ public class ItemController implements ControllerI<Item> {
     public ResponseEntity<String> update(@RequestBody @ModelAttribute Item item, @PathVariable UUID itemId)
             throws InvalidItemException, ItemNotFoundException, ItemAlreadyExistsException {
         if (!ObjectUtils.isEmpty(item)) {
-            if (itemService.existsByItemName(item.getItemName())) {
-                if (itemService.existsById(itemId)) {
+            if (itemService.existsByItemName(item.getItemName()) || itemService.existsById(itemId)) {
+
+                    item.setItemUUID(itemId);
                     itemService.update(item);
 
                     HttpHeaders responseHeaders = new HttpHeaders();
                     responseHeaders.set("ItemController", "update");
                     return new ResponseEntity<>("Successfully Updated Item", responseHeaders, HttpStatus.OK);
-                } else
-                    throw new ItemAlreadyExistsException();
             } else
                 throw new ItemNotFoundException();
         } else
