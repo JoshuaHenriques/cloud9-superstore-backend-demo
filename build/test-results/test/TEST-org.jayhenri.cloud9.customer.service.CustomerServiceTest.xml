@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="org.jayhenri.cloud9.customer.service.CustomerServiceTest" tests="13" skipped="1" failures="0" errors="0" timestamp="2021-08-25T20:02:07" hostname="kde-laptop" time="0.055">
+<testsuite name="org.jayhenri.cloud9.customer.service.CustomerServiceTest" tests="13" skipped="1" failures="0" errors="0" timestamp="2021-08-26T17:58:38" hostname="kde-laptop" time="0.043">
   <properties/>
-  <testcase name="doesNotExistsByPhoneNumber()" classname="org.jayhenri.cloud9.customer.service.CustomerServiceTest" time="0.031"/>
+  <testcase name="doesNotExistsByPhoneNumber()" classname="org.jayhenri.cloud9.customer.service.CustomerServiceTest" time="0.023"/>
   <testcase name="findAllCustomers()" classname="org.jayhenri.cloud9.customer.service.CustomerServiceTest" time="0.0">
     <skipped/>
   </testcase>
   <testcase name="testAdd()" classname="org.jayhenri.cloud9.customer.service.CustomerServiceTest" time="0.002"/>
   <testcase name="delete()" classname="org.jayhenri.cloud9.customer.service.CustomerServiceTest" time="0.002"/>
-  <testcase name="update()" classname="org.jayhenri.cloud9.customer.service.CustomerServiceTest" time="0.001"/>
-  <testcase name="existsByEmail()" classname="org.jayhenri.cloud9.customer.service.CustomerServiceTest" time="0.002"/>
+  <testcase name="update()" classname="org.jayhenri.cloud9.customer.service.CustomerServiceTest" time="0.002"/>
+  <testcase name="existsByEmail()" classname="org.jayhenri.cloud9.customer.service.CustomerServiceTest" time="0.001"/>
   <testcase name="getById()" classname="org.jayhenri.cloud9.customer.service.CustomerServiceTest" time="0.002"/>
   <testcase name="add()" classname="org.jayhenri.cloud9.customer.service.CustomerServiceTest" time="0.001"/>
-  <testcase name="existsById()" classname="org.jayhenri.cloud9.customer.service.CustomerServiceTest" time="0.002"/>
+  <testcase name="existsById()" classname="org.jayhenri.cloud9.customer.service.CustomerServiceTest" time="0.001"/>
   <testcase name="existsByPhoneNumber()" classname="org.jayhenri.cloud9.customer.service.CustomerServiceTest" time="0.001"/>
-  <testcase name="doesNotExistsById()" classname="org.jayhenri.cloud9.customer.service.CustomerServiceTest" time="0.002"/>
+  <testcase name="doesNotExistsById()" classname="org.jayhenri.cloud9.customer.service.CustomerServiceTest" time="0.001"/>
   <testcase name="getByEmail()" classname="org.jayhenri.cloud9.customer.service.CustomerServiceTest" time="0.002"/>
   <testcase name="doesNotExistsByEmail()" classname="org.jayhenri.cloud9.customer.service.CustomerServiceTest" time="0.002"/>
   <system-out><![CDATA[]]></system-out>

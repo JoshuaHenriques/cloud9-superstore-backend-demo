@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="org.jayhenri.cloud9.customer.controller.CreditCardControllerTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2021-08-25T20:02:07" hostname="kde-laptop" time="0.035">
+<testsuite name="org.jayhenri.cloud9.customer.controller.CreditCardControllerTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2021-08-26T17:58:37" hostname="kde-laptop" time="0.04">
   <properties/>
-  <testcase name="addCreditCardThrowsCustomerNotFoundException()" classname="org.jayhenri.cloud9.customer.controller.CreditCardControllerTest" time="0.017"/>
-  <testcase name="listCreditCardsThrowsCustomerNotFoundException()" classname="org.jayhenri.cloud9.customer.controller.CreditCardControllerTest" time="0.001"/>
-  <testcase name="removeCreditCardThrowsCustomerNotFoundException()" classname="org.jayhenri.cloud9.customer.controller.CreditCardControllerTest" time="0.002"/>
+  <testcase name="addCreditCardThrowsCustomerNotFoundException()" classname="org.jayhenri.cloud9.customer.controller.CreditCardControllerTest" time="0.023"/>
+  <testcase name="listCreditCardsThrowsCustomerNotFoundException()" classname="org.jayhenri.cloud9.customer.controller.CreditCardControllerTest" time="0.002"/>
+  <testcase name="removeCreditCardThrowsCustomerNotFoundException()" classname="org.jayhenri.cloud9.customer.controller.CreditCardControllerTest" time="0.001"/>
   <testcase name="addCreditCardThrowsInvalidCreditCardException()" classname="org.jayhenri.cloud9.customer.controller.CreditCardControllerTest" time="0.001"/>
-  <testcase name="addCreditCardThrowsAlreadyExistsException()" classname="org.jayhenri.cloud9.customer.controller.CreditCardControllerTest" time="0.002"/>
-  <testcase name="addCreditCard()" classname="org.jayhenri.cloud9.customer.controller.CreditCardControllerTest" time="0.002"/>
+  <testcase name="addCreditCardThrowsAlreadyExistsException()" classname="org.jayhenri.cloud9.customer.controller.CreditCardControllerTest" time="0.001"/>
+  <testcase name="addCreditCard()" classname="org.jayhenri.cloud9.customer.controller.CreditCardControllerTest" time="0.001"/>
   <testcase name="removeCreditCard()" classname="org.jayhenri.cloud9.customer.controller.CreditCardControllerTest" time="0.002"/>
-  <testcase name="removeCreditCardThrowsCreditCardNotFoundException()" classname="org.jayhenri.cloud9.customer.controller.CreditCardControllerTest" time="0.002"/>
-  <testcase name="listCreditCards()" classname="org.jayhenri.cloud9.customer.controller.CreditCardControllerTest" time="0.001"/>
+  <testcase name="removeCreditCardThrowsCreditCardNotFoundException()" classname="org.jayhenri.cloud9.customer.controller.CreditCardControllerTest" time="0.003"/>
+  <testcase name="listCreditCards()" classname="org.jayhenri.cloud9.customer.controller.CreditCardControllerTest" time="0.002"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
