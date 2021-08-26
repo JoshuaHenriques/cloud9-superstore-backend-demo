@@ -10,7 +10,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -33,7 +32,7 @@ public interface InventoryControllerI<T> {
      * @throws InvalidItemException       the invalid item exception
      */
     @PostMapping(value = "/add/{itemId}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<String> add(@RequestBody @ModelAttribute T t, @PathVariable UUID itemId)
+    ResponseEntity<String> add(@RequestBody T t, @PathVariable UUID itemId)
             throws ItemAlreadyExistsException, InvalidItemException;
 
     /**
@@ -46,7 +45,7 @@ public interface InventoryControllerI<T> {
      * @throws ItemNotFoundException the item not found exception
      */
     @PutMapping(value = "/update/{inventoryId}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<String> update(@RequestBody @ModelAttribute T t, @PathVariable UUID inventoryId)
+    ResponseEntity<String> update(@RequestBody T t, @PathVariable UUID inventoryId)
             throws InvalidItemException, ItemNotFoundException;
 
     /**

@@ -17,7 +17,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -55,7 +54,7 @@ public class StoreInventoryController implements InventoryControllerI<StoreInven
      * @throws InvalidItemException       the invalid item exception
      */
     @PostMapping(value = "/add/{itemId}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> add(@RequestBody @ModelAttribute StoreInventory storeInventory, @PathVariable UUID itemId)
+    public ResponseEntity<String> add(@RequestBody StoreInventory storeInventory, @PathVariable UUID itemId)
             throws ItemAlreadyExistsException, InvalidItemException {
         if (!ObjectUtils.isEmpty(storeInventory)) {
             if (!storeInventoryService.existsById(storeInventory.getInventoryUUID())) {
@@ -80,7 +79,7 @@ public class StoreInventoryController implements InventoryControllerI<StoreInven
      * @throws ItemNotFoundException the item not found exception
      */
     @PutMapping(value = "/update/{inventoryId}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> update(@RequestBody @ModelAttribute StoreInventory storeInventory, @PathVariable UUID inventoryId)
+    public ResponseEntity<String> update(@RequestBody StoreInventory storeInventory, @PathVariable UUID inventoryId)
             throws InvalidItemException, ItemNotFoundException {
         if (!ObjectUtils.isEmpty(storeInventory)) {
             if (storeInventoryService.existsById(storeInventory.getInventoryUUID())) {

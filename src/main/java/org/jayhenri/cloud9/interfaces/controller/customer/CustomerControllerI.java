@@ -14,7 +14,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -35,7 +34,7 @@ public interface CustomerControllerI {
      * @throws InvalidCustomerException       the invalid customer exception
      */
     @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<String> add(@RequestBody @ModelAttribute Customer customer) throws CustomerAlreadyExistsException, InvalidPostalCodeException, InvalidCustomerException;
+    ResponseEntity<String> add(@RequestBody Customer customer) throws CustomerAlreadyExistsException, InvalidPostalCodeException, InvalidCustomerException;
 
     /**
      * Remove.
@@ -47,7 +46,7 @@ public interface CustomerControllerI {
      * @throws CustomerNotFoundException the customer not found exception
      */
     @PutMapping(value = "/update/{customerId}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<String> update(@RequestBody @ModelAttribute Customer customer, @PathVariable UUID customerId) throws InvalidCustomerException, CustomerNotFoundException;
+    ResponseEntity<String> update(@RequestBody Customer customer, @PathVariable UUID customerId) throws InvalidCustomerException, CustomerNotFoundException;
 
     /**
      * Update.

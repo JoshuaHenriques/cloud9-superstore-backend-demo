@@ -13,7 +13,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -37,7 +36,7 @@ public interface CreditCardControllerI {
      * @throws InvalidCreditCardException       the invalid credit card exception
      */
     @PostMapping(value = "/{customerId}/creditCard/add", consumes = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<String> add(@PathVariable UUID customerId, @RequestBody @ModelAttribute CreditCard creditCard)
+    ResponseEntity<String> add(@PathVariable UUID customerId, @RequestBody CreditCard creditCard)
             throws CustomerNotFoundException, InvalidOrdersException, CreditCardAlreadyExistsException, InvalidCreditCardException;
 
     /**

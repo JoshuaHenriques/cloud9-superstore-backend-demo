@@ -21,7 +21,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -61,7 +60,7 @@ public class CustomerController implements CustomerControllerI {
      * @throws InvalidCustomerException       the invalid customer exception
      */
     @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> add(@RequestBody @ModelAttribute Customer customer)
+    public ResponseEntity<String> add(@RequestBody Customer customer)
             throws CustomerAlreadyExistsException, InvalidPostalCodeException, InvalidCustomerException {
 
         if (ObjectUtils.isEmpty(customer))
@@ -92,7 +91,7 @@ public class CustomerController implements CustomerControllerI {
      * @throws CustomerNotFoundException the customer not found exception
      */
     @PutMapping(value = "/update/{customerId}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> update(@RequestBody @ModelAttribute Customer customer, @PathVariable UUID customerId)
+    public ResponseEntity<String> update(@RequestBody Customer customer, @PathVariable UUID customerId)
             throws InvalidCustomerException, CustomerNotFoundException {
         if (!ObjectUtils.isEmpty(customer)) {
             if (customerService.existsById(customer.getCustomerUUID())) {

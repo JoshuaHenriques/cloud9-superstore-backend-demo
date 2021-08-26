@@ -20,7 +20,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -59,7 +58,7 @@ public class CreditCardController implements CreditCardControllerI {
      * @throws CreditCardAlreadyExistsException the credit card already exists exception
      */
     @PostMapping(value = "/{customerId}/creditCard/add", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> add(@PathVariable UUID customerId, @RequestBody @ModelAttribute CreditCard creditCard)
+    public ResponseEntity<String> add(@PathVariable UUID customerId, @RequestBody CreditCard creditCard)
             throws CustomerNotFoundException, InvalidOrdersException, CreditCardAlreadyExistsException, InvalidCreditCardException {
         if (!ObjectUtils.isEmpty(creditCard)) {
             if (customerService.existsById(customerId)) {

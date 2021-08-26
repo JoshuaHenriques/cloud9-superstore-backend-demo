@@ -15,7 +15,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -37,7 +36,7 @@ public interface ReviewControllerI {
      * @throws ItemNotFoundException      the item not found exception
      */
     @PostMapping(value = "/add/{itemId}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<String> add(@RequestBody @ModelAttribute Review review, @PathVariable UUID itemId)
+    ResponseEntity<String> add(@RequestBody Review review, @PathVariable UUID itemId)
             throws ItemAlreadyExistsException, InvalidItemException, ItemNotFoundException;
 
     /**
@@ -52,7 +51,7 @@ public interface ReviewControllerI {
      * @throws ReviewNotFoundException the review not found exception
      */
     @PutMapping(value = "/update/{itemId}/{reviewId}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<String> update(@RequestBody @ModelAttribute Review review, @PathVariable UUID itemId, @PathVariable UUID reviewId)
+    ResponseEntity<String> update(@RequestBody Review review, @PathVariable UUID itemId, @PathVariable UUID reviewId)
             throws InvalidItemException, ItemNotFoundException, ReviewNotFoundException;
 
     /**

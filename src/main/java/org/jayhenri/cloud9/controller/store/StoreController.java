@@ -21,7 +21,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -62,7 +61,7 @@ public class StoreController implements ControllerI<Store> {
      * @throws InvalidStoreException       the invalid store exception
      */
     @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> add(@RequestBody @ModelAttribute Store store)
+    public ResponseEntity<String> add(@RequestBody Store store)
             throws StoreAlreadyExistsException, InvalidPostalCodeException, InvalidStoreException {
 
         if (ObjectUtils.isEmpty(store))
@@ -88,7 +87,7 @@ public class StoreController implements ControllerI<Store> {
      * @throws StoreNotFoundException the store not found exception
      */
     @PutMapping(value = "/update/{storeId}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> update(@RequestBody @ModelAttribute Store store, @PathVariable UUID storeId)
+    public ResponseEntity<String> update(@RequestBody Store store, @PathVariable UUID storeId)
             throws InvalidStoreException, StoreNotFoundException {
         if (!ObjectUtils.isEmpty(store)) {
             if (storeService.existsById(storeId)) {

@@ -19,7 +19,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -56,7 +55,7 @@ public class ItemController implements ControllerI<Item> {
      * @throws InvalidItemException       the invalid item exception
      */
     @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> add(@RequestBody @ModelAttribute Item item)
+    public ResponseEntity<String> add(@RequestBody Item item)
             throws ItemAlreadyExistsException, InvalidItemException {
 
         if (ObjectUtils.isEmpty(item))
@@ -84,7 +83,7 @@ public class ItemController implements ControllerI<Item> {
      * @throws ItemAlreadyExistsException the item already exists exception
      */
     @PutMapping(value = "/update/{itemId}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> update(@RequestBody @ModelAttribute Item item, @PathVariable UUID itemId)
+    public ResponseEntity<String> update(@RequestBody Item item, @PathVariable UUID itemId)
             throws InvalidItemException, ItemNotFoundException, ItemAlreadyExistsException {
         if (!ObjectUtils.isEmpty(item)) {
             if (itemService.existsByItemName(item.getItemName()) || itemService.existsById(itemId)) {

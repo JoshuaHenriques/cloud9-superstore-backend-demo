@@ -23,7 +23,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -66,7 +65,7 @@ public class ReviewController implements ReviewControllerI {
      * @throws ItemNotFoundException      the item not found exception
      */
     @PostMapping(value = "/add/{itemId}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> add(@RequestBody @ModelAttribute Review review, @PathVariable UUID itemId)
+    public ResponseEntity<String> add(@RequestBody Review review, @PathVariable UUID itemId)
             throws ItemAlreadyExistsException, InvalidItemException, ItemNotFoundException {
 
         if (ObjectUtils.isEmpty(review)) {
@@ -95,7 +94,7 @@ public class ReviewController implements ReviewControllerI {
      * @throws ReviewNotFoundException the review not found exception
      */
     @PutMapping(value = "/update/{itemId}/{reviewId}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> update(@RequestBody @ModelAttribute Review review, @PathVariable UUID itemId, @PathVariable UUID reviewId)
+    public ResponseEntity<String> update(@RequestBody Review review, @PathVariable UUID itemId, @PathVariable UUID reviewId)
             throws InvalidItemException, ItemNotFoundException, ReviewNotFoundException {
         if (!ObjectUtils.isEmpty(review)) {
             if (itemService.existsById(itemId)) {

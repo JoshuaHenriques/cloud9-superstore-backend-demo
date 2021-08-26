@@ -21,7 +21,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -62,7 +61,7 @@ public class EmployeeController implements EmployeeControllerI {
      * @throws InvalidEmployeeException       the invalid employee exception
      */
     @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> add(@RequestBody @ModelAttribute Employee employee)
+    public ResponseEntity<String> add(@RequestBody Employee employee)
             throws EmployeeAlreadyExistsException, InvalidPostalCodeException, InvalidEmployeeException {
 
         if (ObjectUtils.isEmpty(employee))
@@ -91,7 +90,7 @@ public class EmployeeController implements EmployeeControllerI {
      * @throws EmployeeNotFoundException the employee not found exception
      */
     @PutMapping(value = "/update/{employeeId}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> update(@RequestBody @ModelAttribute Employee employee, @PathVariable UUID employeeId)
+    public ResponseEntity<String> update(@RequestBody Employee employee, @PathVariable UUID employeeId)
             throws InvalidEmployeeException, EmployeeNotFoundException {
         if (!ObjectUtils.isEmpty(employee)) {
             if (employeeService.existsById(employee.getEmployeeUUID())) {

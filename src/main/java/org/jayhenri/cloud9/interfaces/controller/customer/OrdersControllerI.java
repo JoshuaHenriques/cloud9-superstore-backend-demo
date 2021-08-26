@@ -12,7 +12,6 @@ import org.jayhenri.cloud9.model.customer.Orders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -34,7 +33,7 @@ public interface OrdersControllerI {
      * @throws InvalidOrdersException the invalid orders exception
      */
     @PostMapping(value = "/add/{customerId}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<String> add(@RequestBody @ModelAttribute Orders orders, @PathVariable UUID customerId) throws InvalidOrdersException;
+    ResponseEntity<String> add(@RequestBody Orders orders, @PathVariable UUID customerId) throws InvalidOrdersException;
 
     /**
      * Update response entity.
@@ -46,7 +45,7 @@ public interface OrdersControllerI {
      * @throws InvalidOrdersException  the invalid orders exception
      */
     @PutMapping(value = "/update/{ordersId}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<String> update(@RequestBody @ModelAttribute Orders orders, @PathVariable UUID ordersId) throws OrdersNotFoundException, InvalidOrdersException;
+    ResponseEntity<String> update(@RequestBody Orders orders, @PathVariable UUID ordersId) throws OrdersNotFoundException, InvalidOrdersException;
 
     /**
      * List response entity.

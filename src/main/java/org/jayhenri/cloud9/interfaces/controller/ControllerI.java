@@ -19,7 +19,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -46,7 +45,7 @@ public interface ControllerI<T> {
      * @throws InvalidItemException        the invalid item exception
      */
     @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<String> add(@RequestBody @ModelAttribute T t) throws LoginAlreadyExistsException, InvalidLoginException, StoreAlreadyExistsException, InvalidPostalCodeException, InvalidStoreException, ItemAlreadyExistsException, InvalidItemException;
+    ResponseEntity<String> add(@RequestBody T t) throws LoginAlreadyExistsException, InvalidLoginException, StoreAlreadyExistsException, InvalidPostalCodeException, InvalidStoreException, ItemAlreadyExistsException, InvalidItemException;
 
     /**
      * Update response entity.
@@ -63,7 +62,7 @@ public interface ControllerI<T> {
      * @throws ItemAlreadyExistsException the item already exists exception
      */
     @PutMapping(value = "/update/{uuid}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<String> update(@RequestBody @ModelAttribute T t, @PathVariable UUID uuid) throws InvalidLoginException, LoginNotFoundException, InvalidStoreException, StoreNotFoundException, InvalidItemException, ItemNotFoundException, ItemAlreadyExistsException;
+    ResponseEntity<String> update(@RequestBody T t, @PathVariable UUID uuid) throws InvalidLoginException, LoginNotFoundException, InvalidStoreException, StoreNotFoundException, InvalidItemException, ItemNotFoundException, ItemAlreadyExistsException;
 
     /**
      * Delete response entity.

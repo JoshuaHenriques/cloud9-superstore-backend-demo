@@ -19,7 +19,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -56,7 +55,7 @@ public class LoginController implements ControllerI<Login> {
      * @throws InvalidLoginException       the invalid login exception
      */
     @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> add(@RequestBody @ModelAttribute Login login)
+    public ResponseEntity<String> add(@RequestBody Login login)
             throws LoginAlreadyExistsException, InvalidLoginException {
 
         if (ObjectUtils.isEmpty(login))
@@ -82,7 +81,7 @@ public class LoginController implements ControllerI<Login> {
      * @throws LoginNotFoundException the login not found exception
      */
     @PutMapping(value = "/update/{loginId}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> update(@RequestBody @ModelAttribute Login login, @PathVariable UUID loginId)
+    public ResponseEntity<String> update(@RequestBody Login login, @PathVariable UUID loginId)
             throws InvalidLoginException, LoginNotFoundException {
         if (!ObjectUtils.isEmpty(login)) {
             if (loginService.existsById(loginId)) {

@@ -19,7 +19,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -58,7 +57,7 @@ public class OrdersController implements OrdersControllerI {
      * @throws InvalidOrdersException the invalid orders exception
      */
     @PostMapping(value = "/add/{customerId}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> add(@RequestBody @ModelAttribute Orders orders, @PathVariable UUID customerId) throws InvalidOrdersException {
+    public ResponseEntity<String> add(@RequestBody Orders orders, @PathVariable UUID customerId) throws InvalidOrdersException {
         if (!ObjectUtils.isEmpty(orders)) {
             ordersService.add(customerService.getById(customerId), orders);
 
@@ -79,7 +78,7 @@ public class OrdersController implements OrdersControllerI {
      * @throws InvalidOrdersException  the invalid orders exception
      */
     @PutMapping(value = "/update/{ordersId}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> update(@RequestBody @ModelAttribute Orders orders, @PathVariable UUID ordersId) throws OrdersNotFoundException, InvalidOrdersException {
+    public ResponseEntity<String> update(@RequestBody Orders orders, @PathVariable UUID ordersId) throws OrdersNotFoundException, InvalidOrdersException {
         if (!ObjectUtils.isEmpty(orders)) {
             if (ordersService.existsById(ordersId)) {
                 orders.setOrdersUUID(ordersId);
