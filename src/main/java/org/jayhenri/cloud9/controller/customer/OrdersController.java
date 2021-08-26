@@ -1,5 +1,10 @@
 package org.jayhenri.cloud9.controller.customer;
 
+import java.util.Set;
+import java.util.UUID;
+
+import javax.naming.InvalidNameException;
+
 import org.jayhenri.cloud9.exception.invalid.InvalidOrdersException;
 import org.jayhenri.cloud9.exception.notfound.CustomerNotFoundException;
 import org.jayhenri.cloud9.exception.notfound.OrdersNotFoundException;
@@ -13,11 +18,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
-import org.springframework.web.bind.annotation.*;
-
-import javax.naming.InvalidNameException;
-import java.util.Set;
-import java.util.UUID;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * The type Orders controller.
@@ -49,7 +57,7 @@ public class OrdersController implements OrdersControllerI {
      * @return the response entity
      * @throws InvalidOrdersException the invalid orders exception
      */
-    @PostMapping(value = "/add/{customerId}", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    @PostMapping(value = "/add/{customerId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> add(@RequestBody @ModelAttribute Orders orders, @PathVariable UUID customerId) throws InvalidOrdersException {
         if (!ObjectUtils.isEmpty(orders)) {
             ordersService.add(customerService.getById(customerId), orders);
@@ -70,7 +78,7 @@ public class OrdersController implements OrdersControllerI {
      * @throws OrdersNotFoundException the orders not found exception
      * @throws InvalidOrdersException  the invalid orders exception
      */
-    @PutMapping(value = "/update/{ordersId}", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    @PutMapping(value = "/update/{ordersId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> update(@RequestBody @ModelAttribute Orders orders, @PathVariable UUID ordersId) throws OrdersNotFoundException, InvalidOrdersException {
         if (!ObjectUtils.isEmpty(orders)) {
             if (ordersService.existsById(ordersId)) {

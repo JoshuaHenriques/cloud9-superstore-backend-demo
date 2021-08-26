@@ -1,5 +1,7 @@
 package org.jayhenri.cloud9.controller.customer;
 
+import java.util.UUID;
+
 import org.jayhenri.cloud9.exception.invalid.InvalidAddressException;
 import org.jayhenri.cloud9.exception.notfound.CustomerNotFoundException;
 import org.jayhenri.cloud9.exception.notfound.EmployeeNotFoundException;
@@ -15,14 +17,14 @@ import org.jayhenri.cloud9.model.store.Store;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.UUID;
 
 /**
  * The type Address controller.
@@ -59,7 +61,7 @@ public class AddressController implements AddressControllerI {
      * @throws CustomerNotFoundException the customer not found exception
      * @throws InvalidAddressException   the invalid address exception
      */
-
+    @PutMapping(value = "/update/{entity}/{uuid}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> update(@RequestBody Address address, @PathVariable("uuid") UUID uuid, String type)
             throws CustomerNotFoundException, InvalidAddressException, StoreNotFoundException, EmployeeNotFoundException {
         if (!ObjectUtils.isEmpty(address)) {

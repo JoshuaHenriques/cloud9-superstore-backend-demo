@@ -1,9 +1,13 @@
 package org.jayhenri.cloud9.store;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.then;
+
+import java.util.UUID;
+
 import org.jayhenri.cloud9.interfaces.service.ServiceI;
 import org.jayhenri.cloud9.model.customer.Address;
-import org.jayhenri.cloud9.model.inventory.OnlineInventory;
-import org.jayhenri.cloud9.model.inventory.StoreInventory;
 import org.jayhenri.cloud9.model.store.Store;
 import org.jayhenri.cloud9.repository.store.StoreRepository;
 import org.jayhenri.cloud9.service.store.StoreService;
@@ -14,13 +18,6 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import java.util.HashSet;
-import java.util.UUID;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.BDDMockito.then;
 
 /**
  * The type Store service test.
@@ -56,9 +53,7 @@ public class StoreServiceTest {
 
         store = new Store(
                 "Cloud9 Superstore",
-                new Address(),
-                new HashSet<StoreInventory>(),
-                new HashSet<OnlineInventory>()
+                new Address()
         );
     }
 

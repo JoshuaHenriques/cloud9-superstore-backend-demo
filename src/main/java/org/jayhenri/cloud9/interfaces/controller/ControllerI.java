@@ -1,5 +1,10 @@
 package org.jayhenri.cloud9.interfaces.controller;
 
+import java.util.List;
+import java.util.UUID;
+
+import javax.naming.InvalidNameException;
+
 import org.jayhenri.cloud9.exception.alreadyexists.ItemAlreadyExistsException;
 import org.jayhenri.cloud9.exception.alreadyexists.LoginAlreadyExistsException;
 import org.jayhenri.cloud9.exception.alreadyexists.StoreAlreadyExistsException;
@@ -12,11 +17,13 @@ import org.jayhenri.cloud9.exception.notfound.LoginNotFoundException;
 import org.jayhenri.cloud9.exception.notfound.StoreNotFoundException;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import javax.naming.InvalidNameException;
-import java.util.List;
-import java.util.UUID;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 /**
  * The interface Controller i.
@@ -38,7 +45,7 @@ public interface ControllerI<T> {
      * @throws ItemAlreadyExistsException  the item already exists exception
      * @throws InvalidItemException        the invalid item exception
      */
-    @PostMapping(value = "/add", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<String> add(@RequestBody @ModelAttribute T t) throws LoginAlreadyExistsException, InvalidLoginException, StoreAlreadyExistsException, InvalidPostalCodeException, InvalidStoreException, ItemAlreadyExistsException, InvalidItemException;
 
     /**
@@ -55,7 +62,7 @@ public interface ControllerI<T> {
      * @throws ItemNotFoundException      the item not found exception
      * @throws ItemAlreadyExistsException the item already exists exception
      */
-    @PutMapping(value = "/update/{uuid}", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    @PutMapping(value = "/update/{uuid}", consumes = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<String> update(@RequestBody @ModelAttribute T t, @PathVariable UUID uuid) throws InvalidLoginException, LoginNotFoundException, InvalidStoreException, StoreNotFoundException, InvalidItemException, ItemNotFoundException, ItemAlreadyExistsException;
 
     /**

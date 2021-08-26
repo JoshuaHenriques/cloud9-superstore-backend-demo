@@ -1,17 +1,27 @@
 package org.jayhenri.cloud9.model.customer;
 
 
+import java.io.Serializable;
+import java.util.Set;
+import java.util.UUID;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import org.jayhenri.cloud9.model.item.Item;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.jayhenri.cloud9.model.item.Item;
-
-import javax.persistence.*;
-import java.io.Serializable;
-import java.text.DecimalFormat;
-import java.util.Set;
-import java.util.UUID;
 
 /**
  * The type Cart.
@@ -25,8 +35,6 @@ import java.util.UUID;
 public class Cart implements Serializable {
 
     private static final long serialVersionUID = -198235381052492730L;
-
-    private static DecimalFormat df = new DecimalFormat("0.00");
 
     @Id
     @Column(name = "cart_id", nullable = false)

@@ -1,14 +1,20 @@
 package org.jayhenri.cloud9.interfaces.controller.other;
 
+import java.util.List;
+import java.util.UUID;
+
 import org.jayhenri.cloud9.exception.alreadyexists.ItemAlreadyExistsException;
 import org.jayhenri.cloud9.exception.invalid.InvalidItemException;
 import org.jayhenri.cloud9.exception.notfound.ItemNotFoundException;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.UUID;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 /**
  * The interface Inventory controller i.
@@ -26,7 +32,7 @@ public interface InventoryControllerI<T> {
      * @throws ItemAlreadyExistsException the item already exists exception
      * @throws InvalidItemException       the invalid item exception
      */
-    @PostMapping(value = "/add/{itemId}", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    @PostMapping(value = "/add/{itemId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<String> add(@RequestBody @ModelAttribute T t, @PathVariable UUID itemId)
             throws ItemAlreadyExistsException, InvalidItemException;
 
@@ -39,7 +45,7 @@ public interface InventoryControllerI<T> {
      * @throws InvalidItemException  the invalid item exception
      * @throws ItemNotFoundException the item not found exception
      */
-    @PutMapping(value = "/update/{inventoryId}", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    @PutMapping(value = "/update/{inventoryId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<String> update(@RequestBody @ModelAttribute T t, @PathVariable UUID inventoryId)
             throws InvalidItemException, ItemNotFoundException;
 

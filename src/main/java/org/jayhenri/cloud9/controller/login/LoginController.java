@@ -1,5 +1,10 @@
 package org.jayhenri.cloud9.controller.login;
 
+import java.util.List;
+import java.util.UUID;
+
+import javax.naming.InvalidNameException;
+
 import org.jayhenri.cloud9.exception.alreadyexists.LoginAlreadyExistsException;
 import org.jayhenri.cloud9.exception.invalid.InvalidLoginException;
 import org.jayhenri.cloud9.exception.notfound.LoginNotFoundException;
@@ -12,11 +17,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
-import org.springframework.web.bind.annotation.*;
-
-import javax.naming.InvalidNameException;
-import java.util.List;
-import java.util.UUID;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * The type Login controller.
@@ -46,7 +55,7 @@ public class LoginController implements ControllerI<Login> {
      * @throws LoginAlreadyExistsException the login already exists exception
      * @throws InvalidLoginException       the invalid login exception
      */
-    @PostMapping(value = "/add", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> add(@RequestBody @ModelAttribute Login login)
             throws LoginAlreadyExistsException, InvalidLoginException {
 
@@ -72,7 +81,7 @@ public class LoginController implements ControllerI<Login> {
      * @throws InvalidLoginException  the invalid login exception
      * @throws LoginNotFoundException the login not found exception
      */
-    @PutMapping(value = "/update/{loginId}", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    @PutMapping(value = "/update/{loginId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> update(@RequestBody @ModelAttribute Login login, @PathVariable UUID loginId)
             throws InvalidLoginException, LoginNotFoundException {
         if (!ObjectUtils.isEmpty(login)) {

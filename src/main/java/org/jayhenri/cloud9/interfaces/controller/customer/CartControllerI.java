@@ -1,14 +1,18 @@
 package org.jayhenri.cloud9.interfaces.controller.customer;
 
+import java.util.UUID;
+
 import org.jayhenri.cloud9.exception.invalid.InvalidInventoryTypeException;
 import org.jayhenri.cloud9.exception.notfound.CustomerNotFoundException;
 import org.jayhenri.cloud9.exception.notfound.ItemNotFoundException;
 import org.jayhenri.cloud9.model.customer.Cart;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.UUID;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * The interface Cart controller i.
@@ -27,7 +31,7 @@ public interface CartControllerI {
      * @throws ItemNotFoundException         the item not found exception
      * @throws InvalidInventoryTypeException the invalid inventory type exception
      */
-    @PutMapping(value = "/{customerId}/cart/add/{itemId}", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    @PutMapping(value = "/{customerId}/cart/add/{itemId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<String> add(@PathVariable UUID customerId, @PathVariable UUID itemId, @PathVariable String type) throws CustomerNotFoundException, ItemNotFoundException, InvalidInventoryTypeException;
 
     /**

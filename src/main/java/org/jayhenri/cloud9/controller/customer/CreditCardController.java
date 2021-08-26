@@ -1,5 +1,8 @@
 package org.jayhenri.cloud9.controller.customer;
 
+import java.util.Set;
+import java.util.UUID;
+
 import org.jayhenri.cloud9.exception.alreadyexists.CreditCardAlreadyExistsException;
 import org.jayhenri.cloud9.exception.invalid.InvalidCreditCardException;
 import org.jayhenri.cloud9.exception.invalid.InvalidOrdersException;
@@ -15,10 +18,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.Set;
-import java.util.UUID;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * The type Credit card controller.
@@ -51,7 +58,7 @@ public class CreditCardController implements CreditCardControllerI {
      * @throws CustomerNotFoundException        the customer not found exception
      * @throws CreditCardAlreadyExistsException the credit card already exists exception
      */
-    @PostMapping(value = "/{customerId}/creditCard/add", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    @PostMapping(value = "/{customerId}/creditCard/add", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> add(@PathVariable UUID customerId, @RequestBody @ModelAttribute CreditCard creditCard)
             throws CustomerNotFoundException, InvalidOrdersException, CreditCardAlreadyExistsException, InvalidCreditCardException {
         if (!ObjectUtils.isEmpty(creditCard)) {

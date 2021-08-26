@@ -1,5 +1,7 @@
 package org.jayhenri.cloud9.interfaces.controller.customer;
 
+import java.util.UUID;
+
 import org.jayhenri.cloud9.exception.invalid.InvalidAddressException;
 import org.jayhenri.cloud9.exception.notfound.CustomerNotFoundException;
 import org.jayhenri.cloud9.exception.notfound.EmployeeNotFoundException;
@@ -11,8 +13,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.UUID;
 
 /**
  * The interface Address controller i.
@@ -32,6 +32,6 @@ public interface AddressControllerI {
      * @throws StoreNotFoundException    the store not found exception
      * @throws EmployeeNotFoundException the employee not found exception
      */
-    @PutMapping(value = "/update/{entity}/{uuid}", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    @PutMapping(value = "/update/{entity}/{uuid}", consumes = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<String> update(@RequestBody @ModelAttribute Address address, UUID uuid, String entity) throws CustomerNotFoundException, InvalidAddressException, StoreNotFoundException, EmployeeNotFoundException;
 }

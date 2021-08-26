@@ -1,5 +1,10 @@
 package org.jayhenri.cloud9.controller.item;
 
+import java.util.Set;
+import java.util.UUID;
+
+import javax.naming.InvalidNameException;
+
 import org.jayhenri.cloud9.exception.alreadyexists.ItemAlreadyExistsException;
 import org.jayhenri.cloud9.exception.invalid.InvalidItemException;
 import org.jayhenri.cloud9.exception.invalid.InvalidReviewException;
@@ -16,11 +21,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
-import org.springframework.web.bind.annotation.*;
-
-import javax.naming.InvalidNameException;
-import java.util.Set;
-import java.util.UUID;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * The type Review controller.
@@ -56,7 +65,7 @@ public class ReviewController implements ReviewControllerI {
      * @throws InvalidItemException       the invalid item exception
      * @throws ItemNotFoundException      the item not found exception
      */
-    @PostMapping(value = "/add/{itemId}", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    @PostMapping(value = "/add/{itemId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> add(@RequestBody @ModelAttribute Review review, @PathVariable UUID itemId)
             throws ItemAlreadyExistsException, InvalidItemException, ItemNotFoundException {
 
@@ -85,7 +94,7 @@ public class ReviewController implements ReviewControllerI {
      * @throws ItemNotFoundException   the item not found exception
      * @throws ReviewNotFoundException the review not found exception
      */
-    @PutMapping(value = "/update/{itemId}/{reviewId}", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    @PutMapping(value = "/update/{itemId}/{reviewId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> update(@RequestBody @ModelAttribute Review review, @PathVariable UUID itemId, @PathVariable UUID reviewId)
             throws InvalidItemException, ItemNotFoundException, ReviewNotFoundException {
         if (!ObjectUtils.isEmpty(review)) {

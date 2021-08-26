@@ -1,5 +1,10 @@
 package org.jayhenri.cloud9.interfaces.controller.customer;
 
+import java.util.List;
+import java.util.UUID;
+
+import javax.naming.InvalidNameException;
+
 import org.jayhenri.cloud9.exception.alreadyexists.CustomerAlreadyExistsException;
 import org.jayhenri.cloud9.exception.invalid.InvalidCustomerException;
 import org.jayhenri.cloud9.exception.invalid.InvalidPostalCodeException;
@@ -7,11 +12,13 @@ import org.jayhenri.cloud9.exception.notfound.CustomerNotFoundException;
 import org.jayhenri.cloud9.model.customer.Customer;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import javax.naming.InvalidNameException;
-import java.util.List;
-import java.util.UUID;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 /**
  * The interface Controller i.
@@ -27,7 +34,7 @@ public interface CustomerControllerI {
      * @throws InvalidPostalCodeException     the invalid postal code exception
      * @throws InvalidCustomerException       the invalid customer exception
      */
-    @PostMapping(value = "/add", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<String> add(@RequestBody @ModelAttribute Customer customer) throws CustomerAlreadyExistsException, InvalidPostalCodeException, InvalidCustomerException;
 
     /**
@@ -39,7 +46,7 @@ public interface CustomerControllerI {
      * @throws InvalidCustomerException  the invalid customer exception
      * @throws CustomerNotFoundException the customer not found exception
      */
-    @PutMapping(value = "/update/{customerId}", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    @PutMapping(value = "/update/{customerId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<String> update(@RequestBody @ModelAttribute Customer customer, @PathVariable UUID customerId) throws InvalidCustomerException, CustomerNotFoundException;
 
     /**
