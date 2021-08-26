@@ -1,14 +1,24 @@
 package org.jayhenri.cloud9.model.inventory;
 
+import java.io.Serializable;
+import java.util.UUID;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import org.jayhenri.cloud9.model.item.Item;
+import org.jayhenri.cloud9.model.store.Store;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.jayhenri.cloud9.model.item.Item;
-
-import javax.persistence.*;
-import java.io.Serializable;
-import java.util.UUID;
 
 /**
  * The type Store inventory.
@@ -30,6 +40,10 @@ public class StoreInventory implements Serializable {
     @OneToOne
     @JoinColumn(name = "item_id", nullable = false, unique = true)
     private Item item;
+
+    @ManyToOne
+    @JoinColumn(name = "store_id", nullable = false)
+    private Store store;
 
     @Column(name = "item_name", nullable = false, unique = true)
     private String itemName;

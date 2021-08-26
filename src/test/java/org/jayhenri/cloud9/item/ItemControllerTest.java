@@ -1,5 +1,15 @@
 package org.jayhenri.cloud9.item;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.then;
+
+import java.util.HashSet;
+import java.util.UUID;
+
+import javax.naming.InvalidNameException;
+
 import org.jayhenri.cloud9.controller.item.ItemController;
 import org.jayhenri.cloud9.exception.alreadyexists.ItemAlreadyExistsException;
 import org.jayhenri.cloud9.exception.invalid.InvalidItemException;
@@ -15,15 +25,6 @@ import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
-
-import javax.naming.InvalidNameException;
-import java.util.HashSet;
-import java.util.UUID;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.BDDMockito.then;
 
 /**
  * The type Item controller test.
@@ -107,7 +108,6 @@ public class ItemControllerTest {
     @Test
     void updateItem() throws ItemAlreadyExistsException, InvalidItemException, ItemNotFoundException {
 
-        given(itemService.existsByItemName(item.getItemName())).willReturn(true);
         given(itemService.existsById(uuid)).willReturn(true);
 
         assertThat(HttpStatus.OK).isEqualTo(itemController.update(item, uuid).getStatusCode());

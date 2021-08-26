@@ -4,7 +4,7 @@ services:
     build: .
     restart: always
     ports:
-      - '8080:8080'
+      - '8081:8080'
     environment:
       - 'SPRING_DATASOURCE_URL=jdbc:postgresql://postgres_db:5432/cloud9'
       - SPRING_DATASOURCE_USERNAME=cloud9
@@ -24,7 +24,7 @@ services:
     volumes:
       - '../db/cloud9-data:/var/lib/postgresql/data'
     ports:
-      - '5434:5432'
+      - '5435:5432'
     environment:
       POSTGRES_USER: cloud9
       POSTGRES_PASSWORD: cloud9

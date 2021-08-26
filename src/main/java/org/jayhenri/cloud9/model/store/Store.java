@@ -1,17 +1,22 @@
 package org.jayhenri.cloud9.model.store;
 
+import java.io.Serializable;
+import java.util.UUID;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import org.jayhenri.cloud9.model.customer.Address;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.jayhenri.cloud9.model.customer.Address;
-import org.jayhenri.cloud9.model.inventory.OnlineInventory;
-import org.jayhenri.cloud9.model.inventory.StoreInventory;
-
-import javax.persistence.*;
-import java.io.Serializable;
-import java.util.Set;
-import java.util.UUID;
 
 /**
  * The type Store.
@@ -35,22 +40,6 @@ public class Store implements Serializable {
     @JoinColumn(name = "address_id", nullable = false, unique = true)
     private Address address;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "store_inventories",
-            joinColumns = @JoinColumn(name = "store_id"),
-            inverseJoinColumns = @JoinColumn(name = "store_inventory_id")
-    )
-    private Set<StoreInventory> storeInventory;
-
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "online_inventories",
-            joinColumns = @JoinColumn(name = "store_id"),
-            inverseJoinColumns = @JoinColumn(name = "online_inventory_id")
-    )
-    private Set<OnlineInventory> onlineInventory;
-
     /**
      * Instantiates a new Store.
      *
@@ -59,10 +48,8 @@ public class Store implements Serializable {
      * @param storeInventory  the store inventory
      * @param onlineInventory the online inventory
      */
-    public Store(String storeName, Address address, Set<StoreInventory> storeInventory, Set<OnlineInventory> onlineInventory) {
+    public Store(String storeName, Address address) {
         this.storeName = storeName;
         this.address = address;
-        this.storeInventory = storeInventory;
-        this.onlineInventory = onlineInventory;
     }
 }
