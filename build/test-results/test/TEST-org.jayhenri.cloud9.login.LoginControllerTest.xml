@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="org.jayhenri.cloud9.login.LoginControllerTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-08-26T17:58:37" hostname="kde-laptop" time="0.027">
+<testsuite name="org.jayhenri.cloud9.login.LoginControllerTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-08-27T11:37:47" hostname="kde-laptop" time="0.029">
   <properties/>
-  <testcase name="list()" classname="org.jayhenri.cloud9.login.LoginControllerTest" time="0.027"/>
+  <testcase name="list()" classname="org.jayhenri.cloud9.login.LoginControllerTest" time="0.029"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

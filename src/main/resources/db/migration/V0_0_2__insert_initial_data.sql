@@ -3,6 +3,7 @@ insert into address (address_id, street_name, street_number, unit_number, city, 
 
 insert into store (store_id, store_name, address_id) values ('c95363dc-de29-4c11-ad66-56693af48a57', 'Cloud9 Superstore', '8bd3b9a9-2938-4ca0-8978-049d0c601181');
 
+-- Item
 insert into item (item_id, item_name, item_description, price) values ('2c9bc6f5-8024-4bbc-80cb-155f8bb1d4f0', 'Pasta - Lasagne, Fresh', 'Vivamus vel nulla eget eros elementum pellentesque.', 7.46);
 insert into item (item_id, item_name, item_description, price) values ('0a247241-47ac-44ce-a90d-e770ffe74592', 'Cheese - Cottage Cheese', 'Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede. Morbi porttitor lorem id ligula.', 8.85);
 insert into item (item_id, item_name, item_description, price) values ('201fd017-20d7-45aa-a18f-45c85de0cc8c', 'Lettuce - Frisee', 'Nulla nisl. Nunc nisl.', 0.99);
@@ -45,25 +46,25 @@ insert into store_inventory (inventory_id, item_id, store_id, item_name, quantit
 insert into store_inventory (inventory_id, item_id, store_id, item_name, quantity, price) values('8b1a2df7-8f25-4813-a243-e05c0290043b', '2c9bc6f5-8024-4bbc-80cb-155f8bb1d4f0', 'c95363dc-de29-4c11-ad66-56693af48a57', 'Pasta - Lasagne, Fresh', 300, 7.46);
 
 -- Manager Logins
-insert into login (login_id, roles, email, phone_number, password) values ('e932dc43-e08e-4ae8-9580-2c2efc05f6e1', '{"GUEST", "USER", "MOD", "ADMIN"}', 'feman.mark@gmail.com',  '2503229896', 'password');
+insert into login (login_id, roles, email, phone_number, password, enabled) values ('e932dc43-e08e-4ae8-9580-2c2efc05f6e1', '{"USER", "MOD", "ADMIN"}', 'feman.mark@gmail.com',  '2503229896', 'password', true);
 
-insert into login (login_id, roles, email, phone_number, password) values ('a71ac053-1e17-4d5a-81a2-6a5956a90bfa', '{"GUEST", "USER", "MOD", "ADMIN", "SUPER_ADMIN"}', 'feldman.jonah@gmail.com', '2503529846', 'password');
+insert into login (login_id, roles, email, phone_number, password, enabled) values ('a71ac053-1e17-4d5a-81a2-6a5956a90bfa', '{"USER", "MOD", "ADMIN", "SUPER_ADMIN"}', 'feldman.jonah@gmail.com', '2503529846', 'password', true);
 
-insert into login (login_id, roles, email, phone_number, password) values ('967f0ab9-ab04-4970-a1ca-c79ace5ce98e', '{"GUEST", "USER", "MOD", "ADMIN", "SUPER_ADMIN"}', 'ash.dina@gmail.com', '2502139846', 'password');
+insert into login (login_id, roles, email, phone_number, password, enabled) values ('967f0ab9-ab04-4970-a1ca-c79ace5ce98e', '{"USER", "MOD", "ADMIN", "SUPER_ADMIN"}', 'ash.dina@gmail.com', '2502139846', 'password', true);
 
-insert into login (login_id, roles, email, phone_number, password) values ('97b618f4-5f95-4a54-b87d-845d797b633c', '{"GUEST", "USER", "MOD", "ADMIN"}', 'dunn.garrett@gmail.com',  '2503529346', 'password');
+insert into login (login_id, roles, email, phone_number, password, enabled) values ('97b618f4-5f95-4a54-b87d-845d797b633c', '{"USER", "MOD", "ADMIN"}', 'dunn.garrett@gmail.com',  '2503529346', 'password', true);
 
-insert into login (login_id, roles, email, phone_number, password) values ('c8593941-b3b0-49d7-9540-3d74e066bee5', '{"GUEST", "USER", "MOD"}', 'santos.mateo@gmail.com', '2509045738', 'password');
+insert into login (login_id, roles, email, phone_number, password, enabled) values ('c8593941-b3b0-49d7-9540-3d74e066bee5', '{"USER", "MOD"}', 'santos.mateo@gmail.com', '2509045738', 'password', true);
 
-insert into login (login_id, roles, email, phone_number, password) values ('031988c5-78ba-42d3-a76e-d7b2b3b1c1d6', '{"GUEST", "USER", "MOD"}','mckinney.glenn@gmail.com','2509942342', 'password');
+insert into login (login_id, roles, email, phone_number, password, enabled) values ('031988c5-78ba-42d3-a76e-d7b2b3b1c1d6', '{"USER", "MOD"}','mckinney.glenn@gmail.com','2509942342', 'password', true);
 
-insert into login (login_id, roles, email, phone_number, password) values ('cce539d7-3ce2-43f7-a850-75c39eec0ebb', '{"GUEST", "USER", "MOD"}', 'sakura.cheyenne@gmail.com', '2503434446', 'password');
+insert into login (login_id, roles, email, phone_number, password, enabled) values ('cce539d7-3ce2-43f7-a850-75c39eec0ebb', '{"USER", "MOD"}', 'sakura.cheyenne@gmail.com', '2503434446', 'password', true);
 
-insert into login (login_id, roles, email, phone_number, password) values ('fad1b651-6b99-4e11-82e0-ee04072f9975', '{"GUEST", "USER", "MOD", "ADMIN", "SUPER_ADMIN"}', 'ferrera.amy@gmail.com', '2503917099', 'password');
+insert into login (login_id, roles, email, phone_number, password, enabled) values ('fad1b651-6b99-4e11-82e0-ee04072f9975', '{"USER", "MOD", "ADMIN", "SUPER_ADMIN"}', 'ferrera.amy@gmail.com', '2503917099', 'password', true);
 
-insert into login (login_id, roles, email, phone_number, password) values ('fa8bf02b-0b59-440e-92b1-855f7d253ffa', '{"GUEST", "USER", "MOD", "ADMIN"}', 'kauahi.sandra@gmail.com', '2503629841', 'password');
+insert into login (login_id, roles, email, phone_number, password, enabled) values ('fa8bf02b-0b59-440e-92b1-855f7d253ffa', '{"USER", "MOD", "ADMIN"}', 'kauahi.sandra@gmail.com', '2503629841', 'password', true);
 
-insert into login (login_id, roles, email, phone_number, password) values ('7c1cd3a1-38bb-4c57-9ca0-a36fcf4eb9b1', '{"GUEST", "USER", "MOD", "ADMIN"}', 'schumann.justine@gmail.com', '2500439036', 'password');
+insert into login (login_id, roles, email, phone_number, password, enabled) values ('7c1cd3a1-38bb-4c57-9ca0-a36fcf4eb9b1', '{"USER", "MOD", "ADMIN"}', 'schumann.justine@gmail.com', '2500439036', 'password', true);
 
 -- Manager Addresses
 insert into address (address_id, street_name, street_number, unit_number, city, postal_code, province) values ('236797e4-d7b3-433d-b04a-d48832e98210', '102nd Avenue', '2304', '101', 'Nelson', 'V1L 5Y5', 'British Columbia');

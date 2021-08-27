@@ -1,15 +1,26 @@
 package org.jayhenri.cloud9.model.customer;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.jayhenri.cloud9.model.login.Login;
-
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
 import java.util.UUID;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import org.jayhenri.cloud9.model.login.Login;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * The type Customer.
@@ -29,8 +40,20 @@ public class Customer implements Serializable {
     @Column(name = "customer_id", nullable = false)
     private UUID customerUUID = UUID.randomUUID();
 
+    @Column(name = "first_name", nullable = false, length = 25)
+    private String firstName;
+
+    @Column(name = "last_name", nullable = false, length = 25)
+    private String lastName;
+
+    @Column(name = "phone_number", nullable = false, unique = true, length = 10)
+    private String phoneNumber;
+
     @Column(name = "email", nullable = false, unique = true, length = 50)
     private String email;
+
+    @Column(name = "date_of_birth", nullable = false, length = 10)
+    private String dateOfBirth;
 
     @OneToOne
     @JoinColumn(name = "login_id", nullable = false)
@@ -59,19 +82,6 @@ public class Customer implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "item_id")
     )
     private Set<Orders> orders;
-
-    @Column(name = "first_name", nullable = false, length = 25)
-    private String firstName;
-
-    @Column(name = "last_name", nullable = false, length = 25)
-    private String lastName;
-
-    @Column(name = "phone_number", nullable = false, unique = true, length = 10)
-    private String phoneNumber;
-
-    @Column(name = "date_of_birth", nullable = false, length = 10)
-    private String dateOfBirth;
-
 
     /**
      * Instantiates a new Customer.

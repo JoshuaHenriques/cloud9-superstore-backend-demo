@@ -9,6 +9,7 @@ services:
       - 'SPRING_DATASOURCE_URL=jdbc:postgresql://postgres_db:5432/cloud9'
       - SPRING_DATASOURCE_USERNAME=cloud9
       - SPRING_DATASOURCE_PASSWORD=cloud9
+      - SPRING.JPA.HIBERNATE.DDL-AUTO=validate
     depends_on:
       - flyway
   flyway:

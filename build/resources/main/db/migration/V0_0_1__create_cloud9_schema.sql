@@ -15,7 +15,7 @@ create table if not exists login (
 create table if not exists login_attempts (
     created_at      timestamp       default current_timestamp,
     updated_at      timestamp       default current_timestamp,
-    login_id        uuid            not null primary key default uuid_generate_v4(),
+    login_id        uuid            primary key default uuid_generate_v4(),
     attempts        int             default 0
 );
 
@@ -32,8 +32,8 @@ create table if not exists item_reviews (
         created_at              timestamp       default current_timestamp,
         updated_at              timestamp       default current_timestamp,
         item_reviews_id			uuid			not null primary key default uuid_generate_v4(),
-        item_id                 uuid            not null,
-        review_id               uuid            not null references review(review_id)
+        item_id                 uuid,
+        review_id               uuid            references review(review_id)
 );
 
 create table if not exists item (
@@ -54,14 +54,14 @@ create table if not exists order_items (
        	updated_at              timestamp       default current_timestamp,
        	order_items_id			uuid			primary key default uuid_generate_v4(),
         orders_id				uuid,
-        item_id                 uuid            not null references item(item_id)
+        item_id                 uuid            references item(item_id)
 );
 
 create table if not exists orders (
     created_at      timestamp       default current_timestamp,
     updated_at      timestamp       default current_timestamp,
 	orders_id     	uuid			primary key default uuid_generate_v4(),
-	order_items_id	uuid			not null references order_items(order_items_id),
+	order_items_id	uuid			references order_items(order_items_id),
 	order_status	varchar(50)		not null,
 	total			double precision not null
 );
@@ -80,7 +80,7 @@ create table if not exists store_inventory (
 	created_at      timestamp       default current_timestamp,
 	updated_at      timestamp       default current_timestamp,
 	inventory_id	uuid			primary key default uuid_generate_v4(),
-	item_id			uuid            not null unique references item(item_id),
+	item_id			uuid            unique references item(item_id),
 	store_id		uuid			not null,
 	item_name       varchar(50)     not null,
 	quantity		int		        not null,
@@ -91,7 +91,7 @@ create table if not exists online_inventory (
 	created_at      timestamp       default current_timestamp,
 	updated_at      timestamp       default current_timestamp,
 	inventory_id	uuid			primary key default uuid_generate_v4(),
-	item_id			uuid            not null unique references item(item_id),
+	item_id			uuid            unique references item(item_id),
 	item_name       varchar(50)     not null,
 	quantity		int		        not null,
 	price 			double precision not null

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="org.jayhenri.cloud9.login.LoginServiceTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2021-08-26T17:58:37" hostname="kde-laptop" time="0.485">
+<testsuite name="org.jayhenri.cloud9.login.LoginServiceTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2021-08-27T11:37:46" hostname="kde-laptop" time="0.543">
   <properties/>
-  <testcase name="doesNotExistsByPhoneNumber()" classname="org.jayhenri.cloud9.login.LoginServiceTest" time="0.462"/>
-  <testcase name="delete()" classname="org.jayhenri.cloud9.login.LoginServiceTest" time="0.003"/>
-  <testcase name="update()" classname="org.jayhenri.cloud9.login.LoginServiceTest" time="0.002"/>
-  <testcase name="findAllLogins()" classname="org.jayhenri.cloud9.login.LoginServiceTest" time="0.002"/>
-  <testcase name="getById()" classname="org.jayhenri.cloud9.login.LoginServiceTest" time="0.003"/>
-  <testcase name="add()" classname="org.jayhenri.cloud9.login.LoginServiceTest" time="0.002"/>
+  <testcase name="doesNotExistsByPhoneNumber()" classname="org.jayhenri.cloud9.login.LoginServiceTest" time="0.508"/>
+  <testcase name="delete()" classname="org.jayhenri.cloud9.login.LoginServiceTest" time="0.004"/>
+  <testcase name="update()" classname="org.jayhenri.cloud9.login.LoginServiceTest" time="0.003"/>
+  <testcase name="findAllLogins()" classname="org.jayhenri.cloud9.login.LoginServiceTest" time="0.003"/>
+  <testcase name="getById()" classname="org.jayhenri.cloud9.login.LoginServiceTest" time="0.006"/>
+  <testcase name="add()" classname="org.jayhenri.cloud9.login.LoginServiceTest" time="0.004"/>
   <testcase name="existsById()" classname="org.jayhenri.cloud9.login.LoginServiceTest" time="0.003"/>
   <testcase name="existsByPhoneNumber()" classname="org.jayhenri.cloud9.login.LoginServiceTest" time="0.003"/>
   <testcase name="doesNotExistsById()" classname="org.jayhenri.cloud9.login.LoginServiceTest" time="0.002"/>
