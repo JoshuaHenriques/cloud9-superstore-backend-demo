@@ -64,7 +64,7 @@ public class AddressController implements AddressControllerI {
     @PutMapping(value = "/update/{entity}/{uuid}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> update(@RequestBody Address address, @PathVariable UUID uuid, String type)
             throws CustomerNotFoundException, InvalidAddressException, StoreNotFoundException, EmployeeNotFoundException {
-        if (!ObjectUtils.isEmpty(address)) {
+        if (!ObjectUtils.isEmpty(address) || !ObjectUtils.isEmpty(uuid) || !ObjectUtils.isEmpty(type)) {
 
             switch (type) {
                 case "customer":
