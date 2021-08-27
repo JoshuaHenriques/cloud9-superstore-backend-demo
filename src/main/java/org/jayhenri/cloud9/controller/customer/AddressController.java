@@ -62,16 +62,15 @@ public class AddressController implements AddressControllerI {
      * @throws InvalidAddressException   the invalid address exception
      */
     @PutMapping(value = "/update/{entity}/{uuid}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> update(@RequestBody Address address, @PathVariable("uuid") UUID uuid, String type)
+    public ResponseEntity<String> update(@RequestBody Address address, @PathVariable UUID uuid, String type)
             throws CustomerNotFoundException, InvalidAddressException, StoreNotFoundException, EmployeeNotFoundException {
         if (!ObjectUtils.isEmpty(address)) {
 
             switch (type) {
                 case "customer":
-                    Customer customer = new Customer();
 
                     if (customerService.existsById(uuid)) {
-                        customer.setCustomerUUID(uuid);
+                        Customer customer = customerService.getById(uuid);
                         customer.setAddress(address);
                         customerService.update(customer);
 
@@ -82,10 +81,9 @@ public class AddressController implements AddressControllerI {
                         throw new CustomerNotFoundException();
 
                 case "employee":
-                    Employee employee = new Employee();
 
                     if (employeeService.existsById(uuid)) {
-                        employee.setEmployeeUUID(uuid);
+                        Employee employee = employeeService.getById(uuid);
                         employee.setAddress(address);
                         employeeService.update(employee);
 
@@ -96,10 +94,9 @@ public class AddressController implements AddressControllerI {
                         throw new EmployeeNotFoundException();
 
                 case "store":
-                    Store store = new Store();
 
                     if (storeService.existsById(uuid)) {
-                        store.setStoreUUID(uuid);
+                        Store store = storeService.getById(uuid);
                         store.setAddress(address);
                         storeService.update(store);
 
