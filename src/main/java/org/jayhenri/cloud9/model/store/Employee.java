@@ -1,15 +1,23 @@
 package org.jayhenri.cloud9.model.store;
 
+import java.io.Serializable;
+import java.util.UUID;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+
 import org.jayhenri.cloud9.model.customer.Address;
 import org.jayhenri.cloud9.model.login.Login;
 
-import javax.persistence.*;
-import java.io.Serializable;
-import java.util.UUID;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * The type Employee.
@@ -66,7 +74,9 @@ public class Employee implements Serializable {
      * @param phoneNumber the phone number
      * @param dateOfBirth the date of birth
      */
-    public Employee(Login login, Store store, String firstName, String lastName, String phoneNumber, String dateOfBirth) {
+    public Employee(String email, Address address, Login login, Store store, String firstName, String lastName, String phoneNumber, String dateOfBirth) {
+        this.email = email;
+        this.address = address;
         this.login = login;
         this.store = store;
         this.firstName = firstName;

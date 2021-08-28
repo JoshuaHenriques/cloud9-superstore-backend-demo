@@ -93,7 +93,7 @@ public class EmployeeController implements EmployeeControllerI {
     public ResponseEntity<String> update(@RequestBody Employee employee, @PathVariable UUID employeeId)
             throws InvalidEmployeeException, EmployeeNotFoundException {
         if (!ObjectUtils.isEmpty(employee)) {
-            if (employeeService.existsById(employee.getEmployeeUUID())) {
+            if (employeeService.existsById(employeeId)) {
                 employee.setEmployeeUUID(employeeId);
                 employeeService.update(employee);
 

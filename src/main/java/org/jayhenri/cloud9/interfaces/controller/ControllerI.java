@@ -6,6 +6,7 @@ import java.util.UUID;
 import javax.naming.InvalidNameException;
 
 import org.jayhenri.cloud9.exception.alreadyexists.InventoryAlreadyExistsException;
+import org.jayhenri.cloud9.exception.alreadyexists.ItemAlreadyExistsException;
 import org.jayhenri.cloud9.exception.alreadyexists.LoginAlreadyExistsException;
 import org.jayhenri.cloud9.exception.alreadyexists.StoreAlreadyExistsException;
 import org.jayhenri.cloud9.exception.invalid.InvalidItemException;
@@ -43,9 +44,10 @@ public interface ControllerI<T> {
      * @throws InvalidStoreException       the invalid store exception
      * @throws InventoryAlreadyExistsException  the item already exists exception
      * @throws InvalidItemException        the invalid item exception
+     * @throws ItemAlreadyExistsException
      */
     @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<String> add(@RequestBody T t) throws LoginAlreadyExistsException, InvalidLoginException, StoreAlreadyExistsException, InvalidPostalCodeException, InvalidStoreException, InventoryAlreadyExistsException, InvalidItemException;
+    ResponseEntity<String> add(@RequestBody T t) throws LoginAlreadyExistsException, InvalidLoginException, StoreAlreadyExistsException, InvalidPostalCodeException, InvalidStoreException, InventoryAlreadyExistsException, InvalidItemException, ItemAlreadyExistsException;
 
     /**
      * Update response entity.

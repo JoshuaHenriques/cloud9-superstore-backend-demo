@@ -37,17 +37,18 @@ import org.springframework.web.bind.annotation.RestController;
 public class StoreController implements ControllerI<Store> {
 
     private final ServiceI<Store> storeService;
+
     private final AddressServiceI addressService;
 
     /**
      * Instantiates a new Store controller.
      *
-     * @param storeService   the store service
+     * @param storeService2   the store service
      * @param addressService the inventory service
      */
     @Autowired
-    public StoreController(ServiceI<Store> storeService, AddressServiceI addressService) {
-        this.storeService = storeService;
+    public StoreController(ServiceI<Store> storeService2, AddressServiceI addressService) {
+        this.storeService = storeService2;
         this.addressService = addressService;
     }
 
@@ -67,9 +68,12 @@ public class StoreController implements ControllerI<Store> {
         if (ObjectUtils.isEmpty(store))
             throw new InvalidStoreException();
 
+        else if (storeService.existsById(store.getStoreUUID()))
+                throw new StoreAlreadyExistsException();
+
         else if (!addressService.isValidPostalCode(store.getAddress().getPostalCode()))
             throw new InvalidPostalCodeException();
-
+                
         storeService.add(store);
 
         HttpHeaders responseHeaders = new HttpHeaders();

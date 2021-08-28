@@ -6,6 +6,7 @@ import java.util.UUID;
 import javax.naming.InvalidNameException;
 
 import org.jayhenri.cloud9.exception.alreadyexists.InventoryAlreadyExistsException;
+import org.jayhenri.cloud9.exception.alreadyexists.ItemAlreadyExistsException;
 import org.jayhenri.cloud9.exception.invalid.InvalidItemException;
 import org.jayhenri.cloud9.exception.notfound.ItemNotFoundException;
 import org.jayhenri.cloud9.interfaces.controller.ControllerI;
@@ -56,14 +57,14 @@ public class ItemController implements ControllerI<Item> {
      */
     @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> add(@RequestBody Item item)
-            throws InventoryAlreadyExistsException, InvalidItemException {
+            throws ItemAlreadyExistsException, InvalidItemException {
 
         if (ObjectUtils.isEmpty(item))
             throw new InvalidItemException();
 
         else if (itemService.existsByItemName(item.getItemName())
                 || itemService.existsById(item.getItemUUID()))
-            throw new InventoryAlreadyExistsException();
+            throw new ItemAlreadyExistsException();
 
         itemService.add(item);
 

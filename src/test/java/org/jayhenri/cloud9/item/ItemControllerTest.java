@@ -12,6 +12,7 @@ import javax.naming.InvalidNameException;
 
 import org.jayhenri.cloud9.controller.item.ItemController;
 import org.jayhenri.cloud9.exception.alreadyexists.InventoryAlreadyExistsException;
+import org.jayhenri.cloud9.exception.alreadyexists.ItemAlreadyExistsException;
 import org.jayhenri.cloud9.exception.invalid.InvalidItemException;
 import org.jayhenri.cloud9.exception.notfound.ItemNotFoundException;
 import org.jayhenri.cloud9.interfaces.service.other.ItemServiceI;
@@ -75,7 +76,7 @@ public class ItemControllerTest {
      * @throws InvalidItemException       the invalid item exception
      */
     @Test
-    void addItem() throws InventoryAlreadyExistsException, InvalidItemException {
+    void addItem() throws ItemAlreadyExistsException, InvalidItemException {
 
         given(itemService.existsById(item.getItemUUID())).willReturn(false);
         given(itemService.existsByItemName(item.getItemName())).willReturn(false);
@@ -98,7 +99,7 @@ public class ItemControllerTest {
 
         given(itemService.existsByItemName(item.getItemName())).willReturn(true);
 
-        assertThrows(InventoryAlreadyExistsException.class, () -> itemController.add(item));
+        assertThrows(ItemAlreadyExistsException.class, () -> itemController.add(item));
     }
 
     @Test
