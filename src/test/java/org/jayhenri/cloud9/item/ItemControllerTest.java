@@ -11,12 +11,11 @@ import java.util.UUID;
 import javax.naming.InvalidNameException;
 
 import org.jayhenri.cloud9.controller.item.ItemController;
-import org.jayhenri.cloud9.exception.alreadyexists.ItemAlreadyExistsException;
+import org.jayhenri.cloud9.exception.alreadyexists.InventoryAlreadyExistsException;
 import org.jayhenri.cloud9.exception.invalid.InvalidItemException;
 import org.jayhenri.cloud9.exception.notfound.ItemNotFoundException;
 import org.jayhenri.cloud9.interfaces.service.other.ItemServiceI;
 import org.jayhenri.cloud9.model.item.Item;
-import org.jayhenri.cloud9.repository.item.ItemRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -36,9 +35,6 @@ public class ItemControllerTest {
 
     @Mock
     private ItemServiceI itemService;
-
-    @Mock
-    private ItemRepository itemRepository;
 
     @Captor
     private ArgumentCaptor<Item> captorItem;
@@ -75,11 +71,11 @@ public class ItemControllerTest {
     /**
      * Add item.
      *
-     * @throws ItemAlreadyExistsException the item already exists exception
+     * @throws InventoryAlreadyExistsException the item already exists exception
      * @throws InvalidItemException       the invalid item exception
      */
     @Test
-    void addItem() throws ItemAlreadyExistsException, InvalidItemException {
+    void addItem() throws InventoryAlreadyExistsException, InvalidItemException {
 
         given(itemService.existsById(item.getItemUUID())).willReturn(false);
         given(itemService.existsByItemName(item.getItemName())).willReturn(false);
@@ -102,11 +98,11 @@ public class ItemControllerTest {
 
         given(itemService.existsByItemName(item.getItemName())).willReturn(true);
 
-        assertThrows(ItemAlreadyExistsException.class, () -> itemController.add(item));
+        assertThrows(InventoryAlreadyExistsException.class, () -> itemController.add(item));
     }
 
     @Test
-    void updateItem() throws ItemAlreadyExistsException, InvalidItemException, ItemNotFoundException {
+    void updateItem() throws InventoryAlreadyExistsException, InvalidItemException, ItemNotFoundException {
 
         given(itemService.existsById(uuid)).willReturn(true);
 
@@ -159,6 +155,25 @@ public class ItemControllerTest {
 
     @Test
     void get() throws InvalidNameException, InvalidItemException, ItemNotFoundException {
+        
+        given(itemService.existsById(uuid)).willReturn(true);
+        given(itemService.getById(uuid)).willReturn(item);
 
+        assertThat(HttpStatus.OK).isEqualTo(itemController.get(uuid).getStatusCode());
+        assertThat(item).isEqualTo(itemController.get(uuid).getBody());
+    }
+
+    @Test
+    void getItemThrowsItemNotFoundException() {
+
+        given(itemService.existsById(uuid)).willReturn(false);
+
+        assertThrows(ItemNotFoundException.class, () -> itemController.get(uuid));
+    }
+
+    @Test
+    void getItemThrowsInvalidItemException() {
+
+        assertThrows(InvalidItemException.class, () -> itemController.get(null));
     }
 }

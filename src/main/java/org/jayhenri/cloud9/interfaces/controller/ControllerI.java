@@ -5,7 +5,7 @@ import java.util.UUID;
 
 import javax.naming.InvalidNameException;
 
-import org.jayhenri.cloud9.exception.alreadyexists.ItemAlreadyExistsException;
+import org.jayhenri.cloud9.exception.alreadyexists.InventoryAlreadyExistsException;
 import org.jayhenri.cloud9.exception.alreadyexists.LoginAlreadyExistsException;
 import org.jayhenri.cloud9.exception.alreadyexists.StoreAlreadyExistsException;
 import org.jayhenri.cloud9.exception.invalid.InvalidItemException;
@@ -41,11 +41,11 @@ public interface ControllerI<T> {
      * @throws StoreAlreadyExistsException the store already exists exception
      * @throws InvalidPostalCodeException  the invalid postal code exception
      * @throws InvalidStoreException       the invalid store exception
-     * @throws ItemAlreadyExistsException  the item already exists exception
+     * @throws InventoryAlreadyExistsException  the item already exists exception
      * @throws InvalidItemException        the invalid item exception
      */
     @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<String> add(@RequestBody T t) throws LoginAlreadyExistsException, InvalidLoginException, StoreAlreadyExistsException, InvalidPostalCodeException, InvalidStoreException, ItemAlreadyExistsException, InvalidItemException;
+    ResponseEntity<String> add(@RequestBody T t) throws LoginAlreadyExistsException, InvalidLoginException, StoreAlreadyExistsException, InvalidPostalCodeException, InvalidStoreException, InventoryAlreadyExistsException, InvalidItemException;
 
     /**
      * Update response entity.
@@ -59,10 +59,10 @@ public interface ControllerI<T> {
      * @throws StoreNotFoundException     the store not found exception
      * @throws InvalidItemException       the invalid item exception
      * @throws ItemNotFoundException      the item not found exception
-     * @throws ItemAlreadyExistsException the item already exists exception
+     * @throws InventoryAlreadyExistsException the item already exists exception
      */
     @PutMapping(value = "/update/{uuid}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<String> update(@RequestBody T t, @PathVariable UUID uuid) throws InvalidLoginException, LoginNotFoundException, InvalidStoreException, StoreNotFoundException, InvalidItemException, ItemNotFoundException, ItemAlreadyExistsException;
+    ResponseEntity<String> update(@RequestBody T t, @PathVariable UUID uuid) throws InvalidLoginException, LoginNotFoundException, InvalidStoreException, StoreNotFoundException, InvalidItemException, ItemNotFoundException, InventoryAlreadyExistsException;
 
     /**
      * Delete response entity.

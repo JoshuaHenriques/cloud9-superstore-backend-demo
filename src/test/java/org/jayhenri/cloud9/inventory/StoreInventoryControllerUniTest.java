@@ -1,15 +1,24 @@
 package org.jayhenri.cloud9.inventory;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.then;
+
+import java.util.HashSet;
+import java.util.UUID;
+
 import org.jayhenri.cloud9.controller.inventory.StoreInventoryController;
-import org.jayhenri.cloud9.exception.alreadyexists.ItemAlreadyExistsException;
+import org.jayhenri.cloud9.exception.alreadyexists.InventoryAlreadyExistsException;
+import org.jayhenri.cloud9.exception.invalid.InvalidInventoryException;
 import org.jayhenri.cloud9.exception.invalid.InvalidItemException;
 import org.jayhenri.cloud9.exception.notfound.ItemNotFoundException;
 import org.jayhenri.cloud9.interfaces.controller.other.InventoryControllerI;
 import org.jayhenri.cloud9.interfaces.service.other.InventoryServiceI;
+import org.jayhenri.cloud9.interfaces.service.other.ItemServiceI;
 import org.jayhenri.cloud9.model.inventory.StoreInventory;
 import org.jayhenri.cloud9.model.item.Item;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
@@ -19,105 +28,106 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import java.util.HashSet;
-import java.util.UUID;
-
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.BDDMockito.then;
-
 /**
  * The type StoreInventory controller uni test.
  */
 @ExtendWith(MockitoExtension.class)
 class StoreInventoryControllerUniTest {
 
-    private static final int quantity = 3088;
     @Captor
     private ArgumentCaptor<Item> captorItem;
-    @Captor
-    private ArgumentCaptor<Integer> captorInt;
-    @Captor
-    private ArgumentCaptor<Double> captorDouble;
+
     @Captor
     private ArgumentCaptor<String> captorString;
+
     @Captor
     private ArgumentCaptor<UUID> captorUUID;
+
     @Captor
-    private ArgumentCaptor<StoreInventory> captorStoreInventory;
+    private ArgumentCaptor<StoreInventory> captorInventory;
+
     @Mock
     private InventoryServiceI<StoreInventory> storeInventoryService;
+
+    @Mock
+    private ItemServiceI itemService;
+
     private InventoryControllerI<StoreInventory> storeInventoryController;
+
     private StoreInventory inventory;
-    private UUID uuid;
+
+    private UUID itemId, inventoryId;
+
     private Item item;
 
     private
 
-    @BeforeEach
-    void setUp() {
+    @BeforeEach void setUp() {
 
-        uuid = UUID.randomUUID();
+        itemId = UUID.randomUUID();
 
-        storeInventoryController = new StoreInventoryController(storeInventoryService);
+        inventoryId = UUID.randomUUID();
 
-        item = new Item(
-                "iPhone 13 Pro",
-                "2021 Model",
-                new HashSet<>(),
-                1299.99,
-                null
-        );
+        storeInventoryController = new StoreInventoryController(storeInventoryService, itemService);
 
-        inventory = new StoreInventory(
-                item,
-                item.getItemName(),
-                3950,
-                1129.99
-        );
+        item = new Item("iPhone 13 Pro", "2021 Model", new HashSet<>(), 1299.99, null);
+
+        inventory = new StoreInventory(item, item.getItemName(), 3950, 1129.99);
     }
 
     /**
      * Add item.
      *
-     * @throws ItemAlreadyExistsException the item already exists exception
-     * @throws InvalidItemException       the invalid item exception
+     * @throws InventoryAlreadyExistsException the item already exists exception
+     * @throws InvalidItemException            the invalid item exception
+     * @throws ItemNotFoundException
+     * @throws InvalidInventoryException
      */
-//    @Test
-//    @Disabled
-//    void addItem() throws ItemAlreadyExistsException, InvalidItemException {
-//
-//        given(storeInventoryService.existsByItemName(item.getItemName())).willReturn(false);
-//
-//        // ResponseEntity<String> response = storeInventoryController.add(item, uuid, quantity, item.getPrice());
-//
-//        // then(storeInventoryService).should().add(captorItem.capture(), captorInt.capture(), captorDouble.capture());
-//
-//        assertThat(HttpStatus.CREATED).isEqualTo(response.getStatusCode());
-//        assertThat(captorItem.getValue()).isEqualTo(item);
-//        assertThat(captorInt.getValue()).isEqualTo(quantity);
-//        assertThat(captorDouble.getValue()).isEqualTo(item.getPrice());
-//    }
+    @Test
+    void add() throws InventoryAlreadyExistsException, InvalidItemException, ItemNotFoundException,
+            InvalidInventoryException {
+
+        given(itemService.existsById(itemId)).willReturn(true);
+        given(storeInventoryService.existsById(itemId)).willReturn(false);
+
+        assertThat(HttpStatus.CREATED).isEqualTo(storeInventoryController.add(inventory, itemId).getStatusCode());
+
+        then(storeInventoryService).should().add(captorInventory.capture());
+
+        assertThat(captorInventory.getValue()).isEqualTo(captorInventory.getValue());
+    }
 
     /**
      * Add item throws invalid item exception.
      */
     @Test
-    @Disabled
-    void addItemThrowsInvalidItemException() {
-        // assertThrows(InvalidItemException.class, () -> storeInventoryController.add(null, null, 0, 0.00));
+    void addThrowsInvalidInventoryException() {
+        
+        assertThrows(InvalidInventoryException.class, () -> storeInventoryController.add(null, null));
+    }
+
+    /**
+     * Add item throws invalid item exception.
+     */
+    @Test
+    void addThrowsInventoryAlreadyExistsException() {
+
+        given(itemService.existsById(itemId)).willReturn(true);
+        given(storeInventoryService.existsById(itemId)).willReturn(true);
+
+        assertThrows(InventoryAlreadyExistsException.class, () -> storeInventoryController.add(inventory, itemId));
     }
 
     /**
      * Add item throws item already exists exception.
      */
-//    @Test
-//    void addItemThrowsItemAlreadyExistsException() {
-//        given(storeInventoryService.existsByItemName(inventory.getItemName())).willReturn(true);
-//
-//        assertThrows(ItemAlreadyExistsException.class, () -> storeInventoryController.add(item, uuid, quantity, item.getPrice() * quantity));
-//    }
+    @Test
+    void addThrowsItemNotFoundException() {
+        
+        given(itemService.existsById(itemId)).willReturn(false);
+
+        assertThrows(ItemNotFoundException.class, () -> storeInventoryController.add(inventory, itemId));
+    }
 
     /**
      * Update item.
@@ -125,34 +135,64 @@ class StoreInventoryControllerUniTest {
      * @throws InvalidItemException  the invalid item exception
      * @throws ItemNotFoundException the item not found exception
      */
-//    @Test
-//    void update() throws InvalidItemException, ItemNotFoundException {
-//        given(storeInventoryService.existsByItemName(inventory.getItemName())).willReturn(true);
-//
-//        assertThat(HttpStatus.OK).isEqualTo(storeInventoryController.update(inventory).getStatusCode());
-//
-//        then(storeInventoryService).should().update(captorStoreInventory.capture());
-//
-//        assertThat(captorStoreInventory.getValue()).isEqualTo(inventory);
-//    }
+    @Test
+    void update() throws InvalidItemException, ItemNotFoundException {
+        
+        given(storeInventoryService.existsById(inventoryId)).willReturn(true);
+
+        assertThat(HttpStatus.OK).isEqualTo(storeInventoryController.update(inventory, inventoryId).getStatusCode());
+
+        then(storeInventoryService).should().update(captorInventory.capture());
+
+        assertThat(captorInventory.getValue()).isEqualTo(inventory);
+    }
 
     /**
      * Update item throws invalid item exception.
      */
-//    @Test
-//    void updateItemThrowsInvalidItemException() {
-//        assertThrows(InvalidItemException.class, () -> storeInventoryController.update(null));
-//    }
+    @Test
+    void updateInventoryThrowsInvalidItemException() {
+        
+        assertThrows(InvalidItemException.class, () -> storeInventoryController.update(null, null));
+    }
 
     /**
      * Update item throws item not found exception.
      */
-//    @Test
-//    void updateItemThrowsItemNotFoundException() {
-//        given(storeInventoryService.existsByItemName(inventory.getItemName())).willReturn(false);
-//
-//        assertThrows(ItemNotFoundException.class, () -> storeInventoryController.update(inventory));
-//    }
+    @Test
+    void updateInventoryThrowsItemNotFoundException() {
+        
+        given(storeInventoryService.existsById(inventoryId)).willReturn(false);
+        
+        assertThrows(ItemNotFoundException.class, () ->
+        storeInventoryController.update(inventory, inventoryId));
+    }
+
+        /**
+     * Remove item.
+     *
+     * @throws InvalidItemException  the invalid item exception
+     * @throws ItemNotFoundException the item not found exception
+     */
+    @Test
+    void delete() throws InvalidItemException, ItemNotFoundException {
+        given(storeInventoryService.existsById(inventoryId)).willReturn(true);
+        given(storeInventoryService.getById(inventoryId)).willReturn(inventory);
+
+        assertThat(HttpStatus.OK).isEqualTo(storeInventoryController.delete(inventoryId).getStatusCode());
+
+        then(storeInventoryService).should().delete(inventory);
+    }
+
+    /**
+     * Remove item throws item not found exception.
+     */
+    @Test
+    void deleteThrowsItemNotFoundException() {
+        given(storeInventoryService.existsById(inventoryId)).willReturn(false);
+
+        assertThrows(ItemNotFoundException.class, () -> storeInventoryController.delete(inventoryId));
+    }
 
     /**
      * Gets by product name.
@@ -190,16 +230,16 @@ class StoreInventoryControllerUniTest {
      */
     @Test
     void getById() throws ItemNotFoundException {
-        given(storeInventoryService.existsById(uuid)).willReturn(true);
-        given(storeInventoryService.getById(uuid)).willReturn(inventory);
+        given(storeInventoryService.existsById(inventoryId)).willReturn(true);
+        given(storeInventoryService.getById(inventoryId)).willReturn(inventory);
 
-        ResponseEntity<StoreInventory> _inventory = storeInventoryController.getById(uuid);
+        ResponseEntity<StoreInventory> _inventory = storeInventoryController.getById(inventoryId);
 
         assertThat(inventory).isEqualTo(_inventory.getBody());
 
         then(storeInventoryService).should().getById(captorUUID.capture());
 
-        assertThat(captorUUID.getValue()).isEqualTo(uuid);
+        assertThat(captorUUID.getValue()).isEqualTo(inventoryId);
     }
 
     /**
@@ -207,43 +247,9 @@ class StoreInventoryControllerUniTest {
      */
     @Test
     void getByIdThrowsItemNotFoundException() {
-        given(storeInventoryService.existsById(uuid)).willReturn(false);
+        given(storeInventoryService.existsById(inventoryId)).willReturn(false);
 
-        assertThrows(ItemNotFoundException.class, () -> storeInventoryController.getById(uuid));
-    }
-
-    /**
-     * Remove item.
-     *
-     * @throws InvalidItemException  the invalid item exception
-     * @throws ItemNotFoundException the item not found exception
-     */
-    @Test
-    void removeInventory() throws InvalidItemException, ItemNotFoundException {
-        given(storeInventoryService.existsById(uuid)).willReturn(true);
-        given(storeInventoryService.getById(uuid)).willReturn(inventory);
-
-        assertThat(HttpStatus.OK).isEqualTo(storeInventoryController.delete(uuid).getStatusCode());
-
-        then(storeInventoryService).should().delete(inventory);
-    }
-
-    /**
-     * Remove item throws invalid item exception.
-     */
-    @Test
-    void removeInventoryThrowsInvalidItemException() {
-        assertThrows(InvalidItemException.class, () -> storeInventoryController.delete(null));
-    }
-
-    /**
-     * Remove item throws item not found exception.
-     */
-    @Test
-    void removeInventoryThrowsItemNotFoundException() {
-        given(storeInventoryService.existsById(uuid)).willReturn(false);
-
-        assertThrows(ItemNotFoundException.class, () -> storeInventoryController.delete(uuid));
+        assertThrows(ItemNotFoundException.class, () -> storeInventoryController.getById(inventoryId));
     }
 
     /**

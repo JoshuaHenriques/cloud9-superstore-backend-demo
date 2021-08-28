@@ -1,7 +1,12 @@
 package org.jayhenri.cloud9.customer.service;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.then;
+
+import java.util.UUID;
+
 import org.jayhenri.cloud9.interfaces.service.customer.CustomerServiceI;
-import org.jayhenri.cloud9.model.customer.Cart;
 import org.jayhenri.cloud9.model.customer.Customer;
 import org.jayhenri.cloud9.repository.customer.CustomerRepository;
 import org.jayhenri.cloud9.service.customer.CustomerService;
@@ -13,12 +18,6 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import java.util.UUID;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.BDDMockito.then;
 
 /**
  * The type Customer service test.
@@ -64,11 +63,6 @@ class CustomerServiceTest {
      * The Customer.
      */
     private UUID uuid;
-
-    /**
-     * The Customer.
-     */
-    private Cart cart;
 
     /**
      * Sets up.

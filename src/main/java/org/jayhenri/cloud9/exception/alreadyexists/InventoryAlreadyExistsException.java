@@ -1,23 +1,23 @@
 package org.jayhenri.cloud9.exception.alreadyexists;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ResponseStatus;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
  * The type Item already exists exception.
  */
 @ResponseStatus(value = HttpStatus.BAD_REQUEST)
-public class ItemAlreadyExistsException extends Exception {
+public class InventoryAlreadyExistsException extends Exception {
 
     private List<String> errorMessages = new ArrayList<>();
 
     /**
      * Instantiates a new Item already exists exception.
      */
-    public ItemAlreadyExistsException() {
+    public InventoryAlreadyExistsException() {
     }
 
     /**
@@ -25,7 +25,7 @@ public class ItemAlreadyExistsException extends Exception {
      *
      * @param msg the msg
      */
-    public ItemAlreadyExistsException(String msg) {
+    public InventoryAlreadyExistsException(String msg) {
         super(msg);
     }
 

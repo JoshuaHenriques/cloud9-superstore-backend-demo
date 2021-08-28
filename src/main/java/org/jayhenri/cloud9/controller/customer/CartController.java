@@ -1,6 +1,8 @@
 package org.jayhenri.cloud9.controller.customer;
 
-import org.jayhenri.cloud9.exception.invalid.InvalidInventoryTypeException;
+import java.util.UUID;
+
+import org.jayhenri.cloud9.exception.invalid.InvalidInventoryException;
 import org.jayhenri.cloud9.exception.notfound.CustomerNotFoundException;
 import org.jayhenri.cloud9.exception.notfound.ItemNotFoundException;
 import org.jayhenri.cloud9.interfaces.controller.customer.CartControllerI;
@@ -16,9 +18,12 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.UUID;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * The type Cart controller.
@@ -62,7 +67,7 @@ public class CartController implements CartControllerI {
      */
     @PutMapping(value = "/{customerId}/cart/add/{type}/{itemId}")
     public ResponseEntity<String> add(@PathVariable UUID customerId, @PathVariable UUID itemId, @PathVariable String type)
-            throws CustomerNotFoundException, ItemNotFoundException, InvalidInventoryTypeException {
+            throws CustomerNotFoundException, ItemNotFoundException, InvalidInventoryException {
         if (customerService.existsById(customerId)) {
             switch (type) {
                 case "online":
@@ -88,7 +93,7 @@ public class CartController implements CartControllerI {
                         throw new ItemNotFoundException();
 
                 default:
-                    throw new InvalidInventoryTypeException();
+                    throw new InvalidInventoryException();
             }
         } else
             throw new CustomerNotFoundException();

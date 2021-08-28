@@ -5,7 +5,7 @@ import java.util.UUID;
 
 import javax.naming.InvalidNameException;
 
-import org.jayhenri.cloud9.exception.alreadyexists.ItemAlreadyExistsException;
+import org.jayhenri.cloud9.exception.alreadyexists.InventoryAlreadyExistsException;
 import org.jayhenri.cloud9.exception.invalid.InvalidItemException;
 import org.jayhenri.cloud9.exception.invalid.InvalidReviewException;
 import org.jayhenri.cloud9.exception.notfound.ItemNotFoundException;
@@ -31,13 +31,14 @@ public interface ReviewControllerI {
      * @param review the review
      * @param itemId the item id
      * @return the response entity
-     * @throws ItemAlreadyExistsException the item already exists exception
+     * @throws InventoryAlreadyExistsException the item already exists exception
      * @throws InvalidItemException       the invalid item exception
      * @throws ItemNotFoundException      the item not found exception
+     * @throws InvalidReviewException
      */
     @PostMapping(value = "/add/{itemId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<String> add(@RequestBody Review review, @PathVariable UUID itemId)
-            throws ItemAlreadyExistsException, InvalidItemException, ItemNotFoundException;
+            throws InventoryAlreadyExistsException, InvalidItemException, ItemNotFoundException, InvalidReviewException;
 
     /**
      * Update response entity.
@@ -49,10 +50,11 @@ public interface ReviewControllerI {
      * @throws InvalidItemException    the invalid item exception
      * @throws ItemNotFoundException   the item not found exception
      * @throws ReviewNotFoundException the review not found exception
+     * @throws InvalidReviewException
      */
     @PutMapping(value = "/update/{itemId}/{reviewId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<String> update(@RequestBody Review review, @PathVariable UUID itemId, @PathVariable UUID reviewId)
-            throws InvalidItemException, ItemNotFoundException, ReviewNotFoundException;
+            throws InvalidItemException, ItemNotFoundException, ReviewNotFoundException, InvalidReviewException;
 
     /**
      * Delete response entity.
@@ -85,8 +87,9 @@ public interface ReviewControllerI {
      * @throws InvalidNameException    the invalid name exception
      * @throws ReviewNotFoundException the review not found exception
      * @throws InvalidReviewException  the invalid review exception
+     * @throws ItemNotFoundException
      */
     @GetMapping(value = "/get//{itemId}/{reviewId}", produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<Review> get(@PathVariable UUID itemId, @PathVariable UUID reviewId)
-            throws InvalidNameException, ReviewNotFoundException, InvalidReviewException;
+            throws InvalidNameException, ReviewNotFoundException, InvalidReviewException, ItemNotFoundException;
 }

@@ -3,7 +3,8 @@ package org.jayhenri.cloud9.interfaces.controller.other;
 import java.util.List;
 import java.util.UUID;
 
-import org.jayhenri.cloud9.exception.alreadyexists.ItemAlreadyExistsException;
+import org.jayhenri.cloud9.exception.alreadyexists.InventoryAlreadyExistsException;
+import org.jayhenri.cloud9.exception.invalid.InvalidInventoryException;
 import org.jayhenri.cloud9.exception.invalid.InvalidItemException;
 import org.jayhenri.cloud9.exception.notfound.ItemNotFoundException;
 import org.springframework.http.MediaType;
@@ -28,12 +29,14 @@ public interface InventoryControllerI<T> {
      * @param t      the t
      * @param itemId the item id
      * @return the response entity
-     * @throws ItemAlreadyExistsException the item already exists exception
+     * @throws InventoryAlreadyExistsException the item already exists exception
      * @throws InvalidItemException       the invalid item exception
+     * @throws ItemNotFoundException
+     * @throws InvalidInventoryException
      */
     @PostMapping(value = "/add/{itemId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<String> add(@RequestBody T t, @PathVariable UUID itemId)
-            throws ItemAlreadyExistsException, InvalidItemException;
+            throws InventoryAlreadyExistsException, InvalidItemException, ItemNotFoundException, InvalidInventoryException;
 
     /**
      * Update response entity.

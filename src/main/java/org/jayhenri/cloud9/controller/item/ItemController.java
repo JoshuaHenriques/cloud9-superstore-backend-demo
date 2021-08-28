@@ -5,7 +5,7 @@ import java.util.UUID;
 
 import javax.naming.InvalidNameException;
 
-import org.jayhenri.cloud9.exception.alreadyexists.ItemAlreadyExistsException;
+import org.jayhenri.cloud9.exception.alreadyexists.InventoryAlreadyExistsException;
 import org.jayhenri.cloud9.exception.invalid.InvalidItemException;
 import org.jayhenri.cloud9.exception.notfound.ItemNotFoundException;
 import org.jayhenri.cloud9.interfaces.controller.ControllerI;
@@ -51,19 +51,19 @@ public class ItemController implements ControllerI<Item> {
      *
      * @param item the item
      * @return the response entity
-     * @throws ItemAlreadyExistsException the item already exists exception
+     * @throws InventoryAlreadyExistsException the item already exists exception
      * @throws InvalidItemException       the invalid item exception
      */
     @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> add(@RequestBody Item item)
-            throws ItemAlreadyExistsException, InvalidItemException {
+            throws InventoryAlreadyExistsException, InvalidItemException {
 
         if (ObjectUtils.isEmpty(item))
             throw new InvalidItemException();
 
         else if (itemService.existsByItemName(item.getItemName())
                 || itemService.existsById(item.getItemUUID()))
-            throw new ItemAlreadyExistsException();
+            throw new InventoryAlreadyExistsException();
 
         itemService.add(item);
 
@@ -80,11 +80,11 @@ public class ItemController implements ControllerI<Item> {
      * @return the response entity
      * @throws InvalidItemException       the invalid item exception
      * @throws ItemNotFoundException      the item not found exception
-     * @throws ItemAlreadyExistsException the item already exists exception
+     * @throws InventoryAlreadyExistsException the item already exists exception
      */
     @PutMapping(value = "/update/{itemId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> update(@RequestBody Item item, @PathVariable UUID itemId)
-            throws InvalidItemException, ItemNotFoundException, ItemAlreadyExistsException {
+            throws InvalidItemException, ItemNotFoundException, InventoryAlreadyExistsException {
         if (!ObjectUtils.isEmpty(item)) {
             if (itemService.existsByItemName(item.getItemName()) || itemService.existsById(itemId)) {
 

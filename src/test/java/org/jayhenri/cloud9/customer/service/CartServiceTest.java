@@ -1,5 +1,10 @@
 package org.jayhenri.cloud9.customer.service;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.HashSet;
+import java.util.Set;
+
 import org.jayhenri.cloud9.interfaces.service.customer.CartServiceI;
 import org.jayhenri.cloud9.interfaces.service.customer.CustomerServiceI;
 import org.jayhenri.cloud9.model.customer.Address;
@@ -14,11 +19,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import static org.assertj.core.api.Assertions.assertThat;
-
 /**
  * The type Cart service test.
  */
@@ -29,8 +29,6 @@ public class CartServiceTest {
 
     @Mock
     private CustomerServiceI customerService;
-
-    private Cart cart;
 
     private Item item1, item2, item3;
 

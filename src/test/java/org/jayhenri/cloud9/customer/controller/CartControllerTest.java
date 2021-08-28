@@ -1,7 +1,16 @@
 package org.jayhenri.cloud9.customer.controller;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.then;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 import org.jayhenri.cloud9.controller.customer.CartController;
-import org.jayhenri.cloud9.exception.invalid.InvalidInventoryTypeException;
+import org.jayhenri.cloud9.exception.invalid.InvalidInventoryException;
 import org.jayhenri.cloud9.exception.notfound.CustomerNotFoundException;
 import org.jayhenri.cloud9.exception.notfound.ItemNotFoundException;
 import org.jayhenri.cloud9.interfaces.controller.customer.CartControllerI;
@@ -25,15 +34,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.BDDMockito.then;
 
 /**
  * The type Cart controller test.
@@ -143,12 +143,12 @@ public class CartControllerTest {
     /**
      * Add online item to cart.
      *
-     * @throws InvalidInventoryTypeException the invalid inventory type exception
+     * @throws InvalidInventoryException the invalid inventory type exception
      * @throws CustomerNotFoundException     the customer not found exception
      * @throws ItemNotFoundException         the item not found exception
      */
     @Test
-    void addOnlineItemToCart() throws InvalidInventoryTypeException, CustomerNotFoundException, ItemNotFoundException {
+    void addOnlineItemToCart() throws InvalidInventoryException, CustomerNotFoundException, ItemNotFoundException {
 
         given(customerService.existsById(customerId)).willReturn(true);
         given(onlineInventoryService.existsById(itemId)).willReturn(true);
@@ -181,12 +181,12 @@ public class CartControllerTest {
     /**
      * Add store item to cart.
      *
-     * @throws InvalidInventoryTypeException the invalid inventory type exception
+     * @throws InvalidInventoryException the invalid inventory type exception
      * @throws CustomerNotFoundException     the customer not found exception
      * @throws ItemNotFoundException         the item not found exception
      */
     @Test
-    void addStoreItemToCart() throws InvalidInventoryTypeException, CustomerNotFoundException, ItemNotFoundException {
+    void addStoreItemToCart() throws InvalidInventoryException, CustomerNotFoundException, ItemNotFoundException {
 
         given(customerService.existsById(customerId)).willReturn(true);
         given(storeInventoryService.existsById(itemId)).willReturn(true);
@@ -224,7 +224,7 @@ public class CartControllerTest {
 
         given(customerService.existsById(customerId)).willReturn(true);
 
-        assertThrows(InvalidInventoryTypeException.class, () -> cartController.add(customerId, itemId, ""));
+        assertThrows(InvalidInventoryException.class, () -> cartController.add(customerId, itemId, ""));
 
     }
 

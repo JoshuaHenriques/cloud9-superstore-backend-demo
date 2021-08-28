@@ -1,5 +1,16 @@
 package org.jayhenri.cloud9.customer.controller;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.then;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
+import javax.naming.InvalidNameException;
+
 import org.jayhenri.cloud9.controller.customer.OrdersController;
 import org.jayhenri.cloud9.exception.invalid.InvalidOrdersException;
 import org.jayhenri.cloud9.exception.notfound.CustomerNotFoundException;
@@ -20,16 +31,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
-import javax.naming.InvalidNameException;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.BDDMockito.then;
 
 /**
  * The type Orders controller test.
@@ -176,6 +177,7 @@ public class OrdersControllerTest {
         then(ordersService).should().findAll(captorCustomer.capture());
 
         assertThat(captorCustomer.getValue()).isEqualTo(customer);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
     }
 
     /**

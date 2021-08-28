@@ -3,11 +3,13 @@ package org.jayhenri.cloud9.controller.inventory;
 import java.util.List;
 import java.util.UUID;
 
-import org.jayhenri.cloud9.exception.alreadyexists.ItemAlreadyExistsException;
+import org.jayhenri.cloud9.exception.alreadyexists.InventoryAlreadyExistsException;
+import org.jayhenri.cloud9.exception.invalid.InvalidInventoryException;
 import org.jayhenri.cloud9.exception.invalid.InvalidItemException;
 import org.jayhenri.cloud9.exception.notfound.ItemNotFoundException;
 import org.jayhenri.cloud9.interfaces.controller.other.InventoryControllerI;
 import org.jayhenri.cloud9.interfaces.service.other.InventoryServiceI;
+import org.jayhenri.cloud9.interfaces.service.other.ItemServiceI;
 import org.jayhenri.cloud9.model.inventory.StoreInventory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -34,15 +36,19 @@ public class StoreInventoryController implements InventoryControllerI<StoreInven
 
     private final InventoryServiceI<StoreInventory> storeInventoryService;
 
+    private final ItemServiceI itemService;
+
     /**
      * Instantiates a new StoreInventory controller.
      *
      * @param storeInventoryService the storeInventory service
      */
     @Autowired
-    public StoreInventoryController(InventoryServiceI<StoreInventory> storeInventoryService) {
+    public StoreInventoryController(InventoryServiceI<StoreInventory> storeInventoryService,
+            ItemServiceI itemService) {
 
         this.storeInventoryService = storeInventoryService;
+        this.itemService = itemService;
     }
 
     /**
@@ -50,24 +56,31 @@ public class StoreInventoryController implements InventoryControllerI<StoreInven
      *
      * @param itemId   the item id
      * @return the response entity
-     * @throws ItemAlreadyExistsException the item already exists exception
+     * @throws InventoryAlreadyExistsException the item already exists exception
      * @throws InvalidItemException       the invalid item exception
+     * @throws ItemNotFoundException
+     * @throws InvalidInventoryException
      */
     @PostMapping(value = "/add/{itemId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> add(@RequestBody StoreInventory storeInventory, @PathVariable UUID itemId)
-            throws ItemAlreadyExistsException, InvalidItemException {
+            throws InventoryAlreadyExistsException, InvalidItemException, ItemNotFoundException, InvalidInventoryException {
+        
         if (!ObjectUtils.isEmpty(storeInventory)) {
-            if (!storeInventoryService.existsById(storeInventory.getInventoryUUID())) {
-                storeInventory.setInventoryUUID(itemId);
-                storeInventoryService.add(storeInventory);
+            if (itemService.existsById(itemId)) {
+                if (!storeInventoryService.existsById(itemId)) {
+                    
+                    storeInventory.setInventoryUUID(itemId);
+                    storeInventoryService.add(storeInventory);
 
-                HttpHeaders responseHeaders = new HttpHeaders();
-                responseHeaders.set("StoreInventoryController", "add");
-                return new ResponseEntity<>("Successfully Created Item", responseHeaders, HttpStatus.CREATED);
-            } else
-                throw new ItemAlreadyExistsException();
+                    HttpHeaders responseHeaders = new HttpHeaders();
+                    responseHeaders.set("StoreInventoryController", "add");
+                    return new ResponseEntity<>("Successfully Created Item", responseHeaders, HttpStatus.CREATED);
+                } else
+                    throw new InventoryAlreadyExistsException();
+            } else 
+                throw new ItemNotFoundException();
         } else
-            throw new InvalidItemException();
+            throw new InvalidInventoryException();
     }
 
     /**
@@ -81,8 +94,10 @@ public class StoreInventoryController implements InventoryControllerI<StoreInven
     @PutMapping(value = "/update/{inventoryId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> update(@RequestBody StoreInventory storeInventory, @PathVariable UUID inventoryId)
             throws InvalidItemException, ItemNotFoundException {
+        
         if (!ObjectUtils.isEmpty(storeInventory)) {
-            if (storeInventoryService.existsById(storeInventory.getInventoryUUID())) {
+            if (storeInventoryService.existsById(inventoryId)) {
+
                 storeInventory.setInventoryUUID(inventoryId);
                 storeInventoryService.update(storeInventory);
 
@@ -95,6 +110,26 @@ public class StoreInventoryController implements InventoryControllerI<StoreInven
             throw new InvalidItemException();
     }
 
+        /**
+     * Remove item to storeInventory response entity.
+     *
+     * @return the response entity
+     * @throws InvalidItemException  the invalid item exception
+     * @throws ItemNotFoundException the item not found exception
+     */
+    @DeleteMapping(value = "/delete/{itemId}")
+    public ResponseEntity<String> delete(@PathVariable UUID inventoryId) throws InvalidItemException, ItemNotFoundException {
+
+            if (storeInventoryService.existsById(inventoryId)) {
+                storeInventoryService.delete(storeInventoryService.getById(inventoryId));
+
+                HttpHeaders responseHeaders = new HttpHeaders();
+                responseHeaders.set("StoreInventoryController", "delete");
+                return new ResponseEntity<>("Successfully Deleted Item", responseHeaders, HttpStatus.OK);
+            } else
+                throw new ItemNotFoundException();
+    }
+
     /**
      * Gets by product name.
      *
@@ -105,10 +140,11 @@ public class StoreInventoryController implements InventoryControllerI<StoreInven
 
     @GetMapping(value = "/get/{itemName}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<StoreInventory> getByItemName(@PathVariable String itemName) throws ItemNotFoundException {
+        
         if (storeInventoryService.existsByItemName(itemName)) {
 
             HttpHeaders responseHeaders = new HttpHeaders();
-            responseHeaders.set("OnlineInventoryController", "getByItemName");
+            responseHeaders.set("StoreInventoryController", "getByItemName");
             StoreInventory storeInventory = storeInventoryService.getByItemName(itemName);
             return new ResponseEntity<>(storeInventory, responseHeaders, HttpStatus.OK);
         } else
@@ -123,39 +159,15 @@ public class StoreInventoryController implements InventoryControllerI<StoreInven
      * @throws ItemNotFoundException the item not found exception
      */
     @GetMapping(value = "/get/{itemId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<StoreInventory> getById(@PathVariable UUID itemId) throws ItemNotFoundException {
-        if (storeInventoryService.existsById(itemId)) {
+    public ResponseEntity<StoreInventory> getById(@PathVariable UUID inventoryId) throws ItemNotFoundException {
+        if (storeInventoryService.existsById(inventoryId)) {
 
             HttpHeaders responseHeaders = new HttpHeaders();
-            responseHeaders.set("OnlineInventoryController", "getByItemId");
-            StoreInventory storeInventory = storeInventoryService.getById(itemId);
+            responseHeaders.set("StoreInventoryController", "getByItemId");
+            StoreInventory storeInventory = storeInventoryService.getById(inventoryId);
             return new ResponseEntity<>(storeInventory, responseHeaders, HttpStatus.OK);
         } else
             throw new ItemNotFoundException();
-    }
-
-    /**
-     * Remove item to storeInventory response entity.
-     *
-     * @param itemId the item name
-     * @return the response entity
-     * @throws InvalidItemException  the invalid item exception
-     * @throws ItemNotFoundException the item not found exception
-     */
-    @DeleteMapping(value = "/delete/{itemId}")
-    public ResponseEntity<String> delete(@PathVariable UUID itemId)
-            throws InvalidItemException, ItemNotFoundException {
-        if (!ObjectUtils.isEmpty(itemId)) {
-            if (storeInventoryService.existsById(itemId)) {
-                storeInventoryService.delete(storeInventoryService.getById(itemId));
-
-                HttpHeaders responseHeaders = new HttpHeaders();
-                responseHeaders.set("StoreInventoryController", "delete");
-                return new ResponseEntity<>("Successfully Deleted Item", responseHeaders, HttpStatus.OK);
-            } else
-                throw new ItemNotFoundException();
-        } else
-            throw new InvalidItemException();
     }
 
     /**
@@ -169,7 +181,7 @@ public class StoreInventoryController implements InventoryControllerI<StoreInven
         List<StoreInventory> allInventories = storeInventoryService.findAll();
 
         HttpHeaders responseHeaders = new HttpHeaders();
-        responseHeaders.set("StoreInventoryController", "findAll");
+        responseHeaders.set("StoreInventoryController", "list");
         return new ResponseEntity<>(allInventories, responseHeaders, HttpStatus.OK);
     }
 }
