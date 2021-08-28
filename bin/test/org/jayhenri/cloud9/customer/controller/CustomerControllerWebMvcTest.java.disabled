@@ -7,14 +7,18 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.util.ArrayList;
-import java.util.UUID;
+import java.util.HashSet;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.jayhenri.cloud9.controller.customer.CustomerController;
+import org.jayhenri.cloud9.interfaces.service.customer.AddressServiceI;
+import org.jayhenri.cloud9.model.customer.Address;
+import org.jayhenri.cloud9.model.customer.Cart;
 import org.jayhenri.cloud9.model.customer.CreditCard;
 import org.jayhenri.cloud9.model.customer.Customer;
+import org.jayhenri.cloud9.model.customer.Orders;
+import org.jayhenri.cloud9.model.login.Login;
 import org.jayhenri.cloud9.service.customer.CustomerService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
@@ -41,17 +45,9 @@ public class CustomerControllerWebMvcTest {
     private CustomerService customerService;
 
     @MockBean
-    private InventoryService inventoryService;
+    private AddressServiceI addressService;
 
     private Customer customer;
-
-    private Inventory inventory;
-
-    private CreditCard creditCard;
-
-    private OrderDetails orderDetails;
-
-    private UUID uuid;
 
     /**
      * As json string string.
@@ -74,16 +70,35 @@ public class CustomerControllerWebMvcTest {
      */
     @BeforeEach
     void setUp() {
-        customer = new Customer("testMe", "TestMe", "2934811932", "testMe@gmail.com", "testMePassword", "082395",
-                new Address("Test Me", "29L", "0L", "New York", "T2K9R3", "Province"), null, null, null);
 
-        inventory = new Inventory("Test Product", 369, new Item("Test Product", "Item Description", 32.54));
-
-        orderDetails = new OrderDetails("TEST", "TestMe@gmail.com", new ArrayList<>(), 43.24);
-
-        creditCard = new CreditCard("Test Name", "4656085451464353", "05/23", "231", "4353");
-
-        uuid = UUID.randomUUID();
+        customer = new Customer(
+                "test",
+                new Login(
+                        "Email",
+                        "2923338282",
+                        "password",
+                        new String[] {"USER"},
+                        true
+                ),
+                new Cart(
+                        customer,
+                        new HashSet<>()
+                ),
+                new Address(
+                        "Street Name",
+                        "303",
+                        "000",
+                        "City",
+                        "Postal Code",
+                        "Province"
+                ),
+                new HashSet<CreditCard>(),
+                new HashSet<Orders>(),
+                "test",
+                "2221113333",
+                "test.test@gmail.com",
+                "01/01/1995"
+        );
     }
 
         /**
@@ -94,10 +109,12 @@ public class CustomerControllerWebMvcTest {
         @Test
         void add() throws Exception {
             given(customerService.existsByPhoneNumber(customer.getPhoneNumber())).willReturn(false);
+            given(customerService.existsByEmail(customer.getEmail())).willReturn(false);
+            given(customerService.existsById(customer.getCustomerUUID())).willReturn(false);
             given(addressService.isValidPostalCode(customer.getAddress().getPostalCode())).willReturn(true);
 
-            mockMvc.perform(post("/api/register/customer")
-                    .contentType(MediaType.APPLICATION_JSON)
+            mockMvc.perform(post("/api/customer/add")
+                    .contentType(MediaType.APPLICATION_JSON_VALUE)
                     .content(asJsonString(customer)))
                     .andExpect(status().isCreated());
         }

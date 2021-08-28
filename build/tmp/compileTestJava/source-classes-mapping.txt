@@ -46,5 +46,5 @@ org/jayhenri/cloud9/item/ReviewControllerTest.java
  org.jayhenri.cloud9.item.ReviewControllerTest
 org/jayhenri/cloud9/store/StoreControllerTest.java
  org.jayhenri.cloud9.store.StoreControllerTest
-org/jayhenri/cloud9/customer/repository/CustomerRepositoryDataJpaTest.java
- org.jayhenri.cloud9.customer.repository.CustomerRepositoryDataJpaTest
+org/jayhenri/cloud9/customer/controller/CustomerControllerWebMvcTest.java
+ org.jayhenri.cloud9.customer.controller.CustomerControllerWebMvcTest

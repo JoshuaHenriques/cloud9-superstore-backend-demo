@@ -122,14 +122,13 @@ Store:
 
 #### Layers Tested
 ```
-(~200 Passing Tests)
+(230 Passing Tests)
 Unit Tests:
   @Controller 
   @Service
-Integration Tests:
+Integration Tests *in development*:
   @WebMvcTest
   @JpaDataTest
-  @SpringBootTest 
 ```
 
 #### Models
