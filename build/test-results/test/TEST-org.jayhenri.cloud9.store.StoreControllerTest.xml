@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.jayhenri.cloud9.store.StoreControllerTest" tests="13" skipped="0" failures="0" errors="0" timestamp="2021-08-28T12:44:03" hostname="kde-laptop" time="0.033">
+  <properties/>
+  <testcase name="getStoreThrowsInvalidStoreException()" classname="org.jayhenri.cloud9.store.StoreControllerTest" time="0.002"/>
+  <testcase name="addStore()" classname="org.jayhenri.cloud9.store.StoreControllerTest" time="0.002"/>
+  <testcase name="deleteStore()" classname="org.jayhenri.cloud9.store.StoreControllerTest" time="0.002"/>
+  <testcase name="deleteStoreThrowsStoreNotFoundException()" classname="org.jayhenri.cloud9.store.StoreControllerTest" time="0.003"/>
+  <testcase name="updateStore()" classname="org.jayhenri.cloud9.store.StoreControllerTest" time="0.003"/>
+  <testcase name="updateStoreThrowsStoreNotFoundException()" classname="org.jayhenri.cloud9.store.StoreControllerTest" time="0.003"/>
+  <testcase name="updateStoreThrowsInvalidStoreException()" classname="org.jayhenri.cloud9.store.StoreControllerTest" time="0.002"/>
+  <testcase name="get()" classname="org.jayhenri.cloud9.store.StoreControllerTest" time="0.003"/>
+  <testcase name="list()" classname="org.jayhenri.cloud9.store.StoreControllerTest" time="0.001"/>
+  <testcase name="getStoreThrowsStoreNotFoundException()" classname="org.jayhenri.cloud9.store.StoreControllerTest" time="0.002"/>
+  <testcase name="addStoreThrowsInvalidStoreException()" classname="org.jayhenri.cloud9.store.StoreControllerTest" time="0.001"/>
+  <testcase name="addStoreThrowsStoreAlreadyExistsException()" classname="org.jayhenri.cloud9.store.StoreControllerTest" time="0.002"/>
+  <testcase name="addThrowsInvalidPostalCodeException()" classname="org.jayhenri.cloud9.store.StoreControllerTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

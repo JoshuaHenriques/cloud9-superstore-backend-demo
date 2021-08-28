@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.jayhenri.cloud9.customer.repository.CustomerRepositoryDataJpaTest" tests="1" skipped="1" failures="0" errors="0" timestamp="2021-08-28T12:44:02" hostname="kde-laptop" time="0.0">
+  <properties/>
+  <testcase name="emptyDatabase()" classname="org.jayhenri.cloud9.customer.repository.CustomerRepositoryDataJpaTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
