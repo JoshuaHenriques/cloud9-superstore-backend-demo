@@ -124,7 +124,7 @@ public class ItemController implements ControllerI<Item> {
 
     /**
      * List items response entity.
-     *
+    
      * @return the response entity
      */
     @GetMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)

@@ -20,25 +20,25 @@
 <tr>
 <td>
 <div class="infoBox" id="tests">
-<div class="counter">1</div>
+<div class="counter">233</div>
 <p>tests</p>
 </div>
 </td>
 <td>
 <div class="infoBox" id="failures">
-<div class="counter">1</div>
+<div class="counter">0</div>
 <p>failures</p>
 </div>
 </td>
 <td>
 <div class="infoBox" id="ignored">
-<div class="counter">0</div>
+<div class="counter">3</div>
 <p>ignored</p>
 </div>
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.161s</div>
+<div class="counter">1.211s</div>
 <p>duration</p>
 </div>
 </td>
@@ -47,8 +47,8 @@
 </div>
 </td>
 <td>
-<div class="infoBox failures" id="successRate">
-<div class="percent">0%</div>
+<div class="infoBox skipped" id="successRate">
+<div class="percent">100%</div>
 <p>successful</p>
 </div>
 </td>
@@ -58,7 +58,7 @@
 <div id="tabs">
 <ul class="tabLinks">
 <li>
-<a href="#tab0">Failed tests</a>
+<a href="#tab0">Ignored tests</a>
 </li>
 <li>
 <a href="#tab1">Packages</a>
@@ -68,11 +68,19 @@
 </li>
 </ul>
 <div id="tab0" class="tab">
-<h2>Failed tests</h2>
+<h2>Ignored tests</h2>
 <ul class="linkList">
 <li>
-<a href="classes/org.jayhenri.cloud9.customer.controller.CustomerControllerWebMvcTest.html">CustomerControllerWebMvcTest</a>.
-<a href="classes/org.jayhenri.cloud9.customer.controller.CustomerControllerWebMvcTest.html#add()">add()</a>
+<a href="classes/org.jayhenri.cloud9.customer.controller.CustomerControllerTest.html">CustomerControllerTest</a>.
+<a href="classes/org.jayhenri.cloud9.customer.controller.CustomerControllerTest.html#listCustomers()">listCustomers()</a>
+</li>
+<li>
+<a href="classes/org.jayhenri.cloud9.customer.service.CustomerServiceTest.html">CustomerServiceTest</a>.
+<a href="classes/org.jayhenri.cloud9.customer.service.CustomerServiceTest.html#findAllCustomers()">findAllCustomers()</a>
+</li>
+<li>
+<a href="classes/org.jayhenri.cloud9.store.EmployeeServiceTest.html">EmployeeServiceTest</a>.
+<a href="classes/org.jayhenri.cloud9.store.EmployeeServiceTest.html#findAllEmployees()">findAllEmployees()</a>
 </li>
 </ul>
 </div>
@@ -91,14 +99,64 @@
 </thead>
 <tbody>
 <tr>
-<td class="failures">
+<td class="skipped">
 <a href="packages/org.jayhenri.cloud9.customer.controller.html">org.jayhenri.cloud9.customer.controller</a>
 </td>
-<td>1</td>
-<td>1</td>
+<td>47</td>
 <td>0</td>
-<td>0.161s</td>
-<td class="failures">0%</td>
+<td>1</td>
+<td>0.122s</td>
+<td class="skipped">100%</td>
+</tr>
+<tr>
+<td class="skipped">
+<a href="packages/org.jayhenri.cloud9.customer.service.html">org.jayhenri.cloud9.customer.service</a>
+</td>
+<td>34</td>
+<td>0</td>
+<td>1</td>
+<td>0.106s</td>
+<td class="skipped">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="packages/org.jayhenri.cloud9.inventory.html">org.jayhenri.cloud9.inventory</a>
+</td>
+<td>46</td>
+<td>0</td>
+<td>0</td>
+<td>0.150s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="packages/org.jayhenri.cloud9.item.html">org.jayhenri.cloud9.item</a>
+</td>
+<td>42</td>
+<td>0</td>
+<td>0</td>
+<td>0.131s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="packages/org.jayhenri.cloud9.login.html">org.jayhenri.cloud9.login</a>
+</td>
+<td>21</td>
+<td>0</td>
+<td>0</td>
+<td>0.614s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="skipped">
+<a href="packages/org.jayhenri.cloud9.store.html">org.jayhenri.cloud9.store</a>
+</td>
+<td>43</td>
+<td>0</td>
+<td>1</td>
+<td>0.088s</td>
+<td class="skipped">100%</td>
 </tr>
 </tbody>
 </table>
@@ -118,14 +176,244 @@
 </thead>
 <tbody>
 <tr>
-<td class="failures">
-<a href="classes/org.jayhenri.cloud9.customer.controller.CustomerControllerWebMvcTest.html">org.jayhenri.cloud9.customer.controller.CustomerControllerWebMvcTest</a>
+<td class="success">
+<a href="classes/org.jayhenri.cloud9.customer.controller.AddressControllerTest.html">org.jayhenri.cloud9.customer.controller.AddressControllerTest</a>
 </td>
-<td>1</td>
-<td>1</td>
+<td>8</td>
 <td>0</td>
-<td>0.161s</td>
-<td class="failures">0%</td>
+<td>0</td>
+<td>0.040s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="classes/org.jayhenri.cloud9.customer.controller.CartControllerTest.html">org.jayhenri.cloud9.customer.controller.CartControllerTest</a>
+</td>
+<td>13</td>
+<td>0</td>
+<td>0</td>
+<td>0.029s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="classes/org.jayhenri.cloud9.customer.controller.CreditCardControllerTest.html">org.jayhenri.cloud9.customer.controller.CreditCardControllerTest</a>
+</td>
+<td>9</td>
+<td>0</td>
+<td>0</td>
+<td>0.019s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="skipped">
+<a href="classes/org.jayhenri.cloud9.customer.controller.CustomerControllerTest.html">org.jayhenri.cloud9.customer.controller.CustomerControllerTest</a>
+</td>
+<td>9</td>
+<td>0</td>
+<td>1</td>
+<td>0.019s</td>
+<td class="skipped">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="classes/org.jayhenri.cloud9.customer.controller.OrdersControllerTest.html">org.jayhenri.cloud9.customer.controller.OrdersControllerTest</a>
+</td>
+<td>8</td>
+<td>0</td>
+<td>0</td>
+<td>0.015s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="classes/org.jayhenri.cloud9.customer.service.AddressServiceTest.html">org.jayhenri.cloud9.customer.service.AddressServiceTest</a>
+</td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>0.002s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="classes/org.jayhenri.cloud9.customer.service.CartServiceTest.html">org.jayhenri.cloud9.customer.service.CartServiceTest</a>
+</td>
+<td>5</td>
+<td>0</td>
+<td>0</td>
+<td>0.009s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="classes/org.jayhenri.cloud9.customer.service.CreditCardServiceTest.html">org.jayhenri.cloud9.customer.service.CreditCardServiceTest</a>
+</td>
+<td>8</td>
+<td>0</td>
+<td>0</td>
+<td>0.012s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="skipped">
+<a href="classes/org.jayhenri.cloud9.customer.service.CustomerServiceTest.html">org.jayhenri.cloud9.customer.service.CustomerServiceTest</a>
+</td>
+<td>13</td>
+<td>0</td>
+<td>1</td>
+<td>0.044s</td>
+<td class="skipped">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="classes/org.jayhenri.cloud9.customer.service.OrdersServiceTest.html">org.jayhenri.cloud9.customer.service.OrdersServiceTest</a>
+</td>
+<td>6</td>
+<td>0</td>
+<td>0</td>
+<td>0.039s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="classes/org.jayhenri.cloud9.inventory.OnlineInventoryControllerUniTest.html">org.jayhenri.cloud9.inventory.OnlineInventoryControllerUniTest</a>
+</td>
+<td>14</td>
+<td>0</td>
+<td>0</td>
+<td>0.035s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="classes/org.jayhenri.cloud9.inventory.OnlineInventoryServiceTest.html">org.jayhenri.cloud9.inventory.OnlineInventoryServiceTest</a>
+</td>
+<td>9</td>
+<td>0</td>
+<td>0</td>
+<td>0.047s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="classes/org.jayhenri.cloud9.inventory.StoreInventoryControllerUniTest.html">org.jayhenri.cloud9.inventory.StoreInventoryControllerUniTest</a>
+</td>
+<td>14</td>
+<td>0</td>
+<td>0</td>
+<td>0.026s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="classes/org.jayhenri.cloud9.inventory.StoreInventoryServiceTest.html">org.jayhenri.cloud9.inventory.StoreInventoryServiceTest</a>
+</td>
+<td>9</td>
+<td>0</td>
+<td>0</td>
+<td>0.042s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="classes/org.jayhenri.cloud9.item.ItemControllerTest.html">org.jayhenri.cloud9.item.ItemControllerTest</a>
+</td>
+<td>12</td>
+<td>0</td>
+<td>0</td>
+<td>0.018s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="classes/org.jayhenri.cloud9.item.ItemServiceTest.html">org.jayhenri.cloud9.item.ItemServiceTest</a>
+</td>
+<td>10</td>
+<td>0</td>
+<td>0</td>
+<td>0.058s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="classes/org.jayhenri.cloud9.item.ReviewControllerTest.html">org.jayhenri.cloud9.item.ReviewControllerTest</a>
+</td>
+<td>14</td>
+<td>0</td>
+<td>0</td>
+<td>0.034s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="classes/org.jayhenri.cloud9.item.ReviewServiceTest.html">org.jayhenri.cloud9.item.ReviewServiceTest</a>
+</td>
+<td>6</td>
+<td>0</td>
+<td>0</td>
+<td>0.021s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="classes/org.jayhenri.cloud9.login.LoginControllerTest.html">org.jayhenri.cloud9.login.LoginControllerTest</a>
+</td>
+<td>12</td>
+<td>0</td>
+<td>0</td>
+<td>0.051s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="classes/org.jayhenri.cloud9.login.LoginServiceTest.html">org.jayhenri.cloud9.login.LoginServiceTest</a>
+</td>
+<td>9</td>
+<td>0</td>
+<td>0</td>
+<td>0.563s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="classes/org.jayhenri.cloud9.store.EmployeeControllerTest.html">org.jayhenri.cloud9.store.EmployeeControllerTest</a>
+</td>
+<td>13</td>
+<td>0</td>
+<td>0</td>
+<td>0.015s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="skipped">
+<a href="classes/org.jayhenri.cloud9.store.EmployeeServiceTest.html">org.jayhenri.cloud9.store.EmployeeServiceTest</a>
+</td>
+<td>10</td>
+<td>0</td>
+<td>1</td>
+<td>0.029s</td>
+<td class="skipped">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="classes/org.jayhenri.cloud9.store.StoreControllerTest.html">org.jayhenri.cloud9.store.StoreControllerTest</a>
+</td>
+<td>13</td>
+<td>0</td>
+<td>0</td>
+<td>0.017s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="classes/org.jayhenri.cloud9.store.StoreServiceTest.html">org.jayhenri.cloud9.store.StoreServiceTest</a>
+</td>
+<td>7</td>
+<td>0</td>
+<td>0</td>
+<td>0.027s</td>
+<td class="success">100%</td>
 </tr>
 </tbody>
 </table>
@@ -138,7 +426,7 @@
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 7.0.2</a> at Aug 28, 2021, 9:34:36 AM</p>
+<a href="http://www.gradle.org">Gradle 7.0.2</a> at Aug 28, 2021, 4:38:12 PM</p>
 </div>
 </div>
 </body>
