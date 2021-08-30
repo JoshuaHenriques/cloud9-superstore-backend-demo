@@ -1,21 +1,18 @@
 package org.jayhenri.cloud9.model.store;
 
 import java.io.Serializable;
-import java.util.Set;
 import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import org.jayhenri.cloud9.model.customer.Address;
-import org.jayhenri.cloud9.model.inventory.StoreInventory;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -43,10 +40,6 @@ public class Store implements Serializable {
     @JoinColumn(name = "address_id", nullable = false, unique = true)
     private Address address;
 
-    @OneToMany
-    @JoinColumn(name = "store_inventories_id", nullable = true)
-    private Set<StoreInventory> inventory;
-
     /**
      * Instantiates a new Store.
      *
@@ -55,9 +48,8 @@ public class Store implements Serializable {
      * @param storeInventory  the store inventory
      * @param onlineInventory the online inventory
      */
-    public Store(String storeName, Address address, Set<StoreInventory> inventory) {
+    public Store(String storeName, Address address) {
         this.storeName = storeName;
         this.address = address;
-        this.inventory = inventory;
     }
 }
