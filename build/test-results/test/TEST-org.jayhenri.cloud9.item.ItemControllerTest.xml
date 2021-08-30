@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="org.jayhenri.cloud9.item.ItemControllerTest" tests="12" skipped="0" failures="0" errors="0" timestamp="2021-08-28T20:38:11" hostname="kde-laptop" time="0.024">
+<testsuite name="org.jayhenri.cloud9.item.ItemControllerTest" tests="12" skipped="0" failures="0" errors="0" timestamp="2021-08-30T21:19:43" hostname="kde-laptop" time="0.057">
   <properties/>
-  <testcase name="addItemThrowsItemAlreadyExistsException()" classname="org.jayhenri.cloud9.item.ItemControllerTest" time="0.002"/>
-  <testcase name="addItem()" classname="org.jayhenri.cloud9.item.ItemControllerTest" time="0.002"/>
-  <testcase name="updateItemThrowsInvalidItemException()" classname="org.jayhenri.cloud9.item.ItemControllerTest" time="0.001"/>
-  <testcase name="deleteItemThrowsItemNotFoundException()" classname="org.jayhenri.cloud9.item.ItemControllerTest" time="0.002"/>
-  <testcase name="updateItem()" classname="org.jayhenri.cloud9.item.ItemControllerTest" time="0.002"/>
-  <testcase name="getItemThrowsInvalidItemException()" classname="org.jayhenri.cloud9.item.ItemControllerTest" time="0.001"/>
-  <testcase name="get()" classname="org.jayhenri.cloud9.item.ItemControllerTest" time="0.002"/>
-  <testcase name="list()" classname="org.jayhenri.cloud9.item.ItemControllerTest" time="0.001"/>
-  <testcase name="updateItemThrowsItemNotFoundException()" classname="org.jayhenri.cloud9.item.ItemControllerTest" time="0.002"/>
-  <testcase name="getItemThrowsItemNotFoundException()" classname="org.jayhenri.cloud9.item.ItemControllerTest" time="0.001"/>
+  <testcase name="addItemThrowsItemAlreadyExistsException()" classname="org.jayhenri.cloud9.item.ItemControllerTest" time="0.003"/>
+  <testcase name="addItem()" classname="org.jayhenri.cloud9.item.ItemControllerTest" time="0.006"/>
+  <testcase name="updateItemThrowsInvalidItemException()" classname="org.jayhenri.cloud9.item.ItemControllerTest" time="0.005"/>
+  <testcase name="deleteItemThrowsItemNotFoundException()" classname="org.jayhenri.cloud9.item.ItemControllerTest" time="0.003"/>
+  <testcase name="updateItem()" classname="org.jayhenri.cloud9.item.ItemControllerTest" time="0.003"/>
+  <testcase name="getItemThrowsInvalidItemException()" classname="org.jayhenri.cloud9.item.ItemControllerTest" time="0.004"/>
+  <testcase name="get()" classname="org.jayhenri.cloud9.item.ItemControllerTest" time="0.003"/>
+  <testcase name="list()" classname="org.jayhenri.cloud9.item.ItemControllerTest" time="0.002"/>
+  <testcase name="updateItemThrowsItemNotFoundException()" classname="org.jayhenri.cloud9.item.ItemControllerTest" time="0.005"/>
+  <testcase name="getItemThrowsItemNotFoundException()" classname="org.jayhenri.cloud9.item.ItemControllerTest" time="0.005"/>
   <testcase name="addItemThrowsInvalidItemException()" classname="org.jayhenri.cloud9.item.ItemControllerTest" time="0.001"/>
-  <testcase name="deleteItem()" classname="org.jayhenri.cloud9.item.ItemControllerTest" time="0.001"/>
+  <testcase name="deleteItem()" classname="org.jayhenri.cloud9.item.ItemControllerTest" time="0.004"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

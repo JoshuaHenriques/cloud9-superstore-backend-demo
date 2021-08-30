@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="org.jayhenri.cloud9.store.EmployeeServiceTest" tests="10" skipped="1" failures="0" errors="0" timestamp="2021-08-28T20:38:12" hostname="kde-laptop" time="0.032">
+<testsuite name="org.jayhenri.cloud9.store.EmployeeServiceTest" tests="10" skipped="1" failures="0" errors="0" timestamp="2021-08-30T21:19:44" hostname="kde-laptop" time="0.06">
   <properties/>
-  <testcase name="doesNotExistsByPhoneNumber()" classname="org.jayhenri.cloud9.store.EmployeeServiceTest" time="0.021"/>
-  <testcase name="testAdd()" classname="org.jayhenri.cloud9.store.EmployeeServiceTest" time="0.001"/>
-  <testcase name="delete()" classname="org.jayhenri.cloud9.store.EmployeeServiceTest" time="0.001"/>
+  <testcase name="doesNotExistsByPhoneNumber()" classname="org.jayhenri.cloud9.store.EmployeeServiceTest" time="0.043"/>
+  <testcase name="testAdd()" classname="org.jayhenri.cloud9.store.EmployeeServiceTest" time="0.002"/>
+  <testcase name="delete()" classname="org.jayhenri.cloud9.store.EmployeeServiceTest" time="0.002"/>
   <testcase name="update()" classname="org.jayhenri.cloud9.store.EmployeeServiceTest" time="0.001"/>
   <testcase name="existsByEmail()" classname="org.jayhenri.cloud9.store.EmployeeServiceTest" time="0.001"/>
   <testcase name="findAllEmployees()" classname="org.jayhenri.cloud9.store.EmployeeServiceTest" time="0.0">
@@ -11,8 +11,8 @@
   </testcase>
   <testcase name="add()" classname="org.jayhenri.cloud9.store.EmployeeServiceTest" time="0.001"/>
   <testcase name="existsByPhoneNumber()" classname="org.jayhenri.cloud9.store.EmployeeServiceTest" time="0.001"/>
-  <testcase name="getByEmail()" classname="org.jayhenri.cloud9.store.EmployeeServiceTest" time="0.001"/>
-  <testcase name="doesNotExistsByEmail()" classname="org.jayhenri.cloud9.store.EmployeeServiceTest" time="0.001"/>
+  <testcase name="getByEmail()" classname="org.jayhenri.cloud9.store.EmployeeServiceTest" time="0.002"/>
+  <testcase name="doesNotExistsByEmail()" classname="org.jayhenri.cloud9.store.EmployeeServiceTest" time="0.002"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

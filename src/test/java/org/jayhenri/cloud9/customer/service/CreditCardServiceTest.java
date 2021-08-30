@@ -61,7 +61,6 @@ class CreditCardServiceTest {
         customer = new Customer(
                 "customer.mail@gmail.com",
                 new Login(),
-                new Cart(),
                 new Address(),
                 new HashSet<>(),
                 new HashSet<>(),
@@ -80,9 +79,9 @@ class CreditCardServiceTest {
 
         creditCardService.add(customer, creditCard1);
 
-        assertThat(customer.getWallet().contains(creditCard1)).isTrue();
+        assertThat(customer.getCreditCards().contains(creditCard1)).isTrue();
 
-        assertThat(customer.getWallet().size()).isEqualTo(1);
+        assertThat(customer.getCreditCards().size()).isEqualTo(1);
     }
 
     /**
@@ -91,13 +90,13 @@ class CreditCardServiceTest {
     @Test
     void removeCreditCard() {
 
-        customer.getWallet().add(creditCard1);
-        customer.getWallet().add(creditCard2);
+        customer.getCreditCards().add(creditCard1);
+        customer.getCreditCards().add(creditCard2);
 
         creditCardService.remove(customer, creditCard1.getCreditCardUUID());
 
-        assertThat(customer.getWallet().contains(creditCard1)).isFalse();
-        assertThat(customer.getWallet().size()).isEqualTo(1);
+        assertThat(customer.getCreditCards().contains(creditCard1)).isFalse();
+        assertThat(customer.getCreditCards().size()).isEqualTo(1);
     }
 
     /**
@@ -106,10 +105,10 @@ class CreditCardServiceTest {
     @Test
     void findAllCreditCards() {
 
-        customer.getWallet().add(creditCard1);
-        customer.getWallet().add(creditCard2);
+        customer.getCreditCards().add(creditCard1);
+        customer.getCreditCards().add(creditCard2);
 
-        assertThat(creditCardService.findAll(customer)).isEqualTo(customer.getWallet());
+        assertThat(creditCardService.findAll(customer)).isEqualTo(customer.getCreditCards());
     }
 
     /**
@@ -118,7 +117,7 @@ class CreditCardServiceTest {
     @Test
     void existsById() {
 
-        customer.getWallet().add(creditCard1);
+        customer.getCreditCards().add(creditCard1);
 
         UUID uuid = creditCard1.getCreditCardUUID();
 
@@ -142,7 +141,7 @@ class CreditCardServiceTest {
     @Test
     void getById() {
 
-        customer.getWallet().add(creditCard1);
+        customer.getCreditCards().add(creditCard1);
 
         UUID uuid = creditCard1.getCreditCardUUID();
 

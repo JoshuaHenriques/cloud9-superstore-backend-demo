@@ -11,7 +11,6 @@ import java.util.UUID;
 import org.jayhenri.cloud9.interfaces.service.customer.CustomerServiceI;
 import org.jayhenri.cloud9.interfaces.service.customer.OrdersServiceI;
 import org.jayhenri.cloud9.model.customer.Address;
-import org.jayhenri.cloud9.model.customer.Cart;
 import org.jayhenri.cloud9.model.customer.Customer;
 import org.jayhenri.cloud9.model.customer.Orders;
 import org.jayhenri.cloud9.model.login.Login;
@@ -76,7 +75,6 @@ class OrdersServiceTest {
         customer = new Customer(
                 "customer.mail@gmail.com",
                 new Login(),
-                new Cart(),
                 new Address(),
                 new HashSet<>(),
                 new HashSet<>(),
@@ -89,7 +87,8 @@ class OrdersServiceTest {
         orders = new Orders(
                 "PENDING",
                 new HashSet<>(),
-                293.68
+                293.68,
+                customer
         );
     }
 

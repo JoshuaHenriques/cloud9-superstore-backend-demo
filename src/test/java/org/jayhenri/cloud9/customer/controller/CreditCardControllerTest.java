@@ -10,7 +10,6 @@ import org.jayhenri.cloud9.interfaces.controller.customer.CreditCardControllerI;
 import org.jayhenri.cloud9.interfaces.service.customer.CreditCardServiceI;
 import org.jayhenri.cloud9.interfaces.service.customer.CustomerServiceI;
 import org.jayhenri.cloud9.model.customer.Address;
-import org.jayhenri.cloud9.model.customer.Cart;
 import org.jayhenri.cloud9.model.customer.CreditCard;
 import org.jayhenri.cloud9.model.customer.Customer;
 import org.jayhenri.cloud9.model.login.Login;
@@ -86,7 +85,6 @@ public class CreditCardControllerTest {
         customer = new Customer(
                 "customer.mail@gmail.com",
                 new Login(),
-                new Cart(),
                 new Address(),
                 new HashSet<>(),
                 new HashSet<>(),

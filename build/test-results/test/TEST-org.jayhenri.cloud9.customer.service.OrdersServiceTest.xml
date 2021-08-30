@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="org.jayhenri.cloud9.customer.service.OrdersServiceTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2021-08-28T20:38:11" hostname="kde-laptop" time="0.04">
+<testsuite name="org.jayhenri.cloud9.customer.service.OrdersServiceTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2021-08-30T21:19:44" hostname="kde-laptop" time="0.052">
   <properties/>
-  <testcase name="addOrder()" classname="org.jayhenri.cloud9.customer.service.OrdersServiceTest" time="0.031"/>
+  <testcase name="addOrder()" classname="org.jayhenri.cloud9.customer.service.OrdersServiceTest" time="0.042"/>
   <testcase name="updateOrder()" classname="org.jayhenri.cloud9.customer.service.OrdersServiceTest" time="0.002"/>
   <testcase name="findAllOrders()" classname="org.jayhenri.cloud9.customer.service.OrdersServiceTest" time="0.001"/>
-  <testcase name="getById()" classname="org.jayhenri.cloud9.customer.service.OrdersServiceTest" time="0.002"/>
+  <testcase name="getById()" classname="org.jayhenri.cloud9.customer.service.OrdersServiceTest" time="0.001"/>
   <testcase name="existsById()" classname="org.jayhenri.cloud9.customer.service.OrdersServiceTest" time="0.002"/>
-  <testcase name="doesNotExistsById()" classname="org.jayhenri.cloud9.customer.service.OrdersServiceTest" time="0.001"/>
+  <testcase name="doesNotExistsById()" classname="org.jayhenri.cloud9.customer.service.OrdersServiceTest" time="0.002"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

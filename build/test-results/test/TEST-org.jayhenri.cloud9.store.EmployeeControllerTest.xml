@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="org.jayhenri.cloud9.store.EmployeeControllerTest" tests="13" skipped="0" failures="0" errors="0" timestamp="2021-08-28T20:38:12" hostname="kde-laptop" time="0.02">
+<testsuite name="org.jayhenri.cloud9.store.EmployeeControllerTest" tests="13" skipped="0" failures="0" errors="0" timestamp="2021-08-30T21:19:44" hostname="kde-laptop" time="0.034">
   <properties/>
-  <testcase name="updateEmployeeThrowsEmployeeNotFoundException()" classname="org.jayhenri.cloud9.store.EmployeeControllerTest" time="0.002"/>
+  <testcase name="updateEmployeeThrowsEmployeeNotFoundException()" classname="org.jayhenri.cloud9.store.EmployeeControllerTest" time="0.003"/>
   <testcase name="addEmployeeThrowsInvalidEmployeeException()" classname="org.jayhenri.cloud9.store.EmployeeControllerTest" time="0.001"/>
   <testcase name="deleteEmployee()" classname="org.jayhenri.cloud9.store.EmployeeControllerTest" time="0.002"/>
-  <testcase name="getEmployeeThrowsInvalidEmployeeException()" classname="org.jayhenri.cloud9.store.EmployeeControllerTest" time="0.001"/>
-  <testcase name="get()" classname="org.jayhenri.cloud9.store.EmployeeControllerTest" time="0.002"/>
-  <testcase name="list()" classname="org.jayhenri.cloud9.store.EmployeeControllerTest" time="0.0"/>
-  <testcase name="addEmployee()" classname="org.jayhenri.cloud9.store.EmployeeControllerTest" time="0.001"/>
+  <testcase name="getEmployeeThrowsInvalidEmployeeException()" classname="org.jayhenri.cloud9.store.EmployeeControllerTest" time="0.002"/>
+  <testcase name="get()" classname="org.jayhenri.cloud9.store.EmployeeControllerTest" time="0.003"/>
+  <testcase name="list()" classname="org.jayhenri.cloud9.store.EmployeeControllerTest" time="0.001"/>
+  <testcase name="addEmployee()" classname="org.jayhenri.cloud9.store.EmployeeControllerTest" time="0.004"/>
   <testcase name="updateEmployeeThrowsInvalidEmployeeException()" classname="org.jayhenri.cloud9.store.EmployeeControllerTest" time="0.001"/>
-  <testcase name="getEmployeeThrowsEmployeeNotFoundException()" classname="org.jayhenri.cloud9.store.EmployeeControllerTest" time="0.001"/>
-  <testcase name="deleteEmployeeThrowsEmployeeNotFoundException()" classname="org.jayhenri.cloud9.store.EmployeeControllerTest" time="0.001"/>
-  <testcase name="addEmployeeThrowsEmployeeAlreadyExistsException()" classname="org.jayhenri.cloud9.store.EmployeeControllerTest" time="0.001"/>
-  <testcase name="addThrowsInvalidPostalCodeException()" classname="org.jayhenri.cloud9.store.EmployeeControllerTest" time="0.001"/>
-  <testcase name="updateEmployee()" classname="org.jayhenri.cloud9.store.EmployeeControllerTest" time="0.001"/>
+  <testcase name="getEmployeeThrowsEmployeeNotFoundException()" classname="org.jayhenri.cloud9.store.EmployeeControllerTest" time="0.002"/>
+  <testcase name="deleteEmployeeThrowsEmployeeNotFoundException()" classname="org.jayhenri.cloud9.store.EmployeeControllerTest" time="0.003"/>
+  <testcase name="addEmployeeThrowsEmployeeAlreadyExistsException()" classname="org.jayhenri.cloud9.store.EmployeeControllerTest" time="0.003"/>
+  <testcase name="addThrowsInvalidPostalCodeException()" classname="org.jayhenri.cloud9.store.EmployeeControllerTest" time="0.002"/>
+  <testcase name="updateEmployee()" classname="org.jayhenri.cloud9.store.EmployeeControllerTest" time="0.002"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

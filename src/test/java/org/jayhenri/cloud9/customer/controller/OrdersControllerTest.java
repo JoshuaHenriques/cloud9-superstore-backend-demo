@@ -18,7 +18,6 @@ import org.jayhenri.cloud9.exception.notfound.OrdersNotFoundException;
 import org.jayhenri.cloud9.interfaces.service.customer.CustomerServiceI;
 import org.jayhenri.cloud9.interfaces.service.customer.OrdersServiceI;
 import org.jayhenri.cloud9.model.customer.Address;
-import org.jayhenri.cloud9.model.customer.Cart;
 import org.jayhenri.cloud9.model.customer.Customer;
 import org.jayhenri.cloud9.model.customer.Orders;
 import org.jayhenri.cloud9.model.login.Login;
@@ -74,7 +73,6 @@ public class OrdersControllerTest {
         customer = new Customer(
                 "customer.mail@gmail.com",
                 new Login(),
-                new Cart(),
                 new Address(),
                 new HashSet<>(),
                 new HashSet<>(),
@@ -87,7 +85,8 @@ public class OrdersControllerTest {
         orders = new Orders(
                 "PENDING",
                 new HashSet<>(),
-                293.68
+                293.68,
+                customer
         );
     }
 

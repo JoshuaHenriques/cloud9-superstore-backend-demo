@@ -63,7 +63,6 @@ class CustomerControllerTest {
         customer = new Customer(
                 "customer.email@gmail.com",
                 new Login(),
-                new Cart(),
                 new Address(
                         "Paris St",
                         "2774",
