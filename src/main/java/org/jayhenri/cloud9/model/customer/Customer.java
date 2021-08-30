@@ -76,7 +76,6 @@ public class Customer implements Serializable {
      *
      * @param email       the email
      * @param login       the login
-     * @param cart        the cart
      * @param address     the address
      * @param wallet      the wallet
      * @param orders      the orders

@@ -99,7 +99,6 @@ create table if not exists customer (
 	customer_id     uuid            primary key default uuid_generate_v4(),
 	email           varchar(50)     not null unique,
 	login_id		uuid			unique references login(login_id),
-	-- cart_id			uuid			unique references cart(cart_id),
 	address_id		uuid			unique references address(address_id),
 	first_name      varchar(25)     not null,
 	last_name       varchar(25)     not null,

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="org.jayhenri.cloud9.inventory.OnlineInventoryServiceTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2021-08-30T21:19:43" hostname="kde-laptop" time="0.102">
+<testsuite name="org.jayhenri.cloud9.inventory.OnlineInventoryServiceTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2021-08-30T21:35:04" hostname="kde-laptop" time="0.056">
   <properties/>
-  <testcase name="existsByItemName()" classname="org.jayhenri.cloud9.inventory.OnlineInventoryServiceTest" time="0.069"/>
-  <testcase name="delete()" classname="org.jayhenri.cloud9.inventory.OnlineInventoryServiceTest" time="0.003"/>
-  <testcase name="findAll()" classname="org.jayhenri.cloud9.inventory.OnlineInventoryServiceTest" time="0.002"/>
+  <testcase name="existsByItemName()" classname="org.jayhenri.cloud9.inventory.OnlineInventoryServiceTest" time="0.039"/>
+  <testcase name="delete()" classname="org.jayhenri.cloud9.inventory.OnlineInventoryServiceTest" time="0.001"/>
+  <testcase name="findAll()" classname="org.jayhenri.cloud9.inventory.OnlineInventoryServiceTest" time="0.001"/>
   <testcase name="update()" classname="org.jayhenri.cloud9.inventory.OnlineInventoryServiceTest" time="0.002"/>
-  <testcase name="getByItemName()" classname="org.jayhenri.cloud9.inventory.OnlineInventoryServiceTest" time="0.003"/>
-  <testcase name="getById()" classname="org.jayhenri.cloud9.inventory.OnlineInventoryServiceTest" time="0.003"/>
-  <testcase name="existsById()" classname="org.jayhenri.cloud9.inventory.OnlineInventoryServiceTest" time="0.004"/>
+  <testcase name="getByItemName()" classname="org.jayhenri.cloud9.inventory.OnlineInventoryServiceTest" time="0.001"/>
+  <testcase name="getById()" classname="org.jayhenri.cloud9.inventory.OnlineInventoryServiceTest" time="0.002"/>
+  <testcase name="existsById()" classname="org.jayhenri.cloud9.inventory.OnlineInventoryServiceTest" time="0.003"/>
   <testcase name="doesNotExistsByItemName()" classname="org.jayhenri.cloud9.inventory.OnlineInventoryServiceTest" time="0.002"/>
-  <testcase name="doesNotExistsById()" classname="org.jayhenri.cloud9.inventory.OnlineInventoryServiceTest" time="0.004"/>
+  <testcase name="doesNotExistsById()" classname="org.jayhenri.cloud9.inventory.OnlineInventoryServiceTest" time="0.002"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
