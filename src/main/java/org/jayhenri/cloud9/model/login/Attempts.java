@@ -1,18 +1,22 @@
 package org.jayhenri.cloud9.model.login;
 
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import java.io.Serializable;
+import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import java.io.Serializable;
-import java.util.UUID;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * The type Attempts.
@@ -27,9 +31,13 @@ import java.util.UUID;
 public class Attempts implements Serializable {
 
     @Id
-    @Column(name = "login_id")
-    private UUID loginUUID;
+    private UUID attemptsUUID;
+
+    @MapsId
+    @OneToOne
+    @JoinColumn(name="login_id", unique=true, nullable=false, updatable=false)
+    private Login login;
 
     @Column(name = "attempts")
-    private int attempts;
+    private int attempts = 0;
 }

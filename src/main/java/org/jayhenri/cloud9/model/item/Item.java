@@ -1,14 +1,21 @@
 package org.jayhenri.cloud9.model.item;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
 import java.util.UUID;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * The type Item.
@@ -33,12 +40,7 @@ public class Item implements Serializable {
     @Column(name = "item_description", nullable = false)
     private String description;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "item_reviews",
-            joinColumns = @JoinColumn(name = "item_id"),
-            inverseJoinColumns = @JoinColumn(name = "review_id")
-    )
+    @OneToMany(cascade=CascadeType.ALL, mappedBy="item")
     private Set<Review> reviews;
 
     @Column(name = "price", nullable = false)

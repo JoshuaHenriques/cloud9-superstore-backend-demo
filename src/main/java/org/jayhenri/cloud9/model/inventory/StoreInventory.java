@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -34,16 +35,8 @@ public class StoreInventory implements Serializable {
     private static final long serialVersionUID = -1112477284611964207L;
 
     @Id
-    @Column(name = "inventory_id", nullable = false)
+    @Column(name = "item_id", nullable = false)
     private UUID inventoryUUID = UUID.randomUUID();
-
-    @OneToOne
-    @JoinColumn(name = "item_id", nullable = false, unique = true)
-    private Item item;
-
-    @ManyToOne
-    @JoinColumn(name = "store_id", nullable = false)
-    private Store store;
 
     @Column(name = "item_name", nullable = false, unique = true)
     private String itemName;
@@ -53,6 +46,15 @@ public class StoreInventory implements Serializable {
 
     @Column(name = "price", nullable = false)
     private double price;
+
+    @MapsId
+    @OneToOne
+    @JoinColumn(name="item_id", unique=true, nullable=false)
+    private Item item;
+
+    @ManyToOne
+    @JoinColumn(name="store_id", nullable=false, updatable=false)
+    private Store store;
 
     /**
      * Instantiates a new Store inventory.

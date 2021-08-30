@@ -1,18 +1,22 @@
 package org.jayhenri.cloud9.model.store;
 
 import java.io.Serializable;
+import java.util.Set;
 import java.util.UUID;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import org.jayhenri.cloud9.model.customer.Address;
+import org.jayhenri.cloud9.model.inventory.StoreInventory;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -37,8 +41,14 @@ public class Store implements Serializable {
     private String storeName;
 
     @OneToOne
-    @JoinColumn(name = "address_id", nullable = false, unique = true)
+    @JoinColumn(name = "address_id")
     private Address address;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "store")
+    private Set<Employee> employee;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "store")
+    private Set<StoreInventory> inventory;
 
     /**
      * Instantiates a new Store.

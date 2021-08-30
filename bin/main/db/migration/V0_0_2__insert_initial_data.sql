@@ -16,54 +16,34 @@ insert into item (item_id, item_name, item_description, price) values ('c45a9649
 insert into item (item_id, item_name, item_description, price) values ('51aed8cd-21b9-40d8-8a42-7f07c2dfa9b2', 'Xbox Series X', 'In est risus, auctor sed, tristique in, tempus sit amet, sem. Fusce consequat. Nulla nisl.', 599.99);
 
 -- Online Inventory
-insert into online_inventory (inventory_id, item_id, item_name, quantity, price) values('51aed8cd-21b9-40d8-8a42-7f07c2dfa9b2','51aed8cd-21b9-40d8-8a42-7f07c2dfa9b2', 'Xbox Series X', 1000, 599.99);
+insert into online_inventory (item_id, item_name, quantity, price) values('51aed8cd-21b9-40d8-8a42-7f07c2dfa9b2', 'Xbox Series X', 1000, 599.99);
 
-insert into online_inventory (inventory_id, item_id, item_name, quantity, price) values('c45a9649-183d-4883-8e03-2e76ab3a6077','c45a9649-183d-4883-8e03-2e76ab3a6077', 'Air Conditioner', 500, 499.99);
+insert into online_inventory (item_id, item_name, quantity, price) values('c45a9649-183d-4883-8e03-2e76ab3a6077', 'Air Conditioner', 500, 499.99);
 
-insert into online_inventory (inventory_id, item_id, item_name, quantity, price) values('f9df4666-9cf1-4d8d-b5f3-9e83eb5febb7','f9df4666-9cf1-4d8d-b5f3-9e83eb5febb7', '50inch Samsung TV', 65, 1799.99);
+insert into online_inventory (item_id, item_name, quantity, price) values('f9df4666-9cf1-4d8d-b5f3-9e83eb5febb7', '50inch Samsung TV', 65, 1799.99);
 
-insert into online_inventory (inventory_id, item_id, item_name, quantity, price) values('fdaf6094-2fb9-40db-ba4a-d79baec395ab','fdaf6094-2fb9-40db-ba4a-d79baec395ab', '24inch Gaming Monitor', 300, 299.99);
+insert into online_inventory (item_id, item_name, quantity, price) values('fdaf6094-2fb9-40db-ba4a-d79baec395ab', '24inch Gaming Monitor', 300, 299.99);
 
 -- Store Inventory
-insert into store_inventory (inventory_id, item_id, store_id, item_name, quantity, price) values('51aed8cd-21b9-40d8-8a42-7f07c2dfa9b2', '51aed8cd-21b9-40d8-8a42-7f07c2dfa9b2', 'c95363dc-de29-4c11-ad66-56693af48a57', 'Xbox Series X', 1000, 599.99);
+insert into store_inventory (item_id, store_id, item_name, quantity, price) values('51aed8cd-21b9-40d8-8a42-7f07c2dfa9b2', 'c95363dc-de29-4c11-ad66-56693af48a57', 'Xbox Series X', 1000, 599.99);
 
-insert into store_inventory (inventory_id, item_id, store_id, item_name, quantity, price) values('c45a9649-183d-4883-8e03-2e76ab3a6077', 'c45a9649-183d-4883-8e03-2e76ab3a6077', 'c95363dc-de29-4c11-ad66-56693af48a57', 'Air Conditioner', 500, 499.99);
+insert into store_inventory (item_id, store_id, item_name, quantity, price) values('c45a9649-183d-4883-8e03-2e76ab3a6077', 'c95363dc-de29-4c11-ad66-56693af48a57', 'Air Conditioner', 500, 499.99);
 
-insert into store_inventory (inventory_id, item_id, store_id, item_name, quantity, price) values('f9df4666-9cf1-4d8d-b5f3-9e83eb5febb7', 'f9df4666-9cf1-4d8d-b5f3-9e83eb5febb7', 'c95363dc-de29-4c11-ad66-56693af48a57', '50inch Samsung TV', 65, 1799.99);
+insert into store_inventory (item_id, store_id, item_name, quantity, price) values('f9df4666-9cf1-4d8d-b5f3-9e83eb5febb7', 'c95363dc-de29-4c11-ad66-56693af48a57', '50inch Samsung TV', 65, 1799.99);
 
-insert into store_inventory (inventory_id, item_id, store_id, item_name, quantity, price) values('fdaf6094-2fb9-40db-ba4a-d79baec395ab', 'fdaf6094-2fb9-40db-ba4a-d79baec395ab', 'c95363dc-de29-4c11-ad66-56693af48a57', '24inch Gaming Monitor', 300, 299.99);
+insert into store_inventory (item_id, store_id, item_name, quantity, price) values('fdaf6094-2fb9-40db-ba4a-d79baec395ab', 'c95363dc-de29-4c11-ad66-56693af48a57', '24inch Gaming Monitor', 300, 299.99);
 
-insert into store_inventory (inventory_id, item_id, store_id, item_name, quantity, price) values('726bb8f2-7516-4e56-baab-e2471defcb81', '726bb8f2-7516-4e56-baab-e2471defcb81', 'c95363dc-de29-4c11-ad66-56693af48a57', 'Bread - 10 Grain', 400, 3.99);
+insert into store_inventory (item_id, store_id, item_name, quantity, price) values('726bb8f2-7516-4e56-baab-e2471defcb81', 'c95363dc-de29-4c11-ad66-56693af48a57', 'Bread - 10 Grain', 400, 3.99);
 
-insert into store_inventory (inventory_id, item_id, store_id, item_name, quantity, price) values('3c0a4bfa-ae1b-4bf7-b7d9-656c1a4e4108', '3c0a4bfa-ae1b-4bf7-b7d9-656c1a4e4108', 'c95363dc-de29-4c11-ad66-56693af48a57', 'Browning Caramel Glace', 377, 3.95);
+insert into store_inventory (item_id, store_id, item_name, quantity, price) values('3c0a4bfa-ae1b-4bf7-b7d9-656c1a4e4108', 'c95363dc-de29-4c11-ad66-56693af48a57', 'Browning Caramel Glace', 377, 3.95);
 
-insert into store_inventory (inventory_id, item_id, store_id, item_name, quantity, price) values('68012fe3-c7eb-405e-a9ae-57ca1646414a', '68012fe3-c7eb-405e-a9ae-57ca1646414a', 'c95363dc-de29-4c11-ad66-56693af48a57', 'Oil - Hazelnut', 564, 4.99);
+insert into store_inventory (item_id, store_id, item_name, quantity, price) values('68012fe3-c7eb-405e-a9ae-57ca1646414a', 'c95363dc-de29-4c11-ad66-56693af48a57', 'Oil - Hazelnut', 564, 4.99);
 
-insert into store_inventory (inventory_id, item_id, store_id, item_name, quantity, price) values('201fd017-20d7-45aa-a18f-45c85de0cc8c', '201fd017-20d7-45aa-a18f-45c85de0cc8c', 'c95363dc-de29-4c11-ad66-56693af48a57', 'Lettuce - Frisee', 798, 0.99);
+insert into store_inventory (item_id, store_id, item_name, quantity, price) values('201fd017-20d7-45aa-a18f-45c85de0cc8c', 'c95363dc-de29-4c11-ad66-56693af48a57', 'Lettuce - Frisee', 798, 0.99);
 
-insert into store_inventory (inventory_id, item_id, store_id, item_name, quantity, price) values('0a247241-47ac-44ce-a90d-e770ffe74592', '0a247241-47ac-44ce-a90d-e770ffe74592', 'c95363dc-de29-4c11-ad66-56693af48a57', 'Cheese - Cottage Cheese', 250, 8.85);
+insert into store_inventory (item_id, store_id, item_name, quantity, price) values('0a247241-47ac-44ce-a90d-e770ffe74592', 'c95363dc-de29-4c11-ad66-56693af48a57', 'Cheese - Cottage Cheese', 250, 8.85);
 
-insert into store_inventory (inventory_id, item_id, store_id, item_name, quantity, price) values('2c9bc6f5-8024-4bbc-80cb-155f8bb1d4f0', '2c9bc6f5-8024-4bbc-80cb-155f8bb1d4f0', 'c95363dc-de29-4c11-ad66-56693af48a57', 'Pasta - Lasagne, Fresh', 300, 7.46);
-
-insert into store_inventories(store_id, inventory_id) values ('c95363dc-de29-4c11-ad66-56693af48a57', '2c9bc6f5-8024-4bbc-80cb-155f8bb1d4f0');
-
-insert into store_inventories(store_id, inventory_id) values ('c95363dc-de29-4c11-ad66-56693af48a57', '0a247241-47ac-44ce-a90d-e770ffe74592');
-
-insert into store_inventories(store_id, inventory_id) values ('c95363dc-de29-4c11-ad66-56693af48a57', '201fd017-20d7-45aa-a18f-45c85de0cc8c');
-
-insert into store_inventories(store_id, inventory_id) values ('c95363dc-de29-4c11-ad66-56693af48a57', '68012fe3-c7eb-405e-a9ae-57ca1646414a');
-
-insert into store_inventories(store_id, inventory_id) values ('c95363dc-de29-4c11-ad66-56693af48a57', '3c0a4bfa-ae1b-4bf7-b7d9-656c1a4e4108');
-
-insert into store_inventories(store_id, inventory_id) values ('c95363dc-de29-4c11-ad66-56693af48a57', '726bb8f2-7516-4e56-baab-e2471defcb81');
-
-insert into store_inventories(store_id, inventory_id) values ('c95363dc-de29-4c11-ad66-56693af48a57', 'fdaf6094-2fb9-40db-ba4a-d79baec395ab');
-
-insert into store_inventories(store_id, inventory_id) values ('c95363dc-de29-4c11-ad66-56693af48a57', 'f9df4666-9cf1-4d8d-b5f3-9e83eb5febb7');
-
-insert into store_inventories(store_id, inventory_id) values ('c95363dc-de29-4c11-ad66-56693af48a57', 'c45a9649-183d-4883-8e03-2e76ab3a6077');
-
-insert into store_inventories(store_id, inventory_id) values ('c95363dc-de29-4c11-ad66-56693af48a57', '51aed8cd-21b9-40d8-8a42-7f07c2dfa9b2');
+insert into store_inventory (item_id, store_id, item_name, quantity, price) values('2c9bc6f5-8024-4bbc-80cb-155f8bb1d4f0', 'c95363dc-de29-4c11-ad66-56693af48a57', 'Pasta - Lasagne, Fresh', 300, 7.46);
 
 -- Manager Logins   
 insert into login (login_id, roles, email, phone_number, password, enabled) values ('e932dc43-e08e-4ae8-9580-2c2efc05f6e1', '{"USER", "MOD", "ADMIN"}', 'feman.mark@gmail.com',  '2503229896', 'password', true);

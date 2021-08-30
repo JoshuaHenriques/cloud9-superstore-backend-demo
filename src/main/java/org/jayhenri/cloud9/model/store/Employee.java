@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -37,18 +38,6 @@ public class Employee implements Serializable {
     @Column(name = "email", unique = true, nullable = false)
     private String email;
 
-    @OneToOne
-    @JoinColumn(name = "address_id", unique = true, nullable = false)
-    private Address address;
-
-    @OneToOne
-    @JoinColumn(name = "login_id", nullable = false, unique = true)
-    private Login login;
-
-    @OneToOne
-    @JoinColumn(name = "store_id", nullable = false)
-    private Store store;
-
     @Column(name = "first_name", nullable = false)
     private String firstName;
 
@@ -63,6 +52,18 @@ public class Employee implements Serializable {
 
     @Column(name = "image")
     private byte[] image;
+
+    @OneToOne
+    @JoinColumn(name = "address_id")
+    private Address address;
+
+    @OneToOne
+    @JoinColumn(name = "login_id")
+    private Login login;
+
+    @ManyToOne
+    @JoinColumn(name = "store_id")
+    private Store store;
 
     /**
      * Instantiates a new Employee.

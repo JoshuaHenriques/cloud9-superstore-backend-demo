@@ -1,17 +1,17 @@
 package org.jayhenri.cloud9.service.customer;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicReference;
+
 import org.jayhenri.cloud9.interfaces.service.customer.CreditCardServiceI;
 import org.jayhenri.cloud9.interfaces.service.customer.CustomerServiceI;
 import org.jayhenri.cloud9.model.customer.CreditCard;
 import org.jayhenri.cloud9.model.customer.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * The type Credit card service.
@@ -40,7 +40,7 @@ public class CreditCardService implements CreditCardServiceI {
      */
     public void add(Customer customer, CreditCard creditCard) {
 
-        customer.getWallet().add(creditCard);
+        customer.getCreditCards().add(creditCard);
         customerService.update(customer);
     }
 
@@ -55,7 +55,7 @@ public class CreditCardService implements CreditCardServiceI {
         Set<CreditCard> removeMe = new HashSet<>();
         CreditCard card = getById(customer, cardId);
         removeMe.add(card);
-        customer.getWallet().removeAll(removeMe);
+        customer.getCreditCards().removeAll(removeMe);
 
         customerService.update(customer);
     }
@@ -68,7 +68,7 @@ public class CreditCardService implements CreditCardServiceI {
      */
     public Set<CreditCard> findAll(Customer customer) {
 
-        return customer.getWallet();
+        return customer.getCreditCards();
     }
 
     /**
@@ -81,7 +81,7 @@ public class CreditCardService implements CreditCardServiceI {
     public boolean existsById(Customer customer, UUID cardId) {
 
         AtomicBoolean exists = new AtomicBoolean(false);
-        customer.getWallet().forEach(card -> {
+        customer.getCreditCards().forEach(card -> {
             if (card.getCreditCardUUID().equals(cardId)) {
                 exists.set(true);
             }
@@ -99,7 +99,7 @@ public class CreditCardService implements CreditCardServiceI {
     public CreditCard getById(Customer customer, UUID cardId) {
 
         AtomicReference<CreditCard> creditCard = new AtomicReference<>(new CreditCard());
-        customer.getWallet().forEach(card -> {
+        customer.getCreditCards().forEach(card -> {
             if (card.getCreditCardUUID().equals(cardId)) {
                 creditCard.set(card);
             }

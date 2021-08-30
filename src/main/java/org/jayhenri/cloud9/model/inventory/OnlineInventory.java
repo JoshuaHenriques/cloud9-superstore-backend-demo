@@ -1,14 +1,23 @@
 package org.jayhenri.cloud9.model.inventory;
 
+import java.io.Serializable;
+import java.util.UUID;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import org.jayhenri.cloud9.model.item.Item;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.jayhenri.cloud9.model.item.Item;
-
-import javax.persistence.*;
-import java.io.Serializable;
-import java.util.UUID;
 
 /**
  * The type Online inventory.
@@ -24,12 +33,8 @@ public class OnlineInventory implements Serializable {
     private static final long serialVersionUID = -1112477284611964207L;
 
     @Id
-    @Column(name = "inventory_id", nullable = false)
-    private UUID inventoryUUID = UUID.randomUUID();
-
-    @OneToOne
-    @JoinColumn(name = "item_id", nullable = false, unique = true)
-    private Item item;
+    @Column(name = "item_id", nullable = false)
+    private UUID inventoryUUID;
 
     @Column(name = "item_name", nullable = false, unique = true)
     private String itemName;
@@ -39,6 +44,11 @@ public class OnlineInventory implements Serializable {
 
     @Column(name = "price", nullable = false)
     private double price;
+
+    @MapsId
+    @OneToOne
+    @JoinColumn(name = "item_id")
+    private Item item;
 
     /**
      * Instantiates a new Online inventory.

@@ -1,12 +1,12 @@
 package org.jayhenri.cloud9.service.store;
 
+import java.util.List;
+import java.util.UUID;
+
 import org.jayhenri.cloud9.interfaces.service.ServiceI;
 import org.jayhenri.cloud9.model.store.Store;
 import org.jayhenri.cloud9.repository.store.StoreRepository;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.UUID;
 
 
 /**

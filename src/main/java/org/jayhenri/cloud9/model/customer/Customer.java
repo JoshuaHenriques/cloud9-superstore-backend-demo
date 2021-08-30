@@ -9,7 +9,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -29,10 +28,9 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Entity
-@JsonIgnoreProperties({"hibernateLazyInitializer"})
+@JsonIgnoreProperties({ "hibernateLazyInitializer" })
 @Table(name = "customer")
 public class Customer implements Serializable {
-
 
     private static final long serialVersionUID = -1854209356482886781L;
 
@@ -56,31 +54,21 @@ public class Customer implements Serializable {
     private String dateOfBirth;
 
     @OneToOne
-    @JoinColumn(name = "login_id", nullable = false)
+    @JoinColumn(name="login_id", unique=true, nullable=false, updatable=false)
     private Login login;
 
-    @OneToOne
-    @JoinColumn(name = "cart_id", nullable = false)
-    private Cart cart;
+    // @OneToOne
+    // @JoinColumn(name="cart_id", unique=true, nullable=false, updatable=false)
+    // private Cart cart;
 
     @OneToOne
-    @JoinColumn(name = "address_id", nullable = false)
+    @JoinColumn(name="address_id", unique=true, nullable=false, updatable=false)
     private Address address;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "wallet",
-            joinColumns = @JoinColumn(name = "customer_id"),
-            inverseJoinColumns = @JoinColumn(name = "credit_card_id")
-    )
-    private Set<CreditCard> wallet;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
+    private Set<CreditCard> creditCards;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "order_items",
-            joinColumns = @JoinColumn(name = "orders_id"),
-            inverseJoinColumns = @JoinColumn(name = "item_id")
-    )
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
     private Set<Orders> orders;
 
     /**
@@ -97,16 +85,17 @@ public class Customer implements Serializable {
      * @param phoneNumber the phone number
      * @param dateOfBirth the date of birth
      */
-    public Customer(String email, Login login, Cart cart, Address address, Set<CreditCard> wallet, Set<Orders> orders, String firstName, String lastName, String phoneNumber, String dateOfBirth) {
+    public Customer(String email, Login login, Address address, Set<CreditCard> wallet, Set<Orders> orders,
+            String firstName, String lastName, String phoneNumber, String dateOfBirth) {
+        
         this.email = email;
         this.login = login;
-        this.cart = cart;
         this.address = address;
-        this.wallet = wallet;
+        this.creditCards = wallet;
         this.orders = orders;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
-        this.dateOfBirth = dateOfBirth;
-    }
+        this.dateOfBirth = dateOfBirth; 
+    } 
 }
