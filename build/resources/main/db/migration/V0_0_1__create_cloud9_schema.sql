@@ -82,6 +82,7 @@ create table if not exists store_inventory (
 	inventory_id	uuid			primary key default uuid_generate_v4(),
 	item_id			uuid            unique references item(item_id),
 	store_id		uuid			not null,
+	store_inventories_id uuid,
 	item_name       varchar(50)     not null,
 	quantity		int		        not null,
 	price 			double precision not null
@@ -109,15 +110,27 @@ create table if not exists address (
 	province        varchar(25)     not null
 );
 
+create table if not exists store_inventories (
+	created_at      timestamp       default current_timestamp,
+    updated_at      timestamp       default current_timestamp,
+	store_inventories_id uuid		primary key default uuid_generate_v4(),
+	store_id		uuid,
+	inventory_id	uuid			unique references store_inventory(inventory_id)
+);
+
+alter table store_inventory add foreign key (store_inventories_id) references store_inventories(store_inventories_id);
+
 create table if not exists store (
     created_at          timestamp   default current_timestamp,
     updated_at          timestamp   default current_timestamp,
     store_id            uuid        primary key default uuid_generate_v4(),
     store_name          varchar(25) not null,
-    address_id          uuid        unique references address(address_id)
+    address_id          uuid        unique references address(address_id),
+	store_inventories_id uuid 		references store_inventories(inventory_id)
 );
 
 alter table store_inventory add foreign key (store_id) references store(store_id);
+alter table store_inventories add  foreign key (store_id) references store(store_id);
 
 create table if not exists employee (
 	created_at      timestamp       default current_timestamp,

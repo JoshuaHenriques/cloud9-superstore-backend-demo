@@ -45,6 +45,26 @@ insert into store_inventory (inventory_id, item_id, store_id, item_name, quantit
 
 insert into store_inventory (inventory_id, item_id, store_id, item_name, quantity, price) values('2c9bc6f5-8024-4bbc-80cb-155f8bb1d4f0', '2c9bc6f5-8024-4bbc-80cb-155f8bb1d4f0', 'c95363dc-de29-4c11-ad66-56693af48a57', 'Pasta - Lasagne, Fresh', 300, 7.46);
 
+insert into store_inventories(store_id, inventory_id) values ('c95363dc-de29-4c11-ad66-56693af48a57', '2c9bc6f5-8024-4bbc-80cb-155f8bb1d4f0');
+
+insert into store_inventories(store_id, inventory_id) values ('c95363dc-de29-4c11-ad66-56693af48a57', '0a247241-47ac-44ce-a90d-e770ffe74592');
+
+insert into store_inventories(store_id, inventory_id) values ('c95363dc-de29-4c11-ad66-56693af48a57', '201fd017-20d7-45aa-a18f-45c85de0cc8c');
+
+insert into store_inventories(store_id, inventory_id) values ('c95363dc-de29-4c11-ad66-56693af48a57', '68012fe3-c7eb-405e-a9ae-57ca1646414a');
+
+insert into store_inventories(store_id, inventory_id) values ('c95363dc-de29-4c11-ad66-56693af48a57', '3c0a4bfa-ae1b-4bf7-b7d9-656c1a4e4108');
+
+insert into store_inventories(store_id, inventory_id) values ('c95363dc-de29-4c11-ad66-56693af48a57', '726bb8f2-7516-4e56-baab-e2471defcb81');
+
+insert into store_inventories(store_id, inventory_id) values ('c95363dc-de29-4c11-ad66-56693af48a57', 'fdaf6094-2fb9-40db-ba4a-d79baec395ab');
+
+insert into store_inventories(store_id, inventory_id) values ('c95363dc-de29-4c11-ad66-56693af48a57', 'f9df4666-9cf1-4d8d-b5f3-9e83eb5febb7');
+
+insert into store_inventories(store_id, inventory_id) values ('c95363dc-de29-4c11-ad66-56693af48a57', 'c45a9649-183d-4883-8e03-2e76ab3a6077');
+
+insert into store_inventories(store_id, inventory_id) values ('c95363dc-de29-4c11-ad66-56693af48a57', '51aed8cd-21b9-40d8-8a42-7f07c2dfa9b2');
+
 -- Manager Logins   
 insert into login (login_id, roles, email, phone_number, password, enabled) values ('e932dc43-e08e-4ae8-9580-2c2efc05f6e1', '{"USER", "MOD", "ADMIN"}', 'feman.mark@gmail.com',  '2503229896', 'password', true);
 
