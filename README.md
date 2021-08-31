@@ -1,8 +1,8 @@
 <p align="center">
-  <h3 align="center">Cloud9 Superstore Management System Demo</h3>
+  <h3 align="center">Store Management Demo</h3>
 
 <p align="center">
-    RESTful API Application
+    REST API App
 
 <details open="open">
   <summary>Table of Contents</summary>
@@ -26,7 +26,7 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-This app is a replica of a real world store.* The theme of the project was inspired by the Netflix show Cloud9 Superstore. Great to fork to expand for your use case
+This app is a replica of a real world store.* Great to fork to expand for your use case
 
 #### Endpoints:
 ```
@@ -132,7 +132,7 @@ Integration Tests *in development*:
 ```
 
 #### Models
-<a href="https://github.com/JoshuaHenriques/cloud9-superstore-backend-demo/blob/master/src/main/resources/db/migration/V0_0_1__create_cloud9_schema.sql">Schema</a> for a clearer model representation
+<a href="https://github.com/JoshuaHenriques/store-management-rest-api/blob/master/src/main/resources/db/migration/V0_0_1__create_cloud9_schema.sql">Schema</a> for a clearer model representation
 ```
 Address
 
@@ -177,7 +177,7 @@ Auth0 Java JWT
 #### Usage for CLI
 1. Clone the repo
    ```sh
-   git clone https://github.com/joshuahenriques/cloud9-superstore-backend-demo.git
+   git clone https://github.com/joshuahenriques/store-management-rest-api.git
    ```
 2. Install postgresql and create database
    ```sh
@@ -202,7 +202,7 @@ Auth0 Java JWT
 #### Usage for Docker
 1. Clone the repo
    ```sh
-   git clone https://github.com/joshuahenriques/cloud9-superstore-backend-demo.git
+   git clone https://github.com/joshuahenriques/store-management-rest-api.git
    ```
 2. In root directory build the app
    ```sh
@@ -223,4 +223,4 @@ Distributed under the MIT License. See `LICENSE` for more information.
 ### Contact
 [https://joshuahenriques.com](https://joshuahenriques.com)
 
-[https://github.com/joshuahenriques/cloud9-superstore-backend-demo](https://github.com/joshuahenriques/cloud9-superstore-backend-demo)
+[https://github.com/joshuahenriques/store-management-rest-api](https://github.com/joshuahenriques/store-management-rest-api)
