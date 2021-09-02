@@ -2,7 +2,7 @@
   <h3 align="center">Store Manager</h3>
 
 <p align="center">
-    REST API Application
+    REST API Application Demonstration
 
 <details open="open">
   <summary>Table of Contents</summary>
@@ -132,7 +132,7 @@ Integration Tests *in development*:
 ```
 
 #### Models
-<a href="https://github.com/JoshuaHenriques/store_manager/blob/master/src/main/resources/db/migration/V0_0_1__schema.sql">Schema</a> for a clearer model representation
+<a href="https://github.com/JoshuaHenriques/store-manager/blob/master/src/main/resources/db/migration/V0_0_1__schema.sql">Schema</a> for a clearer model representation
 ```
 Address
 
@@ -177,7 +177,7 @@ Auth0 Java JWT
 #### Usage for CLI
 1. Clone the repo
    ```sh
-   git clone https://github.com/joshuahenriques/store_manager.git
+   git clone https://github.com/joshuahenriques/store-manager.git
    ```
 2. Install postgresql and create database
    ```sh
@@ -202,7 +202,7 @@ Auth0 Java JWT
 #### Usage for Docker
 1. Clone the repo
    ```sh
-   git clone https://github.com/joshuahenriques/store_manager.git
+   git clone https://github.com/joshuahenriques/store-manager.git
    ```
 2. In root directory build the app
    ```sh
@@ -223,4 +223,4 @@ Distributed under the MIT License. See `LICENSE` for more information.
 ### Contact
 [https://joshuahenriques.com](https://joshuahenriques.com)
 
-[https://github.com/joshuahenriques/store_manager](https://github.com/joshuahenriques/store_manager)
+[https://github.com/joshuahenriques/store-manager](https://github.com/joshuahenriques/store-manager)
