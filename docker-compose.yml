@@ -23,7 +23,7 @@ services:
     image: 'postgres:latest'
     restart: always
     volumes:
-      - '../db/store-manager-db:/var/lib/postgresql/data'
+      - '../db/store_manager_db:/var/lib/postgresql/data'
     ports:
       - '5435:5432'
     environment:
