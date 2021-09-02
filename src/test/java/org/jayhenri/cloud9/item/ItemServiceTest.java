@@ -1,9 +1,9 @@
 package org.jayhenri.cloud9.item;
 
-import org.jayhenri.cloud9.interfaces.service.other.ItemServiceI;
-import org.jayhenri.cloud9.model.item.Item;
-import org.jayhenri.cloud9.repository.item.ItemRepository;
-import org.jayhenri.cloud9.service.item.ItemService;
+import org.jayhenri.store_manager.interfaces.service.other.ItemServiceI;
+import org.jayhenri.store_manager.model.item.Item;
+import org.jayhenri.store_manager.repository.item.ItemRepository;
+import org.jayhenri.store_manager.service.item.ItemService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

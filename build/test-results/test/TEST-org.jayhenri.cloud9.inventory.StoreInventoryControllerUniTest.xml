@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="org.jayhenri.cloud9.inventory.StoreInventoryControllerUniTest" tests="14" skipped="0" failures="0" errors="0" timestamp="2021-08-30T21:35:04" hostname="kde-laptop" time="0.038">
+<testsuite name="org.jayhenri.cloud9.inventory.StoreInventoryControllerUniTest" tests="14" skipped="0" failures="0" errors="0" timestamp="2021-09-02T17:19:58" hostname="kde-laptop" time="0.036">
   <properties/>
-  <testcase name="getByIdThrowsItemNotFoundException()" classname="org.jayhenri.cloud9.inventory.StoreInventoryControllerUniTest" time="0.004"/>
-  <testcase name="updateInventoryThrowsItemNotFoundException()" classname="org.jayhenri.cloud9.inventory.StoreInventoryControllerUniTest" time="0.001"/>
+  <testcase name="getByIdThrowsItemNotFoundException()" classname="org.jayhenri.cloud9.inventory.StoreInventoryControllerUniTest" time="0.002"/>
+  <testcase name="updateInventoryThrowsItemNotFoundException()" classname="org.jayhenri.cloud9.inventory.StoreInventoryControllerUniTest" time="0.002"/>
   <testcase name="delete()" classname="org.jayhenri.cloud9.inventory.StoreInventoryControllerUniTest" time="0.003"/>
   <testcase name="deleteThrowsItemNotFoundException()" classname="org.jayhenri.cloud9.inventory.StoreInventoryControllerUniTest" time="0.002"/>
   <testcase name="findAll()" classname="org.jayhenri.cloud9.inventory.StoreInventoryControllerUniTest" time="0.001"/>
-  <testcase name="update()" classname="org.jayhenri.cloud9.inventory.StoreInventoryControllerUniTest" time="0.003"/>
+  <testcase name="update()" classname="org.jayhenri.cloud9.inventory.StoreInventoryControllerUniTest" time="0.002"/>
   <testcase name="getByItemName()" classname="org.jayhenri.cloud9.inventory.StoreInventoryControllerUniTest" time="0.002"/>
-  <testcase name="addThrowsInvalidInventoryException()" classname="org.jayhenri.cloud9.inventory.StoreInventoryControllerUniTest" time="0.001"/>
+  <testcase name="addThrowsInvalidInventoryException()" classname="org.jayhenri.cloud9.inventory.StoreInventoryControllerUniTest" time="0.002"/>
   <testcase name="getById()" classname="org.jayhenri.cloud9.inventory.StoreInventoryControllerUniTest" time="0.002"/>
-  <testcase name="add()" classname="org.jayhenri.cloud9.inventory.StoreInventoryControllerUniTest" time="0.003"/>
+  <testcase name="add()" classname="org.jayhenri.cloud9.inventory.StoreInventoryControllerUniTest" time="0.002"/>
   <testcase name="updateInventoryThrowsInvalidItemException()" classname="org.jayhenri.cloud9.inventory.StoreInventoryControllerUniTest" time="0.002"/>
-  <testcase name="addThrowsInventoryAlreadyExistsException()" classname="org.jayhenri.cloud9.inventory.StoreInventoryControllerUniTest" time="0.005"/>
+  <testcase name="addThrowsInventoryAlreadyExistsException()" classname="org.jayhenri.cloud9.inventory.StoreInventoryControllerUniTest" time="0.002"/>
   <testcase name="getByItemNameThrowsItemNotFoundException()" classname="org.jayhenri.cloud9.inventory.StoreInventoryControllerUniTest" time="0.002"/>
   <testcase name="addThrowsItemNotFoundException()" classname="org.jayhenri.cloud9.inventory.StoreInventoryControllerUniTest" time="0.002"/>
   <system-out><![CDATA[]]></system-out>

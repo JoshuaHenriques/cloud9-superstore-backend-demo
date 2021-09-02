@@ -1,10 +1,10 @@
 package org.jayhenri.cloud9.inventory;
 
-import org.jayhenri.cloud9.interfaces.service.other.InventoryServiceI;
-import org.jayhenri.cloud9.model.inventory.StoreInventory;
-import org.jayhenri.cloud9.model.item.Item;
-import org.jayhenri.cloud9.repository.inventory.StoreInventoryRepository;
-import org.jayhenri.cloud9.service.inventory.StoreInventoryService;
+import org.jayhenri.store_manager.interfaces.service.other.InventoryServiceI;
+import org.jayhenri.store_manager.model.inventory.StoreInventory;
+import org.jayhenri.store_manager.model.item.Item;
+import org.jayhenri.store_manager.repository.inventory.StoreInventoryRepository;
+import org.jayhenri.store_manager.service.inventory.StoreInventoryService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

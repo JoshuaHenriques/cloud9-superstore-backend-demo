@@ -1,15 +1,15 @@
 package org.jayhenri.cloud9.customer.controller;
 
-import org.jayhenri.cloud9.controller.customer.CustomerController;
-import org.jayhenri.cloud9.exception.alreadyexists.CustomerAlreadyExistsException;
-import org.jayhenri.cloud9.exception.invalid.InvalidCustomerException;
-import org.jayhenri.cloud9.exception.invalid.InvalidPostalCodeException;
-import org.jayhenri.cloud9.exception.notfound.CustomerNotFoundException;
-import org.jayhenri.cloud9.interfaces.controller.customer.CustomerControllerI;
-import org.jayhenri.cloud9.interfaces.service.customer.AddressServiceI;
-import org.jayhenri.cloud9.interfaces.service.customer.CustomerServiceI;
-import org.jayhenri.cloud9.model.customer.*;
-import org.jayhenri.cloud9.model.login.Login;
+import org.jayhenri.store_manager.controller.customer.CustomerController;
+import org.jayhenri.store_manager.exception.alreadyexists.CustomerAlreadyExistsException;
+import org.jayhenri.store_manager.exception.invalid.InvalidCustomerException;
+import org.jayhenri.store_manager.exception.invalid.InvalidPostalCodeException;
+import org.jayhenri.store_manager.exception.notfound.CustomerNotFoundException;
+import org.jayhenri.store_manager.interfaces.controller.customer.CustomerControllerI;
+import org.jayhenri.store_manager.interfaces.service.customer.AddressServiceI;
+import org.jayhenri.store_manager.interfaces.service.customer.CustomerServiceI;
+import org.jayhenri.store_manager.model.customer.*;
+import org.jayhenri.store_manager.model.login.Login;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;

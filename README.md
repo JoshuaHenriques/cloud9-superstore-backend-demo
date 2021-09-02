@@ -1,8 +1,8 @@
 <p align="center">
-  <h3 align="center">Cloud9 Superstore Management System Demo</h3>
+  <h3 align="center">Store Manager</h3>
 
 <p align="center">
-    RESTful API Application
+    REST API Application
 
 <details open="open">
   <summary>Table of Contents</summary>
@@ -132,7 +132,7 @@ Integration Tests *in development*:
 ```
 
 #### Models
-<a href="https://github.com/JoshuaHenriques/cloud9-superstore-backend-demo/blob/master/src/main/resources/db/migration/V0_0_1__create_cloud9_schema.sql">Schema</a> for a clearer model representation
+<a href="https://github.com/JoshuaHenriques/store_manager/blob/master/src/main/resources/db/migration/V0_0_1__schema.sql">Schema</a> for a clearer model representation
 ```
 Address
 
@@ -177,14 +177,14 @@ Auth0 Java JWT
 #### Usage for CLI
 1. Clone the repo
    ```sh
-   git clone https://github.com/joshuahenriques/cloud9-superstore-backend-demo.git
+   git clone https://github.com/joshuahenriques/store_manager.git
    ```
 2. Install postgresql and create database
    ```sh
    sudo apt install postgresql -y
    su postgres
    psql
-    *Within psql* "CREATE DATABASE cloud9;"
+    *Within psql* "CREATE DATABASE store_manager_db;"
    ```
 2. In root directory build the app
    ```sh
@@ -202,7 +202,7 @@ Auth0 Java JWT
 #### Usage for Docker
 1. Clone the repo
    ```sh
-   git clone https://github.com/joshuahenriques/cloud9-superstore-backend-demo.git
+   git clone https://github.com/joshuahenriques/store_manager.git
    ```
 2. In root directory build the app
    ```sh
@@ -223,4 +223,4 @@ Distributed under the MIT License. See `LICENSE` for more information.
 ### Contact
 [https://joshuahenriques.com](https://joshuahenriques.com)
 
-[https://github.com/joshuahenriques/cloud9-superstore-backend-demo](https://github.com/joshuahenriques/cloud9-superstore-backend-demo)
+[https://github.com/joshuahenriques/store_manager](https://github.com/joshuahenriques/store_manager)

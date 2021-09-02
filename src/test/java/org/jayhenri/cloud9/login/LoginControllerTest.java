@@ -9,13 +9,13 @@ import java.util.UUID;
 
 import javax.naming.InvalidNameException;
 
-import org.jayhenri.cloud9.controller.login.LoginController;
-import org.jayhenri.cloud9.exception.alreadyexists.InventoryAlreadyExistsException;
-import org.jayhenri.cloud9.exception.alreadyexists.LoginAlreadyExistsException;
-import org.jayhenri.cloud9.exception.invalid.InvalidLoginException;
-import org.jayhenri.cloud9.exception.notfound.LoginNotFoundException;
-import org.jayhenri.cloud9.interfaces.service.other.LoginServiceI;
-import org.jayhenri.cloud9.model.login.Login;
+import org.jayhenri.store_manager.controller.login.LoginController;
+import org.jayhenri.store_manager.exception.alreadyexists.InventoryAlreadyExistsException;
+import org.jayhenri.store_manager.exception.alreadyexists.LoginAlreadyExistsException;
+import org.jayhenri.store_manager.exception.invalid.InvalidLoginException;
+import org.jayhenri.store_manager.exception.notfound.LoginNotFoundException;
+import org.jayhenri.store_manager.interfaces.service.other.LoginServiceI;
+import org.jayhenri.store_manager.model.login.Login;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

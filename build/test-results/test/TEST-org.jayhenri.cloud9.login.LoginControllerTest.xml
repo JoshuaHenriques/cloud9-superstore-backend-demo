@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="org.jayhenri.cloud9.login.LoginControllerTest" tests="12" skipped="0" failures="0" errors="0" timestamp="2021-08-30T21:35:04" hostname="kde-laptop" time="0.066">
+<testsuite name="org.jayhenri.cloud9.login.LoginControllerTest" tests="12" skipped="0" failures="0" errors="0" timestamp="2021-09-02T17:19:57" hostname="kde-laptop" time="0.051">
   <properties/>
-  <testcase name="addLogin()" classname="org.jayhenri.cloud9.login.LoginControllerTest" time="0.033"/>
-  <testcase name="deleteLogin()" classname="org.jayhenri.cloud9.login.LoginControllerTest" time="0.002"/>
-  <testcase name="getLoginThrowsInvalidLoginException()" classname="org.jayhenri.cloud9.login.LoginControllerTest" time="0.005"/>
+  <testcase name="addLogin()" classname="org.jayhenri.cloud9.login.LoginControllerTest" time="0.023"/>
+  <testcase name="deleteLogin()" classname="org.jayhenri.cloud9.login.LoginControllerTest" time="0.003"/>
+  <testcase name="getLoginThrowsInvalidLoginException()" classname="org.jayhenri.cloud9.login.LoginControllerTest" time="0.004"/>
   <testcase name="updateLogin()" classname="org.jayhenri.cloud9.login.LoginControllerTest" time="0.002"/>
   <testcase name="deleteLoginThrowsLoginNotFoundException()" classname="org.jayhenri.cloud9.login.LoginControllerTest" time="0.003"/>
   <testcase name="get()" classname="org.jayhenri.cloud9.login.LoginControllerTest" time="0.003"/>
   <testcase name="list()" classname="org.jayhenri.cloud9.login.LoginControllerTest" time="0.001"/>
   <testcase name="updateLoginThrowsInvalidLoginException()" classname="org.jayhenri.cloud9.login.LoginControllerTest" time="0.001"/>
-  <testcase name="updateLoginThrowsLoginNotFoundException()" classname="org.jayhenri.cloud9.login.LoginControllerTest" time="0.002"/>
-  <testcase name="addLoginThrowsLoginAlreadyExistsException()" classname="org.jayhenri.cloud9.login.LoginControllerTest" time="0.003"/>
-  <testcase name="getLoginThrowsLoginNotFoundException()" classname="org.jayhenri.cloud9.login.LoginControllerTest" time="0.002"/>
+  <testcase name="updateLoginThrowsLoginNotFoundException()" classname="org.jayhenri.cloud9.login.LoginControllerTest" time="0.001"/>
+  <testcase name="addLoginThrowsLoginAlreadyExistsException()" classname="org.jayhenri.cloud9.login.LoginControllerTest" time="0.001"/>
+  <testcase name="getLoginThrowsLoginNotFoundException()" classname="org.jayhenri.cloud9.login.LoginControllerTest" time="0.001"/>
   <testcase name="addLoginThrowsInvalidLoginException()" classname="org.jayhenri.cloud9.login.LoginControllerTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>

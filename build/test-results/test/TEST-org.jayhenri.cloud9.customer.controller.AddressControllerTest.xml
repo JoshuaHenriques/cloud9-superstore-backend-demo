@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="org.jayhenri.cloud9.customer.controller.AddressControllerTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2021-08-30T21:35:04" hostname="kde-laptop" time="0.036">
+<testsuite name="org.jayhenri.cloud9.customer.controller.AddressControllerTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2021-09-02T17:19:58" hostname="kde-laptop" time="0.038">
   <properties/>
   <testcase name="updateEmployeeThrowsEmployeeNotFoundException()" classname="org.jayhenri.cloud9.customer.controller.AddressControllerTest" time="0.025"/>
   <testcase name="updateReturnsWrongType()" classname="org.jayhenri.cloud9.customer.controller.AddressControllerTest" time="0.001"/>
-  <testcase name="updateStore()" classname="org.jayhenri.cloud9.customer.controller.AddressControllerTest" time="0.002"/>
+  <testcase name="updateStore()" classname="org.jayhenri.cloud9.customer.controller.AddressControllerTest" time="0.001"/>
   <testcase name="updateStoreThrowsStoreNotFoundException()" classname="org.jayhenri.cloud9.customer.controller.AddressControllerTest" time="0.001"/>
-  <testcase name="updateCustomerThrowsCustomerNotFoundException()" classname="org.jayhenri.cloud9.customer.controller.AddressControllerTest" time="0.001"/>
+  <testcase name="updateCustomerThrowsCustomerNotFoundException()" classname="org.jayhenri.cloud9.customer.controller.AddressControllerTest" time="0.002"/>
   <testcase name="updateThrowsInvalidAddressException()" classname="org.jayhenri.cloud9.customer.controller.AddressControllerTest" time="0.001"/>
-  <testcase name="updateCustomer()" classname="org.jayhenri.cloud9.customer.controller.AddressControllerTest" time="0.002"/>
+  <testcase name="updateCustomer()" classname="org.jayhenri.cloud9.customer.controller.AddressControllerTest" time="0.003"/>
   <testcase name="updateEmployee()" classname="org.jayhenri.cloud9.customer.controller.AddressControllerTest" time="0.002"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>

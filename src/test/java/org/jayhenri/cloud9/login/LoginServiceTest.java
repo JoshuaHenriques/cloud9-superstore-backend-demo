@@ -1,9 +1,9 @@
 package org.jayhenri.cloud9.login;
 
-import org.jayhenri.cloud9.interfaces.service.other.LoginServiceI;
-import org.jayhenri.cloud9.model.login.Login;
-import org.jayhenri.cloud9.repository.login.LoginRepository;
-import org.jayhenri.cloud9.service.login.LoginService;
+import org.jayhenri.store_manager.interfaces.service.other.LoginServiceI;
+import org.jayhenri.store_manager.model.login.Login;
+import org.jayhenri.store_manager.repository.login.LoginRepository;
+import org.jayhenri.store_manager.service.login.LoginService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

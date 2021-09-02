@@ -10,13 +10,13 @@ import java.util.UUID;
 
 import javax.naming.InvalidNameException;
 
-import org.jayhenri.cloud9.controller.item.ItemController;
-import org.jayhenri.cloud9.exception.alreadyexists.InventoryAlreadyExistsException;
-import org.jayhenri.cloud9.exception.alreadyexists.ItemAlreadyExistsException;
-import org.jayhenri.cloud9.exception.invalid.InvalidItemException;
-import org.jayhenri.cloud9.exception.notfound.ItemNotFoundException;
-import org.jayhenri.cloud9.interfaces.service.other.ItemServiceI;
-import org.jayhenri.cloud9.model.item.Item;
+import org.jayhenri.store_manager.controller.item.ItemController;
+import org.jayhenri.store_manager.exception.alreadyexists.InventoryAlreadyExistsException;
+import org.jayhenri.store_manager.exception.alreadyexists.ItemAlreadyExistsException;
+import org.jayhenri.store_manager.exception.invalid.InvalidItemException;
+import org.jayhenri.store_manager.exception.notfound.ItemNotFoundException;
+import org.jayhenri.store_manager.interfaces.service.other.ItemServiceI;
+import org.jayhenri.store_manager.model.item.Item;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

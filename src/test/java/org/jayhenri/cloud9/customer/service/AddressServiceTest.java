@@ -2,9 +2,9 @@ package org.jayhenri.cloud9.customer.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.jayhenri.cloud9.interfaces.service.customer.AddressServiceI;
-import org.jayhenri.cloud9.model.customer.Address;
-import org.jayhenri.cloud9.service.customer.AddressService;
+import org.jayhenri.store_manager.interfaces.service.customer.AddressServiceI;
+import org.jayhenri.store_manager.model.customer.Address;
+import org.jayhenri.store_manager.service.customer.AddressService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

@@ -11,16 +11,16 @@ import java.util.UUID;
 
 import javax.naming.InvalidNameException;
 
-import org.jayhenri.cloud9.controller.customer.OrdersController;
-import org.jayhenri.cloud9.exception.invalid.InvalidOrdersException;
-import org.jayhenri.cloud9.exception.notfound.CustomerNotFoundException;
-import org.jayhenri.cloud9.exception.notfound.OrdersNotFoundException;
-import org.jayhenri.cloud9.interfaces.service.customer.CustomerServiceI;
-import org.jayhenri.cloud9.interfaces.service.customer.OrdersServiceI;
-import org.jayhenri.cloud9.model.customer.Address;
-import org.jayhenri.cloud9.model.customer.Customer;
-import org.jayhenri.cloud9.model.customer.Orders;
-import org.jayhenri.cloud9.model.login.Login;
+import org.jayhenri.store_manager.controller.customer.OrdersController;
+import org.jayhenri.store_manager.exception.invalid.InvalidOrdersException;
+import org.jayhenri.store_manager.exception.notfound.CustomerNotFoundException;
+import org.jayhenri.store_manager.exception.notfound.OrdersNotFoundException;
+import org.jayhenri.store_manager.interfaces.service.customer.CustomerServiceI;
+import org.jayhenri.store_manager.interfaces.service.customer.OrdersServiceI;
+import org.jayhenri.store_manager.model.customer.Address;
+import org.jayhenri.store_manager.model.customer.Customer;
+import org.jayhenri.store_manager.model.customer.Orders;
+import org.jayhenri.store_manager.model.login.Login;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

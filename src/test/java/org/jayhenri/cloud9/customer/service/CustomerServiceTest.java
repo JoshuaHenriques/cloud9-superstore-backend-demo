@@ -6,10 +6,10 @@ import static org.mockito.BDDMockito.then;
 
 import java.util.UUID;
 
-import org.jayhenri.cloud9.interfaces.service.customer.CustomerServiceI;
-import org.jayhenri.cloud9.model.customer.Customer;
-import org.jayhenri.cloud9.repository.customer.CustomerRepository;
-import org.jayhenri.cloud9.service.customer.CustomerService;
+import org.jayhenri.store_manager.interfaces.service.customer.CustomerServiceI;
+import org.jayhenri.store_manager.model.customer.Customer;
+import org.jayhenri.store_manager.repository.customer.CustomerRepository;
+import org.jayhenri.store_manager.service.customer.CustomerService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;

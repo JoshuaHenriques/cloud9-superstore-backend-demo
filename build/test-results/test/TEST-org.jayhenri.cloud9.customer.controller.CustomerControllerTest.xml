@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="org.jayhenri.cloud9.customer.controller.CustomerControllerTest" tests="9" skipped="1" failures="0" errors="0" timestamp="2021-08-30T21:35:04" hostname="kde-laptop" time="0.023">
+<testsuite name="org.jayhenri.cloud9.customer.controller.CustomerControllerTest" tests="9" skipped="1" failures="0" errors="0" timestamp="2021-09-02T17:19:58" hostname="kde-laptop" time="0.029">
   <properties/>
-  <testcase name="addCustomerThrowsCustomerAlreadyExistsException()" classname="org.jayhenri.cloud9.customer.controller.CustomerControllerTest" time="0.008"/>
+  <testcase name="addCustomerThrowsCustomerAlreadyExistsException()" classname="org.jayhenri.cloud9.customer.controller.CustomerControllerTest" time="0.011"/>
   <testcase name="deleteCustomer()" classname="org.jayhenri.cloud9.customer.controller.CustomerControllerTest" time="0.002"/>
   <testcase name="deleteCustomerThrowsCustomerNotFoundException()" classname="org.jayhenri.cloud9.customer.controller.CustomerControllerTest" time="0.001"/>
-  <testcase name="addCustomerThrowsInvalidPostalCodeException()" classname="org.jayhenri.cloud9.customer.controller.CustomerControllerTest" time="0.001"/>
+  <testcase name="addCustomerThrowsInvalidPostalCodeException()" classname="org.jayhenri.cloud9.customer.controller.CustomerControllerTest" time="0.002"/>
   <testcase name="addCustomer()" classname="org.jayhenri.cloud9.customer.controller.CustomerControllerTest" time="0.002"/>
-  <testcase name="updateCustomerThrowsCustomerNotFoundException()" classname="org.jayhenri.cloud9.customer.controller.CustomerControllerTest" time="0.001"/>
-  <testcase name="listCustomers()" classname="org.jayhenri.cloud9.customer.controller.CustomerControllerTest" time="0.0">
+  <testcase name="updateCustomerThrowsCustomerNotFoundException()" classname="org.jayhenri.cloud9.customer.controller.CustomerControllerTest" time="0.002"/>
+  <testcase name="listCustomers()" classname="org.jayhenri.cloud9.customer.controller.CustomerControllerTest" time="0.001">
     <skipped/>
   </testcase>
-  <testcase name="updateCustomer()" classname="org.jayhenri.cloud9.customer.controller.CustomerControllerTest" time="0.001"/>
+  <testcase name="updateCustomer()" classname="org.jayhenri.cloud9.customer.controller.CustomerControllerTest" time="0.002"/>
   <testcase name="updateCustomerThrowsInvalidCustomerException()" classname="org.jayhenri.cloud9.customer.controller.CustomerControllerTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>

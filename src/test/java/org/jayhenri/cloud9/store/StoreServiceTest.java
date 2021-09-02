@@ -6,11 +6,11 @@ import static org.mockito.BDDMockito.then;
 
 import java.util.UUID;
 
-import org.jayhenri.cloud9.interfaces.service.ServiceI;
-import org.jayhenri.cloud9.model.customer.Address;
-import org.jayhenri.cloud9.model.store.Store;
-import org.jayhenri.cloud9.repository.store.StoreRepository;
-import org.jayhenri.cloud9.service.store.StoreService;
+import org.jayhenri.store_manager.interfaces.service.ServiceI;
+import org.jayhenri.store_manager.model.customer.Address;
+import org.jayhenri.store_manager.model.store.Store;
+import org.jayhenri.store_manager.repository.store.StoreRepository;
+import org.jayhenri.store_manager.service.store.StoreService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

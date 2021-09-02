@@ -9,15 +9,15 @@ import java.util.UUID;
 
 import javax.naming.InvalidNameException;
 
-import org.jayhenri.cloud9.controller.item.ReviewController;
-import org.jayhenri.cloud9.exception.invalid.InvalidItemException;
-import org.jayhenri.cloud9.exception.invalid.InvalidReviewException;
-import org.jayhenri.cloud9.exception.notfound.ItemNotFoundException;
-import org.jayhenri.cloud9.exception.notfound.ReviewNotFoundException;
-import org.jayhenri.cloud9.interfaces.service.other.ItemServiceI;
-import org.jayhenri.cloud9.interfaces.service.other.ReviewServiceI;
-import org.jayhenri.cloud9.model.item.Item;
-import org.jayhenri.cloud9.model.item.Review;
+import org.jayhenri.store_manager.controller.item.ReviewController;
+import org.jayhenri.store_manager.exception.invalid.InvalidItemException;
+import org.jayhenri.store_manager.exception.invalid.InvalidReviewException;
+import org.jayhenri.store_manager.exception.notfound.ItemNotFoundException;
+import org.jayhenri.store_manager.exception.notfound.ReviewNotFoundException;
+import org.jayhenri.store_manager.interfaces.service.other.ItemServiceI;
+import org.jayhenri.store_manager.interfaces.service.other.ReviewServiceI;
+import org.jayhenri.store_manager.model.item.Item;
+import org.jayhenri.store_manager.model.item.Review;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

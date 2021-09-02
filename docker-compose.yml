@@ -1,20 +1,20 @@
 version: '3.9'
 services:
-  cloud9:
+  store_manager:
     build: .
     restart: always
     ports:
       - '8080:8080'
     environment:
-      - 'SPRING_DATASOURCE_URL=jdbc:postgresql://postgres_db:5432/cloud9'
-      - SPRING_DATASOURCE_USERNAME=cloud9
-      - SPRING_DATASOURCE_PASSWORD=cloud9
+      - 'SPRING_DATASOURCE_URL=jdbc:postgresql://postgres_db:5432/store_manager_db'
+      - SPRING_DATASOURCE_USERNAME=user
+      - SPRING_DATASOURCE_PASSWORD=password
       - SPRING.JPA.HIBERNATE.DDL-AUTO=validate
     depends_on:
       - flyway
   flyway:
     image: 'flyway/flyway:latest-alpine'
-    command: '-url=jdbc:postgresql://postgres_db:5432/cloud9 -user=cloud9 -password=cloud9 -connectRetries=6 info migrate info'
+    command: '-url=jdbc:postgresql://postgres_db:5432/store_manager_db -user=user -password=password -connectRetries=6 info migrate info'
     volumes:
       - './src/main/resources/db/migration:/flyway/sql'
     depends_on:
@@ -23,10 +23,10 @@ services:
     image: 'postgres:latest'
     restart: always
     volumes:
-      - '../db/cloud9-data:/var/lib/postgresql/data'
+      - '../db/store-manager-db:/var/lib/postgresql/data'
     ports:
       - '5435:5432'
     environment:
-      POSTGRES_USER: cloud9
-      POSTGRES_PASSWORD: cloud9
-      POSTGRES_DB: cloud9
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: store_manager_db
