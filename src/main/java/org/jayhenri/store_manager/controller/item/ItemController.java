@@ -39,14 +39,6 @@ public class ItemController implements ControllerI<Item> {
         this.itemService = itemService;
     }
 
-    /**
-     * Register response entity.
-     *
-     * @param item the item
-     * @return the response entity
-     * @throws InventoryAlreadyExistsException the item already exists exception
-     * @throws InvalidItemException            the invalid item exception
-     */
     @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> add(@RequestBody Item item)
             throws ItemAlreadyExistsException, InvalidItemException {
@@ -65,16 +57,6 @@ public class ItemController implements ControllerI<Item> {
         return new ResponseEntity<>("Successfully Created Item", responseHeaders, HttpStatus.CREATED);
     }
 
-    /**
-     * Update item.
-     *
-     * @param item   the item
-     * @param itemId the item id
-     * @return the response entity
-     * @throws InvalidItemException            the invalid item exception
-     * @throws ItemNotFoundException           the item not found exception
-     * @throws InventoryAlreadyExistsException the item already exists exception
-     */
     @PutMapping(value = "/update/{itemId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> update(@RequestBody Item item, @PathVariable UUID itemId)
             throws InvalidItemException, ItemNotFoundException, InventoryAlreadyExistsException {
@@ -93,13 +75,6 @@ public class ItemController implements ControllerI<Item> {
             throw new InvalidItemException();
     }
 
-    /**
-     * Delete item.
-     *
-     * @param itemId the item id
-     * @return the response entity
-     * @throws ItemNotFoundException the item not found exception
-     */
     @DeleteMapping(value = "/delete/{itemId}")
     public ResponseEntity<String> delete(@PathVariable UUID itemId)
             throws ItemNotFoundException {
@@ -114,11 +89,6 @@ public class ItemController implements ControllerI<Item> {
             throw new ItemNotFoundException();
     }
 
-    /**
-     * List items response entity.
-     *
-     * @return the response entity
-     */
     @GetMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Item>> list() {
 
@@ -129,14 +99,6 @@ public class ItemController implements ControllerI<Item> {
         return new ResponseEntity<>(list, responseHeaders, HttpStatus.OK);
     }
 
-    /**
-     * Gets by email.
-     *
-     * @return the by email
-     * @throws InvalidNameException  the invalid name exception
-     * @throws ItemNotFoundException the item not found exception
-     * @throws InvalidItemException  the invalid item exception
-     */
     @GetMapping(value = "/get/{itemId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Item> get(@PathVariable UUID itemId)
             throws InvalidNameException, ItemNotFoundException, InvalidItemException {

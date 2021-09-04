@@ -7,20 +7,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The type Order not found exception.
+ * The type Orders not found exception.
  */
 @ResponseStatus(value = HttpStatus.BAD_REQUEST)
 public class OrdersNotFoundException extends Exception {
     private List<String> errorMessages = new ArrayList<>();
 
     /**
-     * Instantiates a new Order not found exception.
+     * Instantiates a new Orders not found exception.
      */
     public OrdersNotFoundException() {
     }
 
     /**
-     * Instantiates a new Order not found exception.
+     * Instantiates a new Orders not found exception.
      *
      * @param msg the msg
      */

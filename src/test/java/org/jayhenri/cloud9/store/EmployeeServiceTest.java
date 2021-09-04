@@ -25,38 +25,20 @@ import static org.mockito.BDDMockito.then;
 @ExtendWith(MockitoExtension.class)
 class EmployeeServiceTest {
 
-    /**
-     * The Test me.
-     */
     private EmployeeServiceI employeeService;
 
-    /**
-     * The Employee repository.
-     */
     @Mock
     private EmployeeRepository employeeRepository;
 
-    /**
-     * The Captor employee.
-     */
     @Captor
     private ArgumentCaptor<Employee> captorEmployee;
 
-    /**
-     * The Captor string.
-     */
     @Captor
     private ArgumentCaptor<String> captorString;
 
-    /**
-     * The Captor string.
-     */
     @Captor
     private ArgumentCaptor<UUID> captorUUID;
 
-    /**
-     * The Employee.
-     */
     private Employee employee;
 
     /**
@@ -97,7 +79,7 @@ class EmployeeServiceTest {
     }
 
     /**
-     * Exists by phone number.
+     * Does not exists by phone number.
      */
     @Test
     void doesNotExistsByPhoneNumber() {
@@ -149,7 +131,6 @@ class EmployeeServiceTest {
 
     /**
      * Find all employees.
-     * Do later.
      */
     @Test
     @Disabled
@@ -173,7 +154,7 @@ class EmployeeServiceTest {
     }
 
     /**
-     * Exists by email.
+     * Does not exists by email.
      */
     @Test
     void doesNotExistsByEmail() {

@@ -35,8 +35,8 @@ public class StoreController implements ControllerI<Store> {
     /**
      * Instantiates a new Store controller.
      *
-     * @param storeService2  the store service
-     * @param addressService the inventory service
+     * @param storeService2  the store service 2
+     * @param addressService the address service
      */
     @Autowired
     public StoreController(ServiceI<Store> storeService2, AddressServiceI addressService) {
@@ -44,15 +44,6 @@ public class StoreController implements ControllerI<Store> {
         this.addressService = addressService;
     }
 
-    /**
-     * Register response entity.
-     *
-     * @param store the store
-     * @return the response entity
-     * @throws StoreAlreadyExistsException the store already exists exception
-     * @throws InvalidPostalCodeException  the invalid postal code exception
-     * @throws InvalidStoreException       the invalid store exception
-     */
     @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> add(@RequestBody Store store)
             throws StoreAlreadyExistsException, InvalidPostalCodeException, InvalidStoreException {
@@ -73,15 +64,6 @@ public class StoreController implements ControllerI<Store> {
         return new ResponseEntity<>("Successfully Created Store", responseHeaders, HttpStatus.CREATED);
     }
 
-    /**
-     * Update store.
-     *
-     * @param store   the store
-     * @param storeId the store id
-     * @return the response entity
-     * @throws InvalidStoreException  the invalid store exception
-     * @throws StoreNotFoundException the store not found exception
-     */
     @PutMapping(value = "/update/{storeId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> update(@RequestBody Store store, @PathVariable UUID storeId)
             throws InvalidStoreException, StoreNotFoundException {
@@ -98,13 +80,6 @@ public class StoreController implements ControllerI<Store> {
             throw new InvalidStoreException();
     }
 
-    /**
-     * Delete store.
-     *
-     * @param storeId the store id
-     * @return the response entity
-     * @throws StoreNotFoundException the store not found exception
-     */
     @DeleteMapping(value = "/delete/{storeId}")
     public ResponseEntity<String> delete(@PathVariable UUID storeId)
             throws StoreNotFoundException {
@@ -118,11 +93,6 @@ public class StoreController implements ControllerI<Store> {
             throw new StoreNotFoundException();
     }
 
-    /**
-     * List customers response entity.
-     *
-     * @return the response entity
-     */
     @GetMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Store>> list() {
         List<Store> list = storeService.findAll();
@@ -132,15 +102,6 @@ public class StoreController implements ControllerI<Store> {
         return new ResponseEntity<>(list, responseHeaders, HttpStatus.OK);
     }
 
-    /**
-     * Gets by email.
-     *
-     * @param storeId the store name
-     * @return the by email
-     * @throws InvalidNameException   the invalid name exception
-     * @throws StoreNotFoundException the store not found exception
-     * @throws InvalidStoreException  the invalid store exception
-     */
     @GetMapping(value = "/get/{storeId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Store> get(@PathVariable UUID storeId)
             throws InvalidNameException, StoreNotFoundException, InvalidStoreException {

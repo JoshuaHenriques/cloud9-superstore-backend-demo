@@ -90,17 +90,12 @@ public class EmployeeControllerTest {
     /**
      * Add employee.
      *
-     * @throws InventoryAlreadyExistsException the employee already exists exception
      * @throws InvalidEmployeeException        the invalid employee exception
      * @throws EmployeeAlreadyExistsException  the employee already exists exception
-     * @throws LoginAlreadyExistsException     the login already exists exception
-     * @throws InvalidLoginException           the invalid login exception
      * @throws InvalidPostalCodeException      the invalid postal code exception
-     * @throws InvalidItemException            the invalid item exception
-     * @throws ItemAlreadyExistsException      the item already exists exception
      */
     @Test
-    void addEmployee() throws InventoryAlreadyExistsException, InvalidEmployeeException, EmployeeAlreadyExistsException, LoginAlreadyExistsException, InvalidLoginException, InvalidPostalCodeException, InvalidItemException, ItemAlreadyExistsException {
+    void addEmployee() throws InvalidEmployeeException, EmployeeAlreadyExistsException, InvalidPostalCodeException {
 
         given(employeeService.existsById(employeeId)).willReturn(false);
         given(addressService.isValidPostalCode(employee.getAddress().getPostalCode())).willReturn(true);
@@ -147,16 +142,11 @@ public class EmployeeControllerTest {
     /**
      * Update employee.
      *
-     * @throws InventoryAlreadyExistsException the inventory already exists exception
      * @throws InvalidEmployeeException        the invalid employee exception
      * @throws EmployeeNotFoundException       the employee not found exception
-     * @throws InvalidLoginException           the invalid login exception
-     * @throws LoginNotFoundException          the login not found exception
-     * @throws InvalidItemException            the invalid item exception
-     * @throws ItemNotFoundException           the item not found exception
      */
     @Test
-    void updateEmployee() throws InventoryAlreadyExistsException, InvalidEmployeeException, EmployeeNotFoundException, InvalidLoginException, LoginNotFoundException, InvalidItemException, ItemNotFoundException {
+    void updateEmployee() throws InvalidEmployeeException, EmployeeNotFoundException {
 
         given(employeeService.existsById(employeeId)).willReturn(true);
 
@@ -191,11 +181,9 @@ public class EmployeeControllerTest {
      * Delete employee.
      *
      * @throws EmployeeNotFoundException the employee not found exception
-     * @throws LoginNotFoundException    the login not found exception
-     * @throws ItemNotFoundException     the item not found exception
      */
     @Test
-    void deleteEmployee() throws EmployeeNotFoundException, LoginNotFoundException, ItemNotFoundException {
+    void deleteEmployee() throws EmployeeNotFoundException {
 
         given(employeeService.existsById(employeeId)).willReturn(true);
         given(employeeService.getById(employeeId)).willReturn(employee);
@@ -232,13 +220,9 @@ public class EmployeeControllerTest {
      * @throws InvalidNameException      the invalid name exception
      * @throws InvalidEmployeeException  the invalid employee exception
      * @throws EmployeeNotFoundException the employee not found exception
-     * @throws InvalidLoginException     the invalid login exception
-     * @throws LoginNotFoundException    the login not found exception
-     * @throws ItemNotFoundException     the item not found exception
-     * @throws InvalidItemException      the invalid item exception
      */
     @Test
-    void get() throws InvalidNameException, InvalidEmployeeException, EmployeeNotFoundException, InvalidLoginException, LoginNotFoundException, ItemNotFoundException, InvalidItemException {
+    void get() throws InvalidNameException, InvalidEmployeeException, EmployeeNotFoundException {
 
         given(employeeService.existsById(employeeId)).willReturn(true);
         given(employeeService.getById(employeeId)).willReturn(employee);

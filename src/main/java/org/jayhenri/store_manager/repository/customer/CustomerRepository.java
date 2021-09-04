@@ -17,9 +17,9 @@ import java.util.UUID;
 public interface CustomerRepository extends JpaRepository<Customer, UUID> {
 
     /**
-     * Exists by email boolean.
+     * Exists by phone number boolean.
      *
-     * @param phoneNumber the email
+     * @param phoneNumber the phone number
      * @return the boolean
      */
     @Query(value = "SELECT * FROM customers WHERE EXISTS (SELECT phone_number FROM customers WHERE customers.phone_number = :phone_number)", nativeQuery = true)
@@ -44,10 +44,10 @@ public interface CustomerRepository extends JpaRepository<Customer, UUID> {
     Customer getByEmail(@Param("email") String email);
 
     /**
-     * Gets by email.
+     * Exists by credit card ccn boolean.
      *
      * @param ccn the ccn
-     * @return the by email
+     * @return the boolean
      */
     @Query(value = "SELECT * FROM credit_cards WHERE EXISTS (SELECT ccn FROM credit_cards WHERE credit_cards.ccn = :ccn", nativeQuery = true)
     boolean existsByCreditCardCCN(@Param("ccn") String ccn);

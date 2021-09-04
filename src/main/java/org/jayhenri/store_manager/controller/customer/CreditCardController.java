@@ -31,7 +31,7 @@ public class CreditCardController implements CreditCardControllerI {
     private final CreditCardServiceI creditCardService;
 
     /**
-     * Instantiates a new Customer controller.
+     * Instantiates a new Credit card controller.
      *
      * @param customerService   the customer service
      * @param creditCardService the credit card service
@@ -42,15 +42,6 @@ public class CreditCardController implements CreditCardControllerI {
         this.creditCardService = creditCardService;
     }
 
-    /**
-     * Add credit card.
-     *
-     * @param customerId the customer id
-     * @param creditCard the credit card
-     * @return the response entity
-     * @throws CustomerNotFoundException        the customer not found exception
-     * @throws CreditCardAlreadyExistsException the credit card already exists exception
-     */
     @PostMapping(value = "/{customerId}/creditCard/add", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> add(@PathVariable UUID customerId, @RequestBody CreditCard creditCard)
             throws CustomerNotFoundException, InvalidOrdersException, CreditCardAlreadyExistsException, InvalidCreditCardException {
@@ -70,15 +61,6 @@ public class CreditCardController implements CreditCardControllerI {
             throw new InvalidCreditCardException();
     }
 
-    /**
-     * Remove credit card.
-     *
-     * @param customerId the customer id
-     * @param cardId     the card id
-     * @return the response entity
-     * @throws CustomerNotFoundException   the customer not found exception
-     * @throws CreditCardNotFoundException the credit card not found exception
-     */
     @DeleteMapping(value = "/{customerId}/creditCard/remove/{cardId}")
     public ResponseEntity<String> delete(@PathVariable UUID customerId, @PathVariable UUID cardId)
             throws CustomerNotFoundException, CreditCardNotFoundException {
@@ -95,13 +77,6 @@ public class CreditCardController implements CreditCardControllerI {
             throw new CustomerNotFoundException();
     }
 
-    /**
-     * List credit cards list.
-     *
-     * @param customerId the email
-     * @return the list
-     * @throws CustomerNotFoundException the customer not found exception
-     */
     @GetMapping(value = "/{customerId}/creditCards/list", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Set<CreditCard>> list(@PathVariable UUID customerId) throws CustomerNotFoundException {
         if (customerService.existsById(customerId)) {

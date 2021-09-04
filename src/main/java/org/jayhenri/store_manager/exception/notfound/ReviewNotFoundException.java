@@ -7,20 +7,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The type Customer not found exception.
+ * The type Review not found exception.
  */
 @ResponseStatus(value = HttpStatus.NOT_FOUND)
 public class ReviewNotFoundException extends Exception {
     private List<String> errorMessages = new ArrayList<>();
 
     /**
-     * Instantiates a new Customer not found exception.
+     * Instantiates a new Review not found exception.
      */
     public ReviewNotFoundException() {
     }
 
     /**
-     * Instantiates a new Customer not found exception.
+     * Instantiates a new Review not found exception.
      *
      * @param msg the msg
      */

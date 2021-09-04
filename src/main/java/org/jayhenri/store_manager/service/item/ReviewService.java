@@ -14,7 +14,7 @@ import java.util.concurrent.atomic.AtomicReference;
 
 
 /**
- * The type Customer service.
+ * The type Review service.
  */
 @Service
 public class ReviewService implements ReviewServiceI {
@@ -33,24 +33,12 @@ public class ReviewService implements ReviewServiceI {
         this.itemService = itemService;
     }
 
-    /**
-     * Add.
-     *
-     * @param item   the item
-     * @param review the review
-     */
     public void add(Item item, Review review) {
 
         item.getReviews().add(review);
         itemService.update(item);
     }
 
-    /**
-     * Update.
-     *
-     * @param item   the item
-     * @param review the review
-     */
     public void update(Item item, Review review) {
 
         item.getReviews().forEach(review1 -> {
@@ -61,12 +49,6 @@ public class ReviewService implements ReviewServiceI {
         itemService.update(item);
     }
 
-    /**
-     * Delete.
-     *
-     * @param item     the item
-     * @param reviewId the review id
-     */
     public void remove(Item item, UUID reviewId) {
         item.getReviews().forEach(review1 -> {
             if (review1.getReviewUUID().equals(reviewId))
@@ -75,41 +57,19 @@ public class ReviewService implements ReviewServiceI {
         itemService.update(item);
     }
 
-    /**
-     * Find all customers list.
-     *
-     * @param item the item
-     * @return the list
-     */
     public Set<Review> findAll(Item item) {
 
         return item.getReviews();
     }
 
-    /**
-     * Exists by email boolean.
-     *
-     * @param item     the item
-     * @param reviewId the review id
-     * @return the boolean
-     */
     public boolean existsById(Item item, UUID reviewId) {
 
         AtomicBoolean exists = new AtomicBoolean(false);
-        item.getReviews().forEach(review -> {
-            exists.set(review.getReviewUUID().equals(reviewId));
-        });
+        item.getReviews().forEach(review -> exists.set(review.getReviewUUID().equals(reviewId)));
 
         return exists.get();
     }
 
-    /**
-     * Gets by id.
-     *
-     * @param item     the item
-     * @param reviewId the review id
-     * @return the by id
-     */
     public Review getById(Item item, UUID reviewId) {
 
         AtomicReference<Review> review = new AtomicReference<>(new Review());

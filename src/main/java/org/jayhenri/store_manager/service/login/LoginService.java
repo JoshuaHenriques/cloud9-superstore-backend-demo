@@ -11,7 +11,7 @@ import java.util.UUID;
 
 
 /**
- * The type Customer service.
+ * The type Login service.
  */
 @Service
 public class LoginService implements LoginServiceI {
@@ -46,75 +46,37 @@ public class LoginService implements LoginServiceI {
 //        return new org.springframework.security.core.userdetails.User(login.getEmail(), login.getPassword(), authorities);
 //    }
 
-    /**
-     * Add.
-     *
-     * @param login the login
-     */
     public void add(Login login) {
 
         // login.setPassword(passwordEncoder.encode(login.getPassword()));
         loginRepository.save(login);
     }
 
-    /**
-     * Delete.
-     *
-     * @param login the login
-     */
     public void remove(Login login) {
 
         loginRepository.delete(login);
     }
 
-    /**
-     * Update.
-     *
-     * @param login the login
-     */
     public void update(Login login) {
 
         loginRepository.save(login);
     }
 
-    /**
-     * Find all logins list.
-     *
-     * @return the list
-     */
     public List<Login> findAll() {
 
         return loginRepository.findAll();
     }
 
-    /**
-     * Exists by email boolean.
-     *
-     * @param uuid the uuid
-     * @return the boolean
-     */
     public boolean existsById(UUID uuid) {
 
         return loginRepository.existsById(uuid);
     }
 
-    /**
-     * Gets by id.
-     *
-     * @param uuid the uuid
-     * @return the by id
-     */
     public Login getById(UUID uuid) {
 
         return loginRepository.getById(uuid);
     }
 
-    /**
-     * Exists by phone number boolean.
-     *
-     * @param phoneNumber the phone number
-     * @return the boolean
-     */
     public boolean existsByPhoneNumber(String phoneNumber) {
 
         return loginRepository.existsByPhoneNumber(phoneNumber);

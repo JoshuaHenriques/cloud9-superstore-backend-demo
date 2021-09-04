@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The type Item not found exception.
+ * The type Login not found exception.
  */
 @ResponseStatus(value = HttpStatus.NOT_FOUND)
 public class LoginNotFoundException extends Exception {
@@ -15,13 +15,13 @@ public class LoginNotFoundException extends Exception {
     private List<String> errorMessages = new ArrayList<>();
 
     /**
-     * Instantiates a new Item not found exception.
+     * Instantiates a new Login not found exception.
      */
     public LoginNotFoundException() {
     }
 
     /**
-     * Instantiates a new Item not found exception.
+     * Instantiates a new Login not found exception.
      *
      * @param msg the msg
      */

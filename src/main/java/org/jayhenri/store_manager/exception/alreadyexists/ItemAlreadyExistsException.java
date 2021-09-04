@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The type Customer already exists exception.
+ * The type Item already exists exception.
  */
 @ResponseStatus(value = HttpStatus.BAD_REQUEST)
 public class ItemAlreadyExistsException extends Exception {
@@ -15,13 +15,13 @@ public class ItemAlreadyExistsException extends Exception {
     private List<String> errorMessages = new ArrayList<>();
 
     /**
-     * Instantiates a new Customer already exists exception.
+     * Instantiates a new Item already exists exception.
      */
     public ItemAlreadyExistsException() {
     }
 
     /**
-     * Instantiates a new Customer already exists exception.
+     * Instantiates a new Item already exists exception.
      *
      * @param msg the msg
      */

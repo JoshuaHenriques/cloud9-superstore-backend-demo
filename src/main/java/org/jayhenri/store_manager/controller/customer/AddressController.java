@@ -48,15 +48,6 @@ public class AddressController implements AddressControllerI {
         this.employeeService = employeeService;
     }
 
-    /**
-     * Update customer.
-     *
-     * @param uuid    the uuid
-     * @param address the customer
-     * @return the response entity
-     * @throws CustomerNotFoundException the customer not found exception
-     * @throws InvalidAddressException   the invalid address exception
-     */
     @PutMapping(value = "/update/{entity}/{uuid}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> update(@RequestBody Address address, @PathVariable UUID uuid, String type)
             throws CustomerNotFoundException, InvalidAddressException, StoreNotFoundException, EmployeeNotFoundException {

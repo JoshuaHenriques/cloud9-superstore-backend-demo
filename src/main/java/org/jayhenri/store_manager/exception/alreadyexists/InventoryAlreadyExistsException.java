@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The type Item already exists exception.
+ * The type Inventory already exists exception.
  */
 @ResponseStatus(value = HttpStatus.BAD_REQUEST)
 public class InventoryAlreadyExistsException extends Exception {
@@ -15,13 +15,13 @@ public class InventoryAlreadyExistsException extends Exception {
     private List<String> errorMessages = new ArrayList<>();
 
     /**
-     * Instantiates a new Item already exists exception.
+     * Instantiates a new Inventory already exists exception.
      */
     public InventoryAlreadyExistsException() {
     }
 
     /**
-     * Instantiates a new Item already exists exception.
+     * Instantiates a new Inventory already exists exception.
      *
      * @param msg the msg
      */

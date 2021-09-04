@@ -24,7 +24,7 @@ public interface InventoryControllerI<T> {
      * @param t      the t
      * @param itemId the item id
      * @return the response entity
-     * @throws InventoryAlreadyExistsException the item already exists exception
+     * @throws InventoryAlreadyExistsException the inventory already exists exception
      * @throws InvalidItemException            the invalid item exception
      * @throws ItemNotFoundException           the item not found exception
      * @throws InvalidInventoryException       the invalid inventory exception
@@ -47,29 +47,29 @@ public interface InventoryControllerI<T> {
             throws InvalidItemException, ItemNotFoundException;
 
     /**
-     * Get response entity.
+     * Gets by item name.
      *
      * @param itemName the item name
-     * @return the response entity
+     * @return the by item name
      * @throws ItemNotFoundException the item not found exception
      */
     @GetMapping(value = "/get/{itemName}", produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<T> getByItemName(@PathVariable String itemName) throws ItemNotFoundException;
 
     /**
-     * Get response entity.
+     * Gets by id.
      *
-     * @param itemId the item name
-     * @return the response entity
+     * @param itemId the item id
+     * @return the by id
      * @throws ItemNotFoundException the item not found exception
      */
     @GetMapping(value = "/get/{inventoryId}", produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<T> getById(@PathVariable UUID itemId) throws ItemNotFoundException;
 
     /**
-     * Remove response entity.
+     * Delete response entity.
      *
-     * @param itemId the item name
+     * @param itemId the item id
      * @return the response entity
      * @throws InvalidItemException  the invalid item exception
      * @throws ItemNotFoundException the item not found exception

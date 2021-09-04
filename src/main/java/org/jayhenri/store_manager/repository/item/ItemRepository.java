@@ -10,14 +10,14 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.UUID;
 
 /**
- * The interface Inventory repository.
+ * The interface Item repository.
  */
 @Repository
 @Transactional
 public interface ItemRepository extends JpaRepository<Item, UUID> {
 
     /**
-     * Exists by phone number boolean.
+     * Exists by item name boolean.
      *
      * @param itemName the item name
      * @return the boolean
@@ -27,10 +27,10 @@ public interface ItemRepository extends JpaRepository<Item, UUID> {
 
 
     /**
-     * Gets by email.
+     * Gets by item name.
      *
      * @param itemName the item name
-     * @return the by email
+     * @return the by item name
      */
     @Query(value = "SELECT * FROM item WHERE item.item_name = :item_name", nativeQuery = true)
     Item getByItemName(@Param("item_name") String itemName);

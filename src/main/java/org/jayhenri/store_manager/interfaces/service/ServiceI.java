@@ -41,7 +41,7 @@ public interface ServiceI<T> {
     /**
      * Exists by id boolean.
      *
-     * @param uuid the u
+     * @param uuid the uuid
      * @return the boolean
      */
     boolean existsById(UUID uuid);
@@ -49,7 +49,7 @@ public interface ServiceI<T> {
     /**
      * Gets by id.
      *
-     * @param uuid the u
+     * @param uuid the uuid
      * @return the by id
      */
     T getById(UUID uuid);

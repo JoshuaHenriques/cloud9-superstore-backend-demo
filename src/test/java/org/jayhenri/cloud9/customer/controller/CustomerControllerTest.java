@@ -31,7 +31,7 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
 
 /**
- * The type Customer controller uni test.
+ * The type Customer controller test.
  */
 @ExtendWith(MockitoExtension.class)
 class CustomerControllerTest {
@@ -82,7 +82,7 @@ class CustomerControllerTest {
     }
 
     /**
-     * Register.
+     * Add customer.
      *
      * @throws InvalidPostalCodeException     the invalid postal code exception
      * @throws CustomerAlreadyExistsException the customer already exists exception
@@ -104,7 +104,7 @@ class CustomerControllerTest {
     }
 
     /**
-     * Register throws invalid postal code exception.
+     * Add customer throws invalid postal code exception.
      */
     @Test
     void addCustomerThrowsInvalidPostalCodeException() {
@@ -114,7 +114,7 @@ class CustomerControllerTest {
     }
 
     /**
-     * Register throws customer already exists exception.
+     * Add customer throws customer already exists exception.
      */
     @Test
     void addCustomerThrowsCustomerAlreadyExistsException() {
@@ -150,7 +150,7 @@ class CustomerControllerTest {
     }
 
     /**
-     * Update customer throws customer already exists exception.
+     * Update customer throws customer not found exception.
      */
     @Test
     void updateCustomerThrowsCustomerNotFoundException() {

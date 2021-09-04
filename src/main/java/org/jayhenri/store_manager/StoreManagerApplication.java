@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * The type Ecommerce application.
+ * The type Store manager application.
  */
 @SpringBootApplication
 public class StoreManagerApplication {

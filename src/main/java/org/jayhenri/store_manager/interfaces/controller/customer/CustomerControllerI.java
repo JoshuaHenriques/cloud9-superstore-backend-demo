@@ -14,12 +14,12 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * The interface Controller i.
+ * The interface Customer controller i.
  */
 public interface CustomerControllerI {
 
     /**
-     * Add.
+     * Add response entity.
      *
      * @param customer the customer
      * @return the response entity
@@ -31,7 +31,7 @@ public interface CustomerControllerI {
     ResponseEntity<String> add(@RequestBody Customer customer) throws CustomerAlreadyExistsException, InvalidPostalCodeException, InvalidCustomerException;
 
     /**
-     * Remove.
+     * Update response entity.
      *
      * @param customer   the customer
      * @param customerId the customer id
@@ -43,7 +43,7 @@ public interface CustomerControllerI {
     ResponseEntity<String> update(@RequestBody Customer customer, @PathVariable UUID customerId) throws InvalidCustomerException, CustomerNotFoundException;
 
     /**
-     * Update.
+     * Delete response entity.
      *
      * @param customerId the customer id
      * @return the response entity
@@ -53,9 +53,9 @@ public interface CustomerControllerI {
     ResponseEntity<String> delete(@PathVariable UUID customerId) throws CustomerNotFoundException;
 
     /**
-     * Find all list.
+     * List response entity.
      *
-     * @return the list
+     * @return the response entity
      */
     @GetMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<List<Customer>> list();

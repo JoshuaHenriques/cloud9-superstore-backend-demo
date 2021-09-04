@@ -72,7 +72,7 @@ public class LoginServiceTest {
     }
 
     /**
-     * Test add.
+     * Add.
      */
     @Test
     void add() {
@@ -85,7 +85,7 @@ public class LoginServiceTest {
     }
 
     /**
-     * Test update.
+     * Update.
      */
     @Test
     void update() {
@@ -111,7 +111,7 @@ public class LoginServiceTest {
     }
 
     /**
-     * Find all.
+     * Find all logins.
      */
     @Test
     void findAllLogins() {
@@ -170,7 +170,7 @@ public class LoginServiceTest {
     }
 
     /**
-     * Exists by Phone Number
+     * Exists by phone number.
      */
     @Test
     void existsByPhoneNumber() {
@@ -186,7 +186,7 @@ public class LoginServiceTest {
     }
 
     /**
-     * Exists by Phone Number
+     * Does not exists by phone number.
      */
     @Test
     void doesNotExistsByPhoneNumber() {

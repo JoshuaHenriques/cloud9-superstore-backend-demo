@@ -58,7 +58,7 @@ public class StoreServiceTest {
     }
 
     /**
-     * Test add.
+     * Add.
      */
     @Test
     void add() {
@@ -71,7 +71,7 @@ public class StoreServiceTest {
     }
 
     /**
-     * Test update.
+     * Update.
      */
     @Test
     void update() {
@@ -95,7 +95,7 @@ public class StoreServiceTest {
     }
 
     /**
-     * Find all.
+     * Find all stores.
      */
     @Test
     void findAllStores() {

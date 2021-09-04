@@ -43,15 +43,6 @@ public class EmployeeController implements EmployeeControllerI {
         this.addressService = addressService;
     }
 
-    /**
-     * Register response entity.
-     *
-     * @param employee the employee
-     * @return the response entity
-     * @throws EmployeeAlreadyExistsException the employee already exists exception
-     * @throws InvalidPostalCodeException     the invalid postal code exception
-     * @throws InvalidEmployeeException       the invalid employee exception
-     */
     @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> add(@RequestBody Employee employee)
             throws EmployeeAlreadyExistsException, InvalidPostalCodeException, InvalidEmployeeException {
@@ -72,15 +63,6 @@ public class EmployeeController implements EmployeeControllerI {
         return new ResponseEntity<>("Successfully Created Employee", responseHeaders, HttpStatus.CREATED);
     }
 
-    /**
-     * Update employee.
-     *
-     * @param employee   the employee
-     * @param employeeId the employee id
-     * @return the response entity
-     * @throws InvalidEmployeeException  the invalid employee exception
-     * @throws EmployeeNotFoundException the employee not found exception
-     */
     @PutMapping(value = "/update/{employeeId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> update(@RequestBody Employee employee, @PathVariable UUID employeeId)
             throws InvalidEmployeeException, EmployeeNotFoundException {
@@ -98,13 +80,6 @@ public class EmployeeController implements EmployeeControllerI {
             throw new InvalidEmployeeException();
     }
 
-    /**
-     * Delete employee.
-     *
-     * @param employeeId the employee id
-     * @return the response entity
-     * @throws EmployeeNotFoundException the employee not found exception
-     */
     @DeleteMapping(value = "/delete/{employeeId}")
     public ResponseEntity<String> delete(@PathVariable UUID employeeId)
             throws EmployeeNotFoundException {
@@ -118,11 +93,6 @@ public class EmployeeController implements EmployeeControllerI {
             throw new EmployeeNotFoundException();
     }
 
-    /**
-     * List customers response entity.
-     *
-     * @return the response entity
-     */
     @GetMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Employee>> list() {
         List<Employee> list = employeeService.findAll();
@@ -132,15 +102,6 @@ public class EmployeeController implements EmployeeControllerI {
         return new ResponseEntity<>(list, responseHeaders, HttpStatus.OK);
     }
 
-    /**
-     * Gets by email.
-     *
-     * @param employeeId the item name
-     * @return the by email
-     * @throws InvalidNameException      the invalid name exception
-     * @throws EmployeeNotFoundException the item not found exception
-     * @throws InvalidEmployeeException  the invalid item exception
-     */
     @GetMapping(value = "/get/{employeeId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Employee> get(@PathVariable UUID employeeId)
             throws InvalidNameException, EmployeeNotFoundException, InvalidEmployeeException {

@@ -11,7 +11,7 @@ import java.util.UUID;
 
 
 /**
- * The type Customer service.
+ * The type Item service.
  */
 @Service
 public class ItemService implements ItemServiceI {
@@ -19,9 +19,9 @@ public class ItemService implements ItemServiceI {
     private final ItemRepository itemRepository;
 
     /**
-     * Instantiates a new Employee service.
+     * Instantiates a new Item service.
      *
-     * @param itemRepository the customer repository
+     * @param itemRepository the item repository
      */
     @Autowired
     public ItemService(ItemRepository itemRepository) {
@@ -30,85 +30,41 @@ public class ItemService implements ItemServiceI {
         // this.orderDBService = orderDBService;
     }
 
-    /**
-     * Add.
-     *
-     * @param customer the customer
-     */
     public void add(Item customer) {
 
         itemRepository.save(customer);
     }
 
-    /**
-     * Delete.
-     *
-     * @param customer the customer
-     */
     public void remove(Item customer) {
 
         itemRepository.delete(customer);
     }
 
-    /**
-     * Update.
-     *
-     * @param customer the customer
-     */
     public void update(Item customer) {
 
         itemRepository.save(customer);
     }
 
-    /**
-     * Find all customers list.
-     *
-     * @return the list
-     */
     public List<Item> findAll() {
 
         return itemRepository.findAll();
     }
 
-    /**
-     * Exists by email boolean.
-     *
-     * @param itemName the item name
-     * @return the boolean
-     */
     public boolean existsByItemName(String itemName) {
 
         return itemRepository.existsByItemName(itemName);
     }
 
-    /**
-     * Gets by email.
-     *
-     * @param itemName the item name
-     * @return the by email
-     */
     public Item getByItemName(String itemName) {
 
         return itemRepository.getByItemName(itemName);
     }
 
-    /**
-     * Exists by email boolean.
-     *
-     * @param uuid the email
-     * @return the boolean
-     */
     public boolean existsById(UUID uuid) {
 
         return itemRepository.existsById(uuid);
     }
 
-    /**
-     * Gets by email.
-     *
-     * @param uuid the email
-     * @return the by email
-     */
     public Item getById(UUID uuid) {
 
         return itemRepository.getById(uuid);

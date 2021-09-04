@@ -25,20 +25,14 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
 
 /**
- * The type Order db service test.
+ * The type Orders service test.
  */
 @ExtendWith(MockitoExtension.class)
 class OrdersServiceTest {
 
-    /**
-     * The Order db repository.
-     */
     @Mock
     private OrdersRepository ordersRepository;
 
-    /**
-     * The Order db repository.
-     */
     @Mock
     private CustomerServiceI customerService;
 
@@ -48,9 +42,6 @@ class OrdersServiceTest {
     @Captor
     private ArgumentCaptor<UUID> captorUUID;
 
-    /**
-     * The Order db repository.
-     */
     private OrdersServiceI ordersService;
 
     private Customer customer;
@@ -59,9 +50,6 @@ class OrdersServiceTest {
 
     private UUID uuid;
 
-    /**
-     * The Argument captor.
-     */
     @Captor
     private ArgumentCaptor<Orders> captorOrders;
 

@@ -30,96 +30,46 @@ public class EmployeeService implements EmployeeServiceI {
         // this.orderDBService = orderDBService;
     }
 
-    /**
-     * Exists by phone number boolean.
-     *
-     * @param phoneNumber the phone number
-     * @return the boolean
-     */
     public boolean existsByPhoneNumber(String phoneNumber) {
 
         return employeeRepository.existsByPhoneNumber(phoneNumber);
     }
 
-    /**
-     * Add.
-     *
-     * @param employee the employee
-     */
     public void add(Employee employee) {
 
         employeeRepository.save(employee);
     }
 
-    /**
-     * Delete.
-     *
-     * @param employee the employee
-     */
     public void remove(Employee employee) {
 
         employeeRepository.delete(employee);
     }
 
-    /**
-     * Update.
-     *
-     * @param employee the employee
-     */
     public void update(Employee employee) {
 
         employeeRepository.save(employee);
     }
 
-    /**
-     * Find all employees list.
-     *
-     * @return the list
-     */
     public List<Employee> findAll() {
 
         return employeeRepository.findAll();
     }
 
-    /**
-     * Exists by email boolean.
-     *
-     * @param uuid the email
-     * @return the boolean
-     */
     public boolean existsById(UUID uuid) {
 
         return employeeRepository.existsById(uuid);
     }
 
-    /**
-     * Gets by email.
-     *
-     * @param uuid the email
-     * @return the by email
-     */
     public Employee getById(UUID uuid) {
 
         return employeeRepository.getById(uuid);
     }
 
-    /**
-     * Exists by email boolean.
-     *
-     * @param email the email
-     * @return the boolean
-     */
     public boolean existsByEmail(String email) {
 
         return employeeRepository.existsByEmail(email);
     }
 
-    /**
-     * Gets by email.
-     *
-     * @param email the email
-     * @return the by email
-     */
     public Employee getByEmail(String email) {
 
         return employeeRepository.getByEmail(email);

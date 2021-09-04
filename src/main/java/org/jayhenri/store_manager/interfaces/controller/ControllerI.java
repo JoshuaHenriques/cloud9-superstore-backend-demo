@@ -36,7 +36,7 @@ public interface ControllerI<T> {
      * @throws StoreAlreadyExistsException     the store already exists exception
      * @throws InvalidPostalCodeException      the invalid postal code exception
      * @throws InvalidStoreException           the invalid store exception
-     * @throws InventoryAlreadyExistsException the item already exists exception
+     * @throws InventoryAlreadyExistsException the inventory already exists exception
      * @throws InvalidItemException            the invalid item exception
      * @throws ItemAlreadyExistsException      the item already exists exception
      */
@@ -55,7 +55,7 @@ public interface ControllerI<T> {
      * @throws StoreNotFoundException          the store not found exception
      * @throws InvalidItemException            the invalid item exception
      * @throws ItemNotFoundException           the item not found exception
-     * @throws InventoryAlreadyExistsException the item already exists exception
+     * @throws InventoryAlreadyExistsException the inventory already exists exception
      */
     @PutMapping(value = "/update/{uuid}", consumes = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<String> update(@RequestBody T t, @PathVariable UUID uuid) throws InvalidLoginException, LoginNotFoundException, InvalidStoreException, StoreNotFoundException, InvalidItemException, ItemNotFoundException, InventoryAlreadyExistsException;

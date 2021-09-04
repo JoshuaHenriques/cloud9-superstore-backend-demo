@@ -63,7 +63,7 @@ public class ItemServiceTest {
     }
 
     /**
-     * Test add.
+     * Add.
      */
     @Test
     void add() {
@@ -76,7 +76,7 @@ public class ItemServiceTest {
     }
 
     /**
-     * Test update.
+     * Update.
      */
     @Test
     void update() {
@@ -100,7 +100,7 @@ public class ItemServiceTest {
     }
 
     /**
-     * Find all.
+     * Find all items.
      */
     @Test
     void findAllItems() {
@@ -173,7 +173,7 @@ public class ItemServiceTest {
     }
 
     /**
-     * Exists by item name.
+     * Does not exists by item name.
      */
     @Test
     void doesNotExistsByItemName() {
@@ -188,7 +188,7 @@ public class ItemServiceTest {
     }
 
     /**
-     * Gets by product name.
+     * Gets by item name.
      */
     @Test
     void getByItemName() {

@@ -29,7 +29,7 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
 
 /**
- * The type StoreInventory controller uni test.
+ * The type Store inventory controller uni test.
  */
 @ExtendWith(MockitoExtension.class)
 class StoreInventoryControllerUniTest {
@@ -77,9 +77,9 @@ class StoreInventoryControllerUniTest {
     }
 
     /**
-     * Add item.
+     * Add.
      *
-     * @throws InventoryAlreadyExistsException the item already exists exception
+     * @throws InventoryAlreadyExistsException the inventory already exists exception
      * @throws InvalidItemException            the invalid item exception
      * @throws ItemNotFoundException           the item not found exception
      * @throws InvalidInventoryException       the invalid inventory exception
@@ -99,7 +99,7 @@ class StoreInventoryControllerUniTest {
     }
 
     /**
-     * Add item throws invalid item exception.
+     * Add throws invalid inventory exception.
      */
     @Test
     void addThrowsInvalidInventoryException() {
@@ -108,7 +108,7 @@ class StoreInventoryControllerUniTest {
     }
 
     /**
-     * Add item throws invalid item exception.
+     * Add throws inventory already exists exception.
      */
     @Test
     void addThrowsInventoryAlreadyExistsException() {
@@ -120,7 +120,7 @@ class StoreInventoryControllerUniTest {
     }
 
     /**
-     * Add item throws item already exists exception.
+     * Add throws item not found exception.
      */
     @Test
     void addThrowsItemNotFoundException() {
@@ -131,7 +131,7 @@ class StoreInventoryControllerUniTest {
     }
 
     /**
-     * Update item.
+     * Update.
      *
      * @throws InvalidItemException  the invalid item exception
      * @throws ItemNotFoundException the item not found exception
@@ -149,7 +149,7 @@ class StoreInventoryControllerUniTest {
     }
 
     /**
-     * Update item throws invalid item exception.
+     * Update inventory throws invalid item exception.
      */
     @Test
     void updateInventoryThrowsInvalidItemException() {
@@ -158,7 +158,7 @@ class StoreInventoryControllerUniTest {
     }
 
     /**
-     * Update item throws item not found exception.
+     * Update inventory throws item not found exception.
      */
     @Test
     void updateInventoryThrowsItemNotFoundException() {
@@ -170,7 +170,7 @@ class StoreInventoryControllerUniTest {
     }
 
     /**
-     * Remove item.
+     * Delete.
      *
      * @throws InvalidItemException  the invalid item exception
      * @throws ItemNotFoundException the item not found exception
@@ -186,7 +186,7 @@ class StoreInventoryControllerUniTest {
     }
 
     /**
-     * Remove item throws item not found exception.
+     * Delete throws item not found exception.
      */
     @Test
     void deleteThrowsItemNotFoundException() {
@@ -196,7 +196,7 @@ class StoreInventoryControllerUniTest {
     }
 
     /**
-     * Gets by product name.
+     * Gets by item name.
      *
      * @throws ItemNotFoundException the item not found exception
      */
@@ -215,7 +215,7 @@ class StoreInventoryControllerUniTest {
     }
 
     /**
-     * Gets by product name throws item not found exception.
+     * Gets by item name throws item not found exception.
      */
     @Test
     void getByItemNameThrowsItemNotFoundException() {
@@ -225,7 +225,7 @@ class StoreInventoryControllerUniTest {
     }
 
     /**
-     * Gets by product name.
+     * Gets by id.
      *
      * @throws ItemNotFoundException the item not found exception
      */
@@ -244,7 +244,7 @@ class StoreInventoryControllerUniTest {
     }
 
     /**
-     * Gets by product name throws item not found exception.
+     * Gets by id throws item not found exception.
      */
     @Test
     void getByIdThrowsItemNotFoundException() {

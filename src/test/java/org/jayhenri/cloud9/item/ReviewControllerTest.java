@@ -71,7 +71,7 @@ public class ReviewControllerTest {
     }
 
     /**
-     * Add review.
+     * Add.
      *
      * @throws ItemNotFoundException  the item not found exception
      * @throws InvalidReviewException the invalid review exception

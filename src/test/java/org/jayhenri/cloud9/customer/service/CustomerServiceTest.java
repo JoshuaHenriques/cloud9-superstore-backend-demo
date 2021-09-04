@@ -25,43 +25,22 @@ import static org.mockito.BDDMockito.then;
 @ExtendWith(MockitoExtension.class)
 class CustomerServiceTest {
 
-    /**
-     * The Test me.
-     */
     private CustomerServiceI customerService;
 
-    /**
-     * The Customer repository.
-     */
     @Mock
     private CustomerRepository customerRepository;
 
-    /**
-     * The Captor customer.
-     */
     @Captor
     private ArgumentCaptor<Customer> captorCustomer;
 
-    /**
-     * The Captor string.
-     */
     @Captor
     private ArgumentCaptor<String> captorString;
 
-    /**
-     * The Captor string.
-     */
     @Captor
     private ArgumentCaptor<UUID> captorUUID;
 
-    /**
-     * The Customer.
-     */
     private Customer customer;
 
-    /**
-     * The Customer.
-     */
     private UUID uuid;
 
     /**
@@ -104,7 +83,7 @@ class CustomerServiceTest {
     }
 
     /**
-     * Exists by phone number.
+     * Does not exists by phone number.
      */
     @Test
     void doesNotExistsByPhoneNumber() {
@@ -156,7 +135,6 @@ class CustomerServiceTest {
 
     /**
      * Find all customers.
-     * Do later.
      */
     @Test
     @Disabled
@@ -180,7 +158,7 @@ class CustomerServiceTest {
     }
 
     /**
-     * Exists by email.
+     * Does not exists by email.
      */
     @Test
     void doesNotExistsByEmail() {

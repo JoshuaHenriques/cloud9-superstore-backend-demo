@@ -7,20 +7,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The type Invalid item exception.
+ * The type Invalid login exception.
  */
 @ResponseStatus(value = HttpStatus.BAD_REQUEST)
 public class InvalidLoginException extends Exception {
     private List<String> errorMessages = new ArrayList<>();
 
     /**
-     * Instantiates a new Invalid item exception.
+     * Instantiates a new Invalid login exception.
      */
     public InvalidLoginException() {
     }
 
     /**
-     * Instantiates a new Invalid item exception.
+     * Instantiates a new Invalid login exception.
      *
      * @param msg the msg
      */

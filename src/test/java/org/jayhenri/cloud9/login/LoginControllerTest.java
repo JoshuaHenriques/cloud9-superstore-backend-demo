@@ -64,12 +64,11 @@ public class LoginControllerTest {
     /**
      * Add login.
      *
-     * @throws InventoryAlreadyExistsException the login already exists exception
      * @throws InvalidLoginException           the invalid login exception
      * @throws LoginAlreadyExistsException     the login already exists exception
      */
     @Test
-    void addLogin() throws InventoryAlreadyExistsException, InvalidLoginException, LoginAlreadyExistsException {
+    void addLogin() throws InvalidLoginException, LoginAlreadyExistsException {
 
         given(loginService.existsById(login.getLoginUUID())).willReturn(false);
 
@@ -103,12 +102,11 @@ public class LoginControllerTest {
     /**
      * Update login.
      *
-     * @throws InventoryAlreadyExistsException the inventory already exists exception
      * @throws InvalidLoginException           the invalid login exception
      * @throws LoginNotFoundException          the login not found exception
      */
     @Test
-    void updateLogin() throws InventoryAlreadyExistsException, InvalidLoginException, LoginNotFoundException {
+    void updateLogin() throws InvalidLoginException, LoginNotFoundException {
 
         given(loginService.existsById(uuid)).willReturn(true);
 

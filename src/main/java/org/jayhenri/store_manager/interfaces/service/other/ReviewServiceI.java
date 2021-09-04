@@ -8,10 +8,6 @@ import java.util.UUID;
 
 /**
  * The interface Review service i.
- *
- * @param <T> the type parameter
- * @param <C> the type parameter
- * @param <U> the type parameter
  */
 public interface ReviewServiceI {
 
@@ -24,7 +20,7 @@ public interface ReviewServiceI {
     void add(Item item, Review review);
 
     /**
-     * Add.
+     * Update.
      *
      * @param item   the item
      * @param review the review

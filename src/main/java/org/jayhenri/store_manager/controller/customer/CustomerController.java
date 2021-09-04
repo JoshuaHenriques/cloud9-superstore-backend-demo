@@ -34,7 +34,7 @@ public class CustomerController implements CustomerControllerI {
      * Instantiates a new Customer controller.
      *
      * @param customerService the customer service
-     * @param addressService  the inventory service
+     * @param addressService  the address service
      */
     @Autowired
     public CustomerController(CustomerServiceI customerService, AddressServiceI addressService) {
@@ -42,15 +42,6 @@ public class CustomerController implements CustomerControllerI {
         this.addressService = addressService;
     }
 
-    /**
-     * Register response entity.
-     *
-     * @param customer the customer
-     * @return the response entity
-     * @throws CustomerAlreadyExistsException the customer already exists exception
-     * @throws InvalidPostalCodeException     the invalid postal code exception
-     * @throws InvalidCustomerException       the invalid customer exception
-     */
     @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> add(@RequestBody Customer customer)
             throws CustomerAlreadyExistsException, InvalidPostalCodeException, InvalidCustomerException {
@@ -73,15 +64,6 @@ public class CustomerController implements CustomerControllerI {
         return new ResponseEntity<>("Successfully Created Customer", responseHeaders, HttpStatus.CREATED);
     }
 
-    /**
-     * Update customer.
-     *
-     * @param customerId the customerId
-     * @param customer   the customer
-     * @return the response entity
-     * @throws InvalidCustomerException  the invalid customer exception
-     * @throws CustomerNotFoundException the customer not found exception
-     */
     @PutMapping(value = "/update/{customerId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> update(@RequestBody Customer customer, @PathVariable UUID customerId)
             throws InvalidCustomerException, CustomerNotFoundException {
@@ -99,13 +81,6 @@ public class CustomerController implements CustomerControllerI {
             throw new InvalidCustomerException();
     }
 
-    /**
-     * Delete customer.
-     *
-     * @param customerId the email
-     * @return the response entity
-     * @throws CustomerNotFoundException the customer not found exception
-     */
     @DeleteMapping(value = "/delete/{customerId}")
     public ResponseEntity<String> delete(@PathVariable UUID customerId)
             throws CustomerNotFoundException {
@@ -120,11 +95,6 @@ public class CustomerController implements CustomerControllerI {
             throw new CustomerNotFoundException();
     }
 
-    /**
-     * List customers response entity.
-     *
-     * @return the response entity
-     */
     @GetMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Customer>> list() {
 
@@ -135,14 +105,6 @@ public class CustomerController implements CustomerControllerI {
         return new ResponseEntity<>(list, responseHeaders, HttpStatus.OK);
     }
 
-    /**
-     * Gets by email.
-     *
-     * @param customerId the email
-     * @return the by email
-     * @throws InvalidNameException      the invalid name exception
-     * @throws CustomerNotFoundException the customer not found exception
-     */
     @GetMapping(value = "/get/{customerId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Customer> get(@PathVariable UUID customerId)
             throws InvalidNameException, CustomerNotFoundException {

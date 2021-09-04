@@ -7,7 +7,7 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
- * The interface Order service i.
+ * The interface Orders service i.
  */
 public interface OrdersServiceI {
 

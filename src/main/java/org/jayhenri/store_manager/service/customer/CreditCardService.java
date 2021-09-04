@@ -32,24 +32,12 @@ public class CreditCardService implements CreditCardServiceI {
         this.customerService = customerService;
     }
 
-    /**
-     * Add credit card.
-     *
-     * @param customer   the customer
-     * @param creditCard the credit card
-     */
     public void add(Customer customer, CreditCard creditCard) {
 
         customer.getCreditCards().add(creditCard);
         customerService.update(customer);
     }
 
-    /**
-     * Remove credit card.
-     *
-     * @param customer the customer
-     * @param cardId   the card id
-     */
     public void remove(Customer customer, UUID cardId) {
 
         Set<CreditCard> removeMe = new HashSet<>();
@@ -60,24 +48,11 @@ public class CreditCardService implements CreditCardServiceI {
         customerService.update(customer);
     }
 
-    /**
-     * Find all credit cards list.
-     *
-     * @param customer the email
-     * @return the list
-     */
     public Set<CreditCard> findAll(Customer customer) {
 
         return customer.getCreditCards();
     }
 
-    /**
-     * Exists by email boolean.
-     *
-     * @param customer the customer
-     * @param cardId   the card id
-     * @return the boolean
-     */
     public boolean existsById(Customer customer, UUID cardId) {
 
         AtomicBoolean exists = new AtomicBoolean(false);
@@ -89,13 +64,6 @@ public class CreditCardService implements CreditCardServiceI {
         return exists.get();
     }
 
-    /**
-     * Gets by email.
-     *
-     * @param customer the customer
-     * @param cardId   the card id
-     * @return the by email
-     */
     public CreditCard getById(Customer customer, UUID cardId) {
 
         AtomicReference<CreditCard> creditCard = new AtomicReference<>(new CreditCard());
@@ -107,12 +75,6 @@ public class CreditCardService implements CreditCardServiceI {
         return creditCard.get();
     }
 
-    /**
-     * Exists by email boolean.
-     *
-     * @param ccn the credit card number
-     * @return the boolean
-     */
     public boolean existsByCCN(String ccn) {
 
         return customerService.existsByCCN(ccn);

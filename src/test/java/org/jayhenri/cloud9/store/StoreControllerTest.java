@@ -83,7 +83,7 @@ public class StoreControllerTest {
     /**
      * Add store.
      *
-     * @throws InventoryAlreadyExistsException the store already exists exception
+     * @throws InventoryAlreadyExistsException the inventory already exists exception
      * @throws InvalidStoreException           the invalid store exception
      * @throws StoreAlreadyExistsException     the store already exists exception
      * @throws LoginAlreadyExistsException     the login already exists exception

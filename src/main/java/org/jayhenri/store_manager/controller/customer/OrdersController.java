@@ -41,14 +41,6 @@ public class OrdersController implements OrdersControllerI {
         this.customerService = customerService;
     }
 
-    /**
-     * Register response entity.
-     *
-     * @param customerId the customer id
-     * @param orders     the orders
-     * @return the response entity
-     * @throws InvalidOrdersException the invalid orders exception
-     */
     @PostMapping(value = "/add/{customerId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> add(@RequestBody Orders orders, @PathVariable UUID customerId) throws InvalidOrdersException {
         if (!ObjectUtils.isEmpty(orders)) {
@@ -61,15 +53,6 @@ public class OrdersController implements OrdersControllerI {
             throw new InvalidOrdersException();
     }
 
-    /**
-     * Update customer.
-     *
-     * @param ordersId the orders id
-     * @param orders   the orders
-     * @return the response entity`
-     * @throws OrdersNotFoundException the orders not found exception
-     * @throws InvalidOrdersException  the invalid orders exception
-     */
     @PutMapping(value = "/update/{ordersId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> update(@RequestBody Orders orders, @PathVariable UUID ordersId) throws OrdersNotFoundException, InvalidOrdersException {
         if (!ObjectUtils.isEmpty(orders)) {
@@ -86,13 +69,6 @@ public class OrdersController implements OrdersControllerI {
             throw new InvalidOrdersException();
     }
 
-    /**
-     * List customers response entity.
-     *
-     * @param customerId the customer id
-     * @return the response entity
-     * @throws CustomerNotFoundException the customer not found exception
-     */
     @GetMapping(value = "/list/{customerId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Set<Orders>> list(@PathVariable UUID customerId) throws CustomerNotFoundException {
 
@@ -106,16 +82,6 @@ public class OrdersController implements OrdersControllerI {
             throw new CustomerNotFoundException();
     }
 
-    /**
-     * Gets by email.
-     *
-     * @param orderId the order id
-     * @return the by email
-     * @throws InvalidNameException      the invalid name exception
-     * @throws CustomerNotFoundException the customer not found exception
-     * @throws OrdersNotFoundException   the orders not found exception
-     * @throws InvalidOrdersException    the invalid orders exception
-     */
     @GetMapping(value = "/get/{orderId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Orders> get(@PathVariable UUID orderId)
             throws InvalidNameException, CustomerNotFoundException, OrdersNotFoundException, InvalidOrdersException {

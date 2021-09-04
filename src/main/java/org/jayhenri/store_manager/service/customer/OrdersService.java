@@ -32,56 +32,27 @@ public class OrdersService implements OrdersServiceI {
         this.customerService = customerService;
     }
 
-    /**
-     * Add order.
-     *
-     * @param customer the customer
-     * @param orders   the order
-     */
     public void add(Customer customer, Orders orders) {
 
         customer.getOrders().add(orders);
         customerService.update(customer);
     }
 
-    /**
-     * Update order.
-     *
-     * @param orders the orders
-     */
     public void update(Orders orders) {
 
         ordersRepository.save(orders);
     }
 
-    /**
-     * Find all orderDetails list.
-     *
-     * @param customer the email
-     * @return the list
-     */
     public Set<Orders> findAll(Customer customer) {
 
         return customer.getOrders();
     }
 
-    /**
-     * Exists by email boolean.
-     *
-     * @param cardId the card id
-     * @return the boolean
-     */
     public boolean existsById(UUID cardId) {
 
         return ordersRepository.existsById(cardId);
     }
 
-    /**
-     * Gets by email.
-     *
-     * @param cardId the card id
-     * @return the by email
-     */
     public Orders getById(UUID cardId) {
 
         return ordersRepository.getById(cardId);

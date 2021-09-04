@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.UUID;
 
 /**
- * The interface Inventory repository.
+ * The interface Online inventory repository.
  */
 @Repository
 @Transactional
@@ -18,7 +18,7 @@ public interface OnlineInventoryRepository extends JpaRepository<OnlineInventory
 
 
     /**
-     * Exists by product name boolean.
+     * Exists by item name boolean.
      *
      * @param phoneNumber the phone number
      * @return the boolean
@@ -28,10 +28,10 @@ public interface OnlineInventoryRepository extends JpaRepository<OnlineInventory
 
 
     /**
-     * Gets by product name.
+     * Gets by item name.
      *
      * @param email the email
-     * @return the by product name
+     * @return the by item name
      */
     @Query(value = "SELECT * FROM online_inventory WHERE online_inventory.item_name = :item_name)", nativeQuery = true)
     OnlineInventory getByItemName(@Param("item_name") String email);

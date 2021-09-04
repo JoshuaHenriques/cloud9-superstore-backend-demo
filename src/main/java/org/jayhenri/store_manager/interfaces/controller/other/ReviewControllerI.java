@@ -25,7 +25,7 @@ public interface ReviewControllerI {
      * @param review the review
      * @param itemId the item id
      * @return the response entity
-     * @throws InventoryAlreadyExistsException the item already exists exception
+     * @throws InventoryAlreadyExistsException the inventory already exists exception
      * @throws InvalidItemException            the invalid item exception
      * @throws ItemNotFoundException           the item not found exception
      * @throws InvalidReviewException          the invalid review exception

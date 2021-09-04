@@ -35,7 +35,7 @@ public interface CreditCardControllerI {
             throws CustomerNotFoundException, InvalidOrdersException, CreditCardAlreadyExistsException, InvalidCreditCardException;
 
     /**
-     * Remove response entity.
+     * Delete response entity.
      *
      * @param customerId the customer id
      * @param cardId     the card id

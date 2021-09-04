@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.UUID;
 
 /**
- * The interface Inventory repository.
+ * The interface Login repository.
  */
 @Repository
 @Transactional

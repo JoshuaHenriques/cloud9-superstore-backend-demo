@@ -59,7 +59,7 @@ public class ReviewServiceTest {
     }
 
     /**
-     * Test add.
+     * Add.
      */
     @Test
     void add() {
@@ -73,7 +73,7 @@ public class ReviewServiceTest {
     }
 
     /**
-     * Test update.
+     * Update.
      */
     @Test
     void update() {
@@ -106,7 +106,7 @@ public class ReviewServiceTest {
     }
 
     /**
-     * Find all.
+     * Find all reviews.
      */
     @Test
     void findAllReviews() {
@@ -117,7 +117,7 @@ public class ReviewServiceTest {
     }
 
     /**
-     * Exists by review name.
+     * Exists by id.
      */
     @Test
     void existsById() {
@@ -128,7 +128,7 @@ public class ReviewServiceTest {
     }
 
     /**
-     * Exists by review name.
+     * Gets by id.
      */
     @Test
     void getById() {

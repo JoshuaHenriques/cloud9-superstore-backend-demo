@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * The type StoreInventory controller.
+ * The type Store inventory controller.
  */
 @RestController // Indicates that the data returned by each method will be written straight into
 // the response body instead of rendering a template
@@ -32,9 +32,9 @@ public class StoreInventoryController implements InventoryControllerI<StoreInven
     private final ItemServiceI itemService;
 
     /**
-     * Instantiates a new StoreInventory controller.
+     * Instantiates a new Store inventory controller.
      *
-     * @param storeInventoryService the storeInventory service
+     * @param storeInventoryService the store inventory service
      * @param itemService           the item service
      */
     @Autowired
@@ -45,16 +45,6 @@ public class StoreInventoryController implements InventoryControllerI<StoreInven
         this.itemService = itemService;
     }
 
-    /**
-     * Add item to storeInventory response entity.
-     *
-     * @param itemId the item id
-     * @return the response entity
-     * @throws InventoryAlreadyExistsException the item already exists exception
-     * @throws InvalidItemException            the invalid item exception
-     * @throws ItemNotFoundException
-     * @throws InvalidInventoryException
-     */
     @PostMapping(value = "/add/{itemId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> add(@RequestBody StoreInventory storeInventory, @PathVariable UUID itemId)
             throws InventoryAlreadyExistsException, InvalidItemException, ItemNotFoundException, InvalidInventoryException {
@@ -77,14 +67,6 @@ public class StoreInventoryController implements InventoryControllerI<StoreInven
             throw new InvalidInventoryException();
     }
 
-    /**
-     * Update item response entity.
-     *
-     * @param storeInventory the storeInventory
-     * @return the response entity
-     * @throws InvalidItemException  the invalid item exception
-     * @throws ItemNotFoundException the item not found exception
-     */
     @PutMapping(value = "/update/{inventoryId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> update(@RequestBody StoreInventory storeInventory, @PathVariable UUID inventoryId)
             throws InvalidItemException, ItemNotFoundException {
@@ -104,13 +86,6 @@ public class StoreInventoryController implements InventoryControllerI<StoreInven
             throw new InvalidItemException();
     }
 
-    /**
-     * Remove item to storeInventory response entity.
-     *
-     * @return the response entity
-     * @throws InvalidItemException  the invalid item exception
-     * @throws ItemNotFoundException the item not found exception
-     */
     @DeleteMapping(value = "/delete/{itemId}")
     public ResponseEntity<String> delete(@PathVariable UUID inventoryId) throws InvalidItemException, ItemNotFoundException {
 
@@ -123,14 +98,6 @@ public class StoreInventoryController implements InventoryControllerI<StoreInven
         } else
             throw new ItemNotFoundException();
     }
-
-    /**
-     * Gets by product name.
-     *
-     * @param itemName the item name
-     * @return the by product name
-     * @throws ItemNotFoundException the item not found exception
-     */
 
     @GetMapping(value = "/get/{itemName}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<StoreInventory> getByItemName(@PathVariable String itemName) throws ItemNotFoundException {
@@ -145,13 +112,6 @@ public class StoreInventoryController implements InventoryControllerI<StoreInven
             throw new ItemNotFoundException();
     }
 
-    /**
-     * Get response entity.
-     *
-     * @param itemId the item name
-     * @return the response entity
-     * @throws ItemNotFoundException the item not found exception
-     */
     @GetMapping(value = "/get/{itemId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<StoreInventory> getById(@PathVariable UUID inventoryId) throws ItemNotFoundException {
         if (storeInventoryService.existsById(inventoryId)) {
@@ -164,11 +124,6 @@ public class StoreInventoryController implements InventoryControllerI<StoreInven
             throw new ItemNotFoundException();
     }
 
-    /**
-     * Find all list.
-     *
-     * @return the list
-     */
     @GetMapping(value = "/list")
     public ResponseEntity<List<StoreInventory>> findAll() {
 

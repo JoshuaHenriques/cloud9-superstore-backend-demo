@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The type Invalid credit card exception.
+ * The type Invalid employee exception.
  */
 @ResponseStatus(value = HttpStatus.BAD_REQUEST)
 public class InvalidEmployeeException extends Exception {
@@ -15,13 +15,13 @@ public class InvalidEmployeeException extends Exception {
     private List<String> errorMessages = new ArrayList<>();
 
     /**
-     * Instantiates a new Invalid credit card exception.
+     * Instantiates a new Invalid employee exception.
      */
     public InvalidEmployeeException() {
     }
 
     /**
-     * Instantiates a new Invalid credit card exception.
+     * Instantiates a new Invalid employee exception.
      *
      * @param msg the msg
      */

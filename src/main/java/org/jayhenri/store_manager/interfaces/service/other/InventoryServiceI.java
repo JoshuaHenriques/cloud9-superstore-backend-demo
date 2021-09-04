@@ -59,7 +59,7 @@ public interface InventoryServiceI<T> {
     /**
      * Exists by id boolean.
      *
-     * @param uuid the u
+     * @param uuid the uuid
      * @return the boolean
      */
     boolean existsById(UUID uuid);
@@ -67,13 +67,13 @@ public interface InventoryServiceI<T> {
     /**
      * Gets by id.
      *
-     * @param uuid the u
+     * @param uuid the uuid
      * @return the by id
      */
     T getById(UUID uuid);
 
     /**
-     * Update.
+     * Can purchase boolean.
      *
      * @param t        the t
      * @param quantity the quantity
@@ -82,7 +82,7 @@ public interface InventoryServiceI<T> {
     boolean canPurchase(T t, int quantity);
 
     /**
-     * Update.
+     * Purchase.
      *
      * @param t        the t
      * @param quantity the quantity

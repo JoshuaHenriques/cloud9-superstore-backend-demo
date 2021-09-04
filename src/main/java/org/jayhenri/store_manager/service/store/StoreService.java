@@ -10,7 +10,7 @@ import java.util.UUID;
 
 
 /**
- * The type Customer service.
+ * The type Store service.
  */
 @Service
 public class StoreService implements ServiceI<Store> {
@@ -27,63 +27,31 @@ public class StoreService implements ServiceI<Store> {
         this.storeRepository = storeRepository;
     }
 
-    /**
-     * Add.
-     *
-     * @param store the store
-     */
     public void add(Store store) {
 
         storeRepository.save(store);
     }
 
-    /**
-     * Delete.
-     *
-     * @param store the store
-     */
     public void remove(Store store) {
 
         storeRepository.delete(store);
     }
 
-    /**
-     * Update.
-     *
-     * @param store the store
-     */
     public void update(Store store) {
 
         storeRepository.save(store);
     }
 
-    /**
-     * Find all stores list.
-     *
-     * @return the list
-     */
     public List<Store> findAll() {
 
         return storeRepository.findAll();
     }
 
-    /**
-     * Exists by email boolean.
-     *
-     * @param uuid the email
-     * @return the boolean
-     */
     public boolean existsById(UUID uuid) {
 
         return storeRepository.existsById(uuid);
     }
 
-    /**
-     * Gets by email.
-     *
-     * @param uuid the email
-     * @return the by email
-     */
     public Store getById(UUID uuid) {
 
         return storeRepository.getById(uuid);

@@ -12,7 +12,7 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
- * The type Order.
+ * The type Orders.
  */
 @Getter
 @Setter

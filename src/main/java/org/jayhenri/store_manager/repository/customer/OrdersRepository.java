@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.UUID;
 
 /**
- * The interface Customer repository.
+ * The interface Orders repository.
  */
 @Repository
 @Transactional

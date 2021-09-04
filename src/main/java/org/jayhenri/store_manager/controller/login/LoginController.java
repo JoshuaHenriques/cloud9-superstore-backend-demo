@@ -38,14 +38,6 @@ public class LoginController implements ControllerI<Login> {
         this.loginService = loginService;
     }
 
-    /**
-     * Register response entity.
-     *
-     * @param login the login
-     * @return the response entity
-     * @throws LoginAlreadyExistsException the login already exists exception
-     * @throws InvalidLoginException       the invalid login exception
-     */
     @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> add(@RequestBody Login login)
             throws LoginAlreadyExistsException, InvalidLoginException {
@@ -63,15 +55,6 @@ public class LoginController implements ControllerI<Login> {
         return new ResponseEntity<>("Successfully Created Login", responseHeaders, HttpStatus.CREATED);
     }
 
-    /**
-     * Update login.
-     *
-     * @param login   the login
-     * @param loginId the login id
-     * @return the response entity
-     * @throws InvalidLoginException  the invalid login exception
-     * @throws LoginNotFoundException the login not found exception
-     */
     @PutMapping(value = "/update/{loginId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> update(@RequestBody Login login, @PathVariable UUID loginId)
             throws InvalidLoginException, LoginNotFoundException {
@@ -89,13 +72,6 @@ public class LoginController implements ControllerI<Login> {
             throw new InvalidLoginException();
     }
 
-    /**
-     * Delete login.
-     *
-     * @param loginId the email
-     * @return the response entity
-     * @throws LoginNotFoundException the login not found exception
-     */
     @DeleteMapping(value = "/delete/{loginId}")
     public ResponseEntity<String> delete(@PathVariable UUID loginId)
             throws LoginNotFoundException {
@@ -109,11 +85,6 @@ public class LoginController implements ControllerI<Login> {
             throw new LoginNotFoundException();
     }
 
-    /**
-     * List logins response entity.
-     *
-     * @return the response entity
-     */
     @GetMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Login>> list() {
 
@@ -124,11 +95,6 @@ public class LoginController implements ControllerI<Login> {
         return new ResponseEntity<>(list, responseHeaders, HttpStatus.OK);
     }
 
-    /**
-     * Gets by email.
-     *
-     * @param loginId the login name
-     */
     @GetMapping(value = "/get/{loginId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Login> get(@PathVariable UUID loginId)
             throws InvalidNameException, InvalidLoginException, LoginNotFoundException {

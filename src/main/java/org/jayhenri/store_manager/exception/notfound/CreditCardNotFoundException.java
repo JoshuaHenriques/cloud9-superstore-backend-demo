@@ -7,20 +7,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The type Customer not found exception.
+ * The type Credit card not found exception.
  */
 @ResponseStatus(value = HttpStatus.NOT_FOUND)
 public class CreditCardNotFoundException extends Exception {
     private List<String> errorMessages = new ArrayList<>();
 
     /**
-     * Instantiates a new Customer not found exception.
+     * Instantiates a new Credit card not found exception.
      */
     public CreditCardNotFoundException() {
     }
 
     /**
-     * Instantiates a new Customer not found exception.
+     * Instantiates a new Credit card not found exception.
      *
      * @param msg the msg
      */

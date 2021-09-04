@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The type Customer already exists exception.
+ * The type Credit card already exists exception.
  */
 @ResponseStatus(value = HttpStatus.BAD_REQUEST)
 public class CreditCardAlreadyExistsException extends Exception {
@@ -15,13 +15,13 @@ public class CreditCardAlreadyExistsException extends Exception {
     private List<String> errorMessages = new ArrayList<>();
 
     /**
-     * Instantiates a new Customer already exists exception.
+     * Instantiates a new Credit card already exists exception.
      */
     public CreditCardAlreadyExistsException() {
     }
 
     /**
-     * Instantiates a new Customer already exists exception.
+     * Instantiates a new Credit card already exists exception.
      *
      * @param msg the msg
      */

@@ -21,45 +21,27 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
 
 /**
- * The type OnlineInventory service test.
+ * The type Online inventory service test.
  */
 @ExtendWith(MockitoExtension.class)
 class OnlineInventoryServiceTest {
 
-    /**
-     * The Test me.
-     */
     private InventoryServiceI<OnlineInventory> onlineInventoryService;
 
-    /**
-     * The OnlineInventory repository.
-     */
     @Mock
     private OnlineInventoryRepository onlineInventoryRepository;
 
-    /**
-     * The Captor onlineInventory.
-     */
     @Captor
     private ArgumentCaptor<OnlineInventory> captorOnlineInventory;
 
-    /**
-     * The Captor string.
-     */
     @Captor
     private ArgumentCaptor<String> captorString;
 
-    /**
-     * The Captor string.
-     */
     @Captor
     private ArgumentCaptor<UUID> captorUUID;
 
     private UUID uuid;
 
-    /**
-     * The OnlineInventory.
-     */
     private OnlineInventory onlineInventory;
 
     private Item item;
@@ -104,9 +86,6 @@ class OnlineInventoryServiceTest {
 //        assertThat(captorOnlineInventory.getValue().getPrice()).isEqualTo(1129.99);
 //    }
 
-    /**
-     * Test update.
-     */
     @Test
     void update() {
         onlineInventoryService.update(onlineInventory);
@@ -202,7 +181,7 @@ class OnlineInventoryServiceTest {
     }
 
     /**
-     * Exists by item name.
+     * Does not exists by item name.
      */
     @Test
     void doesNotExistsByItemName() {
@@ -217,7 +196,7 @@ class OnlineInventoryServiceTest {
     }
 
     /**
-     * Gets by product name.
+     * Gets by item name.
      */
     @Test
     void getByItemName() {
