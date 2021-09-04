@@ -25,8 +25,8 @@
 </details>
 
 <!-- ABOUT THE PROJECT -->
-## About The Project
-This app is a replica of a real world store.* Great to fork to expand for your use case
+<!-- ## About The Project -->
+<!-- This app is a replica of a real world store.* Great to fork to expand for your use case -->
 
 #### Endpoints:
 ```
