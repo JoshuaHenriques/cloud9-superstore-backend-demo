@@ -1,9 +1,9 @@
 package org.jayhenri.store_manager.interfaces.service.other;
 
-import java.util.UUID;
-
 import org.jayhenri.store_manager.interfaces.service.ServiceI;
 import org.jayhenri.store_manager.model.item.Item;
+
+import java.util.UUID;
 
 /**
  * The interface Item service i.

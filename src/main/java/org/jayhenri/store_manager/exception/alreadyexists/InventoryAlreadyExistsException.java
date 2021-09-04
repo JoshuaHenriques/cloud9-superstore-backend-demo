@@ -1,10 +1,10 @@
 package org.jayhenri.store_manager.exception.alreadyexists;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The type Item already exists exception.

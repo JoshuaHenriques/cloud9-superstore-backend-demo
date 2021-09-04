@@ -1,23 +1,14 @@
 package org.jayhenri.store_manager.model.inventory;
 
-import java.io.Serializable;
-import java.util.UUID;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.MapsId;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import org.jayhenri.store_manager.model.item.Item;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.jayhenri.store_manager.model.item.Item;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.UUID;
 
 /**
  * The type Online inventory.

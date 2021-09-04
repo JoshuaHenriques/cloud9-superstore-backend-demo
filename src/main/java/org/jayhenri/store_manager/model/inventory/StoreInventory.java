@@ -1,25 +1,15 @@
 package org.jayhenri.store_manager.model.inventory;
 
-import java.io.Serializable;
-import java.util.UUID;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import org.jayhenri.store_manager.model.item.Item;
-import org.jayhenri.store_manager.model.store.Store;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.jayhenri.store_manager.model.item.Item;
+import org.jayhenri.store_manager.model.store.Store;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.UUID;
 
 /**
  * The type Store inventory.
@@ -49,11 +39,11 @@ public class StoreInventory implements Serializable {
 
     @MapsId
     @OneToOne
-    @JoinColumn(name="item_id", unique=true, nullable=false)
+    @JoinColumn(name = "item_id", unique = true, nullable = false)
     private Item item;
 
     @ManyToOne
-    @JoinColumn(name="store_id", nullable=false, updatable=false)
+    @JoinColumn(name = "store_id", nullable = false, updatable = false)
     private Store store;
 
     /**

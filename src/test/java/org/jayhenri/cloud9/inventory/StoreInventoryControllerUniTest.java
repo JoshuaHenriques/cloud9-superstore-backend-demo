@@ -1,13 +1,5 @@
 package org.jayhenri.cloud9.inventory;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.BDDMockito.then;
-
-import java.util.HashSet;
-import java.util.UUID;
-
 import org.jayhenri.store_manager.controller.inventory.StoreInventoryController;
 import org.jayhenri.store_manager.exception.alreadyexists.InventoryAlreadyExistsException;
 import org.jayhenri.store_manager.exception.invalid.InvalidInventoryException;
@@ -27,6 +19,14 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
+import java.util.HashSet;
+import java.util.UUID;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.then;
 
 /**
  * The type StoreInventory controller uni test.
@@ -62,7 +62,8 @@ class StoreInventoryControllerUniTest {
 
     private
 
-    @BeforeEach void setUp() {
+    @BeforeEach
+    void setUp() {
 
         itemId = UUID.randomUUID();
 
@@ -80,8 +81,8 @@ class StoreInventoryControllerUniTest {
      *
      * @throws InventoryAlreadyExistsException the item already exists exception
      * @throws InvalidItemException            the invalid item exception
-     * @throws ItemNotFoundException
-     * @throws InvalidInventoryException
+     * @throws ItemNotFoundException           the item not found exception
+     * @throws InvalidInventoryException       the invalid inventory exception
      */
     @Test
     void add() throws InventoryAlreadyExistsException, InvalidItemException, ItemNotFoundException,
@@ -102,7 +103,7 @@ class StoreInventoryControllerUniTest {
      */
     @Test
     void addThrowsInvalidInventoryException() {
-        
+
         assertThrows(InvalidInventoryException.class, () -> storeInventoryController.add(null, null));
     }
 
@@ -123,7 +124,7 @@ class StoreInventoryControllerUniTest {
      */
     @Test
     void addThrowsItemNotFoundException() {
-        
+
         given(itemService.existsById(itemId)).willReturn(false);
 
         assertThrows(ItemNotFoundException.class, () -> storeInventoryController.add(inventory, itemId));
@@ -137,7 +138,7 @@ class StoreInventoryControllerUniTest {
      */
     @Test
     void update() throws InvalidItemException, ItemNotFoundException {
-        
+
         given(storeInventoryService.existsById(inventoryId)).willReturn(true);
 
         assertThat(HttpStatus.OK).isEqualTo(storeInventoryController.update(inventory, inventoryId).getStatusCode());
@@ -152,7 +153,7 @@ class StoreInventoryControllerUniTest {
      */
     @Test
     void updateInventoryThrowsInvalidItemException() {
-        
+
         assertThrows(InvalidItemException.class, () -> storeInventoryController.update(null, null));
     }
 
@@ -161,14 +162,14 @@ class StoreInventoryControllerUniTest {
      */
     @Test
     void updateInventoryThrowsItemNotFoundException() {
-        
+
         given(storeInventoryService.existsById(inventoryId)).willReturn(false);
-        
+
         assertThrows(ItemNotFoundException.class, () ->
-        storeInventoryController.update(inventory, inventoryId));
+                storeInventoryController.update(inventory, inventoryId));
     }
 
-        /**
+    /**
      * Remove item.
      *
      * @throws InvalidItemException  the invalid item exception

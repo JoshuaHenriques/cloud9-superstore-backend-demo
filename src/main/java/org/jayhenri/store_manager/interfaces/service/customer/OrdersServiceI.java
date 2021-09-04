@@ -1,10 +1,10 @@
 package org.jayhenri.store_manager.interfaces.service.customer;
 
-import java.util.Set;
-import java.util.UUID;
-
 import org.jayhenri.store_manager.model.customer.Customer;
 import org.jayhenri.store_manager.model.customer.Orders;
+
+import java.util.Set;
+import java.util.UUID;
 
 /**
  * The interface Order service i.

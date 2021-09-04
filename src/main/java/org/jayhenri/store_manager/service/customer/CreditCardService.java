@@ -1,17 +1,17 @@
 package org.jayhenri.store_manager.service.customer;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.atomic.AtomicReference;
-
 import org.jayhenri.store_manager.interfaces.service.customer.CreditCardServiceI;
 import org.jayhenri.store_manager.interfaces.service.customer.CustomerServiceI;
 import org.jayhenri.store_manager.model.customer.CreditCard;
 import org.jayhenri.store_manager.model.customer.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * The type Credit card service.

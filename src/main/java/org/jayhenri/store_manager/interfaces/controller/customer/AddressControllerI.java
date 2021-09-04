@@ -1,7 +1,5 @@
 package org.jayhenri.store_manager.interfaces.controller.customer;
 
-import java.util.UUID;
-
 import org.jayhenri.store_manager.exception.invalid.InvalidAddressException;
 import org.jayhenri.store_manager.exception.notfound.CustomerNotFoundException;
 import org.jayhenri.store_manager.exception.notfound.EmployeeNotFoundException;
@@ -12,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.UUID;
 
 /**
  * The interface Address controller i.

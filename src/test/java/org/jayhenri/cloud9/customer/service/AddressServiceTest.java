@@ -1,7 +1,5 @@
 package org.jayhenri.cloud9.customer.service;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import org.jayhenri.store_manager.interfaces.service.customer.AddressServiceI;
 import org.jayhenri.store_manager.model.customer.Address;
 import org.jayhenri.store_manager.service.customer.AddressService;
@@ -11,6 +9,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * The type Address service test.

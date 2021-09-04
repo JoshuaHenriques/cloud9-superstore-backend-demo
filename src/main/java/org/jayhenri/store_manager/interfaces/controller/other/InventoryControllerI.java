@@ -1,20 +1,15 @@
 package org.jayhenri.store_manager.interfaces.controller.other;
 
-import java.util.List;
-import java.util.UUID;
-
 import org.jayhenri.store_manager.exception.alreadyexists.InventoryAlreadyExistsException;
 import org.jayhenri.store_manager.exception.invalid.InvalidInventoryException;
 import org.jayhenri.store_manager.exception.invalid.InvalidItemException;
 import org.jayhenri.store_manager.exception.notfound.ItemNotFoundException;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  * The interface Inventory controller i.
@@ -30,9 +25,9 @@ public interface InventoryControllerI<T> {
      * @param itemId the item id
      * @return the response entity
      * @throws InventoryAlreadyExistsException the item already exists exception
-     * @throws InvalidItemException       the invalid item exception
-     * @throws ItemNotFoundException
-     * @throws InvalidInventoryException
+     * @throws InvalidItemException            the invalid item exception
+     * @throws ItemNotFoundException           the item not found exception
+     * @throws InvalidInventoryException       the invalid inventory exception
      */
     @PostMapping(value = "/add/{itemId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<String> add(@RequestBody T t, @PathVariable UUID itemId)

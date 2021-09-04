@@ -1,12 +1,12 @@
 package org.jayhenri.store_manager.service.store;
 
-import java.util.List;
-import java.util.UUID;
-
 import org.jayhenri.store_manager.interfaces.service.ServiceI;
 import org.jayhenri.store_manager.model.store.Store;
 import org.jayhenri.store_manager.repository.store.StoreRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.UUID;
 
 
 /**

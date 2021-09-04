@@ -1,14 +1,5 @@
 package org.jayhenri.cloud9.login;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.BDDMockito.then;
-
-import java.util.UUID;
-
-import javax.naming.InvalidNameException;
-
 import org.jayhenri.store_manager.controller.login.LoginController;
 import org.jayhenri.store_manager.exception.alreadyexists.InventoryAlreadyExistsException;
 import org.jayhenri.store_manager.exception.alreadyexists.LoginAlreadyExistsException;
@@ -24,6 +15,14 @@ import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
+
+import javax.naming.InvalidNameException;
+import java.util.UUID;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.then;
 
 /**
  * The type Login controller test.
@@ -66,8 +65,8 @@ public class LoginControllerTest {
      * Add login.
      *
      * @throws InventoryAlreadyExistsException the login already exists exception
-     * @throws InvalidLoginException       the invalid login exception
-     * @throws LoginAlreadyExistsException
+     * @throws InvalidLoginException           the invalid login exception
+     * @throws LoginAlreadyExistsException     the login already exists exception
      */
     @Test
     void addLogin() throws InventoryAlreadyExistsException, InvalidLoginException, LoginAlreadyExistsException {
@@ -81,12 +80,18 @@ public class LoginControllerTest {
         assertThat(captorLogin.getValue()).isEqualTo(login);
     }
 
+    /**
+     * Add login throws invalid login exception.
+     */
     @Test
     void addLoginThrowsInvalidLoginException() {
 
         assertThrows(InvalidLoginException.class, () -> loginController.add(null));
     }
 
+    /**
+     * Add login throws login already exists exception.
+     */
     @Test
     void addLoginThrowsLoginAlreadyExistsException() {
 
@@ -95,6 +100,13 @@ public class LoginControllerTest {
         assertThrows(LoginAlreadyExistsException.class, () -> loginController.add(login));
     }
 
+    /**
+     * Update login.
+     *
+     * @throws InventoryAlreadyExistsException the inventory already exists exception
+     * @throws InvalidLoginException           the invalid login exception
+     * @throws LoginNotFoundException          the login not found exception
+     */
     @Test
     void updateLogin() throws InventoryAlreadyExistsException, InvalidLoginException, LoginNotFoundException {
 
@@ -107,12 +119,18 @@ public class LoginControllerTest {
         assertThat(captorLogin.getValue()).isEqualTo(login);
     }
 
+    /**
+     * Update login throws invalid login exception.
+     */
     @Test
     void updateLoginThrowsInvalidLoginException() {
 
         assertThrows(InvalidLoginException.class, () -> loginController.add(null));
     }
 
+    /**
+     * Update login throws login not found exception.
+     */
     @Test
     void updateLoginThrowsLoginNotFoundException() {
 
@@ -121,6 +139,11 @@ public class LoginControllerTest {
         assertThrows(LoginNotFoundException.class, () -> loginController.update(login, uuid));
     }
 
+    /**
+     * Delete login.
+     *
+     * @throws LoginNotFoundException the login not found exception
+     */
     @Test
     void deleteLogin() throws LoginNotFoundException {
 
@@ -134,6 +157,9 @@ public class LoginControllerTest {
         assertThat(captorLogin.getValue()).isEqualTo(login);
     }
 
+    /**
+     * Delete login throws login not found exception.
+     */
     @Test
     void deleteLoginThrowsLoginNotFoundException() {
 
@@ -142,14 +168,24 @@ public class LoginControllerTest {
         assertThrows(LoginNotFoundException.class, () -> loginController.delete(uuid));
     }
 
+    /**
+     * List.
+     */
     @Test
     void list() {
 
     }
 
+    /**
+     * Get.
+     *
+     * @throws InvalidNameException   the invalid name exception
+     * @throws InvalidLoginException  the invalid login exception
+     * @throws LoginNotFoundException the login not found exception
+     */
     @Test
     void get() throws InvalidNameException, InvalidLoginException, LoginNotFoundException {
-        
+
         given(loginService.existsById(uuid)).willReturn(true);
         given(loginService.getById(uuid)).willReturn(login);
 
@@ -157,6 +193,9 @@ public class LoginControllerTest {
         assertThat(login).isEqualTo(loginController.get(uuid).getBody());
     }
 
+    /**
+     * Gets login throws login not found exception.
+     */
     @Test
     void getLoginThrowsLoginNotFoundException() {
 
@@ -165,6 +204,9 @@ public class LoginControllerTest {
         assertThrows(LoginNotFoundException.class, () -> loginController.get(uuid));
     }
 
+    /**
+     * Gets login throws invalid login exception.
+     */
     @Test
     void getLoginThrowsInvalidLoginException() {
 

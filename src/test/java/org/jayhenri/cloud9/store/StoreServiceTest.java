@@ -1,11 +1,5 @@
 package org.jayhenri.cloud9.store;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.BDDMockito.then;
-
-import java.util.UUID;
-
 import org.jayhenri.store_manager.interfaces.service.ServiceI;
 import org.jayhenri.store_manager.model.customer.Address;
 import org.jayhenri.store_manager.model.store.Store;
@@ -18,6 +12,12 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.util.UUID;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.then;
 
 /**
  * The type Store service test.

@@ -1,10 +1,5 @@
 package org.jayhenri.store_manager.controller.store;
 
-import java.util.List;
-import java.util.UUID;
-
-import javax.naming.InvalidNameException;
-
 import org.jayhenri.store_manager.exception.alreadyexists.StoreAlreadyExistsException;
 import org.jayhenri.store_manager.exception.invalid.InvalidPostalCodeException;
 import org.jayhenri.store_manager.exception.invalid.InvalidStoreException;
@@ -19,14 +14,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.naming.InvalidNameException;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * The type Store controller.
@@ -43,7 +35,7 @@ public class StoreController implements ControllerI<Store> {
     /**
      * Instantiates a new Store controller.
      *
-     * @param storeService2   the store service
+     * @param storeService2  the store service
      * @param addressService the inventory service
      */
     @Autowired
@@ -69,11 +61,11 @@ public class StoreController implements ControllerI<Store> {
             throw new InvalidStoreException();
 
         else if (storeService.existsById(store.getStoreUUID()))
-                throw new StoreAlreadyExistsException();
+            throw new StoreAlreadyExistsException();
 
         else if (!addressService.isValidPostalCode(store.getAddress().getPostalCode()))
             throw new InvalidPostalCodeException();
-                
+
         storeService.add(store);
 
         HttpHeaders responseHeaders = new HttpHeaders();

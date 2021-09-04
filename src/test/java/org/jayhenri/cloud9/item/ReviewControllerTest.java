@@ -1,14 +1,5 @@
 package org.jayhenri.cloud9.item;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.BDDMockito.then;
-
-import java.util.UUID;
-
-import javax.naming.InvalidNameException;
-
 import org.jayhenri.store_manager.controller.item.ReviewController;
 import org.jayhenri.store_manager.exception.invalid.InvalidItemException;
 import org.jayhenri.store_manager.exception.invalid.InvalidReviewException;
@@ -26,6 +17,14 @@ import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
+
+import javax.naming.InvalidNameException;
+import java.util.UUID;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.then;
 
 /**
  * The type Review controller test.
@@ -74,8 +73,8 @@ public class ReviewControllerTest {
     /**
      * Add review.
      *
-     * @throws ReviewAlreadyExistsException the review already exists exception
-     * @throws InvalidReviewException       the invalid review exception
+     * @throws ItemNotFoundException  the item not found exception
+     * @throws InvalidReviewException the invalid review exception
      */
     @Test
     void add() throws ItemNotFoundException, InvalidReviewException {
@@ -91,12 +90,18 @@ public class ReviewControllerTest {
         assertThat(captorItem.getValue()).isEqualTo(item);
     }
 
+    /**
+     * Add throws invalid review exception.
+     */
     @Test
     void addThrowsInvalidReviewException() {
 
         assertThrows(InvalidReviewException.class, () -> reviewController.add(null, null));
     }
 
+    /**
+     * Add throws item not found exception.
+     */
     @Test
     void addThrowsItemNotFoundException() {
 
@@ -105,6 +110,14 @@ public class ReviewControllerTest {
         assertThrows(ItemNotFoundException.class, () -> reviewController.add(review, itemId));
     }
 
+    /**
+     * Update.
+     *
+     * @throws ItemNotFoundException   the item not found exception
+     * @throws ReviewNotFoundException the review not found exception
+     * @throws InvalidItemException    the invalid item exception
+     * @throws InvalidReviewException  the invalid review exception
+     */
     @Test
     void update() throws ItemNotFoundException, ReviewNotFoundException, InvalidItemException, InvalidReviewException {
 
@@ -120,6 +133,9 @@ public class ReviewControllerTest {
         assertThat(captorItem.getValue()).isEqualTo(item);
     }
 
+    /**
+     * Update throws review not found exception.
+     */
     @Test
     void updateThrowsReviewNotFoundException() {
 
@@ -130,6 +146,9 @@ public class ReviewControllerTest {
         assertThrows(ReviewNotFoundException.class, () -> reviewController.update(review, itemId, reviewId));
     }
 
+    /**
+     * Update throws item not found exception.
+     */
     @Test
     void updateThrowsItemNotFoundException() {
 
@@ -137,12 +156,22 @@ public class ReviewControllerTest {
 
         assertThrows(ItemNotFoundException.class, () -> reviewController.update(review, itemId, reviewId));
     }
+
+    /**
+     * Update throws invalid review exception.
+     */
     @Test
     void updateThrowsInvalidReviewException() {
 
         assertThrows(InvalidReviewException.class, () -> reviewController.update(null, itemId, reviewId));
     }
 
+    /**
+     * Delete.
+     *
+     * @throws ReviewNotFoundException the review not found exception
+     * @throws ItemNotFoundException   the item not found exception
+     */
     @Test
     void delete() throws ReviewNotFoundException, ItemNotFoundException {
 
@@ -158,6 +187,9 @@ public class ReviewControllerTest {
         assertThat(captorUUID.getValue()).isEqualTo(reviewId);
     }
 
+    /**
+     * Delete throws review not found exception.
+     */
     @Test
     void deleteThrowsReviewNotFoundException() {
 
@@ -168,6 +200,9 @@ public class ReviewControllerTest {
         assertThrows(ReviewNotFoundException.class, () -> reviewController.delete(itemId, reviewId));
     }
 
+    /**
+     * Delete throws item not found exception.
+     */
     @Test
     void deleteThrowsItemNotFoundException() {
 
@@ -181,9 +216,17 @@ public class ReviewControllerTest {
 
     // }
 
+    /**
+     * Get.
+     *
+     * @throws InvalidReviewException  the invalid review exception
+     * @throws ReviewNotFoundException the review not found exception
+     * @throws InvalidNameException    the invalid name exception
+     * @throws ItemNotFoundException   the item not found exception
+     */
     @Test
     void get() throws InvalidReviewException, ReviewNotFoundException, InvalidNameException, ItemNotFoundException {
-        
+
         given(itemService.existsById(itemId)).willReturn(true);
         given(itemService.getById(itemId)).willReturn(item);
         given(reviewService.existsById(item, reviewId)).willReturn(true);
@@ -196,6 +239,9 @@ public class ReviewControllerTest {
         assertThat(captorUUID.getValue()).isEqualTo(reviewId);
     }
 
+    /**
+     * Gets throws review not found exception.
+     */
     @Test
     void getThrowsReviewNotFoundException() {
 
@@ -206,6 +252,9 @@ public class ReviewControllerTest {
         assertThrows(ReviewNotFoundException.class, () -> reviewController.get(itemId, reviewId));
     }
 
+    /**
+     * Gets throws item not found exception.
+     */
     @Test
     void getThrowsItemNotFoundException() {
 
@@ -214,6 +263,9 @@ public class ReviewControllerTest {
         assertThrows(ItemNotFoundException.class, () -> reviewController.get(itemId, reviewId));
     }
 
+    /**
+     * Gets throws invalid review exception.
+     */
     @Test
     void getThrowsInvalidReviewException() {
 

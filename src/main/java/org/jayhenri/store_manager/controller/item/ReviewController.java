@@ -1,10 +1,5 @@
 package org.jayhenri.store_manager.controller.item;
 
-import java.util.Set;
-import java.util.UUID;
-
-import javax.naming.InvalidNameException;
-
 import org.jayhenri.store_manager.exception.alreadyexists.InventoryAlreadyExistsException;
 import org.jayhenri.store_manager.exception.invalid.InvalidItemException;
 import org.jayhenri.store_manager.exception.invalid.InvalidReviewException;
@@ -21,14 +16,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.naming.InvalidNameException;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  * The type Review controller.
@@ -61,8 +53,8 @@ public class ReviewController implements ReviewControllerI {
      * @param itemId the item id
      * @return the response entity
      * @throws InventoryAlreadyExistsException the item already exists exception
-     * @throws InvalidItemException       the invalid item exception
-     * @throws ItemNotFoundException      the item not found exception
+     * @throws InvalidItemException            the invalid item exception
+     * @throws ItemNotFoundException           the item not found exception
      */
     @PostMapping(value = "/add/{itemId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> add(@RequestBody Review review, @PathVariable UUID itemId)
@@ -96,7 +88,7 @@ public class ReviewController implements ReviewControllerI {
      */
     @PutMapping(value = "/update/{itemId}/{reviewId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> update(@RequestBody Review review, @PathVariable UUID itemId,
-            @PathVariable UUID reviewId)
+                                         @PathVariable UUID reviewId)
             throws InvalidItemException, ItemNotFoundException, ReviewNotFoundException, InvalidReviewException {
         if (!ObjectUtils.isEmpty(review)) {
             if (itemService.existsById(itemId)) {

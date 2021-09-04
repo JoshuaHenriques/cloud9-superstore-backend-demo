@@ -1,15 +1,5 @@
 package org.jayhenri.cloud9.item;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.BDDMockito.then;
-
-import java.util.HashSet;
-import java.util.UUID;
-
-import javax.naming.InvalidNameException;
-
 import org.jayhenri.store_manager.controller.item.ItemController;
 import org.jayhenri.store_manager.exception.alreadyexists.InventoryAlreadyExistsException;
 import org.jayhenri.store_manager.exception.alreadyexists.ItemAlreadyExistsException;
@@ -25,6 +15,15 @@ import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
+
+import javax.naming.InvalidNameException;
+import java.util.HashSet;
+import java.util.UUID;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.then;
 
 /**
  * The type Item controller test.
@@ -72,7 +71,7 @@ public class ItemControllerTest {
     /**
      * Add item.
      *
-     * @throws InventoryAlreadyExistsException the item already exists exception
+     * @throws ItemAlreadyExistsException the item already exists exception
      * @throws InvalidItemException       the invalid item exception
      */
     @Test
@@ -88,12 +87,18 @@ public class ItemControllerTest {
         assertThat(captorItem.getValue()).isEqualTo(item);
     }
 
+    /**
+     * Add item throws invalid item exception.
+     */
     @Test
     void addItemThrowsInvalidItemException() {
 
         assertThrows(InvalidItemException.class, () -> itemController.add(null));
     }
 
+    /**
+     * Add item throws item already exists exception.
+     */
     @Test
     void addItemThrowsItemAlreadyExistsException() {
 
@@ -102,6 +107,13 @@ public class ItemControllerTest {
         assertThrows(ItemAlreadyExistsException.class, () -> itemController.add(item));
     }
 
+    /**
+     * Update item.
+     *
+     * @throws InventoryAlreadyExistsException the inventory already exists exception
+     * @throws InvalidItemException            the invalid item exception
+     * @throws ItemNotFoundException           the item not found exception
+     */
     @Test
     void updateItem() throws InventoryAlreadyExistsException, InvalidItemException, ItemNotFoundException {
 
@@ -114,12 +126,18 @@ public class ItemControllerTest {
         assertThat(captorItem.getValue()).isEqualTo(item);
     }
 
+    /**
+     * Update item throws invalid item exception.
+     */
     @Test
     void updateItemThrowsInvalidItemException() {
 
         assertThrows(InvalidItemException.class, () -> itemController.add(null));
     }
 
+    /**
+     * Update item throws item not found exception.
+     */
     @Test
     void updateItemThrowsItemNotFoundException() {
 
@@ -128,6 +146,11 @@ public class ItemControllerTest {
         assertThrows(ItemNotFoundException.class, () -> itemController.update(item, uuid));
     }
 
+    /**
+     * Delete item.
+     *
+     * @throws ItemNotFoundException the item not found exception
+     */
     @Test
     void deleteItem() throws ItemNotFoundException {
 
@@ -141,6 +164,9 @@ public class ItemControllerTest {
         assertThat(captorItem.getValue()).isEqualTo(item);
     }
 
+    /**
+     * Delete item throws item not found exception.
+     */
     @Test
     void deleteItemThrowsItemNotFoundException() {
 
@@ -149,14 +175,24 @@ public class ItemControllerTest {
         assertThrows(ItemNotFoundException.class, () -> itemController.delete(uuid));
     }
 
+    /**
+     * List.
+     */
     @Test
     void list() {
 
     }
 
+    /**
+     * Get.
+     *
+     * @throws InvalidNameException  the invalid name exception
+     * @throws InvalidItemException  the invalid item exception
+     * @throws ItemNotFoundException the item not found exception
+     */
     @Test
     void get() throws InvalidNameException, InvalidItemException, ItemNotFoundException {
-        
+
         given(itemService.existsById(uuid)).willReturn(true);
         given(itemService.getById(uuid)).willReturn(item);
 
@@ -164,6 +200,9 @@ public class ItemControllerTest {
         assertThat(item).isEqualTo(itemController.get(uuid).getBody());
     }
 
+    /**
+     * Gets item throws item not found exception.
+     */
     @Test
     void getItemThrowsItemNotFoundException() {
 
@@ -172,6 +211,9 @@ public class ItemControllerTest {
         assertThrows(ItemNotFoundException.class, () -> itemController.get(uuid));
     }
 
+    /**
+     * Gets item throws invalid item exception.
+     */
     @Test
     void getItemThrowsInvalidItemException() {
 

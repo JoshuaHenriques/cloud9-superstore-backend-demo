@@ -1,25 +1,15 @@
 package org.jayhenri.store_manager.model.customer;
 
-import java.io.Serializable;
-import java.util.Set;
-import java.util.UUID;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import org.jayhenri.store_manager.model.login.Login;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.jayhenri.store_manager.model.login.Login;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  * The type Customer.
@@ -28,7 +18,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Entity
-@JsonIgnoreProperties({ "hibernateLazyInitializer" })
+@JsonIgnoreProperties({"hibernateLazyInitializer"})
 @Table(name = "customer")
 public class Customer implements Serializable {
 
@@ -54,7 +44,7 @@ public class Customer implements Serializable {
     private String dateOfBirth;
 
     @OneToOne
-    @JoinColumn(name="login_id", unique=true, nullable=false, updatable=false)
+    @JoinColumn(name = "login_id", unique = true, nullable = false, updatable = false)
     private Login login;
 
     // @OneToOne
@@ -62,7 +52,7 @@ public class Customer implements Serializable {
     // private Cart cart;
 
     @OneToOne
-    @JoinColumn(name="address_id", unique=true, nullable=false, updatable=false)
+    @JoinColumn(name = "address_id", unique = true, nullable = false, updatable = false)
     private Address address;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
@@ -85,8 +75,8 @@ public class Customer implements Serializable {
      * @param dateOfBirth the date of birth
      */
     public Customer(String email, Login login, Address address, Set<CreditCard> wallet, Set<Orders> orders,
-            String firstName, String lastName, String phoneNumber, String dateOfBirth) {
-        
+                    String firstName, String lastName, String phoneNumber, String dateOfBirth) {
+
         this.email = email;
         this.login = login;
         this.address = address;
@@ -95,6 +85,6 @@ public class Customer implements Serializable {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
-        this.dateOfBirth = dateOfBirth; 
-    } 
+        this.dateOfBirth = dateOfBirth;
+    }
 }

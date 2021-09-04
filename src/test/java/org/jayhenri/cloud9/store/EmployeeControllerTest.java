@@ -1,14 +1,5 @@
 package org.jayhenri.cloud9.store;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.BDDMockito.then;
-
-import java.util.UUID;
-
-import javax.naming.InvalidNameException;
-
 import org.jayhenri.store_manager.controller.store.EmployeeController;
 import org.jayhenri.store_manager.exception.alreadyexists.EmployeeAlreadyExistsException;
 import org.jayhenri.store_manager.exception.alreadyexists.InventoryAlreadyExistsException;
@@ -36,6 +27,14 @@ import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
+
+import javax.naming.InvalidNameException;
+import java.util.UUID;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.then;
 
 
 /**
@@ -75,14 +74,14 @@ public class EmployeeControllerTest {
         employeeController = new EmployeeController(employeeService, addressService);
 
         employee = new Employee(
-            "employee.email@gmail.com",
-            new Address(),
-            new Login(),
-            new Store(),
-            "First Name",
-            "Last Name",
-            "2222222222",
-            "02/02/0202"
+                "employee.email@gmail.com",
+                new Address(),
+                new Login(),
+                new Store(),
+                "First Name",
+                "Last Name",
+                "2222222222",
+                "02/02/0202"
         );
 
         employee.setEmployeeUUID(employeeId);
@@ -92,13 +91,13 @@ public class EmployeeControllerTest {
      * Add employee.
      *
      * @throws InventoryAlreadyExistsException the employee already exists exception
-     * @throws InvalidEmployeeException       the invalid employee exception
-     * @throws EmployeeAlreadyExistsException
-     * @throws ItemAlreadyExistsException
-     * @throws InvalidItemException
-     * @throws InvalidPostalCodeException
-     * @throws InvalidLoginException
-     * @throws LoginAlreadyExistsException
+     * @throws InvalidEmployeeException        the invalid employee exception
+     * @throws EmployeeAlreadyExistsException  the employee already exists exception
+     * @throws LoginAlreadyExistsException     the login already exists exception
+     * @throws InvalidLoginException           the invalid login exception
+     * @throws InvalidPostalCodeException      the invalid postal code exception
+     * @throws InvalidItemException            the invalid item exception
+     * @throws ItemAlreadyExistsException      the item already exists exception
      */
     @Test
     void addEmployee() throws InventoryAlreadyExistsException, InvalidEmployeeException, EmployeeAlreadyExistsException, LoginAlreadyExistsException, InvalidLoginException, InvalidPostalCodeException, InvalidItemException, ItemAlreadyExistsException {
@@ -113,20 +112,29 @@ public class EmployeeControllerTest {
         assertThat(captorEmployee.getValue()).isEqualTo(employee);
     }
 
+    /**
+     * Add employee throws invalid employee exception.
+     */
     @Test
     void addEmployeeThrowsInvalidEmployeeException() {
 
         assertThrows(InvalidEmployeeException.class, () -> employeeController.add(null));
     }
 
+    /**
+     * Add employee throws employee already exists exception.
+     */
     @Test
     void addEmployeeThrowsEmployeeAlreadyExistsException() {
 
         given(employeeService.existsById(employeeId)).willReturn(true);
-        
+
         assertThrows(EmployeeAlreadyExistsException.class, () -> employeeController.add(employee));
     }
 
+    /**
+     * Add throws invalid postal code exception.
+     */
     @Test
     void addThrowsInvalidPostalCodeException() {
 
@@ -136,6 +144,17 @@ public class EmployeeControllerTest {
         assertThrows(InvalidPostalCodeException.class, () -> employeeController.add(employee));
     }
 
+    /**
+     * Update employee.
+     *
+     * @throws InventoryAlreadyExistsException the inventory already exists exception
+     * @throws InvalidEmployeeException        the invalid employee exception
+     * @throws EmployeeNotFoundException       the employee not found exception
+     * @throws InvalidLoginException           the invalid login exception
+     * @throws LoginNotFoundException          the login not found exception
+     * @throws InvalidItemException            the invalid item exception
+     * @throws ItemNotFoundException           the item not found exception
+     */
     @Test
     void updateEmployee() throws InventoryAlreadyExistsException, InvalidEmployeeException, EmployeeNotFoundException, InvalidLoginException, LoginNotFoundException, InvalidItemException, ItemNotFoundException {
 
@@ -148,12 +167,18 @@ public class EmployeeControllerTest {
         assertThat(captorEmployee.getValue()).isEqualTo(employee);
     }
 
+    /**
+     * Update employee throws invalid employee exception.
+     */
     @Test
     void updateEmployeeThrowsInvalidEmployeeException() {
 
         assertThrows(InvalidEmployeeException.class, () -> employeeController.add(null));
     }
 
+    /**
+     * Update employee throws employee not found exception.
+     */
     @Test
     void updateEmployeeThrowsEmployeeNotFoundException() {
 
@@ -162,6 +187,13 @@ public class EmployeeControllerTest {
         assertThrows(EmployeeNotFoundException.class, () -> employeeController.update(employee, employeeId));
     }
 
+    /**
+     * Delete employee.
+     *
+     * @throws EmployeeNotFoundException the employee not found exception
+     * @throws LoginNotFoundException    the login not found exception
+     * @throws ItemNotFoundException     the item not found exception
+     */
     @Test
     void deleteEmployee() throws EmployeeNotFoundException, LoginNotFoundException, ItemNotFoundException {
 
@@ -175,6 +207,9 @@ public class EmployeeControllerTest {
         assertThat(captorEmployee.getValue()).isEqualTo(employee);
     }
 
+    /**
+     * Delete employee throws employee not found exception.
+     */
     @Test
     void deleteEmployeeThrowsEmployeeNotFoundException() {
 
@@ -183,14 +218,28 @@ public class EmployeeControllerTest {
         assertThrows(EmployeeNotFoundException.class, () -> employeeController.delete(employeeId));
     }
 
+    /**
+     * List.
+     */
     @Test
     void list() {
 
     }
 
+    /**
+     * Get.
+     *
+     * @throws InvalidNameException      the invalid name exception
+     * @throws InvalidEmployeeException  the invalid employee exception
+     * @throws EmployeeNotFoundException the employee not found exception
+     * @throws InvalidLoginException     the invalid login exception
+     * @throws LoginNotFoundException    the login not found exception
+     * @throws ItemNotFoundException     the item not found exception
+     * @throws InvalidItemException      the invalid item exception
+     */
     @Test
     void get() throws InvalidNameException, InvalidEmployeeException, EmployeeNotFoundException, InvalidLoginException, LoginNotFoundException, ItemNotFoundException, InvalidItemException {
-        
+
         given(employeeService.existsById(employeeId)).willReturn(true);
         given(employeeService.getById(employeeId)).willReturn(employee);
 
@@ -198,6 +247,9 @@ public class EmployeeControllerTest {
         assertThat(employee).isEqualTo(employeeController.get(employeeId).getBody());
     }
 
+    /**
+     * Gets employee throws employee not found exception.
+     */
     @Test
     void getEmployeeThrowsEmployeeNotFoundException() {
 
@@ -206,6 +258,9 @@ public class EmployeeControllerTest {
         assertThrows(EmployeeNotFoundException.class, () -> employeeController.get(employeeId));
     }
 
+    /**
+     * Gets employee throws invalid employee exception.
+     */
     @Test
     void getEmployeeThrowsInvalidEmployeeException() {
 

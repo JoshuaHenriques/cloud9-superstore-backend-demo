@@ -32,7 +32,6 @@ public class StoreInventoryService implements InventoryServiceI<StoreInventory> 
 
     /**
      * Add.
-     *
      */
     public void add(StoreInventory inventory) {
 

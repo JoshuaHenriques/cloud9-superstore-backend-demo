@@ -1,9 +1,9 @@
 package org.jayhenri.store_manager.interfaces.service.other;
 
+import org.jayhenri.store_manager.exception.OutOfStockException;
+
 import java.util.List;
 import java.util.UUID;
-
-import org.jayhenri.store_manager.exception.OutOfStockException;
 
 /**
  * The interface Inventory service i.

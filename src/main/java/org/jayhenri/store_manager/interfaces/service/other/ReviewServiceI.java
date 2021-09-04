@@ -1,10 +1,10 @@
 package org.jayhenri.store_manager.interfaces.service.other;
 
-import java.util.Set;
-import java.util.UUID;
-
 import org.jayhenri.store_manager.model.item.Item;
 import org.jayhenri.store_manager.model.item.Review;
+
+import java.util.Set;
+import java.util.UUID;
 
 /**
  * The interface Review service i.

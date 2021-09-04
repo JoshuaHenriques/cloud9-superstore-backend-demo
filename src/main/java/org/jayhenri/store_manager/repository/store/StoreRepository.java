@@ -1,13 +1,13 @@
 package org.jayhenri.store_manager.repository.store;
 
-import java.util.UUID;
-
 import org.jayhenri.store_manager.model.store.Store;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.UUID;
 
 /**
  * The interface Inventory repository.

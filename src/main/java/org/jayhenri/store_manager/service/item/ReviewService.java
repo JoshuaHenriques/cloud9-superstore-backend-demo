@@ -97,10 +97,7 @@ public class ReviewService implements ReviewServiceI {
 
         AtomicBoolean exists = new AtomicBoolean(false);
         item.getReviews().forEach(review -> {
-            if (review.getReviewUUID().equals(reviewId))
-                exists.set(true);
-            else
-                exists.set(false);
+            exists.set(review.getReviewUUID().equals(reviewId));
         });
 
         return exists.get();

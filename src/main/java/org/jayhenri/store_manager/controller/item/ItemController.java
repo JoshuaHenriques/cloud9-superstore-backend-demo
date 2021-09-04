@@ -1,10 +1,5 @@
 package org.jayhenri.store_manager.controller.item;
 
-import java.util.List;
-import java.util.UUID;
-
-import javax.naming.InvalidNameException;
-
 import org.jayhenri.store_manager.exception.alreadyexists.InventoryAlreadyExistsException;
 import org.jayhenri.store_manager.exception.alreadyexists.ItemAlreadyExistsException;
 import org.jayhenri.store_manager.exception.invalid.InvalidItemException;
@@ -18,14 +13,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.naming.InvalidNameException;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * The type Item controller.
@@ -53,7 +45,7 @@ public class ItemController implements ControllerI<Item> {
      * @param item the item
      * @return the response entity
      * @throws InventoryAlreadyExistsException the item already exists exception
-     * @throws InvalidItemException       the invalid item exception
+     * @throws InvalidItemException            the invalid item exception
      */
     @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> add(@RequestBody Item item)
@@ -79,8 +71,8 @@ public class ItemController implements ControllerI<Item> {
      * @param item   the item
      * @param itemId the item id
      * @return the response entity
-     * @throws InvalidItemException       the invalid item exception
-     * @throws ItemNotFoundException      the item not found exception
+     * @throws InvalidItemException            the invalid item exception
+     * @throws ItemNotFoundException           the item not found exception
      * @throws InventoryAlreadyExistsException the item already exists exception
      */
     @PutMapping(value = "/update/{itemId}", consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -89,12 +81,12 @@ public class ItemController implements ControllerI<Item> {
         if (!ObjectUtils.isEmpty(item)) {
             if (itemService.existsByItemName(item.getItemName()) || itemService.existsById(itemId)) {
 
-                    item.setItemUUID(itemId);
-                    itemService.update(item);
+                item.setItemUUID(itemId);
+                itemService.update(item);
 
-                    HttpHeaders responseHeaders = new HttpHeaders();
-                    responseHeaders.set("ItemController", "update");
-                    return new ResponseEntity<>("Successfully Updated Item", responseHeaders, HttpStatus.OK);
+                HttpHeaders responseHeaders = new HttpHeaders();
+                responseHeaders.set("ItemController", "update");
+                return new ResponseEntity<>("Successfully Updated Item", responseHeaders, HttpStatus.OK);
             } else
                 throw new ItemNotFoundException();
         } else
@@ -124,7 +116,7 @@ public class ItemController implements ControllerI<Item> {
 
     /**
      * List items response entity.
-    
+     *
      * @return the response entity
      */
     @GetMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)

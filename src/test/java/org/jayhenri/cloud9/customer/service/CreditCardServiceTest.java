@@ -2,7 +2,9 @@ package org.jayhenri.cloud9.customer.service;
 
 import org.jayhenri.store_manager.interfaces.service.customer.CreditCardServiceI;
 import org.jayhenri.store_manager.interfaces.service.customer.CustomerServiceI;
-import org.jayhenri.store_manager.model.customer.*;
+import org.jayhenri.store_manager.model.customer.Address;
+import org.jayhenri.store_manager.model.customer.CreditCard;
+import org.jayhenri.store_manager.model.customer.Customer;
 import org.jayhenri.store_manager.model.login.Login;
 import org.jayhenri.store_manager.service.customer.CreditCardService;
 import org.junit.jupiter.api.BeforeEach;

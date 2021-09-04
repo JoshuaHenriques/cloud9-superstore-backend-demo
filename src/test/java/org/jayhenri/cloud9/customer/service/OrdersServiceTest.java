@@ -1,13 +1,5 @@
 package org.jayhenri.cloud9.customer.service;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.BDDMockito.then;
-
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
-
 import org.jayhenri.store_manager.interfaces.service.customer.CustomerServiceI;
 import org.jayhenri.store_manager.interfaces.service.customer.OrdersServiceI;
 import org.jayhenri.store_manager.model.customer.Address;
@@ -23,6 +15,14 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.then;
 
 /**
  * The type Order db service test.

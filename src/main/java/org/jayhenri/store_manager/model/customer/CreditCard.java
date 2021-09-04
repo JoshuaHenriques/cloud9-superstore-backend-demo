@@ -1,20 +1,13 @@
 package org.jayhenri.store_manager.model.customer;
 
-import java.io.Serializable;
-import java.util.UUID;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.UUID;
 
 /**
  * The type Credit card.
@@ -34,7 +27,7 @@ public class CreditCard implements Serializable {
     private UUID creditCardUUID = UUID.randomUUID();
 
     @ManyToOne
-    @JoinColumn(name="customer_id", nullable=false, updatable=false)
+    @JoinColumn(name = "customer_id", nullable = false, updatable = false)
     private Customer customer;
 
     @Column(name = "full_name", nullable = false, length = 100)

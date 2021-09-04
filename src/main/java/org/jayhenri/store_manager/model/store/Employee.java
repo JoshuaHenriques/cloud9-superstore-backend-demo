@@ -1,24 +1,15 @@
 package org.jayhenri.store_manager.model.store;
 
-import java.io.Serializable;
-import java.util.UUID;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import org.jayhenri.store_manager.model.customer.Address;
-import org.jayhenri.store_manager.model.login.Login;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.jayhenri.store_manager.model.customer.Address;
+import org.jayhenri.store_manager.model.login.Login;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.UUID;
 
 /**
  * The type Employee.
@@ -68,6 +59,8 @@ public class Employee implements Serializable {
     /**
      * Instantiates a new Employee.
      *
+     * @param email       the email
+     * @param address     the address
      * @param login       the login
      * @param store       the store
      * @param firstName   the first name

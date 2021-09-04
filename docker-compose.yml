@@ -9,7 +9,7 @@ services:
       - 'SPRING_DATASOURCE_URL=jdbc:postgresql://postgres_db:5432/store_manager_db'
       - SPRING_DATASOURCE_USERNAME=user
       - SPRING_DATASOURCE_PASSWORD=password
-      - SPRING.JPA.HIBERNATE.DDL-AUTO=validate
+      - SPRING_JPA_HIBERNATE_DDL-AUTO=validate
     depends_on:
       - flyway
   flyway:

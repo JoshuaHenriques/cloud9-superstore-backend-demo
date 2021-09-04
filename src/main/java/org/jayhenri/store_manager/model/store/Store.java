@@ -1,26 +1,16 @@
 package org.jayhenri.store_manager.model.store;
 
-import java.io.Serializable;
-import java.util.Set;
-import java.util.UUID;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import org.jayhenri.store_manager.model.customer.Address;
-import org.jayhenri.store_manager.model.inventory.StoreInventory;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.jayhenri.store_manager.model.customer.Address;
+import org.jayhenri.store_manager.model.inventory.StoreInventory;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  * The type Store.
@@ -53,10 +43,8 @@ public class Store implements Serializable {
     /**
      * Instantiates a new Store.
      *
-     * @param storeName       the store name
-     * @param address         the address
-     * @param storeInventory  the store inventory
-     * @param onlineInventory the online inventory
+     * @param storeName the store name
+     * @param address   the address
      */
     public Store(String storeName, Address address) {
         this.storeName = storeName;

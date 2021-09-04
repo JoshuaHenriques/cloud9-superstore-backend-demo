@@ -1,22 +1,14 @@
 package org.jayhenri.store_manager.model.login;
 
-import java.io.Serializable;
-import java.util.UUID;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.MapsId;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.UUID;
 
 /**
  * The type Attempts.
@@ -35,7 +27,7 @@ public class Attempts implements Serializable {
 
     @MapsId
     @OneToOne
-    @JoinColumn(name="login_id", unique=true, nullable=false, updatable=false)
+    @JoinColumn(name = "login_id", unique = true, nullable = false, updatable = false)
     private Login login;
 
     @Column(name = "attempts")
