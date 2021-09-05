@@ -39,7 +39,7 @@ Cart:
     /{customerId}/cart/add/{type}/{itemId}
     /{customerId}/cart/empty
     /{customerId}/cart/delete/{itemId}
-    {customerId}/cart/get
+    /{customerId}/cart/get
     /list
 
 CreditCard:
