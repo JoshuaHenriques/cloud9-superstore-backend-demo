@@ -166,7 +166,6 @@ Spring Security
 PostgreSQL Driver
 Commons Validator
 Hibernate
-Auth0 Java JWT
 ```
 
 #### Built With
