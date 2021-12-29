@@ -133,27 +133,6 @@ Integration Tests *in development*:
 
 #### Models
 <a href="https://github.com/JoshuaHenriques/store-manager/blob/master/src/main/resources/db/migration/V0_0_1__schema.sql">Schema</a> for a clearer model representation
-```
-Address
-
-Customer
-   Orders
-   CreditCard
-   Cart
-   
-Inventory
-   OnlineInventory
-   StoreInventory
-   
-Item
-   Review
-   
-Login
-   Attempts
-   
-Store
-   Employee
-```
 
 #### Dependencies
 ```
